@@ -13,10 +13,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import net.sf.sze.model.base.VersionedModel;
-import net.sf.sze.zeugnis.AvSvNote;
-
 import org.apache.commons.lang.builder.CompareToBuilder;
+
+import de.ppi.jpa.helper.VersionedModel;
 
 /**
  * Bewertung zum Arbeits- und Sozialverhalten.
@@ -27,45 +26,80 @@ import org.apache.commons.lang.builder.CompareToBuilder;
 public class AvSvBewertung extends VersionedModel implements Serializable,
         Comparable<AvSvBewertung> {
 
+    /** The beurteilung. */
     @Enumerated(EnumType.ORDINAL)
     private AvSvNote beurteilung;
 
     // bi-directional many-to-one association to ArbeitsUndSozialVerhalten
-    @ManyToOne(optional=false)
+
+    /** The arbeits und sozial verhalten. */
+    @ManyToOne(optional = false)
     @JoinColumn(name = "arbeits_und_sozial_verhalten_id", nullable = false)
-    
+
     private ArbeitsUndSozialVerhalten arbeitsUndSozialVerhalten;
 
     // bi-directional many-to-one association to Zeugnis
-    @ManyToOne(optional=false)
+
+    /** The zeugnis. */
+    @ManyToOne(optional = false)
     @JoinColumn(name = "zeugnis_id", nullable = false)
-    
+
     private Zeugnis zeugnis;
 
     public AvSvBewertung() {
     }
 
+    /**
+     * Gets the beurteilung.
+     *
+     * @return the beurteilung
+     */
     public AvSvNote getBeurteilung() {
         return this.beurteilung;
     }
 
+    /**
+     * Sets the beurteilung.
+     *
+     * @param beurteilung the new beurteilung
+     */
     public void setBeurteilung(final AvSvNote beurteilung) {
         this.beurteilung = beurteilung;
     }
 
+    /**
+     * Gets the arbeits und sozial verhalten.
+     *
+     * @return the arbeits und sozial verhalten
+     */
     public ArbeitsUndSozialVerhalten getArbeitsUndSozialVerhalten() {
         return this.arbeitsUndSozialVerhalten;
     }
 
+    /**
+     * Sets the arbeits und sozial verhalten.
+     *
+     * @param arbeitsUndSozialVerhalten the new arbeits und sozial verhalten
+     */
     public void setArbeitsUndSozialVerhalten(
             final ArbeitsUndSozialVerhalten arbeitsUndSozialVerhalten) {
         this.arbeitsUndSozialVerhalten = arbeitsUndSozialVerhalten;
     }
 
+    /**
+     * Gets the zeugnis.
+     *
+     * @return the zeugnis
+     */
     public Zeugnis getZeugnis() {
         return this.zeugnis;
     }
 
+    /**
+     * Sets the zeugnis.
+     *
+     * @param zeugni the new zeugnis
+     */
     public void setZeugnis(final Zeugnis zeugni) {
         this.zeugnis = zeugni;
     }

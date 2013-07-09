@@ -4,6 +4,13 @@
 
 package net.sf.sze.model;
 
+import de.ppi.jpa.helper.VersionedModel;
+
+import net.sf.sze.model.zeugnis.Arbeitsgruppe;
+import net.sf.sze.model.zeugnis.Zeugnis;
+
+import org.apache.commons.lang.builder.CompareToBuilder;
+
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -11,12 +18,6 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import net.sf.sze.model.base.VersionedModel;
-import net.sf.sze.model.zeugnis.Arbeitsgruppe;
-import net.sf.sze.model.zeugnis.Zeugnis;
-
-import org.apache.commons.lang.builder.CompareToBuilder;
 
 /**
  * Bewertung zur Teilnahme an einer AG. Zur Zeit nur tg oder nicht teilgenommen,
@@ -34,18 +35,15 @@ public class AgBewertung extends VersionedModel implements Serializable,
     @Column(nullable = false)
     private Boolean teilgenommen;
 
-    // bi-directional many-to-one association to Arbeitsgruppe
+    /** Die Arbeitsgruppen. */
     @ManyToOne(optional = false)
     @JoinColumn(name = "arbeitsgruppe_id", nullable = false)
-    
     private Arbeitsgruppe arbeitsgruppe;
 
-    // bi-directional many-to-one association to Zeugnis
+    /** Das Zeugnis. */
     @ManyToOne(optional = false)
     @JoinColumn(name = "zeugnis_id", nullable = false)
-    
     private Zeugnis zeugnis;
-
 
     public Boolean getTeilgenommen() {
         return this.teilgenommen;
@@ -70,7 +68,6 @@ public class AgBewertung extends VersionedModel implements Serializable,
     public void setZeugnis(final Zeugnis zeugni) {
         this.zeugnis = zeugni;
     }
-
 
     @Override
     public int compareTo(final AgBewertung other) {

@@ -17,10 +17,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import net.sf.sze.model.base.VersionedModel;
 import net.sf.sze.util.StringUtil;
 
 import org.apache.commons.lang.builder.CompareToBuilder;
+
+import de.ppi.jpa.helper.VersionedModel;
 
 /**
  * Eine Bewertung ist die Beurteilung zu einem Fach.
@@ -54,92 +55,169 @@ public class Bewertung extends VersionedModel implements Serializable,
 //  })
 
     // TODO einschränken auf den Bereich 1-6 in GUI, kein DB-Constraint, da ABI 1-15
+
+    /** The note. */
     private Long note;
 
+    /** The leistungsniveau. */
     @Column(length = 255)
-    
+
     private String leistungsniveau;
 
+    /** The sonder note. */
     @Column(name = "sonder_note", nullable = false, length = 255)
-    
-    
+
     private String sonderNote;
 
+    /** The relevant. */
     @Column(nullable = false)
-    
-    private Boolean relevant = true;
+    private boolean relevant = true;
 
+    /** The leistung nur schwach ausreichend. */
     @Column(name = "leistung_nur_schwach_ausreichend", nullable = false)
-    
+
     private Boolean leistungNurSchwachAusreichend = Boolean.FALSE;
 
     // bi-directional many-to-one association to Schulfach
-    @ManyToOne(optional=false)
+
+    /** The schulfach. */
+    @ManyToOne(optional = false)
     @JoinColumn(name = "schulfach_id", nullable = false)
-    
+
     private Schulfach schulfach;
 
     // bi-directional many-to-one association to Zeugnis
-    @ManyToOne(optional=false)
+
+    /** The zeugnis. */
+    @ManyToOne(optional = false)
     @JoinColumn(name = "zeugnis_id", nullable = false)
-    
+
     private Zeugnis zeugnis;
 
-
-
+    /**
+     * Gets the leistung nur schwach ausreichend.
+     *
+     * @return the leistung nur schwach ausreichend
+     */
     public Boolean getLeistungNurSchwachAusreichend() {
         return this.leistungNurSchwachAusreichend;
     }
 
+    /**
+     * Sets the leistung nur schwach ausreichend.
+     *
+     * @param leistungNurSchwachAusreichend the new leistung nur schwach
+     *            ausreichend
+     */
     public void setLeistungNurSchwachAusreichend(
             final Boolean leistungNurSchwachAusreichend) {
         this.leistungNurSchwachAusreichend = leistungNurSchwachAusreichend;
     }
 
+    /**
+     * Gets the leistungsniveau.
+     *
+     * @return the leistungsniveau
+     */
     public String getLeistungsniveau() {
         return this.leistungsniveau;
     }
 
+    /**
+     * Sets the leistungsniveau.
+     *
+     * @param leistungsniveau the new leistungsniveau
+     */
     public void setLeistungsniveau(final String leistungsniveau) {
         this.leistungsniveau = leistungsniveau;
     }
 
+    /**
+     * Gets the note.
+     *
+     * @return the note
+     */
     public Long getNote() {
         return this.note;
     }
 
+    /**
+     * Sets the note.
+     *
+     * @param note the new note
+     */
     public void setNote(final Long note) {
         this.note = note;
     }
 
-    public Boolean getRelevant() {
+    /**
+     * Gets the relevant.
+     *
+     * @return the relevant
+     */
+    public boolean getRelevant() {
         return this.relevant;
     }
 
-    public void setRelevant(final Boolean relevant) {
+    /**
+     * Sets the relevant.
+     *
+     * @param relevant the new relevant
+     */
+    public void setRelevant(final boolean relevant) {
         this.relevant = relevant;
     }
 
+    /**
+     * Gets the sonder note.
+     *
+     * @return the sonder note
+     */
     public String getSonderNote() {
         return this.sonderNote;
     }
 
+    /**
+     * Sets the sonder note.
+     *
+     * @param sonderNote the new sonder note
+     */
     public void setSonderNote(final String sonderNote) {
         this.sonderNote = sonderNote;
     }
 
+    /**
+     * Gets the schulfach.
+     *
+     * @return the schulfach
+     */
     public Schulfach getSchulfach() {
         return this.schulfach;
     }
 
+    /**
+     * Sets the schulfach.
+     *
+     * @param schulfach the new schulfach
+     */
     public void setSchulfach(final Schulfach schulfach) {
         this.schulfach = schulfach;
     }
 
+    /**
+     * Gets the zeugnis.
+     *
+     * @return the zeugnis
+     */
     public Zeugnis getZeugnis() {
         return this.zeugnis;
     }
 
+    /**
+     * Sets the zeugnis.
+     *
+     * @param zeugni the new zeugnis
+     */
     public void setZeugnis(final Zeugnis zeugni) {
         this.zeugnis = zeugni;
     }
@@ -183,8 +261,6 @@ public class Bewertung extends VersionedModel implements Serializable,
         return notenDarstellung.toString();
     }
 
-
-
     @Override
     public String toString() {
         return schulfach + ": " + notenDarstellung();
@@ -218,7 +294,8 @@ public class Bewertung extends VersionedModel implements Serializable,
 //          }
 //      }
 //      printMap["bw_${schulfach.technicalName()}"] = result
-//      printMap["bw_${schulfach.technicalName()}_tg"] = relevant?VariableUtility.PLATZHALTER_AUSGEWAEHLT:VariableUtility.PLATZHALTER_LEER
+//      printMap["bw_${schulfach.technicalName()}_tg"] =
+    // relevant?VariableUtility.PLATZHALTER_AUSGEWAEHLT:VariableUtility.PLATZHALTER_LEER
 //      return result
 //  }
 }

@@ -15,11 +15,11 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import net.sf.oval.constraint.Size;
-import net.sf.sze.model.base.VersionedModel;
 import net.sf.sze.util.StringUtil;
-import net.sf.sze.zeugnis.Schulfachtyp;
 
 import org.apache.commons.lang.builder.CompareToBuilder;
+
+import de.ppi.jpa.helper.VersionedModel;
 
 /**
  * Ein Schulfach.
@@ -65,81 +65,149 @@ public class Schulfach extends VersionedModel implements Serializable,
 //      }
 //   }
 
+    /** The name. */
     @Column(nullable = false, length = 30)
 
     @Size(max = 30)
     private String name;
 
+    /** The sortierung. */
     @Column(nullable = false)
 
     private Long sortierung;
 
+    /** The typ. */
     @Column(nullable = false)
 
     @Enumerated(EnumType.ORDINAL)
     private Schulfachtyp typ;
 
+    /** The stufen mit aussen differenzierung. */
     @Column(name = "stufen_mit_aussen_differenzierung", length = 255)
 
     // TODO stufenMitZweiNiveaus
     private String stufenMitAussenDifferenzierung;
 
+    /** The stufen mit binnen differenzierung. */
     @Column(name = "stufen_mit_binnen_differenzierung", length = 255)
 
     // TODO stufenMitDreiNiveaus
     private String stufenMitBinnenDifferenzierung;
 
+    /** The stufen mit standard bewertung. */
     @Column(name = "stufen_mit_standard_bewertung", length = 255)
 
     private String stufenMitStandardBewertung;
 
+    /**
+     * Gets the name.
+     *
+     * @return the name
+     */
     public String getName() {
         return this.name;
     }
 
+    /**
+     * Sets the name.
+     *
+     * @param name the new name
+     */
     public void setName(final String name) {
         this.name = name;
     }
 
+    /**
+     * Gets the sortierung.
+     *
+     * @return the sortierung
+     */
     public Long getSortierung() {
         return this.sortierung;
     }
 
+    /**
+     * Sets the sortierung.
+     *
+     * @param sortierung the new sortierung
+     */
     public void setSortierung(final Long sortierung) {
         this.sortierung = sortierung;
     }
 
+    /**
+     * Gets the stufen mit aussen differenzierung.
+     *
+     * @return the stufen mit aussen differenzierung
+     */
     public String getStufenMitAussenDifferenzierung() {
         return this.stufenMitAussenDifferenzierung;
     }
 
+    /**
+     * Sets the stufen mit aussen differenzierung.
+     *
+     * @param stufenMitAussenDifferenzierung the new stufen mit aussen
+     *            differenzierung
+     */
     public void setStufenMitAussenDifferenzierung(
             final String stufenMitAussenDifferenzierung) {
         this.stufenMitAussenDifferenzierung = stufenMitAussenDifferenzierung;
     }
 
+    /**
+     * Gets the stufen mit binnen differenzierung.
+     *
+     * @return the stufen mit binnen differenzierung
+     */
     public String getStufenMitBinnenDifferenzierung() {
         return this.stufenMitBinnenDifferenzierung;
     }
 
+    /**
+     * Sets the stufen mit binnen differenzierung.
+     *
+     * @param stufenMitBinnenDifferenzierung the new stufen mit binnen
+     *            differenzierung
+     */
     public void setStufenMitBinnenDifferenzierung(
             final String stufenMitBinnenDifferenzierung) {
         this.stufenMitBinnenDifferenzierung = stufenMitBinnenDifferenzierung;
     }
 
+    /**
+     * Gets the stufen mit standard bewertung.
+     *
+     * @return the stufen mit standard bewertung
+     */
     public String getStufenMitStandardBewertung() {
         return this.stufenMitStandardBewertung;
     }
 
+    /**
+     * Sets the stufen mit standard bewertung.
+     *
+     * @param stufenMitStandardBewertung the new stufen mit standard bewertung
+     */
     public void setStufenMitStandardBewertung(
             final String stufenMitStandardBewertung) {
         this.stufenMitStandardBewertung = stufenMitStandardBewertung;
     }
 
+    /**
+     * Gets the typ.
+     *
+     * @return the typ
+     */
     public Schulfachtyp getTyp() {
         return this.typ;
     }
 
+    /**
+     * Sets the typ.
+     *
+     * @param typ the new typ
+     */
     public void setTyp(final Schulfachtyp typ) {
         this.typ = typ;
     }
@@ -156,7 +224,6 @@ public class Schulfach extends VersionedModel implements Serializable,
     public List<String> convertStufenMitAussenDifferenzierungToList() {
         return StringUtil.convertStringToList(stufenMitAussenDifferenzierung);
     }
-
 
     @Override
     public String toString() {

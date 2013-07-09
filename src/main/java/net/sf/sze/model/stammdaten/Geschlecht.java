@@ -2,17 +2,23 @@
 //
 // (c) SZE-Development-Team
 
-package net.sf.sze.stammdaten;
+package net.sf.sze.model.stammdaten;
 
 /**
- * Das Geschlecht
- * @author niels
+ * Das Geschlecht.
  *
+ * @author niels
  */
 public enum Geschlecht {
-    MAENNLICH('m'), WEIBLICH('w');
 
-    final char id;
+    /** The maennlich. */
+    MAENNLICH('m'),
+
+    /** The weiblich. */
+    WEIBLICH('w');
+
+    /** The id. */
+    private final char id;
 
     Geschlecht(char id) {
         this.id = id;

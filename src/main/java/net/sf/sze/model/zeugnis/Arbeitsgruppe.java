@@ -14,13 +14,14 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import net.sf.sze.model.AgBewertung;
-import net.sf.sze.model.base.VersionedModel;
 import net.sf.sze.util.StringUtil;
 
 import org.apache.commons.lang.builder.CompareToBuilder;
 
+import de.ppi.jpa.helper.VersionedModel;
+
 /**
- * Arbeitsgruppen
+ * Arbeitsgruppen.
  *
  */
 @Entity
@@ -30,53 +31,97 @@ import org.apache.commons.lang.builder.CompareToBuilder;
 public class Arbeitsgruppe extends VersionedModel implements Serializable,
         Comparable<Arbeitsgruppe> {
 
+    /** The name. */
     @Column(nullable = false, length = 70)
     private String name;
 
+    /** The sortierung. */
     @Column(nullable = false)
 
     private Long sortierung;
 
+    /** The klassenstufen. */
     @Column(nullable = false, length = 255)
-    
 
     private String klassenstufen;
 
     // bi-directional many-to-one association to AgBewertung
+
+    /** The ag bewertungs. */
     @OneToMany(mappedBy = "arbeitsgruppe")
     private List<AgBewertung> agBewertungs;
 
     public Arbeitsgruppe() {
     }
 
+    /**
+     * Gets the klassenstufen.
+     *
+     * @return the klassenstufen
+     */
     public String getKlassenstufen() {
         return this.klassenstufen;
     }
 
+    /**
+     * Sets the klassenstufen.
+     *
+     * @param klassenstufen the new klassenstufen
+     */
     public void setKlassenstufen(final String klassenstufen) {
         this.klassenstufen = klassenstufen;
     }
 
+    /**
+     * Gets the name.
+     *
+     * @return the name
+     */
     public String getName() {
         return this.name;
     }
 
+    /**
+     * Sets the name.
+     *
+     * @param name the new name
+     */
     public void setName(final String name) {
         this.name = name;
     }
 
+    /**
+     * Gets the sortierung.
+     *
+     * @return the sortierung
+     */
     public Long getSortierung() {
         return this.sortierung;
     }
 
+    /**
+     * Sets the sortierung.
+     *
+     * @param sortierung the new sortierung
+     */
     public void setSortierung(final Long sortierung) {
         this.sortierung = sortierung;
     }
 
+    /**
+     * Gets the ag bewertungs.
+     *
+     * @return the ag bewertungs
+     */
     public List<AgBewertung> getAgBewertungs() {
         return this.agBewertungs;
     }
 
+    /**
+     * Sets the ag bewertungs.
+     *
+     * @param agBewertungs the new ag bewertungs
+     */
     public void setAgBewertungs(final List<AgBewertung> agBewertungs) {
         this.agBewertungs = agBewertungs;
     }
@@ -85,8 +130,6 @@ public class Arbeitsgruppe extends VersionedModel implements Serializable,
     public List<String> convertKlasenStufenToList() {
         return StringUtil.convertStringToList(klassenstufen);
     }
-
-
 
     @Override
     public String toString() {

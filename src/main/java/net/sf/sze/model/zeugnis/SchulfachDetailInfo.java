@@ -14,9 +14,10 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import net.sf.oval.constraint.Size;
-import net.sf.sze.model.base.VersionedModel;
 
 import org.apache.commons.lang.builder.CompareToBuilder;
+
+import de.ppi.jpa.helper.VersionedModel;
 
 /**
  * Manche Schulfächer umfassen mehrere Themen, in diesem Fall wird es im Detail
@@ -29,44 +30,79 @@ import org.apache.commons.lang.builder.CompareToBuilder;
         "schulfach_id"}, name = "UK_SCHULFACH_DETAIL_FORMULAR_SCHULFACH"))
 public class SchulfachDetailInfo extends VersionedModel
         implements Serializable, Comparable<SchulfachDetailInfo> {
+
+    /** The detail info. */
     @Column(name = "detail_info", nullable = false, length = 50)
-    
+
     @Size(max = 50)
     private String detailInfo;
 
     // bi-directional many-to-one association to Schulfach
-    @ManyToOne(optional=false)
+
+    /** The schulfach. */
+    @ManyToOne(optional = false)
     @JoinColumn(name = "schulfach_id", nullable = false)
-    
+
     private Schulfach schulfach;
 
     // bi-directional many-to-one association to ZeugnisFormular
-    @ManyToOne(optional=false)
+
+    /** The formular. */
+    @ManyToOne(optional = false)
     @JoinColumn(name = "formular_id", nullable = false)
-    
+
     private ZeugnisFormular formular;
 
-
+    /**
+     * Gets the detail info.
+     *
+     * @return the detail info
+     */
     public String getDetailInfo() {
         return this.detailInfo;
     }
 
+    /**
+     * Sets the detail info.
+     *
+     * @param detailInfo the new detail info
+     */
     public void setDetailInfo(final String detailInfo) {
         this.detailInfo = detailInfo;
     }
 
+    /**
+     * Gets the schulfach.
+     *
+     * @return the schulfach
+     */
     public Schulfach getSchulfach() {
         return this.schulfach;
     }
 
+    /**
+     * Sets the schulfach.
+     *
+     * @param schulfach the new schulfach
+     */
     public void setSchulfach(final Schulfach schulfach) {
         this.schulfach = schulfach;
     }
 
+    /**
+     * Gets the formular.
+     *
+     * @return the formular
+     */
     public ZeugnisFormular getFormular() {
         return this.formular;
     }
 
+    /**
+     * Sets the formular.
+     *
+     * @param zeugnisFormular the new formular
+     */
     public void setFormular(final ZeugnisFormular zeugnisFormular) {
         this.formular = zeugnisFormular;
     }

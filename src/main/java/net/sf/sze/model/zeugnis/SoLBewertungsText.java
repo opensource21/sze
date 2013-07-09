@@ -12,9 +12,10 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import net.sf.oval.constraint.Size;
-import net.sf.sze.model.base.VersionedModel;
 
 import org.apache.commons.lang.builder.CompareToBuilder;
+
+import de.ppi.jpa.helper.VersionedModel;
 
 /**
  * SoL wird mit festen Texten bewertet.
@@ -26,29 +27,50 @@ import org.apache.commons.lang.builder.CompareToBuilder;
         name = "UK_SOLBEWERTUNGS_TEXT_NAME"))
 public class SoLBewertungsText extends VersionedModel implements Serializable,
         Comparable<SoLBewertungsText> {
+
+    /** The name. */
     @Column(nullable = false, length = 255)
-    
-    
+
     private String name;
 
+    /** The text. */
     @Column(nullable = false, length = 100)
-    
+
     @Size(max = 100)
     private String text;
 
-
+    /**
+     * Gets the name.
+     *
+     * @return the name
+     */
     public String getName() {
         return this.name;
     }
 
+    /**
+     * Sets the name.
+     *
+     * @param name the new name
+     */
     public void setName(final String name) {
         this.name = name;
     }
 
+    /**
+     * Gets the text.
+     *
+     * @return the text
+     */
     public String getText() {
         return this.text;
     }
 
+    /**
+     * Sets the text.
+     *
+     * @param text the new text
+     */
     public void setText(final String text) {
         this.text = text;
     }

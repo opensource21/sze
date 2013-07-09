@@ -16,7 +16,14 @@ import java.util.List;
  * @author niels
  *
  */
-public class StringUtil {
+public final class StringUtil {
+
+    /**
+     * Initiates an object of type StringUtil.
+     */
+    private StringUtil() {
+
+    }
 
     /**
      * Wandelt einen String, der eine Komma oder Leerzeichen separierte Liste

@@ -14,11 +14,11 @@ import javax.persistence.Enumerated;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import net.sf.sze.model.base.VersionedModel;
 import net.sf.sze.util.StringUtil;
-import net.sf.sze.zeugnis.AvSvTyp;
 
 import org.apache.commons.lang.builder.CompareToBuilder;
+
+import de.ppi.jpa.helper.VersionedModel;
 
 /**
  * Mögliches Arbeits- bzw Sozialverhalten. Im allgemeinen kurz AvSv genannt.
@@ -30,53 +30,96 @@ import org.apache.commons.lang.builder.CompareToBuilder;
         name = "UK_AV_SV_TYP_NAME"))
 public class ArbeitsUndSozialVerhalten extends VersionedModel
         implements Serializable, Comparable<ArbeitsUndSozialVerhalten> {
+
+    /** The name. */
     @Column(nullable = false, length = 50)
 
     private String name;
 
+    /** The typ. */
     @Column(nullable = false)
 
     @Enumerated(EnumType.ORDINAL)
     private AvSvTyp typ;
 
+    /** The sortierung. */
     @Column(nullable = false)
 
     private Long sortierung;
 
+    /** The klassenstufen. */
     @Column(nullable = false, length = 255)
-
 
     private String klassenstufen;
 
-
+    /**
+     * Gets the klassenstufen.
+     *
+     * @return the klassenstufen
+     */
     public String getKlassenstufen() {
         return this.klassenstufen;
     }
 
+    /**
+     * Sets the klassenstufen.
+     *
+     * @param klassenstufen the new klassenstufen
+     */
     public void setKlassenstufen(final String klassenstufen) {
         this.klassenstufen = klassenstufen;
     }
 
+    /**
+     * Gets the name.
+     *
+     * @return the name
+     */
     public String getName() {
         return this.name;
     }
 
+    /**
+     * Sets the name.
+     *
+     * @param name the new name
+     */
     public void setName(final String name) {
         this.name = name;
     }
 
+    /**
+     * Gets the sortierung.
+     *
+     * @return the sortierung
+     */
     public Long getSortierung() {
         return this.sortierung;
     }
 
+    /**
+     * Sets the sortierung.
+     *
+     * @param sortierung the new sortierung
+     */
     public void setSortierung(final Long sortierung) {
         this.sortierung = sortierung;
     }
 
+    /**
+     * Gets the typ.
+     *
+     * @return the typ
+     */
     public AvSvTyp getTyp() {
         return this.typ;
     }
 
+    /**
+     * Sets the typ.
+     *
+     * @param typ the new typ
+     */
     public void setTyp(final AvSvTyp typ) {
         this.typ = typ;
     }
@@ -85,7 +128,6 @@ public class ArbeitsUndSozialVerhalten extends VersionedModel
     public List<String> convertKlasenStufenToList() {
         return StringUtil.convertStringToList(klassenstufen);
     }
-
 
     @Override
     public String toString() {

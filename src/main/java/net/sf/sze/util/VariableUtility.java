@@ -4,7 +4,7 @@
 
 package net.sf.sze.util;
 
-import net.sf.sze.stammdaten.Geschlecht;
+import net.sf.sze.model.stammdaten.Geschlecht;
 
 import java.text.SimpleDateFormat;
 
@@ -19,19 +19,39 @@ import java.util.List;
  * @author niels
  *
  */
-public class VariableUtility {
+public final class VariableUtility {
+
     // TODO Test schreiben.
     // Führendes Leerzeichen wird von OO geschluckt, daher 00A0 was auch nix anzeigt.
+
+    /** The Constant PLATZHALTER_LEER. */
     public static final String PLATZHALTER_LEER = "\u00A0/ ";
+
+    /** The Constant PLATZHALTER_AUSGEWAEHLT. */
     public static final String PLATZHALTER_AUSGEWAEHLT = "\u00A0X ";
 
+    /** The Constant VARIABLE_NAMES. */
     public static final String[] VARIABLE_NAMES = {
         "name", "Name", "NAME", "datum", "schuljahr", "Vorname", "Nachname"
     };
 
+    /** The Constant VARIABLE_NAMES_LIST. */
     private static final List<String> VARIABLE_NAMES_LIST = Arrays.asList(
             VARIABLE_NAMES);
 
+    /**
+     *
+     * Initiates an object of type VariableUtility.
+     */
+    private VariableUtility() {
+
+    }
+
+    /**
+     * Liefert die Liste alle Variablen, die nicht verarbeitet werden können.
+     * @param text der Text mit den Variablen.
+     * @return die Liste alle Variablen, die nicht verarbeitet werden können.
+     */
     public static List<String> getInvalidVariables(final String text) {
         final List<String> unknownVariables = new ArrayList<String>();
         final String[] tokens = ("Text" + text).split("@");
@@ -46,6 +66,19 @@ public class VariableUtility {
         return unknownVariables;
     }
 
+    /**
+     * Erzeugt den Text für den Druck in dem die Variablen ersetzt werden.
+     * @param text der Text
+     * @param rufname der Rufname
+     * @param vorname der Vorname
+     * @param nachname der Nachname
+     * @param geschlecht das Geschlecht.
+     * @param datum das aktuelle Datum
+     * @param erSieStattNamenRule true wenn er oder sie statt dem Namen
+     * genommen werden soll.
+     * @param schuljahr das Schuljahr
+     * @return der Text für den Druck.
+     */
     public static String createPrintText(final String text,
             final String rufname, final String vorname, final String nachname,
             final Geschlecht geschlecht, final Date datum,
@@ -104,6 +137,12 @@ public class VariableUtility {
 
     }
 
+    /**
+     * Liefert den geschlechtsspezifischen Text.
+     * @param token der aktuelle Token.
+     * @param geschlecht das gewählte Geschlecht.
+     * @return den geschlechtsspezifischen Text.
+     */
     private static String getGenderSpecificText(final String token,
             final Geschlecht geschlecht) {
         final String[] texts = token.split("\\|");
@@ -114,6 +153,14 @@ public class VariableUtility {
         }
     }
 
+    /**
+     * Erstellt eine Anrede entweder der Name oder Er/Sie.
+     * @param rufname der Rufame
+     * @param geschlecht das Geschlecht.
+     * @param erSieStattNamen Kennzeichen ob der Name verwendet werden soll.
+     * @param kleinGeschrieben Kennzeichen ob er/sie groß oder klein sein soll.
+     * @return die Anrede.
+     */
     private static String buildName(final String rufname,
             final Geschlecht geschlecht, final boolean erSieStattNamen,
             final boolean kleinGeschrieben) {

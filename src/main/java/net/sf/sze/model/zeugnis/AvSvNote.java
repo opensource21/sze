@@ -5,7 +5,7 @@
 /**
  *
  */
-package net.sf.sze.zeugnis;
+package net.sf.sze.model.zeugnis;
 
 /**
  * Schulfächer kann man in verschiedene Gruppen einsortieren. Diese sind hier
@@ -14,12 +14,30 @@ package net.sf.sze.zeugnis;
  *
  */
 public enum AvSvNote {
-    BESONDERE_ANERKENNUNG(1), ERWARTUNGEN_IM_VOLLEN_UMFANG(2),
-            ERWARTUNGEN_ERFUELLT(3), ERWARTUNGEN_MIT_EINSCHRAENKUNGEN(4),
-            ERWARTUNGEN_NICHT_ERFUELLT(5);
 
-    final int id;
+    /** The besondere anerkennung. */
+    BESONDERE_ANERKENNUNG(1),
 
+    /** The erwartungen im vollen umfang. */
+    ERWARTUNGEN_IM_VOLLEN_UMFANG(2),
+
+    /** The erwartungen erfuellt. */
+    ERWARTUNGEN_ERFUELLT(3),
+
+    /** The erwartungen mit einschraenkungen. */
+    ERWARTUNGEN_MIT_EINSCHRAENKUNGEN(4),
+
+    /** The erwartungen nicht erfuellt. */
+    ERWARTUNGEN_NICHT_ERFUELLT(5);
+
+    /** The id. */
+    private final int id;
+
+    /**
+     *
+     * Initiates an object of type AvSvNote.
+     * @param id die ID der Note.
+     */
     private AvSvNote(int id) {
         this.id = id;
     }
@@ -43,6 +61,11 @@ public enum AvSvNote {
         }
     }
 
+    /**
+     * Gets the buchstabe.
+     *
+     * @return the buchstabe
+     */
     public String getBuchstabe() {
         switch (id) {
         case 1:

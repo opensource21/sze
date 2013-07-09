@@ -2,7 +2,7 @@
 //
 // (c) SZE-Development-Team
 
-package net.sf.sze.zeugnis;
+package net.sf.sze.model.zeugnis;
 
 /**
  * Aufzählungsklasse für Halbjahre.
@@ -11,21 +11,27 @@ package net.sf.sze.zeugnis;
  */
 public enum Halbjahr {
 
-    Erstes_Halbjahr(1), Beide_Halbjahre(2);
+    /** The Erstes_ halbjahr. */
+    Erstes_Halbjahr(1),
 
-    final int id;
+    /** The Beide_ halbjahre. */
+    Beide_Halbjahre(2);
 
+    /** The id. */
+    private final int id;
 
-
+    /**
+     * Gets the id.
+     *
+     * @return the id
+     */
     public int getId() {
         return id;
     }
 
-
     private Halbjahr(final int halbjahr) {
         this.id = halbjahr;
     }
-
 
     @Override
     public String toString() {
@@ -41,7 +47,8 @@ public enum Halbjahr {
     }
 
     /**
-     * Liefert den relativen Pfad
+     * Liefert den relativen Pfad.
+     * @return der relative Pfad.
      */
     public String createRelativePathName() {
         switch (id) {

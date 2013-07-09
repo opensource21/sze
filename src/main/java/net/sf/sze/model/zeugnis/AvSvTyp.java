@@ -5,7 +5,7 @@
 /**
  *
  */
-package net.sf.sze.zeugnis;
+package net.sf.sze.model.zeugnis;
 
 /**
  * Unterscheidung in Arbeits- und in Sozialverhalten.
@@ -13,11 +13,30 @@ package net.sf.sze.zeugnis;
  *
  */
 public enum AvSvTyp {
-    ARBEITSVERHALTEN(1, "AV"), SOZIALVERHALTEN(2, "SV");
 
+    /**
+     * Arbeitsverhalten.
+     */
+    ARBEITSVERHALTEN(1, "AV"),
+
+    /** Sozialverhalten. */
+    SOZIALVERHALTEN(2, "SV");
+
+    /**
+     * Die Id.
+     */
     private final int id;
+
+    /**
+     * Schlüssel als Kurzform.
+     */
     private final String shortKey;
 
+    /**
+     * Initiates an object of type AvSvTyp.
+     * @param id die Id
+     * @param shortKey der Kurzschlüssel.
+     */
     private AvSvTyp(int id, String shortKey) {
         this.id = id;
         this.shortKey = shortKey;
@@ -36,6 +55,10 @@ public enum AvSvTyp {
         }
     }
 
+    /**
+     * Liefert den Schlüssel in Kurzform.
+     * @return den Schlüssel in Kurzform.
+     */
     public String getShortKey() {
         return shortKey;
     }

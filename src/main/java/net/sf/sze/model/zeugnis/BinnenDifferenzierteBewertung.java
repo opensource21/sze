@@ -17,18 +17,15 @@ public class BinnenDifferenzierteBewertung extends Bewertung {
 
     // TODO der NotNull-Constraint gilt nur für diese SubKlasse :-/
     // leistungsniveau(inList:['G','E','Z'], nullable:false)
-    //TODO sollte DreiNiveauBewertung heißen.
+    // TODO sollte DreiNiveauBewertung heißen.
     BinnenDifferenzierteBewertung() {
         super();
         init();
     }
 
-
     private void init() {
         setLeistungsniveau("G");
     }
-
-
 
     @Override
     public String toString() {

@@ -11,10 +11,9 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import net.sf.sze.model.base.VersionedModel;
-import net.sf.sze.zeugnis.Halbjahr;
-
 import org.apache.commons.lang.builder.CompareToBuilder;
+
+import de.ppi.jpa.helper.VersionedModel;
 
 /**
  * Beschreibt ein Schulhalbjahr.
@@ -30,46 +29,77 @@ public class Schulhalbjahr extends VersionedModel implements Serializable {
      * Das Jahr in dem die Zeugnisse für das Schuljahr erstellt werden.
      */
     @Column(nullable = false)
-    
     // TODO Gui-Darstellung mit CB 2000..2050, besser Default raten.
-    private Integer jahr;
+    private int jahr;
 
     /**
-     * erstes oder 2.Halbjahr
+     * erstes oder 2.Halbjahr.
      */
     @Column(nullable = false)
-    
+
     private Halbjahr halbjahr;
 
     /**
      * Kennzeichen, ob diese Jahr in der Auswahlliste erscheinen soll.
      */
     @Column(nullable = false)
-    
+
     private Boolean selectable = Boolean.FALSE;
 
-
-
+    /**
+     * Gets the erstes oder 2.
+     *
+     * @return the erstes oder 2
+     */
     public Halbjahr getHalbjahr() {
         return this.halbjahr;
     }
 
+    /**
+     * Sets the erstes oder 2.
+     *
+     * @param halbjahr the new erstes oder 2
+     */
     public void setHalbjahr(final Halbjahr halbjahr) {
         this.halbjahr = halbjahr;
     }
 
-    public Integer getJahr() {
+    /**
+     * Gets the das Jahr in dem die Zeugnisse für das Schuljahr erstellt werden.
+     *
+     * @return the das Jahr in dem die Zeugnisse für das Schuljahr erstellt
+     *         werden
+     */
+    public int getJahr() {
         return this.jahr;
     }
 
-    public void setJahr(final Integer jahr) {
+    /**
+     * Sets the das Jahr in dem die Zeugnisse für das Schuljahr erstellt werden.
+     *
+     * @param jahr the new das Jahr in dem die Zeugnisse für das Schuljahr
+     *            erstellt werden
+     */
+    public void setJahr(final int jahr) {
         this.jahr = jahr;
     }
 
+    /**
+     * Gets the kennzeichen, ob diese Jahr in der Auswahlliste erscheinen soll.
+     *
+     * @return the kennzeichen, ob diese Jahr in der Auswahlliste erscheinen
+     *         soll
+     */
     public Boolean getSelectable() {
         return this.selectable;
     }
 
+    /**
+     * Sets the kennzeichen, ob diese Jahr in der Auswahlliste erscheinen soll.
+     *
+     * @param selectable the new kennzeichen, ob diese Jahr in der Auswahlliste
+     *            erscheinen soll
+     */
     public void setSelectable(final Boolean selectable) {
         this.selectable = selectable;
     }
@@ -80,7 +110,7 @@ public class Schulhalbjahr extends VersionedModel implements Serializable {
     }
 
     /**
-     * Liefert den relativen Pfad
+     * Liefert den relativen Pfad.
      */
     public String createRelativePathName() {
         return (jahr - 1) + "-" + jahr % 100 + "/" + halbjahr

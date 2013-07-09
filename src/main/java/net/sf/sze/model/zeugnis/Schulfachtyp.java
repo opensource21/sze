@@ -5,7 +5,7 @@
 /**
  *
  */
-package net.sf.sze.zeugnis;
+package net.sf.sze.model.zeugnis;
 
 /**
  * Schulfächer kann man in verschiedene Gruppen einsortieren. Diese sind hier
@@ -14,12 +14,27 @@ package net.sf.sze.zeugnis;
  *
  */
 public enum Schulfachtyp {
-    KERNFACH(1, "KF"), ERGAENZUNGSFACH(2, "EF"), WAHLPFLICHT(3, "WP");
 
-    final int id;
-    final String shortKey;
+    /** The kernfach. */
+    KERNFACH(1, "KF"),
 
+    /** The ergaenzungsfach. */
+    ERGAENZUNGSFACH(2, "EF"),
 
+    /** The wahlpflicht. */
+    WAHLPFLICHT(3, "WP");
+
+    /** The id. */
+    private final int id;
+
+    /** The short key. */
+    private final String shortKey;
+
+    /**
+     * Gets the short key.
+     *
+     * @return the short key
+     */
     public String getShortKey() {
         return shortKey;
     }
