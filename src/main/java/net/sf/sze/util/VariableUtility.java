@@ -24,6 +24,8 @@ public final class VariableUtility {
     // TODO Test schreiben.
     // Führendes Leerzeichen wird von OO geschluckt, daher 00A0 was auch nix anzeigt.
 
+    // TODO Die Message noch definiert werden.
+
     /** The Constant PLATZHALTER_LEER. */
     public static final String PLATZHALTER_LEER = "\u00A0/ ";
 
