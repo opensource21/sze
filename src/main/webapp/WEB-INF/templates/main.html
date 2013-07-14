@@ -28,7 +28,19 @@
         <span class="menuButton"><a th:href="@{#{configuration.main}}">Konfiguration</a></span>
         <span class="menuButton"><a th:href="@{#{zeugnis.start}}">Zeugnisse</a></span>
     </div>
-
+    <div class="message" th:unless="${#string.isEmpty(messages)}">
+        ${messages}
+    </div>
+    <div class="message" th:unless="${#lists.isEmpty(messages)}">
+       <ul th:each="message : ${messages}">
+           <li>${message}</li>
+       </ul>
+    </div>
+    <div class="errors" th:unless="${#lists.isEmpty(errors)">
+       <ul th:each="error: ${errors}">
+           <li>${error}</li>
+       </ul>
+    </div>
     <div class="body" layout:fragment="content">
         Hier wird die eigentlich Seite angezeigt.
     </div>
