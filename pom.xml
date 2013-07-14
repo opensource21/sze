@@ -156,6 +156,20 @@
             <version>2.0.3</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- Liquibase -->
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+            <version>3.0.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-maven-plugin</artifactId>
+            <version>3.0.1</version>
+        </dependency>
+
         <!-- Test Dependencies -->
         <dependency>
             <groupId>junit</groupId>
@@ -221,8 +235,8 @@
         <!-- Files in resources should be added -->
         <resources>
             <resource>
-                <!--  and variables should be replaced. Have in mind that
-                    db.properties are written as UTF-8 but is initial ISO-8859-1 -->
+                <!-- and variables should be replaced. Have in mind that db.properties
+                    are written as UTF-8 but is initial ISO-8859-1 -->
                 <directory>src/main/resources</directory>
                 <includes>
                     <include>db.properties</include>

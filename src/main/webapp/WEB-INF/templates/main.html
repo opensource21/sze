@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="de-DE" xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../resources/css/bootstrap-ppi.css"
+        th:href="@{/resources/css/bootstrap-ppi.css}" />
+    <link rel="stylesheet" href="../../resources/css/main.css"
+        th:href="@{/resources/css/bootstrap-ppi.css}" />
+    <link rel="shortcut icon" href="../../resources/img/sze.ico" type="image/x-icon"
+        th:href="@{/resources/img/sze.ico}"/>
+    <link rel="icon" href="../../resources/img/sze.ico" type="image/x-icon"
+        th:href="@{/resources/img/sze.ico}"/>
+    <title>SZE - Schulzeugnisersteller</title>
+</head>
+<body>
+    <div class="logo">
+            <img src="../../resources/img/sze_logo.jpg" th:src="@{/resources/img/sze_logo.jpg}"
+                alt="SZE-Logo" />
+
+    </div>
+    <div class="login-info">
+        <div>Hallo ###! Sie sind eingeloggt in sze Version <i th:text="#{app.version}">3.0.0</i> als: ###Userid### (<a href="auth/logoff" th:href="@{#{todo}(todo='Rechte Steuerung baunen')}">Abmelden</a>)</div>
+    </div>
+    <!-- TODO nachfolgendes in Abhängigkeit von der Rollen anzeigen. -->
+    <div class="nav">
+        <span class="menuButton"><a th:href="@{/admin}">Administration</a></span>
+        <span class="menuButton"><a th:href="@{#{configuration.main}}">Konfiguration</a></span>
+        <span class="menuButton"><a th:href="@{#{zeugnis.start}}">Zeugnisse</a></span>
+    </div>
+
+    <div class="body" layout:fragment="content">
+        Hier wird die eigentlich Seite angezeigt.
+    </div>
+
+    <div class="help" th:unless="${#string.isEmpty(helpMessageId)}" th:utext="<b>Erl&auml;uterung:</b> #{${helpMessageId}}">
+        <b>Erl&auml;uterung:</b> Ein erläuternder Text.
+    </div>
+</body>
+</html>

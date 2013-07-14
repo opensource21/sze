@@ -1,23 +1,29 @@
+// URL.java
+//
+// (c) SZE-Development-Team
+
 package net.sf.sze.frontend;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+
 import java.util.Map;
 import java.util.Properties;
 import java.util.StringTokenizer;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.web.util.UriComponents;
-import org.springframework.web.util.UriComponentsBuilder;
-
 /**
  * List of all URLs.
- * 
+ *
  */
-// CSOFF: InterfaceIsType You must give the Annotations Strings and can't use
-// Enums.
+//CSOFF: InterfaceIsType You must give the Annotations Strings and can't use
+//Enums.
 public final class URL {
 
     /**
@@ -37,10 +43,52 @@ public final class URL {
     public static final String HOME = "/home";
 
     /**
+     * TODO-Url.
+     */
+    public static final String TODO = "/todo";
+
+    /**
+     * All URLs for the configuration of a zeugnis.
+     */
+    public interface Configuration {
+
+        /**
+         * Zeugnisconfiguration base-url.
+         */
+        String HOME = "/zeugnisKonfiguration";
+
+        /**
+         * Zeugnisconfiguration start-url.
+         */
+        String MAIN = HOME + "/";
+
+    }
+
+
+    /**
+     * All URLs for the creation of a Zeugnis.
+     */
+    public interface Zeugnis {
+
+        /**
+         * Zeugniserfassung base-url.
+         */
+        String HOME = "/zeugnis";
+
+        /**
+         * Zeugniserfassung base-url.
+         */
+        String START = HOME + "/start";
+
+    }
+
+
+    /**
      * All URLS for the User.
-     * 
+     *
      */
     public interface User {
+
         /**
          * User-Url.
          */
@@ -73,11 +121,13 @@ public final class URL {
         String CREATE = HOME + "/create";
     }
 
+
     /**
      * All URLS for the {@link net.sf.sze.model.Post}.
-     * 
+     *
      */
     public interface Post {
+
         /**
          * Post-Url.
          */
@@ -110,11 +160,13 @@ public final class URL {
         String CREATE = HOME + "/create";
     }
 
+
     /**
      * All URLS for the {@link net.sf.sze.model.Tag}.
-     * 
+     *
      */
     public interface Tag {
+
         /**
          * Tag-Url.
          */
@@ -147,24 +199,26 @@ public final class URL {
         String CREATE = HOME + "/create";
     }
 
+
     /**
      * Replace all parameters in the URL with the given values.
-     * 
+     *
      * @param url the URL.
      * @param parameters the parameters
      * @return the URL with parameters filled in
      */
     public static String filledURL(String url, Object... parameters) {
-        if (parameters == null || parameters.length == 0) {
+        if ((parameters == null) || (parameters.length == 0)) {
             return url;
         }
+
         final UriComponents uricomponent = getUriComponent(url);
         return uricomponent.expand(parameters).encode().toUriString();
     }
 
     /**
      * Give a {@link UriComponents} to the URL.
-     * 
+     *
      * @param url a url as String
      * @return the {@link UriComponents}
      */
@@ -172,20 +226,22 @@ public final class URL {
         if (!URI_MAP.containsKey(url)) {
             URI_MAP.put(url, UriComponentsBuilder.fromUriString(url).build());
         }
+
         return URI_MAP.get(url);
     }
 
     /**
      * Replace all parameters in the URL with the given values.
-     * 
+     *
      * @param url the URL.
      * @param parameters the parameters
      * @return the URL with parameters filled in
      */
     public static String filledURL(String url, Map<String, String> parameters) {
-        if (parameters == null || parameters.size() == 0) {
+        if ((parameters == null) || (parameters.size() == 0)) {
             return url;
         }
+
         final UriComponents uricomponent = getUriComponent(url);
         return uricomponent.expand(parameters).encode().toUriString();
     }
@@ -193,7 +249,7 @@ public final class URL {
     /**
      * Replace all parameters in the URL with the given values and make a
      * redirect.
-     * 
+     *
      * @param url the URL.
      * @param parameters the parameters
      * @return the redirect URL with parameters filled in
@@ -205,19 +261,19 @@ public final class URL {
     /**
      * Replace all parameters in the URL with the given values and make a
      * redirect.
-     * 
+     *
      * @param url the URL.
      * @param namedParameters the parameters
      * @return the redirect URL with parameters filled in.
      */
-    public static String redirect(String url,
-            Map<String, String> namedParameters) {
+    public static String redirect(String url, Map<String,
+            String> namedParameters) {
         return "redirect:" + filledURL(url, namedParameters);
     }
 
     /**
      * Add all URL constants to a {@link Properties}.
-     * 
+     *
      * @return a {@link Properties} object with all constant information.
      */
     public static Properties urlsAsMessages() {
@@ -229,7 +285,7 @@ public final class URL {
 
     /**
      * Add all class Constants to a {@link Properties}.
-     * 
+     *
      * @param prefix the prefix for the key.
      * @param classes the list of classes.
      * @param props the properties object.
@@ -243,30 +299,26 @@ public final class URL {
                     if (Modifier.isPublic(field.getModifiers())) {
                         try {
                             if (!field.getName().startsWith("P_")) {
-                                String keyName =
-                                        createKey(prefix,
-                                                class1.getSimpleName(),
-                                                field.getName());
-                                String urlValue =
-                                        createUrl(field.get(null).toString());
+                                String keyName = createKey(prefix, class1
+                                        .getSimpleName(), field.getName());
+                                String urlValue = createUrl(field.get(null)
+                                        .toString());
                                 props.put(keyName, urlValue);
                             }
                         } catch (IllegalArgumentException e) {
-                            LOG.error(
-                                    "Error reading the field "
-                                            + field.getDeclaringClass() + "."
-                                            + field.getName(), e);
+                            LOG.error("Error reading the field " + field
+                                    .getDeclaringClass() + "." + field
+                                    .getName(), e);
                         } catch (IllegalAccessException e) {
-                            LOG.error(
-                                    "Error reading the field "
-                                            + field.getDeclaringClass() + "."
-                                            + field.getName(), e);
+                            LOG.error("Error reading the field " + field
+                                    .getDeclaringClass() + "." + field
+                                    .getName(), e);
                         }
                     }
                 }
-                addConstantInfosFromClass(
-                        prefix + "." + class1.getSimpleName(),
-                        class1.getDeclaredClasses(), props);
+
+                addConstantInfosFromClass(prefix + "." + class1
+                        .getSimpleName(), class1.getDeclaredClasses(), props);
 
             }
         }
@@ -275,7 +327,7 @@ public final class URL {
     /**
      * Creates the URL from the constant as a message, i.e. named parameters
      * like {user_id} will be replaced by {0}.
-     * 
+     *
      * @param fieldValue the field value.
      * @return the URL as parameterized message.
      */
@@ -292,14 +344,16 @@ public final class URL {
             } else {
                 result.append(key);
             }
+
             isVariable = !isVariable;
         }
+
         return result.toString();
     }
 
     /**
      * Create a key name.
-     * 
+     *
      * @param prefix the prefix for the key.
      * @param className the simple name of the declaring class.
      * @param fieldName the field name.
@@ -315,7 +369,8 @@ public final class URL {
      */
     private URL() {
         // UTILITY-CONSTRUCTOR
-    };
+    }
 
+    ;
 }
-// CSON: InterfaceIsType
+//CSON: InterfaceIsType
