@@ -11,6 +11,11 @@ html * {
     right: 0;
 }
 
+.login-info {
+    float: none;
+    margin: 0 15px 10px;
+}
+
 body {
     background: #fff;
     color: #333;
@@ -21,7 +26,7 @@ a:link, a:visited, a:hover {
     color: #123;
     font-weight: bold;
     text-decoration: none;
-} 
+}
 
 h1 {
     color: #006dba;
@@ -39,7 +44,7 @@ h2 {
 
 
 ul {
-    padding-left: 15px;	
+    padding-left: 15px;
 }
 
 input, select, textarea {
@@ -53,9 +58,9 @@ select {
    padding: 2px 2px 2px 0;
 }
 textarea {
-	width: 450px;
-	height: 150px;
-	vertical-align: top;
+    width: 450px;
+    height: 150px;
+    vertical-align: top;
 }
 
 input:focus, select:focus, textarea:focus {
@@ -67,19 +72,19 @@ input:focus, select:focus, textarea:focus {
     margin: 0 15px 10px 15px;
 }
 
-		
+
 
 /* NAVIGATION MENU */
 
 .nav {
     background: #fff url(../images/skin/shadow.jpg) bottom repeat-x;
     border: 1px solid #ccc;
-    border-style: solid none solid none;	
+    border-style: solid none solid none;
     margin-top: 5px;
     padding: 7px 12px;
 }
 
-.zeugnisnav {  
+.zeugnisnav {
     background: #fff url(../images/skin/shadow.jpg) bottom repeat-x;
     border: 1px solid #ccc;
     border-style: solid none solid none;
@@ -116,12 +121,12 @@ input:focus, select:focus, textarea:focus {
 }
 
 .help {
-	float: none;	
-	background:#CCEEFF none repeat scroll 0 0;
-	border:1px solid #CCCCCC;
-	color:#110055;
-	margin:10px 15px 5px;
-	padding:5px 5px;
+    float: none;
+    background:#CCEEFF none repeat scroll 0 0;
+    border:1px solid #CCCCCC;
+    color:#110055;
+    margin:10px 15px 5px;
+    padding:5px 5px;
 }
 
 /* MESSAGES AND ERRORS */
@@ -143,10 +148,10 @@ div.errors {
 }
 div.errors ul {
     list-style: none;
-    padding: 0;	
+    padding: 0;
 }
 div.errors li {
-	background: url(../images/skin/exclamation.png) 8px 0% no-repeat;
+    background: url(../images/skin/exclamation.png) 8px 0% no-repeat;
     line-height: 16px;
     padding-left: 30px;
 }
@@ -167,7 +172,7 @@ table {
 tr {
     border: 0;
 }
-td, th { 
+td, th {
     font: 0.7em verdana, arial, helvetica, sans-serif;
     line-height: 12px;
     padding: 5px 6px;
