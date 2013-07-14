@@ -180,11 +180,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
     public ThymeleafViewResolver configureInternalThymeLeafResourceViewResolver() {
         final ThymeleafViewResolver resolver = new ThymeleafViewResolver();
         resolver.setTemplateEngine(templateEngine());
-        resolver.setOrder(1);
-        resolver.setViewNames(new String[] {
-            "example/user/list", "example/user/userform", "example/post/list",
-            "example/post/postform", "example/tag/list", "example/tag/tagform"
-        });
+        resolver.setOrder(2);
         return resolver;
     }
 
@@ -231,7 +227,8 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
                 new InternalResourceViewResolver();
         resolver.setPrefix("/WEB-INF/views/");
         resolver.setSuffix(".jsp");
-        resolver.setOrder(2);
+        resolver.setOrder(1);
+        resolver.setViewNames(new String[] {"xx/user/list"});
         return resolver;
     }
 

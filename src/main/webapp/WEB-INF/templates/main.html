@@ -1,8 +1,14 @@
 <!DOCTYPE html>
+<!-- PARAMS:
+helpMessageId - die MessageId für die Hilfe.
+message - ein Nachricht
+messages - eine Liste mit Meldungen.
+errors - eine Liste mit Fehlermeldungen.
+ -->
 <html lang="de-DE" xmlns:th="http://www.thymeleaf.org"
     xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
     <link rel="stylesheet" href="../../resources/css/bootstrap-ppi.css"
         th:href="@{/resources/css/bootstrap-ppi.css}" />
     <link rel="stylesheet" href="../../resources/css/main.css"
@@ -11,7 +17,6 @@
         th:href="@{/resources/img/sze.ico}"/>
     <link rel="icon" href="../../resources/img/sze.ico" type="image/x-icon"
         th:href="@{/resources/img/sze.ico}"/>
-
     <link rel="stylesheet" href="../../../../resources/css/bootstrap-ppi.css"
         th:href="@{/resources/css/bootstrap-ppi.css}" />
     <link rel="stylesheet"
@@ -51,15 +56,15 @@
         <span class="menuButton"><a th:href="@{#{configuration.main}}">Konfiguration</a></span>
         <span class="menuButton"><a th:href="@{#{zeugnis.start}}">Zeugnisse</a></span>
     </div>
-    <div class="message" th:unless="${#string.isEmpty(messages)}">
-        ${messages}
+    <div class="message" th:unless="${#strings.isEmpty(message)}">
+        ${message}
     </div>
     <div class="message" th:unless="${#lists.isEmpty(messages)}">
        <ul th:each="message : ${messages}">
            <li>${message}</li>
        </ul>
     </div>
-    <div class="errors" th:unless="${#lists.isEmpty(errors)">
+    <div class="errors" th:unless="${#lists.isEmpty(errors)}">
        <ul th:each="error: ${errors}">
            <li>${error}</li>
        </ul>
@@ -68,7 +73,8 @@
         Hier wird die eigentlich Seite angezeigt.
     </div>
 
-    <div class="help" th:unless="${#string.isEmpty(helpMessageId)}" th:utext="<b>Erl&auml;uterung:</b> #{${helpMessageId}}">
+    <div class="help" th:unless="${#string.isEmpty(helpMessageId)}"
+        th:utext="&lt;b&gt;Erl&auml;uterung&lt;/b&gt;: #{${helpMessageId}}">
         <b>Erl&auml;uterung:</b> Ein erläuternder Text.
     </div>
 </body>
