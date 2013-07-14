@@ -13,11 +13,11 @@ klassen - Die Liste der möglichen Klassen.
 <body>
     <div class="body" layout:fragment="content">
         <form action="doit" th:action="@{'url'}" class="well form-horizontal" method="post">
-            <select bs:field="halbjahrId">
+            <select name="halbjahrId">
                 <option th:each="halbjahr : ${halbjahre}" th:value="${halbjahr.id}"
                     th:text="${halbjahr}"/>
             </select>
-            <select bs:field="klassenId">
+            <select name="klassenId">
                 <option th:each="klasse : ${klassen}" th:value="${klasse.id}"
                     th:text="${klasse}"/>
             </select>

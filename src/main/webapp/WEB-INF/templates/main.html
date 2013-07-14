@@ -12,7 +12,7 @@ errors - eine Liste mit Fehlermeldungen.
     <link rel="stylesheet" href="../../resources/css/bootstrap-ppi.css"
         th:href="@{/resources/css/bootstrap-ppi.css}" />
     <link rel="stylesheet" href="../../resources/css/main.css"
-        th:href="@{/resources/css/bootstrap-ppi.css}" />
+        th:href="@{/resources/css/main.css}" />
     <link rel="shortcut icon" href="../../resources/img/sze.ico" type="image/x-icon"
         th:href="@{/resources/img/sze.ico}"/>
     <link rel="icon" href="../../resources/img/sze.ico" type="image/x-icon"
@@ -73,9 +73,8 @@ errors - eine Liste mit Fehlermeldungen.
         Hier wird die eigentlich Seite angezeigt.
     </div>
 
-    <div class="help" th:unless="${#string.isEmpty(helpMessageId)}"
-        th:utext="&lt;b&gt;Erl&auml;uterung&lt;/b&gt;: #{${helpMessageId}}">
-        <b>Erl&auml;uterung:</b> Ein erläuternder Text.
+    <div class="help" th:unless="${#strings.isEmpty(helpMessageId)}">
+        <b>Erl&auml;uterung:</b> <span th:utext="#{${helpMessageId}}" th:remove="tag">Ein erläuternder Text.</span>
     </div>
 </body>
 </html>
