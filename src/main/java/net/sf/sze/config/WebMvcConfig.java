@@ -1,12 +1,23 @@
+// WebMvcConfig.java
+//
+// (c) SZE-Development-Team
+
 package net.sf.sze.config;
 
-import java.util.List;
+import de.ppi.spring.mvc.formatter.NonEmptyStringAnnotationFormatterFactory;
+import de.ppi.spring.mvc.oval.JPAAnnotationConfigLazy;
+import de.ppi.spring.mvc.oval.MessageLookupContextRenderer;
+import de.ppi.spring.mvc.oval.MessageLookupMessageValueFormatter;
+import de.ppi.spring.mvc.oval.SpringMvcMessageResolver;
+import de.ppi.spring.mvc.util.ApostropheEscapingPropertiesPersister;
+import de.ppi.thymeleaf.bootstrap.BootstrapDialect;
 
 import net.sf.oval.Validator;
 import net.sf.oval.configuration.annotation.AnnotationsConfigurer;
 import net.sf.oval.integration.spring.BeanInjectingCheckInitializationListener;
 import net.sf.oval.integration.spring.SpringValidator;
 import net.sf.sze.frontend.URL;
+
 import nz.net.ultraq.web.thymeleaf.LayoutDialect;
 
 import org.springframework.context.MessageSource;
@@ -31,25 +42,20 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 import org.springframework.web.servlet.mvc.method.annotation.ServletWebArgumentResolverAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+
 import org.thymeleaf.spring3.SpringTemplateEngine;
 import org.thymeleaf.spring3.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
-import de.ppi.spring.mvc.formatter.NonEmptyStringAnnotationFormatterFactory;
-import de.ppi.spring.mvc.oval.JPAAnnotationConfigLazy;
-import de.ppi.spring.mvc.oval.MessageLookupContextRenderer;
-import de.ppi.spring.mvc.oval.MessageLookupMessageValueFormatter;
-import de.ppi.spring.mvc.oval.SpringMvcMessageResolver;
-import de.ppi.spring.mvc.util.ApostropheEscapingPropertiesPersister;
-import de.ppi.thymeleaf.bootstrap.BootstrapDialect;
+import java.util.List;
 
 /**
  * The frontend configuration for Spring.
- * 
+ *
  */
 @Configuration
-@ComponentScan(basePackages = { "net.sf.sze.frontend",
-        "net.sf.oval.integration.spring", "de.ppi.jpa.helper" })
+@ComponentScan(basePackages = {"net.sf.sze.frontend",
+        "net.sf.oval.integration.spring", "de.ppi.jpa.helper"})
 @Import(RootConfig.class)
 public class WebMvcConfig extends WebMvcConfigurationSupport {
 
@@ -66,6 +72,14 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
     /** The Constant MESSAGE_SOURCE. */
     private static final String MESSAGE_SOURCE = "classpath:i18n/messages";
 
+    /** The Constant MESSAGE_SOURCE. */
+    private static final String APP_MESSAGE_SOURCE =
+            "classpath:i18n/app-messages";
+
+    /** HELP-Message. */
+    private static final String HELP_MESSAGE_SOURCE =
+            "classpath:i18n/help-messages";
+
     /** The Constant MESSAGE_SOURCE_FOR_OVAL. */
     private static final String MESSAGE_SOURCE_OVAL =
             "classpath:/net/sf/oval/Messages";
@@ -78,8 +92,8 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 
     @Override
     public RequestMappingHandlerMapping requestMappingHandlerMapping() {
-        RequestMappingHandlerMapping requestMappingHandlerMapping =
-                super.requestMappingHandlerMapping();
+        RequestMappingHandlerMapping requestMappingHandlerMapping = super
+                .requestMappingHandlerMapping();
         requestMappingHandlerMapping.setUseSuffixPatternMatch(false);
         requestMappingHandlerMapping.setUseTrailingSlashMatch(true);
         return requestMappingHandlerMapping;
@@ -87,21 +101,22 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 
     /**
      * Initiates the message resolver.
-     * 
+     *
      * @return a message source.
      */
     @Bean(name = "messageSource")
     public MessageSource configureMessageSource() {
         ReloadableResourceBundleMessageSource messageSource =
                 new ReloadableResourceBundleMessageSource();
-        messageSource.setBasenames(MESSAGE_SOURCE, MESSAGE_SOURCE_OVAL);
+        messageSource.setBasenames(MESSAGE_SOURCE, APP_MESSAGE_SOURCE,
+                HELP_MESSAGE_SOURCE, MESSAGE_SOURCE_OVAL);
         messageSource.setCacheSeconds(MESSAGE_CACHE);
         messageSource.setFallbackToSystemLocale(false);
         // Make sure Apostrophs must always be doubled..
         messageSource.setAlwaysUseMessageFormat(true);
         // This persister doubles Apostoph
-        messageSource
-                .setPropertiesPersister(new ApostropheEscapingPropertiesPersister());
+        messageSource.setPropertiesPersister(
+                new ApostropheEscapingPropertiesPersister());
         messageSource.setCommonMessages(URL.urlsAsMessages());
         return messageSource;
     }
@@ -121,7 +136,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
      * very common in frameworks like Grails or Play. The reason is that you
      * doesn't need so much knowledge about JPA and there is no need to write
      * tons of specific Dao-methods which make eager fetching.
-     * 
+     *
      * @return the {@link WebRequestInterceptor}.
      */
     @Bean
@@ -158,25 +173,24 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 
     /**
      * Configures the Thymeleaf view resolver.
-     * 
+     *
      * @return the view resolver.
      */
     @Bean
-    public ThymeleafViewResolver
-            configureInternalThymeLeafResourceViewResolver() {
+    public ThymeleafViewResolver configureInternalThymeLeafResourceViewResolver() {
         final ThymeleafViewResolver resolver = new ThymeleafViewResolver();
         resolver.setTemplateEngine(templateEngine());
         resolver.setOrder(1);
-        resolver.setViewNames(new String[] { "example/user/list",
-                "example/user/userform", "example/post/list",
-                "example/post/postform", "example/tag/list",
-                "example/tag/tagform" });
+        resolver.setViewNames(new String[] {
+            "example/user/list", "example/user/userform", "example/post/list",
+            "example/post/postform", "example/tag/list", "example/tag/tagform"
+        });
         return resolver;
     }
 
     /**
      * Thymeleaf template engine.
-     * 
+     *
      * @return Thymeleaf template engine.
      */
     @Bean()
@@ -190,7 +204,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 
     /**
      * Thymeleaf template resolver.
-     * 
+     *
      * @return Thymeleaf template resolver.
      */
     @Bean()
@@ -208,12 +222,11 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 
     /**
      * Configures the view resolver for JSPs.
-     * 
+     *
      * @return the view resolver.
      */
     @Bean
-    public InternalResourceViewResolver
-            configureInternalJspResourceViewResolver() {
+    public InternalResourceViewResolver configureInternalJspResourceViewResolver() {
         final InternalResourceViewResolver resolver =
                 new InternalResourceViewResolver();
         resolver.setPrefix("/WEB-INF/views/");
@@ -228,13 +241,14 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
     @Override
     protected org.springframework.validation.Validator getValidator() {
         final AnnotationsConfigurer annConfig = new AnnotationsConfigurer();
-        annConfig
-                .addCheckInitializationListener(BeanInjectingCheckInitializationListener.INSTANCE);
-        final Validator ovalValidator =
-                new Validator(annConfig, new JPAAnnotationConfigLazy());
-        Validator
-                .setMessageValueFormatter(new MessageLookupMessageValueFormatter(
-                        configureMessageSource()));
+        annConfig.addCheckInitializationListener(
+                BeanInjectingCheckInitializationListener.INSTANCE);
+
+        final Validator ovalValidator = new Validator(annConfig,
+                new JPAAnnotationConfigLazy());
+        Validator.setMessageValueFormatter(
+                new MessageLookupMessageValueFormatter(
+                configureMessageSource()));
         Validator.setContextRenderer(new MessageLookupContextRenderer(
                 configureMessageSource()));
         Validator.setMessageResolver(new SpringMvcMessageResolver(
@@ -244,14 +258,15 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 
     @Override
     protected void addFormatters(FormatterRegistry registry) {
-        registry.addFormatterForFieldAnnotation(new NonEmptyStringAnnotationFormatterFactory());
+        registry.addFormatterForFieldAnnotation(
+                new NonEmptyStringAnnotationFormatterFactory());
         registry.addFormatter(new DateFormatter());
         super.addFormatters(registry);
     }
 
     /**
      * Register a mapper so that a model entity could be found by id.
-     * 
+     *
      * @return a DomainClassConverter.
      */
     @Bean
