@@ -14,8 +14,8 @@
         <junit.version>4.8.2</junit.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <db.username>sze</db.username>
-        <db.password />
+        <db.username>szep</db.username>
+        <db.password>szep_psw</db.password>
         <db.driver>org.h2.Driver</db.driver>
         <db.url>jdbc:h2:dbs/dev;MODE=PostgreSQL;AUTO_SERVER=TRUE</db.url>
         <db.dialect>org.hibernate.dialect.H2Dialect</db.dialect>
