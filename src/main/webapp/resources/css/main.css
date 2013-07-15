@@ -304,47 +304,48 @@ th.desc a {
     overflow: visible;
     padding: 2px 6px;
 }
-input.delete {
+i.delete {
     background: transparent url(../images/skin/database_delete.png) 5px 50% no-repeat;
     padding-left: 28px;
 }
-input.cancel {
+i.cancel {
     background: transparent url(../images/skin/database_cancel.png) 5px 50% no-repeat;
     padding-left: 28px;
 }
-input.edit {
+i.edit {
     background: transparent url(../images/skin/database_edit.png) 5px 50% no-repeat;
     padding-left: 28px;
 }
 
-input.reload {
+i.reload {
     background: transparent url(../images/skin/reload.png) 5px 50% no-repeat;
     padding-left: 28px;
 }
 
 
-input.save {
+i.save {
     background: transparent url(../images/skin/database_save.png) 5px 50% no-repeat;
     padding-left: 28px;
 }
 
-input.pdf {
+i.pdf {
     background: transparent url(../images/skin/document-pdf-text.png) 5px 50% no-repeat;
     padding-left: 28px;
 }
 
 
-input.cancel {
+
+i.cancel {
     background: transparent url(../images/skin/cancel.png) 5px 50% no-repeat;
     padding-left: 28px;
 }
 
-input.saveAndPrevious {
+i.saveAndPrevious {
     background: transparent url(../images/skin/database_save_previous.png) 5px 50% no-repeat;
     padding-left: 28px;
 }
 
-input.saveAndNext {
+i.saveAndNext {
     background: transparent url(../images/skin/database_save_next.png) 5px 50% no-repeat;
     padding-left: 28px;
 }
@@ -361,17 +362,17 @@ input.saveAndNext {
     padding: 2px 6px;
 }
 
-.zeugnisNav input.prev {
+.zeugnisNav i.prev {
     background: transparent url(../images/skin/arrow-180.png) 5px 50% no-repeat;
     padding-left: 28px;
 }
 
-.zeugnisNav input.next {
+.zeugnisNav i.next {
     background: transparent url(../images/skin/arrow.png) 5px 50% no-repeat;
     padding-left: 28px;
 }
 
-.zeugnisNav input.pdf {
+.zeugnisNav i.pdf {
     background: transparent url(../images/skin/document-pdf-text.png) 5px 50% no-repeat;
     padding-left: 28px;
 }
@@ -379,3 +380,5 @@ input.saveAndNext {
  a img {
    border:0;
  }
+
+

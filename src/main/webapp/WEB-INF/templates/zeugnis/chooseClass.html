@@ -25,9 +25,12 @@ klassen - Die Liste der möglichen Klassen.
                 <option th:each="klasse : ${klassen}" th:value="${klasse.id}"
                     th:text="${klasse}"/>
             </select>
-            <input type="submit" class="btn" name="showZeugnis" value="Zeige Zeugnisse" formaction="@{'asd')"/>
-            <input type="submit" class="btn" name="showBewertung" value="Zeige Bewertungen" formaction="dontDoIt"/>
-            <input type="submit" class="btn pdf" name="printZeugnis" value="Erstelle Zeugnisse" formaction="" formtarget="_blank"/>
+            <button type="submit" class="btn" name="showZeugnis" formaction="@{'asd')">
+            <i class="edit"></i>Zeige Zeugnisse</button>
+            <button type="submit" class="btn" name="showBewertung" formaction="dontDoIt">
+            <i class="edit"></i>Zeige Bewertungen</button>
+            <button type="submit" class="btn" name="printZeugnis"
+                formaction="" formtarget="_blank"><i class="pdf"></i>Erstelle Zeugnisse</button>
         </form>
     </div>
 </body>
