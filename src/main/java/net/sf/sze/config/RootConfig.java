@@ -1,3 +1,7 @@
+// RootConfig.java
+//
+// (c) SZE-Development-Team
+
 package net.sf.sze.config;
 
 import org.springframework.context.annotation.Bean;
@@ -8,29 +12,28 @@ import org.springframework.core.io.ClassPathResource;
 
 /**
  * Spring base configuration.
- * 
+ *
  */
-// CSOFF: HideUtilityClassConstructor The method must be static, but it must be
-// a spring-bean.
+//CSOFF: HideUtilityClassConstructor The method must be static, but it must be
+//a spring-bean.
 @Configuration
-@Import({ PersistenceConfig.class, ServiceConfig.class })
+@Import({PersistenceConfig.class, ServiceConfig.class})
 public class RootConfig {
 
     /**
      * Creates a bean which handles the configuration via a property file. To
      * make sure that it will be instantiated early, the method is static.
-     * 
+     *
      * @return a bean which handles the configuration via a property file.
      */
     @Bean
-    public static PropertySourcesPlaceholderConfigurer
-            propertyPlaceholderConfigurer() {
+    public static PropertySourcesPlaceholderConfigurer propertyPlaceholderConfigurer() {
         final PropertySourcesPlaceholderConfigurer ppc =
                 new PropertySourcesPlaceholderConfigurer();
-        ppc.setLocation(new ClassPathResource("/db.properties"));
+        ppc.setLocation(new ClassPathResource("/app.properties"));
         ppc.setIgnoreUnresolvablePlaceholders(true);
         ppc.setFileEncoding("UTF-8");
         return ppc;
     }
 }
-// CSON: HideUtilityClassConstructor
+//CSON: HideUtilityClassConstructor

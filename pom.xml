@@ -239,7 +239,7 @@
                     are written as UTF-8 but is initial ISO-8859-1 -->
                 <directory>src/main/resources</directory>
                 <includes>
-                    <include>db.properties</include>
+                    <include>app.properties</include>
                 </includes>
                 <filtering>true</filtering>
             </resource>
