@@ -4,16 +4,16 @@
 
 package net.sf.sze.model.zeugnis;
 
+import de.ppi.jpa.helper.VersionedModel;
+
+import org.apache.commons.lang.builder.CompareToBuilder;
+
 import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-
-import org.apache.commons.lang.builder.CompareToBuilder;
-
-import de.ppi.jpa.helper.VersionedModel;
 
 /**
  * Beschreibt ein Schulhalbjahr.
@@ -23,7 +23,8 @@ import de.ppi.jpa.helper.VersionedModel;
 @Table(name = "schulhalbjahr",
         uniqueConstraints = @UniqueConstraint(columnNames = {"jahr",
         "halbjahr"}, name = "UK_SCHULAHLBJAHR_JAHR_HALBJAHR"))
-public class Schulhalbjahr extends VersionedModel implements Serializable {
+public class Schulhalbjahr extends VersionedModel implements Serializable,
+        Comparable<Schulhalbjahr> {
 
     /**
      * Das Jahr in dem die Zeugnisse für das Schuljahr erstellt werden.
@@ -111,12 +112,14 @@ public class Schulhalbjahr extends VersionedModel implements Serializable {
 
     /**
      * Liefert den relativen Pfad.
+     * @return der relative Pfad.
      */
     public String createRelativePathName() {
         return (jahr - 1) + "-" + jahr % 100 + "/" + halbjahr
                 .createRelativePathName();
     }
 
+    @Override
     public int compareTo(final Schulhalbjahr other) {
         final CompareToBuilder compareBuilder = new CompareToBuilder();
         compareBuilder.append(this.jahr, other.jahr);
