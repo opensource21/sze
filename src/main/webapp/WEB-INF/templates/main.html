@@ -44,12 +44,20 @@ errors - eine Liste mit Fehlermeldungen.
 <title>SZE - Schulzeugnisersteller</title>
 </head>
 <body>
-    <img src="../../resources/images/sze_logo.jpg"
-        th:src="@{/resources/images/sze_logo.jpg}" alt="SZE-Logo" />
-    Hallo ###!<p>Sie sind eingeloggt in sze Version
-        <i th:text="#{app.version}">3.0.0</i> als: ###Userid### (<a
-        href="auth/logoff"
-        th:href="@{#{todo}(todo='Rechte Steuerung baunen')}">Abmelden</a>)</p>
+    <div id="header">
+        <div id="logo">
+            <img src="../../resources/images/sze_logo.jpg"
+                th:src="@{/resources/images/sze_logo.jpg}" alt="SZE-Logo" />
+        </div>
+        <div id="info">
+            Hallo ###!
+            <p>
+                Sie sind eingeloggt in sze Version <i th:text="#{app.version}">3.0.0</i>
+                als: ###Userid### (<a href="auth/logoff"
+                    th:href="@{#{todo}(todo='Rechte Steuerung baunen')}">Abmelden</a>)
+            </p>
+        </div>
+    </div>
     <!-- TODO nachfolgendes in Abhängigkeit von der Rollen anzeigen. -->
     <div class="navbar">
         <div class="navbar-inner">
@@ -57,13 +65,14 @@ errors - eine Liste mit Fehlermeldungen.
                 <li><a href="#" th:href="@{/admin}">Administration</a></li>
                 <li><a href="#" th:href="@{#{url.configuration.main}}">Konfiguration</a></li>
                 <!-- TODO feststellen was active ist. -->
-                <li class="active"><a href="#" th:href="@{#{url.zeugnis.start}}">Zeugnisse</a></li>
+                <li class="active"><a href="#"
+                    th:href="@{#{url.zeugnis.start}}">Zeugnisse</a></li>
             </ul>
         </div>
     </div>
 
-    <div class="alert alert-success" th:unless="${#strings.isEmpty(success)}">
-        ${success}</div>
+    <div class="alert alert-success"
+        th:unless="${#strings.isEmpty(success)}">${success}</div>
 
     <div class="alert alert-info" th:unless="${#strings.isEmpty(message)}">
         ${message}</div>

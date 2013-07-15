@@ -2,6 +2,20 @@ body {
     margin: 10px;
 }
 
+#header {
+    display: table;
+}
+
+#logo {
+    display: table-cell;
+    vertical-align:middle;
+}
+
+#info {
+    display: table-cell;
+    vertical-align:middle;
+}
+
 i.delete {
     background: transparent url(../images/skin/database_delete.png) 5px 50% no-repeat;
     padding-left: 28px;
