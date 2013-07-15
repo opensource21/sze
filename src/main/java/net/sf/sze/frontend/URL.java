@@ -370,7 +370,5 @@ public final class URL {
     private URL() {
         // UTILITY-CONSTRUCTOR
     }
-
-    ;
 }
 //CSON: InterfaceIsType

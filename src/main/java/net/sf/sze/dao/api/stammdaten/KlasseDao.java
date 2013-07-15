@@ -2,10 +2,9 @@
 //
 // (c) SZE-Development-Team
 
-package net.sf.sze.dao.api;
+package net.sf.sze.dao.api.stammdaten;
 
 import net.sf.sze.model.stammdaten.Klasse;
-import net.sf.sze.model.zeugnis.Schulhalbjahr;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
 

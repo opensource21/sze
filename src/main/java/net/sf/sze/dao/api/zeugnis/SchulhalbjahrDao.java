@@ -2,7 +2,7 @@
 //
 // (c) SZE-Development-Team
 
-package net.sf.sze.dao.api;
+package net.sf.sze.dao.api.zeugnis;
 
 import net.sf.sze.model.zeugnis.Schulhalbjahr;
 
