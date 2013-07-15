@@ -9,14 +9,12 @@ klassen - Die Liste der möglichen Klassen.
     xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
     layout:decorator="/main">
 <head>
-<script type="text/javascript" src="../../../resources/js/jquery-1.8.2.js" th:remove="all"></script>
-<script type="text/javascript" src="../../../resources/js/thymelaefbs.js?1" th:remove="all"></script>
-
-
+    <script type="text/javascript" src="../../../resources/js/jquery-1.8.2.js" th:remove="all"></script>
+    <script type="text/javascript" src="../../../resources/js/thymelaefbs.js?1" th:remove="all"></script>
 </head>
 <body>
     <div class="body" layout:fragment="content">
-        <form action="doit" th:action="@{'url'}" class="well form-horizontal" method="post">
+        <form action="doit" th:action="@{'url'}" class="well form-horizontal" method="get">
             <select bs:name="halbjahrId">
                 <option th:each="halbjahr : ${halbjahre}" th:value="${halbjahr.id}"
                     th:text="${halbjahr}"/>
@@ -25,12 +23,13 @@ klassen - Die Liste der möglichen Klassen.
                 <option th:each="klasse : ${klassen}" th:value="${klasse.id}"
                     th:text="${klasse}"/>
             </select>
-            <button type="submit" class="btn" name="showZeugnis" formaction="@{'asd')">
-            <i class="edit"></i>Zeige Zeugnisse</button>
-            <button type="submit" class="btn" name="showBewertung" formaction="dontDoIt">
-            <i class="edit"></i>Zeige Bewertungen</button>
-            <button type="submit" class="btn" name="printZeugnis"
-                formaction="" formtarget="_blank"><i class="pdf"></i>Erstelle Zeugnisse</button>
+            <button type="submit" class="btn" id="btnShowZeugnis" th:formaction="@{${urlShowZeugnis}}">
+                <i class="edit"></i>Zeige Zeugnisse</button>
+            <button type="submit" class="btn" id="btnShowBewertung" th:formaction="@{${urlShowBewertung}}">
+                <i class="edit"></i>Zeige Bewertungen</button>
+            <button type="submit" class="btn" id="btnPrintZeugnis"
+                th:formaction="@{${urlPrintZeugnis}}" formtarget="_blank">
+                <i class="pdf"></i>Erstelle Zeugnisse</button>
         </form>
     </div>
 </body>

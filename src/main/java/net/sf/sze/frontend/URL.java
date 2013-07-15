@@ -80,6 +80,21 @@ public final class URL {
          */
         String START = HOME + "/start";
 
+        /**
+         * Zeige Zeugnis.
+         */
+        String SHOW = HOME + "/show";
+
+        /**
+         * Zeige Bewertungen.
+         */
+        String BEWERTUNGEN = HOME + "/bewertungen";
+
+        /**
+         * Zeige PDF einer ganze Klasse.
+         */
+        String ALL_PDFS = HOME + "/pdfklasse";
+
     }
 
 

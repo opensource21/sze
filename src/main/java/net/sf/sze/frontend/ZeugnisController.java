@@ -67,20 +67,12 @@ public class ZeugnisController {
         model.addAttribute("klassen", klassen);
         model.addAttribute("halbjahre", halbjahre);
         model.addAttribute("helpMessageId", "help.chooseClass");
-        return "zeugnis/chooseClass";
-    }
+        model.addAttribute("urlShowZeugnis", URL.filledURL(URL.Zeugnis.SHOW));
+        model.addAttribute("urlShowBewertung", URL.filledURL(URL.Zeugnis
+                .BEWERTUNGEN));
+        model.addAttribute("urlPrintZeugnis", URL.filledURL(URL.Zeugnis
+                .ALL_PDFS));
 
-    /**
-     * Show an edit view for a user.
-     *
-     * @param userId the id of the user.
-     * @param model the model where to safe the data for the view.
-     * @return the logical view name.
-     */
-    @RequestMapping(method = RequestMethod.GET, value = "/xx/{userId}")
-    public String editUser(@PathVariable("userId") String userId, Model model) {
-        LOG.info("UserId: {}", userId);
-        model.addAttribute("userId", userId);
-        return "example/editBootstrap";
+        return "zeugnis/chooseClass";
     }
 }
