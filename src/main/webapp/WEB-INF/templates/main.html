@@ -71,20 +71,20 @@ errors - eine Liste mit Fehlermeldungen.
         </div>
     </div>
 
-    <div class="alert alert-success"
-        th:unless="${#strings.isEmpty(success)}">${success}</div>
+    <div class="alert alert-success" th:text="${success}"
+        th:unless="${#strings.isEmpty(success)}"></div>
 
-    <div class="alert alert-info" th:unless="${#strings.isEmpty(message)}">
-        ${message}</div>
+    <div class="alert alert-info" th:text="${message}"
+        th:unless="${#strings.isEmpty(message)}"></div>
 
     <div class="alert alert-info" th:unless="${#lists.isEmpty(messages)}">
         <ul th:each="message : ${messages}">
-            <li>${message}</li>
+               <li th:text="${message}"></li>
         </ul>
     </div>
     <div class="alert alert-error" th:unless="${#lists.isEmpty(errors)}">
         <ul th:each="error: ${errors}">
-            <li>${error}</li>
+            <li th:text="${error}"></li>
         </ul>
     </div>
     <div class="body" layout:fragment="content">Hier wird die
