@@ -1,17 +1,21 @@
+// URLTest.java
+//
+// (c) SZE-Development-Team
+
 package de.ppi.samples.springmvc.frontend;
+
+import net.sf.sze.frontend.URL;
+
+import org.junit.Test;
 
 import static org.fest.assertions.Assertions.assertThat;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import net.sf.sze.frontend.URL;
-
-import org.junit.Test;
-
 /**
  * Test the Class {@link URL}.
- * 
+ *
  */
 public class URLTest {
 
@@ -26,12 +30,11 @@ public class URLTest {
         final String templateString = "The {animal} jumped over the {target}.";
 
         // ACT
-        final String result =
-                URL.redirect(templateString, "quick brown foxäöü", "lazy dog");
+        final String result = URL.redirect(templateString,
+                "quick brown foxäöü", "lazy dog");
         // ASSERT
-        assertThat(result)
-                .isEqualTo(
-                        "redirect:The%20quick%20brown%20fox%C3%A4%C3%B6%C3%BC%20jumped%20over%20the%20lazy%20dog.");
+        assertThat(result).isEqualTo(
+                "redirect:The%20quick%20brown%20fox%C3%A4%C3%B6%C3%BC%20jumped%20over%20the%20lazy%20dog.");
     }
 
     /**
@@ -45,12 +48,11 @@ public class URLTest {
         final String templateString = "The {animal} jumped over the {target}.";
 
         // ACT
-        final String result =
-                URL.filledURL(templateString, "quick brown fox", "lazy dog");
+        final String result = URL.filledURL(templateString, "quick brown fox",
+                "lazy dog");
         // ASSERT
-        assertThat(result)
-                .isEqualTo(
-                        "The%20quick%20brown%20fox%20jumped%20over%20the%20lazy%20dog.");
+        assertThat(result).isEqualTo(
+                "The%20quick%20brown%20fox%20jumped%20over%20the%20lazy%20dog.");
 
     }
 
@@ -65,8 +67,8 @@ public class URLTest {
         final String templateString = "{animal} {target}.";
 
         // ACT
-        final String result =
-                URL.filledURL(templateString, "quick brown fox", "lazy dog");
+        final String result = URL.filledURL(templateString, "quick brown fox",
+                "lazy dog");
         // ASSERT
         assertThat(result).isEqualTo("quick%20brown%20fox%20lazy%20dog.");
 
@@ -103,9 +105,8 @@ public class URLTest {
         // ACT
         final String result = URL.filledURL(templateString, "äöü");
         // ASSERT
-        assertThat(result)
-                .isEqualTo(
-                        "http://localhost:8080/spring-mvc-sample/example/%C3%A4%C3%B6%C3%BC");
+        assertThat(result).isEqualTo(
+                "http://localhost:8080/spring-mvc-sample/example/%C3%A4%C3%B6%C3%BC");
 
     }
 
@@ -120,14 +121,37 @@ public class URLTest {
         final Map<String, String> valuesMap = new HashMap<String, String>();
         valuesMap.put("animal", "quick brown fox");
         valuesMap.put("target", "lazy dog");
+
         final String templateString = "The {animal} jumped over the {target}.";
 
         // ACT
         final String result = URL.filledURL(templateString, valuesMap);
         // ASSERT
-        assertThat(result)
-                .isEqualTo(
-                        "The%20quick%20brown%20fox%20jumped%20over%20the%20lazy%20dog.");
+        assertThat(result).isEqualTo(
+                "The%20quick%20brown%20fox%20jumped%20over%20the%20lazy%20dog.");
+
+    }
+
+    /**
+     * Test method for
+     * {@link net.sf.sze.frontend.URL#filledURL(java.lang.String, java.util.Map)}
+     * .
+     */
+    @Test
+    public void testFilledURLStringMapOfStringStringToManyArgs() {
+        // Arrange
+        final Map<String, String> valuesMap = new HashMap<String, String>();
+        valuesMap.put("animal", "quick brown fox");
+        valuesMap.put("target", "lazy dog");
+        valuesMap.put("foo", "foo");
+
+        final String templateString = "The {animal} jumped over the {target}.";
+
+        // ACT
+        final String result = URL.filledURL(templateString, valuesMap);
+        // ASSERT
+        assertThat(result).isEqualTo(
+                "The%20quick%20brown%20fox%20jumped%20over%20the%20lazy%20dog.");
 
     }
 
@@ -142,15 +166,14 @@ public class URLTest {
         final Map<String, String> valuesMap = new HashMap<String, String>();
         valuesMap.put("animal", "quick brown fox");
         valuesMap.put("target", "lazy dog");
+
         final String templateString = "The {animal} jumped over the {target}.";
 
         // ACT
         final String result = URL.redirect(templateString, valuesMap);
         // ASSERT
-        assertThat(result)
-                .isEqualTo(
-                        "redirect:The%20quick%20brown%20fox%20jumped%20over%20the%20lazy%20dog.");
+        assertThat(result).isEqualTo(
+                "redirect:The%20quick%20brown%20fox%20jumped%20over%20the%20lazy%20dog.");
 
     }
-
 }

@@ -27,7 +27,7 @@
                 </select>
                 <button type="submit" class="btn">Aktualisieren</button>
                 <a class="btn" th:disabled="${schuelerIndex == 0}"
-                    th:href="@{${urlShowZeugnis}(__#{pg.zeugnis.pg_choose_class(${zeugnis.klasse.id},${zeugnis.schulhalbjahr.id})}__)}">
+                    th:href="@{#{pg.zeugnis.choose_class(${zeugnis.klasse.id},${zeugnis.schulhalbjahr.id})}}">
                     <i class="prev"></i>Vorheriger Sch&uuml;ler</a>
                 <a class="btn" th:disabled="${schuelerIndex +1 ge schueler.size()}"
                     th:href="@{${urlShowZeugnis}(klassenId=${zeugnis.klasse.id}, halbjahrId=${zeugnis.schulhalbjahr.id}, schuelerIndex=${schuelerIndex + 1})}">

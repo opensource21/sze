@@ -452,7 +452,16 @@ public final class URL {
      * @return the paramgroup as parameterized message.
      */
     private static String createParamGroup(String fieldValue) {
-        return fieldValue.replaceAll(",", " = {},") + " = {}";
+        final StringBuilder result = new StringBuilder(2 * fieldValue.length());
+        final StringTokenizer tokens = new StringTokenizer(fieldValue, ",");
+        int i = 0;
+        while (tokens.hasMoreTokens()) {
+            final String key = tokens.nextToken();
+            result.append(key).append("={").append(i).append("},");
+            i++;
+        }
+
+        return result.toString();
     }
 
     /**
