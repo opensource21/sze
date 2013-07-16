@@ -13,8 +13,8 @@ klassen - Die Liste der möglichen Klassen.
     <script type="text/javascript" src="../../../resources/js/thymelaefbs.js?1" th:remove="all"></script>
 </head>
 <body>
-    <div class="body" layout:fragment="content">
-        <form action="doit" th:action="@{'url'}" class="well form-horizontal" method="get">
+    <div layout:fragment="content">
+        <form class="form-horizontal" method="get">
             <select bs:name="halbjahrId">
                 <option th:each="halbjahr : ${halbjahre}" th:value="${halbjahr.id}"
                     th:text="${halbjahr}"/>

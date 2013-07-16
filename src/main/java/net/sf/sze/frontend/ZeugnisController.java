@@ -17,7 +17,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
 import org.springframework.validation.Validator;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -87,6 +86,7 @@ public class ZeugnisController {
      * @param halbjahrId die Id des Schulhalbjahres
      * @param klassenId die Id der Klasse
      * @param schuelerIndex der Indes des Schülers.
+     * @param model das Model
      * @param redirectAttributes Fehlermeldungen.
      * @return die logische View
      */
@@ -98,8 +98,8 @@ public class ZeugnisController {
                     Model model, RedirectAttributes redirectAttributes) {
         final List<Zeugnis> zeugnisse = zeugnisErfassungsService.getZeugnisse(
                 halbjahrId, klassenId);
-        // TODO wenn die Zeugnisliste leer ist, sollte man einen Fehleranzeigen.
-        if (!CollectionUtils.isEmpty(zeugnisse)) {
+
+        if (CollectionUtils.isEmpty(zeugnisse)) {
             redirectAttributes.addFlashAttribute("message",
                     "Es wurden keine Zeugnisse gefunden");
             return URL.redirect(URL.Zeugnis.START);
@@ -115,6 +115,7 @@ public class ZeugnisController {
 
         model.addAttribute("schueler", schueler);
         model.addAttribute("zeugnis", selektiertesZeugnis);
+
         return "zeugnis/showZeugnis";
     }
 }

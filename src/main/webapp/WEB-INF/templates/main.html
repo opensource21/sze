@@ -70,7 +70,7 @@ errors - eine Liste mit Fehlermeldungen.
             </ul>
         </div>
     </div>
-
+    <div class ="well">
     <div class="alert alert-success" th:text="${success}"
         th:unless="${#strings.isEmpty(success)}"></div>
 
@@ -87,9 +87,9 @@ errors - eine Liste mit Fehlermeldungen.
             <li th:text="${error}"></li>
         </ul>
     </div>
-    <div class="body" layout:fragment="content">Hier wird die
+    <div layout:fragment="content" th:remove="tag">Hier wird die
         eigentlich Seite angezeigt.</div>
-
+    </div>
     <div class="alert alert-info"
         th:unless="${#strings.isEmpty(helpMessageId)}">
         <b>Erl&auml;uterung:</b> <span th:utext="#{${helpMessageId}}"
