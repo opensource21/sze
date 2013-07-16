@@ -95,6 +95,8 @@ public final class URL {
          */
         String P_KLASSEN_ID = "klassenId";
 
+        String PG_CHOOSE_CLASS = P_KLASSEN_ID + "," + P_HALBJAHR_ID;
+
         /**
          * Zeugniserfassung base-url.
          */
@@ -450,7 +452,7 @@ public final class URL {
      * @return the paramgroup as parameterized message.
      */
     private static String createParamGroup(String fieldValue) {
-        return fieldValue.replaceAll(",", " = {},");
+        return fieldValue.replaceAll(",", " = {},") + " = {}";
     }
 
     /**
