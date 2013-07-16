@@ -38,7 +38,7 @@
                     anzeigen</a>
             </form>
         </div>
-        <table th:unless="${#lists.isEmpty(zeugnis.bewertungen)}">
+        <table class="table table-striped table-bordered" th:unless="${#lists.isEmpty(zeugnis.bewertungen)}">
             <thead>
                 <tr>
                     <th>Schulfach</th>
@@ -62,12 +62,15 @@
                     </td>
                     <!-- <span th:if="${(stat.index % 2) == 1}" th:remove="tag">
                         </tr>
+                        <span th:unless="${(stat.index % 2) == 1}"  th:remove="tag">
+                            <td>
+                            </td>
+                        </span>
                     </span> -->
+                    <td></td>
+                    <td></td>
+                    <td></td>
                     </tr>
-                    <span th:unless="${(stat.index % 2) == 1}"  th:remove="tag">
-                        <td>
-                        </td>
-                    </span>
                 </div>
                 <span th:if="${(zeugnis.bewertungen.size() % 2) == 1}" th:remove="tag">
                     <td></td>
