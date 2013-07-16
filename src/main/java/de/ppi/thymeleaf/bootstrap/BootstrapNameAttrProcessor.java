@@ -77,7 +77,15 @@ public class BootstrapNameAttrProcessor extends AbstractAttrProcessor {
             final Element element, final String attributeName) {
         NestableNode parent = element.getParent();
 
-        final String fieldName = element.getAttributeValue(attributeName);
+        final String fieldNameExpr = element.getAttributeValue(attributeName);
+        final String fieldName;
+        if (fieldNameExpr.contains("#") || fieldNameExpr.contains("$")) {
+            fieldName = (String) StandardExpressionProcessor.processExpression(
+                    arguments, fieldNameExpr);
+        } else {
+            fieldName = fieldNameExpr;
+        }
+
         if (validFieldNodes.contains(element.getNormalizedName())) {
             element.setAttribute("id", fieldName);
             element.setAttribute("name", fieldName);

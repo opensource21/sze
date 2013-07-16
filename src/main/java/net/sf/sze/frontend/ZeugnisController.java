@@ -92,9 +92,10 @@ public class ZeugnisController {
      * @return die logische View
      */
     @RequestMapping(value = URL.Zeugnis.SHOW, method = RequestMethod.GET)
-    public String showZeugnis(@RequestParam("halbjahrId") long halbjahrId,
-            @RequestParam("klassenId") long klassenId, @RequestParam(
-            value = "schuelerIndex",
+    public String showZeugnis(@RequestParam(net.sf.sze.frontend.URL.Zeugnis
+            .P_HALBJAHR_ID) long halbjahrId, @RequestParam(net.sf.sze.frontend
+            .URL.Zeugnis.P_KLASSEN_ID) long klassenId, @RequestParam(value = net
+            .sf.sze.frontend.URL.Zeugnis.P_SCHUELER_INDEX,
             required = false, defaultValue = "0") int schuelerIndex,
                     Model model, RedirectAttributes redirectAttributes) {
         final List<Zeugnis> zeugnisse = zeugnisErfassungsService.getZeugnisse(
@@ -117,7 +118,8 @@ public class ZeugnisController {
         LOG.debug("Zeugnis von Schueler {}. ", selectedZeugnis.getSchueler());
         model.addAttribute("schueler", schueler);
         model.addAttribute("zeugnis", selectedZeugnis);
-        model.addAttribute("schuelerIndex", Integer.valueOf(schuelerIndex));
+        model.addAttribute(net.sf.sze.frontend.URL.Zeugnis.P_SCHUELER_INDEX,
+                Integer.valueOf(schuelerIndex));
         model.addAttribute("urlShowZeugnis", URL.filledURL(URL.Zeugnis.SHOW));
         model.addAttribute("urlPrintZeugnis", URL.filledURL(URL.Zeugnis
                 .ONE_PDF, selectedZeugnis.getSchueler().getId(), Long.valueOf(

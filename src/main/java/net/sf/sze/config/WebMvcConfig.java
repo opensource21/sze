@@ -48,6 +48,7 @@ import org.thymeleaf.spring3.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
 import java.util.List;
+import java.util.Properties;
 
 /**
  * The frontend configuration for Spring.
@@ -117,7 +118,12 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
         // This persister doubles Apostoph
         messageSource.setPropertiesPersister(
                 new ApostropheEscapingPropertiesPersister());
-        messageSource.setCommonMessages(URL.urlsAsMessages());
+
+        final Properties staticMessages = new Properties();
+        staticMessages.putAll(URL.urlsAsMessages());
+        staticMessages.putAll(URL.paramsAsMessages());
+        staticMessages.putAll(URL.paramGroupAsMessages());
+        messageSource.setCommonMessages(staticMessages);
         return messageSource;
     }
 

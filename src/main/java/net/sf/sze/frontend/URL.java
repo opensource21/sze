@@ -81,9 +81,19 @@ public final class URL {
         String P_SCHUELER_ID = "schuelerId";
 
         /**
-         * Parametername für die Sculhakbjahrs-id.
+         * Parameter HalbjahresId.
          */
         String P_HALBJAHR_ID = "halbjahrId";
+
+        /**
+         * Parameter schuelerIndex.
+         */
+        String P_SCHUELER_INDEX = "schuelerIndex";
+
+        /**
+         * Parameter KlassenId.
+         */
+        String P_KLASSEN_ID = "klassenId";
 
         /**
          * Zeugniserfassung base-url.
@@ -309,8 +319,32 @@ public final class URL {
      */
     public static Properties urlsAsMessages() {
         final Properties props = new Properties();
-        Class<?>[] innerClasses = URL.class.getDeclaredClasses();
+        final Class<?>[] innerClasses = URL.class.getDeclaredClasses();
         addConstantInfosFromClass("url", innerClasses, props);
+        return props;
+    }
+
+    /**
+     * Add all Params constants to a {@link Properties}.
+     *
+     * @return a {@link Properties} object with all constant information.
+     */
+    public static Properties paramsAsMessages() {
+        final Properties props = new Properties();
+        final Class<?>[] innerClasses = URL.class.getDeclaredClasses();
+        addConstantInfosFromClass("par", innerClasses, props);
+        return props;
+    }
+
+    /**
+     * Add all Params constants to a {@link Properties}.
+     *
+     * @return a {@link Properties} object with all constant information.
+     */
+    public static Properties paramGroupAsMessages() {
+        final Properties props = new Properties();
+        final Class<?>[] innerClasses = URL.class.getDeclaredClasses();
+        addConstantInfosFromClass("pg", innerClasses, props);
         return props;
     }
 
@@ -329,12 +363,38 @@ public final class URL {
                 for (Field field : fields) {
                     if (Modifier.isPublic(field.getModifiers())) {
                         try {
-                            if (!field.getName().startsWith("P_")) {
-                                String keyName = createKey(prefix, class1
-                                        .getSimpleName(), field.getName());
-                                String urlValue = createUrl(field.get(null)
-                                        .toString());
-                                props.put(keyName, urlValue);
+
+                            if (prefix.startsWith("url")) {
+                                if (!field.getName().startsWith("P_") && !field
+                                        .getName().startsWith("PG_")) {
+                                    final String keyName = createKey(prefix,
+                                            class1.getSimpleName(), field
+                                            .getName());
+                                    final String urlValue = createUrl(field.get(
+                                            null).toString());
+                                    props.put(keyName, urlValue);
+                                }
+                            } else if (prefix.startsWith("par")) {
+                                if (field.getName().startsWith("P_")) {
+                                    final String keyName = createKey(prefix,
+                                            class1.getSimpleName(), field
+                                            .getName().substring(2));
+                                    props.put(keyName, field.get(null)
+                                            .toString());
+                                }
+                            } else if (prefix.startsWith("pg")) {
+                                if (field.getName().startsWith("PG_")) {
+                                    final String keyName = createKey(prefix,
+                                            class1.getSimpleName(), field
+                                            .getName().substring(3));
+                                    final String pgValue = createParamGroup(
+                                            field.get(null).toString());
+                                    props.put(keyName, pgValue);
+                                }
+
+                            } else {
+                                throw new IllegalArgumentException(
+                                        "Invalid Prefix " + prefix);
                             }
                         } catch (IllegalArgumentException e) {
                             LOG.error("Error reading the field " + field
@@ -380,6 +440,17 @@ public final class URL {
         }
 
         return result.toString();
+    }
+
+    /**
+     * Creates the Paramgroup from the constant as a message, i.e. paramaters
+     * will be enriched with ={}
+     *
+     * @param fieldValue the field value.
+     * @return the paramgroup as parameterized message.
+     */
+    private static String createParamGroup(String fieldValue) {
+        return fieldValue.replaceAll(",", " = {},");
     }
 
     /**

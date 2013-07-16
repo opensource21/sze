@@ -17,8 +17,8 @@
         <div class="zeugnisNav">
             <form class="form-horizontal" id = "chooseSchuelerFormTop" method="get" th:object="${zeugnis}"
                     th:action="@{${urlShowZeugnis}}">
-                <input type="hidden" th:value="${zeugnis.klasse.id}" name="klassenId"/>
-                <input type="hidden" th:value="${zeugnis.schulhalbjahr.id}" name="halbjahrId"/>
+                <input type="hidden" th:value="${zeugnis.klasse.id}" th:name="#{par.zeugnis.klassen_id}"/>
+                <input type="hidden" th:value="${zeugnis.schulhalbjahr.id}" name="#{par.zeugnis.halbjahr_id}"/>
                 Sch&uuml;ler der Klasse <span th:remove="tag" th:text="${zeugnis.klasse}"></span>
                 <select name="schuelerIndex">
                     <option th:each="item, stat : ${schueler}" th:value="${stat.index}"
@@ -35,7 +35,7 @@
                 <a class="btn" th:href="@{${urlPrintZeugnis}}"><i class="pdf"></i>Zeugnis anzeigen</a>
             </form>
         </div>
-
+<!--
         <div class="zeugnislist" th:unless="#lists.empty{zeugnis.bewertungen}">
           <table>
               <thead>
@@ -76,7 +76,7 @@
               </tbody>
           </table>
         </div>
-
+ -->
         <div class="zeugnisNav">
             <form class="form-horizontal" id = "chooseSchuelerFormBottom" method="get" th:object="${zeugnis}"
                     th:action="@{${urlShowZeugnis}}">
