@@ -92,18 +92,22 @@ public class ZeugnisController {
      * @return die logische View
      */
     @RequestMapping(value = URL.Zeugnis.SHOW, method = RequestMethod.GET)
-    public String showZeugnis(@RequestParam(net.sf.sze.frontend.URL.Zeugnis
-            .P_HALBJAHR_ID) long halbjahrId, @RequestParam(net.sf.sze.frontend
-            .URL.Zeugnis.P_KLASSEN_ID) long klassenId, @RequestParam(value = net
-            .sf.sze.frontend.URL.Zeugnis.P_SCHUELER_INDEX,
+    public String showZeugnis(@RequestParam(URL.Zeugnis
+            .P_HALBJAHR_ID) long halbjahrId, @RequestParam(URL.Zeugnis
+            .P_KLASSEN_ID) long klassenId, @RequestParam(value = URL.Zeugnis
+            .P_SCHUELER_INDEX,
             required = false, defaultValue = "0") int schuelerIndex,
                     Model model, RedirectAttributes redirectAttributes) {
         final List<Zeugnis> zeugnisse = zeugnisErfassungsService.getZeugnisse(
                 halbjahrId, klassenId);
 
-        if (CollectionUtils.isEmpty(zeugnisse)) {
+        if (!CollectionUtils.isEmpty(zeugnisse)) {
             redirectAttributes.addFlashAttribute("message",
                     "Es wurden keine Zeugnisse gefunden");
+            redirectAttributes.addFlashAttribute(URL.Zeugnis.P_HALBJAHR_ID, Long
+                    .valueOf(halbjahrId));
+            redirectAttributes.addFlashAttribute(URL.Zeugnis.P_KLASSEN_ID, Long
+                    .valueOf(klassenId));
             return URL.redirect(URL.Zeugnis.START);
         }
 
@@ -118,8 +122,8 @@ public class ZeugnisController {
         LOG.debug("Zeugnis von Schueler {}. ", selectedZeugnis.getSchueler());
         model.addAttribute("schueler", schueler);
         model.addAttribute("zeugnis", selectedZeugnis);
-        model.addAttribute(net.sf.sze.frontend.URL.Zeugnis.P_SCHUELER_INDEX,
-                Integer.valueOf(schuelerIndex));
+        model.addAttribute(URL.Zeugnis.P_SCHUELER_INDEX, Integer.valueOf(
+                schuelerIndex));
         model.addAttribute("urlShowZeugnis", URL.filledURL(URL.Zeugnis.SHOW));
         model.addAttribute("urlPrintZeugnis", URL.filledURL(URL.Zeugnis
                 .ONE_PDF, selectedZeugnis.getSchueler().getId(), Long.valueOf(
