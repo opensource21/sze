@@ -5,7 +5,9 @@
 package net.sf.sze.frontend;
 
 import net.sf.sze.model.stammdaten.Klasse;
+import net.sf.sze.model.stammdaten.Schueler;
 import net.sf.sze.model.zeugnis.Schulhalbjahr;
+import net.sf.sze.model.zeugnis.Zeugnis;
 import net.sf.sze.service.api.ZeugnisErfassungsService;
 
 import org.slf4j.Logger;
@@ -18,7 +20,10 @@ import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -54,7 +59,8 @@ public class ZeugnisController {
      * @param model das Modell.
      * @return den View-Namen.
      */
-    @RequestMapping({URL.Zeugnis.HOME, URL.Zeugnis.START})
+    @RequestMapping(value = {URL.Zeugnis.HOME, URL.Zeugnis.START},
+            method = RequestMethod.GET)
     public String chooseClass(Model model) {
         final List<Schulhalbjahr> halbjahre = zeugnisErfassungsService
                 .getActiveSchulhalbjahre();
@@ -74,5 +80,41 @@ public class ZeugnisController {
                 .ALL_PDFS));
 
         return "zeugnis/chooseClass";
+    }
+
+    /**
+     * Zeigt das Zeugnis des entsprechenden Schülers der Klasse in dem Halbjahr.
+     * @param halbjahrId die Id des Schulhalbjahres
+     * @param klassenId die Id der Klasse
+     * @param schuelerIndex der Indes des Schülers.
+     * @param redirectAttributes Fehlermeldungen.
+     * @return die logische View
+     */
+    @RequestMapping(value = URL.Zeugnis.SHOW, method = RequestMethod.GET)
+    public String showZeugnis(@RequestParam("halbjahrId") long halbjahrId,
+            @RequestParam("klassenId") long klassenId, @RequestParam(
+            value = "schulerIndex",
+            required = false, defaultValue = "0") int schuelerIndex,
+                    Model model, RedirectAttributes redirectAttributes) {
+        final List<Zeugnis> zeugnisse = zeugnisErfassungsService.getZeugnisse(
+                halbjahrId, klassenId);
+        // TODO wenn die Zeugnisliste leer ist, sollte man einen Fehleranzeigen.
+        if (!CollectionUtils.isEmpty(zeugnisse)) {
+            redirectAttributes.addFlashAttribute("message",
+                    "Es wurden keine Zeugnisse gefunden");
+            return URL.redirect(URL.Zeugnis.START);
+        }
+
+        final List<Schueler> schueler = new ArrayList<Schueler>(zeugnisse
+                .size());
+        for (Zeugnis zeugnis : zeugnisse) {
+            schueler.add(zeugnis.getSchueler());
+        }
+
+        final Zeugnis selektiertesZeugnis = zeugnisse.get(schuelerIndex);
+
+        model.addAttribute("schueler", schueler);
+        model.addAttribute("zeugnis", selektiertesZeugnis);
+        return "zeugnis/showZeugnis";
     }
 }

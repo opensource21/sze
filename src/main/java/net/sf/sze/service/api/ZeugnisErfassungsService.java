@@ -6,6 +6,7 @@ package net.sf.sze.service.api;
 
 import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.zeugnis.Schulhalbjahr;
+import net.sf.sze.model.zeugnis.Zeugnis;
 
 import java.util.List;
 
@@ -27,4 +28,13 @@ public interface ZeugnisErfassungsService {
      * @return eine Liste mit alle möglichen Klassen zu den aktiven Schulhalbjahren.
      */
     List<Klasse> getActiveKlassen(List<Schulhalbjahr> acticeSchulhalbjahre);
+
+    /**
+     * Listet alle Zeugnisse zu der Klasse des Schulhalbjahres.
+     *
+     * @param halbjahrId die Id des Schulhalbjahres.
+     * @param klassenId die Id der Klasse.
+     * @return alle Zeugnisse zu der Klasse des Schulhalbjahres.
+     */
+    List<Zeugnis> getZeugnisse(long halbjahrId, long klassenId);
 }

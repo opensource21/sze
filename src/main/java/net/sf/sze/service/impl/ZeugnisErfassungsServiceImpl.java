@@ -6,12 +6,15 @@ package net.sf.sze.service.impl;
 
 import net.sf.sze.dao.api.stammdaten.KlasseDao;
 import net.sf.sze.dao.api.zeugnis.SchulhalbjahrDao;
+import net.sf.sze.dao.api.zeugnis.ZeugnisDao;
 import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.zeugnis.Schulhalbjahr;
+import net.sf.sze.model.zeugnis.Zeugnis;
 import net.sf.sze.service.api.ZeugnisErfassungsService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -54,6 +57,9 @@ public class ZeugnisErfassungsServiceImpl implements ZeugnisErfassungsService {
     @Resource
     private KlasseDao klasseDao;
 
+    @Resource
+    private ZeugnisDao zeugnisDao;
+
     /**
      * {@inheritDoc}
      */
@@ -87,5 +93,17 @@ public class ZeugnisErfassungsServiceImpl implements ZeugnisErfassungsService {
                 - maximalesSchuljahr, maxJahr - minimalesSchuljahr, false);
 
         return klassen;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<Zeugnis> getZeugnisse(long halbjahrId, long klassenId) {
+
+        final List<Zeugnis> zeugnisse = zeugnisDao
+                .findAllByKlasseIdAndSchulhalbjahrIdOrderBySchuelerNameAscSchuelerVornameAsc(
+                klassenId, halbjahrId);
+        return zeugnisse;
     }
 }
