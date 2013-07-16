@@ -4,6 +4,12 @@
 
 package net.sf.sze.model.zeugnis;
 
+import de.ppi.jpa.helper.VersionedModel;
+
+import net.sf.sze.util.StringUtil;
+
+import org.apache.commons.lang.builder.CompareToBuilder;
+
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -16,12 +22,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-
-import net.sf.sze.util.StringUtil;
-
-import org.apache.commons.lang.builder.CompareToBuilder;
-
-import de.ppi.jpa.helper.VersionedModel;
 
 /**
  * Eine Bewertung ist die Beurteilung zu einem Fach.
@@ -256,6 +256,10 @@ public class Bewertung extends VersionedModel implements Serializable,
             notenDarstellung.append('?');
         } else {
             notenDarstellung.append(note);
+        }
+
+        if (leistungNurSchwachAusreichend.booleanValue()) {
+            notenDarstellung.append(" -");
         }
 
         return notenDarstellung.toString();
