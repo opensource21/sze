@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<!-- PARAMS:
+    schueler - Liste der Schueler der Klasse
+    zeugnis - das ausgewählte Zeugnis
+-->
+<html lang="de-DE" xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+    layout:decorator="/main">
+<head>
+<script type="text/javascript"
+    src="../../../resources/js/jquery-1.8.2.js" th:remove="all"></script>
+<script type="text/javascript"
+    src="../../../resources/js/thymelaefbs.js?1" th:remove="all"></script>
+</head>
+<body>
+    <div layout:fragment="content">
+        <div class="zeugnisNav">
+            <form class="form-horizontal" id = "chooseSchuelerFormTop" method="get" th:object="${zeugnis}"
+                    th:action="@{${urlShowZeugnis}}">
+                <input type="hidden" th:value="${zeugnis.klasse.id}" name="klassenId"/>
+                <input type="hidden" th:value="${zeugnis.schulhalbjahr.id}" name="halbjahrId"/>
+                Sch&uuml;ler der Klasse <span th:remove="tag" th:text="${zeugnis.klasse}"></span>
+                <select name="schuelerIndex">
+                    <option th:each="item, stat : ${schueler}" th:value="${stat.index}"
+                        th:text="${item}" th:selected="${item.id == zeugnis.schueler.id}"
+                        th:disabled="${not item.isActive()}"></option>
+                </select>
+                <button type="submit" class="btn">Aktualisieren</button>
+                <a class="btn" th:disabled="${schuelerIndex == 0}"
+                    th:href="@{${urlShowZeugnis}(klassenId=${zeugnis.klasse.id}, halbjahrId=${zeugnis.schulhalbjahr.id}, schuelerIndex=${schuelerIndex - 1})}">
+                    <i class="prev"></i>Vorheriger Sch&uuml;ler</a>
+                <a class="btn" th:disabled="${schuelerIndex +1 ge schueler.size()}"
+                    th:href="@{${urlShowZeugnis}(klassenId=${zeugnis.klasse.id}, halbjahrId=${zeugnis.schulhalbjahr.id}, schuelerIndex=${schuelerIndex + 1})}">
+                    <i class="next"></i>N&auml;chster Sch&uuml;ler</a>
+                <a class="btn" th:href="@{${urlPrintZeugnis}}"><i class="pdf"></i>Zeugnis anzeigen</a>
+            </form>
+        </div>
+
+        <div class="zeugnislist" th:unless="#lists.empty{zeugnis.bewertungen}">
+          <table>
+              <thead>
+                  <tr>
+                      <th>Schulfach</th>
+                      <th>Note</th>
+                      <td></td>
+                      <th>Schulfach</th>
+                      <th>Note</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <g:each in="${zeugnisInstance?.bewertungen?.sort()}" status="i" var="bewertungInstance">
+                      <g:if test="${(i % 2) == 0}">
+                          <tr class="${(i % 4) == 0 ? 'odd' : 'even'}">
+                      </g:if>
+                      <td  ${bewertungInstance.id==lastEditedBewertung ? 'class="lastEdited"' : ''}>
+                          <g:link controller="bewertungErfassung" action="editBewertung" id="${bewertungInstance.id}">${fieldValue(bean:bewertungInstance, field:'schulfach')}</g:link>
+                      </td>
+                      <td  ${bewertungInstance.id==lastEditedBewertung ? 'class="lastEdited"' : ''}>
+                          <g:link controller="bewertungErfassung" action="editBewertung" id="${bewertungInstance.id}">${bewertungInstance.notenDarstellung()}</g:link>
+                       <g:if test="${bewertungInstance.leistungNurSchwachAusreichend}">
+                           -
+                       </g:if>
+                      </td>
+                      <g:if test="${(i % 2) == 1}">
+                          </tr>
+                      </g:if>
+                      <g:else>
+                          <td></td>
+                      </g:else>
+                  </g:each>
+                  <g:if test="${(zeugnisInstance?.bewertungen?.size() % 2) == 1}">
+                      <td></td>
+                      <td></td>
+                      </tr>
+                  </g:if>
+              </tbody>
+          </table>
+        </div>
+
+        <div class="zeugnisNav">
+            <form class="form-horizontal" id = "chooseSchuelerFormBottom" method="get" th:object="${zeugnis}"
+                    th:action="@{${urlShowZeugnis}}">
+                <input type="hidden" th:value="${zeugnis.klasse.id}" name="klassenId"/>
+                <input type="hidden" th:value="${zeugnis.schulhalbjahr.id}" name="halbjahrId"/>
+                Sch&uuml;ler der Klasse <span th:remove="tag" th:text="${zeugnis.klasse}"></span>
+                <select name="schuelerIndex">
+                    <option th:each="item, stat : ${schueler}" th:value="${stat.index}"
+                        th:text="${item}" th:selected="${item.id == zeugnis.schueler.id}"
+                        th:disabled="${not item.isActive()}"></option>
+                </select>
+                <button type="submit" class="btn">Aktualisieren</button>
+                <a class="btn" th:disabled="${schuelerIndex == 0}"
+                    th:href="@{${urlShowZeugnis}(klassenId=${zeugnis.klasse.id}, halbjahrId=${zeugnis.schulhalbjahr.id}, schuelerIndex=${schuelerIndex - 1})}">
+                    <i class="prev"></i>Vorheriger Sch&uuml;ler</a>
+                <a class="btn" th:disabled="${schuelerIndex +1 ge schueler.size()}"
+                    th:href="@{${urlShowZeugnis}(klassenId=${zeugnis.klasse.id}, halbjahrId=${zeugnis.schulhalbjahr.id}, schuelerIndex=${schuelerIndex + 1})}">
+                    <i class="next"></i>N&auml;chster Sch&uuml;ler</a>
+                <a class="btn" th:href="@{${urlPrintZeugnis}}"><i class="pdf"></i>Zeugnis anzeigen</a>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

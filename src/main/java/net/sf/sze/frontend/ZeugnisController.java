@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -93,7 +94,7 @@ public class ZeugnisController {
     @RequestMapping(value = URL.Zeugnis.SHOW, method = RequestMethod.GET)
     public String showZeugnis(@RequestParam("halbjahrId") long halbjahrId,
             @RequestParam("klassenId") long klassenId, @RequestParam(
-            value = "schulerIndex",
+            value = "schuelerIndex",
             required = false, defaultValue = "0") int schuelerIndex,
                     Model model, RedirectAttributes redirectAttributes) {
         final List<Zeugnis> zeugnisse = zeugnisErfassungsService.getZeugnisse(
@@ -111,11 +112,16 @@ public class ZeugnisController {
             schueler.add(zeugnis.getSchueler());
         }
 
-        final Zeugnis selektiertesZeugnis = zeugnisse.get(schuelerIndex);
-
+        final Zeugnis selectedZeugnis = zeugnisse.get(schuelerIndex);
+        Collections.sort(selectedZeugnis.getBewertungen());
+        LOG.debug("Zeugnis von Schueler {}. ", selectedZeugnis.getSchueler());
         model.addAttribute("schueler", schueler);
-        model.addAttribute("zeugnis", selektiertesZeugnis);
-
+        model.addAttribute("zeugnis", selectedZeugnis);
+        model.addAttribute("schuelerIndex", Integer.valueOf(schuelerIndex));
+        model.addAttribute("urlShowZeugnis", URL.filledURL(URL.Zeugnis.SHOW));
+        model.addAttribute("urlPrintZeugnis", URL.filledURL(URL.Zeugnis
+                .ONE_PDF, selectedZeugnis.getSchueler().getId(), Long.valueOf(
+                halbjahrId)));
         return "zeugnis/showZeugnis";
     }
 }

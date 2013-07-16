@@ -4,7 +4,17 @@
 
 package net.sf.sze.model.stammdaten;
 
+import de.ppi.jpa.helper.VersionedModel;
+
+import net.sf.oval.constraint.Past;
+import net.sf.oval.constraint.Size;
+import net.sf.sze.model.zeugnis.Zeugnis;
+
+import org.apache.commons.lang.builder.CompareToBuilder;
+import org.apache.commons.lang3.time.DateUtils;
+
 import java.io.Serializable;
+
 import java.util.Date;
 import java.util.Map;
 import java.util.Set;
@@ -18,14 +28,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import net.sf.oval.constraint.Past;
-import net.sf.oval.constraint.Size;
-import net.sf.sze.model.zeugnis.Zeugnis;
-
-import org.apache.commons.lang.builder.CompareToBuilder;
-
-import de.ppi.jpa.helper.VersionedModel;
 
 /**
  * Ein Schüler einer Schule.
@@ -295,6 +297,16 @@ public class Schueler extends VersionedModel implements Serializable,
     }
 
     // Hier beginnen die echten Methoden
+
+    /**
+     * Kennzeichen ob der Schüler noch aktuell an der Schule ist.
+     * @return true, wenn er noch in der Schule ist.
+     */
+    public boolean isActive() {
+        return (abgangsDatum == null) || (abgangsDatum.getTime() > System
+                .currentTimeMillis());
+    }
+
     @Override
     public String toString() {
         return name + ", " + vorname;

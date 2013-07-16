@@ -76,6 +76,16 @@ public final class URL {
         String HOME = "/zeugnis";
 
         /**
+         * Parametername für die Schüler-id.
+         */
+        String P_SCHUELER_ID = "schuelerId";
+
+        /**
+         * Parametername für die Sculhakbjahrs-id.
+         */
+        String P_HALBJAHR_ID = "halbjahrId";
+
+        /**
          * Zeugniserfassung base-url.
          */
         String START = HOME + "/start";
@@ -94,6 +104,12 @@ public final class URL {
          * Zeige PDF einer ganze Klasse.
          */
         String ALL_PDFS = HOME + "/pdfklasse";
+
+        /**
+         * Zeige PDF eines Schuelers.
+         */
+        String ONE_PDF = HOME + "/pdfschueler/{" + P_SCHUELER_ID + "}" + "/{"
+                + P_HALBJAHR_ID + "}";
 
     }
 

@@ -821,6 +821,11 @@ public class Zeugnis extends VersionedModel implements Serializable,
 //    ?:VariableUtility.PLATZHALTER_LEER
 //  }
 
+    /**
+     * Wandelt die Anzahl an Tage in Textform.
+     * @param day die Anzahl an Tage.
+     * @return die Anzahl an Tage in Textform.
+     */
     private String dayToString(final Long day) {
         if (day == null) {
             return VariableUtility.PLATZHALTER_LEER;
@@ -831,6 +836,10 @@ public class Zeugnis extends VersionedModel implements Serializable,
         }
     }
 
+    /**
+     * Erzeugt eine Satz der den Einsatz in Arbeitsgruppen beschreibt.
+     * @return ein Satz der den Einsatz in Arbeitsgruppen beschreibt.
+     */
     public String createArbeitsgruppenSatz() {
         final List<String> besuchteArbeitsgruppen = new ArrayList<String>();
         if ((agBewertungen != null) && !agBewertungen.isEmpty()) {

@@ -59,3 +59,15 @@ i.saveAndNext {
     background: transparent url(../images/skin/database_save_next.png) 5px 50% no-repeat;
     padding-left: 28px;
 }
+
+i.prev {
+    background: transparent url(../images/skin/arrow-180.png) 5px 50% no-repeat;
+    padding-left: 28px;
+}
+
+i.next {
+    background: transparent url(../images/skin/arrow.png) 5px 50% no-repeat;
+    padding-left: 28px;
+}
+
+
