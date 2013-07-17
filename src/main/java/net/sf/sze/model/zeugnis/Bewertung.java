@@ -83,7 +83,6 @@ public class Bewertung extends VersionedModel implements Serializable,
     /** The schulfach. */
     @ManyToOne(optional = false)
     @JoinColumn(name = "schulfach_id", nullable = false)
-
     private Schulfach schulfach;
 
     // bi-directional many-to-one association to Zeugnis

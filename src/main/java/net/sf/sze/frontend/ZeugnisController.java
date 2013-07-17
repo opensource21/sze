@@ -6,6 +6,8 @@ package net.sf.sze.frontend;
 
 import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.stammdaten.Schueler;
+import net.sf.sze.model.zeugnis.Bewertung;
+import net.sf.sze.model.zeugnis.Schulfachtyp;
 import net.sf.sze.model.zeugnis.Schulhalbjahr;
 import net.sf.sze.model.zeugnis.Zeugnis;
 import net.sf.sze.service.api.ZeugnisErfassungsService;
@@ -101,7 +103,7 @@ public class ZeugnisController {
         final List<Zeugnis> zeugnisse = zeugnisErfassungsService.getZeugnisse(
                 halbjahrId, klassenId);
 
-        if (!CollectionUtils.isEmpty(zeugnisse)) {
+        if (CollectionUtils.isEmpty(zeugnisse)) {
             redirectAttributes.addFlashAttribute("message",
                     "Es wurden keine Zeugnisse gefunden");
             redirectAttributes.addFlashAttribute(URL.Zeugnis.P_HALBJAHR_ID, Long
@@ -119,11 +121,25 @@ public class ZeugnisController {
 
         final Zeugnis selectedZeugnis = zeugnisse.get(schuelerIndex);
         Collections.sort(selectedZeugnis.getBewertungen());
+
+        final List<Bewertung> wpBewertungen = new ArrayList<>();
+        final List<Bewertung> otherBewertungen = new ArrayList<>();
+        for (Bewertung bewertung : selectedZeugnis.getBewertungen()) {
+            if (Schulfachtyp.WAHLPFLICHT.equals(bewertung.getSchulfach()
+                    .getTyp())) {
+                wpBewertungen.add(bewertung);
+            } else {
+                otherBewertungen.add(bewertung);
+            }
+        }
+
         LOG.debug("Zeugnis von Schueler {}. ", selectedZeugnis.getSchueler());
         model.addAttribute("schueler", schueler);
         model.addAttribute("zeugnis", selectedZeugnis);
         model.addAttribute(URL.Zeugnis.P_SCHUELER_INDEX, Integer.valueOf(
                 schuelerIndex));
+        model.addAttribute("wpBewertungen", wpBewertungen);
+        model.addAttribute("otherBewertungen", otherBewertungen);
         model.addAttribute("urlShowZeugnis", URL.filledURL(URL.Zeugnis.SHOW));
         model.addAttribute("urlPrintZeugnis", URL.filledURL(URL.Zeugnis
                 .ONE_PDF, selectedZeugnis.getSchueler().getId(), Long.valueOf(
