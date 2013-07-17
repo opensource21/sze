@@ -654,16 +654,10 @@ public class Zeugnis extends VersionedModel implements Serializable,
     }
 
     /**
-     * Erstellt eine Liste aller Arbeits- und Sozialverhalten-Bewertungen,
-     * wobei sichergestellt wird, dass die Arbeitsverhalten-Bewertungen immer
-     * an ungerader Position sind und die SVBewertungen an gerader. Lücken
-     * werden mit null aufgefüllt.
-     * @return die geordnete Liste.
+     * Liefert alle AvSvBewertungen die das Sozialverhalten betreffen.
+     * @return alle AvSvBewertungen die das Sozialverhalten betreffen.
      */
-    public List<AvSvBewertung> createAvSvBewertungsList() {
-        final List<AvSvBewertung> avSvList = new ArrayList<AvSvBewertung>();
-        final List<AvSvBewertung> avBewertungen =
-                new ArrayList<AvSvBewertung>();
+    public List<AvSvBewertung> getSvBewertungen() {
         final List<AvSvBewertung> svBewertungen =
                 new ArrayList<AvSvBewertung>();
         // Aufteilung der Bewertungen auf die beide Spezialfälle.
@@ -675,6 +669,32 @@ public class Zeugnis extends VersionedModel implements Serializable,
                 svBewertungen.add(avSvBewertung);
                 break;
             case ARBEITSVERHALTEN:
+                break;
+            default:
+                throw new IllegalArgumentException("Typ ist ungültig: " + typ);
+            }
+        }
+
+        // /Sortieren der Listen.
+        Collections.sort(svBewertungen);
+        return svBewertungen;
+    }
+
+    /**
+     * Liefert alle AvSvBewertungen die das Arbeitsverhalten betreffen.
+     * @return alle AvSvBewertungen die das Sozialverhalten betreffen.
+     */
+    public List<AvSvBewertung> getAvBewertungen() {
+        final List<AvSvBewertung> avBewertungen =
+                new ArrayList<AvSvBewertung>();
+        // Aufteilung der Bewertungen auf die beide Spezialfälle.
+        for (final AvSvBewertung avSvBewertung : avSvBewertungen) {
+            final AvSvTyp typ = avSvBewertung.getArbeitsUndSozialVerhalten()
+                    .getTyp();
+            switch (typ) {
+            case SOZIALVERHALTEN:
+                break;
+            case ARBEITSVERHALTEN:
                 avBewertungen.add(avSvBewertung);
                 break;
             default:
@@ -684,24 +704,7 @@ public class Zeugnis extends VersionedModel implements Serializable,
 
         // /Sortieren der Listen.
         Collections.sort(avBewertungen);
-        Collections.sort(svBewertungen);
-
-        for (int i = 0;
-                i < Math.max(avBewertungen.size(), svBewertungen.size()); i++) {
-            if (i < avBewertungen.size()) {
-                avSvList.add(avBewertungen.get(i));
-            } else {
-                avSvList.add(null);
-            }
-
-            if (i < svBewertungen.size()) {
-                avSvList.add(svBewertungen.get(i));
-            } else {
-                avSvList.add(null);
-            }
-        }
-
-        return avSvList;
+        return avBewertungen;
     }
 
     @Override
