@@ -105,6 +105,14 @@ public class Schulhalbjahr extends VersionedModel implements Serializable,
         this.selectable = selectable;
     }
 
+    /**
+     * Kennzeichen ob es das erste Halbjahr ist.
+     * @return true wenn es das erste Halbjahr ist.
+     */
+    public boolean isErstesHalbjahr() {
+        return Halbjahr.Erstes_Halbjahr.equals(halbjahr);
+    }
+
     @Override
     public String toString() {
         return (jahr - 1) + "/" + jahr % 100 + " " + halbjahr;
