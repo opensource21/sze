@@ -122,6 +122,7 @@ public class ZeugnisController {
         final Zeugnis selectedZeugnis = zeugnisse.get(schuelerIndex);
         Collections.sort(selectedZeugnis.getBewertungen());
         Collections.sort(selectedZeugnis.getSchulamtsBemerkungen());
+        Collections.sort(selectedZeugnis.getBemerkungen());
 
         final List<Bewertung> wpBewertungen = new ArrayList<>();
         final List<Bewertung> otherBewertungen = new ArrayList<>();
