@@ -121,6 +121,7 @@ public class ZeugnisController {
 
         final Zeugnis selectedZeugnis = zeugnisse.get(schuelerIndex);
         Collections.sort(selectedZeugnis.getBewertungen());
+        Collections.sort(selectedZeugnis.getSchulamtsBemerkungen());
 
         final List<Bewertung> wpBewertungen = new ArrayList<>();
         final List<Bewertung> otherBewertungen = new ArrayList<>();
@@ -144,6 +145,8 @@ public class ZeugnisController {
         model.addAttribute("urlPrintZeugnis", URL.filledURL(URL.Zeugnis
                 .ONE_PDF, selectedZeugnis.getSchueler().getId(), Long.valueOf(
                 halbjahrId)));
+        model.addAttribute("arbeitsgruppenSatz", selectedZeugnis
+                .createArbeitsgruppenSatz());
         return "zeugnis/showZeugnis";
     }
 }
