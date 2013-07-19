@@ -22,6 +22,6 @@ public interface ZeugnisDao extends PagingAndSortingRepository<Zeugnis, Long> {
      * @param halbjahrId die Id des Schulhalbjahr
      * @return die Liste der Zeugnisse.
      */
-    List<Zeugnis> findAllByKlasseIdAndSchulhalbjahrIdOrderBySchuelerNameAscSchuelerVornameAsc(
+    List<Zeugnis> findAllByKlasseIdAndSchulhalbjahrIdAndSchulhalbjahrSelectableIsTrueOrderBySchuelerNameAscSchuelerVornameAsc(
             long klasseId, long halbjahrId);
 }

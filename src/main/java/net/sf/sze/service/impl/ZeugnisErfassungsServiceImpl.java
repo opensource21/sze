@@ -102,7 +102,7 @@ public class ZeugnisErfassungsServiceImpl implements ZeugnisErfassungsService {
     public List<Zeugnis> getZeugnisse(long halbjahrId, long klassenId) {
 
         final List<Zeugnis> zeugnisse = zeugnisDao
-                .findAllByKlasseIdAndSchulhalbjahrIdOrderBySchuelerNameAscSchuelerVornameAsc(
+                .findAllByKlasseIdAndSchulhalbjahrIdAndSchulhalbjahrSelectableIsTrueOrderBySchuelerNameAscSchuelerVornameAsc(
                 klassenId, halbjahrId);
         return zeugnisse;
     }
