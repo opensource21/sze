@@ -2,12 +2,9 @@
 //
 // (c) SZE-Development-Team
 
-package net.sf.sze.model;
+package net.sf.sze.model.zeugnis;
 
 import de.ppi.jpa.helper.VersionedModel;
-
-import net.sf.sze.model.zeugnis.Arbeitsgruppe;
-import net.sf.sze.model.zeugnis.Zeugnis;
 
 import org.apache.commons.lang.builder.CompareToBuilder;
 
@@ -45,26 +42,57 @@ public class AgBewertung extends VersionedModel implements Serializable,
     @JoinColumn(name = "zeugnis_id", nullable = false)
     private Zeugnis zeugnis;
 
+    /**
+     * Gets the kennzeichen, dass der Schüler teilgenommen hat.
+     *
+     * @return the kennzeichen, dass der Schüler teilgenommen hat
+     */
     public Boolean getTeilgenommen() {
         return this.teilgenommen;
     }
 
+    /**
+     * Sets the kennzeichen, dass der Schüler teilgenommen hat.
+     *
+     * @param teilgenommen the new kennzeichen, dass der Schüler teilgenommen
+     *            hat
+     */
     public void setTeilgenommen(final Boolean teilgenommen) {
         this.teilgenommen = teilgenommen;
     }
 
+    /**
+     * Gets the die Arbeitsgruppen.
+     *
+     * @return the die Arbeitsgruppen
+     */
     public Arbeitsgruppe getArbeitsgruppe() {
         return this.arbeitsgruppe;
     }
 
+    /**
+     * Sets the die Arbeitsgruppen.
+     *
+     * @param arbeitsgruppe the new die Arbeitsgruppen
+     */
     public void setArbeitsgruppe(final Arbeitsgruppe arbeitsgruppe) {
         this.arbeitsgruppe = arbeitsgruppe;
     }
 
+    /**
+     * Gets the das Zeugnis.
+     *
+     * @return the das Zeugnis
+     */
     public Zeugnis getZeugnis() {
         return this.zeugnis;
     }
 
+    /**
+     * Sets the das Zeugnis.
+     *
+     * @param zeugni the new das Zeugnis
+     */
     public void setZeugnis(final Zeugnis zeugni) {
         this.zeugnis = zeugni;
     }

@@ -39,6 +39,12 @@ public enum Schulfachtyp {
         return shortKey;
     }
 
+    /**
+     *
+     * Initiates an object of type Schulfachtyp.
+     * @param id die Id
+     * @param shortKey der Kurzschlüssel.
+     */
     private Schulfachtyp(final int id, final String shortKey) {
         this.id = id;
         this.shortKey = shortKey;

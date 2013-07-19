@@ -30,21 +30,38 @@ public class VersionHistory extends VersionedModel implements Serializable {
     @Column(name = "install_date", nullable = false)
     private Date installDate;
 
-    public VersionHistory() {
-    }
-
+    /**
+     * Gets the die Versionsnummer.
+     *
+     * @return the die Versionsnummer
+     */
     public String getAppVersion() {
         return this.appVersion;
     }
 
+    /**
+     * Sets the die Versionsnummer.
+     *
+     * @param appVersion the new die Versionsnummer
+     */
     public void setAppVersion(final String appVersion) {
         this.appVersion = appVersion;
     }
 
+    /**
+     * Gets the datum der Installation.
+     *
+     * @return the datum der Installation
+     */
     public Date getInstallDate() {
         return this.installDate;
     }
 
+    /**
+     * Sets the datum der Installation.
+     *
+     * @param installDate the new datum der Installation
+     */
     public void setInstallDate(final Date installDate) {
         this.installDate = installDate;
     }

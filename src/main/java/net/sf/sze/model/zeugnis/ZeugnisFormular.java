@@ -4,8 +4,16 @@
 
 package net.sf.sze.model.zeugnis;
 
+import de.ppi.jpa.helper.VersionedModel;
+
+import net.sf.sze.model.stammdaten.Klasse;
+
+import org.apache.commons.lang.builder.CompareToBuilder;
+
 import java.io.Serializable;
+
 import java.sql.Date;
+
 import java.util.List;
 
 import javax.persistence.Column;
@@ -15,12 +23,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-
-import net.sf.sze.model.stammdaten.Klasse;
-
-import org.apache.commons.lang.builder.CompareToBuilder;
-
-import de.ppi.jpa.helper.VersionedModel;
 
 /**
  * Alle Informationen zu dem Formular des Zeugnisses.
@@ -96,9 +98,6 @@ public class ZeugnisFormular extends VersionedModel implements Serializable,
     @JoinColumn(name = "schulhalbjahr_id", nullable = false)
 
     private Schulhalbjahr schulhalbjahr;
-
-    public ZeugnisFormular() {
-    }
 
     /**
      * Gets the defaultfall für diese Klasse kann im Zeugnis überschrieben

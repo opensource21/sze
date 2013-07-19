@@ -5,10 +5,8 @@
 package net.sf.sze.model.zeugnis;
 
 import de.ppi.jpa.helper.VersionedModel;
-
 import net.sf.oval.constraint.Size;
 import net.sf.sze.constraints.ValidVariableText;
-import net.sf.sze.model.AgBewertung;
 import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.stammdaten.Schueler;
 import net.sf.sze.util.StringUtil;
@@ -17,7 +15,6 @@ import net.sf.sze.util.VariableUtility;
 import org.apache.commons.lang.builder.CompareToBuilder;
 
 import java.io.Serializable;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;

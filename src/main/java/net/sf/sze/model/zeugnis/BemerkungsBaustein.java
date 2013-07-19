@@ -4,19 +4,19 @@
 
 package net.sf.sze.model.zeugnis;
 
-import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import de.ppi.jpa.helper.VersionedModel;
 
 import net.sf.oval.constraint.Size;
 import net.sf.sze.constraints.ValidVariableText;
 
 import org.apache.commons.lang.builder.CompareToBuilder;
 
-import de.ppi.jpa.helper.VersionedModel;
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 /**
  * Textbausteine für Bemerkungen.
@@ -26,12 +26,11 @@ import de.ppi.jpa.helper.VersionedModel;
 @Table(name = "bemerkungs_baustein",
         uniqueConstraints = @UniqueConstraint(columnNames = "name",
         name = "UK_BEM_BAUSTEIN_NAME"))
-public class BemerkungsBaustein extends VersionedModel implements Serializable {
+public class BemerkungsBaustein extends VersionedModel implements Serializable,
+        Comparable<BemerkungsBaustein> {
 
     /** The name. */
     @Column(nullable = false, length = 20)
-
-    @Size(max = 20)
     private String name;
 
     /** The text. */
@@ -105,15 +104,8 @@ public class BemerkungsBaustein extends VersionedModel implements Serializable {
         return name;
     }
 
-    public boolean needsDatum() {
-        return text.contains("@datum@");
-    }
-
-    public boolean containsName() {
-        return text.contains("@name@") || text.contains("@Name@");
-    }
-
     @SuppressWarnings("boxing")
+    @Override
     public int compareTo(final BemerkungsBaustein other) {
         final CompareToBuilder compareBuilder = new CompareToBuilder();
         compareBuilder.append(!this.aktiv, !other.aktiv);

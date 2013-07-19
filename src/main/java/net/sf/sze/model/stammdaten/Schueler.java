@@ -11,7 +11,6 @@ import net.sf.oval.constraint.Size;
 import net.sf.sze.model.zeugnis.Zeugnis;
 
 import org.apache.commons.lang.builder.CompareToBuilder;
-import org.apache.commons.lang3.time.DateUtils;
 
 import java.io.Serializable;
 

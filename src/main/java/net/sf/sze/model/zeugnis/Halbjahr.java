@@ -29,6 +29,10 @@ public enum Halbjahr {
         return id;
     }
 
+    /**
+     * Initiates an object of type Halbjahr.
+     * @param halbjahr 1 oder 2.
+     */
     private Halbjahr(final int halbjahr) {
         this.id = halbjahr;
     }

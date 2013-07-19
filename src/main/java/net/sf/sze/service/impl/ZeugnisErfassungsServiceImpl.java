@@ -57,6 +57,9 @@ public class ZeugnisErfassungsServiceImpl implements ZeugnisErfassungsService {
     @Resource
     private KlasseDao klasseDao;
 
+    /**
+     * Das Zeugnis-DAO.
+     */
     @Resource
     private ZeugnisDao zeugnisDao;
 

@@ -4,6 +4,10 @@
 
 package net.sf.sze.model.zeugnis;
 
+import de.ppi.jpa.helper.VersionedModel;
+
+import org.apache.commons.lang.builder.CompareToBuilder;
+
 import java.io.Serializable;
 
 import javax.persistence.Entity;
@@ -12,10 +16,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import org.apache.commons.lang.builder.CompareToBuilder;
-
-import de.ppi.jpa.helper.VersionedModel;
 
 /**
  * Bewertung zum Arbeits- und Sozialverhalten.
@@ -45,9 +45,6 @@ public class AvSvBewertung extends VersionedModel implements Serializable,
     @JoinColumn(name = "zeugnis_id", nullable = false)
 
     private Zeugnis zeugnis;
-
-    public AvSvBewertung() {
-    }
 
     /**
      * Gets the beurteilung.

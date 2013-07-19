@@ -4,19 +4,19 @@
 
 package net.sf.sze.model.zeugnis;
 
-import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import de.ppi.jpa.helper.VersionedModel;
 
 import net.sf.oval.constraint.Size;
 import net.sf.sze.constraints.ValidVariableText;
 
 import org.apache.commons.lang.builder.CompareToBuilder;
 
-import de.ppi.jpa.helper.VersionedModel;
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 /**
  * Schüler können verschieden Ämter inne haben. Zu diesnen kann man zusätzliche
@@ -51,9 +51,6 @@ public class SchulamtsBemerkungsBaustein extends VersionedModel
     @Column(nullable = false)
 
     private Long sortierung;
-
-    public SchulamtsBemerkungsBaustein() {
-    }
 
     /**
      * Gets the aktiv.

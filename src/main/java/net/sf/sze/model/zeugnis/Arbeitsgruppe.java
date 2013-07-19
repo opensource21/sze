@@ -4,7 +4,14 @@
 
 package net.sf.sze.model.zeugnis;
 
+import de.ppi.jpa.helper.VersionedModel;
+
+import net.sf.sze.util.StringUtil;
+
+import org.apache.commons.lang.builder.CompareToBuilder;
+
 import java.io.Serializable;
+
 import java.util.List;
 
 import javax.persistence.Column;
@@ -12,13 +19,6 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-
-import net.sf.sze.model.AgBewertung;
-import net.sf.sze.util.StringUtil;
-
-import org.apache.commons.lang.builder.CompareToBuilder;
-
-import de.ppi.jpa.helper.VersionedModel;
 
 /**
  * Arbeitsgruppen.
@@ -50,9 +50,6 @@ public class Arbeitsgruppe extends VersionedModel implements Serializable,
     /** The ag bewertungs. */
     @OneToMany(mappedBy = "arbeitsgruppe")
     private List<AgBewertung> agBewertungs;
-
-    public Arbeitsgruppe() {
-    }
 
     /**
      * Gets the klassenstufen.
@@ -127,6 +124,11 @@ public class Arbeitsgruppe extends VersionedModel implements Serializable,
     }
 
     // ******************************
+
+    /**
+     * Konvertiert den Sting der Klassenstufen in eine Liste.
+     * @return den Sting der Klassenstufen als Liste.
+     */
     public List<String> convertKlasenStufenToList() {
         return StringUtil.convertStringToList(klassenstufen);
     }

@@ -4,7 +4,14 @@
 
 package net.sf.sze.model.zeugnis;
 
+import de.ppi.jpa.helper.VersionedModel;
+
+import net.sf.sze.util.StringUtil;
+
+import org.apache.commons.lang.builder.CompareToBuilder;
+
 import java.io.Serializable;
+
 import java.util.List;
 
 import javax.persistence.Column;
@@ -13,12 +20,6 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-
-import net.sf.sze.util.StringUtil;
-
-import org.apache.commons.lang.builder.CompareToBuilder;
-
-import de.ppi.jpa.helper.VersionedModel;
 
 /**
  * Mögliches Arbeits- bzw Sozialverhalten. Im allgemeinen kurz AvSv genannt.
@@ -125,6 +126,11 @@ public class ArbeitsUndSozialVerhalten extends VersionedModel
     }
 
     // *******************************************************************
+
+    /**
+     * Konvertiert den Sting der Klassenstufen in eine Liste.
+     * @return den Sting der Klassenstufen als Liste.
+     */
     public List<String> convertKlasenStufenToList() {
         return StringUtil.convertStringToList(klassenstufen);
     }

@@ -20,7 +20,12 @@ public enum Geschlecht {
     /** The id. */
     private final char id;
 
-    Geschlecht(char id) {
+    /**
+     *
+     * Initiates an object of type Geschlecht.
+     * @param id die Id
+     */
+    private Geschlecht(char id) {
         this.id = id;
     }
 
