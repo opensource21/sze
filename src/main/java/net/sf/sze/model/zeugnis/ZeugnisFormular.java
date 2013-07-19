@@ -96,7 +96,6 @@ public class ZeugnisFormular extends VersionedModel implements Serializable,
     /** The schulhalbjahr. */
     @ManyToOne(optional = false)
     @JoinColumn(name = "schulhalbjahr_id", nullable = false)
-
     private Schulhalbjahr schulhalbjahr;
 
     /**

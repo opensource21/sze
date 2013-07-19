@@ -199,6 +199,32 @@
             <version>1.4</version>
         </dependency>
 
+        <!-- FixIt -->
+        <dependency>
+            <groupId>niels</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>2.3.8</version>
+        </dependency>
+        <dependency>
+            <groupId>niels</groupId>
+            <artifactId>iText</artifactId>
+            <version>2.1.7</version>
+        </dependency>
+        <dependency>
+            <groupId>niels</groupId>
+            <artifactId>jodconverter</artifactId>
+            <version>2.2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>niels</groupId>
+            <artifactId>jodreports</artifactId>
+            <version>2.2_tab_patch</version>
+        </dependency>
+        <dependency>
+            <groupId>niels</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>1.4</version>
+        </dependency>
     </dependencies>
     <build>
         <pluginManagement>
