@@ -216,7 +216,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
         resolver.setPrefix("/WEB-INF/templates/");
         resolver.setSuffix(".html");
         resolver.setTemplateMode("HTML5");
-        // TODO in Production cachable should be true.
+        // TODO PPI in Production cachable should be true.
         resolver.setCacheable(false);
         resolver.setCharacterEncoding("UTF-8");
         return resolver;

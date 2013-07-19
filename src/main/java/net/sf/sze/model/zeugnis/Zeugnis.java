@@ -42,11 +42,6 @@ import javax.persistence.UniqueConstraint;
 public class Zeugnis extends VersionedModel implements Serializable,
         Comparable<Zeugnis> {
 
-    // TODO Objekt-Constraint.
-//  if (value < obj.anzahlFehltageUnentschuldigt) {
-//      return 'zeugnis.formular.fehltageUnentschuldigtGtGesamt'
-//  }
-
     /* Individuelle Abweichung vom Leitspruch des Formulars. */
 
     /** The individueller leitspruch. */
@@ -84,6 +79,10 @@ public class Zeugnis extends VersionedModel implements Serializable,
     private String buBewertungsText = "";
 
     /** The anzahl fehltage gesamt. */
+    // TODO 1 Validator anzahlFehltageGesamt-Constraint. "Die Anzahl der unentschuldigten Fehltage kann nicht gr\u00f6\u00dfer sein, als die Anzahl der Fehltage."
+//  if (value < obj.anzahlFehltageUnentschuldigt) {
+//      return 'zeugnis.formular.fehltageUnentschuldigtGtGesamt'
+//  }
     @Column(name = "anzahl_fehltage_gesamt", nullable = false)
 
     private Integer anzahlFehltageGesamt = Integer.valueOf(0);

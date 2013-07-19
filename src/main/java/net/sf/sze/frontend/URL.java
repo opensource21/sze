@@ -43,7 +43,7 @@ public final class URL {
     public static final String HOME = "/home";
 
     /**
-     * TODO-Url.
+     * Eine Url. für Todos.
      */
     public static final String TODO = "/todo";
 

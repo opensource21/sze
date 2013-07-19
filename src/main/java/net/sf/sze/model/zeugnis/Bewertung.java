@@ -37,7 +37,7 @@ import javax.persistence.UniqueConstraint;
 @DiscriminatorValue("net.sf.sze.zeugnis.Bewertung")
 public class Bewertung extends VersionedModel implements Serializable,
         Comparable<Bewertung> {
-    // TODO Validatoren bauen
+    // TODO 3 Validatoren bauen.
 //  sonderNote(validator:{value, object ->
 //      if (["1","2","3","4","5","6"].contains(value.trim())) {
 //          return ['bewertung.sonderNote.invalid',value]
@@ -54,7 +54,7 @@ public class Bewertung extends VersionedModel implements Serializable,
 //      }
 //  })
 
-    // TODO einschränken auf den Bereich 1-6 in GUI, kein DB-Constraint, da ABI 1-15
+    // TODO GUI einschränken auf den Bereich 1-6 in GUI, kein DB-Constraint, da ABI 1-15
 
     /** The note. */
     private Long note;
@@ -75,7 +75,6 @@ public class Bewertung extends VersionedModel implements Serializable,
 
     /** The leistung nur schwach ausreichend. */
     @Column(name = "leistung_nur_schwach_ausreichend", nullable = false)
-
     private Boolean leistungNurSchwachAusreichend = Boolean.FALSE;
 
     // bi-directional many-to-one association to Schulfach
@@ -237,6 +236,10 @@ public class Bewertung extends VersionedModel implements Serializable,
 
     }
 
+    /**
+     * Liefert eine String Repräsentation für die Note zu Darstellung in der GUI.
+     * @return eine String Repräsentation für die Note zu Darstellung in der GUI.
+     */
     public String notenDarstellung() {
         if (StringUtil.containsInformation(sonderNote)) {
             return sonderNote;
@@ -251,7 +254,7 @@ public class Bewertung extends VersionedModel implements Serializable,
             notenDarstellung.append(leistungsniveau).append(" ");
         }
 
-        if (note != null) {
+        if (note == null) {
             notenDarstellung.append('?');
         } else {
             notenDarstellung.append(note);

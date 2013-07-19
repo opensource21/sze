@@ -23,13 +23,14 @@ public class AussenDifferenzierteBewertung extends Bewertung {
     // TODO der NotNull-Constraint gilt nur für diese SubKlasse :-/
     // leistungsniveau(inList:['G','E'], nullable:false)
 
-    // TODO sollte ZweiNiveauBewertung heißen.
+    // NICE sollte ZweiNiveauBewertung heißen.
+
+    /**
+     *
+     * Initiates an object of type AussenDifferenzierteBewertung.
+     */
     public AussenDifferenzierteBewertung() {
         super();
-        init();
-    }
-
-    private void init() {
         setLeistungsniveau("G");
     }
 

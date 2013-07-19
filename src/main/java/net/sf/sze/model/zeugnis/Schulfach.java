@@ -4,7 +4,15 @@
 
 package net.sf.sze.model.zeugnis;
 
+import de.ppi.jpa.helper.VersionedModel;
+
+import net.sf.oval.constraint.Size;
+import net.sf.sze.util.StringUtil;
+
+import org.apache.commons.lang.builder.CompareToBuilder;
+
 import java.io.Serializable;
+
 import java.util.List;
 
 import javax.persistence.Column;
@@ -13,13 +21,6 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-
-import net.sf.oval.constraint.Size;
-import net.sf.sze.util.StringUtil;
-
-import org.apache.commons.lang.builder.CompareToBuilder;
-
-import de.ppi.jpa.helper.VersionedModel;
 
 /**
  * Ein Schulfach.
@@ -32,7 +33,8 @@ import de.ppi.jpa.helper.VersionedModel;
 public class Schulfach extends VersionedModel implements Serializable,
         Comparable<Schulfach> {
 
-    // TODO Validatoren schreiben
+    // TODO 3 Validatoren schreiben, die sicherstellen, dass die Stufen überschneidungsfrei sind.
+    // org.springframework.util.CollectionUtils.containsAny(Collection, Collection)
 //  private static standardIntersectCheck = {value,obj ->
 //  if (obj.convertStufenMitStandardBewertungToList().intersect(
 //                  obj.convertStufenMitBinnenDifferenzierungToList())) {
@@ -84,14 +86,12 @@ public class Schulfach extends VersionedModel implements Serializable,
 
     /** The stufen mit aussen differenzierung. */
     @Column(name = "stufen_mit_aussen_differenzierung", length = 255)
-
-    // TODO stufenMitZweiNiveaus
+    // NICE stufenMitZweiNiveaus
     private String stufenMitAussenDifferenzierung;
 
     /** The stufen mit binnen differenzierung. */
     @Column(name = "stufen_mit_binnen_differenzierung", length = 255)
-
-    // TODO stufenMitDreiNiveaus
+    // NICE stufenMitDreiNiveaus
     private String stufenMitBinnenDifferenzierung;
 
     /** The stufen mit standard bewertung. */

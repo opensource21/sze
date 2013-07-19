@@ -4,7 +4,16 @@
 
 package net.sf.sze.model.stammdaten;
 
+import de.ppi.jpa.helper.VersionedModel;
+
+import net.sf.oval.constraint.Range;
+import net.sf.oval.constraint.Size;
+import net.sf.sze.util.StringUtil;
+
+import org.apache.commons.lang.builder.CompareToBuilder;
+
 import java.io.Serializable;
+
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Set;
@@ -14,13 +23,6 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import net.sf.oval.constraint.Size;
-import net.sf.sze.util.StringUtil;
-
-import org.apache.commons.lang.builder.CompareToBuilder;
-
-import de.ppi.jpa.helper.VersionedModel;
-
 /**
  * Beschreibt eine Schulklasse.
  */
@@ -29,7 +31,7 @@ import de.ppi.jpa.helper.VersionedModel;
 public class Klasse extends VersionedModel implements Serializable,
         Comparable<Klasse> {
 
-    // TODO 3 Zahlenbereich in der GUI einschränken :-/
+    // TODO GUI Zahlenbereich in der GUI einschränken :-/
 //  static constraints = {
 //      jahrgang(range:2000..2020)
 //  }
@@ -38,6 +40,7 @@ public class Klasse extends VersionedModel implements Serializable,
      * Jahr in dem diese Klasse begonnen wurde.
      */
     @Column(nullable = false)
+    @Range(min = 2000, max = 2030)
     private int jahrgang;
 
     /** Ergänzung also 1a. */
