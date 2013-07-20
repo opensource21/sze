@@ -1,11 +1,13 @@
+// PersistenceConfig.java
+//
+// (c) SZE-Development-Team
+
 package net.sf.sze.config;
 
-import java.util.Properties;
-
-import javax.persistence.EntityManager;
-import javax.sql.DataSource;
+import com.jolbox.bonecp.BoneCPDataSource;
 
 import org.hibernate.cfg.Environment;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,11 +19,15 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.TransactionManagementConfigurer;
 
-import com.jolbox.bonecp.BoneCPDataSource;
+import java.util.Properties;
+
+import javax.persistence.EntityManager;
+
+import javax.sql.DataSource;
 
 /**
  * Spring configuration for persistence.
- * 
+ *
  */
 @Configuration
 @EnableTransactionManagement
@@ -94,7 +100,7 @@ public class PersistenceConfig implements TransactionManagementConfigurer {
 
     /**
      * Creates the {@link DataSource}.
-     * 
+     *
      * @return the {@link DataSource}.
      */
     @Bean(name = "dataSource", destroyMethod = "close")
@@ -104,8 +110,8 @@ public class PersistenceConfig implements TransactionManagementConfigurer {
         dataSource.setJdbcUrl(connectionUrl);
         dataSource.setUsername(username);
         dataSource.setPassword(password);
-        dataSource
-                .setIdleConnectionTestPeriodInMinutes(idleConnectionTestPeriodInMinutes);
+        dataSource.setIdleConnectionTestPeriodInMinutes(
+                idleConnectionTestPeriodInMinutes);
         dataSource.setIdleMaxAgeInMinutes(idleMaxAgeInMinutes);
         dataSource.setMinConnectionsPerPartition(minConnectionsPerPartition);
         dataSource.setMaxConnectionsPerPartition(maxConnectionsPerPartition);
@@ -119,17 +125,16 @@ public class PersistenceConfig implements TransactionManagementConfigurer {
 
     /**
      * Creates the {@linkplain EntityManager}.
-     * 
+     *
      * @return the {@linkplain EntityManager}.
      */
     @Bean(name = "entityManagerFactory")
-    public LocalContainerEntityManagerFactoryBean
-            configureEntityManagerFactory() {
+    public LocalContainerEntityManagerFactoryBean configureEntityManagerFactory() {
         final LocalContainerEntityManagerFactoryBean entityManagerFactoryBean =
                 new LocalContainerEntityManagerFactoryBean();
         entityManagerFactoryBean.setDataSource(configureDataSource());
-        entityManagerFactoryBean
-                .setPackagesToScan("net.sf.sze.model");
+        entityManagerFactoryBean.setPackagesToScan("net.sf.sze.model");
+
         final HibernateJpaVendorAdapter jpaVendorAdapter =
                 new HibernateJpaVendorAdapter();
         jpaVendorAdapter.setShowSql(true);
@@ -155,5 +160,4 @@ public class PersistenceConfig implements TransactionManagementConfigurer {
     public PlatformTransactionManager annotationDrivenTransactionManager() {
         return new JpaTransactionManager();
     }
-
 }

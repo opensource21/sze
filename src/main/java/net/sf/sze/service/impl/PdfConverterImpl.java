@@ -33,6 +33,8 @@ import org.apache.commons.io.filefilter.PrefixFileFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.springframework.stereotype.Service;
+
 import java.awt.color.ColorSpace;
 import java.awt.color.ICC_Profile;
 
@@ -50,6 +52,7 @@ import java.util.Arrays;
  * @author niels
  *
  */
+@Service
 public class PdfConverterImpl implements PdfConverter {
 
     /**

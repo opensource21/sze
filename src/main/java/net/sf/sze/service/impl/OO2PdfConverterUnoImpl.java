@@ -1,4 +1,4 @@
-// OO2PdfConverterUnoImp.java
+// OO2PdfConverterUnoImpl.java
 //
 // (c) SZE-Development-Team
 
@@ -48,11 +48,11 @@ import java.io.IOException;
  * @author niels
  *
  */
-public class OO2PdfConverterUnoImp implements OO2PdfConverter {
+public class OO2PdfConverterUnoImpl implements OO2PdfConverter {
 
     /** The log. */
     private final Logger log = LoggerFactory.getLogger(
-            OO2PdfConverterUnoImp.class.getName());
+            OO2PdfConverterUnoImpl.class.getName());
 
     /**
      * Main-Methode.
@@ -63,7 +63,7 @@ public class OO2PdfConverterUnoImp implements OO2PdfConverter {
                 "D:\\sandboxes\\schule_ppi\\sze\\oofiles\\templates\\fsn.odt");
         File outputFile = new File(
                 "D:\\sandboxes\\schule_ppi\\sze\\pdffiles\\fsn.pdf");
-        OO2PdfConverter unoC = new OO2PdfConverterUnoImp();
+        OO2PdfConverter unoC = new OO2PdfConverterUnoImpl();
         unoC.convert(sourceFile, outputFile);
         System.exit(0);
     }
