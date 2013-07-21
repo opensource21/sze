@@ -162,7 +162,7 @@ public class OO2PdfConverterUnoImpl implements OO2PdfConverter {
 
 
     @Override
-    public void closeConnection() {
+    public void destroy() {
         // Nichts zu tun hier.
     }
 

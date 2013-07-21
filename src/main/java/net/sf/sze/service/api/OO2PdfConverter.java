@@ -6,6 +6,10 @@ package net.sf.sze.service.api;
 
 import java.io.File;
 
+/**
+ * Konverter um OpenDocument-Dateien nach PDF umzuwandeln.
+ *
+ */
 public interface OO2PdfConverter {
 
     /**
@@ -15,7 +19,13 @@ public interface OO2PdfConverter {
      */
     void convert(File sourceFile, File outputFile);
 
+    /**
+     * Initialisierung.
+     */
     void init();
 
-    void closeConnection();
+    /**
+     * Die Verbindung wieder schließen.
+     */
+    void destroy();
 }

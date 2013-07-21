@@ -42,10 +42,21 @@ public class OO2PdfConverterJodImpl implements OO2PdfConverter {
     private final String environmentUrl;
     private final String invisibleParam;
 
+    /**
+     * Initiates an object of type OO2PdfConverterJodImpl.
+     * @param ooCommandFile Kommando um Openoffice zu starten.
+     * @param userEnv die Umgebung mit der Konfiguration.
+     */
     public OO2PdfConverterJodImpl(File ooCommandFile, File userEnv) {
         this(ooCommandFile, userEnv, 8100);
     }
 
+    /**
+     * Initiates an object of type OO2PdfConverterJodImpl.
+     * @param ooCommandFile Kommando um Openoffice zu starten.
+     * @param userEnv die Umgebung mit der Konfiguration.
+     * @param ooPort der Port auf dem OpenOffice lauscht.
+     */
     public OO2PdfConverterJodImpl(File ooCommandFile, File userEnv,
             int ooPort) {
         super();
@@ -90,7 +101,7 @@ public class OO2PdfConverterJodImpl implements OO2PdfConverter {
             log.error("Fehler beim Konvertieren von " + sourceFile
                     .getAbsolutePath() + " -> " + outputFile.getAbsolutePath(),
                     rE);
-            closeConnection();
+            destroy();
             convertInternal(sourceFile, outputFile);
         }
     }
@@ -105,14 +116,14 @@ public class OO2PdfConverterJodImpl implements OO2PdfConverter {
         Runtime.getRuntime().addShutdownHook(new Thread() {
             @Override
             public void run() {
-                closeConnection();
+                destroy();
             }
         });
         ensureStartedOpenOfficeService(true);
     }
 
     @Override
-    public void closeConnection() {
+    public void destroy() {
         log.info("Beende Verbindung zu OpenOffice");
         converter = null;
 
@@ -144,7 +155,7 @@ public class OO2PdfConverterJodImpl implements OO2PdfConverter {
                     "-accept=socket,host=127.0.0.1,port=" + ooPort + ";urp;",
                     "-nofirststartwizard" + environmentUrl);
             try {
-                closeConnection();
+                destroy();
                 log.info("Starte OO-Prozess. Init=" + init);
                 ooProcess = processBuilder.start();
                 // 10 Sekunden warten damit OO-Starten kann.
