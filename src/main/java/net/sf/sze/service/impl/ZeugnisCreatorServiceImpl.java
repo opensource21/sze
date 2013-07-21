@@ -242,7 +242,7 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
     }
 
     public File createZeugnis(Zeugnis zeugnis) {
-        final File result;
+        File result;
         final String relativePath = createRelativePath(zeugnis
                 .getSchulhalbjahr(), zeugnis.getKlasse());
         final Schueler schueler = zeugnis.getSchueler();
@@ -460,44 +460,55 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
         }
     }
 
-//  /**
-//   * Ergänzt für die direkt am Zeugnis hängenden Text spezielle Keys,<br>
-//   * nl - Wenn ein Eintrag nicht leer ist, wird ein Newline drangehängt<br>
-//   * bs - Newline wird durch TabNewline ersetzt.<br>
-//   * nlbs - Kombination aus bs und nl.
-//   * @param printMap
-//   */
-//  private addNewlineAndBlocksatzVariables(Map printMap) {
-//      Map nlValues = .put(:]
-//      Map bsValues = .put(:]
-//      Map nlbsValues = .put(:]
-//      printMap.each{key, value ->
-//          if (value instanceof String) {
-//              if (value) {
-//                  nlValues.put(key, "" +value}\n"
-//              } else {
-//                  nlValues.put(key, "" +value}"
-//              }
-//              //assert "Erste Zeile\r\nZweite Zeile".replaceAll(/\r?\n/, "\t\n") == "Erste Zeile\t\nZweite Zeile"
-//              //assert "Erste Zeile\nZweite Zeile".replaceAll(/\r?\n/, "\t\n") == "Erste Zeile\t\nZweite Zeile"
-//              bsValues.put(key, value.replaceAll(/\r?\n/, "\t\n")
-//              nlbsValues.put(key, nlValues.put(key].replaceAll(/\r?\n/, "\t\n")
-//          }
-//      }
-//      printMap.put("nl", nlValues;
-//      printMap.put("bs", bsValues;
-//      printMap.put("nlbs", nlbsValues;
-//  }
-//
-//
-//
+    /**
+     * Ergänzt für die direkt am Zeugnis hängenden Text spezielle Keys,<br>
+     * nl - Wenn ein Eintrag nicht leer ist, wird ein Newline drangehängt<br>
+     * bs - Newline wird durch TabNewline ersetzt.<br>
+     * nlbs - Kombination aus bs und nl.
+     * @param printMap die bisherige PrintMap.
+     */
+    private void addNewlineAndBlocksatzVariables(Map<String, Object> printMap) {
+        final Map<String, String> nlValues = new HashMap<>();
+        final Map<String, String> bsValues = new HashMap<>();
+        final Map<String, String> nlbsValues = new HashMap<>();
+        for (Map.Entry<String, Object> mapEntry : printMap.entrySet()) {
+            final String key = mapEntry.getKey();
+
+            if (mapEntry.getValue() instanceof String) {
+                final String value = (String) mapEntry.getValue();
+                if (value != null) { // TODO evtl. ist if (value) eher contains information. Null kann es hier jedenfalls nicht sein.
+                    nlValues.put(key, "" + value + "\n");
+                } else {
+                    nlValues.put(key, value);
+                }
+
+                // assert "Erste Zeile\r\nZweite Zeile".replaceAll(/\r?\n/, "\t\n") == "Erste Zeile\t\nZweite Zeile"
+                // assert "Erste Zeile\nZweite Zeile".replaceAll(/\r?\n/, "\t\n") == "Erste Zeile\t\nZweite Zeile"
+                bsValues.put(key, value.replaceAll("\\r?\\n", "\t\n"));
+                nlbsValues.put(key, nlValues.get(key).replaceAll("\\r?\\n",
+                        "\t\n"));
+            }
+        }
+
+        printMap.put("nl", nlValues);
+        printMap.put("bs", bsValues);
+        printMap.put("nlbs", nlbsValues);
+    }
+
+    /**
+     * Stellt sicher, dass das Outputverzeichnis da ist und die angegebenen
+     * Dateien gelöscht werden.
+     * @param outputDir das Ausgabeverzeichnis.
+     * @param outputFiles die dort zu löschenden Dateien.
+     */
     private void prepareOutput(File outputDir, File... outputFiles) {
         if (!outputDir.exists()) {
             if (outputDir.mkdirs()) {
                 log.info(outputDir.getAbsolutePath() + " angelegt.");
             } else {
-                throw new FileNotFoundException(outputDir.getAbsolutePath()
-                        + " konnte nicht angelegt werden.");
+                // TODO niels besseres Exception-Handling.
+                throw new RuntimeException(new FileNotFoundException(outputDir
+                        .getAbsolutePath() + " konnte nicht angelegt werden."));
             }
         }
 
@@ -511,39 +522,59 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
             }
         }
     }
-//
-//  public void createZeugnis(File templateFile, Map<String, Object> data,
-//          File odtFile) throws IOException, DocumentTemplateException {
-//      log.debug("Erstelle ODT-Datei")
-//      if (templateFile.isDirectory() || !templateFile.exists()) {
-//          throw new FileNotFoundException(templateFile.getAbsolutePath());
-//      }
-//      if (!"odt".equals(FilenameUtils.getExtension(odtFile.getName()))) {
-//          throw new IllegalArgumentException(odtFile.getName() +
-//                  " muss auf odt Enden.");
-//      }
-//      // InputStreams sind auch OK
-//      DocumentTemplate template = new ZippedDocumentTemplate(templateFile);
-//      try {
-//          template.setContentWrapper(new SzeContentWrapper());
-//          template.createDocument(data, new FileOutputStream(odtFile));
-//      } catch (DocumentTemplateException dtE) {
-//          logPrintMap(data, "")
-//          throw dtE;
-//      }
-//  }
-//
+
+    /**
+     * Erstellt die ODT-Datei.
+     * @param templateFile das Template
+     * @param data die Daten.
+     * @param odtFile die Ausgabedatei.
+     * @throws IOException
+     * @throws DocumentTemplateException
+     */
+    public void createZeugnis(File templateFile, Map<String, Object> data,
+            File odtFile) throws IOException, DocumentTemplateException {
+        log.debug("Erstelle ODT-Datei");
+
+        if (templateFile.isDirectory() || !templateFile.exists()) {
+            throw new FileNotFoundException(templateFile.getAbsolutePath());
+        }
+
+        if (!"odt".equals(FilenameUtils.getExtension(odtFile.getName()))) {
+            throw new IllegalArgumentException(odtFile.getName()
+                    + " muss auf odt Enden.");
+        }
+
+        // InputStreams sind auch OK
+        DocumentTemplate template = new ZippedDocumentTemplate(templateFile);
+        try {
+            template.setContentWrapper(new SzeContentWrapper());
+            template.createDocument(data, new FileOutputStream(odtFile));
+        } catch (DocumentTemplateException dtE) {
+            logPrintMap(data, "");
+            throw dtE;
+        }
+    }
+
 //  //------------- DEBUG_FUNCTIONS -------------------------------------------
 //
-//  private logPrintMap(printMap, praefix) {
-//      printMap.each{key, value ->
-//          if (value instanceof Map) {
-//              logPrintMap(value, "" +key}.")
-//          } else {
-//              log.info("" +praefix}" +key} -> " +value}")
-//          }
-//      }
-//  }
+
+    /**
+     * Loggt die gesamte Daten-Map.
+     * @param printMap die zu druckenden Daten.
+     * @param praefix ein Präfix für die Rekursion.
+     */
+    @SuppressWarnings("unchecked")
+    private void logPrintMap(Map<String, Object> printMap, String praefix) {
+        for (Map.Entry<String, Object> mapEntry : printMap.entrySet()) {
+            final String key = mapEntry.getKey();
+            final Object value = mapEntry.getValue();
+            if (value instanceof Map) {
+                logPrintMap((Map<String, Object>) value, key + ".");
+            } else {
+                log.info(praefix + key + " -> " + value);
+            }
+        }
+    }
 //
 //  private logPrintMap4Content(printMap, praefix, output) {
 //      printMap.each{key, value ->
