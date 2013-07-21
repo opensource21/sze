@@ -326,6 +326,10 @@ public class Schueler extends VersionedModel implements Serializable,
         return compareBuilder.toComparison();
     }
 
+    /**
+     * Schreibt die Daten in die Printmap.
+     * @param printMap die Printmap.
+     */
     public void toPrintMap(final Map<String, String> printMap) {
         final String[] simpleAttributes = {
             "name", "vorname", "geburtsort", "nummer"

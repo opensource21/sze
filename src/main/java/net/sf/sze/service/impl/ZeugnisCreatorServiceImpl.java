@@ -422,7 +422,7 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
 
             final List<Bewertung> bewertungen = oldZeugnis.getBewertungen();
             for (final Bewertung bw : bewertungen) {
-                // TODO bauen bw.toPrintMap(bewertungMap, noteAlsTextDarstellen);
+                bw.toPrintMap(bewertungMap, noteAlsTextDarstellen);
             }
 
             final int klassenstufe = oldZeugnis.getKlasse()

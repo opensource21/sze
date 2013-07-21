@@ -7,10 +7,16 @@ package net.sf.sze.model.zeugnis;
 import de.ppi.jpa.helper.VersionedModel;
 
 import net.sf.sze.util.StringUtil;
+import net.sf.sze.util.VariableUtility;
 
 import org.apache.commons.lang.builder.CompareToBuilder;
 
+import org.springframework.util.StringUtils;
+
 import java.io.Serializable;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
@@ -55,6 +61,17 @@ public class Bewertung extends VersionedModel implements Serializable,
 //  })
 
     // TODO GUI einschränken auf den Bereich 1-6 in GUI, kein DB-Constraint, da ABI 1-15
+
+    public static final Map<Long, String> textMap = new HashMap<Long, String>();
+
+    static {
+        textMap.put(Long.valueOf(1), "sehr gut");
+        textMap.put(Long.valueOf(2), "gut");
+        textMap.put(Long.valueOf(3), "befriedigend");
+        textMap.put(Long.valueOf(4), "ausreichend");
+        textMap.put(Long.valueOf(5), "mangelhaft");
+        textMap.put(Long.valueOf(6), "ungen\ufffdgend");
+    }
 
     /** The note. */
     private Long note;
@@ -272,36 +289,37 @@ public class Bewertung extends VersionedModel implements Serializable,
         return schulfach + ": " + notenDarstellung();
     }
 
-    // TODO toPrintMap elegant implementieren, evtl BeanWrapper?.
-//  String toPrintMap(final Map<String, String> printMap, final boolean noteAlsTextDarstellen) {
-//        textMap = [1L:'sehr gut',
-//                         2L:'gut',
-//                         3L:'befriedigend',
-//                         4L:'ausreichend',
-//                         5L:'mangelhaft',
-//                         6L:'ungen\ufffdgend']
+    /**
+     * Schreibt die Daten in die Printmap.
+     * @param printMap die Printmap.
+     * @param noteAlsTextDarstellen Kennzeichen ob die Note texttuell dargestellt werden soll.
+     */
+    public void toPrintMap(final Map<String, Object> printMap,
+            final boolean noteAlsTextDarstellen) {
 
-//      String result
-//      if (!relevant) {
-//          result = VariableUtility.PLATZHALTER_LEER
-//      } else if (sonderNote) {
-//          result = sonderNote
-//      } else {
-//          String noteAlsText
-//          if (noteAlsTextDarstellen) {
-//              noteAlsText = note?textMap[note]:'?'
-//          } else {
-//              noteAlsText = note?note.toString():'?'
-//          }
-//          if (leistungsniveau) {
-//              result = "${leistungsniveau}   ${noteAlsText}"
-//          } else {
-//              result = noteAlsText
-//          }
-//      }
-//      printMap["bw_${schulfach.technicalName()}"] = result
-//      printMap["bw_${schulfach.technicalName()}_tg"] =
-    // relevant?VariableUtility.PLATZHALTER_AUSGEWAEHLT:VariableUtility.PLATZHALTER_LEER
-//      return result
-//  }
+        String result;
+        if (!relevant) {
+            result = VariableUtility.PLATZHALTER_LEER;
+        } else if (StringUtils.hasText(sonderNote)) {
+            result = sonderNote;
+        } else {
+            String noteAlsText;
+            if (noteAlsTextDarstellen) {
+                noteAlsText = (note != null) ? textMap.get(note) : "?";
+            } else {
+                noteAlsText = (note != null) ? note.toString() : "?";
+            }
+
+            if (leistungsniveau != null) {
+                result = leistungsniveau + "   " + noteAlsText;
+            } else {
+                result = noteAlsText;
+            }
+        }
+
+        printMap.put("bw_" + schulfach.technicalName(), result);
+        printMap.put("bw_" + schulfach.technicalName() + "_tg", relevant
+                ? VariableUtility.PLATZHALTER_AUSGEWAEHLT : VariableUtility
+                .PLATZHALTER_LEER);
+    }
 }

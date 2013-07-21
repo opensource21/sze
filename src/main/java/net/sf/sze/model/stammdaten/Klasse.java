@@ -149,6 +149,11 @@ public class Klasse extends VersionedModel implements Serializable,
         return calculateKlassenname() + " (" + jahrgang + ")";
     }
 
+    /**
+     * Berechnet den Klassennamen in Abhängigkeit vom Schuljahr.
+     * @param schuljahresEnde das Ende des Schuljahrs
+     * @return den Klassennamen in Abhängigkeit vom Schuljahr.
+     */
     public String calculateKlassenname(final int schuljahresEnde) {
         if (StringUtil.containsInformation(suffix)) {
             return calculateKlassenstufe(schuljahresEnde) + suffix;
@@ -157,14 +162,27 @@ public class Klasse extends VersionedModel implements Serializable,
         }
     }
 
+    /**
+     * Berechnet die Klassenstufe in Abhängigkeit vom Schuljahr.
+     * @param schuljahresEnde das Ende des Schuljahrs
+     * @return die Klassenstufe in Abhängigkeit vom Schuljahr.
+     */
     public int calculateKlassenstufe(final int schuljahresEnde) {
         return (schuljahresEnde - jahrgang);
     }
 
+    /**
+     * Berechnet die Klassenstufe in Abhängigkeit zu Heute.
+     * @return die Klassenstufe.
+     */
     public int calculateKlassenstufe() {
         return calculateKlassenstufe(calculateSchuljahresEnde());
     }
 
+    /**
+     * Berechnet den Klassennamen in Abhängigkeit zu Heute.
+     * @return den Klassennamen.
+     */
     public String calculateKlassenname() {
         return calculateKlassenname(calculateSchuljahresEnde());
     }
