@@ -25,6 +25,8 @@ import net.sf.sze.model.zeugnis.ZeugnisFormular;
 import net.sf.sze.oo.SzeContentWrapper;
 import net.sf.sze.service.api.OO2PdfConverter;
 import net.sf.sze.service.api.PdfConverter;
+import net.sf.sze.service.api.ZeugnisCreatorService;
+import net.sf.sze.service.api.ZeugnisCreatorService.ODTConversionException;
 import net.sf.sze.util.ResultContainer;
 import net.sf.sze.util.VariableUtility;
 
@@ -59,7 +61,7 @@ import javax.annotation.Resource;
 @Service
 @Transactional(readOnly = true)
 public class ZeugnisCreatorServiceImpl implements InitializingBean,
-        DisposableBean {
+        DisposableBean, ZeugnisCreatorService {
 
     private static final Logger log = LoggerFactory.getLogger(
             ZeugnisCreatorServiceImpl.class);
@@ -173,11 +175,18 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
         pdfScreenOutputBaseDir = new File(pdfScreenOutputDir);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void destroy() {
         oo2pdfConverter.closeConnection();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public ResultContainer createAllZeugnisse() {
         final ResultContainer result = new ResultContainer();
         log.info("Erstelle alle Zeugnisse.");
@@ -208,6 +217,10 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
         return result;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public File createZeugnisse(Schulhalbjahr halbjahr, Klasse klasse) {
         final List<Zeugnis> zeugnisse = zeugnisDao
                 .findAllBySchulhalbjahrAndKlasse(halbjahr, klasse);
@@ -218,29 +231,37 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
         return createCompletePdfs(halbjahr, klasse);
     }
 
+    /**
+     * Erstellt die kompletten PDFs fürs Schulhalbjahr und Klasse.
+     * @param halbjahr das Schulhalbjahr.
+     * @param klasse die Klasse.
+     * @return das komplette PDFs fürs Schuljahr und Klasse.
+     */
     private File createCompletePdfs(Schulhalbjahr halbjahr, Klasse klasse) {
         final String relativePath = createRelativePath(halbjahr, klasse);
         final File screenDir = new File(pdfScreenOutputBaseDir, relativePath);
         final File printDir = new File(pdfPrintOutputBaseDir, relativePath);
-        final File result;
-        try {
-            pdfConverter.concatAll(printDir, "A3_");
-            pdfConverter.concatAll(printDir, "A4_");
-            result = pdfConverter.concatAll(screenDir, "");
-        } catch (IOException | DocumentException e) {
-            // TODO Exception sauber behandeln.
-            throw new RuntimeException(e);
-        }
-
-        return result;
+        pdfConverter.concatAll(printDir, "A3_");
+        pdfConverter.concatAll(printDir, "A4_");
+        return pdfConverter.concatAll(screenDir, "");
     }
 
+    /**
+     * Erstellt den relativen Pfadnamen fürs Schulhalbjahr und Klasse.
+     * @param halbjahr das Schulhalbjahr.
+     * @param klasse die Klasse.
+     * @return der relative Pfadname fürs Schulhalbjahr und Klasse.
+     */
     private String createRelativePath(Schulhalbjahr halbjahr, Klasse klasse) {
         final String klassenname = klasse.calculateKlassenname(halbjahr
                 .getJahr());
         return halbjahr.createRelativePathName() + "/Kl-" + klassenname;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public File createZeugnis(Zeugnis zeugnis) {
         File result;
         final String relativePath = createRelativePath(zeugnis
@@ -532,26 +553,33 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
      * @throws DocumentTemplateException
      */
     public void createZeugnis(File templateFile, Map<String, Object> data,
-            File odtFile) throws IOException, DocumentTemplateException {
+            File odtFile) {
         log.debug("Erstelle ODT-Datei");
 
-        if (templateFile.isDirectory() || !templateFile.exists()) {
-            throw new FileNotFoundException(templateFile.getAbsolutePath());
-        }
-
-        if (!"odt".equals(FilenameUtils.getExtension(odtFile.getName()))) {
-            throw new IllegalArgumentException(odtFile.getName()
-                    + " muss auf odt Enden.");
-        }
-
-        // InputStreams sind auch OK
-        DocumentTemplate template = new ZippedDocumentTemplate(templateFile);
         try {
-            template.setContentWrapper(new SzeContentWrapper());
-            template.createDocument(data, new FileOutputStream(odtFile));
-        } catch (DocumentTemplateException dtE) {
-            logPrintMap(data, "");
-            throw dtE;
+            if (templateFile.isDirectory() || !templateFile.exists()) {
+                throw new FileNotFoundException(templateFile.getAbsolutePath());
+            }
+
+            if (!"odt".equals(FilenameUtils.getExtension(odtFile.getName()))) {
+                throw new IllegalArgumentException(odtFile.getName()
+                        + " muss auf odt Enden.");
+            }
+
+            // InputStreams sind auch OK
+            DocumentTemplate template = new ZippedDocumentTemplate(
+                    templateFile);
+            try {
+                template.setContentWrapper(new SzeContentWrapper());
+                template.createDocument(data, new FileOutputStream(odtFile));
+            } catch (DocumentTemplateException dtE) {
+                logPrintMap(data, "");
+                throw dtE;
+            }
+        } catch (DocumentTemplateException e) {
+            throw new ODTConversionException(e);
+        } catch (IOException e) {
+            throw new ODTConversionException(e);
         }
     }
 

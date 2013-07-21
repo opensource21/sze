@@ -6,6 +6,8 @@ package net.sf.sze.service.api;
 
 import com.lowagie.text.DocumentException;
 
+import net.sf.sze.service.impl.PdfConverterImpl;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -20,11 +22,10 @@ public interface PdfConverter {
      * @param directory the directory
      * @param praefix the filename-praefix
      * @return the complete file
-     * @throws IOException if there was IO-problems.
-     * @throws DocumentException if the iText-library has a problem.
+     * @throws PDFConversionException if there problems with the conversion.
      */
-    File concatAll(File directory, String praefix) throws IOException,
-            DocumentException;
+    File concatAll(File directory, String praefix)
+            throws PDFConversionException;
 
     /**
      * Converts an Odt-document to a4-pdf.
@@ -32,12 +33,10 @@ public interface PdfConverter {
      * @param pdfFileA4 the name of the new pdf-file.
      * @param oo2pdfConverter converter which converts ODT to PDF-A.
      * @return the number of pages.
-     * @throws IOException if there was IO-problems.
-     * @throws DocumentException if the iText-library has a problem.
+     * @throws PDFConversionException if there problems with the conversion.
      */
     int convertOdtToA4(File odtFile, File pdfFileA4,
-            OO2PdfConverter oo2pdfConverter) throws IOException,
-            DocumentException;
+            OO2PdfConverter oo2pdfConverter) throws PDFConversionException;
 
     /**
      * Converts the given A4 file into a A3 file,
@@ -56,9 +55,32 @@ public interface PdfConverter {
      * @param sourcePdfFileA4 the source Din A4 file.
      * @param targetPdfFileA3 the target Din A3 file.
      * @param targetPdfFileA4 die Din A4-Datei für die Einlage.
-     * @throws IOException if there was IO-problems.
-     * @throws DocumentException if the iText-library has a problem.
+     * @throws PDFConversionException if there problems with the conversion.
      */
     void convertA4ToA3(File sourcePdfFileA4, File targetPdfFileA3,
-            File targetPdfFileA4) throws DocumentException, IOException;
+            File targetPdfFileA4) throws PDFConversionException;
+
+    /**
+     * {@link RuntimeException} in case of problems with the file-system
+     * or an error in the iText-library @see {@link RuntimeException#getCause()}.
+     *
+     */
+    public class PDFConversionException extends RuntimeException {
+
+        /**
+         * Initiates an object of type PdfConverter.PDFConversionException.
+         * @param e DocumentException if the iText-library has a problem.
+         */
+        public PDFConversionException(DocumentException e) {
+            super("Problem with iText", e);
+        }
+
+        /**
+         * Initiates an object of type PdfConverter.PDFConversionException.
+         * @param e IOException if there was IO-problems.
+         */
+        public PDFConversionException(IOException e) {
+            super("Problem with file-io", e);
+        }
+    }
 }

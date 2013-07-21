@@ -11,7 +11,6 @@ import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.PageSize;
 import com.lowagie.text.Rectangle;
-import com.lowagie.text.pdf.BadPdfFormatException;
 import com.lowagie.text.pdf.PdfArray;
 import com.lowagie.text.pdf.PdfContentByte;
 import com.lowagie.text.pdf.PdfCopy;
@@ -41,7 +40,6 @@ import java.awt.color.ICC_Profile;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -70,44 +68,51 @@ public class PdfConverterImpl implements PdfConverter {
      * {@inheritDoc}
      */
     @Override
-    public File concatAll(File directory, String praefix) throws IOException,
-            DocumentException {
+    public File concatAll(File directory, String praefix) {
         final String completePdfName = praefix + "_complete.pdf";
         final File completePdf = new File(directory, completePdfName);
         completePdf.delete();
 
         final String[] pdfs = directory.list(new PrefixFileFilter(praefix));
         if ((pdfs != null) && (pdfs.length > 0)) {
-            Document document = new Document();
-            PdfCopy copy = new PdfCopy(document, new FileOutputStream(
-                    completePdf));
-            copy.setPDFXConformance(PdfWriter.PDFA1B);
-            document.open();
-            addPdfAInfosToDictonary(copy);
-            Arrays.sort(pdfs);
 
-            for (String pdfName : pdfs) {
-                if (completePdfName.equals(pdfName)) {
-                    continue;
-                }
+            final Document document = new Document();
+            try {
+                final PdfCopy copy = new PdfCopy(document, new FileOutputStream(
+                        completePdf));
+                copy.setPDFXConformance(PdfWriter.PDFA1B);
+                document.open();
+                addPdfAInfosToDictonary(copy);
+                Arrays.sort(pdfs);
 
-                try {
-                    final PdfReader reader = new PdfReader(new FileInputStream(
-                            new File(directory, pdfName)));
-                    for (int page = 1; page <= reader.getNumberOfPages();
-                            page++) {
-                        copy.addPage(copy.getImportedPage(reader, page));
+                for (String pdfName : pdfs) {
+                    if (completePdfName.equals(pdfName)) {
+                        continue;
                     }
-                } catch (DocumentException de) {
-                    LOG.error(pdfName, de);
-                    throw de;
-                } catch (IOException io) {
-                    LOG.error(pdfName, io);
-                    throw io;
-                }
-            }
 
-            document.close();
+                    try {
+                        final PdfReader reader = new PdfReader(
+                                new FileInputStream(new File(directory,
+                                pdfName)));
+                        for (int page = 1; page <= reader.getNumberOfPages();
+                                page++) {
+                            copy.addPage(copy.getImportedPage(reader, page));
+                        }
+                    } catch (DocumentException de) {
+                        LOG.error(pdfName, de);
+                        throw de;
+                    } catch (IOException io) {
+                        LOG.error(pdfName, io);
+                        throw io;
+                    }
+                }
+            } catch (DocumentException e) {
+                throw new PDFConversionException(e);
+            } catch (IOException e) {
+                throw new PDFConversionException(e);
+            } finally {
+                document.close();
+            }
         }
 
         return completePdf;
@@ -118,24 +123,38 @@ public class PdfConverterImpl implements PdfConverter {
      */
     @Override
     public int convertOdtToA4(File odtFile, File pdfFileA4,
-            OO2PdfConverter oo2pdfConverter) throws IOException,
-            DocumentException {
+            OO2PdfConverter oo2pdfConverter) {
         LOG.debug("Create DinA4-PDF");
 
-        File tempPdf = File.createTempFile(FilenameUtils.getBaseName(pdfFileA4
-                .getName()), ".pdf");
-        FileUtils.deleteQuietly(tempPdf);
-        oo2pdfConverter.convert(odtFile, tempPdf);
+        final int result;
+        try {
+            File tempPdf = File.createTempFile(FilenameUtils.getBaseName(
+                    pdfFileA4.getName()), ".pdf");
+            FileUtils.deleteQuietly(tempPdf);
+            oo2pdfConverter.convert(odtFile, tempPdf);
 
-        PdfReader reader = new PdfReader(new FileInputStream(tempPdf));
-        makeCleanPdfA(reader, pdfFileA4);
-        FileUtils.deleteQuietly(tempPdf);
-        return reader.getNumberOfPages();
+            PdfReader reader = new PdfReader(new FileInputStream(tempPdf));
+            makeCleanPdfA(reader, pdfFileA4);
+            FileUtils.deleteQuietly(tempPdf);
+            result = reader.getNumberOfPages();
+        } catch (DocumentException e) {
+            throw new PDFConversionException(e);
+        } catch (IOException e) {
+            throw new PDFConversionException(e);
+        }
+
+        return result;
     }
 
+    /**
+     * Makes a clean PDF-A-File.
+     * @param reader a pdfreader
+     * @param pdfFileA4 the filename for the pdf-a-output.
+     * @throws IOException io-trouble or file doesn't exist.
+     * @throws DocumentException problems in itext.
+     */
     private void makeCleanPdfA(PdfReader reader, File pdfFileA4)
-            throws IOException, FileNotFoundException, DocumentException,
-            BadPdfFormatException {
+            throws IOException, DocumentException {
         Document document = new Document();
         PdfCopy copy = new PdfCopy(document, new FileOutputStream(pdfFileA4));
         copy.setPDFXConformance(PdfWriter.PDFA1B);
@@ -155,43 +174,52 @@ public class PdfConverterImpl implements PdfConverter {
      */
     @Override
     public void convertA4ToA3(File sourcePdfFileA4, File targetPdfFileA3,
-            File targetPdfFileA4) throws DocumentException, IOException {
-        LOG.debug("Erstelle DinA3-PDF");
+            File targetPdfFileA4) {
+        LOG.debug("Create DinA3-PDF");
 
-        // we create a reader for a certain document
-        PdfReader reader = new PdfReader(new FileInputStream(sourcePdfFileA4));
-        // we retrieve the total number of pages
-        final int pageNrs = reader.getNumberOfPages();
-        switch (pageNrs) {
-        case 4:
-            createA3Subdocument(reader, targetPdfFileA3, 4, 1, 2, 3);
-            break;
-        case 5:
-            createA3Subdocument(reader, targetPdfFileA3, 0, 1, 2, 0);
-            createA4Subdocument(reader, targetPdfFileA4, 3, 4);
-            break;
-        case 6:
-            createA3Subdocument(reader, targetPdfFileA3, 6, 1, 2, 5);
-            createA4Subdocument(reader, targetPdfFileA4, 3, 4);
-            break;
-        case 8:
-            createA3Subdocument(reader, targetPdfFileA3, 8, 1, 2, 7, 6, 3, 4,
-                    5);
-            break;
-        case 9:
-            createA3Subdocument(reader, targetPdfFileA3, 0, 1, 2, 9, 8, 3, 4,
-                    7);
-            createA4Subdocument(reader, targetPdfFileA4, 5, 6);
-            break;
-        case 10:
-            createA3Subdocument(reader, targetPdfFileA3, 10, 1, 2, 9, 8, 3, 4,
-                    7);
-            createA4Subdocument(reader, targetPdfFileA4, 5, 6);
-            break;
-        default:
-            LOG.warn(sourcePdfFileA4.getAbsolutePath() + " has not the right "
-                    + "number of pages " + reader.getNumberOfPages() + ".");
+        try {
+            // we create a reader for a certain document
+            PdfReader reader = new PdfReader(new FileInputStream(
+                    sourcePdfFileA4));
+            // we retrieve the total number of pages
+            final int pageNrs = reader.getNumberOfPages();
+            switch (pageNrs) {
+            case 4:
+                createA3Subdocument(reader, targetPdfFileA3, 4, 1, 2, 3);
+                break;
+            case 5:
+                createA3Subdocument(reader, targetPdfFileA3, 0, 1, 2, 0);
+                createA4Subdocument(reader, targetPdfFileA4, 3, 4);
+                break;
+            case 6:
+                createA3Subdocument(reader, targetPdfFileA3, 6, 1, 2, 5);
+                createA4Subdocument(reader, targetPdfFileA4, 3, 4);
+                break;
+            case 8:
+                createA3Subdocument(reader, targetPdfFileA3, 8, 1, 2, 7, 6, 3,
+                        4, 5);
+                break;
+            case 9:
+                createA3Subdocument(reader, targetPdfFileA3, 0, 1, 2, 9, 8, 3,
+                        4, 7);
+                createA4Subdocument(reader, targetPdfFileA4, 5, 6);
+                break;
+            case 10:
+                createA3Subdocument(reader, targetPdfFileA3, 10, 1, 2, 9, 8, 3,
+                        4, 7);
+                createA4Subdocument(reader, targetPdfFileA4, 5, 6);
+                break;
+            default:
+                LOG.warn(sourcePdfFileA4.getAbsolutePath()
+                        + " has not the right " + "number of pages " + reader
+                        .getNumberOfPages() + ".");
+            }
+        } catch (DocumentException e) {
+            throw new PDFConversionException(e);
+        } catch (IOException e) {
+            throw new PDFConversionException(e);
         }
+
     }
 
     /**
@@ -201,8 +229,8 @@ public class PdfConverterImpl implements PdfConverter {
      * @param pages page-numbers in the order they will placed the paper in the
      * order left, right-side must be a multiple of 4. 0 is interpreted as an
      * empty-page.
-     * @throws DocumentException
-     * @throws IOException
+     * @throws DocumentException problems in iText.
+     * @throws IOException io-problems.
      */
     private void createA3Subdocument(PdfReader reader, File pdfFileA3,
             int... pages) throws DocumentException, IOException {
