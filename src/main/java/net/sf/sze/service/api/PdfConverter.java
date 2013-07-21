@@ -6,8 +6,6 @@ package net.sf.sze.service.api;
 
 import com.lowagie.text.DocumentException;
 
-import net.sf.sze.service.impl.PdfConverterImpl;
-
 import java.io.File;
 import java.io.IOException;
 

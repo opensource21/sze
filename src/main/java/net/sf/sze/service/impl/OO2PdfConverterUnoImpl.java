@@ -13,7 +13,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.io.IOException;
 
 //import com.sun.star.beans.PropertyValue;
 //import com.sun.star.comp.helper.Bootstrap;
@@ -59,11 +58,11 @@ public class OO2PdfConverterUnoImpl implements OO2PdfConverter {
      * @param args argumente.
      */
     public static void main(String[] args) {
-        File sourceFile = new File(
+        final File sourceFile = new File(
                 "D:\\sandboxes\\schule_ppi\\sze\\oofiles\\templates\\fsn.odt");
-        File outputFile = new File(
+        final File outputFile = new File(
                 "D:\\sandboxes\\schule_ppi\\sze\\pdffiles\\fsn.pdf");
-        OO2PdfConverter unoC = new OO2PdfConverterUnoImpl();
+        final OO2PdfConverter unoC = new OO2PdfConverterUnoImpl();
         unoC.convert(sourceFile, outputFile);
         System.exit(0);
     }

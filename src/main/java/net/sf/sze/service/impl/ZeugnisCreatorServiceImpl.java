@@ -4,8 +4,6 @@
 
 package net.sf.sze.service.impl;
 
-import com.lowagie.text.DocumentException;
-
 import net.sf.jooreports.templates.DocumentTemplate;
 import net.sf.jooreports.templates.DocumentTemplateException;
 import net.sf.jooreports.templates.ZippedDocumentTemplate;
@@ -26,7 +24,6 @@ import net.sf.sze.oo.SzeContentWrapper;
 import net.sf.sze.service.api.OO2PdfConverter;
 import net.sf.sze.service.api.PdfConverter;
 import net.sf.sze.service.api.ZeugnisCreatorService;
-import net.sf.sze.service.api.ZeugnisCreatorService.ODTConversionException;
 import net.sf.sze.util.ResultContainer;
 import net.sf.sze.util.VariableUtility;
 
@@ -63,7 +60,10 @@ import javax.annotation.Resource;
 public class ZeugnisCreatorServiceImpl implements InitializingBean,
         DisposableBean, ZeugnisCreatorService {
 
-    private static final Logger log = LoggerFactory.getLogger(
+    /**
+     * Die Log-Instanz.
+     */
+    private static final Logger LOG = LoggerFactory.getLogger(
             ZeugnisCreatorServiceImpl.class);
 
     @Value("${createPDF}")
@@ -76,7 +76,7 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
     private String ooExecutableString;
 
     @Value("${ooPort}")
-    private int ooPort = 8100;
+    private final int ooPort = 8100;
 
     @Value("${ooEnv}")
     private boolean ooEnv;
@@ -133,7 +133,7 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
 
     @Override
     public void afterPropertiesSet() {
-        log.info("PDF-Erstellung aktiv = {}", createPdf);
+        LOG.info("PDF-Erstellung aktiv = {}", Boolean.valueOf(createPdf));
 
         if (createPdf) {
             if ("SERVICE".equals(converter)) {
@@ -167,7 +167,7 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
             }
 
             oo2pdfConverter.init();
-            log.info("Init PDF-Creation mit  {}", converter);
+            LOG.info("Init PDF-Creation mit  {}", converter);
         }
 
         odtOutputBaseDir = new File(odtOutputDir);
@@ -189,27 +189,27 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
     @Override
     public ResultContainer createAllZeugnisse() {
         final ResultContainer result = new ResultContainer();
-        log.info("Erstelle alle Zeugnisse.");
+        LOG.info("Erstelle alle Zeugnisse.");
 
         final Set<Klasse> klassen = new HashSet<Klasse>();
         final List<Schulhalbjahr> halbjahre = schulhalbjahrDao
                 .findAllBySelectable(true);
-        for (Schulhalbjahr halbjahr : halbjahre) {
+        for (final Schulhalbjahr halbjahr : halbjahre) {
             final List<Zeugnis> zeugnisse = zeugnisDao.findAllBySchulhalbjahr(
                     halbjahr);
-            for (Zeugnis zeugnis : zeugnisse) {
+            for (final Zeugnis zeugnis : zeugnisse) {
                 try {
                     createZeugnis(zeugnis);
                     klassen.add(zeugnis.getKlasse());
                     result.addMessage(zeugnis + " wurde erstellt.");
-                } catch (Exception e) {
-                    log.error("Fehler beim drucken des Zeugnisses " + zeugnis);
+                } catch (final Exception e) {
+                    LOG.error("Fehler beim drucken des Zeugnisses " + zeugnis);
                 }
             }
         }
 
-        for (Schulhalbjahr halbjahr : halbjahre) {
-            for (Klasse klasse : klassen) {
+        for (final Schulhalbjahr halbjahr : halbjahre) {
+            for (final Klasse klasse : klassen) {
                 createCompletePdfs(halbjahr, klasse);
             }
         }
@@ -224,7 +224,7 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
     public File createZeugnisse(Schulhalbjahr halbjahr, Klasse klasse) {
         final List<Zeugnis> zeugnisse = zeugnisDao
                 .findAllBySchulhalbjahrAndKlasse(halbjahr, klasse);
-        for (Zeugnis zeugnis : zeugnisse) {
+        for (final Zeugnis zeugnis : zeugnisse) {
             createZeugnis(zeugnis);
         }
 
@@ -289,7 +289,7 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
                 + baseFileName + ".pdf");
         prepareOutput(pdfPrintOutputDir, zeugnisPdfPrintA3Datei,
                 zeugnisPdfPrintA4Datei);
-        log.debug("Beginne Zeugnisdaten zusammenzustellen");
+        LOG.debug("Beginne Zeugnisdaten zusammenzustellen");
 
         final Map<String, Object> zeugnisDaten = new HashMap<>();
         zeugnisDaten.put("PLATZHALTER_LEER", VariableUtility.PLATZHALTER_LEER);
@@ -297,7 +297,7 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
         final Map<String, Object> emptyMap = new HashMap<>();
 
         final Iterable<Schulfach> schulfaecher = schulfachDao.findAll();
-        for (Schulfach schulfach : schulfaecher) {
+        for (final Schulfach schulfach : schulfaecher) {
             zeugnisDaten.put("bw_" + schulfach.technicalName(), VariableUtility
                     .PLATZHALTER_LEER);
             zeugnisDaten.put("bw_" + schulfach.technicalName() + "_tg", "");
@@ -357,7 +357,7 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
             final File odtDatei;
             if (zeugnisOdtManualDatei.exists()) {
                 odtDatei = zeugnisOdtManualDatei;
-                log.info("Konvertiere korrigierte Datei " + odtDatei
+                LOG.info("Konvertiere korrigierte Datei " + odtDatei
                         .getAbsolutePath());
             } else {
                 odtDatei = zeugnisOdtDatei;
@@ -372,7 +372,7 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
                     zeugnisPdfPrintA3Datei, zeugnisPdfPrintA4Datei);
         }
 
-        log.debug("Zeugnis erstellt.");
+        LOG.debug("Zeugnis erstellt.");
         return result;
     }
 
@@ -381,7 +381,7 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
         int i = 0;
         Collections.sort(zeugnis.getBewertungen());
 
-        for (Bewertung bewertung : zeugnis.getBewertungen()) {
+        for (final Bewertung bewertung : zeugnis.getBewertungen()) {
             if (bewertung.getRelevant() && (bewertung.getSchulfach().getTyp()
                     == Schulfachtyp.WAHLPFLICHT)) {
                 i++;
@@ -401,7 +401,7 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
                 .calculateKlasssenstufenHalbjahresIndex();
         final Map<String, Object> emptyMap = new HashMap<>();
         final Iterable<Schulfach> faecher = schulfachDao.findAll();
-        for (Schulfach schulfach : faecher) {
+        for (final Schulfach schulfach : faecher) {
             emptyMap.put("bw_" + schulfach.technicalName() + "", "");
             emptyMap.put("bw_" + schulfach.technicalName() + "_tg", "");
         }
@@ -416,12 +416,12 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
         final List<Zeugnis> oldZeugnisse = zeugnisDao
                 .findAllBySchuelerOrderBySchulhalbjahrAsc(schueler);
         // Historische Daten für Wahlpflicht
-        for (Zeugnis oldZeugnis : oldZeugnisse) {
+        for (final Zeugnis oldZeugnis : oldZeugnisse) {
             final Map<String, Object> bewertungMap = new HashMap<>();
             bewertungMap.putAll(emptyMap);
 
             final List<Bewertung> bewertungen = oldZeugnis.getBewertungen();
-            for (Bewertung bw : bewertungen) {
+            for (final Bewertung bw : bewertungen) {
                 // TODO bauen bw.toPrintMap(bewertungMap, noteAlsTextDarstellen);
             }
 
@@ -449,11 +449,11 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
     private void getSchulfachDetailInfo(ZeugnisFormular zeugnisFormular,
             Map<String, Object> printMap) {
         final Iterable<Schulfach> faecher = schulfachDao.findAll();
-        for (Schulfach schulfach : faecher) {
+        for (final Schulfach schulfach : faecher) {
             printMap.put("" + schulfach.technicalName() + "_detailInfo", "");
         }
 
-        for (SchulfachDetailInfo detailInfo : zeugnisFormular
+        for (final SchulfachDetailInfo detailInfo : zeugnisFormular
                 .getSchulfachDetailInfos()) {
             printMap.put(detailInfo.getSchulfach().technicalName()
                     + "_detailInfo", detailInfo.getDetailInfo());
@@ -466,7 +466,7 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
      */
     @SuppressWarnings("unchecked")
     private void removeNullAndAddBlank(Map<String, Object> printMap) {
-        for (Map.Entry<String, Object> mapEntry : printMap.entrySet()) {
+        for (final Map.Entry<String, Object> mapEntry : printMap.entrySet()) {
             final String key = mapEntry.getKey();
             final Object value = mapEntry.getValue();
             if (value == null) {
@@ -492,7 +492,7 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
         final Map<String, String> nlValues = new HashMap<>();
         final Map<String, String> bsValues = new HashMap<>();
         final Map<String, String> nlbsValues = new HashMap<>();
-        for (Map.Entry<String, Object> mapEntry : printMap.entrySet()) {
+        for (final Map.Entry<String, Object> mapEntry : printMap.entrySet()) {
             final String key = mapEntry.getKey();
 
             if (mapEntry.getValue() instanceof String) {
@@ -525,7 +525,7 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
     private void prepareOutput(File outputDir, File... outputFiles) {
         if (!outputDir.exists()) {
             if (outputDir.mkdirs()) {
-                log.info(outputDir.getAbsolutePath() + " angelegt.");
+                LOG.info(outputDir.getAbsolutePath() + " angelegt.");
             } else {
                 // TODO niels besseres Exception-Handling.
                 throw new RuntimeException(new FileNotFoundException(outputDir
@@ -533,7 +533,7 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
             }
         }
 
-        for (File outputFile : outputFiles) {
+        for (final File outputFile : outputFiles) {
             if (outputFile.exists()) {
                 if (!outputFile.delete()) {
                     throw new IllegalStateException(outputFile
@@ -554,7 +554,7 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
      */
     public void createZeugnis(File templateFile, Map<String, Object> data,
             File odtFile) {
-        log.debug("Erstelle ODT-Datei");
+        LOG.debug("Erstelle ODT-Datei");
 
         try {
             if (templateFile.isDirectory() || !templateFile.exists()) {
@@ -567,18 +567,18 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
             }
 
             // InputStreams sind auch OK
-            DocumentTemplate template = new ZippedDocumentTemplate(
+            final DocumentTemplate template = new ZippedDocumentTemplate(
                     templateFile);
             try {
                 template.setContentWrapper(new SzeContentWrapper());
                 template.createDocument(data, new FileOutputStream(odtFile));
-            } catch (DocumentTemplateException dtE) {
+            } catch (final DocumentTemplateException dtE) {
                 logPrintMap(data, "");
                 throw dtE;
             }
-        } catch (DocumentTemplateException e) {
+        } catch (final DocumentTemplateException e) {
             throw new ODTConversionException(e);
-        } catch (IOException e) {
+        } catch (final IOException e) {
             throw new ODTConversionException(e);
         }
     }
@@ -593,13 +593,13 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
      */
     @SuppressWarnings("unchecked")
     private void logPrintMap(Map<String, Object> printMap, String praefix) {
-        for (Map.Entry<String, Object> mapEntry : printMap.entrySet()) {
+        for (final Map.Entry<String, Object> mapEntry : printMap.entrySet()) {
             final String key = mapEntry.getKey();
             final Object value = mapEntry.getValue();
             if (value instanceof Map) {
                 logPrintMap((Map<String, Object>) value, key + ".");
             } else {
-                log.info(praefix + key + " -> " + value);
+                LOG.info(praefix + key + " -> " + value);
             }
         }
     }

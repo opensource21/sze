@@ -4,8 +4,6 @@
 
 package net.sf.sze.service.api;
 
-import com.lowagie.text.DocumentException;
-
 import net.sf.jooreports.templates.DocumentTemplateException;
 import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.zeugnis.Schulhalbjahr;
@@ -28,7 +26,8 @@ public interface ZeugnisCreatorService {
      * @throws PDFConversionException if there problems with the conversion.
      * @throws ODTConversionException if there problems with the template-engine.
      */
-    ResultContainer createAllZeugnisse();
+    ResultContainer createAllZeugnisse() throws ODTConversionException,
+            PDFConversionException;
 
     /**
      * Erstellt die Zeugnisse fürs Schulhalbjahr und Klasse.
@@ -38,7 +37,8 @@ public interface ZeugnisCreatorService {
      * @throws PDFConversionException if there problems with the conversion.
      * @throws ODTConversionException if there problems with the template-engine.
      */
-    File createZeugnisse(Schulhalbjahr halbjahr, Klasse klasse);
+    File createZeugnisse(Schulhalbjahr halbjahr, Klasse klasse)
+            throws ODTConversionException, PDFConversionException;
 
     /**
      * Erstellt das Zeugnisdokument.
@@ -47,14 +47,15 @@ public interface ZeugnisCreatorService {
      * @throws PDFConversionException if there problems with the conversion.
      * @throws ODTConversionException if there problems with the template-engine.
      */
-    File createZeugnis(Zeugnis zeugnis);
+    File createZeugnis(Zeugnis zeugnis) throws ODTConversionException,
+            PDFConversionException;
 
     /**
      * {@link RuntimeException} in case of problems with the file-system
      * or an error in the template-engine @see {@link RuntimeException#getCause()}.
      *
      */
-    class ODTConversionException extends RuntimeException {
+    public class ODTConversionException extends RuntimeException {
 
         /**
          * Initiates an object.
