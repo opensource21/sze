@@ -5,6 +5,7 @@
 package net.sf.sze.service.impl;
 
 import net.sf.jooreports.templates.DocumentTemplate;
+import net.sf.jooreports.templates.DocumentTemplate.ContentWrapper;
 import net.sf.jooreports.templates.DocumentTemplateException;
 import net.sf.jooreports.templates.ZippedDocumentTemplate;
 import net.sf.sze.dao.api.zeugnis.SchulfachDao;
@@ -20,7 +21,6 @@ import net.sf.sze.model.zeugnis.Schulfachtyp;
 import net.sf.sze.model.zeugnis.Schulhalbjahr;
 import net.sf.sze.model.zeugnis.Zeugnis;
 import net.sf.sze.model.zeugnis.ZeugnisFormular;
-import net.sf.sze.oo.SzeContentWrapper;
 import net.sf.sze.service.api.OO2PdfConverter;
 import net.sf.sze.service.api.PdfConverter;
 import net.sf.sze.service.api.ZeugnisCreatorService;
@@ -37,6 +37,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -303,7 +304,8 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
             zeugnisDaten.put("bw_" + schulfach.technicalName() + "_tg", "");
         }
 
-        // TODO bauen zeugnis.toPrintMap(zeugnisDaten);
+        zeugnis.toPrintMap(zeugnisDaten);
+
         final boolean noteAlsTextDarstellen = zeugnis.getZeugnisArt()
                 .getNoteAlsTextDarstellen().booleanValue();
         for (int hj = 1; hj < 3; hj++) {
@@ -387,15 +389,16 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
                 i++;
                 zeugnisDaten.put("wp" + hj + "_" + i + "_name", bewertung
                         .getSchulfach().getName());
-                zeugnisDaten.put("wp" + hj + "_" + i + "_note", null);
-                // TODO bauen statt null bewertung.toPrintMap(new HashMap<>(), noteAlsTextDarstellen));
+                zeugnisDaten.put("wp" + hj + "_" + i + "_note", bewertung
+                        .createPrintText(noteAlsTextDarstellen));
             }
         }
     }
 
     private void fillHistoricalData(Zeugnis zeugnis, Map<String,
             Object> zeugnisDaten, boolean noteAlsTextDarstellen) {
-        // Fülle für alle möglichen Jahrgänge die Schulfächer (Wahlpflicht würde reichen, aber das spielt keine Rolle.)
+        // Fülle für alle möglichen Jahrgänge die Schulfächer
+        // (Wahlpflicht würde reichen, aber das spielt keine Rolle.)
         final Schueler schueler = zeugnis.getSchueler();
         final int currentKlassenStufenIndex = zeugnis
                 .calculateKlasssenstufenHalbjahresIndex();
@@ -497,7 +500,7 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
 
             if (mapEntry.getValue() instanceof String) {
                 final String value = (String) mapEntry.getValue();
-                if (value != null) { // TODO evtl. ist if (value) eher contains information. Null kann es hier jedenfalls nicht sein.
+                if (StringUtils.hasLength(value)) {
                     nlValues.put(key, "" + value + "\n");
                 } else {
                     nlValues.put(key, value);
@@ -527,7 +530,7 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
             if (outputDir.mkdirs()) {
                 LOG.info(outputDir.getAbsolutePath() + " angelegt.");
             } else {
-                // TODO niels besseres Exception-Handling.
+                // NICE besseres Exception-Handling.
                 throw new RuntimeException(new FileNotFoundException(outputDir
                         .getAbsolutePath() + " konnte nicht angelegt werden."));
             }
@@ -656,4 +659,23 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
 //      """
 //
 //  }
+
+    /**
+     * Content Wrapper der auch \t durch Tab ersetzt.
+     * @author niels
+     *
+     */
+    private static final class SzeContentWrapper implements ContentWrapper {
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public String wrapContent(String content) {
+            return "[#ftl]\n"
+                    + "[#escape any as any?xml?replace(\"\\n\",\"<text:"
+                    + "line-break />\")?replace(\"\\t\",\"<text:tab/>\")]\n"
+                    + content + "[/#escape]";
+        }
+    }
 }

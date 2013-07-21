@@ -5,6 +5,7 @@
 package net.sf.sze.model.zeugnis;
 
 import de.ppi.jpa.helper.VersionedModel;
+
 import net.sf.oval.constraint.Size;
 import net.sf.sze.constraints.ValidVariableText;
 import net.sf.sze.model.stammdaten.Klasse;
@@ -14,11 +15,18 @@ import net.sf.sze.util.VariableUtility;
 
 import org.apache.commons.lang.builder.CompareToBuilder;
 
+import org.springframework.util.StringUtils;
+
 import java.io.Serializable;
+
+import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -110,12 +118,10 @@ public class Zeugnis extends VersionedModel implements Serializable,
 
     /** The klassen ziel gefaehrdet. */
     @Column(name = "klassen_ziel_gefaehrdet", nullable = false)
-
     private Boolean klassenZielGefaehrdet = Boolean.FALSE;
 
     /** The klassen ziel ausgeschlossen. */
     @Column(name = "klassen_ziel_ausgeschlossen", nullable = false)
-
     private Boolean klassenZielAusgeschlossen = Boolean.FALSE;
 
     // bi-directional many-to-one association to AgBewertung
@@ -709,123 +715,166 @@ public class Zeugnis extends VersionedModel implements Serializable,
                 .getJahr()) + " " + schueler;
     }
 
-    // TODO toPrintMap elegant implementieren, evtl BeanWrapper?.
-//  String toPrintMap(final Map<String, String> printMap) {
-//      //Schuler, ergänzen
-//      schueler.toPrintMap(printMap)
-//      //Klasse ergänzen
-//      printMap['klasse'] = klasse.calculateKlassenname(schulhalbjahr.jahr)
-//      //schulhalbjahr
-//      schulhalbjahr.toPrintMap(printMap)
-//      //formular
-//      final formatter = new SimpleDateFormat('dd.MM.yyyy', Locale.GERMANY);
-//      printMap['titel'] = zeugnisArt.titel
-//      printMap['abschlussGrad'] = zeugnisArt.abschlussGrad
-//
-//      if (individuellerLeitspruch) {
-//          printMap['leitspruch'] = individuellerLeitspruch
-//      } else {
-//          printMap['leitspruch'] = formular.leitspruch
-//      }
-//
-//      if (quelleIndividuellerLeitspruch) {
-//          printMap['quelleLeitspruch'] = quelleIndividuellerLeitspruch
-//      } else {
-//          printMap['quelleLeitspruch'] = formular.quelleLeitspruch
-//      }
-//
-//
-//      if (individuellerLeitspruch2) {
-//          printMap['leitspruch2'] = individuellerLeitspruch2
-//      } else {
-//          printMap['leitspruch2'] = formular.leitspruch2
-//      }
-//
-//      if (quelleIndividuellerLeitspruch2) {
-//          printMap['quelleLeitspruch2'] = quelleIndividuellerLeitspruch2
-//      } else {
-//          printMap['quelleLeitspruch2'] = formular.quelleLeitspruch2
-//      }
-//
-//      if (individuellesAusgabeDatum) {
-//          printMap['ausgabeDatum'] = formatter.format(individuellesAusgabeDatum)
-//      } else {
-//          printMap['ausgabeDatum'] = formatter.format(formular.ausgabeDatum)
-//      }
-//      printMap['arbeitsgruppen']=createArbeitsgruppenSatz()
-//      printMap['anzahlFehltageGesamt'] = dayToString(anzahlFehltageGesamt)
-//      printMap['anzahlFehltageUnentschuldigt'] = dayToString(anzahlFehltageUnentschuldigt)
-//      printMap['anzahlVerspaetungen'] = (anzahlVerspaetungen==0)?
-//    VariableUtility.PLATZHALTER_LEER:"${anzahlVerspaetungen}";
-//      def versetzungsBemerkung = ""
-//      if (schulhalbjahr.halbjahr==Halbjahr.Beide_Halbjahre) {
-//          if (klassenZielWurdeNichtErreicht) {
-//              versetzungsBemerkung = "Das Klassenziel wurde nicht erreicht. "
-//          }
-//          if (ruecktAuf && zeugnisArt.printVersetzungsbemerkung) {
-//              def nextKlassenstufe = klasse.calculateKlassenstufe(schulhalbjahr.jahr) +1
-//              versetzungsBemerkung = versetzungsBemerkung +
-//    "${schueler.vorname} r\u00fcckt auf in Klasse ${nextKlassenstufe}. "
-//          }
-//      } else {
-//          if (klassenZielGefaehrdet) {
-//              versetzungsBemerkung = "Das Erreichen des Klassenziels ist gef\u00e4hrdet. "
-//          }
-//          if (klassenZielAusgeschlossen) {
-//              versetzungsBemerkung = "Das Erreichen des Klassenziels erscheint ausgeschlossen. "
-//          }
-//      }
-//      printMap['bemerkung_versetzung'] = versetzungsBemerkung;
-//      printMap['buBewertungsText'] = VariableUtility.createPrintText(
-//              buBewertungsText?:VariableUtility.PLATZHALTER_LEER,
-//    schueler.rufname, schueler.vorname, schueler.geschlecht,
-//              formular.nachteilsAusgleichsDatum, false, printMap['shj_jahr'])
-//      printMap['soLBewertungsTextFix'] = soLBewertungsText?.text?:VariableUtility.PLATZHALTER_LEER
-//      def schwachAusreichendFaecher = []
-//      bewertungen.sort().each{Bewertung bw ->
-//          bw.toPrintMap(printMap, zeugnisArt.noteAlsTextDarstellen)
-//          if (bw.leistungNurSchwachAusreichend) {
-//              schwachAusreichendFaecher << bw.schulfach.name
-//          }
-//      }
-//      avSvBewertungen.each{it.toPrintMap(printMap)}
-//      def schwachausreichendBemerkung
-//      switch (schwachAusreichendFaecher.size()) {
-//      case 0:
-//          //Keine Bemerkung nötig
-//          schwachausreichendBemerkung = ""
-//          break;
-//      case 1:
-//          schwachausreichendBemerkung = "Die Leistungen im Fach " +
-//                  "${schwachAusreichendFaecher[0]} waren nur schwach ausreichend. "
-//          break;
-//      default:
-//          schwachausreichendBemerkung = "Die Leistungen in den Fächern " +
-//                  "${schwachAusreichendFaecher[0..-2].join(', ')} und " +
-//                  "${schwachAusreichendFaecher[-1]} waren nur schwach ausreichend. "
-//      }
-//      printMap['bemerkung_schwachausreichend'] = schwachausreichendBemerkung
-//      StringBuffer allgemeineBemerkungen = new StringBuffer("")
-//      bemerkungen?.sort()?.each {Bemerkung aBemerkung ->
-//          allgemeineBemerkungen.append(aBemerkung.createPrintText(schueler,
-//                  formular.nachteilsAusgleichsDatum, printMap['shj_jahr']))
-//      }
-//      printMap['bemerkung_allgemein'] = allgemeineBemerkungen.toString()
-//      StringBuffer schulamtsBemerkungsText = new StringBuffer("")
-//      schulamtsBemerkungen?.sort()?.each {aBemerkung ->
-//          schulamtsBemerkungsText.append(aBemerkung.createPrintText(schueler,
-//                  null, printMap['shj_jahr'])).append(' ')
-//      }
-//      printMap['bemerkung_schulamt'] = schulamtsBemerkungsText.toString()
-//    ?:VariableUtility.PLATZHALTER_LEER
-//  }
+    /**
+     * Füllt die Zeugnisdaten in die Map.
+     * @param printMap die Map die die Daten enthält.
+     */
+    public void toPrintMap(final Map<String, Object> printMap) {
+        // Schuler, ergänzen
+        // TODO implementieren schueler.toPrintMap(printMap);
+        // Klasse ergänzen
+        printMap.put("klasse", klasse.calculateKlassenname(schulhalbjahr
+                .getJahr()));
+
+        // schulhalbjahr
+        // TODO bauen schulhalbjahr.toPrintMap(printMap);
+        // formular
+        final SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy",
+                Locale.GERMANY);
+        printMap.put("titel", zeugnisArt.getTitel());
+        printMap.put("abschlussGrad", zeugnisArt.getAbschlussGrad());
+
+        if (StringUtils.hasText(individuellerLeitspruch)) {
+            printMap.put("leitspruch", individuellerLeitspruch);
+        } else {
+            printMap.put("leitspruch", formular.getLeitspruch());
+        }
+
+        if (StringUtils.hasText(quelleIndividuellerLeitspruch)) {
+            printMap.put("quelleLeitspruch", quelleIndividuellerLeitspruch);
+        } else {
+            printMap.put("quelleLeitspruch", formular.getQuelleLeitspruch());
+        }
+
+        if (StringUtils.hasText(individuellerLeitspruch2)) {
+            printMap.put("leitspruch2", individuellerLeitspruch2);
+        } else {
+            printMap.put("leitspruch2", formular.getLeitspruch2());
+        }
+
+        if (StringUtils.hasText(quelleIndividuellerLeitspruch2)) {
+            printMap.put("quelleLeitspruch2", quelleIndividuellerLeitspruch2);
+        } else {
+            printMap.put("quelleLeitspruch2", formular.getQuelleLeitspruch2());
+        }
+
+        if (individuellesAusgabeDatum != null) {
+            printMap.put("ausgabeDatum", formatter.format(
+                    individuellesAusgabeDatum));
+        } else {
+            printMap.put("ausgabeDatum", formatter.format(formular
+                    .getAusgabeDatum()));
+        }
+
+        printMap.put("arbeitsgruppen", createArbeitsgruppenSatz());
+        printMap.put("anzahlFehltageGesamt", dayToString(anzahlFehltageGesamt));
+        printMap.put("anzahlFehltageUnentschuldigt", dayToString(
+                anzahlFehltageUnentschuldigt));
+        printMap.put("anzahlVerspaetungen", ((anzahlVerspaetungen == null)
+                || (anzahlVerspaetungen.intValue() == 0)) ? VariableUtility
+                .PLATZHALTER_LEER : anzahlVerspaetungen.toString());
+
+        String versetzungsBemerkung = "";
+        if (schulhalbjahr.getHalbjahr() == Halbjahr.Beide_Halbjahre) {
+            if (klassenZielWurdeNichtErreicht.booleanValue()) {
+                versetzungsBemerkung = "Das Klassenziel wurde nicht erreicht. ";
+            }
+
+            if (ruecktAuf.booleanValue() && zeugnisArt
+                    .getPrintVersetzungsbemerkung().booleanValue()) {
+                int nextKlassenstufe = klasse.calculateKlassenstufe(
+                        schulhalbjahr.getJahr()) + 1;
+                versetzungsBemerkung = versetzungsBemerkung + schueler
+                        .getVorname() + " r\u00fcckt auf in Klasse "
+                        + nextKlassenstufe + ". ";
+            }
+        } else {
+            if (klassenZielGefaehrdet.booleanValue()) {
+                versetzungsBemerkung =
+                        "Das Erreichen des Klassenziels ist gef\u00e4hrdet. ";
+            }
+
+            if (klassenZielAusgeschlossen.booleanValue()) {
+                versetzungsBemerkung =
+                        "Das Erreichen des Klassenziels erscheint ausgeschlossen. ";
+            }
+        }
+
+        printMap.put("bemerkung_versetzung", versetzungsBemerkung);
+        printMap.put("buBewertungsText", VariableUtility.createPrintText(
+                StringUtils.hasLength(buBewertungsText) ? buBewertungsText
+                : VariableUtility.PLATZHALTER_LEER, schueler, formular
+                .getNachteilsAusgleichsDatum(), false, (String) printMap.get(
+                "shj_jahr")));
+        printMap.put("soLBewertungsTextFix", StringUtils.hasLength(
+                soLBewertungsText.getText()) ? soLBewertungsText.getText()
+                : VariableUtility.PLATZHALTER_LEER);
+
+        final List<String> schwachAusreichendFaecher = new ArrayList<String>();
+        for (Bewertung bw : bewertungen) {
+            bw.toPrintMap(printMap, zeugnisArt.getNoteAlsTextDarstellen()
+                    .booleanValue());
+
+            if (bw.getLeistungNurSchwachAusreichend().booleanValue()) {
+                schwachAusreichendFaecher.add(bw.getSchulfach().getName());
+            }
+        }
+
+        for (AvSvBewertung avSvBewertung : avSvBewertungen) {
+            // TODO bauen avSvBewertung.toPrintMap(printMap);
+        }
+
+        String schwachausreichendBemerkung;
+        switch (schwachAusreichendFaecher.size()) {
+        case 0:
+            // Keine Bemerkung nötig
+            schwachausreichendBemerkung = "";
+            break;
+        case 1:
+            schwachausreichendBemerkung = "Die Leistungen im Fach "
+                    + schwachAusreichendFaecher.get(0)
+                    + " waren nur schwach ausreichend. ";
+            break;
+        default:
+            final String lastAusreichendFach = schwachAusreichendFaecher.remove(
+                    schwachAusreichendFaecher.size() - 1);
+            schwachausreichendBemerkung = "Die Leistungen in den Fächern "
+                    + StringUtils.collectionToDelimitedString(
+                    schwachAusreichendFaecher, ", ") + " und "
+                    + lastAusreichendFach + " waren nur schwach ausreichend. ";
+        }
+
+        printMap.put("bemerkung_schwachausreichend",
+                schwachausreichendBemerkung);
+
+        final StringBuffer allgemeineBemerkungen = new StringBuffer("");
+        for (Bemerkung aBemerkung : bemerkungen) {
+            allgemeineBemerkungen.append(aBemerkung.createPrintText(schueler,
+                    formular.getNachteilsAusgleichsDatum(), (String) printMap
+                    .get("shj_jahr")));
+        }
+
+        printMap.put("bemerkung_allgemein", allgemeineBemerkungen.toString());
+
+        StringBuffer schulamtsBemerkungsText = new StringBuffer("");
+        Collections.sort(schulamtsBemerkungen);
+
+        for (SchulamtsBemerkung aBemerkung : schulamtsBemerkungen) {
+            schulamtsBemerkungsText.append(aBemerkung.createPrintText(schueler,
+                    null, (String) printMap.get("shj_jahr"))).append(" ");
+        }
+
+        printMap.put("bemerkung_schulamt", StringUtils.hasLength(
+                schulamtsBemerkungsText) ? schulamtsBemerkungsText.toString()
+                : VariableUtility.PLATZHALTER_LEER);
+    }
 
     /**
      * Wandelt die Anzahl an Tage in Textform.
      * @param day die Anzahl an Tage.
      * @return die Anzahl an Tage in Textform.
      */
-    private String dayToString(final Long day) {
+    private String dayToString(final Integer day) {
         if (day == null) {
             return VariableUtility.PLATZHALTER_LEER;
         } else if (day.longValue() == 1) {

@@ -5,6 +5,7 @@
 package net.sf.sze.util;
 
 import net.sf.sze.model.stammdaten.Geschlecht;
+import net.sf.sze.model.stammdaten.Schueler;
 
 import java.text.SimpleDateFormat;
 
@@ -64,6 +65,24 @@ public final class VariableUtility {
         }
 
         return unknownVariables;
+    }
+
+    /**
+     * Erzeugt den Text für den Druck in dem die Variablen ersetzt werden.
+     * @param text der Text
+     * @param schueler der Schüler
+     * @param datum das aktuelle Datum
+     * @param erSieStattNamenRule true wenn er oder sie statt dem Namen
+     * genommen werden soll.
+     * @param schuljahr das Schuljahr
+     * @return der Text für den Druck.
+     */
+    public static String createPrintText(final String text, Schueler schueler,
+            final Date datum, final boolean erSieStattNamenRule,
+            final String schuljahr) {
+        return createPrintText(text, schueler.getRufname(), schueler
+                .getVorname(), schueler.getName(), schueler.getGeschlecht(),
+                datum, erSieStattNamenRule, schuljahr);
     }
 
     /**

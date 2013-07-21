@@ -62,15 +62,16 @@ public class Bewertung extends VersionedModel implements Serializable,
 
     // TODO GUI einschränken auf den Bereich 1-6 in GUI, kein DB-Constraint, da ABI 1-15
 
-    public static final Map<Long, String> textMap = new HashMap<Long, String>();
+    private static final Map<Long, String> TEXT_MAP = new HashMap<Long,
+            String>();
 
     static {
-        textMap.put(Long.valueOf(1), "sehr gut");
-        textMap.put(Long.valueOf(2), "gut");
-        textMap.put(Long.valueOf(3), "befriedigend");
-        textMap.put(Long.valueOf(4), "ausreichend");
-        textMap.put(Long.valueOf(5), "mangelhaft");
-        textMap.put(Long.valueOf(6), "ungen\ufffdgend");
+        TEXT_MAP.put(Long.valueOf(1), "sehr gut");
+        TEXT_MAP.put(Long.valueOf(2), "gut");
+        TEXT_MAP.put(Long.valueOf(3), "befriedigend");
+        TEXT_MAP.put(Long.valueOf(4), "ausreichend");
+        TEXT_MAP.put(Long.valueOf(5), "mangelhaft");
+        TEXT_MAP.put(Long.valueOf(6), "ungen\ufffdgend");
     }
 
     /** The note. */
@@ -296,7 +297,20 @@ public class Bewertung extends VersionedModel implements Serializable,
      */
     public void toPrintMap(final Map<String, Object> printMap,
             final boolean noteAlsTextDarstellen) {
+        final String result = createPrintText(noteAlsTextDarstellen);
+        printMap.put("bw_" + schulfach.technicalName(), result);
+        printMap.put("bw_" + schulfach.technicalName() + "_tg", relevant
+                ? VariableUtility.PLATZHALTER_AUSGEWAEHLT : VariableUtility
+                .PLATZHALTER_LEER);
 
+    }
+
+    /**
+     * Stellt die Note in Textform für den Druck.
+     * @param noteAlsTextDarstellen Kennzeichen ob die Note texttuell dargestellt werden soll.
+     * @return die Note in Textform für den Druck.
+     */
+    public String createPrintText(final boolean noteAlsTextDarstellen) {
         String result;
         if (!relevant) {
             result = VariableUtility.PLATZHALTER_LEER;
@@ -305,7 +319,7 @@ public class Bewertung extends VersionedModel implements Serializable,
         } else {
             String noteAlsText;
             if (noteAlsTextDarstellen) {
-                noteAlsText = (note != null) ? textMap.get(note) : "?";
+                noteAlsText = (note != null) ? TEXT_MAP.get(note) : "?";
             } else {
                 noteAlsText = (note != null) ? note.toString() : "?";
             }
@@ -317,9 +331,6 @@ public class Bewertung extends VersionedModel implements Serializable,
             }
         }
 
-        printMap.put("bw_" + schulfach.technicalName(), result);
-        printMap.put("bw_" + schulfach.technicalName() + "_tg", relevant
-                ? VariableUtility.PLATZHALTER_AUSGEWAEHLT : VariableUtility
-                .PLATZHALTER_LEER);
+        return result;
     }
 }

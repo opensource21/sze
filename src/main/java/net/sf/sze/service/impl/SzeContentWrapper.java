@@ -5,7 +5,7 @@
 /**
  *
  */
-package net.sf.sze.oo;
+package net.sf.sze.service.impl;
 
 import net.sf.jooreports.templates.DocumentTemplate.ContentWrapper;
 
@@ -21,8 +21,8 @@ public class SzeContentWrapper implements ContentWrapper {
      */
     @Override
     public String wrapContent(String content) {
-        return "[#ftl]\n"
-                + "[#escape any as any?xml?replace(\"\\n\",\"<text:line-break />\")?replace(\"\\t\",\"<text:tab/>\")]\n"
+        return "[#ftl]\n" + "[#escape any as any?xml?replace(\"\\n\",\"<text:"
+                + "line-break />\")?replace(\"\\t\",\"<text:tab/>\")]\n"
                 + content + "[/#escape]";
     }
 }
