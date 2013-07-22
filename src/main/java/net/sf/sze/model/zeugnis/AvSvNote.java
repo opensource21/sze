@@ -83,4 +83,11 @@ public enum AvSvNote {
                     + " ist nicht zulässig.");
         }
     }
+
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
 }

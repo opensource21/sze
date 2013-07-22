@@ -727,7 +727,8 @@ public class Zeugnis extends VersionedModel implements Serializable,
                 .getJahr()));
 
         // schulhalbjahr
-        // TODO bauen schulhalbjahr.toPrintMap(printMap);
+        schulhalbjahr.toPrintMap(printMap);
+
         // formular
         final SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy",
                 Locale.GERMANY);
@@ -821,7 +822,7 @@ public class Zeugnis extends VersionedModel implements Serializable,
         }
 
         for (AvSvBewertung avSvBewertung : avSvBewertungen) {
-            // TODO bauen avSvBewertung.toPrintMap(printMap);
+            avSvBewertung.toPrintMap(printMap);
         }
 
         String schwachausreichendBemerkung;

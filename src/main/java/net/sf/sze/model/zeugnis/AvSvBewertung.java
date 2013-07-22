@@ -6,9 +6,13 @@ package net.sf.sze.model.zeugnis;
 
 import de.ppi.jpa.helper.VersionedModel;
 
+import net.sf.sze.util.VariableUtility;
+
 import org.apache.commons.lang.builder.CompareToBuilder;
 
 import java.io.Serializable;
+
+import java.util.Map;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -122,15 +126,19 @@ public class AvSvBewertung extends VersionedModel implements Serializable,
 
     }
 
-    // TODO toPrintMap elegant implementieren, evtl BeanWrapper?.
-//  def toPrintMap(final Map<String, String> printMap) {
-//      AvSvNote.values().each {note ->
-//          def result=""
-//          if (beurteilung == note) {
-//             result=VariableUtility.PLATZHALTER_AUSGEWAEHLT
-//          }
-//          printMap["avsvbw_${arbeitsUndSozialVerhalten.technicalName()}_${note.id}"] = result
-//      }
-//
-//  }
+    /**
+     * Schreibt die Daten in die Printmap.
+     * @param printMap die Printmap.
+     */
+    public void toPrintMap(final Map<String, Object> printMap) {
+        for (AvSvNote note : AvSvNote.values()) {
+            String result = "";
+            if (note.equals(beurteilung)) {
+                result = VariableUtility.PLATZHALTER_AUSGEWAEHLT;
+            }
+
+            printMap.put("avsvbw_" + arbeitsUndSozialVerhalten.technicalName()
+                    + "_" + note.getId(), result);
+        }
+    }
 }

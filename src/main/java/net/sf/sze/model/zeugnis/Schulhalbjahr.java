@@ -10,6 +10,8 @@ import org.apache.commons.lang.builder.CompareToBuilder;
 
 import java.io.Serializable;
 
+import java.util.Map;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -136,10 +138,17 @@ public class Schulhalbjahr extends VersionedModel implements Serializable,
         return compareBuilder.toComparison();
     }
 
-    // TODO toPrintMap elegant implementieren, evtl BeanWrapper?.
-//  String toPrintMap(Map<String, String> printMap) {
-//      printMap['shj_jahr'] = "${jahr-1}/${jahr.toString()[-2..-1]}";
-//      printMap['shj_halbjahr'] = "${halbjahr.toString()[0..-5]}";
-//      printMap['shj'] = this.toString();
-//  }
+    /**
+     * Schreibt die Daten in die Printmap.
+     * @param printMap die Printmap.
+     */
+    public void toPrintMap(Map<String, Object> printMap) {
+        printMap.put("shj_jahr", (jahr - 1) + "/" + Integer.toString(jahr)
+                .substring(2, 4));
+
+        final String halbjahrString = halbjahr.toString();
+        printMap.put("shj_halbjahr", halbjahrString.substring(0, halbjahrString
+                .length() - 4));
+        printMap.put("shj", this.toString());
+    }
 }
