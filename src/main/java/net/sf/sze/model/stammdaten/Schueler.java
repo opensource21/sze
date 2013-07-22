@@ -14,7 +14,10 @@ import org.apache.commons.lang.builder.CompareToBuilder;
 
 import java.io.Serializable;
 
+import java.text.SimpleDateFormat;
+
 import java.util.Date;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -27,6 +30,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import javax.swing.text.DateFormatter;
 
 /**
  * Ein Schüler einer Schule.
@@ -330,18 +335,16 @@ public class Schueler extends VersionedModel implements Serializable,
      * Schreibt die Daten in die Printmap.
      * @param printMap die Printmap.
      */
-    public void toPrintMap(final Map<String, String> printMap) {
-        final String[] simpleAttributes = {
-            "name", "vorname", "geburtsort", "nummer"
-        };
-        // TODO toPrintMap elegant implementieren, evtl BeanWrapper?.
-        for (final String attr : simpleAttributes) {
-            printMap.put("schueler_" + attr, "TODO"); // this."$attr"?:"";
-        }
-//      def dateAttributes = ["geburtstag", "aufnahmeDatum", "abgangsDatum"]
-//      final formatter = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMANY);
-//      dateAttributes.each{attr ->
-//          printMap["schueler_${attr}"] = this."$attr"?formatter.format(this."$attr"):""
-//      }
+    public void toPrintMap(final Map<String, Object> printMap) {
+        printMap.put("schueler_name", name);
+        printMap.put("schueler_vorname", vorname);
+        printMap.put("schueler_geburtsort", geburtsort);
+        printMap.put("schueler_nummer", nummer);
+
+        final SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy",
+                Locale.GERMANY);
+        printMap.put("schueler_geburtstag", formatter.format(geburtstag));
+        printMap.put("schueler_aufnahmeDatum", formatter.format(aufnahmeDatum));
+        printMap.put("schueler_abgangsDatum", formatter.format(abgangsDatum));
     }
 }

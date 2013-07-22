@@ -721,7 +721,7 @@ public class Zeugnis extends VersionedModel implements Serializable,
      */
     public void toPrintMap(final Map<String, Object> printMap) {
         // Schuler, ergänzen
-        // TODO implementieren schueler.toPrintMap(printMap);
+        schueler.toPrintMap(printMap);
         // Klasse ergänzen
         printMap.put("klasse", klasse.calculateKlassenname(schulhalbjahr
                 .getJahr()));
