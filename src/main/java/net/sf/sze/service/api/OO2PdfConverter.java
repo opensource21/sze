@@ -27,5 +27,5 @@ public interface OO2PdfConverter {
     /**
      * Die Verbindung wieder schließen.
      */
-    void destroy();
+    void closeConnection();
 }

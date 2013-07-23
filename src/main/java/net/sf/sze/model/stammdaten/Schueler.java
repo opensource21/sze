@@ -31,8 +31,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import javax.swing.text.DateFormatter;
-
 /**
  * Ein Schüler einer Schule.
  *

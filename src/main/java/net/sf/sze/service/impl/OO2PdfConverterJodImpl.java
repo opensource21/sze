@@ -101,7 +101,7 @@ public class OO2PdfConverterJodImpl implements OO2PdfConverter {
             log.error("Fehler beim Konvertieren von " + sourceFile
                     .getAbsolutePath() + " -> " + outputFile.getAbsolutePath(),
                     rE);
-            destroy();
+            closeConnection();
             convertInternal(sourceFile, outputFile);
         }
     }
@@ -116,14 +116,14 @@ public class OO2PdfConverterJodImpl implements OO2PdfConverter {
         Runtime.getRuntime().addShutdownHook(new Thread() {
             @Override
             public void run() {
-                destroy();
+                closeConnection();
             }
         });
         ensureStartedOpenOfficeService(true);
     }
 
     @Override
-    public void destroy() {
+    public void closeConnection() {
         log.info("Beende Verbindung zu OpenOffice");
         converter = null;
 
@@ -155,7 +155,7 @@ public class OO2PdfConverterJodImpl implements OO2PdfConverter {
                     "-accept=socket,host=127.0.0.1,port=" + ooPort + ";urp;",
                     "-nofirststartwizard" + environmentUrl);
             try {
-                destroy();
+                closeConnection();
                 log.info("Starte OO-Prozess. Init=" + init);
                 ooProcess = processBuilder.start();
                 // 10 Sekunden warten damit OO-Starten kann.

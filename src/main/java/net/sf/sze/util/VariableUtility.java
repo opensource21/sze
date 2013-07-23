@@ -80,33 +80,12 @@ public final class VariableUtility {
     public static String createPrintText(final String text, Schueler schueler,
             final Date datum, final boolean erSieStattNamenRule,
             final String schuljahr) {
-        return createPrintText(text, schueler.getRufname(), schueler
-                .getVorname(), schueler.getName(), schueler.getGeschlecht(),
-                datum, erSieStattNamenRule, schuljahr);
-    }
-
-    /**
-     * Erzeugt den Text für den Druck in dem die Variablen ersetzt werden.
-     * @param text der Text
-     * @param rufname der Rufname
-     * @param vorname der Vorname
-     * @param nachname der Nachname
-     * @param geschlecht das Geschlecht.
-     * @param datum das aktuelle Datum
-     * @param erSieStattNamenRule true wenn er oder sie statt dem Namen
-     * genommen werden soll.
-     * @param schuljahr das Schuljahr
-     * @return der Text für den Druck.
-     */
-    public static String createPrintText(final String text,
-            final String rufname, final String vorname, final String nachname,
-            final Geschlecht geschlecht, final Date datum,
-            final boolean erSieStattNamenRule, final String schuljahr) {
         if (!text.contains("@")) {
             return text;
         }
 
-        final String rufnameNotNull = (rufname != null) ? rufname : vorname;
+        final String rufnameNotNull = (schueler.getRufname() != null) ? schueler
+                .getRufname() : schueler.getVorname();
         final StringBuffer printText = new StringBuffer();
         boolean erSieStattNamen = erSieStattNamenRule;
         // Der Präfix muss davor, damit der erste Token nie eine Variable ist.
@@ -118,12 +97,12 @@ public final class VariableUtility {
                 if ("NAME".equals(token)) {
                     replacement = rufnameNotNull;
                 } else if ("name".equals(token)) {
-                    replacement = buildName(rufnameNotNull, geschlecht,
-                            erSieStattNamen, true);
+                    replacement = buildName(rufnameNotNull, schueler
+                            .getGeschlecht(), erSieStattNamen, true);
                     erSieStattNamen = true;
                 } else if ("Name".equals(token)) {
-                    replacement = buildName(rufnameNotNull, geschlecht,
-                            erSieStattNamen, false);
+                    replacement = buildName(rufnameNotNull, schueler
+                            .getGeschlecht(), erSieStattNamen, false);
                     erSieStattNamen = true;
                 } else if ("datum".equals(token)) {
                     if (datum != null) {
@@ -136,11 +115,12 @@ public final class VariableUtility {
                 } else if ("schuljahr".equals(token)) {
                     replacement = schuljahr;
                 } else if ("Vorname".equals(token)) {
-                    replacement = vorname;
+                    replacement = schueler.getVorname();
                 } else if ("Nachname".equals(token)) {
-                    replacement = nachname;
+                    replacement = schueler.getName();
                 } else if (token.contains("|")) {
-                    replacement = getGenderSpecificText(token, geschlecht);
+                    replacement = getGenderSpecificText(token, schueler
+                            .getGeschlecht());
                 } else {
                     throw new IllegalStateException(token + " is not allowed");
                 }

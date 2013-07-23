@@ -181,7 +181,7 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
      */
     @Override
     public void destroy() {
-        oo2pdfConverter.destroy();
+        oo2pdfConverter.closeConnection();
     }
 
     /**
@@ -294,8 +294,6 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
 
         final Map<String, Object> zeugnisDaten = new HashMap<>();
         zeugnisDaten.put("PLATZHALTER_LEER", VariableUtility.PLATZHALTER_LEER);
-
-        final Map<String, Object> emptyMap = new HashMap<>();
 
         final Iterable<Schulfach> schulfaecher = schulfachDao.findAll();
         for (final Schulfach schulfach : schulfaecher) {
@@ -506,8 +504,10 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
                     nlValues.put(key, value);
                 }
 
-                // assert "Erste Zeile\r\nZweite Zeile".replaceAll(/\r?\n/, "\t\n") == "Erste Zeile\t\nZweite Zeile"
-                // assert "Erste Zeile\nZweite Zeile".replaceAll(/\r?\n/, "\t\n") == "Erste Zeile\t\nZweite Zeile"
+                // assert "Erste Zeile\r\nZweite Zeile".replaceAll(/\r?\n/, "\t\n")
+                // == "Erste Zeile\t\nZweite Zeile"
+                // assert "Erste Zeile\nZweite Zeile".replaceAll(/\r?\n/, "\t\n")
+                // == "Erste Zeile\t\nZweite Zeile"
                 bsValues.put(key, value.replaceAll("\\r?\\n", "\t\n"));
                 nlbsValues.put(key, nlValues.get(key).replaceAll("\\r?\\n",
                         "\t\n"));

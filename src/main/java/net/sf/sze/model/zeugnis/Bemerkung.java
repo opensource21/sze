@@ -191,9 +191,8 @@ public class Bemerkung extends VersionedModel implements Serializable,
             final String schuljahr) {
         String text = StringUtil.containsInformation(freiText) ? freiText
                 : fixText;
-        text = VariableUtility.createPrintText(text, schueler.getRufname(),
-                schueler.getVorname(), schueler.getName(), schueler
-                .getGeschlecht(), datum, erSieStattNamen, schuljahr);
+        text = VariableUtility.createPrintText(text, schueler, datum,
+                erSieStattNamen, schuljahr);
 
         if (!text.endsWith("\n") && !text.endsWith(" ")) {
             text += " ";

@@ -257,8 +257,7 @@ public class SchulamtsBemerkung extends VersionedModel implements Serializable,
             text = fixText;
         }
 
-        return VariableUtility.createPrintText(text, schueler.getRufname(),
-                schueler.getVorname(), schueler.getName(), schueler
-                .getGeschlecht(), datum, erSieStattNamen, schuljahr);
+        return VariableUtility.createPrintText(text, schueler, datum,
+                erSieStattNamen, schuljahr);
     }
 }
