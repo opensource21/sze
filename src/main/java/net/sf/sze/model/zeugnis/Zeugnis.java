@@ -6,6 +6,8 @@ package net.sf.sze.model.zeugnis;
 
 import de.ppi.jpa.helper.VersionedModel;
 
+import net.sf.oval.constraint.CheckWith;
+import net.sf.oval.constraint.CheckWithCheck;
 import net.sf.oval.constraint.Size;
 import net.sf.sze.constraints.ValidVariableText;
 import net.sf.sze.model.stammdaten.Klasse;
@@ -83,18 +85,14 @@ public class Zeugnis extends VersionedModel implements Serializable,
     @ValidVariableText
     private String buBewertungsText = "";
 
-    /** The anzahl fehltage gesamt. */
-    // TODO 1 Validator anzahlFehltageGesamt-Constraint. "Die Anzahl der unentschuldigten Fehltage kann nicht gr\u00f6\u00dfer sein, als die Anzahl der Fehltage."
-//  if (value < obj.anzahlFehltageUnentschuldigt) {
-//      return 'zeugnis.formular.fehltageUnentschuldigtGtGesamt'
-//  }
+    /** Die Anzahl Fehltage Gesamt. */
     @Column(name = "anzahl_fehltage_gesamt", nullable = false)
-
+    @CheckWith(value = FehlTageCheck.class,
+            message = "validation.zeugnis.fehltageUnentschuldigtGtGesamt")
     private Integer anzahlFehltageGesamt = Integer.valueOf(0);
 
     /** The anzahl fehltage unentschuldigt. */
     @Column(name = "anzahl_fehltage_unentschuldigt", nullable = false)
-
     private Integer anzahlFehltageUnentschuldigt = Integer.valueOf(0);
 
     /** The anzahl verspaetungen. */
@@ -947,5 +945,25 @@ public class Zeugnis extends VersionedModel implements Serializable,
                 .getJahr());
         final int halbjahresId = schulhalbjahr.getHalbjahr().getId();
         return klassenstufe * 10 + halbjahresId;
+    }
+
+    /**
+     * Prüft ob die {@link Zeugnis#anzahlFehltageUnentschuldigt} &gt;
+     * {@link Zeugnis#anzahlFehltageGesamt}.
+     *
+     */
+    private static class FehlTageCheck implements CheckWithCheck.SimpleCheck {
+
+        @Override
+        public boolean isSatisfied(Object validatedObject,
+                Object anzahlFehltageGesaamt) {
+
+            if (((Zeugnis) validatedObject).anzahlFehltageUnentschuldigt
+                    .compareTo((Integer) anzahlFehltageGesaamt) > 0) {
+                return false;
+            }
+
+            return true;
+        }
     }
 }
