@@ -6,6 +6,8 @@ package net.sf.sze.model.zeugnis;
 
 import de.ppi.jpa.helper.VersionedModel;
 
+import net.sf.oval.constraint.CheckWith;
+import net.sf.oval.constraint.CheckWithCheck;
 import net.sf.sze.util.StringUtil;
 import net.sf.sze.util.VariableUtility;
 
@@ -43,22 +45,6 @@ import javax.persistence.UniqueConstraint;
 @DiscriminatorValue("net.sf.sze.zeugnis.Bewertung")
 public class Bewertung extends VersionedModel implements Serializable,
         Comparable<Bewertung> {
-    // TODO 3 Validatoren bauen.
-//  sonderNote(validator:{value, object ->
-//      if (["1","2","3","4","5","6"].contains(value.trim())) {
-//          return ['bewertung.sonderNote.invalid',value]
-//      }
-//  })
-//  leistungNurSchwachAusreichend(validator:{value, object ->
-//      if (value && (object.note != 4)) {
-//          return ['bewertung.leistungNurSchwachAusreichend.invalid']
-//      }
-//  })
-//  relevant(validator:{value, object ->
-//      if (!value && (object.sonderNote || object.note)) {
-//          return ['bewertung.relevant.invalid']
-//      }
-//  })
 
     // TODO GUI einschränken auf den Bereich 1-6 in GUI, kein DB-Constraint, da ABI 1-15
 
@@ -82,17 +68,23 @@ public class Bewertung extends VersionedModel implements Serializable,
 
     private String leistungsniveau;
 
-    /** The sonder note. */
+    /** Die Sondernote. */
     @Column(name = "sonder_note", nullable = false, length = 255)
-
+    @CheckWith(value = SondernoteCheck.class,
+            message = "validation.bewertung.sonderNote.invalid")
     private String sonderNote;
 
     /** The relevant. */
     @Column(nullable = false)
+    @CheckWith(value = RelevantCheck.class,
+            message = "validation.bewertung.relevant.invalid")
     private boolean relevant = true;
 
     /** The leistung nur schwach ausreichend. */
     @Column(name = "leistung_nur_schwach_ausreichend", nullable = false)
+    @CheckWith(
+            message = "validation.bewertung.leistungNurSchwachAusreichend.invalid",
+            value = SchwachausreichendCheck.class)
     private Boolean leistungNurSchwachAusreichend = Boolean.FALSE;
 
     // bi-directional many-to-one association to Schulfach
@@ -332,5 +324,71 @@ public class Bewertung extends VersionedModel implements Serializable,
         }
 
         return result;
+    }
+
+    /**
+     * Prüft ob die {@link Bewertung#sonderNote} nicht eine "normale" Note ist.
+     *
+     */
+    private static class SondernoteCheck implements CheckWithCheck.SimpleCheck {
+
+        private static final String[] STANDARDNOTEN = {
+            "1", "2", "3", "4", "5", "6"
+        };
+
+        @Override
+        public boolean isSatisfied(Object validatedObject, Object sonderNote) {
+            for (String stdNote : STANDARDNOTEN) {
+                if (stdNote.equals(sonderNote)) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+    }
+
+
+    /**
+     * Prüft ob die {@link Bewertung#leistungNurSchwachAusreichend} zur Note passt.
+     *
+     */
+    private static class SchwachausreichendCheck implements CheckWithCheck
+            .SimpleCheck {
+
+        private static final Long NOTE_VIER = Long.valueOf(4);
+
+        @Override
+        public boolean isSatisfied(Object validatedObject,
+                Object leistungsNurSchwachAusreichend) {
+            if ((leistungsNurSchwachAusreichend != null)
+                    && ((Boolean) leistungsNurSchwachAusreichend)
+                    .booleanValue() && !NOTE_VIER.equals(
+                    ((Bewertung) validatedObject).note)) {
+                return false;
+            }
+
+            return true;
+        }
+    }
+
+
+    /**
+     * Prüft ob die {@link Bewertung#relevant} false ist, wenn eine Note
+     * gesetzt ist.
+     *
+     */
+    private static class RelevantCheck implements CheckWithCheck.SimpleCheck {
+
+        @Override
+        public boolean isSatisfied(Object validatedObject, Object relevant) {
+            if ((relevant != null) && ((Boolean) relevant).booleanValue()
+                    && ((((Bewertung) validatedObject).note != null)
+                    || (((Bewertung) validatedObject).note != null))) {
+                return false;
+            }
+
+            return true;
+        }
     }
 }
