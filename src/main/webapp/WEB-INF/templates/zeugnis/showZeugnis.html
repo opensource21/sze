@@ -23,13 +23,13 @@
                     th:value="${zeugnis.schulhalbjahr.id}"
                     th:name="#{par.zeugnis.halbjahr_id}" />
                 Sch&uuml;ler der Klasse <span
-                    th:remove="tag" th:text="${zeugnis.klasse}"></span> <select
-                    name="schuelerIndex">
+                    th:remove="tag" th:text="${zeugnis.klasse}"></span>
+                <select class="cbauto" name="schuelerIndex">
                     <option th:each="item, stat : ${schueler}" th:value="${stat.index}"
                         th:text="${item}" th:selected="${item.id == zeugnis.schueler.id}"
                         th:disabled="${not item.isActive()}"></option>
                 </select>
-                <button type="submit" class="btn">Aktualisieren</button>
+                <button type="submit" class="btn cbbutton">Aktualisieren</button>
                 <a class="btn" th:disabled="${schuelerIndex == 0}"
                     th:href="@{${urlShowZeugnis}(klassenId=${zeugnis.klasse.id}, halbjahrId=${zeugnis.schulhalbjahr.id}, schuelerIndex=${schuelerIndex - 1})}">
                     <i class="prev"></i>Vorheriger Sch&uuml;ler
