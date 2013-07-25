@@ -14,6 +14,7 @@ import javax.persistence.Entity;
 @Entity
 @DiscriminatorValue("net.sf.sze.zeugnis.BinnenDifferenzierteBewertung")
 public class BinnenDifferenzierteBewertung extends Bewertung {
+    // NICE sollte DreiNiveauBewertung statt BinnenBewertung heißen.
 
     // TODO der NotNull-Constraint gilt nur für diese SubKlasse :-/
     // leistungsniveau(inList:['G','E','Z'], nullable:false)

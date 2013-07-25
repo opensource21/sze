@@ -21,7 +21,7 @@ import java.lang.annotation.Target;
 public @interface ValidVariableText {
 
     /**
-     * The context of the unqiue-key.
+     * Der Default-Value.
      *
      */
     String value() default "";

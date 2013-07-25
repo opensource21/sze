@@ -7,6 +7,9 @@ package net.sf.sze.model.zeugnis;
 import de.ppi.jpa.helper.VersionedModel;
 
 import net.sf.oval.constraint.Size;
+import net.sf.sze.constraints.BinnenAussenIntersect;
+import net.sf.sze.constraints.StandardAussenIntersect;
+import net.sf.sze.constraints.StandardBinnenIntersect;
 import net.sf.sze.util.StringUtil;
 
 import org.apache.commons.lang.builder.CompareToBuilder;
@@ -33,40 +36,6 @@ import javax.persistence.UniqueConstraint;
 public class Schulfach extends VersionedModel implements Serializable,
         Comparable<Schulfach> {
 
-    // TODO 3 Validatoren schreiben, die sicherstellen, dass die Stufen überschneidungsfrei sind.
-    // org.springframework.util.CollectionUtils.containsAny(Collection, Collection)
-//  private static standardIntersectCheck = {value,obj ->
-//  if (obj.convertStufenMitStandardBewertungToList().intersect(
-//                  obj.convertStufenMitBinnenDifferenzierungToList())) {
-//      return 'schulfach.standardIntersectBinnen'
-//  }
-//  if (obj.convertStufenMitStandardBewertungToList().intersect(
-//              obj.convertStufenMitAussenDifferenzierungToList())) {
-//      return 'schulfach.standardIntersectAussen'
-//  }
-//}
-//private static binnenIntersectCheck = {value,obj ->
-//      if (obj.convertStufenMitStandardBewertungToList().intersect(
-//              obj.convertStufenMitBinnenDifferenzierungToList())) {
-//          return 'schulfach.standardIntersectBinnen'
-//      }
-//  if (obj.convertStufenMitBinnenDifferenzierungToList().intersect(
-//              obj.convertStufenMitAussenDifferenzierungToList())) {
-//      return 'schulfach.binnenIntersectAussen'
-//  }
-// }
-//
-//private static aussenIntersectCheck = {value,obj ->
-//      if (obj.convertStufenMitStandardBewertungToList().intersect(
-//              obj.convertStufenMitAussenDifferenzierungToList())) {
-//          return 'schulfach.standardIntersectAussen'
-//      }
-//      if (obj.convertStufenMitBinnenDifferenzierungToList().intersect(
-//              obj.convertStufenMitAussenDifferenzierungToList())) {
-//          return 'schulfach.binnenIntersectAussen'
-//      }
-//   }
-
     /** The name. */
     @Column(nullable = false, length = 30)
 
@@ -87,16 +56,21 @@ public class Schulfach extends VersionedModel implements Serializable,
     /** The stufen mit aussen differenzierung. */
     @Column(name = "stufen_mit_aussen_differenzierung", length = 255)
     // NICE stufenMitZweiNiveaus
+    @BinnenAussenIntersect
+    @StandardAussenIntersect
     private String stufenMitAussenDifferenzierung;
 
     /** The stufen mit binnen differenzierung. */
     @Column(name = "stufen_mit_binnen_differenzierung", length = 255)
     // NICE stufenMitDreiNiveaus
+    @StandardBinnenIntersect
+    @BinnenAussenIntersect
     private String stufenMitBinnenDifferenzierung;
 
     /** The stufen mit standard bewertung. */
     @Column(name = "stufen_mit_standard_bewertung", length = 255)
-
+    @StandardBinnenIntersect
+    @StandardAussenIntersect
     private String stufenMitStandardBewertung;
 
     /**

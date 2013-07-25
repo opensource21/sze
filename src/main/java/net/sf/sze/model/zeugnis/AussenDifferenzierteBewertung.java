@@ -19,11 +19,9 @@ import javax.persistence.Entity;
 @Entity
 @DiscriminatorValue("net.sf.sze.zeugnis.AussenDifferenzierteBewertung")
 public class AussenDifferenzierteBewertung extends Bewertung {
-
+    // NICE sollte ZweiNiveauBewertung statt AussenBewertung heißen.
     // TODO der NotNull-Constraint gilt nur für diese SubKlasse :-/
     // leistungsniveau(inList:['G','E'], nullable:false)
-
-    // NICE sollte ZweiNiveauBewertung heißen.
 
     /**
      *

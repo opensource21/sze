@@ -33,7 +33,7 @@ public class ValidVariableTextCheck
     private List<String> illegalVariables;
 
     /**
-     * Instantiates a new unique check.
+     * Instantiates a new valid variable check.
      */
     public ValidVariableTextCheck() {
         setMessage(MESSAGE);
