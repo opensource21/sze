@@ -242,6 +242,45 @@ public final class URL {
 
 
     /**
+     * All URLS for the Bemerkung.
+     *
+     */
+    public interface Bemerkung {
+
+        /**
+         * Bemerkung-Url.
+         */
+        String HOME = "/bemerkung";
+
+        /**
+         * Parametername for the bemerkung-id.
+         */
+        String P_BEMERKUNGID = "bemerkungId";
+
+        /**
+         * Edit-User-Url.
+         */
+        String EDIT = HOME + "/edit/{" + P_BEMERKUNGID + "}";
+
+        /**
+         * Show-User-Url.
+         */
+        String SHOW = HOME + "/show/{" + P_BEMERKUNGID + "}";
+
+        /**
+         * Delete-User-Url.
+         */
+        String DELETE = HOME + "/delete/{" + P_BEMERKUNGID + "}";
+
+        /** List User-URL. */
+        String LIST = HOME + "/list";
+
+        /** Create User-URL. */
+        String CREATE = HOME + "/create";
+    }
+
+
+    /**
      * Replace all parameters in the URL with the given values.
      *
      * @param url the URL.

@@ -6,7 +6,6 @@ package net.sf.sze.constraints;
 
 import net.sf.oval.configuration.annotation.Constraint;
 import net.sf.sze.model.zeugnis.AussenDifferenzierteBewertung;
-import net.sf.sze.model.zeugnis.Bewertung;
 import net.sf.sze.model.zeugnis.BinnenDifferenzierteBewertung;
 
 import java.lang.annotation.ElementType;
