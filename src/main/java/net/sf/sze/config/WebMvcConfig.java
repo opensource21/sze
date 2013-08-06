@@ -32,6 +32,7 @@ import org.springframework.data.web.PageableArgumentResolver;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.format.datetime.DateFormatter;
 import org.springframework.format.support.FormattingConversionService;
+import org.springframework.http.MediaType;
 import org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor;
 import org.springframework.web.context.request.WebRequestInterceptor;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -59,6 +60,11 @@ import java.util.Properties;
         "net.sf.oval.integration.spring", "de.ppi.jpa.helper"})
 @Import(RootConfig.class)
 public class WebMvcConfig extends WebMvcConfigurationSupport {
+
+    /**
+     * The default encoding.
+     */
+    private static final String ENCODING = "UTF-8";
 
     /**
      * Page size if no other information is given.
@@ -187,7 +193,8 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
         final ThymeleafViewResolver resolver = new ThymeleafViewResolver();
         resolver.setTemplateEngine(templateEngine());
         resolver.setOrder(2);
-        resolver.setContentType("text/html; charset=UTF-8");
+        resolver.setContentType(MediaType.TEXT_HTML_VALUE);
+        resolver.setCharacterEncoding(ENCODING);
         return resolver;
     }
 
@@ -219,7 +226,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
         resolver.setTemplateMode("HTML5");
         // TODO PPI in Production cachable should be true.
         resolver.setCacheable(false);
-        resolver.setCharacterEncoding("UTF-8");
+        resolver.setCharacterEncoding(ENCODING);
         return resolver;
     }
 
