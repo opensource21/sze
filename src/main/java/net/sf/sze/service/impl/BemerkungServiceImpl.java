@@ -8,8 +8,6 @@ import net.sf.sze.dao.api.zeugnis.BemerkungDao;
 import net.sf.sze.model.zeugnis.Bemerkung;
 import net.sf.sze.service.api.BemerkungService;
 
-import org.hibernate.LazyInitializationException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
