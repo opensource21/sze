@@ -187,6 +187,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
         final ThymeleafViewResolver resolver = new ThymeleafViewResolver();
         resolver.setTemplateEngine(templateEngine());
         resolver.setOrder(2);
+        resolver.setContentType("text/html; charset=UTF-8");
         return resolver;
     }
 
