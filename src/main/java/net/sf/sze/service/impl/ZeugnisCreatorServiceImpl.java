@@ -8,7 +8,6 @@ import net.sf.jooreports.templates.DocumentTemplate;
 import net.sf.jooreports.templates.DocumentTemplate.ContentWrapper;
 import net.sf.jooreports.templates.DocumentTemplateException;
 import net.sf.jooreports.templates.DocumentTemplateFactory;
-import net.sf.jooreports.templates.ZippedDocumentTemplate;
 import net.sf.sze.dao.api.zeugnis.SchulfachDao;
 import net.sf.sze.dao.api.zeugnis.SchulhalbjahrDao;
 import net.sf.sze.dao.api.zeugnis.ZeugnisDao;

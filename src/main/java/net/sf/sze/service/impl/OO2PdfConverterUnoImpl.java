@@ -12,18 +12,19 @@ import net.sf.sze.service.api.OO2PdfConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
+import com.sun.star.beans.PropertyValue;
+import com.sun.star.comp.helper.Bootstrap;
+import com.sun.star.comp.helper.BootstrapException;
+import com.sun.star.frame.XComponentLoader;
+import com.sun.star.frame.XStorable;
+import com.sun.star.lang.XComponent;
+import com.sun.star.lang.XMultiComponentFactory;
+import com.sun.star.uno.UnoRuntime;
+import com.sun.star.uno.XComponentContext;
+import com.sun.star.util.XCloseable;
 
-//import com.sun.star.beans.PropertyValue;
-//import com.sun.star.comp.helper.Bootstrap;
-//import com.sun.star.comp.helper.BootstrapException;
-//import com.sun.star.frame.XComponentLoader;
-//import com.sun.star.frame.XStorable;
-//import com.sun.star.lang.XComponent;
-//import com.sun.star.lang.XMultiComponentFactory;
-//import com.sun.star.uno.UnoRuntime;
-//import com.sun.star.uno.XComponentContext;
-//import com.sun.star.util.XCloseable;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Vorteil: Man muss keine Service starten
@@ -73,70 +74,70 @@ public class OO2PdfConverterUnoImpl implements OO2PdfConverter {
      */
     @Override
     public void convert(File sourceFile, File outputFile) {
-//      try {
-//          // get the remote office component context
-//          XComponentContext xContext = Bootstrap.bootstrap();
-//          // get the remote office service manager
-//          XMultiComponentFactory xMCF = xContext.getServiceManager();
-//          Object oDesktop = xMCF.createInstanceWithContext(
-//                  "com.sun.star.frame.Desktop", xContext);
-//          XComponentLoader xCompLoader = (XComponentLoader) UnoRuntime
-//                  .queryInterface(XComponentLoader.class, oDesktop);
-//
-//          log.info("OO ist initialisiert");
-//
-//          StringBuffer sLoadUrl = new StringBuffer("file:///");
-//          sLoadUrl.append(sourceFile.getCanonicalPath().replace('\\', '/'));
-//
-//          StringBuffer sSaveUrl = new StringBuffer("file:///");
-//          sSaveUrl.append(outputFile.getCanonicalPath().replace('\\', '/'));
-//
-//          PropertyValue[] propertyValue = new PropertyValue[1];
-//          propertyValue[0] = new PropertyValue();
-//          propertyValue[0].Name = "Hidden";
-//          propertyValue[0].Value = new Boolean(true);
-//
-//          Object oDocToStore = xCompLoader.loadComponentFromURL(sLoadUrl
-//                  .toString(), "_blank", 0, propertyValue);
-//          log.info("Dokument geladen.");
-//
-//          XStorable xStorable = (XStorable) UnoRuntime.queryInterface(
-//                  XStorable.class, oDocToStore);
-//
-//          propertyValue = new PropertyValue[2];
-//          propertyValue[0] = new PropertyValue();
-//          propertyValue[0].Name = "Overwrite";
-//          propertyValue[0].Value = new Boolean(true);
-//          propertyValue[1] = new PropertyValue();
-//          propertyValue[1].Name = "FilterName";
-//          propertyValue[1].Value = "writer_pdf_Export";
-//          xStorable.storeToURL(sSaveUrl.toString(), propertyValue);
-//          log.info("Dokument " + sSaveUrl + " gespeichert.");
-//
-//          XCloseable xCloseable = (XCloseable) UnoRuntime.queryInterface(
-//                  XCloseable.class, oDocToStore);
-//
-//          if (xCloseable != null) {
-//              xCloseable.close(false);
-//          } else {
-//              XComponent xComp = (XComponent) UnoRuntime.queryInterface(
-//                      XComponent.class, oDocToStore);
-//              xComp.dispose();
-//          }
-//      } catch (BootstrapException e) {
-//          String message =
-//                  "Die Remote-Komponenten konnte nicht kontaktiert werden.";
-//          log.warn(message, e);
-//          throw new ConvertionException(message, e);
-//      } catch (com.sun.star.uno.Exception e) {
-//          String message = "Konnte den Office-Service nicht starten.";
-//          log.warn(message, e);
-//          throw new ConvertionException(message, e);
-//      } catch (IOException e) {
-//          String message = "Canonicalname konnte nicht ermittelt werden";
-//          log.warn(message, e);
-//          throw new ConvertionException(message, e);
-//      }
+        try {
+            // get the remote office component context
+            XComponentContext xContext = Bootstrap.bootstrap();
+            // get the remote office service manager
+            XMultiComponentFactory xMCF = xContext.getServiceManager();
+            Object oDesktop = xMCF.createInstanceWithContext(
+                    "com.sun.star.frame.Desktop", xContext);
+            XComponentLoader xCompLoader = (XComponentLoader) UnoRuntime
+                    .queryInterface(XComponentLoader.class, oDesktop);
+
+            log.info("OO ist initialisiert");
+
+            StringBuffer sLoadUrl = new StringBuffer("file:///");
+            sLoadUrl.append(sourceFile.getCanonicalPath().replace('\\', '/'));
+
+            StringBuffer sSaveUrl = new StringBuffer("file:///");
+            sSaveUrl.append(outputFile.getCanonicalPath().replace('\\', '/'));
+
+            PropertyValue[] propertyValue = new PropertyValue[1];
+            propertyValue[0] = new PropertyValue();
+            propertyValue[0].Name = "Hidden";
+            propertyValue[0].Value = new Boolean(true);
+
+            Object oDocToStore = xCompLoader.loadComponentFromURL(sLoadUrl
+                    .toString(), "_blank", 0, propertyValue);
+            log.info("Dokument geladen.");
+
+            XStorable xStorable = (XStorable) UnoRuntime.queryInterface(
+                    XStorable.class, oDocToStore);
+
+            propertyValue = new PropertyValue[2];
+            propertyValue[0] = new PropertyValue();
+            propertyValue[0].Name = "Overwrite";
+            propertyValue[0].Value = new Boolean(true);
+            propertyValue[1] = new PropertyValue();
+            propertyValue[1].Name = "FilterName";
+            propertyValue[1].Value = "writer_pdf_Export";
+            xStorable.storeToURL(sSaveUrl.toString(), propertyValue);
+            log.info("Dokument " + sSaveUrl + " gespeichert.");
+
+            XCloseable xCloseable = (XCloseable) UnoRuntime.queryInterface(
+                    XCloseable.class, oDocToStore);
+
+            if (xCloseable != null) {
+                xCloseable.close(false);
+            } else {
+                XComponent xComp = (XComponent) UnoRuntime.queryInterface(
+                        XComponent.class, oDocToStore);
+                xComp.dispose();
+            }
+        } catch (BootstrapException e) {
+            String message =
+                    "Die Remote-Komponenten konnte nicht kontaktiert werden.";
+            log.warn(message, e);
+            throw new ConvertionException(message, e);
+        } catch (com.sun.star.uno.Exception e) {
+            String message = "Konnte den Office-Service nicht starten.";
+            log.warn(message, e);
+            throw new ConvertionException(message, e);
+        } catch (IOException e) {
+            String message = "Canonicalname konnte nicht ermittelt werden";
+            log.warn(message, e);
+            throw new ConvertionException(message, e);
+        }
     }
 
     /**
