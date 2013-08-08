@@ -86,11 +86,6 @@ public final class URL {
         String P_HALBJAHR_ID = "halbjahr_id";
 
         /**
-         * Parameter schuelerIndex.
-         */
-        String P_SCHUELER_INDEX = "schuelerIndex";
-
-        /**
          * Parameter KlassenId.
          */
         String P_KLASSEN_ID = "klassen_id";
@@ -143,7 +138,7 @@ public final class URL {
         /**
          * Parameter schuelerIndex.
          */
-        String P_SCHUELER_INDEX = Zeugnis.P_SCHUELER_INDEX;
+        String P_SCHUELER_INDEX = Zeugnis.P_SCHUELER_ID;
 
         /**
          * Parameter KlassenId.

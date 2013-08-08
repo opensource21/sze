@@ -25,20 +25,20 @@
                 th:object="${zeugnis}" th:action="@{${urlShowZeugnis}}">
                 Sch&uuml;ler der Klasse <span
                     th:remove="tag" th:text="${zeugnis.klasse}"></span>
-                <select class="cbauto" name="schuelerIndex">
-                    <option th:each="item, stat : ${schueler}" th:value="${stat.index}"
+                <select class="cbauto" name="schueler_id">
+                    <option th:each="item : ${schuelerListe}" th:value="${item.id}"
                         th:text="${item}" th:selected="${item.id == zeugnis.schueler.id}"
                         th:disabled="${not item.isActive()}"></option>
                 </select>
                 <button type="submit" class="btn cbbutton">Aktualisieren</button>
-                <span class="btn disabled" th:if="${schuelerIndex == 0}"><i class="prev"></i>Vorheriger Sch&uuml;ler</span>
-                <a class="btn" th:unless="${schuelerIndex == 0}"
-                    th:href="@{${urlShowZeugnis}(schuelerIndex=${schuelerIndex - 1})}">
+                <span class="btn disabled" th:if="${prevSchuelerId==null}"><i class="prev"></i>Vorheriger Sch&uuml;ler</span>
+                <a class="btn" th:unless="${prevSchuelerId==null}"
+                    th:href="@{${urlShowZeugnis}(schueler_id=${prevSchuelerId})}">
                     <i class="prev"></i>Vorheriger Sch&uuml;ler
                 </a>
-                <span class="btn disabled" th:if="${schuelerIndex +1 ge schueler.size()}"><i class="next"></i>N&auml;chster Sch&uuml;ler</span>
-                <a class="btn" th:unless="${schuelerIndex +1 ge schueler.size()}"
-                    th:href="@{${urlShowZeugnis}(schuelerIndex=${schuelerIndex + 1})}">
+                <span class="btn disabled" th:if="${nextSchuelerId==null}"><i class="next"></i>N&auml;chster Sch&uuml;ler</span>
+                <a class="btn" th:unless="${nextSchuelerId==null}"
+                    th:href="@{${urlShowZeugnis}(schueler_id=${nextSchuelerId})}">
                     <i class="next"></i>N&auml;chster Sch&uuml;ler
                 </a> <a class="btn" th:href="@{${urlPrintZeugnis}}"><i class="pdf"></i>Zeugnis
                     anzeigen</a>
