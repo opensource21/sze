@@ -19,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
 import org.springframework.validation.Validator;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -93,11 +94,31 @@ public class ZeugnisController {
      * @param redirectAttributes Fehlermeldungen.
      * @return die logische View
      */
-    @RequestMapping(value = URL.Zeugnis.SHOW, method = RequestMethod.GET)
-    public String showZeugnis(@RequestParam(URL.Zeugnis
-            .P_HALBJAHR_ID) long halbjahrId, @RequestParam(URL.Zeugnis
+    @RequestMapping(value = URL.ZeugnisPath.SHOW, method = RequestMethod.GET)
+    public String showZeugnisPath(@PathVariable(URL.ZeugnisPath
+            .P_HALBJAHR_ID) long halbjahrId, @PathVariable(URL.ZeugnisPath
             .P_KLASSEN_ID) long klassenId, @RequestParam(value = URL.Zeugnis
             .P_SCHUELER_INDEX,
+            required = false, defaultValue = "0") int schuelerIndex,
+                    Model model, RedirectAttributes redirectAttributes) {
+        return showZeugnis(halbjahrId, klassenId, schuelerIndex, model,
+                redirectAttributes);
+    }
+
+    /**
+     * Zeigt das Zeugnis des entsprechenden Schülers der Klasse in dem Halbjahr.
+     * @param halbjahrId die Id des Schulhalbjahres
+     * @param klassenId die Id der Klasse
+     * @param schuelerIndex der Indes des Schülers.
+     * @param model das Model
+     * @param redirectAttributes Fehlermeldungen.
+     * @return die logische View
+     */
+    @RequestMapping(value = URL.Zeugnis.SHOW, method = RequestMethod.GET)
+    public String showZeugnis(@RequestParam(value = URL.Zeugnis.P_HALBJAHR_ID,
+            required = false) long halbjahrId, @RequestParam(URL.Zeugnis
+                    .P_KLASSEN_ID) long klassenId, @RequestParam(value = URL
+                    .Zeugnis.P_SCHUELER_INDEX,
             required = false, defaultValue = "0") int schuelerIndex,
                     Model model, RedirectAttributes redirectAttributes) {
         final List<Zeugnis> zeugnisse = zeugnisErfassungsService.getZeugnisse(
@@ -142,7 +163,8 @@ public class ZeugnisController {
                 schuelerIndex));
         model.addAttribute("wpBewertungen", wpBewertungen);
         model.addAttribute("otherBewertungen", otherBewertungen);
-        model.addAttribute("urlShowZeugnis", URL.filledURL(URL.Zeugnis.SHOW));
+        model.addAttribute("urlShowZeugnis", URL.filledURL(URL.ZeugnisPath
+                .SHOW, Long.valueOf(halbjahrId), Long.valueOf(klassenId)));
         model.addAttribute("urlPrintZeugnis", URL.filledURL(URL.Zeugnis
                 .ONE_PDF, selectedZeugnis.getSchueler().getId(), Long.valueOf(
                 halbjahrId)));
