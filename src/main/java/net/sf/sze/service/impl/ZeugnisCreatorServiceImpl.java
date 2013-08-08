@@ -7,6 +7,7 @@ package net.sf.sze.service.impl;
 import net.sf.jooreports.templates.DocumentTemplate;
 import net.sf.jooreports.templates.DocumentTemplate.ContentWrapper;
 import net.sf.jooreports.templates.DocumentTemplateException;
+import net.sf.jooreports.templates.DocumentTemplateFactory;
 import net.sf.jooreports.templates.ZippedDocumentTemplate;
 import net.sf.sze.dao.api.zeugnis.SchulfachDao;
 import net.sf.sze.dao.api.zeugnis.SchulhalbjahrDao;
@@ -570,8 +571,8 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
             }
 
             // InputStreams sind auch OK
-            final DocumentTemplate template = new ZippedDocumentTemplate(
-                    templateFile);
+            final DocumentTemplate template = new DocumentTemplateFactory()
+                    .getTemplate(templateFile);
             try {
                 template.setContentWrapper(new SzeContentWrapper());
                 template.createDocument(data, new FileOutputStream(odtFile));

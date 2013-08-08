@@ -170,6 +170,40 @@
             <version>3.0.1</version>
         </dependency>
 
+        <!--  Reporterstellung -->
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>2.3.9</version>
+        </dependency>
+        <dependency>
+            <groupId>com.lowagie</groupId>
+            <artifactId>itext</artifactId>
+            <version>2.1.7</version>
+        </dependency>
+
+        <!--  TODO 2.2.2 wird schwierig.
+        https://maven-eu.nuxeo.org/nexus/index.html#nexus-search;quick~jodconverter
+        ist aber notwändig :-( Oder aber ganz die Technik wechseln auf xdocreport,
+        aber die sind noch nicht so weit.
+         -->
+        <dependency>
+            <groupId>com.artofsolving</groupId>
+            <artifactId>jodconverter</artifactId>
+            <version>2.2.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.sf.jodreports</groupId>
+            <artifactId>jodreports</artifactId>
+            <version>2.4.0</version> <!-- War 2.2.2 -->
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>1.4</version>
+        </dependency>
+
         <!-- Test Dependencies -->
         <dependency>
             <groupId>junit</groupId>
@@ -199,32 +233,6 @@
             <version>1.4</version>
         </dependency>
 
-        <!-- FixIt -->
-        <dependency>
-            <groupId>niels</groupId>
-            <artifactId>freemarker</artifactId>
-            <version>2.3.8</version>
-        </dependency>
-        <dependency>
-            <groupId>niels</groupId>
-            <artifactId>iText</artifactId>
-            <version>2.1.7</version>
-        </dependency>
-        <dependency>
-            <groupId>niels</groupId>
-            <artifactId>jodconverter</artifactId>
-            <version>2.2.2</version>
-        </dependency>
-        <dependency>
-            <groupId>niels</groupId>
-            <artifactId>jodreports</artifactId>
-            <version>2.2_tab_patch</version>
-        </dependency>
-        <dependency>
-            <groupId>niels</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>1.4</version>
-        </dependency>
     </dependencies>
     <build>
         <pluginManagement>
@@ -438,5 +446,10 @@
             </plugin>
         </plugins>
     </reporting>
-
+<!--     <repositories>
+      <repository>
+        <id>nexus für jodreport 2.2.2</id>
+        <url>https://maven-eu.nuxeo.org/nexus</url>
+      </repository>
+    </repositories> -->
 </project>
