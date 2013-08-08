@@ -78,12 +78,12 @@ public final class URL {
         /**
          * Parametername für die Schüler-id.
          */
-        String P_SCHUELER_ID = "schuelerId";
+        String P_SCHUELER_ID = "schueler_id";
 
         /**
          * Parameter HalbjahresId.
          */
-        String P_HALBJAHR_ID = "halbjahrId";
+        String P_HALBJAHR_ID = "halbjahr_id";
 
         /**
          * Parameter schuelerIndex.
@@ -93,7 +93,7 @@ public final class URL {
         /**
          * Parameter KlassenId.
          */
-        String P_KLASSEN_ID = "klassenId";
+        String P_KLASSEN_ID = "klassen_id";
 
         /**
          * Zeugniserfassung base-url.
