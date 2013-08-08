@@ -19,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
 import org.springframework.validation.Validator;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -88,18 +89,38 @@ public class ZeugnisController {
      * Zeigt das Zeugnis des entsprechenden Schülers der Klasse in dem Halbjahr.
      * @param halbjahrId die Id des Schulhalbjahres
      * @param klassenId die Id der Klasse
-     * @param schuelerIndex der Indes des Schülers.
+     * @param schuelerId der Indes des Schülers.
+     * @param model das Model
+     * @param redirectAttributes Fehlermeldungen.
+     * @return die logische View
+     */
+    @RequestMapping(value = URL.ZeugnisPath.SHOW, method = RequestMethod.GET)
+    public String showZeugnisPath(@PathVariable(URL.ZeugnisPath
+            .P_HALBJAHR_ID) long halbjahrId, @PathVariable(URL.ZeugnisPath
+            .P_KLASSEN_ID) long klassenId, @RequestParam(value = URL.Zeugnis
+            .P_SCHUELER_ID,
+            required = false, defaultValue = "0") Long schuelerId, Model model,
+                    RedirectAttributes redirectAttributes) {
+        return showZeugnis(halbjahrId, klassenId, schuelerId, model,
+                redirectAttributes);
+    }
+
+    /**
+     * Zeigt das Zeugnis des entsprechenden Schülers der Klasse in dem Halbjahr.
+     * @param halbjahrId die Id des Schulhalbjahres
+     * @param klassenId die Id der Klasse
+     * @param schuelerId die Id des auszuwählenden Schüler.
      * @param model das Model
      * @param redirectAttributes Fehlermeldungen.
      * @return die logische View
      */
     @RequestMapping(value = URL.Zeugnis.SHOW, method = RequestMethod.GET)
-    public String showZeugnis(@RequestParam(URL.Zeugnis
-            .P_HALBJAHR_ID) long halbjahrId, @RequestParam(URL.Zeugnis
-            .P_KLASSEN_ID) long klassenId, @RequestParam(value = URL.Zeugnis
-            .P_SCHUELER_INDEX,
-            required = false, defaultValue = "0") int schuelerIndex,
-                    Model model, RedirectAttributes redirectAttributes) {
+    public String showZeugnis(@RequestParam(value = URL.Zeugnis.P_HALBJAHR_ID,
+            required = false) long halbjahrId, @RequestParam(URL.Zeugnis
+                    .P_KLASSEN_ID) long klassenId, @RequestParam(value = URL
+                    .Zeugnis.P_SCHUELER_ID,
+            required = false) Long schuelerId, Model model,
+                    RedirectAttributes redirectAttributes) {
         final List<Zeugnis> zeugnisse = zeugnisErfassungsService.getZeugnisse(
                 halbjahrId, klassenId);
 
@@ -113,13 +134,33 @@ public class ZeugnisController {
             return URL.redirect(URL.Zeugnis.START);
         }
 
-        final List<Schueler> schueler = new ArrayList<Schueler>(zeugnisse
+        final List<Schueler> schuelerListe = new ArrayList<Schueler>(zeugnisse
                 .size());
+        Zeugnis selectedZeugnis = null;
+        Long prevSchuelerId = null;
+        Long selectedSchuelerId = schuelerId;
+        Long nextSchuelerId = null;
         for (Zeugnis zeugnis : zeugnisse) {
-            schueler.add(zeugnis.getSchueler());
+            // Sicherstellen, dass es immer einen selektierten Schüler gibt.
+            if (selectedSchuelerId == null) {
+                selectedSchuelerId = zeugnis.getSchueler().getId();
+            }
+
+            schuelerListe.add(zeugnis.getSchueler());
+
+            if ((selectedZeugnis != null) && (nextSchuelerId == null)) {
+                nextSchuelerId = zeugnis.getSchueler().getId();
+            }
+
+            if (selectedSchuelerId.equals(zeugnis.getSchueler().getId())) {
+                selectedZeugnis = zeugnis;
+            }
+
+            if (selectedZeugnis == null) {
+                prevSchuelerId = zeugnis.getSchueler().getId();
+            }
         }
 
-        final Zeugnis selectedZeugnis = zeugnisse.get(schuelerIndex);
         Collections.sort(selectedZeugnis.getBewertungen());
         Collections.sort(selectedZeugnis.getSchulamtsBemerkungen());
         Collections.sort(selectedZeugnis.getBemerkungen());
@@ -136,13 +177,14 @@ public class ZeugnisController {
         }
 
         LOG.debug("Zeugnis von Schueler {}. ", selectedZeugnis.getSchueler());
-        model.addAttribute("schueler", schueler);
+        model.addAttribute("schuelerListe", schuelerListe);
         model.addAttribute("zeugnis", selectedZeugnis);
-        model.addAttribute(URL.Zeugnis.P_SCHUELER_INDEX, Integer.valueOf(
-                schuelerIndex));
+        model.addAttribute("prevSchuelerId", prevSchuelerId);
+        model.addAttribute("nextSchuelerId", nextSchuelerId);
         model.addAttribute("wpBewertungen", wpBewertungen);
         model.addAttribute("otherBewertungen", otherBewertungen);
-        model.addAttribute("urlShowZeugnis", URL.filledURL(URL.Zeugnis.SHOW));
+        model.addAttribute("urlShowZeugnis", URL.filledURL(URL.ZeugnisPath
+                .SHOW, Long.valueOf(halbjahrId), Long.valueOf(klassenId)));
         model.addAttribute("urlPrintZeugnis", URL.filledURL(URL.Zeugnis
                 .ONE_PDF, selectedZeugnis.getSchueler().getId(), Long.valueOf(
                 halbjahrId)));

@@ -78,22 +78,77 @@ public final class URL {
         /**
          * Parametername für die Schüler-id.
          */
-        String P_SCHUELER_ID = "schuelerId";
+        String P_SCHUELER_ID = "schueler_id";
 
         /**
          * Parameter HalbjahresId.
          */
-        String P_HALBJAHR_ID = "halbjahrId";
-
-        /**
-         * Parameter schuelerIndex.
-         */
-        String P_SCHUELER_INDEX = "schuelerIndex";
+        String P_HALBJAHR_ID = "halbjahr_id";
 
         /**
          * Parameter KlassenId.
          */
-        String P_KLASSEN_ID = "klassenId";
+        String P_KLASSEN_ID = "klassen_id";
+
+        /**
+         * Zeugniserfassung base-url.
+         */
+        String START = HOME + "/start";
+
+        /**
+         * Zeige Zeugnis.
+         */
+        String SHOW = HOME + "/show";
+
+        /**
+         * Zeige Bewertungen.
+         */
+        String BEWERTUNGEN = HOME + "/bewertungen";
+
+        /**
+         * Zeige PDF einer ganze Klasse.
+         */
+        String ALL_PDFS = HOME + "/pdfklasse";
+
+        /**
+         * Zeige PDF eines Schuelers.
+         */
+        String ONE_PDF = HOME + "/pdfschueler/{" + P_SCHUELER_ID + "}" + "/{"
+                + P_HALBJAHR_ID + "}";
+
+    }
+
+
+    /**
+     * All URLs for the creation of a Zeugnis bei dem die Basis-Informationen
+     * Halbjahr und KlassenId fest im Pfad sind.
+     */
+    public interface ZeugnisPath {
+
+        /**
+         * Parametername für die Schüler-id.
+         */
+        String P_SCHUELER_ID = Zeugnis.P_SCHUELER_ID;
+
+        /**
+         * Parameter HalbjahresId.
+         */
+        String P_HALBJAHR_ID = Zeugnis.P_HALBJAHR_ID;
+
+        /**
+         * Parameter schuelerIndex.
+         */
+        String P_SCHUELER_INDEX = Zeugnis.P_SCHUELER_ID;
+
+        /**
+         * Parameter KlassenId.
+         */
+        String P_KLASSEN_ID = Zeugnis.P_KLASSEN_ID;
+
+        /**
+         * Zeugniserfassung base-url.
+         */
+        String HOME = "/zeugnis/{" + P_HALBJAHR_ID + "}/{" + P_KLASSEN_ID + "}";
 
         /**
          * Zeugniserfassung base-url.
