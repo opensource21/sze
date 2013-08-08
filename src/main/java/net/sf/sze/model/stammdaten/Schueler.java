@@ -91,7 +91,6 @@ public class Schueler extends VersionedModel implements Serializable,
     /** The klasse. */
     @ManyToOne(optional = false)
     @JoinColumn(name = "klasse_id", nullable = false)
-
     private Klasse klasse;
 
     // bi-directional many-to-one association to Zeugni

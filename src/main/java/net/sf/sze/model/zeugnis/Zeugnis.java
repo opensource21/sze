@@ -32,6 +32,7 @@ import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -162,7 +163,7 @@ public class Zeugnis extends VersionedModel implements Serializable,
     // bi-directional many-to-one association to Schueler
 
     /** The schueler. */
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "schueler_id", nullable = false)
     private Schueler schueler;
 
