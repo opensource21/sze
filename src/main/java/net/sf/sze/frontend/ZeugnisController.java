@@ -125,11 +125,8 @@ public class ZeugnisController {
         if (CollectionUtils.isEmpty(zeugnisse)) {
             redirectAttributes.addFlashAttribute("message",
                     "Es wurden keine Zeugnisse gefunden");
-            redirectAttributes.addFlashAttribute(URL.Zeugnis.P_HALBJAHR_ID, Long
-                    .valueOf(halbjahrId));
-            redirectAttributes.addFlashAttribute(URL.Zeugnis.P_KLASSEN_ID, Long
-                    .valueOf(klassenId));
-            return URL.redirect(URL.Zeugnis.START);
+            return URL.redirect(URL.ZeugnisPath.START, Long.valueOf(
+                    halbjahrId), Long.valueOf(klassenId));
         }
 
         final List<Schueler> schuelerListe = new ArrayList<Schueler>(zeugnisse
@@ -157,6 +154,13 @@ public class ZeugnisController {
             if (selectedZeugnis == null) {
                 prevSchuelerId = zeugnis.getSchueler().getId();
             }
+        }
+
+        if (selectedZeugnis == null) {
+            redirectAttributes.addFlashAttribute("message",
+                    "Der angegebene Schüler hat kein Zeugnis, gehe zum ersten.");
+            return URL.redirect(URL.ZeugnisPath.SHOW, Long.valueOf(halbjahrId),
+                    Long.valueOf(klassenId));
         }
 
         Collections.sort(selectedZeugnis.getBewertungen());
