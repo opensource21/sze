@@ -19,7 +19,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
 import org.springframework.validation.Validator;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -63,15 +62,23 @@ public class ZeugnisController {
      * @param model das Modell.
      * @return den View-Namen.
      */
-    @RequestMapping(value = {URL.Zeugnis.HOME, URL.Zeugnis.START},
+    @RequestMapping(value = {URL.Zeugnis.START, URL.Zeugnis.HOME},
             method = RequestMethod.GET)
-    // @ModelAttribute(URL.Zeugnis.P_HALBJAHR_ID)
-    // @ModelAttribute(URL.Zeugnis.P_KLASSEN_ID)
-    public String chooseClass(@ModelAttribute(URL.Zeugnis.P_HALBJAHR_ID)
-    @RequestParam(value = URL.Zeugnis.P_HALBJAHR_ID,
-            defaultValue = "-1") Long halbjahrId, @RequestParam(value = URL
-            .Zeugnis.P_KLASSEN_ID,
-            defaultValue = "-1") Long klassenId, Model model) {
+    public String chooseClass(Model model) {
+        return chooseClass(Long.valueOf(0), Long.valueOf(0), model);
+    }
+
+    /**
+     * Zeigt den Auswahl-Dialog für die Klasse.
+     * @param halbjahrId die Id des Halbjahres
+     * @param klassenId die Id der Klasse
+     * @param model das Modell
+     * @return den View-Namen
+     */
+    @RequestMapping(value = {URL.ZeugnisPath.START}, method = RequestMethod.GET)
+    public String chooseClass(@PathVariable(URL.Zeugnis
+            .P_HALBJAHR_ID) Long halbjahrId, @PathVariable(URL.Zeugnis
+            .P_KLASSEN_ID) Long klassenId, Model model) {
         final List<Schulhalbjahr> halbjahre = zeugnisErfassungsService
                 .getActiveSchulhalbjahre();
         if (CollectionUtils.isEmpty(halbjahre)) {
@@ -88,8 +95,8 @@ public class ZeugnisController {
                 .BEWERTUNGEN));
         model.addAttribute("urlPrintZeugnis", URL.filledURL(URL.Zeugnis
                 .ALL_PDFS));
-        model.addAttribute(URL.Zeugnis.P_HALBJAHR_ID, halbjahrId);
-        model.addAttribute(URL.Zeugnis.P_KLASSEN_ID, klassenId);
+//      model.addAttribute(URL.Zeugnis.P_HALBJAHR_ID, halbjahrId);
+//      model.addAttribute(URL.Zeugnis.P_KLASSEN_ID, klassenId);
 
         return "zeugnis/chooseClass";
     }
@@ -108,30 +115,12 @@ public class ZeugnisController {
             .P_HALBJAHR_ID) long halbjahrId, @PathVariable(URL.ZeugnisPath
             .P_KLASSEN_ID) long klassenId, @RequestParam(value = URL.Zeugnis
             .P_SCHUELER_ID,
-            required = false, defaultValue = "0") Long schuelerId, Model model,
-                    RedirectAttributes redirectAttributes) {
-        return showZeugnis(halbjahrId, klassenId, schuelerId, model,
-                redirectAttributes);
-    }
-
-    /**
-     * Zeigt das Zeugnis des entsprechenden Schülers der Klasse in dem Halbjahr.
-     * @param halbjahrId die Id des Schulhalbjahres
-     * @param klassenId die Id der Klasse
-     * @param schuelerId die Id des auszuwählenden Schüler.
-     * @param model das Model
-     * @param redirectAttributes Fehlermeldungen.
-     * @return die logische View
-     */
-    @RequestMapping(value = URL.Zeugnis.SHOW, method = RequestMethod.GET)
-    public String showZeugnis(@RequestParam(value = URL.Zeugnis.P_HALBJAHR_ID,
-            required = false) long halbjahrId, @RequestParam(URL.Zeugnis
-                    .P_KLASSEN_ID) long klassenId, @RequestParam(value = URL
-                    .Zeugnis.P_SCHUELER_ID,
             required = false) Long schuelerId, Model model,
                     RedirectAttributes redirectAttributes) {
         final List<Zeugnis> zeugnisse = zeugnisErfassungsService.getZeugnisse(
                 halbjahrId, klassenId);
+
+        LOG.debug("SchülerId=>{}<)", schuelerId);
 
         if (CollectionUtils.isEmpty(zeugnisse)) {
             redirectAttributes.addFlashAttribute("message",
@@ -200,5 +189,21 @@ public class ZeugnisController {
         model.addAttribute("arbeitsgruppenSatz", selectedZeugnis
                 .createArbeitsgruppenSatz());
         return "zeugnis/showZeugnis";
+    }
+
+    /**
+     * Zeigt das Zeugnis des entsprechenden Schülers der Klasse in dem Halbjahr.
+     * @param halbjahrId die Id des Schulhalbjahres
+     * @param klassenId die Id der Klasse
+     * @param model das Model
+     * @param redirectAttributes Fehlermeldungen.
+     * @return die logische View
+     */
+    @RequestMapping(value = URL.Zeugnis.SHOW, method = RequestMethod.GET)
+    public String showZeugnis(@RequestParam(URL.Zeugnis
+            .P_HALBJAHR_ID) Long halbjahrId, @RequestParam(URL.Zeugnis
+            .P_KLASSEN_ID) Long klassenId, Model model,
+            RedirectAttributes redirectAttributes) {
+        return URL.redirect(URL.ZeugnisPath.SHOW, halbjahrId, klassenId);
     }
 }
