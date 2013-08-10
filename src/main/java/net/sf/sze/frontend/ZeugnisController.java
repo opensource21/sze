@@ -19,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
 import org.springframework.validation.Validator;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -64,7 +65,13 @@ public class ZeugnisController {
      */
     @RequestMapping(value = {URL.Zeugnis.HOME, URL.Zeugnis.START},
             method = RequestMethod.GET)
-    public String chooseClass(Model model) {
+    // @ModelAttribute(URL.Zeugnis.P_HALBJAHR_ID)
+    // @ModelAttribute(URL.Zeugnis.P_KLASSEN_ID)
+    public String chooseClass(@ModelAttribute(URL.Zeugnis.P_HALBJAHR_ID)
+    @RequestParam(value = URL.Zeugnis.P_HALBJAHR_ID,
+            defaultValue = "-1") Long halbjahrId, @RequestParam(value = URL
+            .Zeugnis.P_KLASSEN_ID,
+            defaultValue = "-1") Long klassenId, Model model) {
         final List<Schulhalbjahr> halbjahre = zeugnisErfassungsService
                 .getActiveSchulhalbjahre();
         if (CollectionUtils.isEmpty(halbjahre)) {
@@ -81,6 +88,8 @@ public class ZeugnisController {
                 .BEWERTUNGEN));
         model.addAttribute("urlPrintZeugnis", URL.filledURL(URL.Zeugnis
                 .ALL_PDFS));
+        model.addAttribute(URL.Zeugnis.P_HALBJAHR_ID, halbjahrId);
+        model.addAttribute(URL.Zeugnis.P_KLASSEN_ID, klassenId);
 
         return "zeugnis/chooseClass";
     }

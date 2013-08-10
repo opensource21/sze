@@ -68,8 +68,8 @@ errors - eine Liste mit Fehlermeldungen.
                 <li><a href="#" th:href="@{/admin}">Administration</a></li>
                 <li><a href="#" th:href="@{#{url.configuration.main}}">Konfiguration</a></li>
                 <!-- TODO feststellen was active ist. -->
-                <li class="active"><a href="#"
-                    th:href="@{#{url.zeugnis.start}}">Zeugnisse</a></li>
+                <li class="active">
+                    <a href="#" th:href="@{#{url.zeugnis.start}(klassen_id=${klassen_id},halbjahr_id=${halbjahr_id})}">Zeugnisse</a></li>
             </ul>
         </div>
     </div>

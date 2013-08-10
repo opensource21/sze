@@ -17,11 +17,11 @@ klassen - Die Liste der möglichen Klassen.
         <form class="form-horizontal" method="get">
             <select bs:name="#{par.zeugnis.halbjahr_id}">
                 <option th:each="halbjahr : ${halbjahre}" th:value="${halbjahr.id}"
-                    th:text="${halbjahr}" th:selected="${halbjahr.id==halbjahrId}" />
+                    th:text="${halbjahr}" th:selected="${halbjahr.id==halbjahr_id}" />
             </select>
             <select bs:name="#{par.zeugnis.klassen_id}">
                 <option th:each="klasse : ${klassen}" th:value="${klasse.id}"
-                    th:text="${klasse}" th:selected="${klasse.id==klassenId}"/>
+                    th:text="${klasse}" th:selected="${klasse.id==klassen_id}"/>
             </select>
             <button type="submit" class="btn" id="btnShowZeugnis" th:formaction="@{${urlShowZeugnis}}">
                 <i class="edit"></i>Zeige Zeugnisse</button>
