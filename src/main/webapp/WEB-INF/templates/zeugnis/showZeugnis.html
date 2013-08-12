@@ -140,12 +140,12 @@
                         <td valign="top" th:text="${zeugnis.anzahlFehltageUnentschuldigt}"></td>
                         <td valign="top" th:text="${zeugnis.anzahlVerspaetungen}"></td>
                         <span th:unless="${zeugnis.schulhalbjahr?.isErstesHalbjahr()}" th:remove="tag">
-                            <td valign="top" th:text="${(zeugnis.ruecktAuf==true)?'Ja':'Nein'}"></td>
-                            <td valign="top" th:text="${(zeugnis.klassenZielWurdeNichtErreicht==true)?'Ja':'Nein'}"></td>
+                            <td valign="top" th:text="#{'blt.'+${zeugnis.ruecktAuf}}"></td>
+                            <td valign="top" th:text="#{'blt.'+${zeugnis.klassenZielWurdeNichtErreicht}}"></td>
                         </span>
                         <span th:if="${zeugnis.schulhalbjahr?.isErstesHalbjahr()}" th:remove="tag">
-                            <td valign="top" th:text="${(zeugnis.klassenZielGefaehrdet==true)?'Ja':'Nein'}"></td>
-                            <td valign="top" th:text="${(zeugnis.klassenZielAusgeschlossen==true)?'Ja':'Nein'}"></td>
+                            <td valign="top" th:text="#{'blt.'+${zeugnis.klassenZielGefaehrdet}}"></td>
+                            <td valign="top" th:text="#{'blt.'+${zeugnis.klassenZielAusgeschlossen}}"></td>
                         </span>
                         <td valign="top" th:text="${zeugnis.zeugnisArt}"></td>
                     </tr>
