@@ -10,6 +10,7 @@ import de.ppi.spring.mvc.oval.MessageLookupContextRenderer;
 import de.ppi.spring.mvc.oval.MessageLookupMessageValueFormatter;
 import de.ppi.spring.mvc.oval.SpringMvcMessageResolver;
 import de.ppi.spring.mvc.util.ApostropheEscapingPropertiesPersister;
+import de.ppi.spring.mvc.util.UrlDefinitionsToMessages;
 import de.ppi.thymeleaf.bootstrap.BootstrapDialect;
 
 import net.sf.oval.Validator;
@@ -32,6 +33,7 @@ import org.springframework.data.web.PageableArgumentResolver;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.format.datetime.DateFormatter;
 import org.springframework.format.support.FormattingConversionService;
+import org.springframework.http.MediaType;
 import org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor;
 import org.springframework.web.context.request.WebRequestInterceptor;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -48,7 +50,6 @@ import org.thymeleaf.spring3.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
 import java.util.List;
-import java.util.Properties;
 
 /**
  * The frontend configuration for Spring.
@@ -59,6 +60,11 @@ import java.util.Properties;
         "net.sf.oval.integration.spring", "de.ppi.jpa.helper"})
 @Import(RootConfig.class)
 public class WebMvcConfig extends WebMvcConfigurationSupport {
+
+    /**
+     * The default encoding.
+     */
+    private static final String ENCODING = "UTF-8";
 
     /**
      * Page size if no other information is given.
@@ -119,11 +125,13 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
         messageSource.setPropertiesPersister(
                 new ApostropheEscapingPropertiesPersister());
 
-        final Properties staticMessages = new Properties();
-        staticMessages.putAll(URL.urlsAsMessages());
-        staticMessages.putAll(URL.paramsAsMessages());
-        staticMessages.putAll(URL.paramGroupAsMessages());
-        messageSource.setCommonMessages(staticMessages);
+        final Class<?>[] classes = URL.class.getDeclaredClasses();
+        final UrlDefinitionsToMessages urlDefinitions =
+                new UrlDefinitionsToMessages(classes);
+        urlDefinitions.addParamGroupAsMessages();
+        urlDefinitions.addParamsAsMessages();
+        urlDefinitions.addUrlsAsMessages();
+        messageSource.setCommonMessages(urlDefinitions.getMessages());
         return messageSource;
     }
 
@@ -187,6 +195,8 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
         final ThymeleafViewResolver resolver = new ThymeleafViewResolver();
         resolver.setTemplateEngine(templateEngine());
         resolver.setOrder(2);
+        resolver.setContentType(MediaType.TEXT_HTML_VALUE);
+        resolver.setCharacterEncoding(ENCODING);
         return resolver;
     }
 
@@ -216,9 +226,9 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
         resolver.setPrefix("/WEB-INF/templates/");
         resolver.setSuffix(".html");
         resolver.setTemplateMode("HTML5");
-        // TODO PPI in Production cachable should be true.
+        // TODO in Production cachable should be true.
         resolver.setCacheable(false);
-        resolver.setCharacterEncoding("UTF-8");
+        resolver.setCharacterEncoding(ENCODING);
         return resolver;
     }
 
@@ -233,8 +243,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
                 new InternalResourceViewResolver();
         resolver.setPrefix("/WEB-INF/views/");
         resolver.setSuffix(".jsp");
-        resolver.setOrder(1);
-        resolver.setViewNames(new String[] {"xx/user/list"});
+        resolver.setOrder(2);
         return resolver;
     }
 

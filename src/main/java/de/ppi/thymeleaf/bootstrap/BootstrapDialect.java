@@ -1,18 +1,14 @@
-// BootstrapDialect.java
-//
-// (c) SZE-Development-Team
-
 package de.ppi.thymeleaf.bootstrap;
-
-import org.thymeleaf.dialect.AbstractDialect;
-import org.thymeleaf.processor.IProcessor;
 
 import java.util.HashSet;
 import java.util.Set;
 
+import org.thymeleaf.dialect.AbstractDialect;
+import org.thymeleaf.processor.IProcessor;
+
 /**
  * The dialect for Twitter Bootstrap.
- *
+ * 
  */
 public class BootstrapDialect extends AbstractDialect {
 
@@ -47,4 +43,5 @@ public class BootstrapDialect extends AbstractDialect {
         processors.add(new BootstrapNameAttrProcessor());
         return processors;
     }
+
 }

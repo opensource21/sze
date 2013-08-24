@@ -1,7 +1,3 @@
-// BootstrapNameAttrProcessor.java
-//
-// (c) SZE-Development-Team
-
 package de.ppi.thymeleaf.bootstrap;
 
 import org.slf4j.Logger;
@@ -22,15 +18,15 @@ import java.util.Set;
 
 /**
  * Attribute processor which makes the work easier with Twitter Bootstrap.
- *
+ * 
  */
 public class BootstrapNameAttrProcessor extends AbstractAttrProcessor {
 
     /**
      * The Logger for the controller.
      */
-    private static final Logger LOG = LoggerFactory.getLogger(
-            BootstrapNameAttrProcessor.class);
+    private static final Logger LOG = LoggerFactory
+            .getLogger(BootstrapNameAttrProcessor.class);
 
     /** The attribute name which should trigger this processor. */
     public static final String ATTRIBUTE_NAME = "name";
@@ -43,9 +39,8 @@ public class BootstrapNameAttrProcessor extends AbstractAttrProcessor {
     /**
      * List of all node names, which are used for th:field.
      */
-    private static final String[] VALID_FIELD_NODE_NAMES = {
-        "input", "select", "option", "textarea"
-    };
+    private static final String[] VALID_FIELD_NODE_NAMES = { "input", "select",
+            "option", "textarea" };
 
     /**
      * Set of all node names, which are used for th:field.
@@ -80,8 +75,9 @@ public class BootstrapNameAttrProcessor extends AbstractAttrProcessor {
         final String fieldNameExpr = element.getAttributeValue(attributeName);
         final String fieldName;
         if (fieldNameExpr.contains("#") || fieldNameExpr.contains("$")) {
-            fieldName = (String) StandardExpressionProcessor.processExpression(
-                    arguments, fieldNameExpr);
+            fieldName =
+                    (String) StandardExpressionProcessor.processExpression(
+                            arguments, fieldNameExpr);
         } else {
             fieldName = fieldNameExpr;
         }
@@ -100,8 +96,9 @@ public class BootstrapNameAttrProcessor extends AbstractAttrProcessor {
 
         final String label;
         if (labelExpr.contains("#") || labelExpr.contains("$")) {
-            label = (String) StandardExpressionProcessor.processExpression(
-                    arguments, labelExpr);
+            label =
+                    (String) StandardExpressionProcessor.processExpression(
+                            arguments, labelExpr);
         } else {
             label = labelExpr;
         }
@@ -132,7 +129,7 @@ public class BootstrapNameAttrProcessor extends AbstractAttrProcessor {
      * &lt;/div&gt;
      * <br>
      * &lt;/div&gt; </code>
-     *
+     * 
      * @param fieldName the name of the property.
      * @param labelText the label text.
      * @param input the input-node.
