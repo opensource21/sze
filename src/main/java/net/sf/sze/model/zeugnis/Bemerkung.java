@@ -60,12 +60,11 @@ public class Bemerkung extends VersionedModel implements Serializable,
 
     private BemerkungsBaustein baustein;
 
-    // bi-directional many-to-one association to Zeugni
+    // bi-directional many-to-one association to Zeugnis
 
     /** The zeugnis. */
     @ManyToOne(optional = false)
     @JoinColumn(name = "zeugnis_id", nullable = false)
-
     private Zeugnis zeugnis;
 
     /**
