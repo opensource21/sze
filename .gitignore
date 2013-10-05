@@ -2,3 +2,4 @@ dbs
 target/*
 .svn
 *.log
+/target
