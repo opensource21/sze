@@ -1,6 +1,6 @@
-ï»¿<!DOCTYPE html>
+<!DOCTYPE html>
 <!-- PARAMS:
-helpMessageId - die MessageId fÃ¼r die Hilfe.
+helpMessageId - die MessageId für die Hilfe.
 success - Erfolgsmeldung
 message - ein Nachricht
 messages - eine Liste mit Meldungen.
@@ -61,7 +61,7 @@ errors - eine Liste mit Fehlermeldungen.
             </p>
         </div>
     </div>
-    <!-- TODO nachfolgendes in AbhÃ¤ngigkeit von der Rollen anzeigen. -->
+    <!-- TODO nachfolgendes in Abhängigkeit von der Rollen anzeigen. -->
     <div class="navbar">
         <div class="navbar-inner">
             <ul class="nav">
@@ -96,7 +96,7 @@ errors - eine Liste mit Fehlermeldungen.
     <div class="alert alert-info"
         th:unless="${#strings.isEmpty(helpMessageId)}">
         <b>Erl&auml;uterung:</b> <span th:utext="#{${helpMessageId}}"
-            th:remove="tag">Ein erlÃ¤uternder Text.</span>
+            th:remove="tag">Ein erläuternder Text.</span>
     </div>
 </body>
 </html>
