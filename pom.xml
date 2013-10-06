@@ -26,6 +26,12 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>de.ppi.oss</groupId>
+            <artifactId>fuwesta-core</artifactId>
+            <version>0.3</version>
+            <scope>compile</scope>
+        </dependency>
         <!-- logging -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -170,18 +176,16 @@
             <version>3.0.1</version>
         </dependency>
 
-        <!--  Reporterstellung -->
+        <!-- Reporterstellung -->
         <dependency>
             <groupId>com.lowagie</groupId>
             <artifactId>itext</artifactId>
             <version>2.1.7</version>
         </dependency>
 
-        <!--  TODO 2.2.2 wird schwierig.
-        https://maven-eu.nuxeo.org/nexus/index.html#nexus-search;quick~jodconverter
-        ist aber notwändig :-( Oder aber ganz die Technik wechseln auf xdocreport,
-        aber die sind noch nicht so weit.
-         -->
+        <!-- TODO 2.2.2 wird schwierig. https://maven-eu.nuxeo.org/nexus/index.html#nexus-search;quick~jodconverter
+            ist aber notwändig :-( Oder aber ganz die Technik wechseln auf xdocreport,
+            aber die sind noch nicht so weit. -->
         <dependency>
             <groupId>com.artofsolving</groupId>
             <artifactId>jodconverter</artifactId>
@@ -449,24 +453,28 @@
             </plugin>
         </plugins>
     </reporting>
-   <repositories>
-     <repository>
-       <id>central</id>
-       <name>Central Repository</name>
-       <url>http://repo.maven.apache.org/maven2</url>
-       <layout>default</layout>
-       <snapshots>
-         <enabled>false</enabled>
-       </snapshots>
-    </repository>
-    <repository>
-       <id>jodconverter</id>
-       <name>Codconvter Repositoy</name>
-       <url>https://maven-us.nuxeo.org/nexus/content/groups/public/</url>
-       <layout>default</layout>
-       <snapshots>
-         <enabled>false</enabled>
-       </snapshots>
-     </repository>
-   </repositories>
+    <repositories>
+        <repository>
+            <id>central</id>
+            <name>Central Repository</name>
+            <url>http://repo.maven.apache.org/maven2</url>
+            <layout>default</layout>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>jodconverter</id>
+            <name>Codconvter Repositoy</name>
+            <url>https://maven-us.nuxeo.org/nexus/content/groups/public/</url>
+            <layout>default</layout>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>opensource21</id>
+            <url> http://opensource21.github.com/releases</url>
+        </repository>
+    </repositories>
 </project>
