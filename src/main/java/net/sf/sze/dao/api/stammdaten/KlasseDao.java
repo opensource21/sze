@@ -4,11 +4,11 @@
 
 package net.sf.sze.dao.api.stammdaten;
 
+import java.util.List;
+
 import net.sf.sze.model.stammdaten.Klasse;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
-
-import java.util.List;
 
 /**
  * DAO fürs {@link Klasse}.

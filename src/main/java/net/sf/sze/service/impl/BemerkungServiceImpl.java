@@ -4,13 +4,14 @@
 
 package net.sf.sze.service.impl;
 
+import javax.annotation.Resource;
+
 import net.sf.sze.dao.api.zeugnis.BemerkungDao;
 import net.sf.sze.model.zeugnis.Bemerkung;
 import net.sf.sze.service.api.BemerkungService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -18,8 +19,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.annotation.Resource;
 
 /**
  * Implementation of {@link BemerkungService}.

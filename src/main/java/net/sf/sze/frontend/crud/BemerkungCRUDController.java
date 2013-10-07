@@ -4,9 +4,7 @@
 
 package net.sf.sze.frontend.crud;
 
-import de.ppi.spring.mvc.util.DefaultExceptionHandler;
-import de.ppi.spring.mvc.util.PageWrapper;
-import de.ppi.spring.mvc.util.ResourceNotFoundException;
+import javax.annotation.Resource;
 
 import net.sf.sze.frontend.URL;
 import net.sf.sze.model.zeugnis.Bemerkung;
@@ -14,8 +12,6 @@ import net.sf.sze.service.api.BemerkungService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import org.springframework.dao.ConcurrencyFailureException;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefaults;
@@ -28,7 +24,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.annotation.Resource;
+import de.ppi.fuwesta.spring.mvc.util.PageWrapper;
+import de.ppi.fuwesta.spring.mvc.util.ResourceNotFoundException;
 
 /**
  * Controller for Create, Read, Update and Delete for the model Bemerkung.
@@ -238,15 +235,7 @@ public class BemerkungCRUDController {
 
         LOG.debug("Update Bemerkung: " + bemerkung);
 
-        try {
-            bemerkungService.save(bemerkung);
-        } catch (ConcurrencyFailureException olE) {
-            DefaultExceptionHandler.handleConcurrencyFailureException(result,
-                    olE);
-            addStandardModelData(bemerkung, URL.filledURL(URL.Bemerkung.EDIT,
-                    bemerkung.getId()), false, model);
-            return BEMERKUNG_FORM;
-        }
+        bemerkungService.save(bemerkung);
 
         return URL.redirect(URL.Bemerkung.LIST);
     }

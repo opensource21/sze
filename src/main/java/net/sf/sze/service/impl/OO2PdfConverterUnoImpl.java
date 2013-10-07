@@ -7,6 +7,9 @@
  */
 package net.sf.sze.service.impl;
 
+import java.io.File;
+import java.io.IOException;
+
 import net.sf.sze.service.api.OO2PdfConverter;
 
 import org.slf4j.Logger;
@@ -22,9 +25,6 @@ import com.sun.star.lang.XMultiComponentFactory;
 import com.sun.star.uno.UnoRuntime;
 import com.sun.star.uno.XComponentContext;
 import com.sun.star.util.XCloseable;
-
-import java.io.File;
-import java.io.IOException;
 
 /**
  * Vorteil: Man muss keine Service starten

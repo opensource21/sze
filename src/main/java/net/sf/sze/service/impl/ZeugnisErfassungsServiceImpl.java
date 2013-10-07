@@ -4,6 +4,10 @@
 
 package net.sf.sze.service.impl;
 
+import java.util.List;
+
+import javax.annotation.Resource;
+
 import net.sf.sze.dao.api.stammdaten.KlasseDao;
 import net.sf.sze.dao.api.zeugnis.SchulhalbjahrDao;
 import net.sf.sze.dao.api.zeugnis.ZeugnisDao;
@@ -14,14 +18,9 @@ import net.sf.sze.service.api.ZeugnisErfassungsService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-
-import javax.annotation.Resource;
 
 /**
  * Standardimplementierung vom {@link ZeugnisErfassungsService}.

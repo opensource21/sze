@@ -4,12 +4,12 @@
 
 package net.sf.sze.dao.api.zeugnis;
 
+import java.util.List;
+
 import net.sf.sze.model.zeugnis.Halbjahr;
 import net.sf.sze.model.zeugnis.Schulhalbjahr;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
-
-import java.util.List;
 
 /**
  * DAO fürs {@link Schulhalbjahr}.
