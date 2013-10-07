@@ -5,6 +5,7 @@
 
 package net.sf.sze.frontend;
 
+import net.sf.sze.frontend.URL.Session;
 import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.stammdaten.Schueler;
 import net.sf.sze.model.zeugnis.Bewertung;
@@ -77,8 +78,8 @@ public class ZeugnisController {
      * @return den View-Namen
      */
     @RequestMapping(value = {URL.ZeugnisPath.START}, method = RequestMethod.GET)
-    public String chooseClass(@PathVariable(URL.Zeugnis
-            .P_HALBJAHR_ID) Long halbjahrId, @PathVariable(URL.Zeugnis
+    public String chooseClass(@PathVariable(URL.Session
+            .P_HALBJAHR_ID) Long halbjahrId, @PathVariable(URL.Session
             .P_KLASSEN_ID) Long klassenId, Model model) {
         final List<Schulhalbjahr> halbjahre = zeugnisErfassungsService
                 .getActiveSchulhalbjahre();
@@ -112,9 +113,9 @@ public class ZeugnisController {
      * @return die logische View
      */
     @RequestMapping(value = URL.ZeugnisPath.SHOW, method = RequestMethod.GET)
-    public String showZeugnisPath(@PathVariable(URL.ZeugnisPath
-            .P_HALBJAHR_ID) long halbjahrId, @PathVariable(URL.ZeugnisPath
-            .P_KLASSEN_ID) long klassenId, @RequestParam(value = URL.Zeugnis
+    public String showZeugnisPath(@PathVariable(URL.Session
+            .P_HALBJAHR_ID) long halbjahrId, @PathVariable(URL.Session
+            .P_KLASSEN_ID) long klassenId, @RequestParam(value = URL.Session
             .P_SCHUELER_ID,
             required = false) Long schuelerId, Model model,
                     RedirectAttributes redirectAttributes) {
@@ -197,7 +198,7 @@ public class ZeugnisController {
     }
 
     /**
-     * Zeigt das Zeugnis des entsprechenden Schülers der Klasse in dem Halbjahr.
+     * Zeigt das Zeugnis des ersten Schülers der Klasse in dem Halbjahr.
      * @param halbjahrId die Id des Schulhalbjahres
      * @param klassenId die Id der Klasse
      * @param model das Model
@@ -205,8 +206,118 @@ public class ZeugnisController {
      * @return die logische View
      */
     @RequestMapping(value = URL.Zeugnis.SHOW, method = RequestMethod.GET)
-    public String showZeugnis(@RequestParam(URL.Zeugnis
-            .P_HALBJAHR_ID) Long halbjahrId, @RequestParam(URL.Zeugnis
+    public String showZeugnis(@RequestParam(URL.Session
+            .P_HALBJAHR_ID) Long halbjahrId, @RequestParam(URL.Session
+            .P_KLASSEN_ID) Long klassenId, Model model,
+            RedirectAttributes redirectAttributes) {
+        return URL.redirect(URL.ZeugnisPath.SHOW, halbjahrId, klassenId);
+    }
+
+    /**
+     * Zeigt die Bewertungen des entsprechenden Faches der Klasse in dem Halbjahr.
+     * @param halbjahrId die Id des Schulhalbjahres
+     * @param klassenId die Id der Klasse
+     * @param schulfachId die Id des Schulfaches..
+     * @param model das Model
+     * @param redirectAttributes Fehlermeldungen.
+     * @return die logische View
+     */
+    @RequestMapping(value = URL.ZeugnisPath.SHOW, method = RequestMethod.GET)
+    public String showBewertungenPath(@PathVariable(URL.Session
+            .P_HALBJAHR_ID) long halbjahrId, @PathVariable(URL.Session
+            .P_KLASSEN_ID) long klassenId, @RequestParam(value = URL.Session
+            .P_SCHUELER_ID,
+            required = false) Long schuelerId, Model model,
+                    RedirectAttributes redirectAttributes) {
+        final List<Zeugnis> zeugnisse = zeugnisErfassungsService.getZeugnisse(
+                halbjahrId, klassenId);
+
+        LOG.debug("SchülerId=>{}<)", schuelerId);
+
+        if (CollectionUtils.isEmpty(zeugnisse)) {
+            redirectAttributes.addFlashAttribute("message",
+                    "Es wurden keine Zeugnisse gefunden");
+            return URL.redirect(URL.ZeugnisPath.START, Long.valueOf(
+                    halbjahrId), Long.valueOf(klassenId));
+        }
+
+        final List<Schueler> schuelerListe = new ArrayList<Schueler>(zeugnisse
+                .size());
+        Zeugnis selectedZeugnis = null;
+        Long prevSchuelerId = null;
+        Long selectedSchuelerId = schuelerId;
+        Long nextSchuelerId = null;
+        for (Zeugnis zeugnis : zeugnisse) {
+            // Sicherstellen, dass es immer einen selektierten Schüler gibt.
+            if (selectedSchuelerId == null) {
+                selectedSchuelerId = zeugnis.getSchueler().getId();
+            }
+
+            schuelerListe.add(zeugnis.getSchueler());
+
+            if ((selectedZeugnis != null) && (nextSchuelerId == null)) {
+                nextSchuelerId = zeugnis.getSchueler().getId();
+            }
+
+            if (selectedSchuelerId.equals(zeugnis.getSchueler().getId())) {
+                selectedZeugnis = zeugnis;
+            }
+
+            if (selectedZeugnis == null) {
+                prevSchuelerId = zeugnis.getSchueler().getId();
+            }
+        }
+
+        if (selectedZeugnis == null) {
+            redirectAttributes.addFlashAttribute("message",
+                    "Der angegebene Schüler hat kein Zeugnis, gehe zum ersten.");
+            return URL.redirect(URL.ZeugnisPath.SHOW, Long.valueOf(halbjahrId),
+                    Long.valueOf(klassenId));
+        }
+
+        Collections.sort(selectedZeugnis.getBewertungen());
+        Collections.sort(selectedZeugnis.getSchulamtsBemerkungen());
+        Collections.sort(selectedZeugnis.getBemerkungen());
+
+        final List<Bewertung> wpBewertungen = new ArrayList<>();
+        final List<Bewertung> otherBewertungen = new ArrayList<>();
+        for (Bewertung bewertung : selectedZeugnis.getBewertungen()) {
+            if (Schulfachtyp.WAHLPFLICHT.equals(bewertung.getSchulfach()
+                    .getTyp())) {
+                wpBewertungen.add(bewertung);
+            } else {
+                otherBewertungen.add(bewertung);
+            }
+        }
+
+        LOG.debug("Zeugnis von Schueler {}. ", selectedZeugnis.getSchueler());
+        model.addAttribute("schuelerListe", schuelerListe);
+        model.addAttribute("zeugnis", selectedZeugnis);
+        model.addAttribute("prevSchuelerId", prevSchuelerId);
+        model.addAttribute("nextSchuelerId", nextSchuelerId);
+        model.addAttribute("wpBewertungen", wpBewertungen);
+        model.addAttribute("otherBewertungen", otherBewertungen);
+        model.addAttribute("urlShowZeugnis", URL.filledURL(URL.ZeugnisPath
+                .SHOW, Long.valueOf(halbjahrId), Long.valueOf(klassenId)));
+        model.addAttribute("urlPrintZeugnis", URL.filledURL(URL.Zeugnis
+                .ONE_PDF, selectedZeugnis.getSchueler().getId(), Long.valueOf(
+                halbjahrId)));
+        model.addAttribute("arbeitsgruppenSatz", selectedZeugnis
+                .createArbeitsgruppenSatz());
+        return "zeugnis/showZeugnis";
+    }
+
+    /**
+     * Zeigt die Bewertungen der Klasse in dem Halbjahr.
+     * @param halbjahrId die Id des Schulhalbjahres
+     * @param klassenId die Id der Klasse
+     * @param model das Model
+     * @param redirectAttributes Fehlermeldungen.
+     * @return die logische View
+     */
+    @RequestMapping(value = URL.Zeugnis.SHOW, method = RequestMethod.GET)
+    public String showBewertungen(@RequestParam(URL.Session
+            .P_HALBJAHR_ID) Long halbjahrId, @RequestParam(URL.Session
             .P_KLASSEN_ID) Long klassenId, Model model,
             RedirectAttributes redirectAttributes) {
         return URL.redirect(URL.ZeugnisPath.SHOW, halbjahrId, klassenId);

@@ -54,22 +54,12 @@ public final class URL {
 
     }
 
-
     /**
-     * All URLs for the creation of a Zeugnis.
+     * Parameter die in verschiedenen View gebraucht werden
+     * und ähnlich wie bei einer Session in die URL abgelegt werden.
+     *
      */
-    public interface Zeugnis {
-
-        /**
-         * Zeugniserfassung base-url.
-         */
-        String HOME = "/zeugnis";
-
-        /**
-         * Parametername für die Schüler-id.
-         */
-        @ParamFormat
-        String P_SCHUELER_ID = "schueler_id";
+    public interface Session {
 
         /**
          * Parameter HalbjahresId.
@@ -84,6 +74,25 @@ public final class URL {
         String P_KLASSEN_ID = "klassen_id";
 
         /**
+         * Parametername für die Schüler-id.
+         */
+        @ParamFormat
+        String P_SCHUELER_ID = "schueler_id";
+
+    }
+
+    /**
+     * All URLs for the creation of a Zeugnis.
+     */
+    public interface Zeugnis {
+
+        /**
+         * Zeugniserfassung base-url.
+         */
+        String HOME = "/zeugnis";
+
+
+        /**
          * Zeugniserfassung base-url.
          */
         String START = HOME + "/start";
@@ -106,8 +115,8 @@ public final class URL {
         /**
          * Zeige PDF eines Schuelers.
          */
-        String ONE_PDF = HOME + "/pdfschueler/{" + P_SCHUELER_ID + "}" + "/{"
-                + P_HALBJAHR_ID + "}";
+        String ONE_PDF = HOME + "/pdfschueler/{" + Session.P_SCHUELER_ID + "}" + "/{"
+                + Session.P_HALBJAHR_ID + "}";
 
     }
 
@@ -119,33 +128,9 @@ public final class URL {
     public interface ZeugnisPath {
 
         /**
-         * Parametername für die Schüler-id.
-         */
-        @ParamFormat
-        String P_SCHUELER_ID = Zeugnis.P_SCHUELER_ID;
-
-        /**
-         * Parameter HalbjahresId.
-         */
-        @ParamFormat
-        String P_HALBJAHR_ID = Zeugnis.P_HALBJAHR_ID;
-
-        /**
-         * Parameter schuelerIndex.
-         */
-        @ParamFormat
-        String P_SCHUELER_INDEX = Zeugnis.P_SCHUELER_ID;
-
-        /**
-         * Parameter KlassenId.
-         */
-        @ParamFormat
-        String P_KLASSEN_ID = Zeugnis.P_KLASSEN_ID;
-
-        /**
          * Zeugniserfassung base-url.
          */
-        String HOME = "/zeugnis/{" + P_HALBJAHR_ID + "}/{" + P_KLASSEN_ID + "}";
+        String HOME = "/zeugnis/{" + Session.P_HALBJAHR_ID + "}/{" + Session.P_KLASSEN_ID + "}";
 
         /**
          * Zeugniserfassung base-url.
@@ -170,8 +155,8 @@ public final class URL {
         /**
          * Zeige PDF eines Schuelers.
          */
-        String ONE_PDF = HOME + "/pdfschueler/{" + P_SCHUELER_ID + "}" + "/{"
-                + P_HALBJAHR_ID + "}";
+        String ONE_PDF = HOME + "/pdfschueler/{" + Session.P_SCHUELER_ID + "}" + "/{"
+                + Session.P_HALBJAHR_ID + "}";
 
     }
 
