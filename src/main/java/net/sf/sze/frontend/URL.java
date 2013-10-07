@@ -7,10 +7,10 @@ package net.sf.sze.frontend;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import de.ppi.fuwesta.spring.mvc.util.UrlDefinitionsToMessages.ParamFormat;
 
 /**
  * List of all URLs.
@@ -19,11 +19,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 //CSOFF: InterfaceIsType You must give the Annotations Strings and can't use
 //Enums.
 public final class URL {
-
-    /**
-     * The Logger for the controller.
-     */
-    private static final Logger LOG = LoggerFactory.getLogger(URL.class);
 
     /**
      * Map which stores the UriComponents.
@@ -72,16 +67,19 @@ public final class URL {
         /**
          * Parametername für die Schüler-id.
          */
+        @ParamFormat
         String P_SCHUELER_ID = "schueler_id";
 
         /**
          * Parameter HalbjahresId.
          */
+        @ParamFormat
         String P_HALBJAHR_ID = "halbjahr_id";
 
         /**
          * Parameter KlassenId.
          */
+        @ParamFormat
         String P_KLASSEN_ID = "klassen_id";
 
         /**
@@ -122,21 +120,25 @@ public final class URL {
         /**
          * Parametername für die Schüler-id.
          */
+        @ParamFormat
         String P_SCHUELER_ID = Zeugnis.P_SCHUELER_ID;
 
         /**
          * Parameter HalbjahresId.
          */
+        @ParamFormat
         String P_HALBJAHR_ID = Zeugnis.P_HALBJAHR_ID;
 
         /**
          * Parameter schuelerIndex.
          */
+        @ParamFormat
         String P_SCHUELER_INDEX = Zeugnis.P_SCHUELER_ID;
 
         /**
          * Parameter KlassenId.
          */
+        @ParamFormat
         String P_KLASSEN_ID = Zeugnis.P_KLASSEN_ID;
 
         /**
@@ -170,123 +172,6 @@ public final class URL {
         String ONE_PDF = HOME + "/pdfschueler/{" + P_SCHUELER_ID + "}" + "/{"
                 + P_HALBJAHR_ID + "}";
 
-    }
-
-
-    /**
-     * All URLS for the User.
-     *
-     */
-    public interface User {
-
-        /**
-         * User-Url.
-         */
-        String HOME = "/user";
-
-        /**
-         * Parametername for the user-id.
-         */
-        String P_USERID = "userId";
-
-        /**
-         * Edit-User-Url.
-         */
-        String EDIT = HOME + "/edit/{" + P_USERID + "}";
-
-        /**
-         * Show-User-Url.
-         */
-        String SHOW = HOME + "/show/{" + P_USERID + "}";
-
-        /**
-         * Delete-User-Url.
-         */
-        String DELETE = HOME + "/delete/{" + P_USERID + "}";
-
-        /** List User-URL. */
-        String LIST = HOME + "/list";
-
-        /** Create User-URL. */
-        String CREATE = HOME + "/create";
-    }
-
-
-    /**
-     * All URLS for the {@link net.sf.sze.model.Post}.
-     *
-     */
-    public interface Post {
-
-        /**
-         * Post-Url.
-         */
-        String HOME = "/post";
-
-        /**
-         * Parameter for id of the post.
-         */
-        String P_POSTID = "postId";
-
-        /**
-         * Edit-Post-Url.
-         */
-        String EDIT = HOME + "/edit/{" + P_POSTID + "}";
-
-        /**
-         * Show-Post-Url.
-         */
-        String SHOW = HOME + "/show/{" + P_POSTID + "}";
-
-        /**
-         * Delete-Post-Url.
-         */
-        String DELETE = HOME + "/delete/{" + P_POSTID + "}";
-
-        /** List Post-URL. */
-        String LIST = HOME + "/list";
-
-        /** Create Post-URL. */
-        String CREATE = HOME + "/create";
-    }
-
-
-    /**
-     * All URLS for the {@link net.sf.sze.model.Tag}.
-     *
-     */
-    public interface Tag {
-
-        /**
-         * Tag-Url.
-         */
-        String HOME = "/tag";
-
-        /**
-         * Parameter for the if of the tag.
-         */
-        String P_TAGID = "tagId";
-
-        /**
-         * Edit-Tag-Url.
-         */
-        String EDIT = HOME + "/edit/{" + P_TAGID + "}";
-
-        /**
-         * Show-Tag-Url.
-         */
-        String SHOW = HOME + "/show/{" + P_TAGID + "}";
-
-        /**
-         * Delete-Tag-Url.
-         */
-        String DELETE = HOME + "/delete/{" + P_TAGID + "}";
-
-        /** List Tag-URL. */
-        String LIST = HOME + "/list";
-
-        /** Create Tag-URL. */
-        String CREATE = HOME + "/create";
     }
 
 
