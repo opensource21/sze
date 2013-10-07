@@ -455,24 +455,6 @@
     </reporting>
     <repositories>
         <repository>
-            <id>central</id>
-            <name>Central Repository</name>
-            <url>http://repo.maven.apache.org/maven2</url>
-            <layout>default</layout>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>jodconverter</id>
-            <name>Codconvter Repositoy</name>
-            <url>https://maven-us.nuxeo.org/nexus/content/groups/public/</url>
-            <layout>default</layout>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
             <id>opensource21</id>
             <url> http://opensource21.github.com/releases</url>
         </repository>
