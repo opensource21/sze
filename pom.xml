@@ -9,9 +9,8 @@
     <description>Schulzeugnisersteller</description>
     <properties>
         <java.version>1.7</java.version>
-        <org.springframework.version>3.2.3.RELEASE</org.springframework.version>
-        <org.slf4j.version>1.7.3</org.slf4j.version>
-        <junit.version>4.8.2</junit.version>
+        <org.springframework.version>3.2.4.RELEASE</org.springframework.version>
+        <junit.version>4.11</junit.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <db.username>szep</db.username>
@@ -22,7 +21,6 @@
         <db.generateDdl>true</db.generateDdl>
         <db.schema>PUBLIC</db.schema>
         <db.hbm2ddl.auto>update</db.hbm2ddl.auto>
-        <thymeleaf.version>2.0.17</thymeleaf.version>
     </properties>
 
     <dependencies>
@@ -34,84 +32,13 @@
         </dependency>
         <!-- logging -->
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${org.slf4j.version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>jcl-over-slf4j</artifactId>
-            <version>${org.slf4j.version}</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>1.0.10</version>
             <scope>runtime</scope>
         </dependency>
 
-        <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
-            <version>2.6</version>
-        </dependency>
-
-        <!-- DB Dependencies -->
-        <dependency>
-            <groupId>com.jolbox</groupId>
-            <artifactId>bonecp</artifactId>
-            <version>0.7.1.RELEASE</version>
-        </dependency>
-
-
-        <dependency>
-            <groupId>org.hibernate.javax.persistence</groupId>
-            <artifactId>hibernate-jpa-2.0-api</artifactId>
-            <version>1.0.1.Final</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
-            <version>4.1.12.Final</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>1.3.168</version>
-        </dependency>
-
-
-        <!-- Validation with OVal -->
-        <dependency>
-            <groupId>net.sf.oval</groupId>
-            <artifactId>oval</artifactId>
-            <version>1.81</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.easytesting</groupId>
-            <artifactId>fest-reflect</artifactId>
-            <version>1.4.1</version>
-        </dependency>
-
-
         <!-- Spring -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>${org.springframework.version}</version>
-            <exclusions>
-                <!-- Exclude Commons Logging in favor of SLF4j -->
-                <exclusion>
-                    <groupId>commons-logging</groupId>
-                    <artifactId>commons-logging</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
@@ -124,11 +51,6 @@
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-jpa</artifactId>
-            <version>1.2.0.RELEASE</version>
-        </dependency>
         <!-- Necessary because the WebMvcConfigurationSupport reference it -->
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -139,28 +61,10 @@
 
         <!-- Thymeleaf -->
         <dependency>
-            <groupId>org.thymeleaf</groupId>
-            <artifactId>thymeleaf</artifactId>
-            <version>${thymeleaf.version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.thymeleaf</groupId>
-            <artifactId>thymeleaf-spring3</artifactId>
-            <version>${thymeleaf.version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
             <groupId>nz.net.ultraq.web.thymeleaf</groupId>
             <artifactId>thymeleaf-layout-dialect</artifactId>
             <version>1.0.6</version>
             <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.thymeleaf</groupId>
-            <artifactId>thymeleaf-testing</artifactId>
-            <version>2.0.3</version>
-            <scope>test</scope>
         </dependency>
 
         <!-- Liquibase -->
@@ -183,9 +87,6 @@
             <version>2.1.7</version>
         </dependency>
 
-        <!-- TODO 2.2.2 wird schwierig. https://maven-eu.nuxeo.org/nexus/index.html#nexus-search;quick~jodconverter
-            ist aber notwändig :-( Oder aber ganz die Technik wechseln auf xdocreport,
-            aber die sind noch nicht so weit. -->
         <dependency>
             <groupId>com.artofsolving</groupId>
             <artifactId>jodconverter</artifactId>
@@ -226,18 +127,11 @@
             <type>jar</type>
             <scope>test</scope>
         </dependency>
-
         <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-all</artifactId>
-            <version>1.9.5</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.easytesting</groupId>
-            <artifactId>fest-assert</artifactId>
-            <version>1.4</version>
+           <groupId>org.assertj</groupId>
+           <artifactId>assertj-core</artifactId>
+           <version>1.4.0</version>
+           <scope>test</scope>
         </dependency>
 
     </dependencies>

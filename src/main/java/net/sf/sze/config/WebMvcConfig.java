@@ -9,7 +9,7 @@ import java.util.List;
 
 import net.sf.oval.Validator;
 import net.sf.oval.configuration.annotation.AnnotationsConfigurer;
-import net.sf.oval.integration.spring.BeanInjectingCheckInitializationListener;
+import net.sf.oval.integration.spring.SpringCheckInitializationListener;
 import net.sf.oval.integration.spring.SpringValidator;
 import net.sf.sze.frontend.URL;
 import nz.net.ultraq.web.thymeleaf.LayoutDialect;
@@ -22,7 +22,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.repository.support.DomainClassConverter;
-import org.springframework.data.web.PageableArgumentResolver;
+import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.format.datetime.DateFormatter;
 import org.springframework.format.support.FormattingConversionService;
@@ -35,7 +35,6 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
-import org.springframework.web.servlet.mvc.method.annotation.ServletWebArgumentResolverAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.thymeleaf.spring3.SpringTemplateEngine;
 import org.thymeleaf.spring3.view.ThymeleafViewResolver;
@@ -172,10 +171,10 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
     @Override
     protected void addArgumentResolvers(
             List<HandlerMethodArgumentResolver> argumentResolvers) {
-        PageableArgumentResolver resolver = new PageableArgumentResolver();
+        PageableHandlerMethodArgumentResolver resolver = new PageableHandlerMethodArgumentResolver();
 
-        resolver.setFallbackPagable(new PageRequest(0, FALLBACK_PAGE_SIZE));
-        argumentResolvers.add(new ServletWebArgumentResolverAdapter(resolver));
+        resolver.setFallbackPageable(new PageRequest(0, FALLBACK_PAGE_SIZE));
+        argumentResolvers.add(resolver);
     }
 
     @Override
@@ -253,7 +252,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
     protected org.springframework.validation.Validator getValidator() {
         final AnnotationsConfigurer annConfig = new AnnotationsConfigurer();
         annConfig.addCheckInitializationListener(
-                BeanInjectingCheckInitializationListener.INSTANCE);
+                SpringCheckInitializationListener.INSTANCE);
 
         final Validator ovalValidator = new Validator(annConfig,
                 new JPAAnnotationConfigLazy());

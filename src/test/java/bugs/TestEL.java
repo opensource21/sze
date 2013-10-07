@@ -2,8 +2,7 @@ package bugs;
 
 import java.util.Date;
 
-import junit.framework.Assert;
-
+import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.expression.spel.SpelEvaluationException;
 import org.springframework.expression.spel.standard.SpelExpression;
@@ -89,7 +88,7 @@ public class TestEL {
 
         /**
          * Gets the name.
-         * 
+         *
          * @return the name
          */
         public String getName() {
@@ -98,7 +97,7 @@ public class TestEL {
 
         /**
          * Sets the name.
-         * 
+         *
          * @param name the new name
          */
         public void setName(String name) {
@@ -107,7 +106,7 @@ public class TestEL {
 
         /**
          * Gets the test date.
-         * 
+         *
          * @return the test date
          */
         public Date getTestDate() {
@@ -116,7 +115,7 @@ public class TestEL {
 
         /**
          * Sets the test date.
-         * 
+         *
          * @param testDate the new test date
          */
         public void setTestDate(Date testDate) {

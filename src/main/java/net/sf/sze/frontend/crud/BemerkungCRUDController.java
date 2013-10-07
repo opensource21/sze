@@ -14,7 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
-import org.springframework.data.web.PageableDefaults;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -67,8 +67,8 @@ public class BemerkungCRUDController {
      */
     @RequestMapping(value = {URL.Bemerkung.HOME, URL.Bemerkung.LIST},
             method = RequestMethod.GET)
-    public String list(Model model, @PageableDefaults(pageNumber = 0, value = 5,
-            sort = {"bemerkungId"}, sortDir = Direction
+    public String list(Model model, @PageableDefault(page = 0, value = 5,
+            sort = {"bemerkungId"}, direction = Direction
                     .ASC) Pageable pageRequest) {
         final PageWrapper<Bemerkung> bemerkungList = new PageWrapper<Bemerkung>(
                 bemerkungService.getBemerkung(pageRequest), URL.Bemerkung.LIST);

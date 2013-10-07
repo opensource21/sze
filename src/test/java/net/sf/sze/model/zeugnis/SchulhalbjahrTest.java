@@ -4,9 +4,9 @@
 
 package net.sf.sze.model.zeugnis;
 
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
-import static org.fest.assertions.Assertions.assertThat;
+import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.Map;

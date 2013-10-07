@@ -4,11 +4,10 @@
 
 package net.sf.sze.model.zeugnis;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import net.sf.sze.frontend.URL;
 
 import org.junit.Test;
-
-import static org.fest.assertions.Assertions.assertThat;
 
 import java.util.HashMap;
 import java.util.Map;
