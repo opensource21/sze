@@ -4,19 +4,7 @@
 
 package net.sf.sze.model.zeugnis;
 
-import de.ppi.jpa.helper.VersionedModel;
-
-import net.sf.oval.constraint.CheckWith;
-import net.sf.oval.constraint.CheckWithCheck;
-import net.sf.sze.util.StringUtil;
-import net.sf.sze.util.VariableUtility;
-
-import org.apache.commons.lang.builder.CompareToBuilder;
-
-import org.springframework.util.StringUtils;
-
 import java.io.Serializable;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,6 +18,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+import net.sf.oval.constraint.CheckWith;
+import net.sf.oval.constraint.CheckWithCheck;
+import net.sf.sze.util.StringUtil;
+import net.sf.sze.util.VariableUtility;
+
+import org.apache.commons.lang.builder.CompareToBuilder;
+import org.springframework.util.StringUtils;
+
+import de.ppi.fuwesta.jpa.helper.VersionedModel;
 
 /**
  * Eine Bewertung ist die Beurteilung zu einem Fach.

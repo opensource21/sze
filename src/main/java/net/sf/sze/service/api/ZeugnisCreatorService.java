@@ -4,15 +4,15 @@
 
 package net.sf.sze.service.api;
 
+import java.io.File;
+import java.io.IOException;
+
 import net.sf.jooreports.templates.DocumentTemplateException;
 import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.zeugnis.Schulhalbjahr;
 import net.sf.sze.model.zeugnis.Zeugnis;
 import net.sf.sze.service.api.PdfConverter.PDFConversionException;
 import net.sf.sze.util.ResultContainer;
-
-import java.io.File;
-import java.io.IOException;
 
 /**
  * Service zum Erstellen der Zeugnisse.

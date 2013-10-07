@@ -16,7 +16,7 @@ import net.sf.sze.constraints.ValidVariableText;
 
 import org.apache.commons.lang.builder.CompareToBuilder;
 
-import de.ppi.jpa.helper.VersionedModel;
+import de.ppi.fuwesta.jpa.helper.VersionedModel;
 
 /**
  * Schüler können verschieden Ämter inne haben, diese werden hier definiert.

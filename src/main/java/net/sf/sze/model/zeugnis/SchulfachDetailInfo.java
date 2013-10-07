@@ -17,7 +17,7 @@ import net.sf.oval.constraint.Size;
 
 import org.apache.commons.lang.builder.CompareToBuilder;
 
-import de.ppi.jpa.helper.VersionedModel;
+import de.ppi.fuwesta.jpa.helper.VersionedModel;
 
 /**
  * Manche Schulfächer umfassen mehrere Themen, in diesem Fall wird es im Detail

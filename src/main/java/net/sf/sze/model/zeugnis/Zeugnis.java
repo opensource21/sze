@@ -4,25 +4,8 @@
 
 package net.sf.sze.model.zeugnis;
 
-import de.ppi.jpa.helper.VersionedModel;
-
-import net.sf.oval.constraint.CheckWith;
-import net.sf.oval.constraint.CheckWithCheck;
-import net.sf.oval.constraint.Size;
-import net.sf.sze.constraints.ValidVariableText;
-import net.sf.sze.model.stammdaten.Klasse;
-import net.sf.sze.model.stammdaten.Schueler;
-import net.sf.sze.util.StringUtil;
-import net.sf.sze.util.VariableUtility;
-
-import org.apache.commons.lang.builder.CompareToBuilder;
-
-import org.springframework.util.StringUtils;
-
 import java.io.Serializable;
-
 import java.text.SimpleDateFormat;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -38,6 +21,20 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+import net.sf.oval.constraint.CheckWith;
+import net.sf.oval.constraint.CheckWithCheck;
+import net.sf.oval.constraint.Size;
+import net.sf.sze.constraints.ValidVariableText;
+import net.sf.sze.model.stammdaten.Klasse;
+import net.sf.sze.model.stammdaten.Schueler;
+import net.sf.sze.util.StringUtil;
+import net.sf.sze.util.VariableUtility;
+
+import org.apache.commons.lang.builder.CompareToBuilder;
+import org.springframework.util.StringUtils;
+
+import de.ppi.fuwesta.jpa.helper.VersionedModel;
 
 /**
  * Ein Schulzeugnis.

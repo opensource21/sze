@@ -4,10 +4,10 @@
 
 package net.sf.sze.service.api;
 
-import com.lowagie.text.DocumentException;
-
 import java.io.File;
 import java.io.IOException;
+
+import com.lowagie.text.DocumentException;
 
 /**
  * Class PdfConverter.

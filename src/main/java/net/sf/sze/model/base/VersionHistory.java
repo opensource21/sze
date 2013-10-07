@@ -4,15 +4,14 @@
 
 package net.sf.sze.model.base;
 
-import de.ppi.jpa.helper.VersionedModel;
-
 import java.io.Serializable;
-
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+
+import de.ppi.fuwesta.jpa.helper.VersionedModel;
 
 /**
  * Information welche Versionen, wann genutzt wurden.

@@ -4,18 +4,8 @@
 
 package net.sf.sze.model.stammdaten;
 
-import de.ppi.jpa.helper.VersionedModel;
-
-import net.sf.oval.constraint.Past;
-import net.sf.oval.constraint.Size;
-import net.sf.sze.model.zeugnis.Zeugnis;
-
-import org.apache.commons.lang.builder.CompareToBuilder;
-
 import java.io.Serializable;
-
 import java.text.SimpleDateFormat;
-
 import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
@@ -30,6 +20,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import net.sf.oval.constraint.Past;
+import net.sf.oval.constraint.Size;
+import net.sf.sze.model.zeugnis.Zeugnis;
+
+import org.apache.commons.lang.builder.CompareToBuilder;
+
+import de.ppi.fuwesta.jpa.helper.VersionedModel;
 
 /**
  * Ein Schüler einer Schule.

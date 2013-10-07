@@ -4,12 +4,12 @@
 
 package net.sf.sze.constraints;
 
-import net.sf.oval.configuration.annotation.Constraint;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+
+import net.sf.oval.configuration.annotation.Constraint;
 
 /**
  * Prüft ob ein Text nur gültige Variablen enthält.

@@ -15,7 +15,7 @@ import net.sf.oval.constraint.Size;
 
 import org.apache.commons.lang.builder.CompareToBuilder;
 
-import de.ppi.jpa.helper.VersionedModel;
+import de.ppi.fuwesta.jpa.helper.VersionedModel;
 
 /**
  * SoL wird mit festen Texten bewertet.

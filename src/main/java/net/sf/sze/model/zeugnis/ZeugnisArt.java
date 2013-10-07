@@ -15,7 +15,7 @@ import net.sf.oval.constraint.Size;
 
 import org.apache.commons.lang.builder.CompareToBuilder;
 
-import de.ppi.jpa.helper.VersionedModel;
+import de.ppi.fuwesta.jpa.helper.VersionedModel;
 
 /**
  * Beschreibt die Art des Zeugnisses, wie Abschluss-Zeugnis oder nicht,

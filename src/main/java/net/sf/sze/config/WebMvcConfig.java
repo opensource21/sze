@@ -4,21 +4,14 @@
 
 package net.sf.sze.config;
 
-import de.ppi.spring.mvc.formatter.NonEmptyStringAnnotationFormatterFactory;
-import de.ppi.spring.mvc.oval.JPAAnnotationConfigLazy;
-import de.ppi.spring.mvc.oval.MessageLookupContextRenderer;
-import de.ppi.spring.mvc.oval.MessageLookupMessageValueFormatter;
-import de.ppi.spring.mvc.oval.SpringMvcMessageResolver;
-import de.ppi.spring.mvc.util.ApostropheEscapingPropertiesPersister;
-import de.ppi.spring.mvc.util.UrlDefinitionsToMessages;
-import de.ppi.thymeleaf.bootstrap.BootstrapDialect;
+
+import java.util.List;
 
 import net.sf.oval.Validator;
 import net.sf.oval.configuration.annotation.AnnotationsConfigurer;
 import net.sf.oval.integration.spring.BeanInjectingCheckInitializationListener;
 import net.sf.oval.integration.spring.SpringValidator;
 import net.sf.sze.frontend.URL;
-
 import nz.net.ultraq.web.thymeleaf.LayoutDialect;
 
 import org.springframework.context.MessageSource;
@@ -44,12 +37,18 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 import org.springframework.web.servlet.mvc.method.annotation.ServletWebArgumentResolverAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-
 import org.thymeleaf.spring3.SpringTemplateEngine;
 import org.thymeleaf.spring3.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
-import java.util.List;
+import de.ppi.fuwesta.spring.mvc.formatter.NonEmptyStringAnnotationFormatterFactory;
+import de.ppi.fuwesta.spring.mvc.oval.JPAAnnotationConfigLazy;
+import de.ppi.fuwesta.spring.mvc.oval.MessageLookupContextRenderer;
+import de.ppi.fuwesta.spring.mvc.oval.MessageLookupMessageValueFormatter;
+import de.ppi.fuwesta.spring.mvc.oval.SpringMvcMessageResolver;
+import de.ppi.fuwesta.spring.mvc.util.ApostropheEscapingPropertiesPersister;
+import de.ppi.fuwesta.spring.mvc.util.UrlDefinitionsToMessages;
+import de.ppi.fuwesta.thymeleaf.bootstrap.BootstrapDialect;
 
 /**
  * The frontend configuration for Spring.

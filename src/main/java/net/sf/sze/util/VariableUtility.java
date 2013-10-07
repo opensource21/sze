@@ -4,15 +4,14 @@
 
 package net.sf.sze.util;
 
-import net.sf.sze.model.stammdaten.Geschlecht;
-import net.sf.sze.model.stammdaten.Schueler;
-
 import java.text.SimpleDateFormat;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+
+import net.sf.sze.model.stammdaten.Geschlecht;
+import net.sf.sze.model.stammdaten.Schueler;
 
 /**
  * An verschiedenen Stellen werden Textbausteine mit Variablen benötigt. Hier
