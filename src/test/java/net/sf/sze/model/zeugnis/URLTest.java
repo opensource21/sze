@@ -1,13 +1,15 @@
 // URLTest.java
 //
+// Licensed under the AGPL - http://www.gnu.org/licenses/agpl-3.0.txt
 // (c) SZE-Development-Team
 
 package net.sf.sze.model.zeugnis;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import net.sf.sze.frontend.URL;
 
 import org.junit.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.HashMap;
 import java.util.Map;

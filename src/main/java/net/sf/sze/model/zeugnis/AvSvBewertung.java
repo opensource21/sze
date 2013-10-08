@@ -1,10 +1,18 @@
 // AvSvBewertung.java
 //
+// Licensed under the AGPL - http://www.gnu.org/licenses/agpl-3.0.txt
 // (c) SZE-Development-Team
 
 package net.sf.sze.model.zeugnis;
 
+import de.ppi.fuwesta.jpa.helper.VersionedModel;
+
+import net.sf.sze.util.VariableUtility;
+
+import org.apache.commons.lang.builder.CompareToBuilder;
+
 import java.io.Serializable;
+
 import java.util.Map;
 
 import javax.persistence.Entity;
@@ -13,12 +21,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import net.sf.sze.util.VariableUtility;
-
-import org.apache.commons.lang.builder.CompareToBuilder;
-
-import de.ppi.fuwesta.jpa.helper.VersionedModel;
 
 /**
  * Bewertung zum Arbeits- und Sozialverhalten.

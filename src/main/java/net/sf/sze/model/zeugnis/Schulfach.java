@@ -1,18 +1,11 @@
 // Schulfach.java
 //
+// Licensed under the AGPL - http://www.gnu.org/licenses/agpl-3.0.txt
 // (c) SZE-Development-Team
 
 package net.sf.sze.model.zeugnis;
 
-import java.io.Serializable;
-import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import de.ppi.fuwesta.jpa.helper.VersionedModel;
 
 import net.sf.oval.constraint.Size;
 import net.sf.sze.constraints.BinnenAussenIntersect;
@@ -22,7 +15,16 @@ import net.sf.sze.util.StringUtil;
 
 import org.apache.commons.lang.builder.CompareToBuilder;
 
-import de.ppi.fuwesta.jpa.helper.VersionedModel;
+import java.io.Serializable;
+
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 /**
  * Ein Schulfach.

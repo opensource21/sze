@@ -1,17 +1,18 @@
 // StandardBinnenIntersect.java
 //
+// Licensed under the AGPL - http://www.gnu.org/licenses/agpl-3.0.txt
 // (c) SZE-Development-Team
 
 package net.sf.sze.constraints;
+
+import net.sf.oval.configuration.annotation.Constraint;
+import net.sf.sze.model.zeugnis.Bewertung;
+import net.sf.sze.model.zeugnis.BinnenDifferenzierteBewertung;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-
-import net.sf.oval.configuration.annotation.Constraint;
-import net.sf.sze.model.zeugnis.Bewertung;
-import net.sf.sze.model.zeugnis.BinnenDifferenzierteBewertung;
 
 /**
  * Prüft ob es Schulfächer gibt die Standard- {@link Bewertung} und

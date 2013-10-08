@@ -1,14 +1,12 @@
 // OO2PdfConverterUnoImpl.java
 //
+// Licensed under the AGPL - http://www.gnu.org/licenses/agpl-3.0.txt
 // (c) SZE-Development-Team
 
 /**
  *
  */
 package net.sf.sze.service.impl;
-
-import java.io.File;
-import java.io.IOException;
 
 import net.sf.sze.service.api.OO2PdfConverter;
 
@@ -25,6 +23,9 @@ import com.sun.star.lang.XMultiComponentFactory;
 import com.sun.star.uno.UnoRuntime;
 import com.sun.star.uno.XComponentContext;
 import com.sun.star.util.XCloseable;
+
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Vorteil: Man muss keine Service starten

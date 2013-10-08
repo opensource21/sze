@@ -1,20 +1,22 @@
 // Schulhalbjahr.java
 //
+// Licensed under the AGPL - http://www.gnu.org/licenses/agpl-3.0.txt
 // (c) SZE-Development-Team
 
 package net.sf.sze.model.zeugnis;
 
+import de.ppi.fuwesta.jpa.helper.VersionedModel;
+
+import org.apache.commons.lang.builder.CompareToBuilder;
+
 import java.io.Serializable;
+
 import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-
-import org.apache.commons.lang.builder.CompareToBuilder;
-
-import de.ppi.fuwesta.jpa.helper.VersionedModel;
 
 /**
  * Beschreibt ein Schulhalbjahr.

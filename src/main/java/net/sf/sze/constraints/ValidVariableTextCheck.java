@@ -1,12 +1,9 @@
 // ValidVariableTextCheck.java
 //
+// Licensed under the AGPL - http://www.gnu.org/licenses/agpl-3.0.txt
 // (c) SZE-Development-Team
 
 package net.sf.sze.constraints;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import net.sf.oval.Validator;
 import net.sf.oval.configuration.annotation.AbstractAnnotationCheck;
@@ -14,6 +11,10 @@ import net.sf.oval.context.OValContext;
 import net.sf.sze.util.VariableUtility;
 
 import org.apache.commons.lang.StringUtils;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Prüft ob ein Text nur gültige Variablen enthält.

@@ -1,16 +1,17 @@
 // URL.java
 //
+// Licensed under the AGPL - http://www.gnu.org/licenses/agpl-3.0.txt
 // (c) SZE-Development-Team
 
 package net.sf.sze.frontend;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import de.ppi.fuwesta.spring.mvc.util.UrlDefinitionsToMessages.ParamFormat;
 
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import de.ppi.fuwesta.spring.mvc.util.UrlDefinitionsToMessages.ParamFormat;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * List of all URLs.

@@ -1,17 +1,19 @@
 // VersionHistory.java
 //
+// Licensed under the AGPL - http://www.gnu.org/licenses/agpl-3.0.txt
 // (c) SZE-Development-Team
 
 package net.sf.sze.model.base;
 
+import de.ppi.fuwesta.jpa.helper.VersionedModel;
+
 import java.io.Serializable;
+
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-
-import de.ppi.fuwesta.jpa.helper.VersionedModel;
 
 /**
  * Information welche Versionen, wann genutzt wurden.

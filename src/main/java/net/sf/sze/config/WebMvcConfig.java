@@ -1,17 +1,25 @@
 // WebMvcConfig.java
 //
+// Licensed under the AGPL - http://www.gnu.org/licenses/agpl-3.0.txt
 // (c) SZE-Development-Team
 
 package net.sf.sze.config;
 
-
-import java.util.List;
+import de.ppi.fuwesta.spring.mvc.formatter.NonEmptyStringAnnotationFormatterFactory;
+import de.ppi.fuwesta.spring.mvc.oval.JPAAnnotationConfigLazy;
+import de.ppi.fuwesta.spring.mvc.oval.MessageLookupContextRenderer;
+import de.ppi.fuwesta.spring.mvc.oval.MessageLookupMessageValueFormatter;
+import de.ppi.fuwesta.spring.mvc.oval.SpringMvcMessageResolver;
+import de.ppi.fuwesta.spring.mvc.util.ApostropheEscapingPropertiesPersister;
+import de.ppi.fuwesta.spring.mvc.util.UrlDefinitionsToMessages;
+import de.ppi.fuwesta.thymeleaf.bootstrap.BootstrapDialect;
 
 import net.sf.oval.Validator;
 import net.sf.oval.configuration.annotation.AnnotationsConfigurer;
 import net.sf.oval.integration.spring.SpringCheckInitializationListener;
 import net.sf.oval.integration.spring.SpringValidator;
 import net.sf.sze.frontend.URL;
+
 import nz.net.ultraq.web.thymeleaf.LayoutDialect;
 
 import org.springframework.context.MessageSource;
@@ -36,18 +44,12 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+
 import org.thymeleaf.spring3.SpringTemplateEngine;
 import org.thymeleaf.spring3.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
-import de.ppi.fuwesta.spring.mvc.formatter.NonEmptyStringAnnotationFormatterFactory;
-import de.ppi.fuwesta.spring.mvc.oval.JPAAnnotationConfigLazy;
-import de.ppi.fuwesta.spring.mvc.oval.MessageLookupContextRenderer;
-import de.ppi.fuwesta.spring.mvc.oval.MessageLookupMessageValueFormatter;
-import de.ppi.fuwesta.spring.mvc.oval.SpringMvcMessageResolver;
-import de.ppi.fuwesta.spring.mvc.util.ApostropheEscapingPropertiesPersister;
-import de.ppi.fuwesta.spring.mvc.util.UrlDefinitionsToMessages;
-import de.ppi.fuwesta.thymeleaf.bootstrap.BootstrapDialect;
+import java.util.List;
 
 /**
  * The frontend configuration for Spring.
@@ -171,7 +173,8 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
     @Override
     protected void addArgumentResolvers(
             List<HandlerMethodArgumentResolver> argumentResolvers) {
-        PageableHandlerMethodArgumentResolver resolver = new PageableHandlerMethodArgumentResolver();
+        PageableHandlerMethodArgumentResolver resolver =
+                new PageableHandlerMethodArgumentResolver();
 
         resolver.setFallbackPageable(new PageRequest(0, FALLBACK_PAGE_SIZE));
         argumentResolvers.add(resolver);

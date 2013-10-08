@@ -1,11 +1,20 @@
 // ZeugnisFormular.java
 //
+// Licensed under the AGPL - http://www.gnu.org/licenses/agpl-3.0.txt
 // (c) SZE-Development-Team
 
 package net.sf.sze.model.zeugnis;
 
+import de.ppi.fuwesta.jpa.helper.VersionedModel;
+
+import net.sf.sze.model.stammdaten.Klasse;
+
+import org.apache.commons.lang.builder.CompareToBuilder;
+
 import java.io.Serializable;
+
 import java.sql.Date;
+
 import java.util.List;
 
 import javax.persistence.Column;
@@ -15,12 +24,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-
-import net.sf.sze.model.stammdaten.Klasse;
-
-import org.apache.commons.lang.builder.CompareToBuilder;
-
-import de.ppi.fuwesta.jpa.helper.VersionedModel;
 
 /**
  * Alle Informationen zu dem Formular des Zeugnisses.
