@@ -6,6 +6,8 @@
 - Umgang mit UniqueKeys diese müssen direkt beim Attribut definiert werden.
 Oder zusätzlich ein @Unique
 
+- Umstellung auf #{db....}
+
 - Initialisierung (4h)
 - Bearbeiten der Noten (1h)
 - Bearbeiten/Hinzufügen von Bemerkungen (2h)
