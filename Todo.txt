@@ -3,3 +3,39 @@
 - BemerkungCRUD zu Ende bringen.
 - Umstellung auf neue Thymeleaf-version
 
+- Umgang mit UniqueKeys diese müssen direkt beim Attribut definiert werden.
+Oder zusätzlich ein @Unique
+
+- Umstellung auf #{db....}
+
+- Initialisierung (4h)
+- Bearbeiten der Noten (1h)
+- Bearbeiten/Hinzufügen von Bemerkungen (2h)
+- Schulfacheinstiegs-Seite (4h)
+- Admin-Bereich (3 PT?)
+
+
+Forschung
+- Man muss die aktuelle URL herausbekommen um den aktuellen Menüpunkt zu setzen.
+- Scaffolding
+
+Erledigt
++ Das Encoding stimmt auf den Seiten nicht, insbesonder bei Kommentaren -> Liegt aber auch daran,
+    dass das Response-Encoding nicht korrekt gesetzt wird (Gefixt). Bei den Kommentaren ist es sehr merkwürdig,
+    muss man mal im Original analysieren bzw in der Datenbank,
+    ?halbjahrId=15&klassenId=3 Schüler Bleul, Philippe-Yannic
+    Datenbank ist OK Es handelt sich um Deutsche Hochkommata.
+    Wird auch sauber ausgelesen.
+    Lag am Encoding fürs ausliefern.
++ Bei Comboboxen sollte man ein Autosubmit mit JS bauen. Diesmal aber JQuery-Like.
++ Formatter für Bereiche ausschalten! //J-  bzw //J+
++ bs:name ist per Copy&Paste entstanden bei Java und JS Java zu unterschiedlich, JS gefixt.
+
++ Druckaufbreitung (6h) -> Es fehlt noch der Test
++ Gedanken zu den Hilfetexten machen. Ist da ein Filter gut oder macht man das anders besser. -Lieber per Hand
++ Schreiben der Validatoren (1h)
++ th:fragment solle im aktuelle Template schauen können. -> Im Forum gepostet. wird in 2.1 möglich :-))
++ Boolean-Darstellung muss man immer einzeln Programmieren, da wäre eine Erweiterung sinnvoll. -> Ins Forum gestellt. ->
+  Eleganter #{'bool.'+${var}}
+
+
