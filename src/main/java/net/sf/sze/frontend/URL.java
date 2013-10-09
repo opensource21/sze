@@ -142,10 +142,6 @@ public final class URL {
          */
         String SHOW = HOME + "/show";
 
-        /**
-         * Zeige Bewertungen.
-         */
-        String BEWERTUNGEN = HOME + "/bewertungen";
 
         /**
          * Zeige PDF einer ganze Klasse.
@@ -160,6 +156,43 @@ public final class URL {
 
     }
 
+
+    /**
+     * Alle URLs für die Bewertungserfassung.
+     */
+    public interface Bewertungen {
+
+        /**
+         * Bewertungen base-url.
+         */
+        String HOME = "/bewertungen";
+
+        /**
+         * Zeige Bewertungen.
+         */
+        String SHOW = HOME + "/list";
+
+
+    }
+
+    /**
+     * Alle URLs zur Anzeige der Bewertungen bei dem die Basis-Informationen
+     * Halbjahr und KlassenId fest im Pfad sind.
+     */
+    public interface BewertungenPath {
+
+        /**
+         * Bewertungserfassung base-url.
+         */
+        String HOME = "/bewertungen/{" + Session.P_HALBJAHR_ID + "}/{" + Session.P_KLASSEN_ID + "}";
+
+        /**
+         * Zeige Bewertungen.
+         */
+        String SHOW = HOME + "/list";
+
+
+    }
 
     /**
      * All URLS for the Bemerkung.
@@ -200,68 +233,9 @@ public final class URL {
     }
 
 
-    /**
-     * Alle URLs für die Bewertungserfassung.
-     */
-    public interface Bewertungen {
-
-        /**
-         * Bewertungen base-url.
-         */
-        String HOME = "/bewertungen";
 
 
-        /**
-         * Bewertungserfassung base-url.
-         */
-        String START = HOME + "/start";
 
-        /**
-         * Zeige Bewertungen.
-         */
-        String SHOW = HOME + "/list";
-
-
-    }
-
-    /**
-     * Alle URLs zur Anzeige der Bewertungen bei dem die Basis-Informationen
-     * Halbjahr und KlassenId fest im Pfad sind.
-     */
-    public interface BewertungenPath {
-
-        /**
-         * Zeugniserfassung base-url.
-         */
-        String HOME = "/zeugnis/{" + Session.P_HALBJAHR_ID + "}/{" + Session.P_KLASSEN_ID + "}";
-
-        /**
-         * Zeugniserfassung base-url.
-         */
-        String START = HOME + "/start";
-
-        /**
-         * Zeige Zeugnis.
-         */
-        String SHOW = HOME + "/show";
-
-        /**
-         * Zeige Bewertungen.
-         */
-        String BEWERTUNGEN = HOME + "/bewertungen";
-
-        /**
-         * Zeige PDF einer ganze Klasse.
-         */
-        String ALL_PDFS = HOME + "/pdfklasse";
-
-        /**
-         * Zeige PDF eines Schuelers.
-         */
-        String ONE_PDF = HOME + "/pdfschueler/{" + Session.P_SCHUELER_ID + "}" + "/{"
-                + Session.P_HALBJAHR_ID + "}";
-
-    }
 
 
     /**
