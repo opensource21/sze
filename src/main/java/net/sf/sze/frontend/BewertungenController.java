@@ -1,8 +1,7 @@
-// ZeugnisController.java
+//BewertungenController.java
 //
 // Licensed under the AGPL - http://www.gnu.org/licenses/agpl-3.0.txt
-// (c) SZE-Development-Team
-
+// (c) SZE-Development Team
 package net.sf.sze.frontend;
 
 import java.util.ArrayList;
@@ -11,11 +10,9 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.stammdaten.Schueler;
 import net.sf.sze.model.zeugnis.Bewertung;
 import net.sf.sze.model.zeugnis.Schulfachtyp;
-import net.sf.sze.model.zeugnis.Schulhalbjahr;
 import net.sf.sze.model.zeugnis.Zeugnis;
 import net.sf.sze.service.api.ZeugnisErfassungsService;
 
@@ -31,18 +28,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+
 /**
- * Haupt-Controlller für die Zeugniserfassung.
+ * Controller zur Erfassung der Bertungen.
  *
  */
 @Controller
-public class ZeugnisController {
+public class BewertungenController {
 
     /**
      * The Logger for the controller.
      */
-    private static final Logger LOG = LoggerFactory.getLogger(
-            ZeugnisController.class);
+    private static final Logger LOG = LoggerFactory
+            .getLogger(BewertungenController.class);
+
 
     /**
      * Der {@link ZeugnisErfassungsService}.
@@ -56,61 +55,18 @@ public class ZeugnisController {
     @Resource
     private Validator validator;
 
-    /**
-     * Zeigt den Auswahl-Dialog für die Klasse.
-     *
-     * @param model das Modell.
-     * @return den View-Namen.
-     */
-    @RequestMapping(value = {URL.Zeugnis.START, URL.Zeugnis.HOME},
-            method = RequestMethod.GET)
-    public String chooseClass(Model model) {
-        return chooseClass(Long.valueOf(0), Long.valueOf(0), model);
-    }
 
     /**
-     * Zeigt den Auswahl-Dialog für die Klasse.
-     * @param halbjahrId die Id des Halbjahres
-     * @param klassenId die Id der Klasse
-     * @param model das Modell
-     * @return den View-Namen
-     */
-    @RequestMapping(value = {URL.ZeugnisPath.START}, method = RequestMethod.GET)
-    public String chooseClass(@PathVariable(URL.Session
-            .P_HALBJAHR_ID) Long halbjahrId, @PathVariable(URL.Session
-            .P_KLASSEN_ID) Long klassenId, Model model) {
-        final List<Schulhalbjahr> halbjahre = zeugnisErfassungsService
-                .getActiveSchulhalbjahre();
-        if (CollectionUtils.isEmpty(halbjahre)) {
-            return URL.redirect(URL.Configuration.MAIN);
-        }
-
-        final List<Klasse> klassen = zeugnisErfassungsService.getActiveKlassen(
-                halbjahre);
-        model.addAttribute("klassen", klassen);
-        model.addAttribute("halbjahre", halbjahre);
-        model.addAttribute("helpMessageId", "help.chooseClass");
-        model.addAttribute("urlShowZeugnis", URL.filledURL(URL.Zeugnis.SHOW));
-        model.addAttribute("urlShowBewertung", URL.filledURL(URL.Bewertungen.SHOW));
-        model.addAttribute("urlPrintZeugnis", URL.filledURL(URL.Zeugnis
-                .ALL_PDFS));
-//      model.addAttribute(URL.Zeugnis.P_HALBJAHR_ID, halbjahrId);
-//      model.addAttribute(URL.Zeugnis.P_KLASSEN_ID, klassenId);
-
-        return "zeugnis/chooseClass";
-    }
-
-    /**
-     * Zeigt das Zeugnis des entsprechenden Schülers der Klasse in dem Halbjahr.
+     * Zeigt die Bewertungen des entsprechenden Faches der Klasse in dem Halbjahr.
      * @param halbjahrId die Id des Schulhalbjahres
      * @param klassenId die Id der Klasse
-     * @param schuelerId der Indes des Schülers.
+     * @param schulfachId die Id des Schulfaches..
      * @param model das Model
      * @param redirectAttributes Fehlermeldungen.
      * @return die logische View
      */
-    @RequestMapping(value = URL.ZeugnisPath.SHOW, method = RequestMethod.GET)
-    public String showZeugnisPath(@PathVariable(URL.Session
+    @RequestMapping(value = URL.BewertungenPath.SHOW, method = RequestMethod.GET)
+    public String showBewertungenPath(@PathVariable(URL.Session
             .P_HALBJAHR_ID) long halbjahrId, @PathVariable(URL.Session
             .P_KLASSEN_ID) long klassenId, @RequestParam(value = URL.Session
             .P_SCHUELER_ID,
@@ -195,18 +151,19 @@ public class ZeugnisController {
     }
 
     /**
-     * Zeigt das Zeugnis des ersten Schülers der Klasse in dem Halbjahr.
+     * Zeigt die Bewertungen der Klasse in dem Halbjahr.
      * @param halbjahrId die Id des Schulhalbjahres
      * @param klassenId die Id der Klasse
      * @param model das Model
      * @param redirectAttributes Fehlermeldungen.
      * @return die logische View
      */
-    @RequestMapping(value = URL.Zeugnis.SHOW, method = RequestMethod.GET)
-    public String showZeugnis(@RequestParam(URL.Session
+    @RequestMapping(value = URL.Bewertungen.SHOW, method = RequestMethod.GET)
+    public String showBewertungen(@RequestParam(URL.Session
             .P_HALBJAHR_ID) Long halbjahrId, @RequestParam(URL.Session
             .P_KLASSEN_ID) Long klassenId, Model model,
             RedirectAttributes redirectAttributes) {
         return URL.redirect(URL.ZeugnisPath.SHOW, halbjahrId, klassenId);
     }
+
 }
