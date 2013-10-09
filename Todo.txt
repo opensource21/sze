@@ -17,6 +17,42 @@ Oder zusätzlich ein @Unique
 
 Forschung
 - Man muss die aktuelle URL herausbekommen um den aktuellen Menüpunkt zu setzen.
+
+    Thanks for creating that feature request zemi.
+
+    Just to provide some added context:
+
+    I'm trying to apply a css class to a menu item based on the current page URL.  So all pages under '/jobs/' should result in my jobs menu item being active.
+
+                <ul class="nav">
+                    <li info:activeforprefix="'/jobs/'">Jobs</li>
+                    <li info:activeforprefix="'/grid/'">Grid</li>
+                    <li info:activeforprefix="'/admin/'">
+                        Administration</li>
+                </ul>
+
+    The implementation of the info:activeforprefix is:
+
+            final String prefix = (String) StandardExpressionProcessor.processExpression(
+                    arguments, templateResolution, attributeValue
+            );
+
+            final Map<String, String> values = new HashMap<String, String>();
+
+            RequestContext requestContext = (RequestContext) arguments.getContext().getVariables().get("springRequestContext");
+            if (requestContext.getRequestUri().startsWith(prefix)) {
+                values.put("class", "active");
+            }
+
+    By the way, I'm loving thymeleaf.  It is refreshing to work with HTML files that actually look like HTML files :)
+
+    Cheers,
+    -Daniel
+
+    Sind auch vorhanden.
+    #httpServletRequest
+    #httpSession
+
 - Scaffolding
 
 Erledigt
