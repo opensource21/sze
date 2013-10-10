@@ -79,6 +79,12 @@ public final class URL {
         @ParamFormat
         String P_SCHUELER_ID = "schueler_id";
 
+        /**
+         * Parametername für die Id des Schulfachs.
+         */
+        @ParamFormat
+        String P_SCHULFACH_ID = "schulfach_id";
+
     }
 
     /**
@@ -102,10 +108,6 @@ public final class URL {
          */
         String SHOW = HOME + "/show";
 
-        /**
-         * Zeige Bewertungen.
-         */
-        String BEWERTUNGEN = HOME + "/bewertungen";
 
         /**
          * Zeige PDF einer ganze Klasse.
