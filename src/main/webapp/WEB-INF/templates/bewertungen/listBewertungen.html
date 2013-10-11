@@ -1,24 +1,66 @@
+<!DOCTYPE html>
+<!-- PARAMS:
+schulfaecher - Liste der relevanten Schulfächer
+bewertungen - alle Bewertungen des Schulfachs,
+halbjahrId - das Schulhalbjahr
+klassenId - die KlassenId
+schulfachId - die Id des Schulfachs.
 
-<%@ page import="net.sf.sze.zeugnis.Bewertung" %>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <meta name="layout" content="main" />
-        <title>Schul-Zeugnis-Erstellung  - Bewertungen</title>
-    </head>
-    <body>
+ -->
+
+<html lang="de-DE" xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+    layout:decorator="/main">
+<head>
+<script type="text/javascript"
+    src="../../../resources/js/jquery-1.8.2.js" th:remove="all"></script>
+<script type="text/javascript"
+    src="../../../resources/js/thymelaefbs.js?1" th:remove="all"></script>
+</head>
+<body>
+    <div layout:fragment="content">
+        <div class="zeugnisNav" th:with="formId='chooseSchuelerFormTop'" th:fragment="zeugnisNav">
+            <form class="form-horizontal" th:id="${formId}" method="get"
+                th:object="${zeugnis}" th:action="@{${urlShowZeugnis}}">
+                Sch&uuml;ler der Klasse <span
+                    th:remove="tag" th:text="${zeugnis.klasse}"></span>
+                <select class="cbauto" name="schueler_id">
+                    <option th:each="item : ${schuelerListe}" th:value="${item.id}"
+                        th:text="${item}" th:selected="${item.id == zeugnis.schueler.id}"
+                        th:disabled="${not item.isActive()}"></option>
+                </select>
+                <button type="submit" class="btn cbbutton">Aktualisieren</button>
+                <span class="btn disabled" th:if="${prevSchuelerId==null}"><i class="prev"></i>Vorheriger Sch&uuml;ler</span>
+                <a class="btn" th:unless="${prevSchuelerId==null}"
+                    th:href="@{${urlShowZeugnis}(schueler_id=${prevSchuelerId})}">
+                    <i class="prev"></i>Vorheriger Sch&uuml;ler
+                </a>
+                <span class="btn disabled" th:if="${nextSchuelerId==null}"><i class="next"></i>N&auml;chster Sch&uuml;ler</span>
+                <a class="btn" th:unless="${nextSchuelerId==null}"
+                    th:href="@{${urlShowZeugnis}(schueler_id=${nextSchuelerId})}">
+                    <i class="next"></i>N&auml;chster Sch&uuml;ler
+                </a> <a class="btn" th:href="@{${urlPrintZeugnis}}"><i class="pdf"></i>Zeugnis
+                    anzeigen</a>
+            </form>
+        </div>
+        <h4>Zeugnis f&uuml;r <b th:text="${zeugnis.schueler.name}+', '+${zeugnis.schueler.vorname}"></b> im Schulhalbjahr <b th:text="${zeugnis.schulhalbjahr}"></b></h4>
+        <div class="row-fluid">
+        </div>
+    </div>
+</body>
+<!--
         <div class="nav">
           <g:form method="post" useToken="true" name="chooseSchulfach">
-                <g:select  name="schulfachId" from="${schulfaecher}"  value="${schulfachId}" 
-                    optionKey="id" noSelection="[0:'Alle anzeigen']" 
+                <g:select  name="schulfachId" from="${schulfaecher}"  value="${schulfachId}"
+                    optionKey="id" noSelection="[0:'Alle anzeigen']"
                     onchange="getElementById('chooseSchulfach').submit(action='filterBewertungen')"/>
                 <span class="button"><g:actionSubmit class="update" action="filterBewertungen" value="Schulfach filtern" id="chooseSchulfachBtn" /></span>
           </g:form>
           <g:javascript>
           if(document.getElementById("chooseSchulfachBtn"))
             document.getElementById("chooseSchulfachBtn").style.display = "none";
-          </g:javascript>          
-                    
+          </g:javascript>
+
         </div>
         <div class="body">
             <h1>Bewertung für Klasse <b>${klasse}</b> im Schulhalbjahr <b>${schulhalbjahr}</b></h1>
@@ -30,12 +72,12 @@
                     <thead>
                         <tr>
                                <g:sortableColumn property="zeugnis.schueler.name" title="Zeugnis" />
-                               <g:sortableColumn property="schulfach" title="Schulfach" />                          
-                               <g:sortableColumn property="leistungsniveau" title="Leistungsniveau" />                       
-                               <g:sortableColumn property="note" title="Note" />                        
+                               <g:sortableColumn property="schulfach" title="Schulfach" />
+                               <g:sortableColumn property="leistungsniveau" title="Leistungsniveau" />
+                               <g:sortableColumn property="note" title="Note" />
                                <g:sortableColumn property="sonderNote" title="Sonder Note" />
-                               <g:sortableColumn property="leistungNurSchwachAusreichend" title="Schwach ausreichend" />                        
-                               <g:sortableColumn property="relevant" title="Relevant" />                        
+                               <g:sortableColumn property="leistungNurSchwachAusreichend" title="Schwach ausreichend" />
+                               <g:sortableColumn property="relevant" title="Relevant" />
                         </tr>
                     </thead>
                     <tbody>
@@ -45,19 +87,19 @@
                         </g:if>
                         <g:else>
                             <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-                        </g:else>                                               
+                        </g:else>
                             <td><g:link action="editBewertung" id="${bewertungInstance.id}">${fieldValue(bean:bewertungInstance, field:'zeugnis')}</g:link></td>
-                            
+
                             <td><g:link action="editBewertung" id="${bewertungInstance.id}">${fieldValue(bean:bewertungInstance, field:'schulfach')}</g:link></td>
-                        
+
                             <td><g:link action="editBewertung" id="${bewertungInstance.id}">${fieldValue(bean:bewertungInstance, field:'leistungsniveau')}</g:link></td>
-                        
+
                             <td><g:link action="editBewertung" id="${bewertungInstance.id}">${fieldValue(bean:bewertungInstance, field:'note')}</g:link></td>
-                        
+
                             <td><g:link action="editBewertung" id="${bewertungInstance.id}">${fieldValue(bean:bewertungInstance, field:'sonderNote')}</g:link></td>
 
                             <td><g:link action="editBewertung" id="${bewertungInstance.id}"><g:formatBoolean boolean="${bewertungInstance.leistungNurSchwachAusreichend}"/></g:link></td>
-                        
+
                             <td><g:link action="editBewertung" id="${bewertungInstance.id}"><g:formatBoolean boolean="${bewertungInstance.relevant}"/></g:link></td>
                         </tr>
                     </g:each>
@@ -70,3 +112,4 @@
         </div>
     </body>
 </html>
+ -->
