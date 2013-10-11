@@ -80,6 +80,7 @@ public class BewertungenController {
             }
         });
         if (schulfachId == null) {
+            LOG.debug("Nehme das erste Schulfach");
             schulfachId = schulfaecher.get(0).getId();
         }
 
@@ -90,6 +91,8 @@ public class BewertungenController {
         model.addAttribute("schulfaecher", schulfaecher);
         model.addAttribute("klasse", klasse);
         model.addAttribute("schulhalbjahr", schulhalbjahr);
+        model.addAttribute(URL.Session.P_KLASSEN_ID, klasse.getId());
+        model.addAttribute(URL.Session.P_HALBJAHR_ID, schulhalbjahr.getId());
         return "bewertungen/listBewertungen";
 
     }

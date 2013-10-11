@@ -22,12 +22,13 @@ schulfachId - die Id des Schulfachs.
         <div class="bewertungenNav" th:with="formId='chooseSchulfachFormTop'" th:fragment="bewertungNav">
             <form class="form-horizontal" th:id="${formId}" method="get"
                 th:object="${zeugnis}"
-                th:action="@{#{url.bewertungen.list(schulhalbjahr.id, klasse.id, schulfachId)}}">
-                Schulf&aumlcher
-                <select class="cbauto" name="#{par.session.schulfach_id}">
+                th:action="@{#{url.bewertungenpath.list(${schulhalbjahr.id}, ${klasse.id})}}">
+                <!-- (schulhalbjahr.id, klasse.id, schulfachId) und die URL muss auch her.  -->
+
+                Schulf&auml;cher
+                <select class="cbauto" th:name="#{par.session.schulfach_id}">
                     <option th:each="item : ${schulfaecher}" th:value="${item.id}"
-                        th:text="${item.name}" th:selected="${item.id == schulfach_id}"
-                        th:disabled="${not item.isActive()}"></option>
+                        th:text="${item.name}" th:selected="${item.id == schulfach_id}"></option>
                 </select>
                 <button type="submit" class="btn cbbutton">Aktualisieren</button>
             </form>
@@ -37,6 +38,7 @@ schulfachId - die Id des Schulfachs.
         </div>
     </div>
 </body>
+</html>
 <!--
         <div class="nav">
           <g:form method="post" useToken="true" name="chooseSchulfach">
