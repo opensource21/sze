@@ -190,24 +190,24 @@ public class Schulfach extends VersionedModel implements Serializable,
     // **************************************************
 
     /**
-     * Konvertiert den Sting der Klassenstufen in eine Liste.
-     * @return den Sting der Klassenstufen als Liste.
+     * Konvertiert den String der Klassenstufen in eine Liste.
+     * @return den String der Klassenstufen als Liste.
      */
     public List<String> convertStufenMitStandardBewertungToList() {
         return StringUtil.convertStringToList(stufenMitStandardBewertung);
     }
 
     /**
-     * Konvertiert den Sting der Klassenstufen in eine Liste.
-     * @return den Sting der Klassenstufen als Liste.
+     * Konvertiert den String der Klassenstufen in eine Liste.
+     * @return den String der Klassenstufen als Liste.
      */
     public List<String> convertStufenMitBinnenDifferenzierungToList() {
         return StringUtil.convertStringToList(stufenMitBinnenDifferenzierung);
     }
 
     /**
-     * Konvertiert den Sting der Klassenstufen in eine Liste.
-     * @return den Sting der Klassenstufen als Liste.
+     * Konvertiert den String der Klassenstufen in eine Liste.
+     * @return den String der Klassenstufen als Liste.
      */
     public List<String> convertStufenMitAussenDifferenzierungToList() {
         return StringUtil.convertStringToList(stufenMitAussenDifferenzierung);
