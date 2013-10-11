@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
+
 /**
  * Utility-Class welches einige Konvertierungen bei Strings vornimmt.
  * @author niels
@@ -33,8 +35,8 @@ public final class StringUtil {
      * @return die Liste.
      */
     public static List<String> convertStringToList(String listAsString) {
-        if (containsInformation(listAsString)) {
-            return Arrays.asList(listAsString.split("[ ,]+/"));
+        if (StringUtils.isNotEmpty(listAsString)) {
+            return Arrays.asList(listAsString.trim().split("[ ,]+"));
         } else {
             return new ArrayList<String>();
         }
@@ -53,7 +55,9 @@ public final class StringUtil {
      * Prüft ob ein Text nicht null und nicht nur Leerzeichen enthält.
      * @param text der zu prüfende Text.
      * @return false wenn er leer ist oder nur Leerzeichen enthält.
+     * @deprecated {@link StringUtils#isNotEmpty(String)}
      */
+    @Deprecated
     public static boolean containsInformation(String text) {
         return (text != null) && !text.trim().isEmpty();
     }
