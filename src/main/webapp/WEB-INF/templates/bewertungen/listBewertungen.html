@@ -2,8 +2,8 @@
 <!-- PARAMS:
 schulfaecher - Liste der relevanten Schulfächer
 bewertungen - alle Bewertungen des Schulfachs,
-halbjahrId - das Schulhalbjahr
-klassenId - die KlassenId
+klasse _ die Klasse
+schulhalbjahr - das Schulhalbjahr.
 schulfachId - die Id des Schulfachs.
 
  -->
@@ -19,31 +19,20 @@ schulfachId - die Id des Schulfachs.
 </head>
 <body>
     <div layout:fragment="content">
-        <div class="zeugnisNav" th:with="formId='chooseSchuelerFormTop'" th:fragment="zeugnisNav">
+        <div class="bewertungenNav" th:with="formId='chooseSchulfachFormTop'" th:fragment="bewertungNav">
             <form class="form-horizontal" th:id="${formId}" method="get"
-                th:object="${zeugnis}" th:action="@{${urlShowZeugnis}}">
-                Sch&uuml;ler der Klasse <span
-                    th:remove="tag" th:text="${zeugnis.klasse}"></span>
-                <select class="cbauto" name="schueler_id">
-                    <option th:each="item : ${schuelerListe}" th:value="${item.id}"
-                        th:text="${item}" th:selected="${item.id == zeugnis.schueler.id}"
+                th:object="${zeugnis}"
+                th:action="@{#{url.bewertungen.list(schulhalbjahr.id, klasse.id, schulfachId)}}">
+                Schulf&aumlcher
+                <select class="cbauto" name="#{par.session.schulfach_id}">
+                    <option th:each="item : ${schulfaecher}" th:value="${item.id}"
+                        th:text="${item.name}" th:selected="${item.id == schulfach_id}"
                         th:disabled="${not item.isActive()}"></option>
                 </select>
                 <button type="submit" class="btn cbbutton">Aktualisieren</button>
-                <span class="btn disabled" th:if="${prevSchuelerId==null}"><i class="prev"></i>Vorheriger Sch&uuml;ler</span>
-                <a class="btn" th:unless="${prevSchuelerId==null}"
-                    th:href="@{${urlShowZeugnis}(schueler_id=${prevSchuelerId})}">
-                    <i class="prev"></i>Vorheriger Sch&uuml;ler
-                </a>
-                <span class="btn disabled" th:if="${nextSchuelerId==null}"><i class="next"></i>N&auml;chster Sch&uuml;ler</span>
-                <a class="btn" th:unless="${nextSchuelerId==null}"
-                    th:href="@{${urlShowZeugnis}(schueler_id=${nextSchuelerId})}">
-                    <i class="next"></i>N&auml;chster Sch&uuml;ler
-                </a> <a class="btn" th:href="@{${urlPrintZeugnis}}"><i class="pdf"></i>Zeugnis
-                    anzeigen</a>
             </form>
         </div>
-        <h4>Zeugnis f&uuml;r <b th:text="${zeugnis.schueler.name}+', '+${zeugnis.schueler.vorname}"></b> im Schulhalbjahr <b th:text="${zeugnis.schulhalbjahr}"></b></h4>
+        <h4>Bewertung für Klasse <b th:text="${klasse}">${klasse}</b> im Schulhalbjahr <b th:text="${schulhalbjahr}">${schulhalbjahr}</b></h4>
         <div class="row-fluid">
         </div>
     </div>

@@ -10,8 +10,10 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.zeugnis.Bewertung;
 import net.sf.sze.model.zeugnis.Schulfach;
+import net.sf.sze.model.zeugnis.Schulhalbjahr;
 import net.sf.sze.service.api.BewertungErfassungsService;
 
 import org.slf4j.Logger;
@@ -64,13 +66,12 @@ public class BewertungenController {
      */
     @RequestMapping(value = URL.BewertungenPath.LIST, method = RequestMethod.GET)
     public String showBewertungenPath(@PathVariable(URL.Session
-            .P_HALBJAHR_ID) long halbjahrId, @PathVariable(URL.Session
-            .P_KLASSEN_ID) long klassenId, @RequestParam(value = URL.Session
+            .P_HALBJAHR_ID) Schulhalbjahr schulhalbjahr,
+            @PathVariable(URL.Session.P_KLASSEN_ID) Klasse klasse, @RequestParam(value = URL.Session
             .P_SCHULFACH_ID, required = false) Long schulfachId, Model model,
             RedirectAttributes redirectAttributes) {
-
         final List<Schulfach> schulfaecher = bewertungErfassungsService.
-                getActiveSchulfaecher(halbjahrId, klassenId);
+                getActiveSchulfaecher(schulhalbjahr, klasse);
         //TODO Sortierung nach Name?
         Collections.sort(schulfaecher, new Comparator<Schulfach>() {
             @Override
@@ -83,9 +84,12 @@ public class BewertungenController {
         }
 
         final List<Bewertung> bewertungen = bewertungErfassungsService.
-                getBewertungen(halbjahrId, klassenId, schulfachId.longValue());
+                getBewertungen(schulhalbjahr.getId().longValue(),
+                klasse.getId().longValue(), schulfachId.longValue());
         model.addAttribute("bewertungen", bewertungen);
         model.addAttribute("schulfaecher", schulfaecher);
+        model.addAttribute("klasse", klasse);
+        model.addAttribute("schulhalbjahr", schulhalbjahr);
         return "bewertungen/listBewertungen";
 
     }

@@ -9,14 +9,14 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import net.sf.sze.dao.api.stammdaten.KlasseDao;
 import net.sf.sze.dao.api.zeugnis.BewertungDao;
 import net.sf.sze.dao.api.zeugnis.SchulfachDao;
-import net.sf.sze.dao.api.zeugnis.SchulhalbjahrDao;
+import net.sf.sze.dao.api.zeugnis.ZeugnisDao;
 import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.zeugnis.Bewertung;
 import net.sf.sze.model.zeugnis.Schulfach;
 import net.sf.sze.model.zeugnis.Schulhalbjahr;
+import net.sf.sze.model.zeugnis.Zeugnis;
 import net.sf.sze.service.api.BewertungErfassungsService;
 
 import org.slf4j.Logger;
@@ -47,17 +47,10 @@ public class BewertungErfassungsServiceImpl implements
     private BewertungDao bewertungDao;
 
     /**
-     * Dao fürs {@link Schulhalbjahr}.
+     * Dao für eine {@link  Zeugnis}.
      */
     @Resource
-    private SchulhalbjahrDao schulhalbjahrDao;
-
-
-    /**
-     * Dao für eine Schul-{@link  Klasse}.
-     */
-    @Resource
-    private KlasseDao klasseDao;
+    private ZeugnisDao zeugnisDao;
 
 
     /**
@@ -72,8 +65,13 @@ public class BewertungErfassungsServiceImpl implements
     @Override
     public List<Bewertung> getBewertungen(long halbjahrId, long klassenId,
             long schulfachId) {
-        return bewertungDao.findAllByZeugnisKlasseIdAndZeugnisSchulhalbjahrIdAndZeugnisSchulhalbjahrSelectableIsTrueAndSchulfachIdOrderByZeugnisSchuelerNameAscZeugnisSchuelerVornameAsc(
-                klassenId, halbjahrId, schulfachId);
+        LOG.debug("Suche Bewertungn für {}, {} und {}", halbjahrId, klassenId, schulfachId);
+        //TODO Schulhalbjahr muss selektierbar sein, aber das fängt man besser mit
+        //einer direkten Prüfung ab.
+        final List<Zeugnis>  zeugnisse = zeugnisDao.
+                findAllByKlasseIdAndSchulhalbjahrIdAndSchulhalbjahrSelectableIsTrueOrderBySchuelerNameAscSchuelerVornameAsc(klassenId, halbjahrId);
+        //TODO niels ist das Aufsplitten wirklich sinnvoll oder lieber ein großes SQL?
+        return bewertungDao.findAllByZeugnisIn(zeugnisse);
     }
 
     /**
@@ -81,11 +79,7 @@ public class BewertungErfassungsServiceImpl implements
      */
     @Override
     public List<Schulfach>
-            getActiveSchulfaecher(long halbjahrId, long klassenId) {
-        final Schulhalbjahr hj = schulhalbjahrDao.findOne(
-                Long.valueOf(halbjahrId));
-        final Klasse klasse = klasseDao.findOne(
-                Long.valueOf(klassenId));
+            getActiveSchulfaecher(Schulhalbjahr hj, Klasse klasse) {
         final String klassenStufe = String.valueOf(klasse.calculateKlassenstufe(hj.getJahr()));
         final List<Schulfach> alleSchulfaecher = schulfachDao.findAll();
         final List<Schulfach> relevanteSchulfaecher = new ArrayList<>();

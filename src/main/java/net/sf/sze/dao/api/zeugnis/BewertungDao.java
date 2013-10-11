@@ -8,6 +8,7 @@ package net.sf.sze.dao.api.zeugnis;
 import java.util.List;
 
 import net.sf.sze.model.zeugnis.Bewertung;
+import net.sf.sze.model.zeugnis.Zeugnis;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
 
@@ -35,6 +36,15 @@ public interface BewertungDao extends PagingAndSortingRepository<Bewertung,
      * @param halbjahrId Id des Halbjahrs.
      * @return Die Liste aller Zeugnisse.
      */
-    List<Bewertung> findAllByZeugnisKlasseIdAndZeugnisSchulhalbjahrIdAndZeugnisSchulhalbjahrSelectableIsTrueAndSchulfachIdOrderByZeugnisSchuelerNameAscZeugnisSchuelerVornameAsc(
+    //TODO diese Methode scheint zu komplex zu sein, als das Hibernate sie
+    //schafft , kann man wohl löschen.
+    List<Bewertung> findAllByZeugnisKlasseIdAndZeugnisSchulhalbjahrIdAndSchulfachIdOrderByZeugnisSchuelerNameAscZeugnisSchuelerVornameAsc(
             long klasseId, long halbjahrId, long schulfachId);
+
+    /**
+     * Liefert alle Bewertungen zu den Zeugnissen.
+     * @param zeugnisse die Zeugnisse.
+     * @return alle zugehörigen Bewertungen.
+     */
+    List<Bewertung> findAllByZeugnisIn(List<Zeugnis> zeugnisse);
 }
