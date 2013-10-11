@@ -86,7 +86,7 @@ public class BewertungenController {
                 getBewertungen(halbjahrId, klassenId, schulfachId.longValue());
         model.addAttribute("bewertungen", bewertungen);
         model.addAttribute("schulfaecher", schulfaecher);
-        return "bewertungen/list";
+        return "bewertungen/listBewertungen";
 
     }
 
