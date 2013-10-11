@@ -91,7 +91,7 @@ public class ZeugnisController {
         model.addAttribute("halbjahre", halbjahre);
         model.addAttribute("helpMessageId", "help.chooseClass");
         model.addAttribute("urlShowZeugnis", URL.filledURL(URL.Zeugnis.SHOW));
-        model.addAttribute("urlShowBewertung", URL.filledURL(URL.Bewertungen.SHOW));
+        model.addAttribute("urlShowBewertung", URL.filledURL(URL.Bewertungen.LIST));
         model.addAttribute("urlPrintZeugnis", URL.filledURL(URL.Zeugnis
                 .ALL_PDFS));
 //      model.addAttribute(URL.Zeugnis.P_HALBJAHR_ID, halbjahrId);

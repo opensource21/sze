@@ -172,7 +172,7 @@ public final class URL {
         /**
          * Zeige Bewertungen.
          */
-        String SHOW = HOME + "/list";
+        String LIST = HOME + "/list";
 
 
     }
@@ -191,7 +191,7 @@ public final class URL {
         /**
          * Zeige Bewertungen.
          */
-        String SHOW = HOME + "/list";
+        String LIST = HOME + "/list";
 
 
     }

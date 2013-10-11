@@ -5,10 +5,10 @@
 
 package net.sf.sze.service.api;
 
-import net.sf.sze.model.zeugnis.Bewertung;
+import java.util.List;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import net.sf.sze.model.zeugnis.Bewertung;
+import net.sf.sze.model.zeugnis.Schulfach;
 
 /**
  * Service mit Diensten zum Erfassen von Bewertungen.
@@ -23,8 +23,17 @@ public interface BewertungErfassungsService {
      *
      * @param halbjahrId die Id des Schulhalbjahres.
      * @param klassenId die Id der Klasse.
+     * @param schulfachId die Id des Schulfachs.
      * @return alle Bewertungrn zu der Klasse des Schulhalbjahres.
      */
-    Page<Bewertung> getBewertungen(long halbjahrId, long klassenId, Pageable pageable);
+    List<Bewertung> getBewertungen(long halbjahrId, long klassenId, long schulfachId);
+
+    /**
+     * Liefert die für die Klasse relevanten Schulfächer.
+     * @param halbjahrId die Id des Shculhalbjahres.
+     * @param klassenId Die Id der Klasse.
+     * @return eine Liste der möglichen Fächer.
+     */
+    List<Schulfach> getActiveSchulfaecher(long halbjahrId, long klassenId);
 
 }

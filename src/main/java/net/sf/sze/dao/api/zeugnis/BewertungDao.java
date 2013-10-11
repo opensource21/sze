@@ -5,10 +5,10 @@
 
 package net.sf.sze.dao.api.zeugnis;
 
+import java.util.List;
+
 import net.sf.sze.model.zeugnis.Bewertung;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 /**
@@ -17,25 +17,24 @@ import org.springframework.data.repository.PagingAndSortingRepository;
  */
 public interface BewertungDao extends PagingAndSortingRepository<Bewertung,
         Long> {
+//
+//    /**
+//     * Listet alle Bewertungen zu einer Klasse und einem Halbjahr.
+//     * @param klasseId Id der Klasse.
+//     * @param halbjahrId Id des Halbjahrs.
+//     * @param pageable information zum Paginating.
+//     * @return ein Page-Objekt.
+//     */
+//    Page<Bewertung> findAllByZeugnisKlasseIdAndZeugnisSchulhalbjahrIdAndZeugnisSchulhalbjahrSelectableIsTrueOrderByZeugnisSchuelerNameAscZeugnisSchuelerVornameAsc(
+//            long klasseId, long halbjahrId, Pageable pageable);
+//
 
     /**
      * Listet alle Bewertungen zu einer Klasse und einem Halbjahr.
      * @param klasseId Id der Klasse.
      * @param halbjahrId Id des Halbjahrs.
-     * @param pageable information zum Paginating.
-     * @return ein Page-Objekt.
+     * @return Die Liste aller Zeugnisse.
      */
-    Page<Bewertung> findAllByZeugnisKlasseIdAndZeugnisSchulhalbjahrIdAndZeugnisSchulhalbjahrSelectableIsTrueOrderByZeugnisSchuelerNameAscZeugnisSchuelerVornameAsc(
-            long klasseId, long halbjahrId, Pageable pageable);
-
-
-    /**
-     * Listet alle Bewertungen zu einer Klasse und einem Halbjahr.
-     * @param klasseId Id der Klasse.
-     * @param halbjahrId Id des Halbjahrs.
-     * @param pageable information zum Paginating.
-     * @return ein Page-Objekt.
-     */
-    Page<Bewertung> findAllByZeugnisKlasseIdAndZeugnisSchulhalbjahrIdAndZeugnisSchulhalbjahrSelectableIsTrueAndSchulfachIdOrderByZeugnisSchuelerNameAscZeugnisSchuelerVornameAsc(
-            long klasseId, long halbjahrId, long schulfachId, Pageable page);
+    List<Bewertung> findAllByZeugnisKlasseIdAndZeugnisSchulhalbjahrIdAndZeugnisSchulhalbjahrSelectableIsTrueAndSchulfachIdOrderByZeugnisSchuelerNameAscZeugnisSchuelerVornameAsc(
+            long klasseId, long halbjahrId, long schulfachId);
 }
