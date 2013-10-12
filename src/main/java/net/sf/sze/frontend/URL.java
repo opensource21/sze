@@ -188,10 +188,15 @@ public final class URL {
          */
         String HOME = "/bewertungen/{" + Session.P_HALBJAHR_ID + "}/{" + Session.P_KLASSEN_ID + "}";
 
+        @ParamFormat
+        String P_BEWERTUNGS_ID = "bewertungsId";
+
         /**
          * Zeige Bewertungen.
          */
         String LIST = HOME + "/list";
+
+        String EDIT = HOME + "/edit/{" + P_BEWERTUNGS_ID + "}";
 
 
     }

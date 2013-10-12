@@ -43,8 +43,9 @@ public interface BewertungDao extends PagingAndSortingRepository<Bewertung,
 
     /**
      * Liefert alle Bewertungen zu den Zeugnissen.
+     * @param schulfachId die Id des Schulfachs.
      * @param zeugnisse die Zeugnisse.
      * @return alle zugehörigen Bewertungen.
      */
-    List<Bewertung> findAllByZeugnisIn(List<Zeugnis> zeugnisse);
+    List<Bewertung> findAllBySchulfachIdAndZeugnisIn(long schulfachId, List<Zeugnis> zeugnisse);
 }

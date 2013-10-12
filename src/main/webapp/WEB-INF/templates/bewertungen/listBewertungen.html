@@ -35,6 +35,42 @@ schulfachId - die Id des Schulfachs.
         <div class="row-fluid">
             <span th:text="#{bewertungen.no_data}" th:remove="tag" th:if="${#lists.isEmpty(bewertungen)}"></span>
             <table class="table table-striped table-bordered table-hover table-condensed" th:unless="${#lists.isEmpty(bewertungen)}">
+                <thead>
+                    <tr>
+                        <th>Zeugnis</th>
+                        <th>Schulfach</th>
+                        <th>Leistungsniveau</th>
+                        <th>Note</th>
+                        <th>Sonder Note</th>
+                        <th>Schwach ausreichend</th>
+                        <th>Relevant</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="bewertungInstance:${bewertungen}">
+                        <td><a th:href="@{#{url.bewertungenpath.edit(${__#{par.session.halbjahr_id}__},
+                                ${__#{par.session.klassen_id}__},
+                                ${bewertungInstance.id})}}" th:text="${bewertungInstance.zeugnis}"></a></td>
+                        <td><a th:href="@{#{url.bewertungenpath.edit(${__#{par.session.halbjahr_id}__},
+                                ${__#{par.session.klassen_id}__},
+                                ${bewertungInstance.id})}}" th:text="${bewertungInstance.schulfach}"></a></td>
+                        <td><a th:href="@{#{url.bewertungenpath.edit(${__#{par.session.halbjahr_id}__},
+                                ${__#{par.session.klassen_id}__},
+                                ${bewertungInstance.id})}}" th:text="${bewertungInstance.leistungsniveau}"></a></td>
+                        <td><a th:href="@{#{url.bewertungenpath.edit(${__#{par.session.halbjahr_id}__},
+                                ${__#{par.session.klassen_id}__},
+                                ${bewertungInstance.id})}}" th:text="${bewertungInstance.note}"></a></td>
+                        <td><a th:href="@{#{url.bewertungenpath.edit(${__#{par.session.halbjahr_id}__},
+                                ${__#{par.session.klassen_id}__},
+                                ${bewertungInstance.id})}}" th:text="${bewertungInstance.sonderNote}"></a></td>
+                        <td><a th:href="@{#{url.bewertungenpath.edit(${__#{par.session.halbjahr_id}__},
+                                ${__#{par.session.klassen_id}__},
+                                ${bewertungInstance.id})}}" th:text="#{${'blt.' + bewertungInstance.leistungNurSchwachAusreichend}}"></a></td>
+                        <td><a th:href="@{#{url.bewertungenpath.edit(${__#{par.session.halbjahr_id}__},
+                                ${__#{par.session.klassen_id}__},
+                                ${bewertungInstance.id})}}" th:text="#{${'blt.' + bewertungInstance.relevant}}"></a></td>
+                    </tr>
+                </tbody>
             </table>
 
         </div>
@@ -43,56 +79,4 @@ schulfachId - die Id des Schulfachs.
     </div>
 </body>
 </html>
-<!--
 
-        <div class="body">
-            <h1>Bewertung für Klasse <b>${klasse}</b> im Schulhalbjahr <b>${schulhalbjahr}</b></h1>
-            <g:if test="${flash.message}">
-            <div class="message">${flash.message}</div>
-            </g:if>
-            <div class="list">
-                <table>
-                    <thead>
-                        <tr>
-                               <g:sortableColumn property="zeugnis.schueler.name" title="Zeugnis" />
-                               <g:sortableColumn property="schulfach" title="Schulfach" />
-                               <g:sortableColumn property="leistungsniveau" title="Leistungsniveau" />
-                               <g:sortableColumn property="note" title="Note" />
-                               <g:sortableColumn property="sonderNote" title="Sonder Note" />
-                               <g:sortableColumn property="leistungNurSchwachAusreichend" title="Schwach ausreichend" />
-                               <g:sortableColumn property="relevant" title="Relevant" />
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <g:each in="${bewertungInstanceList}" status="i" var="bewertungInstance">
-                        <g:if test="${bewertungInstance.id==lastEditedBewertung}">
-                            <tr class="lastEdited">
-                        </g:if>
-                        <g:else>
-                            <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-                        </g:else>
-                            <td><g:link action="editBewertung" id="${bewertungInstance.id}">${fieldValue(bean:bewertungInstance, field:'zeugnis')}</g:link></td>
-
-                            <td><g:link action="editBewertung" id="${bewertungInstance.id}">${fieldValue(bean:bewertungInstance, field:'schulfach')}</g:link></td>
-
-                            <td><g:link action="editBewertung" id="${bewertungInstance.id}">${fieldValue(bean:bewertungInstance, field:'leistungsniveau')}</g:link></td>
-
-                            <td><g:link action="editBewertung" id="${bewertungInstance.id}">${fieldValue(bean:bewertungInstance, field:'note')}</g:link></td>
-
-                            <td><g:link action="editBewertung" id="${bewertungInstance.id}">${fieldValue(bean:bewertungInstance, field:'sonderNote')}</g:link></td>
-
-                            <td><g:link action="editBewertung" id="${bewertungInstance.id}"><g:formatBoolean boolean="${bewertungInstance.leistungNurSchwachAusreichend}"/></g:link></td>
-
-                            <td><g:link action="editBewertung" id="${bewertungInstance.id}"><g:formatBoolean boolean="${bewertungInstance.relevant}"/></g:link></td>
-                        </tr>
-                    </g:each>
-                    </tbody>
-                </table>
-            </div>
-            <div class="paginateButtons">
-                <g:paginate params="${params.findAll{ k,v -> k != 'filter' && k!= 'offset'}}" total="${bewertungInstanceTotal}" />
-            </div>
-        </div>
-    </body>
-</html>
- -->

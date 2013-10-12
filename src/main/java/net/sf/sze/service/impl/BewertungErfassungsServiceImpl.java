@@ -92,7 +92,7 @@ public class BewertungErfassungsServiceImpl implements
         //findAllByZeugnisKlasseIdAndZeugnisSchulhalbjahrIdAndSchulfachIdOrderByZeugnisSchuelerNameAscZeugnisSchuelerVornameAsc(
         // long klasseId, long halbjahrId, long schulfachId); Scheitert. Es gabe eine Fehlermeldung, dass er kein Element
         // zu einer ZeugnisID findet. Das klingt nach einem Fehler in dem darunter liegenden Framework.
-        return bewertungDao.findAllByZeugnisIn(zeugnisse);
+        return bewertungDao.findAllBySchulfachIdAndZeugnisIn(schulfachId, zeugnisse);
     }
 
     /**
