@@ -24,8 +24,6 @@ schulfachId - die Id des Schulfachs.
                 th:object="${zeugnis}"
                 th:action="@{#{url.bewertungenpath.list(${schulhalbjahr.id}, ${klasse.id})}}">
                 <!-- (schulhalbjahr.id, klasse.id, schulfachId) und die URL muss auch her.  -->
-
-                Schulf&auml;cher
                 <select class="cbauto" th:name="#{par.session.schulfach_id}">
                     <option th:each="item : ${schulfaecher}" th:value="${item.id}"
                         th:text="${item.name}" th:selected="${item.id == schulfach_id}"></option>
@@ -35,6 +33,10 @@ schulfachId - die Id des Schulfachs.
         </div>
         <h4>Bewertung für Klasse <b th:text="${klasse}">${klasse}</b> im Schulhalbjahr <b th:text="${schulhalbjahr}">${schulhalbjahr}</b></h4>
         <div class="row-fluid">
+
+
+        </div>
+        <div class="bewertungenNav" th:with="formId='chooseSchulfachFormBottom'" th:include="bewertungen/listBewertungen::bewertungNav">
         </div>
     </div>
 </body>

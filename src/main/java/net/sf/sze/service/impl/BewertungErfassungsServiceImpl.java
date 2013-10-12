@@ -9,8 +9,10 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import net.sf.sze.dao.api.stammdaten.KlasseDao;
 import net.sf.sze.dao.api.zeugnis.BewertungDao;
 import net.sf.sze.dao.api.zeugnis.SchulfachDao;
+import net.sf.sze.dao.api.zeugnis.SchulhalbjahrDao;
 import net.sf.sze.dao.api.zeugnis.ZeugnisDao;
 import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.zeugnis.Bewertung;
@@ -46,6 +48,20 @@ public class BewertungErfassungsServiceImpl implements
     @Resource
     private BewertungDao bewertungDao;
 
+
+    /**
+     * Dao fürs {@link Schulhalbjahr}.
+     */
+    @Resource
+    private SchulhalbjahrDao schulhalbjahrDao;
+
+
+    /**
+     * Dao für eine Schul-{@link  Klasse}.
+     */
+    @Resource
+    private KlasseDao klasseDao;
+
     /**
      * Dao für eine {@link  Zeugnis}.
      */
@@ -62,6 +78,7 @@ public class BewertungErfassungsServiceImpl implements
     /**
      * {@inheritDoc}
      */
+    @SuppressWarnings("boxing")
     @Override
     public List<Bewertung> getBewertungen(long halbjahrId, long klassenId,
             long schulfachId) {
@@ -70,7 +87,11 @@ public class BewertungErfassungsServiceImpl implements
         //einer direkten Prüfung ab.
         final List<Zeugnis>  zeugnisse = zeugnisDao.
                 findAllByKlasseIdAndSchulhalbjahrIdAndSchulhalbjahrSelectableIsTrueOrderBySchuelerNameAscSchuelerVornameAsc(klassenId, halbjahrId);
-        //TODO niels ist das Aufsplitten wirklich sinnvoll oder lieber ein großes SQL?
+        //NICE niels ist das Aufsplitten wirklich sinnvoll oder lieber ein großes SQL?
+        //Der Ansatz mit List<Bewertung>
+        //findAllByZeugnisKlasseIdAndZeugnisSchulhalbjahrIdAndSchulfachIdOrderByZeugnisSchuelerNameAscZeugnisSchuelerVornameAsc(
+        // long klasseId, long halbjahrId, long schulfachId); Scheitert. Es gabe eine Fehlermeldung, dass er kein Element
+        // zu einer ZeugnisID findet. Das klingt nach einem Fehler in dem darunter liegenden Framework.
         return bewertungDao.findAllByZeugnisIn(zeugnisse);
     }
 
@@ -97,6 +118,22 @@ public class BewertungErfassungsServiceImpl implements
         }
 
         return relevanteSchulfaecher;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Klasse getKlasse(long klassenId) {
+        return klasseDao.findOne(Long.valueOf(klassenId));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Schulhalbjahr getSchulhalbjahr(long schulhalbjahrId) {
+        return schulhalbjahrDao.findOne(Long.valueOf(schulhalbjahrId));
     }
 
 }

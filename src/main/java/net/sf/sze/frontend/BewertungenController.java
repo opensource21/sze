@@ -66,10 +66,14 @@ public class BewertungenController {
      */
     @RequestMapping(value = URL.BewertungenPath.LIST, method = RequestMethod.GET)
     public String showBewertungenPath(@PathVariable(URL.Session
-            .P_HALBJAHR_ID) Schulhalbjahr schulhalbjahr,
-            @PathVariable(URL.Session.P_KLASSEN_ID) Klasse klasse, @RequestParam(value = URL.Session
+            .P_HALBJAHR_ID) long schulhalbjahrId,
+            @PathVariable(URL.Session.P_KLASSEN_ID) long klassenId, @RequestParam(value = URL.Session
             .P_SCHULFACH_ID, required = false) Long schulfachId, Model model,
             RedirectAttributes redirectAttributes) {
+
+        final Klasse klasse = bewertungErfassungsService.getKlasse(klassenId);
+        final Schulhalbjahr schulhalbjahr = bewertungErfassungsService.getSchulhalbjahr(schulhalbjahrId);
+
         final List<Schulfach> schulfaecher = bewertungErfassungsService.
                 getActiveSchulfaecher(schulhalbjahr, klasse);
         //TODO Sortierung nach Name?
@@ -87,12 +91,12 @@ public class BewertungenController {
         final List<Bewertung> bewertungen = bewertungErfassungsService.
                 getBewertungen(schulhalbjahr.getId().longValue(),
                 klasse.getId().longValue(), schulfachId.longValue());
+
         model.addAttribute("bewertungen", bewertungen);
         model.addAttribute("schulfaecher", schulfaecher);
         model.addAttribute("klasse", klasse);
         model.addAttribute("schulhalbjahr", schulhalbjahr);
-        model.addAttribute(URL.Session.P_KLASSEN_ID, klasse.getId());
-        model.addAttribute(URL.Session.P_HALBJAHR_ID, schulhalbjahr.getId());
+        model.addAttribute(URL.Session.P_SCHULFACH_ID, schulfachId);
         return "bewertungen/listBewertungen";
 
     }

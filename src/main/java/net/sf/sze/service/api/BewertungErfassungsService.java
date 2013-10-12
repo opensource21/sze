@@ -38,4 +38,18 @@ public interface BewertungErfassungsService {
      */
     List<Schulfach> getActiveSchulfaecher(Schulhalbjahr halbjahr, Klasse klasse);
 
+    /**
+     * Liefert die Klasse zu der Id.
+     * @param klassenId die Id der Klasse.
+     * @return die Klasse.
+     */
+    Klasse getKlasse(long klassenId);
+
+    /**
+     * Das Schulhalbjahr.
+     * @param schulhalbjahrId die Id des gewünschten Schulhalbjahrs.
+     * @return das Schulhalbjahr.
+     */
+    Schulhalbjahr getSchulhalbjahr(long schulhalbjahrId);
+
 }
