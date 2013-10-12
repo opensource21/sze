@@ -51,14 +51,4 @@ public final class StringUtil {
         return text.replaceAll("[ /äöüÄÖÜß+-]", "");
     }
 
-    /**
-     * Prüft ob ein Text nicht null und nicht nur Leerzeichen enthält.
-     * @param text der zu prüfende Text.
-     * @return false wenn er leer ist oder nur Leerzeichen enthält.
-     * @deprecated {@link StringUtils#isNotEmpty(String)}
-     */
-    @Deprecated
-    public static boolean containsInformation(String text) {
-        return (text != null) && !text.trim().isEmpty();
-    }
 }

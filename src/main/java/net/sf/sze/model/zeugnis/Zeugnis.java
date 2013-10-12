@@ -5,25 +5,8 @@
 
 package net.sf.sze.model.zeugnis;
 
-import de.ppi.fuwesta.jpa.helper.VersionedModel;
-
-import net.sf.oval.constraint.CheckWith;
-import net.sf.oval.constraint.CheckWithCheck;
-import net.sf.oval.constraint.Size;
-import net.sf.sze.constraints.ValidVariableText;
-import net.sf.sze.model.stammdaten.Klasse;
-import net.sf.sze.model.stammdaten.Schueler;
-import net.sf.sze.util.StringUtil;
-import net.sf.sze.util.VariableUtility;
-
-import org.apache.commons.lang.builder.CompareToBuilder;
-
-import org.springframework.util.StringUtils;
-
 import java.io.Serializable;
-
 import java.text.SimpleDateFormat;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -39,6 +22,19 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+import net.sf.oval.constraint.CheckWith;
+import net.sf.oval.constraint.CheckWithCheck;
+import net.sf.oval.constraint.Size;
+import net.sf.sze.constraints.ValidVariableText;
+import net.sf.sze.model.stammdaten.Klasse;
+import net.sf.sze.model.stammdaten.Schueler;
+import net.sf.sze.util.VariableUtility;
+
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.builder.CompareToBuilder;
+
+import de.ppi.fuwesta.jpa.helper.VersionedModel;
 
 /**
  * Ein Schulzeugnis.
@@ -735,25 +731,25 @@ public class Zeugnis extends VersionedModel implements Serializable,
         printMap.put("titel", zeugnisArt.getTitel());
         printMap.put("abschlussGrad", zeugnisArt.getAbschlussGrad());
 
-        if (StringUtils.hasText(individuellerLeitspruch)) {
+        if (StringUtils.isNotBlank(individuellerLeitspruch)) {
             printMap.put("leitspruch", individuellerLeitspruch);
         } else {
             printMap.put("leitspruch", formular.getLeitspruch());
         }
 
-        if (StringUtils.hasText(quelleIndividuellerLeitspruch)) {
+        if (StringUtils.isNotBlank(quelleIndividuellerLeitspruch)) {
             printMap.put("quelleLeitspruch", quelleIndividuellerLeitspruch);
         } else {
             printMap.put("quelleLeitspruch", formular.getQuelleLeitspruch());
         }
 
-        if (StringUtils.hasText(individuellerLeitspruch2)) {
+        if (StringUtils.isNotBlank(individuellerLeitspruch2)) {
             printMap.put("leitspruch2", individuellerLeitspruch2);
         } else {
             printMap.put("leitspruch2", formular.getLeitspruch2());
         }
 
-        if (StringUtils.hasText(quelleIndividuellerLeitspruch2)) {
+        if (StringUtils.isNotBlank(quelleIndividuellerLeitspruch2)) {
             printMap.put("quelleLeitspruch2", quelleIndividuellerLeitspruch2);
         } else {
             printMap.put("quelleLeitspruch2", formular.getQuelleLeitspruch2());
@@ -803,11 +799,11 @@ public class Zeugnis extends VersionedModel implements Serializable,
 
         printMap.put("bemerkung_versetzung", versetzungsBemerkung);
         printMap.put("buBewertungsText", VariableUtility.createPrintText(
-                StringUtils.hasLength(buBewertungsText) ? buBewertungsText
+                StringUtils.isNotEmpty(buBewertungsText) ? buBewertungsText
                 : VariableUtility.PLATZHALTER_LEER, schueler, formular
                 .getNachteilsAusgleichsDatum(), false, (String) printMap.get(
                 "shj_jahr")));
-        printMap.put("soLBewertungsTextFix", StringUtils.hasLength(
+        printMap.put("soLBewertungsTextFix", StringUtils.isNotEmpty(
                 soLBewertungsText.getText()) ? soLBewertungsText.getText()
                 : VariableUtility.PLATZHALTER_LEER);
 
@@ -840,8 +836,7 @@ public class Zeugnis extends VersionedModel implements Serializable,
             final String lastAusreichendFach = schwachAusreichendFaecher.remove(
                     schwachAusreichendFaecher.size() - 1);
             schwachausreichendBemerkung = "Die Leistungen in den Fächern "
-                    + StringUtils.collectionToDelimitedString(
-                    schwachAusreichendFaecher, ", ") + " und "
+                    + StringUtils.join(schwachAusreichendFaecher, ", ") + " und "
                     + lastAusreichendFach + " waren nur schwach ausreichend. ";
         }
 
@@ -865,8 +860,8 @@ public class Zeugnis extends VersionedModel implements Serializable,
                     null, (String) printMap.get("shj_jahr"))).append(" ");
         }
 
-        printMap.put("bemerkung_schulamt", StringUtils.hasLength(
-                schulamtsBemerkungsText) ? schulamtsBemerkungsText.toString()
+        printMap.put("bemerkung_schulamt", schulamtsBemerkungsText.length() > 0
+                ? schulamtsBemerkungsText.toString()
                 : VariableUtility.PLATZHALTER_LEER);
     }
 
@@ -901,7 +896,7 @@ public class Zeugnis extends VersionedModel implements Serializable,
         }
 
         final StringBuilder arbeitsgruppenSatz = new StringBuilder();
-        final String name = StringUtil.containsInformation(schueler
+        final String name = StringUtils.isNotBlank(schueler
                 .getRufname()) ? schueler.getRufname() : schueler.getVorname();
         final int anzAGs = besuchteArbeitsgruppen.size();
         switch (anzAGs) {

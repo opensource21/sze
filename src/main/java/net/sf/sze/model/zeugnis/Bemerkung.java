@@ -5,17 +5,7 @@
 
 package net.sf.sze.model.zeugnis;
 
-import de.ppi.fuwesta.jpa.helper.VersionedModel;
-
-import net.sf.sze.constraints.ValidVariableText;
-import net.sf.sze.model.stammdaten.Schueler;
-import net.sf.sze.util.StringUtil;
-import net.sf.sze.util.VariableUtility;
-
-import org.apache.commons.lang.builder.CompareToBuilder;
-
 import java.io.Serializable;
-
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -24,6 +14,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import net.sf.sze.constraints.ValidVariableText;
+import net.sf.sze.model.stammdaten.Schueler;
+import net.sf.sze.util.VariableUtility;
+
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.builder.CompareToBuilder;
+
+import de.ppi.fuwesta.jpa.helper.VersionedModel;
 
 /**
  * Bemerkungen zu Zeugnissen.
@@ -173,7 +172,7 @@ public class Bemerkung extends VersionedModel implements Serializable,
 
     @Override
     public String toString() {
-        if (StringUtil.containsInformation(freiText)) {
+        if (StringUtils.isNotBlank(freiText)) {
             return baustein.getName() + " " + freiText;
         } else {
             return baustein.getName() + " " + fixText;
@@ -189,7 +188,7 @@ public class Bemerkung extends VersionedModel implements Serializable,
      */
     public String createPrintText(final Schueler schueler, final Date datum,
             final String schuljahr) {
-        String text = StringUtil.containsInformation(freiText) ? freiText
+        String text = StringUtils.isNotBlank(freiText) ? freiText
                 : fixText;
         text = VariableUtility.createPrintText(text, schueler, datum,
                 erSieStattNamen, schuljahr);

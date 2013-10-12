@@ -155,7 +155,7 @@ public class Klasse extends VersionedModel implements Serializable,
      * @return den Klassennamen in Abhängigkeit vom Schuljahr.
      */
     public String calculateKlassenname(final int schuljahresEnde) {
-        if (StringUtils.isNotEmpty(suffix)) {
+        if (StringUtils.isNotBlank(suffix)) {
             return calculateKlassenstufe(schuljahresEnde) + suffix;
         } else {
             return String.valueOf(calculateKlassenstufe(schuljahresEnde));

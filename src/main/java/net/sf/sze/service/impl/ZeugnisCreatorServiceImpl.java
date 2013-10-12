@@ -29,22 +29,19 @@ import net.sf.sze.util.ResultContainer;
 import net.sf.sze.util.VariableUtility;
 
 import org.apache.commons.io.FilenameUtils;
-
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -499,7 +496,7 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
 
             if (mapEntry.getValue() instanceof String) {
                 final String value = (String) mapEntry.getValue();
-                if (StringUtils.hasLength(value)) {
+                if (StringUtils.isNotEmpty(value)) {
                     nlValues.put(key, "" + value + "\n");
                 } else {
                     nlValues.put(key, value);

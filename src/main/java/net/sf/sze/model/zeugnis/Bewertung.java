@@ -6,18 +6,14 @@
 package net.sf.sze.model.zeugnis;
 
 import de.ppi.fuwesta.jpa.helper.VersionedModel;
-
 import net.sf.oval.constraint.CheckWith;
 import net.sf.oval.constraint.CheckWithCheck;
-import net.sf.sze.util.StringUtil;
 import net.sf.sze.util.VariableUtility;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.CompareToBuilder;
 
-import org.springframework.util.StringUtils;
-
 import java.io.Serializable;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -251,7 +247,7 @@ public class Bewertung extends VersionedModel implements Serializable,
      * @return eine String Repräsentation für die Note zu Darstellung in der GUI.
      */
     public String notenDarstellung() {
-        if (StringUtil.containsInformation(sonderNote)) {
+        if (StringUtils.isNotBlank(sonderNote)) {
             return sonderNote;
         }
 
@@ -306,7 +302,7 @@ public class Bewertung extends VersionedModel implements Serializable,
         String result;
         if (!relevant) {
             result = VariableUtility.PLATZHALTER_LEER;
-        } else if (StringUtils.hasText(sonderNote)) {
+        } else if (StringUtils.isNotBlank(sonderNote)) {
             result = sonderNote;
         } else {
             String noteAlsText;
