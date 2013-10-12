@@ -22,7 +22,7 @@ schulfachId - die Id des Schulfachs.
         <div class="bewertungenNav" th:with="formId='chooseSchulfachFormTop'" th:fragment="bewertungNav">
             <form class="form-horizontal" th:id="${formId}" method="get"
                 th:object="${zeugnis}"
-                th:action="@{#{url.bewertungenpath.list(${schulhalbjahr.id}, ${klasse.id})}}">
+                th:action="@{#{url.bewertungenpath.list(${__#{par.session.halbjahr_id}__}, ${__#{par.session.klassen_id}__})}}">
                 <!-- (schulhalbjahr.id, klasse.id, schulfachId) und die URL muss auch her.  -->
                 <select class="cbauto" th:name="#{par.session.schulfach_id}">
                     <option th:each="item : ${schulfaecher}" th:value="${item.id}"
@@ -33,7 +33,9 @@ schulfachId - die Id des Schulfachs.
         </div>
         <h4>Bewertung für Klasse <b th:text="${klasse}">${klasse}</b> im Schulhalbjahr <b th:text="${schulhalbjahr}">${schulhalbjahr}</b></h4>
         <div class="row-fluid">
-
+            <span th:text="#{bewertungen.no_data}" th:remove="tag" th:if="${#lists.isEmpty(bewertungen)}"></span>
+            <table class="table table-striped table-bordered table-hover table-condensed" th:unless="${#lists.isEmpty(bewertungen)}">
+            </table>
 
         </div>
         <div class="bewertungenNav" th:with="formId='chooseSchulfachFormBottom'" th:include="bewertungen/listBewertungen::bewertungNav">
@@ -42,19 +44,7 @@ schulfachId - die Id des Schulfachs.
 </body>
 </html>
 <!--
-        <div class="nav">
-          <g:form method="post" useToken="true" name="chooseSchulfach">
-                <g:select  name="schulfachId" from="${schulfaecher}"  value="${schulfachId}"
-                    optionKey="id" noSelection="[0:'Alle anzeigen']"
-                    onchange="getElementById('chooseSchulfach').submit(action='filterBewertungen')"/>
-                <span class="button"><g:actionSubmit class="update" action="filterBewertungen" value="Schulfach filtern" id="chooseSchulfachBtn" /></span>
-          </g:form>
-          <g:javascript>
-          if(document.getElementById("chooseSchulfachBtn"))
-            document.getElementById("chooseSchulfachBtn").style.display = "none";
-          </g:javascript>
 
-        </div>
         <div class="body">
             <h1>Bewertung für Klasse <b>${klasse}</b> im Schulhalbjahr <b>${schulhalbjahr}</b></h1>
             <g:if test="${flash.message}">

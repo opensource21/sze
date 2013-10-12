@@ -20,6 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.CollectionUtils;
 import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -66,13 +67,13 @@ public class BewertungenController {
      */
     @RequestMapping(value = URL.BewertungenPath.LIST, method = RequestMethod.GET)
     public String showBewertungenPath(@PathVariable(URL.Session
-            .P_HALBJAHR_ID) long schulhalbjahrId,
+            .P_HALBJAHR_ID) long halbjahrId,
             @PathVariable(URL.Session.P_KLASSEN_ID) long klassenId, @RequestParam(value = URL.Session
             .P_SCHULFACH_ID, required = false) Long schulfachId, Model model,
             RedirectAttributes redirectAttributes) {
 
         final Klasse klasse = bewertungErfassungsService.getKlasse(klassenId);
-        final Schulhalbjahr schulhalbjahr = bewertungErfassungsService.getSchulhalbjahr(schulhalbjahrId);
+        final Schulhalbjahr schulhalbjahr = bewertungErfassungsService.getSchulhalbjahr(halbjahrId);
 
         final List<Schulfach> schulfaecher = bewertungErfassungsService.
                 getActiveSchulfaecher(schulhalbjahr, klasse);
@@ -83,6 +84,12 @@ public class BewertungenController {
                 return o1.getName().compareTo(o2.getName());
             }
         });
+        if (CollectionUtils.isEmpty(schulfaecher)) {
+            redirectAttributes.addFlashAttribute("message",
+                    "Es wurden keine Schulfächer gefunden");
+            return URL.redirect(URL.ZeugnisPath.START, Long.valueOf(
+                    halbjahrId), Long.valueOf(klassenId));
+        }
         if (schulfachId == null) {
             LOG.debug("Nehme das erste Schulfach");
             schulfachId = schulfaecher.get(0).getId();
