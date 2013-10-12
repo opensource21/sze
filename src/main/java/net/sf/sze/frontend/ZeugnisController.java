@@ -5,6 +5,12 @@
 
 package net.sf.sze.frontend;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import javax.annotation.Resource;
+
 import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.stammdaten.Schueler;
 import net.sf.sze.model.zeugnis.Bewertung;
@@ -15,7 +21,6 @@ import net.sf.sze.service.api.ZeugnisErfassungsService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
@@ -25,12 +30,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import javax.annotation.Resource;
 
 /**
  * Haupt-Controlller für die Zeugniserfassung.
@@ -77,8 +76,8 @@ public class ZeugnisController {
      * @return den View-Namen
      */
     @RequestMapping(value = {URL.ZeugnisPath.START}, method = RequestMethod.GET)
-    public String chooseClass(@PathVariable(URL.Zeugnis
-            .P_HALBJAHR_ID) Long halbjahrId, @PathVariable(URL.Zeugnis
+    public String chooseClass(@PathVariable(URL.Session
+            .P_HALBJAHR_ID) Long halbjahrId, @PathVariable(URL.Session
             .P_KLASSEN_ID) Long klassenId, Model model) {
         final List<Schulhalbjahr> halbjahre = zeugnisErfassungsService
                 .getActiveSchulhalbjahre();
@@ -92,8 +91,7 @@ public class ZeugnisController {
         model.addAttribute("halbjahre", halbjahre);
         model.addAttribute("helpMessageId", "help.chooseClass");
         model.addAttribute("urlShowZeugnis", URL.filledURL(URL.Zeugnis.SHOW));
-        model.addAttribute("urlShowBewertung", URL.filledURL(URL.Zeugnis
-                .BEWERTUNGEN));
+        model.addAttribute("urlShowBewertung", URL.filledURL(URL.Bewertungen.LIST));
         model.addAttribute("urlPrintZeugnis", URL.filledURL(URL.Zeugnis
                 .ALL_PDFS));
 //      model.addAttribute(URL.Zeugnis.P_HALBJAHR_ID, halbjahrId);
@@ -112,9 +110,9 @@ public class ZeugnisController {
      * @return die logische View
      */
     @RequestMapping(value = URL.ZeugnisPath.SHOW, method = RequestMethod.GET)
-    public String showZeugnisPath(@PathVariable(URL.ZeugnisPath
-            .P_HALBJAHR_ID) long halbjahrId, @PathVariable(URL.ZeugnisPath
-            .P_KLASSEN_ID) long klassenId, @RequestParam(value = URL.Zeugnis
+    public String showZeugnisPath(@PathVariable(URL.Session
+            .P_HALBJAHR_ID) long halbjahrId, @PathVariable(URL.Session
+            .P_KLASSEN_ID) long klassenId, @RequestParam(value = URL.Session
             .P_SCHUELER_ID,
             required = false) Long schuelerId, Model model,
                     RedirectAttributes redirectAttributes) {
@@ -197,7 +195,7 @@ public class ZeugnisController {
     }
 
     /**
-     * Zeigt das Zeugnis des entsprechenden Schülers der Klasse in dem Halbjahr.
+     * Zeigt das Zeugnis des ersten Schülers der Klasse in dem Halbjahr.
      * @param halbjahrId die Id des Schulhalbjahres
      * @param klassenId die Id der Klasse
      * @param model das Model
@@ -205,8 +203,8 @@ public class ZeugnisController {
      * @return die logische View
      */
     @RequestMapping(value = URL.Zeugnis.SHOW, method = RequestMethod.GET)
-    public String showZeugnis(@RequestParam(URL.Zeugnis
-            .P_HALBJAHR_ID) Long halbjahrId, @RequestParam(URL.Zeugnis
+    public String showZeugnis(@RequestParam(URL.Session
+            .P_HALBJAHR_ID) Long halbjahrId, @RequestParam(URL.Session
             .P_KLASSEN_ID) Long klassenId, Model model,
             RedirectAttributes redirectAttributes) {
         return URL.redirect(URL.ZeugnisPath.SHOW, halbjahrId, klassenId);

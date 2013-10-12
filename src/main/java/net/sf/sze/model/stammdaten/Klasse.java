@@ -5,16 +5,7 @@
 
 package net.sf.sze.model.stammdaten;
 
-import de.ppi.fuwesta.jpa.helper.VersionedModel;
-
-import net.sf.oval.constraint.Range;
-import net.sf.oval.constraint.Size;
-import net.sf.sze.util.StringUtil;
-
-import org.apache.commons.lang.builder.CompareToBuilder;
-
 import java.io.Serializable;
-
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Set;
@@ -23,6 +14,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import net.sf.oval.constraint.Range;
+import net.sf.oval.constraint.Size;
+
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.builder.CompareToBuilder;
+
+import de.ppi.fuwesta.jpa.helper.VersionedModel;
 
 /**
  * Beschreibt eine Schulklasse.
@@ -156,7 +155,7 @@ public class Klasse extends VersionedModel implements Serializable,
      * @return den Klassennamen in Abhängigkeit vom Schuljahr.
      */
     public String calculateKlassenname(final int schuljahresEnde) {
-        if (StringUtil.containsInformation(suffix)) {
+        if (StringUtils.isNotEmpty(suffix)) {
             return calculateKlassenstufe(schuljahresEnde) + suffix;
         } else {
             return String.valueOf(calculateKlassenstufe(schuljahresEnde));

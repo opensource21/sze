@@ -54,22 +54,12 @@ public final class URL {
 
     }
 
-
     /**
-     * All URLs for the creation of a Zeugnis.
+     * Parameter die in verschiedenen View gebraucht werden
+     * und ähnlich wie bei einer Session in die URL abgelegt werden.
+     *
      */
-    public interface Zeugnis {
-
-        /**
-         * Zeugniserfassung base-url.
-         */
-        String HOME = "/zeugnis";
-
-        /**
-         * Parametername für die Schüler-id.
-         */
-        @ParamFormat
-        String P_SCHUELER_ID = "schueler_id";
+    public interface Session {
 
         /**
          * Parameter HalbjahresId.
@@ -84,6 +74,31 @@ public final class URL {
         String P_KLASSEN_ID = "klassen_id";
 
         /**
+         * Parametername für die Schüler-id.
+         */
+        @ParamFormat
+        String P_SCHUELER_ID = "schueler_id";
+
+        /**
+         * Parametername für die Id des Schulfachs.
+         */
+        @ParamFormat
+        String P_SCHULFACH_ID = "schulfach_id";
+
+    }
+
+    /**
+     * All URLs for the creation of a Zeugnis.
+     */
+    public interface Zeugnis {
+
+        /**
+         * Zeugniserfassung base-url.
+         */
+        String HOME = "/zeugnis";
+
+
+        /**
          * Zeugniserfassung base-url.
          */
         String START = HOME + "/start";
@@ -93,10 +108,6 @@ public final class URL {
          */
         String SHOW = HOME + "/show";
 
-        /**
-         * Zeige Bewertungen.
-         */
-        String BEWERTUNGEN = HOME + "/bewertungen";
 
         /**
          * Zeige PDF einer ganze Klasse.
@@ -106,8 +117,8 @@ public final class URL {
         /**
          * Zeige PDF eines Schuelers.
          */
-        String ONE_PDF = HOME + "/pdfschueler/{" + P_SCHUELER_ID + "}" + "/{"
-                + P_HALBJAHR_ID + "}";
+        String ONE_PDF = HOME + "/pdfschueler/{" + Session.P_SCHUELER_ID + "}" + "/{"
+                + Session.P_HALBJAHR_ID + "}";
 
     }
 
@@ -119,33 +130,9 @@ public final class URL {
     public interface ZeugnisPath {
 
         /**
-         * Parametername für die Schüler-id.
-         */
-        @ParamFormat
-        String P_SCHUELER_ID = Zeugnis.P_SCHUELER_ID;
-
-        /**
-         * Parameter HalbjahresId.
-         */
-        @ParamFormat
-        String P_HALBJAHR_ID = Zeugnis.P_HALBJAHR_ID;
-
-        /**
-         * Parameter schuelerIndex.
-         */
-        @ParamFormat
-        String P_SCHUELER_INDEX = Zeugnis.P_SCHUELER_ID;
-
-        /**
-         * Parameter KlassenId.
-         */
-        @ParamFormat
-        String P_KLASSEN_ID = Zeugnis.P_KLASSEN_ID;
-
-        /**
          * Zeugniserfassung base-url.
          */
-        String HOME = "/zeugnis/{" + P_HALBJAHR_ID + "}/{" + P_KLASSEN_ID + "}";
+        String HOME = "/zeugnis/{" + Session.P_HALBJAHR_ID + "}/{" + Session.P_KLASSEN_ID + "}";
 
         /**
          * Zeugniserfassung base-url.
@@ -157,10 +144,6 @@ public final class URL {
          */
         String SHOW = HOME + "/show";
 
-        /**
-         * Zeige Bewertungen.
-         */
-        String BEWERTUNGEN = HOME + "/bewertungen";
 
         /**
          * Zeige PDF einer ganze Klasse.
@@ -170,11 +153,53 @@ public final class URL {
         /**
          * Zeige PDF eines Schuelers.
          */
-        String ONE_PDF = HOME + "/pdfschueler/{" + P_SCHUELER_ID + "}" + "/{"
-                + P_HALBJAHR_ID + "}";
+        String ONE_PDF = HOME + "/pdfschueler/{" + Session.P_SCHUELER_ID + "}" + "/{"
+                + Session.P_HALBJAHR_ID + "}";
 
     }
 
+
+    /**
+     * Alle URLs für die Bewertungserfassung.
+     */
+    public interface Bewertungen {
+
+        /**
+         * Bewertungen base-url.
+         */
+        String HOME = "/bewertungen";
+
+        /**
+         * Zeige Bewertungen.
+         */
+        String LIST = HOME + "/list";
+
+
+    }
+
+    /**
+     * Alle URLs zur Anzeige der Bewertungen bei dem die Basis-Informationen
+     * Halbjahr und KlassenId fest im Pfad sind.
+     */
+    public interface BewertungenPath {
+
+        /**
+         * Bewertungserfassung base-url.
+         */
+        String HOME = "/bewertungen/{" + Session.P_HALBJAHR_ID + "}/{" + Session.P_KLASSEN_ID + "}";
+
+        @ParamFormat
+        String P_BEWERTUNGS_ID = "bewertungsId";
+
+        /**
+         * Zeige Bewertungen.
+         */
+        String LIST = HOME + "/list";
+
+        String EDIT = HOME + "/edit/{" + P_BEWERTUNGS_ID + "}";
+
+
+    }
 
     /**
      * All URLS for the Bemerkung.
@@ -213,6 +238,11 @@ public final class URL {
         /** Create User-URL. */
         String CREATE = HOME + "/create";
     }
+
+
+
+
+
 
 
     /**

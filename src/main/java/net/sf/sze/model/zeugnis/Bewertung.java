@@ -100,7 +100,6 @@ public class Bewertung extends VersionedModel implements Serializable,
     /** The zeugnis. */
     @ManyToOne(optional = false)
     @JoinColumn(name = "zeugnis_id", nullable = false)
-
     private Zeugnis zeugnis;
 
     /**
