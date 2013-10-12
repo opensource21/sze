@@ -99,6 +99,7 @@ public class BewertungenController {
                 getBewertungen(schulhalbjahr.getId().longValue(),
                 klasse.getId().longValue(), schulfachId.longValue());
 
+        Collections.sort(bewertungen);
         model.addAttribute("bewertungen", bewertungen);
         model.addAttribute("schulfaecher", schulfaecher);
         model.addAttribute("klasse", klasse);
