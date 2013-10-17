@@ -17,7 +17,7 @@ import org.springframework.util.CollectionUtils;
  *
  */
 public class BinnenAussenIntersectCheck
-        extends AbstractAnnotationCheck<StandardAussenIntersect> {
+        extends AbstractAnnotationCheck<BinnenAussenIntersect> {
 
     /**
      * Der Default-Message-Key.
@@ -33,7 +33,7 @@ public class BinnenAussenIntersectCheck
     }
 
     @Override
-    public void configure(StandardAussenIntersect constraintAnnotation) {
+    public void configure(BinnenAussenIntersect constraintAnnotation) {
         setMessage(constraintAnnotation.message());
     }
 

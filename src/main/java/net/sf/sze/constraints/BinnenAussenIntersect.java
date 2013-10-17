@@ -21,7 +21,7 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD, ElementType.PARAMETER})
-@Constraint(checkWith = StandardAussenIntersectCheck.class)
+@Constraint(checkWith = BinnenAussenIntersectCheck.class)
 public @interface BinnenAussenIntersect {
 
     /**
