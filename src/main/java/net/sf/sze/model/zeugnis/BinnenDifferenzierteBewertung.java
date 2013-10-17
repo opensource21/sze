@@ -5,6 +5,9 @@
 
 package net.sf.sze.model.zeugnis;
 
+import java.util.Arrays;
+import java.util.List;
+
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
@@ -19,7 +22,8 @@ public class BinnenDifferenzierteBewertung extends Bewertung {
 
     // TODO der NotNull-Constraint gilt nur für diese SubKlasse :-/
     // leistungsniveau(inList:['G','E','Z'], nullable:false)
-    // NICE sollte DreiNiveauBewertung heißen.
+
+    private static final List<String> NIVEAUS = Arrays.asList("G", "E", "Z");
 
     /**
      *
@@ -34,4 +38,14 @@ public class BinnenDifferenzierteBewertung extends Bewertung {
     public String toString() {
         return super.toString();
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<String> getLeistungsNiveaus() {
+        return NIVEAUS;
+    }
+
+
 }

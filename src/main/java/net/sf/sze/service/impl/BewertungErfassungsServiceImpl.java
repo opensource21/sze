@@ -5,6 +5,8 @@
 package net.sf.sze.service.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -25,6 +27,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import de.ppi.fuwesta.spring.mvc.util.ResourceNotFoundException;
 
 
 /**
@@ -80,27 +84,64 @@ public class BewertungErfassungsServiceImpl implements
      */
     @SuppressWarnings("boxing")
     @Override
-    public List<Bewertung> getBewertungen(long halbjahrId, long klassenId,
+    public List<Bewertung> getSortedBewertungen(long halbjahrId, long klassenId,
             long schulfachId) {
         LOG.debug("Suche Bewertungn für {}, {} und {}", halbjahrId, klassenId, schulfachId);
-        //TODO Schulhalbjahr muss selektierbar sein, aber das fängt man besser mit
-        //einer direkten Prüfung ab.
         final List<Zeugnis>  zeugnisse = zeugnisDao.
                 findAllByKlasseIdAndSchulhalbjahrIdAndSchulhalbjahrSelectableIsTrueOrderBySchuelerNameAscSchuelerVornameAsc(klassenId, halbjahrId);
-        //NICE niels ist das Aufsplitten wirklich sinnvoll oder lieber ein großes SQL?
+        //PERFORMANCE: 2 SQLs und eine handisches Suchen ist sicherlich nicht die schnellste Lösung.
         //Der Ansatz mit List<Bewertung>
         //findAllByZeugnisKlasseIdAndZeugnisSchulhalbjahrIdAndSchulfachIdOrderByZeugnisSchuelerNameAscZeugnisSchuelerVornameAsc(
         // long klasseId, long halbjahrId, long schulfachId); Scheitert. Es gabe eine Fehlermeldung, dass er kein Element
         // zu einer ZeugnisID findet. Das klingt nach einem Fehler in dem darunter liegenden Framework.
-        return bewertungDao.findAllBySchulfachIdAndZeugnisIn(schulfachId, zeugnisse);
+        final List<Bewertung> bewertungen = bewertungDao.findAllBySchulfachIdAndZeugnisIn(schulfachId, zeugnisse);
+        Collections.sort(bewertungen);
+        return bewertungen;
     }
+
+
+
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public BewertungWithNeigbors getBewertungWithNeighbors(Long halbjahrId,
+            Long klassenId, Long schulfachId, Long bewertungsId) {
+        final List<Bewertung> bewertungen = getSortedBewertungen(halbjahrId.longValue(),
+                klassenId.longValue(), schulfachId.longValue());
+        Long prevId = null;
+        Long nextId = null;
+        Bewertung selectedBewertung = null;
+        for (Bewertung bewertung : bewertungen) {
+            if ((selectedBewertung != null) && (nextId == null)) {
+                nextId = bewertung.getId();
+            }
+
+            if (bewertungsId.equals(bewertung.getId())) {
+                selectedBewertung = bewertung;
+            }
+
+            if (selectedBewertung == null) {
+                prevId = bewertung.getId();
+            }
+        }
+        if (selectedBewertung == null) {
+            throw new ResourceNotFoundException("Es wurde keine Bewertung zur Id "
+                    + bewertungsId + " gefunden.");
+        }
+        return new BewertungWithNeigbors(selectedBewertung, prevId, nextId);
+    }
+
+
+
 
     /**
      * {@inheritDoc}
      */
     @Override
     public List<Schulfach>
-            getActiveSchulfaecher(Schulhalbjahr hj, Klasse klasse) {
+            getActiveSchulfaecherOrderByName(Schulhalbjahr hj, Klasse klasse) {
         final String klassenStufe = String.valueOf(klasse.calculateKlassenstufe(hj.getJahr()));
         final List<Schulfach> alleSchulfaecher = schulfachDao.findAll();
         final List<Schulfach> relevanteSchulfaecher = new ArrayList<>();
@@ -116,7 +157,13 @@ public class BewertungErfassungsServiceImpl implements
                 relevanteSchulfaecher.add(schulfach);
             }
         }
-
+        //PERFORMANCE Besser bei der DB - Abfrage sortieren.
+        Collections.sort(relevanteSchulfaecher, new Comparator<Schulfach>() {
+            @Override
+            public int compare(Schulfach o1, Schulfach o2) {
+                return o1.getName().compareTo(o2.getName());
+            }
+        });
         return relevanteSchulfaecher;
     }
 

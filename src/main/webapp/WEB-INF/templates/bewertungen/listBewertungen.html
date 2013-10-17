@@ -31,7 +31,7 @@ schulfachId - die Id des Schulfachs.
                 <button type="submit" class="btn cbbutton">Aktualisieren</button>
             </form>
         </div>
-        <h4>Bewertung für Klasse <b th:text="${klasse}">${klasse}</b> im Schulhalbjahr <b th:text="${schulhalbjahr}">${schulhalbjahr}</b></h4>
+        <h4>Bewertungen für Klasse <b th:text="${klasse?.calculateKlassenname(schulhalbjahr.jahr)}">${klasse?.calculateKlassenname(schulhalbjahr.jahr)}</b> im Schulhalbjahr <b th:text="${schulhalbjahr}">${schulhalbjahr}</b></h4>
         <div class="row-fluid">
             <span th:text="#{bewertungen.no_data}" th:remove="tag" th:if="${#lists.isEmpty(bewertungen)}"></span>
             <table class="table table-striped table-bordered table-hover table-condensed" th:unless="${#lists.isEmpty(bewertungen)}">
@@ -47,28 +47,17 @@ schulfachId - die Id des Schulfachs.
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="bewertungInstance:${bewertungen}">
-                        <td><a th:href="@{#{url.bewertungenpath.edit(${__#{par.session.halbjahr_id}__},
-                                ${__#{par.session.klassen_id}__},
-                                ${bewertungInstance.id})}}" th:text="${bewertungInstance.zeugnis}"></a></td>
-                        <td><a th:href="@{#{url.bewertungenpath.edit(${__#{par.session.halbjahr_id}__},
-                                ${__#{par.session.klassen_id}__},
-                                ${bewertungInstance.id})}}" th:text="${bewertungInstance.schulfach}"></a></td>
-                        <td><a th:href="@{#{url.bewertungenpath.edit(${__#{par.session.halbjahr_id}__},
-                                ${__#{par.session.klassen_id}__},
-                                ${bewertungInstance.id})}}" th:text="${bewertungInstance.leistungsniveau}"></a></td>
-                        <td><a th:href="@{#{url.bewertungenpath.edit(${__#{par.session.halbjahr_id}__},
-                                ${__#{par.session.klassen_id}__},
-                                ${bewertungInstance.id})}}" th:text="${bewertungInstance.note}"></a></td>
-                        <td><a th:href="@{#{url.bewertungenpath.edit(${__#{par.session.halbjahr_id}__},
-                                ${__#{par.session.klassen_id}__},
-                                ${bewertungInstance.id})}}" th:text="${bewertungInstance.sonderNote}"></a></td>
-                        <td><a th:href="@{#{url.bewertungenpath.edit(${__#{par.session.halbjahr_id}__},
-                                ${__#{par.session.klassen_id}__},
-                                ${bewertungInstance.id})}}" th:text="#{${'blt.' + bewertungInstance.leistungNurSchwachAusreichend}}"></a></td>
-                        <td><a th:href="@{#{url.bewertungenpath.edit(${__#{par.session.halbjahr_id}__},
-                                ${__#{par.session.klassen_id}__},
-                                ${bewertungInstance.id})}}" th:text="#{${'blt.' + bewertungInstance.relevant}}"></a></td>
+                    <tr th:each="bewertungInstance:${bewertungen}" th:class="${(lasteditedId==bewertungInstance.id)?'lastEdited':''}"
+                        th:with="url=@{#{url.bewertungenpath.edit(${__#{par.session.halbjahr_id}__},
+                                ${__#{par.session.klassen_id}__}, ${bewertungInstance.schulfach.id},
+                                ${bewertungInstance.id})}}">
+                        <td><a th:href="${url}" th:text="${bewertungInstance.zeugnis}"></a></td>
+                        <td><a th:href="${url}" th:text="${bewertungInstance.schulfach}"></a></td>
+                        <td><a th:href="${url}" th:text="${bewertungInstance.leistungsniveau}"></a></td>
+                        <td><a th:href="${url}" th:text="${bewertungInstance.note}"></a></td>
+                        <td><a th:href="${url}" th:text="${bewertungInstance.sonderNote}"></a></td>
+                        <td><a th:href="${url}" th:text="#{${'blt.' + bewertungInstance.leistungNurSchwachAusreichend}}"></a></td>
+                        <td><a th:href="${url}" th:text="#{${'blt.' + bewertungInstance.relevant}}"></a></td>
                     </tr>
                 </tbody>
             </table>

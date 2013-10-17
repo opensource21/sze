@@ -60,13 +60,11 @@ public class Schueler extends VersionedModel implements Serializable,
 
     /** The geburtstag. */
     @Column(nullable = false)
-
     @Past
     private Date geburtstag;
 
     /** The geburtsort. */
     @Column(nullable = false, length = 40)
-
     @Size(max = 40)
     private String geburtsort;
 
@@ -83,7 +81,6 @@ public class Schueler extends VersionedModel implements Serializable,
 
     /** The geschlecht. */
     @Column(nullable = false, length = 1)
-
     @Enumerated(EnumType.ORDINAL)
     private Geschlecht geschlecht;
 

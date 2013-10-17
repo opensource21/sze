@@ -104,9 +104,6 @@ public class ZeugnisErfassungsServiceImpl implements ZeugnisErfassungsService {
      */
     @Override
     public List<Zeugnis> getZeugnisse(long halbjahrId, long klassenId) {
-        //TODO Schulhalbjahr muss selektierbar sein, aber das fängt man besser mit
-        //einer direkten Prüfung ab.
-
         final List<Zeugnis> zeugnisse = zeugnisDao
                 .findAllByKlasseIdAndSchulhalbjahrIdAndSchulhalbjahrSelectableIsTrueOrderBySchuelerNameAscSchuelerVornameAsc(
                 klassenId, halbjahrId);

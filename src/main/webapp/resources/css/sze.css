@@ -71,3 +71,6 @@ i.next {
 }
 
 
+.table-striped tbody > tr.lastEdited > td {
+    background-color: #F0F244;
+}

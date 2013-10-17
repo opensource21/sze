@@ -31,7 +31,7 @@ public interface ZeugnisErfassungsService {
     List<Klasse> getActiveKlassen(List<Schulhalbjahr> acticeSchulhalbjahre);
 
     /**
-     * Listet alle Zeugnisse zu der Klasse des Schulhalbjahres.
+     * Listet alle Zeugnisse zu der Klasse des selektierbaren Schulhalbjahres.
      *
      * @param halbjahrId die Id des Schulhalbjahres.
      * @param klassenId die Id der Klasse.

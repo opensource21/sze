@@ -5,6 +5,9 @@
 
 package net.sf.sze.model.zeugnis;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
@@ -15,6 +18,11 @@ import javax.persistence.Entity;
 @Entity
 @DiscriminatorValue("net.sf.sze.zeugnis.StandardBewertung")
 public class StandardBewertung extends Bewertung {
-    // Leistungsniveau darf nicht mit angezeigt werden.
+    private static final List<String> NIVEAUS = new ArrayList<String>();
+
+    @Override
+    public List<String> getLeistungsNiveaus() {
+        return NIVEAUS;
+    }
 
 }

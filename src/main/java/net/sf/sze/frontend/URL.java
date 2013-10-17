@@ -186,7 +186,8 @@ public final class URL {
         /**
          * Bewertungserfassung base-url.
          */
-        String HOME = "/bewertungen/{" + Session.P_HALBJAHR_ID + "}/{" + Session.P_KLASSEN_ID + "}";
+        String HOME = "/bewertungen/{" + Session.P_HALBJAHR_ID + "}/{" +
+                Session.P_KLASSEN_ID  + "}";
 
         @ParamFormat
         String P_BEWERTUNGS_ID = "bewertungsId";
@@ -196,7 +197,9 @@ public final class URL {
          */
         String LIST = HOME + "/list";
 
-        String EDIT = HOME + "/edit/{" + P_BEWERTUNGS_ID + "}";
+        String EDIT = HOME + "/edit/{" +Session.P_SCHULFACH_ID  + "}/{"+ P_BEWERTUNGS_ID+ "}";
+
+        String CANCEL = HOME + "/cancel/{" + Session.P_SCHULFACH_ID + "}/{"+ P_BEWERTUNGS_ID+ "}";
 
 
     }

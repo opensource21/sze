@@ -5,16 +5,10 @@
 
 package net.sf.sze.model.zeugnis;
 
-import de.ppi.fuwesta.jpa.helper.VersionedModel;
-import net.sf.oval.constraint.CheckWith;
-import net.sf.oval.constraint.CheckWithCheck;
-import net.sf.sze.util.VariableUtility;
-
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.builder.CompareToBuilder;
-
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.persistence.Column;
@@ -28,6 +22,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import net.sf.oval.constraint.CheckWith;
+import net.sf.oval.constraint.CheckWithCheck;
+import net.sf.sze.util.VariableUtility;
+
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.builder.CompareToBuilder;
+
+import de.ppi.fuwesta.jpa.helper.VersionedModel;
+
 /**
  * Eine Bewertung ist die Beurteilung zu einem Fach.
  *
@@ -40,13 +43,14 @@ import javax.persistence.UniqueConstraint;
 @DiscriminatorColumn(name = "class",
         discriminatorType = DiscriminatorType.STRING, length = 255)
 @DiscriminatorValue("net.sf.sze.zeugnis.Bewertung")
-public class Bewertung extends VersionedModel implements Serializable,
+public abstract class Bewertung extends VersionedModel implements Serializable,
         Comparable<Bewertung> {
-
-    // TODO GUI einschränken auf den Bereich 1-6 in GUI, kein DB-Constraint, da ABI 1-15
 
     private static final Map<Long, String> TEXT_MAP = new HashMap<Long,
             String>();
+
+    private static final List<Long> NOTEN;
+
 
     static {
         TEXT_MAP.put(Long.valueOf(1), "sehr gut");
@@ -55,6 +59,7 @@ public class Bewertung extends VersionedModel implements Serializable,
         TEXT_MAP.put(Long.valueOf(4), "ausreichend");
         TEXT_MAP.put(Long.valueOf(5), "mangelhaft");
         TEXT_MAP.put(Long.valueOf(6), "ungen\ufffdgend");
+        NOTEN = new ArrayList<Long>(TEXT_MAP.keySet());
     }
 
     /** The note. */
@@ -62,7 +67,6 @@ public class Bewertung extends VersionedModel implements Serializable,
 
     /** The leistungsniveau. */
     @Column(length = 255)
-
     private String leistungsniveau;
 
     /** Die Sondernote. */
@@ -378,13 +382,28 @@ public class Bewertung extends VersionedModel implements Serializable,
 
         @Override
         public boolean isSatisfied(Object validatedObject, Object relevant) {
-            if ((relevant != null) && ((Boolean) relevant).booleanValue()
-                    && ((((Bewertung) validatedObject).note != null)
+            if (!((relevant != null) && ((Boolean) relevant).booleanValue())
+                    && (StringUtils.isNotBlank(((Bewertung) validatedObject).sonderNote)
                     || (((Bewertung) validatedObject).note != null))) {
                 return false;
             }
 
             return true;
         }
+
+    }
+
+    /**
+     * Liefert die Möglichen Ausprägungen der Leistungsniveaus.
+     * @return die Möglichen Ausprägungen der Leistungsniveaus.
+     */
+    public abstract List<String> getLeistungsNiveaus();
+
+    /**
+     * Liefert die Möglichen Ausprägungen der Noten.
+     * @return die Möglichen Ausprägungen der Noten.
+     */
+    public List<Long> getNoten() {
+        return NOTEN;
     }
 }
