@@ -160,7 +160,8 @@ public class Zeugnis extends VersionedModel implements Serializable,
     // bi-directional many-to-one association to Schueler
 
     /** The schueler. */
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    //TODO niels sollte EAGER sein.
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "schueler_id", nullable = false)
     private Schueler schueler;
 
@@ -174,7 +175,7 @@ public class Zeugnis extends VersionedModel implements Serializable,
     // bi-directional many-to-one association to SolbewertungsText
 
     /** The so l bewertungs text. */
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true)
     @JoinColumn(name = "solbewertungs_text_id")
     private SoLBewertungsText soLBewertungsText;
 

@@ -1,5 +1,8 @@
+- Wieso ändert sich die Sortierung bei Eager/Lazy
+- Die Aufteilung auf Services überdenken, Bündelung nach DB nach Controller?
+- Der Schüler kann nicht validiert werden, da die Prüfung auf Länge 1 biem Geschlecht fehlschlägt.
+- Automatisches @Valid rausnehmen für Subklassen.
 - Beschreibung von Session und URL.
-- Umstellung der Notenübersicht
 - BemerkungCRUD zu Ende bringen.
 - Umstellung auf neue Thymeleaf-version
 
@@ -13,6 +16,12 @@ Oder zusätzlich ein @Unique
 - Bearbeiten/Hinzufügen von Bemerkungen (2h)
 - Schulfacheinstiegs-Seite (4h)
 - Admin-Bereich (3 PT?)
+
+- Der Titel wird nicht gesetzt.
+
+Fachliche Klärung:
+- Sortierung nach Schulfachname
+- Soll die Klasse immer zum aktuellen Datum oder zum Schuljahr umgesetzt werden.
 
 
 Forschung
@@ -74,4 +83,6 @@ Erledigt
 + Boolean-Darstellung muss man immer einzeln Programmieren, da wäre eine Erweiterung sinnvoll. -> Ins Forum gestellt. ->
   Eleganter #{'bool.'+${var}}
 
++ Owning-Side bei Many-To-One oder One-To-Many: Immer Many. Bei Many-Many die ohne mappedBy
++ Inverse Side: Die One-Side oder die mit mappedBy. Hier ist das Speichern und veränden komplexer.
 
