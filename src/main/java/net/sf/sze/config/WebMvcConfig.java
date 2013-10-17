@@ -11,15 +11,14 @@ import de.ppi.fuwesta.spring.mvc.oval.MessageLookupContextRenderer;
 import de.ppi.fuwesta.spring.mvc.oval.MessageLookupMessageValueFormatter;
 import de.ppi.fuwesta.spring.mvc.oval.SpringMvcMessageResolver;
 import de.ppi.fuwesta.spring.mvc.util.ApostropheEscapingPropertiesPersister;
+import de.ppi.fuwesta.spring.mvc.util.EntityPropertiesToMessages;
 import de.ppi.fuwesta.spring.mvc.util.UrlDefinitionsToMessages;
 import de.ppi.fuwesta.thymeleaf.bootstrap.BootstrapDialect;
-
 import net.sf.oval.Validator;
 import net.sf.oval.configuration.annotation.AnnotationsConfigurer;
 import net.sf.oval.integration.spring.SpringCheckInitializationListener;
 import net.sf.oval.integration.spring.SpringValidator;
 import net.sf.sze.frontend.URL;
-
 import nz.net.ultraq.web.thymeleaf.LayoutDialect;
 
 import org.springframework.context.MessageSource;
@@ -44,12 +43,12 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-
 import org.thymeleaf.spring3.SpringTemplateEngine;
 import org.thymeleaf.spring3.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
 import java.util.List;
+import java.util.Properties;
 
 /**
  * The frontend configuration for Spring.
@@ -131,7 +130,12 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
         urlDefinitions.addParamGroupAsMessages();
         urlDefinitions.addParamsAsMessages();
         urlDefinitions.addUrlsAsMessages();
-        messageSource.setCommonMessages(urlDefinitions.getMessages());
+        Properties staticMessages = urlDefinitions.getMessages();
+        final EntityPropertiesToMessages epm =
+                new EntityPropertiesToMessages(
+                        "net.sf.sze.model");
+        staticMessages.putAll(epm.getProperties());
+        messageSource.setCommonMessages(staticMessages);
         return messageSource;
     }
 
