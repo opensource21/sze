@@ -4,6 +4,9 @@
 // (c) SZE-Development Team
 package net.sf.sze.service.api;
 
+import java.util.List;
+
+import de.ppi.fuwesta.spring.mvc.util.ResourceNotFoundException;
 import net.sf.sze.model.zeugnis.Bewertung;
 
 
@@ -29,6 +32,38 @@ public class BewertungWithNeigbors {
         this.bewertung = bewertung;
         this.prevBewertungsId = prevBewertungsId;
         this.nextBewertungsId = nextBewertungsId;
+    }
+
+    /**
+     *
+     * Initiates an object of type BewertungWithNeigbors.
+     * @param bewertungen alle Bewertungen.
+     * @param bewertungsId die Bewertung zu der die Nachbarn ermittelt werden sollen.
+     */
+    public BewertungWithNeigbors(List<Bewertung> bewertungen, Long bewertungsId){
+        Long prevId = null;
+        Long nextId = null;
+        Bewertung selectedBewertung = null;
+        for (Bewertung bewertung : bewertungen) {
+            if ((selectedBewertung != null) && (nextId == null)) {
+                nextId = bewertung.getId();
+            }
+
+            if (bewertungsId.equals(bewertung.getId())) {
+                selectedBewertung = bewertung;
+            }
+
+            if (selectedBewertung == null) {
+                prevId = bewertung.getId();
+            }
+        }
+        if (selectedBewertung == null) {
+            throw new ResourceNotFoundException("Es wurde keine Bewertung zur Id "
+                    + bewertungsId + " gefunden.");
+        }
+        this.bewertung = selectedBewertung;
+        this.prevBewertungsId = prevId;
+        this.nextBewertungsId = nextId;
     }
 
     /**

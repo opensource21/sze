@@ -60,14 +60,5 @@ public interface BewertungErfassungsService {
      */
     Klasse getKlasse(long klassenId);
 
-    /**
-     * Das Schulhalbjahr.
-     * @param schulhalbjahrId die Id des gewünschten Schulhalbjahrs.
-     * @return das Schulhalbjahr.
-     */
-    Schulhalbjahr getSchulhalbjahr(long schulhalbjahrId);
-
-
-
 
 }

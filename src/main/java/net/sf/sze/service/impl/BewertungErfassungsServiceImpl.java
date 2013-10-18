@@ -29,8 +29,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import de.ppi.fuwesta.spring.mvc.util.ResourceNotFoundException;
-
 
 /**
  * Implementierung des {@link BewertungErfassungsService}.
@@ -111,27 +109,7 @@ public class BewertungErfassungsServiceImpl implements
             Long klassenId, Long schulfachId, Long bewertungsId) {
         final List<Bewertung> bewertungen = getSortedBewertungen(halbjahrId.longValue(),
                 klassenId.longValue(), schulfachId.longValue());
-        Long prevId = null;
-        Long nextId = null;
-        Bewertung selectedBewertung = null;
-        for (Bewertung bewertung : bewertungen) {
-            if ((selectedBewertung != null) && (nextId == null)) {
-                nextId = bewertung.getId();
-            }
-
-            if (bewertungsId.equals(bewertung.getId())) {
-                selectedBewertung = bewertung;
-            }
-
-            if (selectedBewertung == null) {
-                prevId = bewertung.getId();
-            }
-        }
-        if (selectedBewertung == null) {
-            throw new ResourceNotFoundException("Es wurde keine Bewertung zur Id "
-                    + bewertungsId + " gefunden.");
-        }
-        return new BewertungWithNeigbors(selectedBewertung, prevId, nextId);
+        return new BewertungWithNeigbors(bewertungen, bewertungsId);
     }
 
 
@@ -176,12 +154,5 @@ public class BewertungErfassungsServiceImpl implements
         return klasseDao.findOne(Long.valueOf(klassenId));
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Schulhalbjahr getSchulhalbjahr(long schulhalbjahrId) {
-        return schulhalbjahrDao.findOne(Long.valueOf(schulhalbjahrId));
-    }
 
 }

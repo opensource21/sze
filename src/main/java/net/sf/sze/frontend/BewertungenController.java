@@ -19,6 +19,7 @@ import net.sf.sze.model.zeugnis.StandardBewertung;
 import net.sf.sze.service.api.BewertungErfassungsService;
 import net.sf.sze.service.api.BewertungService;
 import net.sf.sze.service.api.BewertungWithNeigbors;
+import net.sf.sze.service.api.SchulhalbjahrService;
 
 import org.apache.commons.lang.BooleanUtils;
 import org.apache.commons.lang.StringUtils;
@@ -64,6 +65,12 @@ public class BewertungenController {
     private BewertungErfassungsService bewertungErfassungsService;
 
     /**
+     * Der {@link SchulhalbjahrService}.
+     */
+    @Resource
+    private SchulhalbjahrService schulhalbjahrService;
+
+    /**
      * Der {@link BewertungService}.
      */
     @Resource
@@ -87,19 +94,18 @@ public class BewertungenController {
      */
     @RequestMapping(value = URL.BewertungenPath.LIST, method = RequestMethod.GET)
     public String showBewertungenPath(@PathVariable(URL.Session
-            .P_HALBJAHR_ID) long halbjahrId,
-            @PathVariable(URL.Session.P_KLASSEN_ID) long klassenId, @RequestParam(value = URL.Session
+            .P_HALBJAHR_ID) Long halbjahrId,
+            @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId, @RequestParam(value = URL.Session
             .P_SCHULFACH_ID, required = false) Long schulfachId, Model model,
             RedirectAttributes redirectAttributes) {
 
-        final Klasse klasse = bewertungErfassungsService.getKlasse(klassenId);
-        final Schulhalbjahr schulhalbjahr = bewertungErfassungsService.getSchulhalbjahr(halbjahrId);
+        final Klasse klasse = bewertungErfassungsService.getKlasse(klassenId.longValue());
+        final Schulhalbjahr schulhalbjahr = schulhalbjahrService.read(halbjahrId);
 
         if (BooleanUtils.isFalse(schulhalbjahr.getSelectable())) {
             redirectAttributes.addFlashAttribute("message",
                     "Das Schulhalbjahr ist nicht mehr selektierbar.");
-            return URL.redirect(URL.ZeugnisPath.START, Long.valueOf(
-                    halbjahrId), Long.valueOf(klassenId));
+            return URL.redirect(URL.ZeugnisPath.START, halbjahrId, klassenId);
         }
         final List<Schulfach> schulfaecher = bewertungErfassungsService.
                 getActiveSchulfaecherOrderByName(schulhalbjahr, klasse);
@@ -107,8 +113,7 @@ public class BewertungenController {
         if (CollectionUtils.isEmpty(schulfaecher)) {
             redirectAttributes.addFlashAttribute("message",
                     "Es wurden keine Schulfächer gefunden.");
-            return URL.redirect(URL.ZeugnisPath.START, Long.valueOf(
-                    halbjahrId), Long.valueOf(klassenId));
+            return URL.redirect(URL.ZeugnisPath.START, halbjahrId, klassenId);
         }
         if (schulfachId == null) {
             LOG.debug("Nehme das erste Schulfach");
@@ -298,7 +303,7 @@ public class BewertungenController {
             type = "standard";
         }
         model.addAttribute("bewertung", bewertung);
-        model.addAttribute("schulhalbjahr", bewertungErfassungsService.getSchulhalbjahr(halbjahrId.longValue()));
+        model.addAttribute("schulhalbjahr", schulhalbjahrService.read(halbjahrId));
         model.addAttribute(Common.P_PREV_ID, prevId);
         model.addAttribute(Common.P_NEXT_ID, nextId);
         model.addAttribute("saveUrl", URL.filledURL(URL.BewertungenPath.EDIT,

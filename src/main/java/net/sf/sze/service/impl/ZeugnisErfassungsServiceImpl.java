@@ -5,24 +5,29 @@
 
 package net.sf.sze.service.impl;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import javax.annotation.Resource;
+
 import net.sf.sze.dao.api.stammdaten.KlasseDao;
+import net.sf.sze.dao.api.zeugnis.BewertungDao;
 import net.sf.sze.dao.api.zeugnis.SchulhalbjahrDao;
 import net.sf.sze.dao.api.zeugnis.ZeugnisDao;
 import net.sf.sze.model.stammdaten.Klasse;
+import net.sf.sze.model.zeugnis.Bewertung;
+import net.sf.sze.model.zeugnis.Schulfachtyp;
 import net.sf.sze.model.zeugnis.Schulhalbjahr;
 import net.sf.sze.model.zeugnis.Zeugnis;
+import net.sf.sze.service.api.BewertungWithNeigbors;
 import net.sf.sze.service.api.ZeugnisErfassungsService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-
-import javax.annotation.Resource;
 
 /**
  * Standardimplementierung vom {@link ZeugnisErfassungsService}.
@@ -63,6 +68,12 @@ public class ZeugnisErfassungsServiceImpl implements ZeugnisErfassungsService {
      */
     @Resource
     private ZeugnisDao zeugnisDao;
+
+    /**
+     * Das Bewertung-DAO.
+     */
+    @Resource
+    private BewertungDao bewertungDao;
 
     /**
      * {@inheritDoc}
@@ -108,5 +119,42 @@ public class ZeugnisErfassungsServiceImpl implements ZeugnisErfassungsService {
                 .findAllByKlasseIdAndSchulhalbjahrIdAndSchulhalbjahrSelectableIsTrueOrderBySchuelerNameAscSchuelerVornameAsc(
                 klassenId, halbjahrId);
         return zeugnisse;
+    }
+
+
+    /**
+     *
+     * {@inheritDoc}
+     */
+    @Override
+    public void splitBewertungslist(List<Bewertung> bewertungen,
+            final List<Bewertung> wpBewertungen,
+            final List<Bewertung> otherBewertungen) {
+        for (Bewertung bewertung : bewertungen) {
+            if (Schulfachtyp.WAHLPFLICHT.equals(bewertung.getSchulfach()
+                    .getTyp())) {
+                wpBewertungen.add(bewertung);
+            } else {
+                otherBewertungen.add(bewertung);
+            }
+        }
+        Collections.sort(wpBewertungen);
+        Collections.sort(otherBewertungen);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public BewertungWithNeigbors getBewertungWithNeighbors(Long bewertungsId) {
+        final Zeugnis zeugnis = bewertungDao.findOne(bewertungsId).getZeugnis();
+        final List<Bewertung> wpBewertungen = new ArrayList<>();
+        final List<Bewertung> otherBewertungen = new ArrayList<>();
+        splitBewertungslist(zeugnis.getBewertungen(),
+                wpBewertungen, otherBewertungen);
+        final List<Bewertung> bewertungen = new ArrayList<>();
+        bewertungen.addAll(otherBewertungen);
+        bewertungen.addAll(wpBewertungen);
+        return new BewertungWithNeigbors(bewertungen, bewertungsId);
     }
 }
