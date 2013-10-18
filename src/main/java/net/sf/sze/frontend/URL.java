@@ -88,6 +88,38 @@ public final class URL {
     }
 
     /**
+     * Einige allgemein gültige Parameter und Konstanten.
+     */
+    public interface Common {
+
+        /**
+         * Aktion gehe zum Nächsten.
+         */
+        static final String ACTION_NEXT = "next";
+        /**
+         * Action gehe zum vorherigen.
+         */
+        static final String ACTION_PREV = "prev";
+        /**
+         * Parameter zu letzt editierte Id.
+         */
+        static final String P_LASTEDITED_ID = "lasteditedId";
+        /**
+         * Parameter zum definieren der Aktion.
+         */
+        static final String P_ACTION = "action";
+        /**
+         * Paramter für die nächste ID.
+         */
+        static final String P_NEXT_ID = "nextId";
+        /**
+         * Paramter für die vorherige ID.
+         */
+        static final String P_PREV_ID = "prevId";
+
+    }
+
+    /**
      * All URLs for the creation of a Zeugnis.
      */
     public interface Zeugnis {
