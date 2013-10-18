@@ -22,6 +22,7 @@ import net.sf.sze.model.zeugnis.Schulfach;
 import net.sf.sze.model.zeugnis.Schulhalbjahr;
 import net.sf.sze.model.zeugnis.Zeugnis;
 import net.sf.sze.service.api.BewertungErfassungsService;
+import net.sf.sze.service.api.BewertungWithNeigbors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

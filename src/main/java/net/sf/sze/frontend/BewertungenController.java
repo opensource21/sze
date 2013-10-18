@@ -17,8 +17,8 @@ import net.sf.sze.model.zeugnis.Schulfach;
 import net.sf.sze.model.zeugnis.Schulhalbjahr;
 import net.sf.sze.model.zeugnis.StandardBewertung;
 import net.sf.sze.service.api.BewertungErfassungsService;
-import net.sf.sze.service.api.BewertungErfassungsService.BewertungWithNeigbors;
 import net.sf.sze.service.api.BewertungService;
+import net.sf.sze.service.api.BewertungWithNeigbors;
 
 import org.apache.commons.lang.BooleanUtils;
 import org.apache.commons.lang.StringUtils;
