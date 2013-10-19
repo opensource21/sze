@@ -311,6 +311,7 @@ public class BewertungenController {
         model.addAttribute("cancelUrl", URL.filledURL(URL.BewertungenPath.CANCEL,
                 halbjahrId, klassenId, schulfachId, bewertung.getId()));
         model.addAttribute("type", type);
+        model.addAttribute("helpMessageId", "help.bewertung.edit");
     }
 
 

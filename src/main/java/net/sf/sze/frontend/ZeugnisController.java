@@ -251,7 +251,7 @@ public class ZeugnisController {
         //TODO niels
         BewertungWithNeigbors bewertungWithNeigbors = zeugnisErfassungsService.
                 getBewertungWithNeighbors(bewertungsId);
-        setEditModelValues(halbjahrId, klassenId, schulfachId,
+        setEditBewertungModelValues(halbjahrId, klassenId, schulfachId,
                 bewertungWithNeigbors.getBewertung(),
                 bewertungWithNeigbors.getPrevBewertungsId(),
                 bewertungWithNeigbors.getNextBewertungsId(), model);
@@ -347,7 +347,7 @@ public class ZeugnisController {
 
         if (result.hasErrors()) {
             LOG.info("Die Bewertung hat Fehler {}", result);
-            setEditModelValues(halbjahrId, klassenId, schuelerId, bewertung, prevId, nextId, model);
+            setEditBewertungModelValues(halbjahrId, klassenId, schuelerId, bewertung, prevId, nextId, model);
             return BEWERTUNGEN_EDIT_BEWERTUNG_VIEW;
         }
         bewertungService.save(bewertung);
@@ -374,7 +374,7 @@ public class ZeugnisController {
      * @param model das Model
      * @param bewertungValues eine Bewertung die direkten Werte enthält.
      */
-    private void setEditModelValues(Long halbjahrId, Long klassenId,
+    private void setEditBewertungModelValues(Long halbjahrId, Long klassenId,
             Long schuelerId, Bewertung bewertung, Long prevId, Long nextId, Model model) {
         final String type;
         if (bewertung instanceof BinnenDifferenzierteBewertung) {
@@ -393,6 +393,7 @@ public class ZeugnisController {
         model.addAttribute("cancelUrl", URL.filledURL(URL.ZeugnisPath.BEWERTUNG_CANCEL,
                 halbjahrId, klassenId, schuelerId, bewertung.getId()));
         model.addAttribute("type", type);
+        model.addAttribute("helpMessageId", "help.bewertung.edit");
     }
 
 
