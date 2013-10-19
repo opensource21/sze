@@ -161,6 +161,9 @@ public final class URL {
      */
     public interface ZeugnisPath {
 
+        @ParamFormat
+        String P_BEWERTUNGS_ID = "bewertungsId";
+
         /**
          * Zeugniserfassung base-url.
          */
@@ -176,6 +179,9 @@ public final class URL {
          */
         String SHOW = HOME + "/show";
 
+        String BEWERTUNG_CANCEL = HOME + "/cancelBewertung/{" + Session.P_SCHUELER_ID + "}/{"+ P_BEWERTUNGS_ID+ "}";
+
+        String BEWERTUNG_EDIT = HOME + "/editBewertung/{" +Session.P_SCHUELER_ID  + "}/{"+ P_BEWERTUNGS_ID+ "}";
 
         /**
          * Zeige PDF einer ganze Klasse.

@@ -309,7 +309,7 @@ public class BewertungenController {
         model.addAttribute("saveUrl", URL.filledURL(URL.BewertungenPath.EDIT,
                 halbjahrId, klassenId, schulfachId, bewertung.getId()));
         model.addAttribute("cancelUrl", URL.filledURL(URL.BewertungenPath.CANCEL,
-                halbjahrId, klassenId, bewertung.getSchulfach().getId(), bewertung.getId()));
+                halbjahrId, klassenId, schulfachId, bewertung.getId()));
         model.addAttribute("type", type);
     }
 
