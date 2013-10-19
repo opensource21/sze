@@ -56,14 +56,15 @@
                     </thead>
                     <tbody>
                         <div th:each="bewertungInstance, stat:${bewertungen}" th:remove="tag">
-                            <tr th:class="${(bewertungInstance.id==lastEditedBewertung) ? 'lastEdited':''}">
+                            <tr th:class="${(bewertungInstance.id==lasteditedId) ? 'lastEdited':''}"
+                            th:with="url=@{#{url.zeugnispath.bewertung_edit(${__#{par.session.halbjahr_id}__},
+                                ${__#{par.session.klassen_id}__}, ${bewertungInstance.zeugnis.schueler.id},
+                                ${bewertungInstance.id})}}">
                             <td>
-                                <a href="bewertungErfassung:editBewertung{bewertungInstance.id}"
-                                    th:text="${bewertungInstance.schulfach}"></a>
+                                <a th:href="${url}" th:text="${bewertungInstance.schulfach}"></a>
                             </td>
                             <td>
-                                <a href="bewertungErfassung:editBewertung{bewertungInstance.id}"
-                                    th:text="${bewertungInstance.notenDarstellung()}"></a>
+                                <a th:href="${url}" th:text="${bewertungInstance.notenDarstellung()}"></a>
                             </td>
                             </tr>
                         </div>

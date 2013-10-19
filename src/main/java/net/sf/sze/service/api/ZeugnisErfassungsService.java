@@ -6,6 +6,7 @@
 package net.sf.sze.service.api;
 
 import net.sf.sze.model.stammdaten.Klasse;
+import net.sf.sze.model.zeugnis.Bewertung;
 import net.sf.sze.model.zeugnis.Schulhalbjahr;
 import net.sf.sze.model.zeugnis.Zeugnis;
 
@@ -38,4 +39,23 @@ public interface ZeugnisErfassungsService {
      * @return alle Zeugnisse zu der Klasse des Schulhalbjahres.
      */
     List<Zeugnis> getZeugnisse(long halbjahrId, long klassenId);
+
+
+    /**
+     * Teilt die Bewertungen auf die beiden Listen auf und sortiert diese.
+     * @param bewertungen alle Bewertungen.
+     * @param wpBewertungen Wahlpflichtbewertungen
+     * @param otherBewertungen andere Bewertungen.
+     */
+    void splitBewertungslist(List<Bewertung> bewertungen,
+            final List<Bewertung> wpBewertungen,
+            final List<Bewertung> otherBewertungen);
+
+    /**
+     * Liefert die Bewertungen mit den Nachbarn.
+     * @param bewertungsId die Bewertungs-Id
+     * @return eine Bewertung mit den Ids des Nachbarbewertungen.
+     */
+    BewertungWithNeigbors getBewertungWithNeighbors(Long bewertungsId);
+
 }

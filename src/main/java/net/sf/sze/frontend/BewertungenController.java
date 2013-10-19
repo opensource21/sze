@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import net.sf.sze.frontend.URL.Common;
 import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.zeugnis.AussenDifferenzierteBewertung;
 import net.sf.sze.model.zeugnis.Bewertung;
@@ -16,8 +17,9 @@ import net.sf.sze.model.zeugnis.Schulfach;
 import net.sf.sze.model.zeugnis.Schulhalbjahr;
 import net.sf.sze.model.zeugnis.StandardBewertung;
 import net.sf.sze.service.api.BewertungErfassungsService;
-import net.sf.sze.service.api.BewertungErfassungsService.BewertungWithNeigbors;
 import net.sf.sze.service.api.BewertungService;
+import net.sf.sze.service.api.BewertungWithNeigbors;
+import net.sf.sze.service.api.SchulhalbjahrService;
 
 import org.apache.commons.lang.BooleanUtils;
 import org.apache.commons.lang.StringUtils;
@@ -63,6 +65,12 @@ public class BewertungenController {
     private BewertungErfassungsService bewertungErfassungsService;
 
     /**
+     * Der {@link SchulhalbjahrService}.
+     */
+    @Resource
+    private SchulhalbjahrService schulhalbjahrService;
+
+    /**
      * Der {@link BewertungService}.
      */
     @Resource
@@ -86,19 +94,18 @@ public class BewertungenController {
      */
     @RequestMapping(value = URL.BewertungenPath.LIST, method = RequestMethod.GET)
     public String showBewertungenPath(@PathVariable(URL.Session
-            .P_HALBJAHR_ID) long halbjahrId,
-            @PathVariable(URL.Session.P_KLASSEN_ID) long klassenId, @RequestParam(value = URL.Session
+            .P_HALBJAHR_ID) Long halbjahrId,
+            @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId, @RequestParam(value = URL.Session
             .P_SCHULFACH_ID, required = false) Long schulfachId, Model model,
             RedirectAttributes redirectAttributes) {
 
-        final Klasse klasse = bewertungErfassungsService.getKlasse(klassenId);
-        final Schulhalbjahr schulhalbjahr = bewertungErfassungsService.getSchulhalbjahr(halbjahrId);
+        final Klasse klasse = bewertungErfassungsService.getKlasse(klassenId.longValue());
+        final Schulhalbjahr schulhalbjahr = schulhalbjahrService.read(halbjahrId);
 
         if (BooleanUtils.isFalse(schulhalbjahr.getSelectable())) {
             redirectAttributes.addFlashAttribute("message",
                     "Das Schulhalbjahr ist nicht mehr selektierbar.");
-            return URL.redirect(URL.ZeugnisPath.START, Long.valueOf(
-                    halbjahrId), Long.valueOf(klassenId));
+            return URL.redirect(URL.ZeugnisPath.START, halbjahrId, klassenId);
         }
         final List<Schulfach> schulfaecher = bewertungErfassungsService.
                 getActiveSchulfaecherOrderByName(schulhalbjahr, klasse);
@@ -106,8 +113,7 @@ public class BewertungenController {
         if (CollectionUtils.isEmpty(schulfaecher)) {
             redirectAttributes.addFlashAttribute("message",
                     "Es wurden keine Schulfächer gefunden.");
-            return URL.redirect(URL.ZeugnisPath.START, Long.valueOf(
-                    halbjahrId), Long.valueOf(klassenId));
+            return URL.redirect(URL.ZeugnisPath.START, halbjahrId, klassenId);
         }
         if (schulfachId == null) {
             LOG.debug("Nehme das erste Schulfach");
@@ -143,6 +149,7 @@ public class BewertungenController {
         return URL.redirect(URL.BewertungenPath.LIST, halbjahrId, klassenId);
     }
 
+
     /**
      * Zeigt die Bewertung zu der entsprechenden Id.
      * @param halbjahrId die Id des Schulhalbjahres
@@ -169,33 +176,6 @@ public class BewertungenController {
         return BEWERTUNGEN_EDIT_BEWERTUNG_VIEW;
     }
 
-    /**
-     * @param halbjahrId die Id des Halbjahrs.
-     * @param klassenId die Id der Klassse
-     * @param schulfachId die Id des Schulfachs.
-     * @param model das Model
-     * @param bewertungValues eine Bewertung die direkten Werte enthält.
-     */
-    private void setEditModelValues(Long halbjahrId, Long klassenId,
-            Long schulfachId, Bewertung bewertung, Long prevId, Long nextId, Model model) {
-        final String type;
-        if (bewertung instanceof BinnenDifferenzierteBewertung) {
-            type = "3niveau";
-        } else if (bewertung instanceof AussenDifferenzierteBewertung) {
-            type = "2niveau";
-        } else {
-            type = "standard";
-        }
-        model.addAttribute("bewertung", bewertung);
-        model.addAttribute("schulhalbjahr", bewertungErfassungsService.getSchulhalbjahr(halbjahrId.longValue()));
-        model.addAttribute("prevId", prevId);
-        model.addAttribute("nextId", nextId);
-        model.addAttribute("saveUrl", URL.filledURL(URL.BewertungenPath.EDIT,
-                halbjahrId, klassenId, schulfachId, bewertung.getId()));
-        model.addAttribute("cancelUrl", URL.filledURL(URL.BewertungenPath.CANCEL,
-                halbjahrId, klassenId, bewertung.getSchulfach().getId(), bewertung.getId()));
-        model.addAttribute("type", type);
-    }
 
     /**
      * Aktualisiert die {@link StandardBewertung}.
@@ -211,8 +191,8 @@ public class BewertungenController {
             .P_HALBJAHR_ID) Long halbjahrId,
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
             @PathVariable(URL.Session.P_SCHULFACH_ID) Long schulfachId,
-            @RequestParam("prevId") Long prevId, @RequestParam("nextId") Long nextId,
-            @RequestParam(value="action", required=false) String action,
+            @RequestParam(Common.P_PREV_ID) Long prevId, @RequestParam(Common.P_NEXT_ID) Long nextId,
+            @RequestParam(value=Common.P_ACTION, required=false) String action,
             StandardBewertung bewertung,
             BindingResult result, Model model,
             RedirectAttributes redirectAttributes) {
@@ -234,8 +214,8 @@ public class BewertungenController {
             .P_HALBJAHR_ID) Long halbjahrId,
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
             @PathVariable(URL.Session.P_SCHULFACH_ID) Long schulfachId,
-            @RequestParam("prevId") Long prevId, @RequestParam("nextId") Long nextId,
-            @RequestParam(value="action", required=false) String action,
+            @RequestParam(Common.P_PREV_ID) Long prevId, @RequestParam(Common.P_NEXT_ID) Long nextId,
+            @RequestParam(value=Common.P_ACTION, required=false) String action,
             AussenDifferenzierteBewertung bewertung,
             BindingResult result, Model model,
             RedirectAttributes redirectAttributes) {
@@ -258,8 +238,8 @@ public class BewertungenController {
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
             @PathVariable(URL.Session.P_SCHULFACH_ID) Long schulfachId,
             BinnenDifferenzierteBewertung bewertung,
-            @RequestParam("prevId") Long prevId, @RequestParam("nextId") Long nextId,
-            @RequestParam(value="action", required=false) String action,
+            @RequestParam(Common.P_PREV_ID) Long prevId, @RequestParam(Common.P_NEXT_ID) Long nextId,
+            @RequestParam(value=Common.P_ACTION, required=false) String action,
             BindingResult result, Model model,
             RedirectAttributes redirectAttributes) {
         return updateBewertung(halbjahrId, klassenId, schulfachId, bewertung,
@@ -290,20 +270,50 @@ public class BewertungenController {
         }
         bewertungService.save(bewertung);
         final String nextUrl;
-        if (StringUtils.equalsIgnoreCase(action, "prev")) {
+        if (StringUtils.equalsIgnoreCase(action, Common.ACTION_PREV)) {
             nextUrl = URL.redirect(URL.BewertungenPath.EDIT,
                     halbjahrId, klassenId, schulfachId, prevId);
-        } else if (StringUtils.equalsIgnoreCase(action, "next")) {
+        } else if (StringUtils.equalsIgnoreCase(action, Common.ACTION_NEXT)) {
             nextUrl = URL.redirect(URL.BewertungenPath.EDIT,
                     halbjahrId, klassenId, schulfachId, nextId);
 
         } else {
-            redirectAttributes.addFlashAttribute("lasteditedId", bewertung.getId());
+            redirectAttributes.addFlashAttribute(Common.P_LASTEDITED_ID, bewertung.getId());
             nextUrl = createRedirectToList(halbjahrId, klassenId, schulfachId);
         }
 
         return nextUrl;
     }
+
+    /**
+     * @param halbjahrId die Id des Halbjahrs.
+     * @param klassenId die Id der Klassse
+     * @param schulfachId die Id des Schulfachs.
+     * @param model das Model
+     * @param bewertungValues eine Bewertung die direkten Werte enthält.
+     */
+    private void setEditModelValues(Long halbjahrId, Long klassenId,
+            Long schulfachId, Bewertung bewertung, Long prevId, Long nextId, Model model) {
+        final String type;
+        if (bewertung instanceof BinnenDifferenzierteBewertung) {
+            type = "3niveau";
+        } else if (bewertung instanceof AussenDifferenzierteBewertung) {
+            type = "2niveau";
+        } else {
+            type = "standard";
+        }
+        model.addAttribute("bewertung", bewertung);
+        model.addAttribute("schulhalbjahr", schulhalbjahrService.read(halbjahrId));
+        model.addAttribute(Common.P_PREV_ID, prevId);
+        model.addAttribute(Common.P_NEXT_ID, nextId);
+        model.addAttribute("saveUrl", URL.filledURL(URL.BewertungenPath.EDIT,
+                halbjahrId, klassenId, schulfachId, bewertung.getId()));
+        model.addAttribute("cancelUrl", URL.filledURL(URL.BewertungenPath.CANCEL,
+                halbjahrId, klassenId, schulfachId, bewertung.getId()));
+        model.addAttribute("type", type);
+        model.addAttribute("helpMessageId", "help.bewertung.edit");
+    }
+
 
     /**
      * @param halbjahrId
@@ -333,7 +343,7 @@ public class BewertungenController {
             @PathVariable(URL.Session.P_SCHULFACH_ID) Long schulfachId,
             @PathVariable(URL.BewertungenPath.P_BEWERTUNGS_ID) Long bewertungsId,
             RedirectAttributes redirectAttributes) {
-        redirectAttributes.addFlashAttribute("lasteditedId", bewertungsId);
+        redirectAttributes.addFlashAttribute(Common.P_LASTEDITED_ID, bewertungsId);
         return createRedirectToList(halbjahrId, klassenId, schulfachId);
     }
 
