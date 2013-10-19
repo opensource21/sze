@@ -9,12 +9,12 @@
 - Umgang mit UniqueKeys diese müssen direkt beim Attribut definiert werden.
 Oder zusätzlich ein @Unique
 
+- Es wäre schöner wenn die Help-Messages direkt in der View definiert werden.
+
 - Umstellung auf #{db....}
 
 - Initialisierung (4h)
-- Bearbeiten der Noten (1h)
 - Bearbeiten/Hinzufügen von Bemerkungen (2h)
-- Schulfacheinstiegs-Seite (4h)
 - Admin-Bereich (3 PT?)
 
 - Der Titel wird nicht gesetzt.
