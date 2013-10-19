@@ -248,7 +248,6 @@ public class ZeugnisController {
             @PathVariable(value = URL.ZeugnisPath.P_BEWERTUNGS_ID)
             Long bewertungsId, Model model) {
 
-        //TODO niels
         BewertungWithNeigbors bewertungWithNeigbors = zeugnisErfassungsService.
                 getBewertungWithNeighbors(bewertungsId);
         setEditBewertungModelValues(halbjahrId, klassenId, schulfachId,
