@@ -314,15 +314,15 @@ public class Schueler extends VersionedModel implements Serializable,
     @Override
     public int compareTo(final Schueler other) {
         final CompareToBuilder compareBuilder = new CompareToBuilder();
-        compareBuilder.append(this.klasse, other.klasse);
-        compareBuilder.append(this.name, other.name);
-        compareBuilder.append(this.vorname, other.vorname);
-        compareBuilder.append(this.geburtstag, other.geburtstag);
-        compareBuilder.append(this.geburtsort, other.geburtsort);
-        compareBuilder.append(this.nummer, other.nummer);
-        compareBuilder.append(this.aufnahmeDatum, other.aufnahmeDatum);
-        compareBuilder.append(this.abgangsDatum, other.abgangsDatum);
-        compareBuilder.append(this.zeugnisse, other.zeugnisse);
+        compareBuilder.append(this.getKlasse(), other.getKlasse());
+        compareBuilder.append(this.getName(), other.getName());
+        compareBuilder.append(this.getVorname(), other.getVorname());
+        compareBuilder.append(this.getGeburtstag(), other.getGeburtstag());
+        compareBuilder.append(this.getGeburtsort(), other.getGeburtsort());
+        compareBuilder.append(this.getNummer(), other.getNummer());
+        compareBuilder.append(this.getAufnahmeDatum(), other.getAufnahmeDatum());
+        compareBuilder.append(this.getAbgangsDatum(), other.getAbgangsDatum());
+        compareBuilder.append(this.getZeugnisse(), other.getZeugnisse());
         return compareBuilder.toComparison();
     }
 

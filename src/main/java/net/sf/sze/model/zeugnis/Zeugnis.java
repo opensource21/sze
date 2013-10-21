@@ -646,9 +646,9 @@ public class Zeugnis extends VersionedModel implements Serializable,
     @Override
     public int compareTo(final Zeugnis other) {
         final CompareToBuilder compareBuilder = new CompareToBuilder();
-        compareBuilder.append(this.schulhalbjahr, other.schulhalbjahr);
-        compareBuilder.append(this.klasse, other.klasse);
-        compareBuilder.append(this.schueler, other.schueler);
+        compareBuilder.append(this.getSchulhalbjahr(), other.getSchulhalbjahr());
+        compareBuilder.append(this.getKlasse(), other.getKlasse());
+        compareBuilder.append(this.getSchueler(), other.getSchueler());
         return compareBuilder.toComparison();
     }
 
