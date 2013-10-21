@@ -5,15 +5,9 @@
 
 package net.sf.sze.config;
 
-import de.ppi.fuwesta.spring.mvc.formatter.NonEmptyStringAnnotationFormatterFactory;
-import de.ppi.fuwesta.spring.mvc.oval.JPAAnnotationConfigLazy;
-import de.ppi.fuwesta.spring.mvc.oval.MessageLookupContextRenderer;
-import de.ppi.fuwesta.spring.mvc.oval.MessageLookupMessageValueFormatter;
-import de.ppi.fuwesta.spring.mvc.oval.SpringMvcMessageResolver;
-import de.ppi.fuwesta.spring.mvc.util.ApostropheEscapingPropertiesPersister;
-import de.ppi.fuwesta.spring.mvc.util.EntityPropertiesToMessages;
-import de.ppi.fuwesta.spring.mvc.util.UrlDefinitionsToMessages;
-import de.ppi.fuwesta.thymeleaf.bootstrap.BootstrapDialect;
+import java.util.List;
+import java.util.Properties;
+
 import net.sf.oval.Validator;
 import net.sf.oval.configuration.annotation.AnnotationsConfigurer;
 import net.sf.oval.integration.spring.SpringCheckInitializationListener;
@@ -47,8 +41,15 @@ import org.thymeleaf.spring3.SpringTemplateEngine;
 import org.thymeleaf.spring3.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
-import java.util.List;
-import java.util.Properties;
+import de.ppi.fuwesta.spring.mvc.formatter.NonEmptyStringAnnotationFormatterFactory;
+import de.ppi.fuwesta.spring.mvc.oval.JPAAnnotationsConfigurer;
+import de.ppi.fuwesta.spring.mvc.oval.MessageLookupContextRenderer;
+import de.ppi.fuwesta.spring.mvc.oval.MessageLookupMessageValueFormatter;
+import de.ppi.fuwesta.spring.mvc.oval.SpringMvcMessageResolver;
+import de.ppi.fuwesta.spring.mvc.util.ApostropheEscapingPropertiesPersister;
+import de.ppi.fuwesta.spring.mvc.util.EntityPropertiesToMessages;
+import de.ppi.fuwesta.spring.mvc.util.UrlDefinitionsToMessages;
+import de.ppi.fuwesta.thymeleaf.bootstrap.BootstrapDialect;
 
 /**
  * The frontend configuration for Spring.
@@ -262,7 +263,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
                 SpringCheckInitializationListener.INSTANCE);
 
         final Validator ovalValidator = new Validator(annConfig,
-                new JPAAnnotationConfigLazy());
+                new JPAAnnotationsConfigurer(false));
         Validator.setMessageValueFormatter(
                 new MessageLookupMessageValueFormatter(
                 configureMessageSource()));

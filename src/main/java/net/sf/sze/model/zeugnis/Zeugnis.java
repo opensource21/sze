@@ -160,8 +160,7 @@ public class Zeugnis extends VersionedModel implements Serializable,
     // bi-directional many-to-one association to Schueler
 
     /** The schueler. */
-    //TODO niels sollte EAGER sein.
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "schueler_id", nullable = false)
     private Schueler schueler;
 
