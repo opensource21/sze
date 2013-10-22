@@ -82,5 +82,5 @@ Erledigt
   Eleganter #{'bool.'+${var}}
 
 + Owning-Side bei Many-To-One oder One-To-Many: Immer Many. Bei Many-Many die ohne mappedBy
-+ Inverse Side: Die One-Side oder die mit mappedBy. Hier ist das Speichern und veränden komplexer.
++ Inverse Side: Die One-Side (also da wo One-To steht) oder die mit mappedBy. Hier ist das Speichern und veränden komplexer.
 
