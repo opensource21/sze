@@ -121,6 +121,15 @@ public class ZeugnisErfassungsServiceImpl implements ZeugnisErfassungsService {
         return zeugnisse;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Zeugnis getZeugnis(Long halbjahrId, Long klassenId, Long schuelerId) {
+
+        return zeugnisDao.findByHalbjahrIdAndKlasseIdAndSchuelerId(halbjahrId, klassenId, schuelerId);
+    }
+
 
     /**
      *
@@ -157,4 +166,6 @@ public class ZeugnisErfassungsServiceImpl implements ZeugnisErfassungsService {
         bewertungen.addAll(wpBewertungen);
         return new BewertungWithNeigbors(bewertungen, bewertungsId);
     }
+
+
 }

@@ -58,4 +58,12 @@ public interface ZeugnisErfassungsService {
      */
     BewertungWithNeigbors getBewertungWithNeighbors(Long bewertungsId);
 
+    /**
+     * Liest ein Zeugnis.
+     * @param halbjahrId die HalbjahrsId
+     * @param klassenId die KlassenId
+     * @param schuelerId die Id des Schülers
+     */
+    Zeugnis getZeugnis(Long halbjahrId, Long klassenId, Long schuelerId);
+
 }

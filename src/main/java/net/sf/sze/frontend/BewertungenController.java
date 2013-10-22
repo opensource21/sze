@@ -38,7 +38,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 /**
- * Controller zur Erfassung der Bertungen.
+ * Controller zur Erfassung der Bewertungen.
  *
  */
 @Controller
