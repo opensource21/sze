@@ -20,6 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,6 +41,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  */
 @Controller
 public class BemerkungController {
+
+
+    /**
+     * Comment for <code>BEMERKUNG_FORM</code>
+     */
+    private static final String BEMERKUNG_FORM = "bemerkung/editBemerkung";
 
 
     /**
@@ -93,16 +100,44 @@ public class BemerkungController {
     public String createBemerkung(@PathVariable(URL.Session
             .P_HALBJAHR_ID) Long halbjahrId,
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
-            @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId, Model model,
-            RedirectAttributes redirectAttributes) {
+            @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId, Model model) {
         final Zeugnis zeugnis = zeugnisErfassungsService.getZeugnis(halbjahrId, klassenId, schuelerId);
         final Bemerkung bemerkung = new Bemerkung();
         bemerkung.setZeugnis(zeugnis);
         fillModel(model, halbjahrId, klassenId, schuelerId, bemerkung);
-        model.addAttribute("anlegenUrl", "");
+        model.addAttribute("saveUrl", URL.filledURL(URL.ZeugnisPath.BEMERKUNG_CREATE, halbjahrId, klassenId, schuelerId));
         model.addAttribute("anlegenUndWeiterUrl", "");
 
-        return "bemerkung/editBemerkung";
+        return BEMERKUNG_FORM;
+    }
+
+    /**
+     * Speichert die neu angelegte Bemerkung.
+     * @param halbjahrId die Id des Schulhalbjahres
+     * @param klassenId die Id der Klasse
+     * @param schuelerId die Id des Schuelers
+     * @param model das Model
+     * @param redirectAttributes Fehlermeldungen.
+     * @return die logische View
+     */
+    @RequestMapping(value = URL.ZeugnisPath.BEMERKUNG_CREATE, method = RequestMethod.POST)
+    public String insertBemerkung(@PathVariable(URL.Session
+            .P_HALBJAHR_ID) Long halbjahrId,
+            @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
+            @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
+            Bemerkung bemerkung, BindingResult result, Model model,
+            RedirectAttributes redirectAttributes) {
+        validator.validate(bemerkung, result);
+
+        if (result.hasErrors()) {
+            fillModel(model, halbjahrId, klassenId, schuelerId, bemerkung);
+            return BEMERKUNG_FORM;
+        }
+
+        LOG.debug("Create Bemerkung: " + bemerkung);
+        bemerkungService.save(bemerkung);
+        return URL.redirect(URL.ZeugnisPath.SHOW +"?" +
+                URL.Session.P_SCHUELER_ID + "=" + schuelerId, halbjahrId, klassenId);
     }
 
     private void fillModel(Model model, Long halbjahrId,
