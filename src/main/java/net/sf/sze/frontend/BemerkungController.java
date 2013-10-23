@@ -164,14 +164,14 @@ public class BemerkungController {
             .P_HALBJAHR_ID) Long halbjahrId,
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
-            @PathVariable(URL.Session.P_SCHUELER_ID) Long bemerkungsId,
+            @PathVariable(URL.ZeugnisPath.P_BEMERKUNGS_ID) Long bemerkungsId,
             Model model) {
         final Zeugnis zeugnis = zeugnisErfassungsService.getZeugnis(halbjahrId, klassenId, schuelerId);
         final Bemerkung bemerkung = bemerkungService.read(bemerkungsId);
         bemerkung.setZeugnis(zeugnis);
         fillModel(model, halbjahrId, klassenId, schuelerId, bemerkung);
         model.addAttribute("updateUrl", URL.filledURL(URL.ZeugnisPath.BEMERKUNG_EDIT, halbjahrId, klassenId, schuelerId, bemerkungsId));
-
+        model.addAttribute("deleteUrl", URL.filledURL(URL.ZeugnisPath.BEMERKUNG_DELETE, halbjahrId, klassenId, schuelerId, bemerkungsId));
         return BEMERKUNG_FORM;
     }
 
@@ -189,13 +189,14 @@ public class BemerkungController {
             .P_HALBJAHR_ID) Long halbjahrId,
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
-            @PathVariable(URL.Session.P_SCHUELER_ID) Long bemerkungsId,
+            @PathVariable(URL.ZeugnisPath.P_BEMERKUNGS_ID) Long bemerkungsId,
             Bemerkung bemerkung, @RequestParam(value=URL.Common.P_ACTION, required=false) String action,
             BindingResult result, Model model) {
         validator.validate(bemerkung, result);
 
         if (result.hasErrors()) {
             model.addAttribute("updateUrl", URL.filledURL(URL.ZeugnisPath.BEMERKUNG_EDIT, halbjahrId, klassenId, schuelerId, bemerkungsId));
+            model.addAttribute("deleteUrl", URL.filledURL(URL.ZeugnisPath.BEMERKUNG_DELETE, halbjahrId, klassenId, schuelerId, bemerkungsId));
             fillModel(model, halbjahrId, klassenId, schuelerId, bemerkung);
             return BEMERKUNG_FORM;
         }
@@ -224,6 +225,16 @@ public class BemerkungController {
             Long schuelerId) {
         return URL.redirect(URL.ZeugnisPath.SHOW +"?" +
                 URL.Session.P_SCHUELER_ID + "=" + schuelerId, halbjahrId, klassenId);
+    }
+
+    @RequestMapping(value = URL.ZeugnisPath.BEMERKUNG_DELETE, method = RequestMethod.POST)
+    public String deleteBemerkung(@PathVariable(URL.Session
+            .P_HALBJAHR_ID) Long halbjahrId,
+            @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
+            @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
+            @PathVariable(URL.ZeugnisPath.P_BEMERKUNGS_ID) Long bemerkungsId) {
+        bemerkungService.delete(bemerkungsId);
+        return createRedirectToZeugnisUrl(halbjahrId, klassenId, schuelerId);
     }
 
 

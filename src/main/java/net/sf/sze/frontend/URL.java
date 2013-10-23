@@ -195,6 +195,7 @@ public final class URL {
         String BEMERKUNG_CREATE = DETAIL + "/createBemerkung";
         String BEMERKUNG_EDIT = DETAIL + "/editBemerkung/{" + P_BEMERKUNGS_ID + "}";
         String BEMERKUNG_CANCEL = DETAIL + "/cancelBemerkung";
+        String BEMERKUNG_DELETE = DETAIL + "/deleteBemerkung/{" + P_BEMERKUNGS_ID + "}";
 
         /**
          * Zeige PDF einer ganze Klasse.

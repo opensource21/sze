@@ -69,6 +69,8 @@ cancelUrl
                 <i class="cancel"></i>Abbrechen</button>
             <button type="submit"  th:formaction="@{${insertUrl}(action=${'next'})}" class="btn" th:unless="${insertUrl == null}">
                 <i class="saveAndNext"></i>Speichern und weiteren Anlegen</button>
+            <button type="submit" th:formaction="@{${deleteUrl}}" class="btn" th:unless="${deleteUrl == null}">
+                <i class="delete"></i>Löschen</button>
         </form>
     </div>
 </body>
