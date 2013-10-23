@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import net.sf.sze.frontend.URL.Common;
 import net.sf.sze.model.zeugnis.Bemerkung;
 import net.sf.sze.model.zeugnis.BemerkungsBaustein;
 import net.sf.sze.model.zeugnis.Zeugnis;
@@ -16,6 +17,7 @@ import net.sf.sze.service.api.BemerkungsBausteineService;
 import net.sf.sze.service.api.SchulhalbjahrService;
 import net.sf.sze.service.api.ZeugnisErfassungsService;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -25,6 +27,7 @@ import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
@@ -125,7 +128,8 @@ public class BemerkungController {
             .P_HALBJAHR_ID) Long halbjahrId,
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
-            Bemerkung bemerkung, BindingResult result, Model model,
+            Bemerkung bemerkung, @RequestParam(URL.Common.P_ACTION) String action,
+            BindingResult result, Model model,
             RedirectAttributes redirectAttributes) {
         validator.validate(bemerkung, result);
 
@@ -136,8 +140,16 @@ public class BemerkungController {
 
         LOG.debug("Create Bemerkung: " + bemerkung);
         bemerkungService.save(bemerkung);
-        return URL.redirect(URL.ZeugnisPath.SHOW +"?" +
-                URL.Session.P_SCHUELER_ID + "=" + schuelerId, halbjahrId, klassenId);
+        final String nextUrl;
+        if (StringUtils.equalsIgnoreCase(action, Common.ACTION_NEXT)) {
+            nextUrl = URL.redirect(URL.ZeugnisPath.BEMERKUNG_CREATE,
+                    halbjahrId, klassenId, schuelerId);
+        } else {
+            nextUrl = URL.redirect(URL.ZeugnisPath.SHOW +"?" +
+                    URL.Session.P_SCHUELER_ID + "=" + schuelerId, halbjahrId, klassenId);
+        }
+
+        return nextUrl;
     }
 
     private void fillModel(Model model, Long halbjahrId,

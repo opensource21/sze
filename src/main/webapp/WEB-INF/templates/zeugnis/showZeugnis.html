@@ -204,7 +204,7 @@
                      <tr th:each="bemerkungInstance:${zeugnis?.bemerkungen}">
                         <td th:text="${bemerkungInstance.baustein.name}"></td>
                         <td th:text="${bemerkungInstance.sortierung}"></td>
-                        <td th:text="${bemerkungInstance.freiText?:bemerkungInstance.fixText}"></td>
+                        <td th:text="${#strings.isEmpty(bemerkungInstance.freiText)?bemerkungInstance.fixText:bemerkungInstance.freiText}"></td>
                         <td><a href="bemerkung:edit.${bemerkungInstance.id}"><i class="edit"></i></a></td>
                        </tr>
                  </tbody>

@@ -62,12 +62,12 @@ cancelUrl
             <!-- FreiText -->
             <textarea rows="5" bs:field="freiText" bs:class="controls-row"
                 class="span3"></textarea>
-            <button type="submit"  th:formaction="@{${saveUrl}}" class="btn"><i class="save"></i>Speichern</button>
-            <!-- <button type="submit"  th:formaction="@{${saveUrl}(action=${'prev'})}" class="btn" th:unless="${prevId == null}"><i class="saveAndPrevious"></i>Speichern und Zurück</button>
-
-            <button type="submit"  th:formaction="@{${cancelUrl}}" class="btn"><i class="cancel"></i>Abbrechen</button>
-            <button type="submit"  th:formaction="@{${saveUrl}(action=${'next'})}" class="btn" th:unless="${nextId == null}"><i class="saveAndNext"></i>Speichern und Weiter</button>
-             -->
+            <button type="submit"  th:formaction="@{${saveUrl}}" class="btn">
+                <i class="save"></i>Speichern</button>
+            <button type="submit"  th:formaction="@{${cancelUrl}}" formmethod="get" class="btn">
+                <i class="cancel"></i>Abbrechen</button>
+            <button type="submit"  th:formaction="@{${saveUrl}(action=${'next'})}" class="btn">
+                <i class="saveAndNext"></i>Speichern und weiteren Anlegen</button>
         </form>
     </div>
 </body>

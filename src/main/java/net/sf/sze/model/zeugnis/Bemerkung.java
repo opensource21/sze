@@ -13,7 +13,6 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import net.sf.sze.constraints.ValidVariableText;
 import net.sf.sze.model.stammdaten.Schueler;
@@ -41,11 +40,6 @@ public class Bemerkung extends VersionedModel implements Serializable,
     /** The er sie statt namen. */
     @Column(name = "er_sie_statt_namen", nullable = false)
     private boolean erSieStattNamen = false;
-
-    /** The fix text. */
-    @Transient
-    @ValidVariableText
-    private String fixText;
 
     /** The frei text. */
     @Column(name = "frei_text", length = 500)
@@ -103,6 +97,16 @@ public class Bemerkung extends VersionedModel implements Serializable,
     }
 
     /**
+     * @return the fixText
+     */
+    public String getFixText() {
+        if (baustein == null) {
+            return "";
+        }
+        return baustein.getText();
+    }
+
+    /**
      * Gets the sortierung.
      *
      * @return the sortierung
@@ -136,7 +140,6 @@ public class Bemerkung extends VersionedModel implements Serializable,
      */
     public void setBaustein(final BemerkungsBaustein bemerkungsBaustein) {
         this.baustein = bemerkungsBaustein;
-        this.fixText = this.baustein.getText();
     }
 
     /**
@@ -163,7 +166,7 @@ public class Bemerkung extends VersionedModel implements Serializable,
         compareBuilder.append(this.sortierung, other.sortierung);
         compareBuilder.append(this.baustein, other.baustein);
         compareBuilder.append(this.zeugnis, other.zeugnis);
-        compareBuilder.append(this.fixText, other.fixText);
+        compareBuilder.append(this.getFixText(), other.getFixText());
         compareBuilder.append(this.freiText, other.freiText);
         compareBuilder.append(this.erSieStattNamen, other.erSieStattNamen);
         return compareBuilder.toComparison();
@@ -174,7 +177,7 @@ public class Bemerkung extends VersionedModel implements Serializable,
         if (StringUtils.isNotBlank(freiText)) {
             return baustein.getName() + " " + freiText;
         } else {
-            return baustein.getName() + " " + fixText;
+            return baustein.getName() + " " + getFixText();
         }
     }
 
@@ -188,7 +191,7 @@ public class Bemerkung extends VersionedModel implements Serializable,
     public String createPrintText(final Schueler schueler, final Date datum,
             final String schuljahr) {
         String text = StringUtils.isNotBlank(freiText) ? freiText
-                : fixText;
+                : getFixText();
         text = VariableUtility.createPrintText(text, schueler, datum,
                 erSieStattNamen, schuljahr);
 
