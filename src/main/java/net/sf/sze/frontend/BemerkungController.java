@@ -147,6 +147,7 @@ public class BemerkungController {
         model.addAttribute("bemerkung", bemerkung);
         model.addAttribute("schulhalbjahr", schulhalbjahrService.read(halbjahrId));
         model.addAttribute("bemerkungsBausteine", bemerkungsBausteine);
+        model.addAttribute("helpMessageId", "help.bemerkung.edit");
         model.addAttribute("cancelUrl", URL.filledURL(URL.ZeugnisPath.SHOW +"?" +
                 URL.Session.P_SCHUELER_ID + "=" + schuelerId, halbjahrId, klassenId));
     }
