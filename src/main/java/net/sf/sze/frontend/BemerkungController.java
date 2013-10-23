@@ -13,9 +13,9 @@ import net.sf.sze.model.zeugnis.BemerkungsBaustein;
 import net.sf.sze.model.zeugnis.Zeugnis;
 import net.sf.sze.service.api.BemerkungService;
 import net.sf.sze.service.api.BemerkungsBausteineService;
+import net.sf.sze.service.api.SchulhalbjahrService;
 import net.sf.sze.service.api.ZeugnisErfassungsService;
 
-import org.bouncycastle.util.encoders.UrlBase64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -69,6 +69,12 @@ public class BemerkungController {
     private ZeugnisErfassungsService zeugnisErfassungsService;
 
     /**
+     * Der {@link SchulhalbjahrService}.
+     */
+    @Resource
+    private SchulhalbjahrService schulhalbjahrService;
+
+    /**
      * Der Validator.
      */
     @Resource
@@ -92,16 +98,19 @@ public class BemerkungController {
         final Zeugnis zeugnis = zeugnisErfassungsService.getZeugnis(halbjahrId, klassenId, schuelerId);
         final Bemerkung bemerkung = new Bemerkung();
         bemerkung.setZeugnis(zeugnis);
+        fillModel(model, halbjahrId, klassenId, schuelerId, bemerkung);
+        model.addAttribute("anlegenUrl", "");
+        model.addAttribute("anlegenUndWeiterUrl", "");
 
-
-        return "bemerkung/edit";
+        return "bemerkung/editBemerkung";
     }
 
     private void fillModel(Model model, Long halbjahrId,
             Long klassenId, Long schuelerId, Bemerkung bemerkung) {
         final List<BemerkungsBaustein> bemerkungsBausteine =
-                bemerkungsBausteineService.getAllBemerkungsBausteine().getContent();
+                bemerkungService.getAllBausteine(bemerkung);
         model.addAttribute("bemerkung", bemerkung);
+        model.addAttribute("schulhalbjahr", schulhalbjahrService.read(halbjahrId));
         model.addAttribute("bemerkungsBausteine", bemerkungsBausteine);
         model.addAttribute("cancelUrl", URL.filledURL(URL.ZeugnisPath.SHOW +"?" +
                 URL.Session.P_SCHUELER_ID + "=" + schuelerId, halbjahrId, klassenId));

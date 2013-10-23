@@ -5,7 +5,10 @@
 
 package net.sf.sze.service.api;
 
+import java.util.List;
+
 import net.sf.sze.model.zeugnis.Bemerkung;
+import net.sf.sze.model.zeugnis.BemerkungsBaustein;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -77,4 +80,11 @@ public interface BemerkungService {
      * @return number of bemerkungs.
      */
     long getNrOfBemerkungs();
+
+    /**
+     * Liefert alle relevanten Bemerkungsbausteine sortiert.
+     * @param bemerkung die Bemerkung zu der es angezeigt werden soll.
+     * @return alle relevanten Bemerkungsbausteine sortiert.
+     */
+    List<BemerkungsBaustein> getAllBausteine(Bemerkung bemerkung);
 }

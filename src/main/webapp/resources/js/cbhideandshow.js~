@@ -1,0 +1,18 @@
+$(document).ready(function(){
+   hideandshow();
+});
+
+function hideandshow() {
+   $('.cbhideandshow').each(function(index ) {
+       var combobox = $(this);
+       var id = combox.attr("id")
+       var oldValue = combobox.value;
+       $(id + oldValue).show();       
+       combobox.change(function() {
+	   $(id + oldValue).hide();       
+           oldValue = combobox.value;
+	   $(id + oldValue).show();       
+       });
+   })
+};
+

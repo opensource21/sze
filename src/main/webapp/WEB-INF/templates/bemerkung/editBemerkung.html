@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!-- PARAMS:
+bemerkung - die Bemerkung.
+bemerkungsBausteine - alle möglichen Bemerkungsbausteine
+schulhalbjahr
+anlegenUrl
+anlegenUndWeiterUrl
+cancelUrl
+-->
+
+<html lang="de-DE" xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+    layout:decorator="/main">
+<head>
+<script type="text/javascript"
+    src="../../../resources/js/jquery-1.8.2.js" th:remove="all"></script>
+<script type="text/javascript"
+    src="../../../resources/js/thymelaefbs.js?1" th:remove="all"></script>
+</head>
+<body>
+    <div layout:fragment="content">
+        <h4>
+            Bearbeite Bemerkung für Schüler <em
+                th:text="${bemerkung?.zeugnis?.schueler}"></em> (Klasse <span
+                th:remove="tag"
+                th:text="${bemerkung?.zeugnis?.klasse?.calculateKlassenname(schulhalbjahr.jahr)}"></span>
+            im Hj: <span th:remove="tag" th:text="${schulhalbjahr}"></span>)
+        </h4>
+        <form class="well form-horizontal" method="post"
+            th:object="${bemerkung}">
+            <input id="id" type="hidden" th:value="*{id}" name="id" /> <input
+                id="version" type="hidden" th:value="*{version}" name="version" /> <input
+                id="zeugnis" type="hidden" th:value="*{zeugnis.id}" name="zeugnis" />
+
+            <!-- Baustein -->
+            <select bs:field="#{db.Bemerkung.baustein}" bs:class="controls-row"
+                class="span3 cbhideandshow" data-class-show="span3">
+                <option th:each="item : ${bemerkungsBausteine}" th:value="${item.id}"
+                    th:text="${item.name}" th:disabled="${not item.aktiv}"></option>
+            </select>
+
+            <div class="control-group">
+                <label class="control-label" for="sortierung"
+                    th:text="#{model.Bemerkung.sortierung}">Sortierung</label>
+                <div class="controls-row">
+                    <input type="text" class="span1" th:field="*{sortierung}" /> <label
+                        class="checkbox span2"> <input type="checkbox"
+                        th:field="*{erSieStattNamen}" id="erSieStattNamen" /> <span
+                        th:text="#{model.Bemerkung.erSieStattNamen}" th:remove="tag"></span>
+                    </label>
+                </div>
+            </div>
+            <!-- FixText Sollte nicht übermittelt werden!-->
+            <div class="control-group">
+                <label class="control-label" for="fixText" th:text="#{field.fixText}+':'">
+                Text aus dem:</label>
+                <div class="controls-row">
+                    <textarea th:id="${'baustein' + baustein.id}" rows="5" class="hide" readonly="readonly"
+                    th:each="baustein:${bemerkungsBausteine}" th:text="${baustein.text}"></textarea>
+                </div>
+            </div>
+            <!-- FreiText -->
+            <textarea rows="5" bs:field="freiText" bs:class="controls-row"
+                class="span3"></textarea>
+            <!-- <button type="submit"  th:formaction="@{${saveUrl}(action=${'prev'})}" class="btn" th:unless="${prevId == null}"><i class="saveAndPrevious"></i>Speichern und Zurück</button>
+            <button type="submit"  th:formaction="@{${saveUrl}}" class="btn"><i class="save"></i>Speichern</button>
+            <button type="submit"  th:formaction="@{${cancelUrl}}" class="btn"><i class="cancel"></i>Abbrechen</button>
+            <button type="submit"  th:formaction="@{${saveUrl}(action=${'next'})}" class="btn" th:unless="${nextId == null}"><i class="saveAndNext"></i>Speichern und Weiter</button>
+             -->
+        </form>
+    </div>
+</body>
+</html>

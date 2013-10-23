@@ -71,6 +71,6 @@ public interface ZeugnisDao extends PagingAndSortingRepository<Zeugnis, Long> {
      * @param schuelerId die Id des Schuelers,
      * @return das Zeugnis.
      */
-    Zeugnis findByHalbjahrIdAndKlasseIdAndSchuelerId(Long halbjahrId,
+    Zeugnis findBySchulhalbjahrIdAndKlasseIdAndSchuelerId(Long halbjahrId,
             Long klassenId, Long schuelerId);
 }
