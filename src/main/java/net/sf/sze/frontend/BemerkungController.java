@@ -109,7 +109,6 @@ public class BemerkungController {
         bemerkung.setZeugnis(zeugnis);
         fillModel(model, halbjahrId, klassenId, schuelerId, bemerkung);
         model.addAttribute("saveUrl", URL.filledURL(URL.ZeugnisPath.BEMERKUNG_CREATE, halbjahrId, klassenId, schuelerId));
-        model.addAttribute("anlegenUndWeiterUrl", "");
 
         return BEMERKUNG_FORM;
     }
@@ -128,12 +127,13 @@ public class BemerkungController {
             .P_HALBJAHR_ID) Long halbjahrId,
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
-            Bemerkung bemerkung, @RequestParam(URL.Common.P_ACTION) String action,
+            Bemerkung bemerkung, @RequestParam(value=URL.Common.P_ACTION, required=false) String action,
             BindingResult result, Model model,
             RedirectAttributes redirectAttributes) {
         validator.validate(bemerkung, result);
 
         if (result.hasErrors()) {
+            model.addAttribute("saveUrl", URL.filledURL(URL.ZeugnisPath.BEMERKUNG_CREATE, halbjahrId, klassenId, schuelerId));
             fillModel(model, halbjahrId, klassenId, schuelerId, bemerkung);
             return BEMERKUNG_FORM;
         }
@@ -145,12 +145,33 @@ public class BemerkungController {
             nextUrl = URL.redirect(URL.ZeugnisPath.BEMERKUNG_CREATE,
                     halbjahrId, klassenId, schuelerId);
         } else {
-            nextUrl = URL.redirect(URL.ZeugnisPath.SHOW +"?" +
-                    URL.Session.P_SCHUELER_ID + "=" + schuelerId, halbjahrId, klassenId);
+            nextUrl = createRedirectToZeugnisUrl(halbjahrId, klassenId, schuelerId);
         }
 
         return nextUrl;
     }
+
+    @RequestMapping(value = URL.ZeugnisPath.BEMERKUNG_CANCEL, method = RequestMethod.POST)
+    public String insertBemerkung(@PathVariable(URL.Session
+            .P_HALBJAHR_ID) Long halbjahrId,
+            @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
+            @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId) {
+        return createRedirectToZeugnisUrl(halbjahrId, klassenId, schuelerId);
+    }
+
+    /**
+     * Erstellt die URL um zurück auf die Show-Zeugnismaske zu gehen.
+     * @param halbjahrId Id des Schulhalbjahres.
+     * @param klassenId Id der Klasse
+     * @param schuelerId Id des Schülers.
+     * @return die Url
+     */
+    private String createRedirectToZeugnisUrl(Long halbjahrId, Long klassenId,
+            Long schuelerId) {
+        return URL.redirect(URL.ZeugnisPath.SHOW +"?" +
+                URL.Session.P_SCHUELER_ID + "=" + schuelerId, halbjahrId, klassenId);
+    }
+
 
     private void fillModel(Model model, Long halbjahrId,
             Long klassenId, Long schuelerId, Bemerkung bemerkung) {
@@ -160,8 +181,8 @@ public class BemerkungController {
         model.addAttribute("schulhalbjahr", schulhalbjahrService.read(halbjahrId));
         model.addAttribute("bemerkungsBausteine", bemerkungsBausteine);
         model.addAttribute("helpMessageId", "help.bemerkung.edit");
-        model.addAttribute("cancelUrl", URL.filledURL(URL.ZeugnisPath.SHOW +"?" +
-                URL.Session.P_SCHUELER_ID + "=" + schuelerId, halbjahrId, klassenId));
+        model.addAttribute("cancelUrl",
+                URL.filledURL(URL.ZeugnisPath.BEMERKUNG_CANCEL, halbjahrId, klassenId, schuelerId));
     }
 
 }
