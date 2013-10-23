@@ -201,7 +201,7 @@
                      </tr>
                  </thead>
                  <tbody>
-                     <tr th:each="bemerkungInstance:${zeugnisInstance?.bemerkungen}">
+                     <tr th:each="bemerkungInstance:${zeugnis?.bemerkungen}">
                         <td th:text="${bemerkungInstance.baustein.name}"></td>
                         <td th:text="${bemerkungInstance.sortierung}"></td>
                         <td th:text="${bemerkungInstance.freiText?:bemerkungInstance.fixText}"></td>
