@@ -10,7 +10,6 @@ import de.ppi.fuwesta.jpa.helper.VersionedModel;
 import org.apache.commons.lang.builder.CompareToBuilder;
 
 import java.io.Serializable;
-
 import java.util.Map;
 
 import javax.persistence.Column;
@@ -144,12 +143,19 @@ public class Schulhalbjahr extends VersionedModel implements Serializable,
      * @param printMap die Printmap.
      */
     public void toPrintMap(Map<String, Object> printMap) {
-        printMap.put("shj_jahr", (jahr - 1) + "/" + Integer.toString(jahr)
-                .substring(2, 4));
+        printMap.put("shj_jahr", getSchuljahr());
 
         final String halbjahrString = halbjahr.toString();
         printMap.put("shj_halbjahr", halbjahrString.substring(0, halbjahrString
                 .length() - 4));
         printMap.put("shj", this.toString());
+    }
+
+    /**
+     * @return
+     */
+    public String getSchuljahr() {
+        return (jahr - 1) + "/" + Integer.toString(jahr)
+                .substring(2, 4);
     }
 }

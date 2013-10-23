@@ -46,9 +46,9 @@ public class BemerkungController {
 
 
     /**
-     * Comment for <code>BEMERKUNG_FORM</code>
+     * View zum Editieren der Bemerkung.
      */
-    private static final String BEMERKUNG_FORM = "bemerkung/editBemerkung";
+    private static final String EDIT_BEMERKUNG_VIEW = "bemerkung/editBemerkung";
 
 
     /**
@@ -109,7 +109,7 @@ public class BemerkungController {
         fillModel(model, halbjahrId, klassenId, schuelerId, bemerkung);
         model.addAttribute("insertUrl", URL.filledURL(URL.ZeugnisPath.BEMERKUNG_CREATE, halbjahrId, klassenId, schuelerId));
 
-        return BEMERKUNG_FORM;
+        return EDIT_BEMERKUNG_VIEW;
     }
 
     /**
@@ -133,7 +133,7 @@ public class BemerkungController {
         if (result.hasErrors()) {
             model.addAttribute("insertUrl", URL.filledURL(URL.ZeugnisPath.BEMERKUNG_CREATE, halbjahrId, klassenId, schuelerId));
             fillModel(model, halbjahrId, klassenId, schuelerId, bemerkung);
-            return BEMERKUNG_FORM;
+            return EDIT_BEMERKUNG_VIEW;
         }
 
         LOG.debug("Create Bemerkung: " + bemerkung);
@@ -159,6 +159,33 @@ public class BemerkungController {
      * @param redirectAttributes Fehlermeldungen.
      * @return die logische View
      */
+    @RequestMapping(value = URL.ZeugnisPath.BEMERKUNG_SHOW, method = RequestMethod.GET)
+    public String showBemerkung(@PathVariable(URL.Session
+            .P_HALBJAHR_ID) Long halbjahrId,
+            @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
+            @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
+            @PathVariable(URL.ZeugnisPath.P_BEMERKUNGS_ID) Long bemerkungsId,
+            Model model) {
+        final Bemerkung bemerkung = bemerkungService.read(bemerkungsId);
+        model.addAttribute("bemerkung", bemerkung);
+        model.addAttribute("schulhalbjahr", schulhalbjahrService.read(halbjahrId));
+        model.addAttribute("cancelUrl", URL.filledURL(URL.ZeugnisPath.SHOW +"?" +
+                URL.Session.P_SCHUELER_ID + "=" + schuelerId, halbjahrId, klassenId));
+        model.addAttribute("editUrl", URL.filledURL(URL.ZeugnisPath.BEMERKUNG_EDIT, halbjahrId, klassenId, schuelerId, bemerkungsId));
+        model.addAttribute("deleteUrl", URL.filledURL(URL.ZeugnisPath.BEMERKUNG_DELETE, halbjahrId, klassenId, schuelerId, bemerkungsId));
+        return "bemerkung/showBemerkung";
+    }
+
+    /**
+     * Zeigt die Bemerkung des entsprechenden Faches der Klasse in dem Halbjahr.
+     * @param halbjahrId die Id des Schulhalbjahres
+     * @param klassenId die Id der Klasse
+     * @param schuelerId die Id des Schuelers
+     * @param bemerkungsId die Id der Bemerkung
+     * @param model das Model
+     * @param redirectAttributes Fehlermeldungen.
+     * @return die logische View
+     */
     @RequestMapping(value = URL.ZeugnisPath.BEMERKUNG_EDIT, method = RequestMethod.GET)
     public String editBemerkung(@PathVariable(URL.Session
             .P_HALBJAHR_ID) Long halbjahrId,
@@ -166,13 +193,11 @@ public class BemerkungController {
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
             @PathVariable(URL.ZeugnisPath.P_BEMERKUNGS_ID) Long bemerkungsId,
             Model model) {
-        final Zeugnis zeugnis = zeugnisErfassungsService.getZeugnis(halbjahrId, klassenId, schuelerId);
         final Bemerkung bemerkung = bemerkungService.read(bemerkungsId);
-        bemerkung.setZeugnis(zeugnis);
         fillModel(model, halbjahrId, klassenId, schuelerId, bemerkung);
         model.addAttribute("updateUrl", URL.filledURL(URL.ZeugnisPath.BEMERKUNG_EDIT, halbjahrId, klassenId, schuelerId, bemerkungsId));
         model.addAttribute("deleteUrl", URL.filledURL(URL.ZeugnisPath.BEMERKUNG_DELETE, halbjahrId, klassenId, schuelerId, bemerkungsId));
-        return BEMERKUNG_FORM;
+        return EDIT_BEMERKUNG_VIEW;
     }
 
     /**
@@ -198,7 +223,7 @@ public class BemerkungController {
             model.addAttribute("updateUrl", URL.filledURL(URL.ZeugnisPath.BEMERKUNG_EDIT, halbjahrId, klassenId, schuelerId, bemerkungsId));
             model.addAttribute("deleteUrl", URL.filledURL(URL.ZeugnisPath.BEMERKUNG_DELETE, halbjahrId, klassenId, schuelerId, bemerkungsId));
             fillModel(model, halbjahrId, klassenId, schuelerId, bemerkung);
-            return BEMERKUNG_FORM;
+            return EDIT_BEMERKUNG_VIEW;
         }
 
         LOG.debug("Update Bemerkung: " + bemerkung);
@@ -244,10 +269,10 @@ public class BemerkungController {
                 bemerkungService.getAllBausteine(bemerkung);
         model.addAttribute("bemerkung", bemerkung);
         model.addAttribute("schulhalbjahr", schulhalbjahrService.read(halbjahrId));
-        model.addAttribute("bemerkungsBausteine", bemerkungsBausteine);
-        model.addAttribute("helpMessageId", "help.bemerkung.edit");
         model.addAttribute("cancelUrl",
                 URL.filledURL(URL.ZeugnisPath.BEMERKUNG_CANCEL, halbjahrId, klassenId, schuelerId));
+        model.addAttribute("bemerkungsBausteine", bemerkungsBausteine);
+        model.addAttribute("helpMessageId", "help.bemerkung.edit");
     }
 
 }

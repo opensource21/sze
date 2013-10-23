@@ -193,8 +193,9 @@ public final class URL {
         String BEWERTUNG_EDIT = DETAIL + "/editBewertung/{"+ P_BEWERTUNGS_ID+ "}";
 
         String BEMERKUNG_CREATE = DETAIL + "/createBemerkung";
-        String BEMERKUNG_EDIT = DETAIL + "/editBemerkung/{" + P_BEMERKUNGS_ID + "}";
         String BEMERKUNG_CANCEL = DETAIL + "/cancelBemerkung";
+        String BEMERKUNG_EDIT = DETAIL + "/editBemerkung/{" + P_BEMERKUNGS_ID + "}";
+        String BEMERKUNG_SHOW = DETAIL + "/showBemerkung/{" + P_BEMERKUNGS_ID + "}";
         String BEMERKUNG_DELETE = DETAIL + "/deleteBemerkung/{" + P_BEMERKUNGS_ID + "}";
 
         /**

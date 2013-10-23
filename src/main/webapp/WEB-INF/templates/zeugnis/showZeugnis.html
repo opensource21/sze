@@ -195,7 +195,6 @@
                  <thead>
                      <tr>
                        <th th:text="#{bemerkung.baustein}"></th>
-                       <th th:text="#{bemerkung.sortierung}"></th>
                        <th th:text="#{bemerkung.text}"></th>
                        <th th:text="#{action}"></th>
                      </tr>
@@ -203,9 +202,11 @@
                  <tbody>
                      <tr th:each="bemerkungInstance:${zeugnis?.bemerkungen}">
                         <td th:text="${bemerkungInstance.baustein.name}"></td>
-                        <td th:text="${bemerkungInstance.sortierung}"></td>
-                        <td th:text="${#strings.isEmpty(bemerkungInstance.freiText)?bemerkungInstance.fixText:bemerkungInstance.freiText}"></td>
-                        <td><a th:href="@{#{url.zeugnispath.bemerkung_edit(${zeugnis.schulhalbjahr.id}, ${zeugnis.klasse.id}, ${zeugnis.schueler.id}, ${bemerkungInstance.id})}}"><i class="edit"></i></a></td>
+                        <td th:text="${bemerkungInstance.createPrintText()}"></td>
+                        <td>
+                          <a th:href="@{#{url.zeugnispath.bemerkung_show(${zeugnis.schulhalbjahr.id}, ${zeugnis.klasse.id}, ${zeugnis.schueler.id}, ${bemerkungInstance.id})}}"><i class="imageshow"></i></a>
+                          <a th:href="@{#{url.zeugnispath.bemerkung_edit(${zeugnis.schulhalbjahr.id}, ${zeugnis.klasse.id}, ${zeugnis.schueler.id}, ${bemerkungInstance.id})}}"><i class="edit"></i></a>
+                        </td>
                        </tr>
                  </tbody>
              </table>
