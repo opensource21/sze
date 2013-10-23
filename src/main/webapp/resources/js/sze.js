@@ -1,6 +1,21 @@
 $(document).ready(function(){
+   cbsubmit();
    hideandshow();
+   confirmDelete();
 });
+
+function cbsubmit() {
+   $('.cbauto').each(function(index ) {
+       var combobox = $(this);
+       var button = combobox.siblings('.cbbutton').first();
+
+       combobox.change(function() {
+           button.click();
+       });
+       button.hide();
+   })
+};
+
 
 function hideandshow() {
    $('.cbhideandshow').each(function(index ) {
@@ -16,4 +31,14 @@ function hideandshow() {
        });
    })
 };
+
+function confirmDelete() {
+    $('button .delete').each(function(index) {
+        var myBtn = $(this).parent().get(0)
+        myBtn.addEventListener('click',function(event) {
+          if(!confirm('Wollen Sie wirklich löschen?'))
+               event.preventDefault();;
+        })
+    })
+}
 
