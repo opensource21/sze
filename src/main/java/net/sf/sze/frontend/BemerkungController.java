@@ -28,7 +28,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 /**
@@ -108,7 +107,7 @@ public class BemerkungController {
         final Bemerkung bemerkung = new Bemerkung();
         bemerkung.setZeugnis(zeugnis);
         fillModel(model, halbjahrId, klassenId, schuelerId, bemerkung);
-        model.addAttribute("saveUrl", URL.filledURL(URL.ZeugnisPath.BEMERKUNG_CREATE, halbjahrId, klassenId, schuelerId));
+        model.addAttribute("insertUrl", URL.filledURL(URL.ZeugnisPath.BEMERKUNG_CREATE, halbjahrId, klassenId, schuelerId));
 
         return BEMERKUNG_FORM;
     }
@@ -128,12 +127,11 @@ public class BemerkungController {
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
             Bemerkung bemerkung, @RequestParam(value=URL.Common.P_ACTION, required=false) String action,
-            BindingResult result, Model model,
-            RedirectAttributes redirectAttributes) {
+            BindingResult result, Model model) {
         validator.validate(bemerkung, result);
 
         if (result.hasErrors()) {
-            model.addAttribute("saveUrl", URL.filledURL(URL.ZeugnisPath.BEMERKUNG_CREATE, halbjahrId, klassenId, schuelerId));
+            model.addAttribute("insertUrl", URL.filledURL(URL.ZeugnisPath.BEMERKUNG_CREATE, halbjahrId, klassenId, schuelerId));
             fillModel(model, halbjahrId, klassenId, schuelerId, bemerkung);
             return BEMERKUNG_FORM;
         }
@@ -151,8 +149,64 @@ public class BemerkungController {
         return nextUrl;
     }
 
+    /**
+     * Zeigt die Bemerkung des entsprechenden Faches der Klasse in dem Halbjahr.
+     * @param halbjahrId die Id des Schulhalbjahres
+     * @param klassenId die Id der Klasse
+     * @param schuelerId die Id des Schuelers
+     * @param bemerkungsId die Id der Bemerkung
+     * @param model das Model
+     * @param redirectAttributes Fehlermeldungen.
+     * @return die logische View
+     */
+    @RequestMapping(value = URL.ZeugnisPath.BEMERKUNG_EDIT, method = RequestMethod.GET)
+    public String editBemerkung(@PathVariable(URL.Session
+            .P_HALBJAHR_ID) Long halbjahrId,
+            @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
+            @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
+            @PathVariable(URL.Session.P_SCHUELER_ID) Long bemerkungsId,
+            Model model) {
+        final Zeugnis zeugnis = zeugnisErfassungsService.getZeugnis(halbjahrId, klassenId, schuelerId);
+        final Bemerkung bemerkung = bemerkungService.read(bemerkungsId);
+        bemerkung.setZeugnis(zeugnis);
+        fillModel(model, halbjahrId, klassenId, schuelerId, bemerkung);
+        model.addAttribute("updateUrl", URL.filledURL(URL.ZeugnisPath.BEMERKUNG_EDIT, halbjahrId, klassenId, schuelerId, bemerkungsId));
+
+        return BEMERKUNG_FORM;
+    }
+
+    /**
+     * Speichert die neu angelegte Bemerkung.
+     * @param halbjahrId die Id des Schulhalbjahres
+     * @param klassenId die Id der Klasse
+     * @param schuelerId die Id des Schuelers
+     * @param bemerkungsId die Id der Bemerkung
+     * @param model das Model
+     * @return die logische View
+     */
+    @RequestMapping(value = URL.ZeugnisPath.BEMERKUNG_EDIT, method = RequestMethod.POST)
+    public String updateBemerkung(@PathVariable(URL.Session
+            .P_HALBJAHR_ID) Long halbjahrId,
+            @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
+            @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
+            @PathVariable(URL.Session.P_SCHUELER_ID) Long bemerkungsId,
+            Bemerkung bemerkung, @RequestParam(value=URL.Common.P_ACTION, required=false) String action,
+            BindingResult result, Model model) {
+        validator.validate(bemerkung, result);
+
+        if (result.hasErrors()) {
+            model.addAttribute("updateUrl", URL.filledURL(URL.ZeugnisPath.BEMERKUNG_EDIT, halbjahrId, klassenId, schuelerId, bemerkungsId));
+            fillModel(model, halbjahrId, klassenId, schuelerId, bemerkung);
+            return BEMERKUNG_FORM;
+        }
+
+        LOG.debug("Update Bemerkung: " + bemerkung);
+        bemerkungService.save(bemerkung);
+        return createRedirectToZeugnisUrl(halbjahrId, klassenId, schuelerId);
+    }
+
     @RequestMapping(value = URL.ZeugnisPath.BEMERKUNG_CANCEL, method = RequestMethod.POST)
-    public String insertBemerkung(@PathVariable(URL.Session
+    public String cancelEditBemerkung(@PathVariable(URL.Session
             .P_HALBJAHR_ID) Long halbjahrId,
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId) {

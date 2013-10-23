@@ -164,6 +164,10 @@ public final class URL {
         @ParamFormat
         String P_BEWERTUNGS_ID = "bewertungsId";
 
+        @ParamFormat
+        String P_BEMERKUNGS_ID = "bemerkungsId";
+
+
         /**
          * Zeugniserfassung base-url.
          */
@@ -189,7 +193,7 @@ public final class URL {
         String BEWERTUNG_EDIT = DETAIL + "/editBewertung/{"+ P_BEWERTUNGS_ID+ "}";
 
         String BEMERKUNG_CREATE = DETAIL + "/createBemerkung";
-        String BEMERKUNG_EDIT = DETAIL + "/editBemerkung";
+        String BEMERKUNG_EDIT = DETAIL + "/editBemerkung/{" + P_BEMERKUNGS_ID + "}";
         String BEMERKUNG_CANCEL = DETAIL + "/cancelBemerkung";
 
         /**
