@@ -189,23 +189,24 @@
             </table>
         </div>
 
-         <h5>Bemerkungen <a href="bemerkung:create">hinzuf&uuml;gen</a></h5>
+         <h5>Bemerkungen <a th:href="@{#{url.zeugnispath.bemerkung_create(${zeugnis.schulhalbjahr.id}, ${zeugnis.klasse.id}, ${zeugnis.schueler.id})}}">hinzuf&uuml;gen</a></h5>
          <div class="list row-fluid">
              <table class="table table-striped table-bordered table-hover table-condensed">
                  <thead>
                      <tr>
                        <th th:text="#{bemerkung.baustein}"></th>
-                       <th th:text="#{bemerkung.sortierung}"></th>
                        <th th:text="#{bemerkung.text}"></th>
                        <th th:text="#{action}"></th>
                      </tr>
                  </thead>
                  <tbody>
-                     <tr th:each="bemerkungInstance:${zeugnisInstance?.bemerkungen}">
+                     <tr th:each="bemerkungInstance:${zeugnis?.bemerkungen}">
                         <td th:text="${bemerkungInstance.baustein.name}"></td>
-                        <td th:text="${bemerkungInstance.sortierung}"></td>
-                        <td th:text="${bemerkungInstance.freiText?:bemerkungInstance.fixText}"></td>
-                        <td><a href="bemerkung:edit.${bemerkungInstance.id}"><i class="edit"></i></a></td>
+                        <td th:text="${bemerkungInstance.createPrintText()}"></td>
+                        <td>
+                          <a th:href="@{#{url.zeugnispath.bemerkung_show(${zeugnis.schulhalbjahr.id}, ${zeugnis.klasse.id}, ${zeugnis.schueler.id}, ${bemerkungInstance.id})}}"><i class="imageshow"></i></a>
+                          <a th:href="@{#{url.zeugnispath.bemerkung_edit(${zeugnis.schulhalbjahr.id}, ${zeugnis.klasse.id}, ${zeugnis.schueler.id}, ${bemerkungInstance.id})}}"><i class="edit"></i></a>
+                        </td>
                        </tr>
                  </tbody>
              </table>

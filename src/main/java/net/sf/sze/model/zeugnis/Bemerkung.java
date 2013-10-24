@@ -13,7 +13,6 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import net.sf.sze.constraints.ValidVariableText;
 import net.sf.sze.model.stammdaten.Schueler;
@@ -42,11 +41,6 @@ public class Bemerkung extends VersionedModel implements Serializable,
     @Column(name = "er_sie_statt_namen", nullable = false)
     private boolean erSieStattNamen = false;
 
-    /** The fix text. */
-    @Transient
-    @ValidVariableText
-    private String fixText;
-
     /** The frei text. */
     @Column(name = "frei_text", length = 500)
     @ValidVariableText
@@ -57,7 +51,6 @@ public class Bemerkung extends VersionedModel implements Serializable,
     /** The baustein. */
     @ManyToOne(optional = false)
     @JoinColumn(name = "baustein_id", nullable = false)
-
     private BemerkungsBaustein baustein;
 
     // bi-directional many-to-one association to Zeugnis
@@ -104,6 +97,16 @@ public class Bemerkung extends VersionedModel implements Serializable,
     }
 
     /**
+     * @return the fixText
+     */
+    public String getFixText() {
+        if (baustein == null) {
+            return "";
+        }
+        return baustein.getText();
+    }
+
+    /**
      * Gets the sortierung.
      *
      * @return the sortierung
@@ -137,7 +140,6 @@ public class Bemerkung extends VersionedModel implements Serializable,
      */
     public void setBaustein(final BemerkungsBaustein bemerkungsBaustein) {
         this.baustein = bemerkungsBaustein;
-        this.fixText = this.baustein.getText();
     }
 
     /**
@@ -164,7 +166,7 @@ public class Bemerkung extends VersionedModel implements Serializable,
         compareBuilder.append(this.sortierung, other.sortierung);
         compareBuilder.append(this.baustein, other.baustein);
         compareBuilder.append(this.zeugnis, other.zeugnis);
-        compareBuilder.append(this.fixText, other.fixText);
+        compareBuilder.append(this.getFixText(), other.getFixText());
         compareBuilder.append(this.freiText, other.freiText);
         compareBuilder.append(this.erSieStattNamen, other.erSieStattNamen);
         return compareBuilder.toComparison();
@@ -175,10 +177,20 @@ public class Bemerkung extends VersionedModel implements Serializable,
         if (StringUtils.isNotBlank(freiText)) {
             return baustein.getName() + " " + freiText;
         } else {
-            return baustein.getName() + " " + fixText;
+            return baustein.getName() + " " + getFixText();
         }
     }
 
+
+    /**
+     * Erzeugt den Text für den Druck.
+     * @return die Bemerkung.
+     */
+    public String createPrintText() {
+        return createPrintText(zeugnis.getSchueler(),
+                    zeugnis.getFormular().getNachteilsAusgleichsDatum(),
+                    zeugnis.getSchulhalbjahr().getSchuljahr());
+    }
     /**
      * Erzeugt den Text für den Druck.
      * @param schueler der zugehörige Schüler.
@@ -189,7 +201,7 @@ public class Bemerkung extends VersionedModel implements Serializable,
     public String createPrintText(final Schueler schueler, final Date datum,
             final String schuljahr) {
         String text = StringUtils.isNotBlank(freiText) ? freiText
-                : fixText;
+                : getFixText();
         text = VariableUtility.createPrintText(text, schueler, datum,
                 erSieStattNamen, schuljahr);
 

@@ -164,10 +164,19 @@ public final class URL {
         @ParamFormat
         String P_BEWERTUNGS_ID = "bewertungsId";
 
+        @ParamFormat
+        String P_BEMERKUNGS_ID = "bemerkungsId";
+
+
         /**
          * Zeugniserfassung base-url.
          */
         String HOME = "/zeugnis/{" + Session.P_HALBJAHR_ID + "}/{" + Session.P_KLASSEN_ID + "}";
+
+        /**
+         * Standard-URL um Details von dem Zeugnis zu bearbeiten.
+         */
+        String DETAIL = "/zeugnis/{" + Session.P_HALBJAHR_ID + "}/{" + Session.P_KLASSEN_ID + "}/{" + Session.P_SCHUELER_ID + "}";
 
         /**
          * Zeugniserfassung base-url.
@@ -179,9 +188,15 @@ public final class URL {
          */
         String SHOW = HOME + "/show";
 
-        String BEWERTUNG_CANCEL = HOME + "/cancelBewertung/{" + Session.P_SCHUELER_ID + "}/{"+ P_BEWERTUNGS_ID+ "}";
+        String BEWERTUNG_CANCEL = DETAIL + "/cancelBewertung/{"+ P_BEWERTUNGS_ID+ "}";
 
-        String BEWERTUNG_EDIT = HOME + "/editBewertung/{" +Session.P_SCHUELER_ID  + "}/{"+ P_BEWERTUNGS_ID+ "}";
+        String BEWERTUNG_EDIT = DETAIL + "/editBewertung/{"+ P_BEWERTUNGS_ID+ "}";
+
+        String BEMERKUNG_CREATE = DETAIL + "/createBemerkung";
+        String BEMERKUNG_CANCEL = DETAIL + "/cancelBemerkung";
+        String BEMERKUNG_EDIT = DETAIL + "/editBemerkung/{" + P_BEMERKUNGS_ID + "}";
+        String BEMERKUNG_SHOW = DETAIL + "/showBemerkung/{" + P_BEMERKUNGS_ID + "}";
+        String BEMERKUNG_DELETE = DETAIL + "/deleteBemerkung/{" + P_BEMERKUNGS_ID + "}";
 
         /**
          * Zeige PDF einer ganze Klasse.
@@ -191,8 +206,9 @@ public final class URL {
         /**
          * Zeige PDF eines Schuelers.
          */
-        String ONE_PDF = HOME + "/pdfschueler/{" + Session.P_SCHUELER_ID + "}" + "/{"
-                + Session.P_HALBJAHR_ID + "}";
+        String ONE_PDF = DETAIL + "/pdfSchueler";
+
+
 
     }
 

@@ -5,6 +5,8 @@
 
 package net.sf.sze.dao.api.zeugnis;
 
+import java.util.List;
+
 import net.sf.sze.model.zeugnis.BemerkungsBaustein;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -15,5 +17,9 @@ import org.springframework.data.repository.PagingAndSortingRepository;
  */
 public interface BemerkungsBausteinDao
         extends PagingAndSortingRepository<BemerkungsBaustein, Long> {
-    // Noch keine speziellen Methoden.
+
+    /**
+     * Findet alle aktive sortiert nach Name.
+     */
+    List<BemerkungsBaustein> findAllByAktivTrueOrderByNameAsc();
 }

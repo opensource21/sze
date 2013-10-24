@@ -43,7 +43,6 @@ public class BemerkungsBaustein extends VersionedModel implements Serializable,
 
     /** The aktiv. */
     @Column(nullable = false)
-
     private Boolean aktiv = Boolean.TRUE;
 
     /**

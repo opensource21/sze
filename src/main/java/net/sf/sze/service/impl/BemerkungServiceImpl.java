@@ -5,10 +5,14 @@
 
 package net.sf.sze.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import net.sf.sze.dao.api.zeugnis.BemerkungDao;
+import net.sf.sze.dao.api.zeugnis.BemerkungsBausteinDao;
 import net.sf.sze.model.zeugnis.Bemerkung;
+import net.sf.sze.model.zeugnis.BemerkungsBaustein;
 import net.sf.sze.service.api.BemerkungService;
 
 import org.springframework.data.domain.Page;
@@ -30,6 +34,12 @@ public class BemerkungServiceImpl implements BemerkungService {
     /** The bemerkung-Dao. */
     @Resource
     private BemerkungDao bemerkungDao;
+
+    /** The {@link BemerkungsBausteinDao}. */
+    @Resource
+    private BemerkungsBausteinDao bemerkungsBausteinDao;
+
+
 
     /**
      * {@inheritDoc}
@@ -91,5 +101,20 @@ public class BemerkungServiceImpl implements BemerkungService {
     @Override
     public long getNrOfBemerkungs() {
         return bemerkungDao.count();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<BemerkungsBaustein> getAllBausteine(Bemerkung bemerkung) {
+        final List<BemerkungsBaustein> bausteine = bemerkungsBausteinDao.
+                findAllByAktivTrueOrderByNameAsc();
+        if (bemerkung != null && bemerkung.getBaustein() != null ) {
+            if (!bausteine.contains(bemerkung.getBaustein())) {
+                bausteine.add(bemerkung.getBaustein());
+            }
+        }
+        return bausteine;
     }
 }
