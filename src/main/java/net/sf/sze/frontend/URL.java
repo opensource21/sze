@@ -167,6 +167,8 @@ public final class URL {
         @ParamFormat
         String P_BEMERKUNGS_ID = "bemerkungsId";
 
+        @ParamFormat
+        String P_SCHULAMTS_BEMERKUNGS_ID = "schulamtsBemerkungsId";
 
         /**
          * Zeugniserfassung base-url.
@@ -197,6 +199,13 @@ public final class URL {
         String BEMERKUNG_EDIT = DETAIL + "/editBemerkung/{" + P_BEMERKUNGS_ID + "}";
         String BEMERKUNG_SHOW = DETAIL + "/showBemerkung/{" + P_BEMERKUNGS_ID + "}";
         String BEMERKUNG_DELETE = DETAIL + "/deleteBemerkung/{" + P_BEMERKUNGS_ID + "}";
+
+        String SCHULAMTS_BEMERKUNG_CREATE = DETAIL + "/createSchulamtsBemerkung";
+        String SCHULAMTS_BEMERKUNG_CANCEL = DETAIL + "/cancelSchulamtsBemerkung";
+        String SCHULAMTS_BEMERKUNG_EDIT = DETAIL + "/editSchulamtsBemerkung/{" + P_SCHULAMTS_BEMERKUNGS_ID + "}";
+        String SCHULAMTS_BEMERKUNG_SHOW = DETAIL + "/showSchulamtsBemerkung/{" + P_SCHULAMTS_BEMERKUNGS_ID + "}";
+        String SCHULAMTS_BEMERKUNG_DELETE = DETAIL + "/deleteSchulamtsBemerkung/{" + P_SCHULAMTS_BEMERKUNGS_ID + "}";
+
 
         /**
          * Zeige PDF einer ganze Klasse.
