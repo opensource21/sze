@@ -33,7 +33,7 @@ deleteUrl
                 id="zeugnis" type="hidden" th:value="*{zeugnis.id}" name="zeugnis" />
 
             <!-- Baustein -->
-            <select bs:field="#{db.Bemerkung.baustein}" bs:class="controls-row"
+            <select bs:field="#{db.Bemerkung.baustein}" bs:conclass="controls-row"
                 class="span3 cbhideandshow" data-class-show="span3">
                 <option th:each="item : ${bemerkungsBausteine}" th:value="${item.id}"
                     th:text="${item.name}" th:disabled="${not item.aktiv}"></option>
@@ -60,7 +60,7 @@ deleteUrl
                 </div>
             </div>
             <!-- FreiText -->
-            <textarea rows="5" bs:field="freiText" bs:class="controls-row"
+            <textarea rows="5" bs:field="freiText" bs:conclass="controls-row"
                 class="span3"></textarea>
             <button type="submit" th:formaction="@{${insertUrl}}" class="btn" th:unless="${insertUrl == null}">
                 <i class="save"></i>Speichern</button>
