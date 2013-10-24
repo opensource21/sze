@@ -28,15 +28,15 @@ deleteUrl
         <form class="well form-horizontal" method="post"
             th:object="${bemerkung}">
             <!-- Baustein -->
-            <input type="text" bs:field="#{db.Bemerkung.baustein}" bs:conclass="controls-row"
-                class="span3 show" readonly="readonly">
+            <input type="text" bs:field="#{db.Bemerkung.baustein}"
+                class="span4 show" readonly="readonly">
             </input>
             <div class="control-group">
                 <label class="control-label" for="sortierung"
                     th:text="#{model.Bemerkung.sortierung}">Sortierung</label>
-                <div class="controls-row">
+                <div class="controls controls-row">
                     <input type="text" class="span1 show" th:field="*{sortierung}" readonly="readonly" />
-                    <label class="checkbox span2"> <span
+                    <label class="checkbox span3"> <span
                         th:text="#{${'field.erSieStattNamen'+bemerkung.erSieStattNamen}}" th:remove="tag" ></span>
                     </label>
                 </div>
@@ -45,14 +45,14 @@ deleteUrl
             <div class="control-group" th:if="${#strings.isEmpty(bemerkung.freiText)}">
                 <label class="control-label" for="fixText" th:text="#{field.fixText}+':'">
                 Text aus dem:</label>
-                <div class="controls-row">
-                    <textarea id="fixText" rows="5" class="span3 show" readonly="readonly"
+                <div class="controls controls-row">
+                    <textarea id="fixText" rows="5" class="span4 show" readonly="readonly"
                     th:text="${bemerkung.fixText}"></textarea>
                 </div>
             </div>
             <!-- FreiText -->
-            <textarea rows="5" bs:field="freiText" bs:conclass="controls-row" readonly="readonly"
-                class="span3 show" th:unless="${#strings.isEmpty(bemerkung.freiText)}"></textarea>
+            <textarea rows="5" bs:field="freiText" readonly="readonly"
+                class="span4 show" th:unless="${#strings.isEmpty(bemerkung.freiText)}"></textarea>
             <a th:href="@{${cancelUrl}}" class="btn">
                 <i class="prev"></i>Zurück</a>
             <button type="submit" th:formaction="@{${deleteUrl}}" formmethod="post" class="btn">

@@ -33,8 +33,8 @@ deleteUrl
                 id="zeugnis" type="hidden" th:value="*{zeugnis.id}" name="zeugnis" />
 
             <!-- Baustein -->
-            <select bs:field="#{db.Bemerkung.baustein}" bs:conclass="controls-row"
-                class="span3 cbhideandshow" data-class-show="span3">
+            <select bs:field="#{db.Bemerkung.baustein}"
+                class="span4 cbhideandshow" data-class-show="span4">
                 <option th:each="item : ${bemerkungsBausteine}" th:value="${item.id}"
                     th:text="${item.name}" th:disabled="${not item.aktiv}"></option>
             </select>
@@ -42,9 +42,9 @@ deleteUrl
             <div class="control-group">
                 <label class="control-label" for="sortierung"
                     th:text="#{model.Bemerkung.sortierung}">Sortierung</label>
-                <div class="controls-row">
+                <div class="controls controls-row">
                     <input type="text" class="span1" th:field="*{sortierung}" /> <label
-                        class="checkbox span2"> <input type="checkbox"
+                        class="checkbox span3"> <input type="checkbox"
                         th:field="*{erSieStattNamen}" id="erSieStattNamen" /> <span
                         th:text="#{model.Bemerkung.erSieStattNamen}" th:remove="tag"></span>
                     </label>
@@ -54,14 +54,14 @@ deleteUrl
             <div class="control-group">
                 <label class="control-label" for="fixText" th:text="#{field.fixText}+':'">
                 Text aus dem:</label>
-                <div class="controls-row">
+                <div class="controls controls-row">
                     <textarea th:id="${'baustein' + baustein.id}" rows="5" class="hide" readonly="readonly"
                     th:each="baustein:${bemerkungsBausteine}" th:text="${baustein.text}"></textarea>
                 </div>
             </div>
             <!-- FreiText -->
-            <textarea rows="5" bs:field="freiText" bs:conclass="controls-row"
-                class="span3"></textarea>
+            <textarea rows="5" bs:field="freiText"
+                class="span4"></textarea>
             <button type="submit" th:formaction="@{${insertUrl}}" class="btn" th:unless="${insertUrl == null}">
                 <i class="save"></i>Speichern</button>
             <button type="submit" th:formaction="@{${updateUrl}}" class="btn" th:unless="${updateUrl == null}">
