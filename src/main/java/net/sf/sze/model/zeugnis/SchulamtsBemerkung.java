@@ -13,9 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
-import net.sf.oval.constraint.Size;
 import net.sf.sze.constraints.ValidVariableText;
 import net.sf.sze.model.stammdaten.Schueler;
 import net.sf.sze.util.VariableUtility;
@@ -36,18 +34,11 @@ public class SchulamtsBemerkung extends VersionedModel implements Serializable,
 
     /** The sortierung. */
     @Column(nullable = false)
-
     private Long sortierung = Long.valueOf(10);
 
     /** The er sie statt namen. */
     @Column(name = "er_sie_statt_namen", nullable = false)
     private boolean erSieStattNamen = false;
-
-    /** The fix text. */
-    @Transient
-    @Size(max = 600)
-    @ValidVariableText
-    private String fixText;
 
     /** The frei text. */
     @Column(name = "frei_text", length = 600)
@@ -59,23 +50,18 @@ public class SchulamtsBemerkung extends VersionedModel implements Serializable,
     /** The schulamt. */
     @ManyToOne(optional = false)
     @JoinColumn(name = "schulamt_id", nullable = false)
-
     private Schulamt schulamt;
 
     // bi-directional many-to-one association to SchulamtsBemerkungsBaustein
-
     /** The schulamts bemerkungs baustein. */
     @ManyToOne(optional = false)
     @JoinColumn(name = "schulamts_baustein_id", nullable = false)
-
     private SchulamtsBemerkungsBaustein schulamtsBemerkungsBaustein;
 
     // bi-directional many-to-one association to Zeugnis
-
     /** The zeugnis. */
     @ManyToOne(optional = false)
     @JoinColumn(name = "zeugnis_id", nullable = false)
-
     private Zeugnis zeugnis;
 
     /**
@@ -167,7 +153,6 @@ public class SchulamtsBemerkung extends VersionedModel implements Serializable,
     public void setSchulamtsBemerkungsBaustein(
             final SchulamtsBemerkungsBaustein schulamtsBemerkungsBaustein) {
         this.schulamtsBemerkungsBaustein = schulamtsBemerkungsBaustein;
-        setFixText();
     }
 
     /**
@@ -188,17 +173,6 @@ public class SchulamtsBemerkung extends VersionedModel implements Serializable,
         this.zeugnis = zeugni;
     }
 
-    /**
-     * Setzt den Text bei Veränderungen des Bemerkungsbausteins.
-     */
-    private void setFixText() {
-        final String schulamtsText = (schulamt != null) ? schulamt
-                .getBeschreibenderSatz() : null;
-        final String schulamtsBausteinText = (schulamtsBemerkungsBaustein
-                != null) ? schulamtsBemerkungsBaustein.getBeschreibenderSatz()
-                : null;
-        setFixText(schulamtsText + " " + schulamtsBausteinText);
-    }
 
     /**
      * Gets the fix text.
@@ -206,17 +180,14 @@ public class SchulamtsBemerkung extends VersionedModel implements Serializable,
      * @return the fix text
      */
     public String getFixText() {
-        return fixText;
+        final String schulamtsText = (schulamt != null) ? schulamt
+                .getBeschreibenderSatz() : null;
+        final String schulamtsBausteinText = (schulamtsBemerkungsBaustein
+                != null) ? schulamtsBemerkungsBaustein.getBeschreibenderSatz()
+                : null;
+        return schulamtsText + " " + schulamtsBausteinText;
     }
 
-    /**
-     * Sets the fix text.
-     *
-     * @param fixText the new fix text
-     */
-    public void setFixText(final String fixText) {
-        this.fixText = fixText;
-    }
 
     @Override
     public int compareTo(final SchulamtsBemerkung other) {
@@ -226,7 +197,7 @@ public class SchulamtsBemerkung extends VersionedModel implements Serializable,
         compareBuilder.append(this.schulamtsBemerkungsBaustein, other
                 .schulamtsBemerkungsBaustein);
         compareBuilder.append(this.zeugnis, other.zeugnis);
-        compareBuilder.append(this.fixText, other.fixText);
+        compareBuilder.append(this.getFixText(), other.getFixText());
         compareBuilder.append(this.freiText, other.freiText);
         compareBuilder.append(this.erSieStattNamen, other.erSieStattNamen);
         return compareBuilder.toComparison();
@@ -237,7 +208,7 @@ public class SchulamtsBemerkung extends VersionedModel implements Serializable,
         if (StringUtils.isNotBlank(freiText)) {
             return schulamt.getName() + " " + freiText;
         } else {
-            return schulamt.getName() + " " + fixText;
+            return schulamt.getName() + " " + getFixText();
         }
     }
 
@@ -254,7 +225,7 @@ public class SchulamtsBemerkung extends VersionedModel implements Serializable,
         if (StringUtils.isNotBlank(freiText)) {
             text = freiText;
         } else {
-            text = fixText;
+            text = getFixText();
         }
 
         return VariableUtility.createPrintText(text, schueler, datum,
