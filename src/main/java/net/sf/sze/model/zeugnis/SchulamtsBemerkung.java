@@ -214,6 +214,16 @@ public class SchulamtsBemerkung extends VersionedModel implements Serializable,
 
     /**
      * Erzeugt den Text für den Druck.
+     * @return die Bemerkung.
+     */
+    public String createPrintText() {
+        return createPrintText(zeugnis.getSchueler(),
+                    zeugnis.getFormular().getNachteilsAusgleichsDatum(),
+                    zeugnis.getSchulhalbjahr().getSchuljahr());
+    }
+
+    /**
+     * Erzeugt den Text für den Druck.
      * @param schueler der zugehörige Schüler.
      * @param datum das Zeugnisausgabedatum.
      * @param schuljahr das aktuelle Schuljahr.
