@@ -32,13 +32,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Controller zur Erfassung der {@link Bemerkung}.
- * TODOs
- * <ul>
- * <li> Create Anlegen und "Anlegen und weiter" Abbrechen
- * <li> Bearbeiten Speichern, Erneut laden, Löschen! Abbrechen
- * <li> Anzeige Bearbeiten, Löschen Abbrechen
- *
- * </ul>
  *
  */
 @Controller
