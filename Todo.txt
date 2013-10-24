@@ -1,7 +1,6 @@
 - PDF-Erstellung einbinden.
 - Die Aufteilung auf Services überdenken, Bündelung nach DB nach Controller?
 - Beschreibung von Session und URL.
-- BemerkungCRUD zu Ende bringen.
 - Umstellung auf neue Thymeleaf-version
 
 - Umgang mit UniqueKeys diese müssen direkt beim Attribut definiert werden.
@@ -61,6 +60,8 @@ Forschung
     #httpSession
 
 - Scaffolding
+
+Bootstrap3 http://code.divshot.com/bootstrap3_upgrader/
 
 Erledigt
 + Das Encoding stimmt auf den Seiten nicht, insbesonder bei Kommentaren -> Liegt aber auch daran,

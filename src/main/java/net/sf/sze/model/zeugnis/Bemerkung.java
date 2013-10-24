@@ -34,7 +34,6 @@ public class Bemerkung extends VersionedModel implements Serializable,
 
     /** The sortierung. */
     @Column(nullable = false)
-
     private Long sortierung = Long.valueOf(10);
 
     /** The er sie statt namen. */
