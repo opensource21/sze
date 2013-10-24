@@ -19,7 +19,7 @@ deleteUrl
 <body>
     <div layout:fragment="content">
         <h4>
-            Die Bemerkung für Schüler <em
+            Die Schulamtsbeschreibung für Schüler <em
                 th:text="${bemerkung?.zeugnis?.schueler}"></em> (Klasse <span
                 th:remove="tag"
                 th:text="${bemerkung?.zeugnis?.klasse?.calculateKlassenname(schulhalbjahr.jahr)}"></span>
@@ -27,13 +27,18 @@ deleteUrl
         </h4>
         <form class="well form-horizontal" method="post"
             th:object="${bemerkung}">
+                        <!-- Schulamt -->
+            <input type="text" bs:field="#{db.SchulamtsBemerkung.schulamt}"
+                class="span4 show" readonly="readonly">
+            </input>
+
             <!-- Baustein -->
-            <input type="text" bs:field="#{db.Bemerkung.baustein}"
+            <input type="text" bs:field="#{db.SchulamtsBemerkung.schulamtsBemerkungsBaustein}"
                 class="span4 show" readonly="readonly">
             </input>
             <div class="control-group">
                 <label class="control-label" for="sortierung"
-                    th:text="#{model.Bemerkung.sortierung}">Sortierung</label>
+                    th:text="#{model.SchulamtsBemerkung.sortierung}">Sortierung</label>
                 <div class="controls controls-row">
                     <input type="text" class="span1 show" th:field="*{sortierung}" readonly="readonly" />
                     <label class="checkbox span3"> <span

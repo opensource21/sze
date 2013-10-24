@@ -158,10 +158,10 @@ public class SchulamtsBemerkungController {
             .P_HALBJAHR_ID) Long halbjahrId,
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
-            @PathVariable(URL.ZeugnisPath.P_BEMERKUNGS_ID) Long schulamtsBemerkungsId,
+            @PathVariable(URL.ZeugnisPath.P_SCHULAMTS_BEMERKUNGS_ID) Long schulamtsBemerkungsId,
             Model model) {
         final SchulamtsBemerkung schulamtsBemerkung = schulamtsBemerkungService.read(schulamtsBemerkungsId);
-        model.addAttribute("schulamtsBemerkung", schulamtsBemerkung);
+        model.addAttribute("bemerkung", schulamtsBemerkung);
         model.addAttribute("schulhalbjahr", schulhalbjahrService.read(halbjahrId));
         model.addAttribute("cancelUrl", URL.filledURL(URL.ZeugnisPath.SHOW +"?" +
                 URL.Session.P_SCHUELER_ID + "=" + schuelerId, halbjahrId, klassenId));
@@ -185,7 +185,7 @@ public class SchulamtsBemerkungController {
             .P_HALBJAHR_ID) Long halbjahrId,
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
-            @PathVariable(URL.ZeugnisPath.P_BEMERKUNGS_ID) Long schulamtsBemerkungsId,
+            @PathVariable(URL.ZeugnisPath.P_SCHULAMTS_BEMERKUNGS_ID) Long schulamtsBemerkungsId,
             Model model) {
         final SchulamtsBemerkung schulamtsBemerkung = schulamtsBemerkungService.read(schulamtsBemerkungsId);
         fillModel(model, halbjahrId, klassenId, schuelerId, schulamtsBemerkung);
@@ -208,7 +208,7 @@ public class SchulamtsBemerkungController {
             .P_HALBJAHR_ID) Long halbjahrId,
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
-            @PathVariable(URL.ZeugnisPath.P_BEMERKUNGS_ID) Long schulamtsBemerkungsId,
+            @PathVariable(URL.ZeugnisPath.P_SCHULAMTS_BEMERKUNGS_ID) Long schulamtsBemerkungsId,
             SchulamtsBemerkung schulamtsBemerkung, @RequestParam(value=URL.Common.P_ACTION, required=false) String action,
             BindingResult result, Model model) {
         validator.validate(schulamtsBemerkung, result);
@@ -251,7 +251,7 @@ public class SchulamtsBemerkungController {
             .P_HALBJAHR_ID) Long halbjahrId,
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
-            @PathVariable(URL.ZeugnisPath.P_BEMERKUNGS_ID) Long schulamtsBemerkungsId) {
+            @PathVariable(URL.ZeugnisPath.P_SCHULAMTS_BEMERKUNGS_ID) Long schulamtsBemerkungsId) {
         schulamtsBemerkungService.delete(schulamtsBemerkungsId);
         return createRedirectToZeugnisUrl(halbjahrId, klassenId, schuelerId);
     }
