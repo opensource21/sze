@@ -39,7 +39,6 @@ public class SchulamtsBemerkungsBaustein extends VersionedModel
 
     /** The beschreibender satz. */
     @Column(name = "beschreibender_satz", nullable = false, length = 255)
-
     @ValidVariableText
     private String beschreibenderSatz;
 

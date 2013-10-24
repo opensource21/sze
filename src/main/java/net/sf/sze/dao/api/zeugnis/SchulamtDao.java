@@ -5,6 +5,8 @@
 
 package net.sf.sze.dao.api.zeugnis;
 
+import java.util.List;
+
 import net.sf.sze.model.zeugnis.Schulamt;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -15,5 +17,10 @@ import org.springframework.data.repository.PagingAndSortingRepository;
  */
 public interface SchulamtDao extends PagingAndSortingRepository<Schulamt,
         Long> {
-    // Noch keine speziellen Methoden.
+
+    /**
+     * Findet alle aktiven Schulämter sortiert nach Name.
+     * @return alle aktiven Schulämter sortiert nach Name.
+     */
+    List<Schulamt> findAllByAktivTrueOrderByNameAsc();
 }
