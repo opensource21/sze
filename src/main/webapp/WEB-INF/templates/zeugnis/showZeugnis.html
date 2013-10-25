@@ -116,7 +116,7 @@
             <div class="span6" th:with="bewertungen=${zeugnis.svBewertungen}, head='Sozialverhalten'" th:include="zeugnis/showZeugnis::AvSvtable">
             </div>
         </div>
-        <h5>Zeugnis-Details <a href="zeugnisErfassung:editDetail.${zeugnis.id}">bearbeiten</a></h5>
+        <h5>Zeugnis-Details <a th:href="@{#{url.zeugnispath.zeugnis_edit_detail(${zeugnis.schulhalbjahr.id}, ${zeugnis.klasse.id}, ${zeugnis.schueler.id})}}">bearbeiten</a></h5>
         <div class="zeugnisdetail row-fluid">
             <table class="table table-bordered table-condensed" >
                 <thead>

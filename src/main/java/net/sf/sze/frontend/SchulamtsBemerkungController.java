@@ -137,7 +137,7 @@ public class SchulamtsBemerkungController {
             nextUrl = URL.redirect(URL.ZeugnisPath.SCHULAMTS_BEMERKUNG_CREATE,
                     halbjahrId, klassenId, schuelerId);
         } else {
-            nextUrl = createRedirectToZeugnisUrl(halbjahrId, klassenId, schuelerId);
+            nextUrl = URL.createRedirectToZeugnisUrl(halbjahrId, klassenId, schuelerId);
         }
 
         return nextUrl;
@@ -163,8 +163,7 @@ public class SchulamtsBemerkungController {
         final SchulamtsBemerkung schulamtsBemerkung = schulamtsBemerkungService.read(schulamtsBemerkungsId);
         model.addAttribute("bemerkung", schulamtsBemerkung);
         model.addAttribute("schulhalbjahr", schulhalbjahrService.read(halbjahrId));
-        model.addAttribute("cancelUrl", URL.filledURL(URL.ZeugnisPath.SHOW +"?" +
-                URL.Session.P_SCHUELER_ID + "=" + schuelerId, halbjahrId, klassenId));
+        model.addAttribute("cancelUrl", URL.createLinkToZeugnisUrl(halbjahrId, klassenId, schuelerId));
         model.addAttribute("editUrl", URL.filledURL(URL.ZeugnisPath.SCHULAMTS_BEMERKUNG_EDIT, halbjahrId, klassenId, schuelerId, schulamtsBemerkungsId));
         model.addAttribute("deleteUrl", URL.filledURL(URL.ZeugnisPath.SCHULAMTS_BEMERKUNG_DELETE, halbjahrId, klassenId, schuelerId, schulamtsBemerkungsId));
         return "schulamtsBemerkung/showBemerkung";
@@ -222,7 +221,7 @@ public class SchulamtsBemerkungController {
 
         LOG.debug("Update Bemerkung: " + schulamtsBemerkung);
         schulamtsBemerkungService.save(schulamtsBemerkung);
-        return createRedirectToZeugnisUrl(halbjahrId, klassenId, schuelerId);
+        return URL.createRedirectToZeugnisUrl(halbjahrId, klassenId, schuelerId);
     }
 
     @RequestMapping(value = URL.ZeugnisPath.SCHULAMTS_BEMERKUNG_CANCEL, method = RequestMethod.POST)
@@ -230,21 +229,9 @@ public class SchulamtsBemerkungController {
             .P_HALBJAHR_ID) Long halbjahrId,
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId) {
-        return createRedirectToZeugnisUrl(halbjahrId, klassenId, schuelerId);
+        return URL.createRedirectToZeugnisUrl(halbjahrId, klassenId, schuelerId);
     }
 
-    /**
-     * Erstellt die URL um zurück auf die Show-Zeugnismaske zu gehen.
-     * @param halbjahrId Id des Schulhalbjahres.
-     * @param klassenId Id der Klasse
-     * @param schuelerId Id des Schülers.
-     * @return die Url
-     */
-    private String createRedirectToZeugnisUrl(Long halbjahrId, Long klassenId,
-            Long schuelerId) {
-        return URL.redirect(URL.ZeugnisPath.SHOW +"?" +
-                URL.Session.P_SCHUELER_ID + "=" + schuelerId, halbjahrId, klassenId);
-    }
 
     @RequestMapping(value = URL.ZeugnisPath.SCHULAMTS_BEMERKUNG_DELETE, method = RequestMethod.POST)
     public String deleteSchulamtsBemerkung(@PathVariable(URL.Session
@@ -253,7 +240,7 @@ public class SchulamtsBemerkungController {
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
             @PathVariable(URL.ZeugnisPath.P_SCHULAMTS_BEMERKUNGS_ID) Long schulamtsBemerkungsId) {
         schulamtsBemerkungService.delete(schulamtsBemerkungsId);
-        return createRedirectToZeugnisUrl(halbjahrId, klassenId, schuelerId);
+        return URL.createRedirectToZeugnisUrl(halbjahrId, klassenId, schuelerId);
     }
 
 

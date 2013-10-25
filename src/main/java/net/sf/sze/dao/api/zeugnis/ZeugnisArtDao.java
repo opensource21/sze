@@ -5,6 +5,8 @@
 
 package net.sf.sze.dao.api.zeugnis;
 
+import java.util.List;
+
 import net.sf.sze.model.zeugnis.ZeugnisArt;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -15,5 +17,10 @@ import org.springframework.data.repository.PagingAndSortingRepository;
  */
 public interface ZeugnisArtDao extends PagingAndSortingRepository<ZeugnisArt,
         Long> {
-    // Noch keine speziellen Methoden.
+
+    /**
+     * Liefert alle aktiven Zeugnisarten sortiert nach dem Sortierungsfeld.
+     * @return alle aktiven Zeugnisarten sortiert nach dem Sortierungsfeld.
+     */
+    List<ZeugnisArt> findAllByAktivTrueOrderBySortierungAsc();
 }

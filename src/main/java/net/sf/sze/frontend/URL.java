@@ -22,6 +22,11 @@ import java.util.concurrent.ConcurrentHashMap;
 public final class URL {
 
     /**
+     * Prefix für Redirect-Urls.
+     */
+    private static final String REDIRECT_PREFIX = "redirect:";
+
+    /**
      * Map which stores the UriComponents.
      */
     private static final Map<String, UriComponents> URI_MAP =
@@ -206,6 +211,7 @@ public final class URL {
         String SCHULAMTS_BEMERKUNG_SHOW = DETAIL + "/showSchulamtsBemerkung/{" + P_SCHULAMTS_BEMERKUNGS_ID + "}";
         String SCHULAMTS_BEMERKUNG_DELETE = DETAIL + "/deleteSchulamtsBemerkung/{" + P_SCHULAMTS_BEMERKUNGS_ID + "}";
 
+        String ZEUGNIS_EDIT_DETAIL = DETAIL + "/editDetail";
 
         /**
          * Zeige PDF einer ganze Klasse.
@@ -366,7 +372,7 @@ public final class URL {
      * @return the redirect URL with parameters filled in
      */
     public static String redirect(String url, Object... parameters) {
-        return "redirect:" + filledURL(url, parameters);
+        return REDIRECT_PREFIX + filledURL(url, parameters);
     }
 
     /**
@@ -379,7 +385,7 @@ public final class URL {
      */
     public static String redirect(String url, Map<String,
             String> namedParameters) {
-        return "redirect:" + filledURL(url, namedParameters);
+        return REDIRECT_PREFIX + filledURL(url, namedParameters);
     }
 
     /**
@@ -387,6 +393,31 @@ public final class URL {
      */
     private URL() {
         // UTILITY-CONSTRUCTOR
+    }
+
+    /**
+     * Erstellt die URL um zurück auf die Show-Zeugnismaske zu gehen.
+     * @param halbjahrId Id des Schulhalbjahres.
+     * @param klassenId Id der Klasse
+     * @param schuelerId Id des Schülers.
+     * @return die Url
+     */
+    public static String createRedirectToZeugnisUrl(Long halbjahrId, Long klassenId,
+            Long schuelerId) {
+        return REDIRECT_PREFIX + createLinkToZeugnisUrl(halbjahrId, klassenId, schuelerId);
+    }
+
+    /**
+     * Erstellt die URL um zurück auf die Show-Zeugnismaske zu gehen ohne Redirect.
+     * @param halbjahrId Id des Schulhalbjahres.
+     * @param klassenId Id der Klasse
+     * @param schuelerId Id des Schülers.
+     * @return die Url
+     */
+    public static String createLinkToZeugnisUrl(Long halbjahrId, Long klassenId,
+            Long schuelerId) {
+        return filledURL(URL.ZeugnisPath.SHOW +"?" +
+                URL.Session.P_SCHUELER_ID + "=" + schuelerId, halbjahrId, klassenId);
     }
 }
 //CSON: InterfaceIsType

@@ -2,6 +2,7 @@ $(document).ready(function(){
    cbsubmit();
    hideandshow();
    confirmDelete();
+   addDatepicker();
 });
 
 function cbsubmit() {
@@ -42,3 +43,26 @@ function confirmDelete() {
     })
 }
 
+function addDatepicker() {
+$(function() {
+    $('.datepicker').datepicker(
+        {
+            showOn : "both",
+            buttonImage : /*[[@{/resources/css/calendar.gif}]]*/ '../../../../resources/css/calendar.gif',
+            buttonImageOnly : true,
+            dayNamesMin : [ "So", "Mo", "Di", "Mi", "Do", "Fr", "Sa" ],
+            monthNamesShort : [ "Jan", "Feb", "Mrz", "Apr", "Mai",
+                    "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez" ],
+            dateFormat : "dd.mm.yy",
+            changeMonth : true,
+            changeYear : true,
+            showWeek : true,
+            firstDay : 1,
+            timeFormat : 'hh:mm:ss',
+            showSecond : true,
+            hourGrid : 3,
+            minuteGrid : 10,
+            secondGrid : 10
+        });
+    });
+}

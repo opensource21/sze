@@ -9,6 +9,7 @@ import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.zeugnis.Bewertung;
 import net.sf.sze.model.zeugnis.Schulhalbjahr;
 import net.sf.sze.model.zeugnis.Zeugnis;
+import net.sf.sze.model.zeugnis.ZeugnisArt;
 
 import java.util.List;
 
@@ -30,6 +31,13 @@ public interface ZeugnisErfassungsService {
      * @return eine Liste mit alle möglichen Klassen zu den aktiven Schulhalbjahren.
      */
     List<Klasse> getActiveKlassen(List<Schulhalbjahr> acticeSchulhalbjahre);
+
+    /**
+     * Liefert eine Liste mit alle aktiven Zeugnisarten und der aktuell verwendeten.
+     * @param zeugnis das aktuelle Zeugnis.
+     * @return eine Liste mit alle aktiven Zeugnisarten und der aktuell verwendeten.
+     */
+    List<ZeugnisArt> getAllZeugnisArten(Zeugnis zeugnis);
 
     /**
      * Listet alle Zeugnisse zu der Klasse des selektierbaren Schulhalbjahres.
@@ -66,4 +74,14 @@ public interface ZeugnisErfassungsService {
      */
     Zeugnis getZeugnis(Long halbjahrId, Long klassenId, Long schuelerId);
 
+
+    /**
+     * Sichert das Zeugnis, wobei Veränderungen auf der <b>Inverse-Side nicht
+     * berücksichtigt</b> werden!
+     *
+     * @param zeugnis das zu speichernde Zeugnis.
+     * @return das gespeicherte Zeugnis.
+     *
+     */
+    Zeugnis save(Zeugnis zeugnis);
 }
