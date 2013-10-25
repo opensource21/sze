@@ -14,12 +14,14 @@ import javax.annotation.Resource;
 import net.sf.sze.dao.api.stammdaten.KlasseDao;
 import net.sf.sze.dao.api.zeugnis.BewertungDao;
 import net.sf.sze.dao.api.zeugnis.SchulhalbjahrDao;
+import net.sf.sze.dao.api.zeugnis.ZeugnisArtDao;
 import net.sf.sze.dao.api.zeugnis.ZeugnisDao;
 import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.zeugnis.Bewertung;
 import net.sf.sze.model.zeugnis.Schulfachtyp;
 import net.sf.sze.model.zeugnis.Schulhalbjahr;
 import net.sf.sze.model.zeugnis.Zeugnis;
+import net.sf.sze.model.zeugnis.ZeugnisArt;
 import net.sf.sze.service.api.BewertungWithNeigbors;
 import net.sf.sze.service.api.ZeugnisErfassungsService;
 
@@ -62,6 +64,12 @@ public class ZeugnisErfassungsServiceImpl implements ZeugnisErfassungsService {
     private ZeugnisDao zeugnisDao;
 
     /**
+     * Das ZeugnisArt-DAO.
+     */
+    @Resource
+    private ZeugnisArtDao zeugnisArtDao;
+
+    /**
      * Das Bewertung-DAO.
      */
     @Resource
@@ -100,6 +108,21 @@ public class ZeugnisErfassungsServiceImpl implements ZeugnisErfassungsService {
                 - maximalesSchuljahr, maxJahr - minimalesSchuljahr, false);
 
         return klassen;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<ZeugnisArt> getAllZeugnisArten(Zeugnis zeugnis) {
+        final List<ZeugnisArt> bausteine = zeugnisArtDao.
+                findAllByAktivTrueOrderBySortierungAsc();
+        if (zeugnis != null && zeugnis.getZeugnisArt() != null ) {
+            if (!bausteine.contains(zeugnis.getZeugnisArt())) {
+                bausteine.add(zeugnis.getZeugnisArt());
+            }
+        }
+        return bausteine;
     }
 
     /**
@@ -163,9 +186,9 @@ public class ZeugnisErfassungsServiceImpl implements ZeugnisErfassungsService {
      * {@inheritDoc}
      */
     @Override
+    @Transactional(readOnly=false)
     public Zeugnis save(Zeugnis zeugnis) {
         return zeugnisDao.save(zeugnis);
     }
-
 
 }

@@ -1,3 +1,4 @@
+- Bei den komplexeren Masken fehlt die Anzeige von Validierungsfehlern!
 - PDF-Erstellung einbinden.
 - Die Aufteilung auf Services überdenken, Bündelung nach DB nach Controller?
 - Beschreibung von Session und URL.

@@ -434,10 +434,23 @@ public class ZeugnisController {
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
             Model model) {
         final Zeugnis zeugnis = zeugnisErfassungsService.getZeugnis(halbjahrId, klassenId, schuelerId);
+        fillZeugnisDetailModel(model, halbjahrId, klassenId, schuelerId,zeugnis);
+        return EDIT_ZEUGNIS_DETAIL_VIEW;
+    }
+
+    /**
+     * @param model
+     * @param halbjahrId
+     * @param klassenId
+     * @param schuelerId
+     * @param zeugnis
+     */
+    private void fillZeugnisDetailModel(Model model, Long halbjahrId,
+            Long klassenId, Long schuelerId, final Zeugnis zeugnis) {
         model.addAttribute("zeugnis", zeugnis);
+        model.addAttribute("zeugnisArten", zeugnisErfassungsService.getAllZeugnisArten(zeugnis));
         model.addAttribute("updateUrl", URL.filledURL(URL.ZeugnisPath.ZEUGNIS_EDIT_DETAIL, halbjahrId, klassenId, schuelerId));
         model.addAttribute("cancelUrl", URL.createLinkToZeugnisUrl(halbjahrId, klassenId, schuelerId));
-        return EDIT_ZEUGNIS_DETAIL_VIEW;
     }
 
     /**
@@ -457,9 +470,9 @@ public class ZeugnisController {
         validator.validate(zeugnis, result);
 
         if (result.hasErrors()) {
-            model.addAttribute("zeugnis", zeugnis);
-            model.addAttribute("updateUrl", URL.filledURL(URL.ZeugnisPath.ZEUGNIS_EDIT_DETAIL, halbjahrId, klassenId, schuelerId));
-            model.addAttribute("cancelUrl", URL.createLinkToZeugnisUrl(halbjahrId, klassenId, schuelerId));
+            LOG.info("Fehler:" + result.getAllErrors());
+            fillZeugnisDetailModel(model, halbjahrId, klassenId, schuelerId,
+                    zeugnis);
             return EDIT_ZEUGNIS_DETAIL_VIEW;
         }
 
