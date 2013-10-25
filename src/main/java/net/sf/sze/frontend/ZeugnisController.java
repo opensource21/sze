@@ -449,6 +449,7 @@ public class ZeugnisController {
             Long klassenId, Long schuelerId, final Zeugnis zeugnis) {
         model.addAttribute("zeugnis", zeugnis);
         model.addAttribute("zeugnisArten", zeugnisErfassungsService.getAllZeugnisArten(zeugnis));
+        model.addAttribute("helpMessageId", "help.zeugnis.editDetail");
         model.addAttribute("updateUrl", URL.filledURL(URL.ZeugnisPath.ZEUGNIS_EDIT_DETAIL, halbjahrId, klassenId, schuelerId));
         model.addAttribute("cancelUrl", URL.createLinkToZeugnisUrl(halbjahrId, klassenId, schuelerId));
     }

@@ -31,35 +31,29 @@ cancelUrl
             <input id="klasse" type="hidden" th:value="*{klasse.id}" name="klasse" />
             <input id="schueler" type="hidden" th:value="*{schueler.id}" name="schueler" />
             <input id="schulhalbjahr" type="hidden" th:value="*{schulhalbjahr.id}" name="schulhalbjahr" />
-            <!-- Fehltage -->
-            <div class="control-group">
-                <label class="control-label" for="anzahlFehltageGesamt">Fehltage:</label>
-                <div class="controls controls-row">
-                    <input type="text" class="span1" th:field="*{anzahlFehltageGesamt}"/>
-                    <label class="span1 control-label" for="anzahlFehltageUnentschuldigt">unentschuldigt:</label>
-                    <input type="text" class="span1" th:field="*{anzahlFehltageUnentschuldigt}"/>
-                    <label class="span1 control-label" th:text="#{showZeugnis.anzahlVerspaetungen}+':'" for="anzahlVerspaetungen">Verspätet</label>
-                    <input type="text" class="span1" th:field="*{anzahlVerspaetungen}"/>
-                </div>
-            </div>
+
+            <input type="text" class="span1" bs:field="#{db.Zeugnis.anzahlFehltageGesamt}"/>
+            <input type="text" class="span1" bs:field="#{db.Zeugnis.anzahlFehltageUnentschuldigt}"/>
+            <input type="text" class="span1" bs:field="#{db.Zeugnis.anzahlVerspaetungen}"/>
+
             <div class="control-group">
                 <label class="control-label">Versetzung:</label>
                 <div class="controls controls-row" th:unless="${zeugnis.schulhalbjahr?.isErstesHalbjahr()}">
-                    <label class="checkbox span3">
+                    <label class="checkbox span2">
                         <input type="checkbox" th:field="*{ruecktAuf}" id="ruecktAuf"/>
                         <span th:text="#{model.Zeugnis.ruecktAuf}" th:remove="tag"></span>
                     </label>
-                    <label class="checkbox span3">
+                    <label class="checkbox span2">
                         <input type="checkbox" th:field="*{klassenZielWurdeNichtErreicht}" id="klassenZielWurdeNichtErreicht"/>
                         <span th:text="#{model.Zeugnis.klassenZielWurdeNichtErreicht}" th:remove="tag"></span>
                     </label>
                 </div>
                 <div class="controls controls-row" th:if="${zeugnis.schulhalbjahr?.isErstesHalbjahr()}">
-                    <label class="checkbox span3">
+                    <label class="checkbox span2">
                         <input type="checkbox" th:field="*{klassenZielGefaehrdet}" id="klassenZielGefaehrdet"/>
                         <span th:text="#{model.Zeugnis.klassenZielGefaehrdet}" th:remove="tag"></span>
                     </label>
-                    <label class="checkbox span3">
+                    <label class="checkbox span2">
                         <input type="checkbox" th:field="*{klassenZielAusgeschlossen}" id="klassenZielAusgeschlossen"/>
                         <span th:text="#{model.Zeugnis.klassenZielAusgeschlossen}" th:remove="tag"></span>
                     </label>
@@ -75,44 +69,10 @@ cancelUrl
             <input type="text" class="span4" bs:field="#{db.Zeugnis.quelleIndividuellerLeitspruch}"/>
             <textarea rows="5" class="span4" bs:field="#{db.Zeugnis.individuellerLeitspruch2}"/>
             <input type="text" class="span4" bs:field="#{db.Zeugnis.quelleIndividuellerLeitspruch2}"/>
-            <!-- Baustein
-            <select bs:field="#{db.Bemerkung.baustein}"
-                class="span4 cbhideandshow" data-class-show="span4">
-                <option th:each="item : ${bemerkungsBausteine}" th:value="${item.id}"
-                    th:text="${item.name}" th:disabled="${not item.aktiv}"></option>
-            </select>
 
-            <div class="control-group">
-                <label class="control-label" for="sortierung"
-                    th:text="#{model.Bemerkung.sortierung}">Sortierung</label>
-                <div class="controls controls-row">
-                    <input type="text" class="span1" th:field="*{sortierung}" /> <label
-                        class="checkbox span3"> <input type="checkbox"
-                        th:field="*{erSieStattNamen}" id="erSieStattNamen" /> <span
-                        th:text="#{model.Bemerkung.erSieStattNamen}" th:remove="tag"></span>
-                    </label>
-                </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label" for="fixText" th:text="#{field.fixText}+':'">
-                Text aus dem:</label>
-                <div class="controls controls-row">
-                    <textarea th:id="${'baustein' + baustein.id}" rows="5" class="hide" readonly="readonly"
-                    th:each="baustein:${bemerkungsBausteine}" th:text="${baustein.text}"></textarea>
-                </div>
-            </div>
-            <textarea rows="5" bs:field="freiText"
-                class="span4"></textarea>-->
-            <button type="submit" th:formaction="@{${insertUrl}}" class="btn" th:unless="${insertUrl == null}">
-                <i class="save"></i>Speichern</button>
             <button type="submit" th:formaction="@{${updateUrl}}" class="btn" th:unless="${updateUrl == null}">
                 <i class="save"></i>Speichern</button>
-            <button type="submit"  th:formaction="@{${cancelUrl}}" class="btn">
-                <i class="cancel"></i>Abbrechen</button>
-            <button type="submit"  th:formaction="@{${insertUrl}(action=${'next'})}" class="btn" th:unless="${insertUrl == null}">
-                <i class="saveAndNext"></i>Speichern und weiteren Anlegen</button>
-            <button type="submit" th:formaction="@{${deleteUrl}}" class="btn" th:unless="${deleteUrl == null}">
-                <i class="delete"></i>Löschen</button>
+            <a th:href="@{${cancelUrl}}" class="btn"> <i class="cancel"></i>Abbrechen</a>
         </form>
     </div>
 </body>
