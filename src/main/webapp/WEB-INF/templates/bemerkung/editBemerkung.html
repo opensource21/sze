@@ -41,12 +41,14 @@ deleteUrl
 
             <div class="control-group">
                 <label class="control-label" for="sortierung"
-                    th:text="#{model.Bemerkung.sortierung}">Sortierung</label>
-                <div class="controls controls-row">
-                    <input type="text" class="span1" th:field="*{sortierung}" /> <label
-                        class="checkbox span3"> <input type="checkbox"
-                        th:field="*{erSieStattNamen}" id="erSieStattNamen" /> <span
-                        th:text="#{model.Bemerkung.erSieStattNamen}" th:remove="tag"></span>
+                    th:text="#{net.sf.sze.model.zeugnis.Bemerkung.sortierung}">Sortierung</label>
+                <div class="controls-row controls">
+                    <input type="text" class="span1" th:field="*{sortierung}" />
+                    <span class="help-block" th:if="${#fields.hasErrors('sortierung')}"
+                        th:errors="*{sortierung}">An error</span>
+                    <label class="checkbox span3">
+                        <input type="checkbox" th:field="*{erSieStattNamen}" id="erSieStattNamen"/>
+                        <span th:text="#{net.sf.sze.model.zeugnis.Bemerkung.erSieStattNamen}" th:remove="tag"></span>
                     </label>
                 </div>
             </div>
