@@ -95,103 +95,84 @@ public class Zeugnis extends VersionedModel implements Serializable,
 
     /** The anzahl verspaetungen. */
     @Column(name = "anzahl_verspaetungen", nullable = false)
-
     private Integer anzahlVerspaetungen = Integer.valueOf(0);
 
     // 2.HJ
-
     /** The rueckt auf. */
     @Column(name = "rueckt_auf", nullable = false)
-
     private Boolean ruecktAuf = Boolean.TRUE;
-
     /** The klassen ziel wurde nicht erreicht. */
     @Column(name = "klassen_ziel_wurde_nicht_erreicht", nullable = false)
-
     private Boolean klassenZielWurdeNichtErreicht = Boolean.FALSE;
 
     // 1.HJ
-
     /** The klassen ziel gefaehrdet. */
     @Column(name = "klassen_ziel_gefaehrdet", nullable = false)
     private Boolean klassenZielGefaehrdet = Boolean.FALSE;
-
     /** The klassen ziel ausgeschlossen. */
     @Column(name = "klassen_ziel_ausgeschlossen", nullable = false)
     private Boolean klassenZielAusgeschlossen = Boolean.FALSE;
 
-    // bi-directional many-to-one association to AgBewertung
 
+    // bi-directional many-to-one association to AgBewertung
     /** The ag bewertungen. */
     @OneToMany(mappedBy = "zeugnis")
     private List<AgBewertung> agBewertungen;
 
     // bi-directional many-to-one association to AvSvBewertung
-
     /** The av sv bewertungen. */
     @OneToMany(mappedBy = "zeugnis")
     private List<AvSvBewertung> avSvBewertungen;
 
     // bi-directional many-to-one association to Bemerkung
-
     /** The bemerkungen. */
     @OneToMany(mappedBy = "zeugnis")
     private List<Bemerkung> bemerkungen;
 
     // bi-directional many-to-one association to Bewertung
-
     /** The bewertungen. */
     @OneToMany(mappedBy = "zeugnis")
     private List<Bewertung> bewertungen;
 
     // bi-directional many-to-one association to SchulamtsBemerkung
-
     /** The schulamts bemerkungen. */
     @OneToMany(mappedBy = "zeugnis")
     private List<SchulamtsBemerkung> schulamtsBemerkungen;
 
     // bi-directional many-to-one association to Klasse
-
     /** The klasse. */
     @ManyToOne(optional = false)
     @JoinColumn(name = "klasse_id", nullable = false)
     private Klasse klasse;
 
     // bi-directional many-to-one association to Schueler
-
     /** The schueler. */
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "schueler_id", nullable = false)
     private Schueler schueler;
 
     // bi-directional many-to-one association to Schulhalbjahr
-
     /** The schulhalbjahr. */
     @ManyToOne(optional = false)
     @JoinColumn(name = "schulhalbjahr_id", nullable = false)
     private Schulhalbjahr schulhalbjahr;
 
     // bi-directional many-to-one association to SolbewertungsText
-
     /** The so l bewertungs text. */
     @ManyToOne(optional = true)
     @JoinColumn(name = "solbewertungs_text_id")
     private SoLBewertungsText soLBewertungsText;
 
     // bi-directional many-to-one association to ZeugnisArt
-
     /** The zeugnis art. */
     @ManyToOne(optional = false)
     @JoinColumn(name = "zeugnis_art_id", nullable = false)
-
     private ZeugnisArt zeugnisArt;
 
     // bi-directional many-to-one association to ZeugnisFormular
-
     /** The formular. */
     @ManyToOne(optional = false)
     @JoinColumn(name = "formular_id", nullable = false)
-
     private ZeugnisFormular formular;
 
     /**
