@@ -23,8 +23,6 @@ import net.sf.sze.model.zeugnis.Zeugnis;
 import net.sf.sze.service.api.BewertungWithNeigbors;
 import net.sf.sze.service.api.ZeugnisErfassungsService;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,12 +34,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(readOnly = true)
 public class ZeugnisErfassungsServiceImpl implements ZeugnisErfassungsService {
-
-    /**
-     * The Logger for the controller.
-     */
-    private static final Logger LOG = LoggerFactory.getLogger(
-            ZeugnisErfassungsServiceImpl.class);
 
     /** Minimales Schuljahr. */
     @Value("${schuljahre.min}")
@@ -165,6 +157,14 @@ public class ZeugnisErfassungsServiceImpl implements ZeugnisErfassungsService {
         bewertungen.addAll(otherBewertungen);
         bewertungen.addAll(wpBewertungen);
         return new BewertungWithNeigbors(bewertungen, bewertungsId);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Zeugnis save(Zeugnis zeugnis) {
+        return zeugnisDao.save(zeugnis);
     }
 
 

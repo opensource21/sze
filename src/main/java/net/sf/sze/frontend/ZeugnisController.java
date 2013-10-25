@@ -59,6 +59,11 @@ public class ZeugnisController {
             "bewertungen/editBewertung";
 
     /**
+     * Die View zur Bearbeitung der Zeugnisdetails.
+     */
+    private static final String EDIT_ZEUGNIS_DETAIL_VIEW = "zeugnis/editDetail";
+
+    /**
      * Der {@link ZeugnisErfassungsService}.
      */
     @Resource
@@ -360,7 +365,7 @@ public class ZeugnisController {
 
         } else {
             redirectAttributes.addFlashAttribute(Common.P_LASTEDITED_ID, bewertung.getId());
-            nextUrl = createRedirectToList(halbjahrId, klassenId, schuelerId);
+            nextUrl = URL.createRedirectToZeugnisUrl(halbjahrId, klassenId, schuelerId);
         }
 
         return nextUrl;
@@ -397,20 +402,6 @@ public class ZeugnisController {
 
 
     /**
-     * @param halbjahrId
-     * @param klassenId
-     * @param schuelerId
-     * @return
-     */
-    private String createRedirectToList(Long halbjahrId, Long klassenId,
-            final Long schuelerId) {
-        return URL.redirect(URL.ZeugnisPath.SHOW +"?" +
-                URL.Session.P_SCHUELER_ID + "=" + schuelerId
-                , halbjahrId, klassenId);
-    }
-
-
-    /**
      * Bricht die Bearbeitung einer Bewertung ab.
      * @param halbjahrId die Id des Schulhalbjahres
      * @param klassenId die Id der Klasse
@@ -425,7 +416,56 @@ public class ZeugnisController {
             @PathVariable(URL.ZeugnisPath.P_BEWERTUNGS_ID) Long bewertungsId,
             RedirectAttributes redirectAttributes) {
         redirectAttributes.addFlashAttribute(Common.P_LASTEDITED_ID, bewertungsId);
-        return createRedirectToList(halbjahrId, klassenId, schuelerId);
+        return URL.createRedirectToZeugnisUrl(halbjahrId, klassenId, schuelerId);
+    }
+
+    /**
+     * Zeigt die Zeugnisdetails an..
+     * @param halbjahrId die Id des Schulhalbjahres
+     * @param klassenId die Id der Klasse
+     * @param schuelerId die Id des Schuelers
+     * @param model das Model
+     * @return die logische View
+     */
+    @RequestMapping(value = URL.ZeugnisPath.ZEUGNIS_EDIT_DETAIL, method = RequestMethod.GET)
+    public String editZeugnisDetail(@PathVariable(URL.Session
+            .P_HALBJAHR_ID) Long halbjahrId,
+            @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
+            @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
+            Model model) {
+        final Zeugnis zeugnis = zeugnisErfassungsService.getZeugnis(halbjahrId, klassenId, schuelerId);
+        model.addAttribute("zeugnis", zeugnis);
+        model.addAttribute("updateUrl", URL.filledURL(URL.ZeugnisPath.ZEUGNIS_EDIT_DETAIL, halbjahrId, klassenId, schuelerId));
+        model.addAttribute("cancelUrl", URL.createLinkToZeugnisUrl(halbjahrId, klassenId, schuelerId));
+        return EDIT_ZEUGNIS_DETAIL_VIEW;
+    }
+
+    /**
+     * Speichert die neu angelegte Bemerkung.
+     * @param halbjahrId die Id des Schulhalbjahres
+     * @param klassenId die Id der Klasse
+     * @param schuelerId die Id des Schuelers
+     * @param model das Model
+     * @return die logische View
+     */
+    @RequestMapping(value = URL.ZeugnisPath.ZEUGNIS_EDIT_DETAIL, method = RequestMethod.POST)
+    public String updateZeugnisDetail(@PathVariable(URL.Session
+            .P_HALBJAHR_ID) Long halbjahrId,
+            @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
+            @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
+            Zeugnis zeugnis, BindingResult result, Model model) {
+        validator.validate(zeugnis, result);
+
+        if (result.hasErrors()) {
+            model.addAttribute("zeugnis", zeugnis);
+            model.addAttribute("updateUrl", URL.filledURL(URL.ZeugnisPath.ZEUGNIS_EDIT_DETAIL, halbjahrId, klassenId, schuelerId));
+            model.addAttribute("cancelUrl", URL.createLinkToZeugnisUrl(halbjahrId, klassenId, schuelerId));
+            return EDIT_ZEUGNIS_DETAIL_VIEW;
+        }
+
+        LOG.debug("Update Zeugnis: " + zeugnis);
+        zeugnisErfassungsService.save(zeugnis);
+        return URL.createRedirectToZeugnisUrl(halbjahrId, klassenId, schuelerId);
     }
 
 }

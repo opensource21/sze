@@ -66,4 +66,14 @@ public interface ZeugnisErfassungsService {
      */
     Zeugnis getZeugnis(Long halbjahrId, Long klassenId, Long schuelerId);
 
+
+    /**
+     * Sichert das Zeugnis, wobei Veränderungen auf der <b>Inverse-Side nicht
+     * berücksichtigt</b> werden!
+     *
+     * @param zeugnis das zu speichernde Zeugnis.
+     * @return das gespeicherte Zeugnis.
+     *
+     */
+    Zeugnis save(Zeugnis zeugnis);
 }
