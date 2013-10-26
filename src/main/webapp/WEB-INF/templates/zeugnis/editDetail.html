@@ -41,21 +41,21 @@ cancelUrl
                 <div class="controls controls-row" th:unless="${zeugnis.schulhalbjahr?.isErstesHalbjahr()}">
                     <label class="checkbox span2">
                         <input type="checkbox" th:field="*{ruecktAuf}" id="ruecktAuf"/>
-                        <span th:text="#{model.Zeugnis.ruecktAuf}" th:remove="tag"></span>
+                        <span th:text="#{net.sf.sze.model.zeugnis.Zeugnis.ruecktAuf}" th:remove="tag"></span>
                     </label>
                     <label class="checkbox span2">
                         <input type="checkbox" th:field="*{klassenZielWurdeNichtErreicht}" id="klassenZielWurdeNichtErreicht"/>
-                        <span th:text="#{model.Zeugnis.klassenZielWurdeNichtErreicht}" th:remove="tag"></span>
+                        <span th:text="#{net.sf.sze.model.zeugnis.Zeugnis.klassenZielWurdeNichtErreicht}" th:remove="tag"></span>
                     </label>
                 </div>
                 <div class="controls controls-row" th:if="${zeugnis.schulhalbjahr?.isErstesHalbjahr()}">
                     <label class="checkbox span2">
                         <input type="checkbox" th:field="*{klassenZielGefaehrdet}" id="klassenZielGefaehrdet"/>
-                        <span th:text="#{model.Zeugnis.klassenZielGefaehrdet}" th:remove="tag"></span>
+                        <span th:text="#{net.sf.sze.model.zeugnis.Zeugnis.klassenZielGefaehrdet}" th:remove="tag"></span>
                     </label>
                     <label class="checkbox span2">
                         <input type="checkbox" th:field="*{klassenZielAusgeschlossen}" id="klassenZielAusgeschlossen"/>
-                        <span th:text="#{model.Zeugnis.klassenZielAusgeschlossen}" th:remove="tag"></span>
+                        <span th:text="#{net.sf.sze.model.zeugnis.Zeugnis.klassenZielAusgeschlossen}" th:remove="tag"></span>
                     </label>
                 </div>
             </div>

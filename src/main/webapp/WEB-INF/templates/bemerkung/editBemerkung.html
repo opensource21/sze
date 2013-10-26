@@ -28,9 +28,9 @@ deleteUrl
         </h4>
         <form class="well form-horizontal" method="post"
             th:object="${bemerkung}">
-            <input id="id" type="hidden" th:value="*{id}" name="id" /> <input
-                id="version" type="hidden" th:value="*{version}" name="version" /> <input
-                id="zeugnis" type="hidden" th:value="*{zeugnis.id}" name="zeugnis" />
+            <input id="id" type="hidden" th:value="*{id}" name="id" />
+            <input id="version" type="hidden" th:value="*{version}" name="version" />
+            <input id="zeugnis" type="hidden" th:value="*{zeugnis.id}" name="zeugnis" />
 
             <!-- Baustein -->
             <select bs:field="#{db.Bemerkung.baustein}"
@@ -39,17 +39,8 @@ deleteUrl
                     th:text="${item.name}" th:disabled="${not item.aktiv}"></option>
             </select>
 
-            <div class="control-group">
-                <label class="control-label" for="sortierung"
-                    th:text="#{model.Bemerkung.sortierung}">Sortierung</label>
-                <div class="controls controls-row">
-                    <input type="text" class="span1" th:field="*{sortierung}" /> <label
-                        class="checkbox span3"> <input type="checkbox"
-                        th:field="*{erSieStattNamen}" id="erSieStattNamen" /> <span
-                        th:text="#{model.Bemerkung.erSieStattNamen}" th:remove="tag"></span>
-                    </label>
-                </div>
-            </div>
+            <input type="text" class="span1" bs:field="#{db.Bemerkung.sortierung}" />
+            <input type="checkbox" bs:field="#{db.Bemerkung.erSieStattNamen}"/>
             <!-- FixText Sollte nicht übermittelt werden!-->
             <div class="control-group">
                 <label class="control-label" for="fixText" th:text="#{field.fixText}+':'">
