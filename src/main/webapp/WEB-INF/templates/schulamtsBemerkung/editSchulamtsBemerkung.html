@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- PARAMS:
-bemerkung - die Bemerkung.
+schulamtsBemerkung - die Bemerkung.
 bemerkungsBausteine - alle möglichen BemerkungsschulamtsBemerkungsBausteine
 schulaemter - alle möglichen Schulämter
 schulhalbjahr
@@ -22,20 +22,19 @@ deleteUrl
     <div layout:fragment="content">
         <h4>
             Bearbeite die Schulamtsbeschreibung für Schüler <em
-                th:text="${bemerkung?.zeugnis?.schueler}"></em> (Klasse <span
+                th:text="${schulamtsBemerkung?.zeugnis?.schueler}"></em> (Klasse <span
                 th:remove="tag"
-                th:text="${bemerkung?.zeugnis?.klasse?.calculateKlassenname(schulhalbjahr.jahr)}"></span>
+                th:text="${schulamtsBemerkung?.zeugnis?.klasse?.calculateKlassenname(schulhalbjahr.jahr)}"></span>
             im Hj: <span th:remove="tag" th:text="${schulhalbjahr}"></span>)
         </h4>
         <form class="well form-horizontal" method="post"
-            th:object="${bemerkung}">
-                <input id="id" type="hidden" th:value="*{id}" name="id" />
-                <input id="version" type="hidden" th:value="*{version}" name="version" />
-                <input id="zeugnis" type="hidden" th:value="*{zeugnis.id}" name="zeugnis" />
+                th:object="${schulamtsBemerkung}">
+            <input id="id" type="hidden" th:value="*{id}" name="id" />
+            <input id="version" type="hidden" th:value="*{version}" name="version" />
+            <input id="zeugnis" type="hidden" th:value="*{zeugnis.id}" name="zeugnis" />
 
             <!-- Schulamt -->
-            <select bs:field="#{db.SchulamtsBemerkung.schulamt}"
-                class="span4">
+            <select bs:field="#{db.SchulamtsBemerkung.schulamt}" class="span4">
                 <option th:each="item : ${schulaemter}" th:value="${item.id}"
                     th:text="${item.name}" th:disabled="${not item.aktiv}"></option>
             </select>
@@ -47,18 +46,10 @@ deleteUrl
                 <option th:each="item : ${bemerkungsBausteine}" th:value="${item.id}"
                     th:text="${item.name}" th:disabled="${not item.aktiv}"></option>
             </select>
+            <input type="text" class="span1" bs:field="#{db.SchulamtsBemerkung.sortierung}" />
 
-            <div class="control-group">
-                <label class="control-label" for="sortierung"
-                    th:text="#{net.sf.sze.model.zeugnis.SchulamtsBemerkung.sortierung}">Sortierung</label>
-                <div class="controls controls-row">
-                    <input type="text" class="span1" th:field="*{sortierung}" /> <label
-                        class="checkbox span3"> <input type="checkbox"
-                        th:field="*{erSieStattNamen}" id="erSieStattNamen" /> <span
-                        th:text="#{net.sf.sze.model.zeugnis.SchulamtsBemerkung.erSieStattNamen}" th:remove="tag"></span>
-                    </label>
-                </div>
-            </div>
+            <input type="checkbox" bs:field="#{db.SchulamtsBemerkung.erSieStattNamen}"/>
+
             <!-- FixText Sollte nicht übermittelt werden!-->
             <div class="control-group">
                 <label class="control-label" for="fixText" th:text="#{field.fixText}+':'">

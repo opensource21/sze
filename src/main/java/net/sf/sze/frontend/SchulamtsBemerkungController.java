@@ -42,7 +42,7 @@ public class SchulamtsBemerkungController {
     /**
      * View zum Editieren der Bemerkung.
      */
-    private static final String EDIT_SCHULAMTS_BEMERKUNG_VIEW = "schulamtsBemerkung/editBemerkung";
+    private static final String EDIT_SCHULAMTS_BEMERKUNG_VIEW = "schulamtsBemerkung/editSchulamtsBemerkung";
 
 
     /**
@@ -125,6 +125,7 @@ public class SchulamtsBemerkungController {
         validator.validate(schulamtsBemerkung, result);
 
         if (result.hasErrors()) {
+            LOG.info("Fehler beim Speichern der Schulamtsbemerkung: {}", result.getAllErrors());
             model.addAttribute("insertUrl", URL.filledURL(URL.ZeugnisPath.SCHULAMTS_BEMERKUNG_CREATE, halbjahrId, klassenId, schuelerId));
             fillModel(model, halbjahrId, klassenId, schuelerId, schulamtsBemerkung);
             return EDIT_SCHULAMTS_BEMERKUNG_VIEW;
@@ -166,7 +167,7 @@ public class SchulamtsBemerkungController {
         model.addAttribute("cancelUrl", URL.createLinkToZeugnisUrl(halbjahrId, klassenId, schuelerId));
         model.addAttribute("editUrl", URL.filledURL(URL.ZeugnisPath.SCHULAMTS_BEMERKUNG_EDIT, halbjahrId, klassenId, schuelerId, schulamtsBemerkungsId));
         model.addAttribute("deleteUrl", URL.filledURL(URL.ZeugnisPath.SCHULAMTS_BEMERKUNG_DELETE, halbjahrId, klassenId, schuelerId, schulamtsBemerkungsId));
-        return "schulamtsBemerkung/showBemerkung";
+        return "schulamtsBemerkung/showSchulamtsBemerkung";
     }
 
     /**
@@ -250,7 +251,7 @@ public class SchulamtsBemerkungController {
                 schulamtsBemerkungService.getAllSchulamtsBemerkungsBausteine(schulamtsBemerkung);
         final List<Schulamt> schulaemter =
                 schulamtsBemerkungService.getAllSchulaemter(schulamtsBemerkung);
-        model.addAttribute("bemerkung", schulamtsBemerkung);
+        model.addAttribute("schulamtsBemerkung", schulamtsBemerkung);
         model.addAttribute("schulhalbjahr", schulhalbjahrService.read(halbjahrId));
         model.addAttribute("cancelUrl", URL.filledURL(
                 URL.ZeugnisPath.SCHULAMTS_BEMERKUNG_CANCEL, halbjahrId, klassenId, schuelerId));
