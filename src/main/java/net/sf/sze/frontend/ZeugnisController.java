@@ -64,6 +64,11 @@ public class ZeugnisController {
     private static final String EDIT_ZEUGNIS_DETAIL_VIEW = "zeugnis/editDetail";
 
     /**
+     * Die View zur Bearbeitung Arbeitsgruppen.
+     */
+    private static final String EDIT_ZEUGNIS_AGS = "zeugnis/editArbeitsgruppen";
+
+    /**
      * Der {@link ZeugnisErfassungsService}.
      */
     @Resource
@@ -482,4 +487,66 @@ public class ZeugnisController {
         return URL.createRedirectToZeugnisUrl(halbjahrId, klassenId, schuelerId);
     }
 
+
+    /**
+     * Zeigt die Zeugnisdetails an..
+     * @param halbjahrId die Id des Schulhalbjahres
+     * @param klassenId die Id der Klasse
+     * @param schuelerId die Id des Schuelers
+     * @param model das Model
+     * @return die logische View
+     */
+    @RequestMapping(value = URL.ZeugnisPath.ZEUGNIS_EDIT_AGS, method = RequestMethod.GET)
+    public String editArbeitsgruppen(@PathVariable(URL.Session
+            .P_HALBJAHR_ID) Long halbjahrId,
+            @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
+            @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
+            Model model) {
+        final Zeugnis zeugnis = zeugnisErfassungsService.getZeugnis(halbjahrId, klassenId, schuelerId);
+        fillArbeitsgruppenModel(model, halbjahrId, klassenId, schuelerId,zeugnis);
+        return EDIT_ZEUGNIS_AGS;
+    }
+
+    /**
+     * @param model
+     * @param halbjahrId
+     * @param klassenId
+     * @param schuelerId
+     * @param zeugnis
+     */
+    private void fillArbeitsgruppenModel(Model model, Long halbjahrId,
+            Long klassenId, Long schuelerId, final Zeugnis zeugnis) {
+        model.addAttribute("zeugnis", zeugnis);
+        model.addAttribute("helpMessageId", "help.zeugnis.editArbeitsgruppen");
+        model.addAttribute("updateUrl", URL.filledURL(URL.ZeugnisPath.ZEUGNIS_EDIT_AGS, halbjahrId, klassenId, schuelerId));
+        model.addAttribute("cancelUrl", URL.createLinkToZeugnisUrl(halbjahrId, klassenId, schuelerId));
+    }
+
+    /**
+     * Speichert die neu angelegte Bemerkung.
+     * @param halbjahrId die Id des Schulhalbjahres
+     * @param klassenId die Id der Klasse
+     * @param schuelerId die Id des Schuelers
+     * @param model das Model
+     * @return die logische View
+     */
+    @RequestMapping(value = URL.ZeugnisPath.ZEUGNIS_EDIT_AGS, method = RequestMethod.POST)
+    public String updateArbeitsgruppen(@PathVariable(URL.Session
+            .P_HALBJAHR_ID) Long halbjahrId,
+            @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
+            @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
+            Zeugnis zeugnis, BindingResult result, Model model) {
+        validator.validate(zeugnis, result);
+
+        if (result.hasErrors()) {
+            LOG.info("Fehler:" + result.getAllErrors());
+            fillArbeitsgruppenModel(model, halbjahrId, klassenId, schuelerId,
+                    zeugnis);
+            return EDIT_ZEUGNIS_AGS;
+        }
+
+        LOG.debug("Update Zeugnis: " + zeugnis);
+        zeugnisErfassungsService.save(zeugnis);
+        return URL.createRedirectToZeugnisUrl(halbjahrId, klassenId, schuelerId);
+    }
 }

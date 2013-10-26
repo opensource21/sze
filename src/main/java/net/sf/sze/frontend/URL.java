@@ -212,6 +212,7 @@ public final class URL {
         String SCHULAMTS_BEMERKUNG_DELETE = DETAIL + "/deleteSchulamtsBemerkung/{" + P_SCHULAMTS_BEMERKUNGS_ID + "}";
 
         String ZEUGNIS_EDIT_DETAIL = DETAIL + "/editDetail";
+        String ZEUGNIS_EDIT_AGS = DETAIL + "/editArbeitsgruppen";
 
         /**
          * Zeige PDF einer ganze Klasse.
