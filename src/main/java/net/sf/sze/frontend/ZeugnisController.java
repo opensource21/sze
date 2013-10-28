@@ -496,7 +496,7 @@ public class ZeugnisController {
 
 
     /**
-     * Zeigt die Zeugnisdetails an..
+     * Zeigt die AG-Bewertungen an.
      * @param halbjahrId die Id des Schulhalbjahres
      * @param klassenId die Id der Klasse
      * @param schuelerId die Id des Schuelers
@@ -534,10 +534,11 @@ public class ZeugnisController {
     }
 
     /**
-     * Speichert die neu angelegte Bemerkung.
+     * Speichert die neu angelegte AG-Bewertungen.
      * @param halbjahrId die Id des Schulhalbjahres
      * @param klassenId die Id der Klasse
      * @param schuelerId die Id des Schuelers
+     * @param newZeugnis als Container für die AG-Bewertungen.
      * @param model das Model
      * @return die logische View
      */
