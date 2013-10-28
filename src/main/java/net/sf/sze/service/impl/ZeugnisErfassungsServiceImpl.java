@@ -14,12 +14,14 @@ import javax.annotation.Resource;
 import net.sf.sze.dao.api.stammdaten.KlasseDao;
 import net.sf.sze.dao.api.zeugnis.BewertungDao;
 import net.sf.sze.dao.api.zeugnis.SchulhalbjahrDao;
+import net.sf.sze.dao.api.zeugnis.SoLBewertungsTextDao;
 import net.sf.sze.dao.api.zeugnis.ZeugnisArtDao;
 import net.sf.sze.dao.api.zeugnis.ZeugnisDao;
 import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.zeugnis.Bewertung;
 import net.sf.sze.model.zeugnis.Schulfachtyp;
 import net.sf.sze.model.zeugnis.Schulhalbjahr;
+import net.sf.sze.model.zeugnis.SoLBewertungsText;
 import net.sf.sze.model.zeugnis.Zeugnis;
 import net.sf.sze.model.zeugnis.ZeugnisArt;
 import net.sf.sze.service.api.BewertungWithNeigbors;
@@ -74,6 +76,12 @@ public class ZeugnisErfassungsServiceImpl implements ZeugnisErfassungsService {
      */
     @Resource
     private BewertungDao bewertungDao;
+
+    /**
+     * Das SolBertunge-DAO.
+     */
+    @Resource
+    private SoLBewertungsTextDao soLBewertungsTextDao;
 
     /**
      * {@inheritDoc}
@@ -189,6 +197,15 @@ public class ZeugnisErfassungsServiceImpl implements ZeugnisErfassungsService {
     @Transactional(readOnly=false)
     public Zeugnis save(Zeugnis zeugnis) {
         return zeugnisDao.save(zeugnis);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<SoLBewertungsText> getSoLTexte(Zeugnis zeugnis) {
+        List<SoLBewertungsText> result = soLBewertungsTextDao.findAllOrderByNameAscAndTextAsc();
+        return result;
     }
 
 }

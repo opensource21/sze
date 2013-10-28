@@ -74,7 +74,7 @@
             <div class="span6" th:with="bewertungen=${wpBewertungen}" th:include="zeugnis/showZeugnis::table">
             </div>
         </div>
-        <h5>Biblischer Unterricht und SoL <a href="@zeugnisErfassung.editBuUndSoL ${zeugnis.id}">bearbeiten</a></h5>
+        <h5>Biblischer Unterricht und SoL <a th:href="@{#{url.zeugnispath.zeugnis_edit_bu_sol(${zeugnis.schulhalbjahr.id}, ${zeugnis.klasse.id}, ${zeugnis.schueler.id})}}">bearbeiten</a></h5>
         <div class="buUndSoLBeurteilungen row-fluid">
             <div class="span12">
             <table class="table table-striped table-bordered table-hover table-condensed">

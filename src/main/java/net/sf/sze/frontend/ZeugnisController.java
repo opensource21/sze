@@ -70,6 +70,11 @@ public class ZeugnisController {
     private static final String EDIT_ZEUGNIS_AGS = "zeugnis/editArbeitsgruppen";
 
     /**
+     * Die View zur Bearbeitung des BU-Textes und SoL.
+     */
+    private static final String EDIT_ZEUGNIS_BU_SOL = "zeugnis/editBUundSoL";
+
+    /**
      * Der {@link ZeugnisErfassungsService}.
      */
     @Resource
@@ -546,6 +551,72 @@ public class ZeugnisController {
         //Wenn man eine Validierung wollte müsste man sicherstellen, dass auch
         //die Liste validiert wird, was so nicht erfolgt. Ein Form-Object wäre sinnvoll.
         agBewertungService.save(newZeugnis.getAgBewertungen());
+        return URL.createRedirectToZeugnisUrl(halbjahrId, klassenId, schuelerId);
+    }
+
+    /**
+     * Zeigt die BU und SoL-Bewertung an.
+     * @param halbjahrId die Id des Schulhalbjahres
+     * @param klassenId die Id der Klasse
+     * @param schuelerId die Id des Schuelers
+     * @param model das Model
+     * @return die logische View
+     */
+    @RequestMapping(value = URL.ZeugnisPath.ZEUGNIS_EDIT_BU_SOL, method = RequestMethod.GET)
+    public String editBuSoL(@PathVariable(URL.Session
+            .P_HALBJAHR_ID) Long halbjahrId,
+            @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
+            @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
+            Model model) {
+        final Zeugnis zeugnis = zeugnisErfassungsService.getZeugnis(halbjahrId, klassenId, schuelerId);
+        fillBuSoLModel(model, halbjahrId, klassenId, schuelerId,zeugnis);
+        return EDIT_ZEUGNIS_BU_SOL;
+    }
+
+    /**
+     * @param model
+     * @param halbjahrId
+     * @param klassenId
+     * @param schuelerId
+     * @param zeugnis
+     */
+    private void fillBuSoLModel(Model model, Long halbjahrId,
+            Long klassenId, Long schuelerId, final Zeugnis zeugnis) {
+        model.addAttribute("zeugnis", zeugnis);
+        model.addAttribute("solBewertungsTexte", zeugnisErfassungsService.getSoLTexte(zeugnis));
+        model.addAttribute("updateUrl", URL.filledURL(URL.ZeugnisPath.ZEUGNIS_EDIT_BU_SOL, halbjahrId, klassenId, schuelerId));
+        model.addAttribute("cancelUrl", URL.createLinkToZeugnisUrl(halbjahrId, klassenId, schuelerId));
+    }
+
+    /**
+     * Speichert die neu angelegte BU und SoL-Bewertung .
+     * @param halbjahrId die Id des Schulhalbjahres
+     * @param klassenId die Id der Klasse
+     * @param schuelerId die Id des Schuelers
+     * @param newZeugnis als Container für die AG-Bewertungen.
+     * @param model das Model
+     * @return die logische View
+     */
+    @RequestMapping(value = URL.ZeugnisPath.ZEUGNIS_EDIT_BU_SOL, method = RequestMethod.POST)
+    public String updateBuSoL(@PathVariable(URL.Session
+            .P_HALBJAHR_ID) Long halbjahrId,
+            @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
+            @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
+            Zeugnis newZeugnis, BindingResult result, Model model) {
+        final Zeugnis zeugnis = zeugnisErfassungsService.getZeugnis(halbjahrId, klassenId, schuelerId);
+        zeugnis.setBuBewertungsText(newZeugnis.getBuBewertungsText());
+        zeugnis.setSoLBewertungsText(newZeugnis.getSoLBewertungsText());
+
+        validator.validate(zeugnis, result);
+        if (result.hasErrors()) {
+            LOG.info("Fehler:" + result.getAllErrors());
+            fillBuSoLModel(model, halbjahrId, klassenId, schuelerId,
+                    zeugnis);
+            return EDIT_ZEUGNIS_BU_SOL;
+        }
+
+        LOG.debug("Update Zeugnis: " + zeugnis);
+        zeugnisErfassungsService.save(zeugnis);
         return URL.createRedirectToZeugnisUrl(halbjahrId, klassenId, schuelerId);
     }
 }

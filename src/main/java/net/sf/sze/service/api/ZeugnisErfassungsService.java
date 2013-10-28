@@ -8,6 +8,7 @@ package net.sf.sze.service.api;
 import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.zeugnis.Bewertung;
 import net.sf.sze.model.zeugnis.Schulhalbjahr;
+import net.sf.sze.model.zeugnis.SoLBewertungsText;
 import net.sf.sze.model.zeugnis.Zeugnis;
 import net.sf.sze.model.zeugnis.ZeugnisArt;
 
@@ -84,4 +85,10 @@ public interface ZeugnisErfassungsService {
      *
      */
     Zeugnis save(Zeugnis zeugnis);
+
+    /**
+     * Liefert alle SoL-Bewertungstexte, sortiert und passend zum Zeugnis.
+     * @return alle SoL-Bewertungstexte, sortiert und passend zum Zeugnis.
+     */
+    List<SoLBewertungsText> getSoLTexte(Zeugnis zeugnis);
 }
