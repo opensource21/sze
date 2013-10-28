@@ -31,12 +31,10 @@ public class SoLBewertungsText extends VersionedModel implements Serializable,
 
     /** The name. */
     @Column(nullable = false, length = 255)
-
     private String name;
 
     /** The text. */
     @Column(nullable = false, length = 100)
-
     @Size(max = 100)
     private String text;
 
