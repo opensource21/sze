@@ -14,12 +14,14 @@ import javax.annotation.Resource;
 import net.sf.sze.frontend.URL.Common;
 import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.stammdaten.Schueler;
+import net.sf.sze.model.zeugnis.AgBewertung;
 import net.sf.sze.model.zeugnis.AussenDifferenzierteBewertung;
 import net.sf.sze.model.zeugnis.Bewertung;
 import net.sf.sze.model.zeugnis.BinnenDifferenzierteBewertung;
 import net.sf.sze.model.zeugnis.Schulhalbjahr;
 import net.sf.sze.model.zeugnis.StandardBewertung;
 import net.sf.sze.model.zeugnis.Zeugnis;
+import net.sf.sze.service.api.AgBewertungService;
 import net.sf.sze.service.api.BewertungService;
 import net.sf.sze.service.api.BewertungWithNeigbors;
 import net.sf.sze.service.api.SchulhalbjahrService;
@@ -85,7 +87,11 @@ public class ZeugnisController {
      */
     @Resource
     private SchulhalbjahrService schulhalbjahrService;
-
+    /**
+     * Der {@link AgBewertungService}.
+     */
+    @Resource
+    private AgBewertungService agBewertungService;
     /**
      * Der Validator.
      */
@@ -425,7 +431,7 @@ public class ZeugnisController {
     }
 
     /**
-     * Zeigt die Zeugnisdetails an..
+     * Zeigt die Zeugnisdetails an.
      * @param halbjahrId die Id des Schulhalbjahres
      * @param klassenId die Id der Klasse
      * @param schuelerId die Id des Schuelers
@@ -460,7 +466,7 @@ public class ZeugnisController {
     }
 
     /**
-     * Speichert die neu angelegte Bemerkung.
+     * Speichert das veränderte Zeugnis.
      * @param halbjahrId die Id des Schulhalbjahres
      * @param klassenId die Id der Klasse
      * @param schuelerId die Id des Schuelers
@@ -503,6 +509,9 @@ public class ZeugnisController {
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
             Model model) {
         final Zeugnis zeugnis = zeugnisErfassungsService.getZeugnis(halbjahrId, klassenId, schuelerId);
+        for (AgBewertung agBewertung : zeugnis.getAgBewertungen()) {
+            LOG.info(agBewertung.toString());
+        }
         fillArbeitsgruppenModel(model, halbjahrId, klassenId, schuelerId,zeugnis);
         return EDIT_ZEUGNIS_AGS;
     }
@@ -516,6 +525,7 @@ public class ZeugnisController {
      */
     private void fillArbeitsgruppenModel(Model model, Long halbjahrId,
             Long klassenId, Long schuelerId, final Zeugnis zeugnis) {
+        Collections.sort(zeugnis.getAgBewertungen());
         model.addAttribute("zeugnis", zeugnis);
         model.addAttribute("helpMessageId", "help.zeugnis.editArbeitsgruppen");
         model.addAttribute("updateUrl", URL.filledURL(URL.ZeugnisPath.ZEUGNIS_EDIT_AGS, halbjahrId, klassenId, schuelerId));
@@ -535,7 +545,12 @@ public class ZeugnisController {
             .P_HALBJAHR_ID) Long halbjahrId,
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
-            Zeugnis zeugnis, BindingResult result, Model model) {
+            Zeugnis newZeugnis, BindingResult result, Model model) {
+        //Das Zeugnis wird nicht komplett übertrage sondern dient nur als Container,
+        //daher muss hier zunächst das Zeugnis geladen werden und dann die Liste gesetzt werden.
+        final Zeugnis zeugnis = zeugnisErfassungsService.getZeugnis(halbjahrId, klassenId, schuelerId);
+        zeugnis.setAgBewertungen(newZeugnis.getAgBewertungen());
+
         validator.validate(zeugnis, result);
 
         if (result.hasErrors()) {
@@ -544,9 +559,7 @@ public class ZeugnisController {
                     zeugnis);
             return EDIT_ZEUGNIS_AGS;
         }
-
-        LOG.debug("Update Zeugnis: " + zeugnis);
-        zeugnisErfassungsService.save(zeugnis);
+        agBewertungService.save(newZeugnis.getAgBewertungen());
         return URL.createRedirectToZeugnisUrl(halbjahrId, klassenId, schuelerId);
     }
 }

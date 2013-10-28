@@ -25,19 +25,11 @@ cancelUrl
         </h4>
         <form class="well form-horizontal" method="post"
             th:object="${zeugnis}">
-            <input id="id" type="hidden" th:value="*{id}" name="id" />
-            <input id="version" type="hidden" th:value="*{version}" name="version" />
-            <input id="formular" type="hidden" th:value="*{formular.id}" name="formular" />
-            <input id="klasse" type="hidden" th:value="*{klasse.id}" name="klasse" />
-            <input id="schueler" type="hidden" th:value="*{schueler.id}" name="schueler" />
-            <input id="schulhalbjahr" type="hidden" th:value="*{schulhalbjahr.id}" name="schulhalbjahr" />
-            <input id="zeugnisArt" type="hidden" th:value="*{zeugnisArt.id}" name="zeugnisArt" />
-
-            <input id="#{db.Zeugnis.anzahlFehltageGesamt}" type="hidden" th:value="*{__#{db.Zeugnis.anzahlFehltageGesamt}__}"/>
-            <input id="#{db.Zeugnis.anzahlFehltageUnentschuldigt}" type="hidden" th:value="*{__#{db.Zeugnis.anzahlFehltageUnentschuldigt}__}"/>
-            <input id="#{db.Zeugnis.anzahlVerspaetungen}" type="hidden" th:value="*{__#{db.Zeugnis.anzahlVerspaetungen}__}"/>
             <span th:remove="tag" th:each="agBewertung, stat: *{agBewertungen}">
-                <input type="hidden" th:value="*{agBewertungen[__${stat.index}__].id}"/>
+                <input type="hidden" th:value="*{agBewertungen[__${stat.index}__].id}" th:name="${'agBewertungen['+__${stat.index}__+'].id'}"/>
+                <input type="hidden" th:value="*{agBewertungen[__${stat.index}__].version}" th:name="${'agBewertungen['+__${stat.index}__+'].version'}"/>
+                <input type="hidden" th:value="*{agBewertungen[__${stat.index}__].arbeitsgruppe.id}" th:name="${'agBewertungen['+__${stat.index}__+'].arbeitsgruppe'}"/>
+                <input type="hidden" th:value="*{agBewertungen[__${stat.index}__].zeugnis.id}" th:name="${'agBewertungen['+__${stat.index}__+'].zeugnis'}"/>
                 <input type="checkbox" bs:field="${'agBewertungen['+__${stat.index}__+'].teilgenommen'}" bs:label="${agBewertung.arbeitsgruppe.name}"/>
             </span>
             <button type="submit" th:formaction="@{${updateUrl}}" class="btn" th:unless="${updateUrl == null}">
