@@ -11,6 +11,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import net.sf.oval.constraint.AssertValidCheck;
 import net.sf.sze.frontend.URL.Common;
 import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.stammdaten.Schueler;
@@ -546,19 +547,9 @@ public class ZeugnisController {
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
             Zeugnis newZeugnis, BindingResult result, Model model) {
-        //Das Zeugnis wird nicht komplett übertrage sondern dient nur als Container,
-        //daher muss hier zunächst das Zeugnis geladen werden und dann die Liste gesetzt werden.
-        final Zeugnis zeugnis = zeugnisErfassungsService.getZeugnis(halbjahrId, klassenId, schuelerId);
-        zeugnis.setAgBewertungen(newZeugnis.getAgBewertungen());
-
-        validator.validate(zeugnis, result);
-
-        if (result.hasErrors()) {
-            LOG.info("Fehler:" + result.getAllErrors());
-            fillArbeitsgruppenModel(model, halbjahrId, klassenId, schuelerId,
-                    zeugnis);
-            return EDIT_ZEUGNIS_AGS;
-        }
+        //Die Validierung ist nicht sinnvoll, da nichts schief gehen kann.
+        //Wenn man eine Validierung wollte müsste man sicherstellen, dass auch
+        //die Liste validiert wird, was so nicht erfolgt. Ein Form-Object wäre sinnvoll.
         agBewertungService.save(newZeugnis.getAgBewertungen());
         return URL.createRedirectToZeugnisUrl(halbjahrId, klassenId, schuelerId);
     }
