@@ -40,7 +40,6 @@ public class AvSvBewertung extends VersionedModel implements Serializable,
     /** The arbeits und sozial verhalten. */
     @ManyToOne(optional = false)
     @JoinColumn(name = "arbeits_und_sozial_verhalten_id", nullable = false)
-
     private ArbeitsUndSozialVerhalten arbeitsUndSozialVerhalten;
 
     // bi-directional many-to-one association to Zeugnis
@@ -48,7 +47,6 @@ public class AvSvBewertung extends VersionedModel implements Serializable,
     /** The zeugnis. */
     @ManyToOne(optional = false)
     @JoinColumn(name = "zeugnis_id", nullable = false)
-
     private Zeugnis zeugnis;
 
     /**

@@ -93,7 +93,7 @@
             </table>
             </div>
         </div>
-        <h5>Arbeits- und Sozialverhalten <a href="zeugnisErfassung:editArbeitsUndSozialVerhalten.${zeugnis.id}">bearbeiten</a></h5>
+        <h5>Arbeits- und Sozialverhalten <a th:href="@{#{url.zeugnispath.zeugnis_edit_av_sv(${zeugnis.schulhalbjahr.id}, ${zeugnis.klasse.id}, ${zeugnis.schueler.id})}}">bearbeiten</a></h5>
         <div class="avSvBeurteilungen row-fluid">
             <div class="span6" th:with="bewertungen=${zeugnis.avBewertungen}, head='Arbeitsverhalten'" th:fragment="AvSvtable">
             <table class="table table-striped table-bordered table-hover table-condensed" >

@@ -35,23 +35,19 @@ public class ArbeitsUndSozialVerhalten extends VersionedModel
 
     /** The name. */
     @Column(nullable = false, length = 50)
-
     private String name;
 
     /** The typ. */
     @Column(nullable = false)
-
     @Enumerated(EnumType.ORDINAL)
     private AvSvTyp typ;
 
     /** The sortierung. */
     @Column(nullable = false)
-
     private Long sortierung;
 
     /** The klassenstufen. */
     @Column(nullable = false, length = 255)
-
     private String klassenstufen;
 
     /**

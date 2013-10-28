@@ -1,4 +1,3 @@
-- Bei den komplexeren Masken fehlt die Anzeige von Validierungsfehlern!
 - PDF-Erstellung einbinden.
 - Die Aufteilung auf Services überdenken, Bündelung nach DB nach Controller?
 - Beschreibung von Session und URL.
@@ -61,6 +60,9 @@ Forschung
     #httpSession
 
 - Scaffolding
+- Bei den komplexeren Masken fehlt die Anzeige von Validierungsfehlern!
+- Wenn man eine Unterlist bearbeitet fehlt auch die Validierung.
+
 
 Bootstrap3 http://code.divshot.com/bootstrap3_upgrader/
 

@@ -14,7 +14,6 @@ import javax.annotation.Resource;
 import net.sf.sze.frontend.URL.Common;
 import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.stammdaten.Schueler;
-import net.sf.sze.model.zeugnis.AgBewertung;
 import net.sf.sze.model.zeugnis.AussenDifferenzierteBewertung;
 import net.sf.sze.model.zeugnis.Bewertung;
 import net.sf.sze.model.zeugnis.BinnenDifferenzierteBewertung;
@@ -509,9 +508,6 @@ public class ZeugnisController {
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
             Model model) {
         final Zeugnis zeugnis = zeugnisErfassungsService.getZeugnis(halbjahrId, klassenId, schuelerId);
-        for (AgBewertung agBewertung : zeugnis.getAgBewertungen()) {
-            LOG.info(agBewertung.toString());
-        }
         fillArbeitsgruppenModel(model, halbjahrId, klassenId, schuelerId,zeugnis);
         return EDIT_ZEUGNIS_AGS;
     }
@@ -527,7 +523,6 @@ public class ZeugnisController {
             Long klassenId, Long schuelerId, final Zeugnis zeugnis) {
         Collections.sort(zeugnis.getAgBewertungen());
         model.addAttribute("zeugnis", zeugnis);
-        model.addAttribute("helpMessageId", "help.zeugnis.editArbeitsgruppen");
         model.addAttribute("updateUrl", URL.filledURL(URL.ZeugnisPath.ZEUGNIS_EDIT_AGS, halbjahrId, klassenId, schuelerId));
         model.addAttribute("cancelUrl", URL.createLinkToZeugnisUrl(halbjahrId, klassenId, schuelerId));
     }

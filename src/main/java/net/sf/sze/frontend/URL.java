@@ -213,6 +213,7 @@ public final class URL {
 
         String ZEUGNIS_EDIT_DETAIL = DETAIL + "/editDetail";
         String ZEUGNIS_EDIT_AGS = DETAIL + "/editArbeitsgruppen";
+        String ZEUGNIS_EDIT_AV_SV = DETAIL + "/editAvSv";
 
         /**
          * Zeige PDF einer ganze Klasse.
