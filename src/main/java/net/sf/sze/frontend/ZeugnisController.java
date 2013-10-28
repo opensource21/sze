@@ -14,12 +14,14 @@ import javax.annotation.Resource;
 import net.sf.sze.frontend.URL.Common;
 import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.stammdaten.Schueler;
+import net.sf.sze.model.zeugnis.AgBewertung;
 import net.sf.sze.model.zeugnis.AussenDifferenzierteBewertung;
 import net.sf.sze.model.zeugnis.Bewertung;
 import net.sf.sze.model.zeugnis.BinnenDifferenzierteBewertung;
 import net.sf.sze.model.zeugnis.Schulhalbjahr;
 import net.sf.sze.model.zeugnis.StandardBewertung;
 import net.sf.sze.model.zeugnis.Zeugnis;
+import net.sf.sze.service.api.AgBewertungService;
 import net.sf.sze.service.api.BewertungService;
 import net.sf.sze.service.api.BewertungWithNeigbors;
 import net.sf.sze.service.api.SchulhalbjahrService;
@@ -64,6 +66,11 @@ public class ZeugnisController {
     private static final String EDIT_ZEUGNIS_DETAIL_VIEW = "zeugnis/editDetail";
 
     /**
+     * Die View zur Bearbeitung Arbeitsgruppen.
+     */
+    private static final String EDIT_ZEUGNIS_AGS = "zeugnis/editArbeitsgruppen";
+
+    /**
      * Der {@link ZeugnisErfassungsService}.
      */
     @Resource
@@ -80,7 +87,11 @@ public class ZeugnisController {
      */
     @Resource
     private SchulhalbjahrService schulhalbjahrService;
-
+    /**
+     * Der {@link AgBewertungService}.
+     */
+    @Resource
+    private AgBewertungService agBewertungService;
     /**
      * Der Validator.
      */
@@ -420,7 +431,7 @@ public class ZeugnisController {
     }
 
     /**
-     * Zeigt die Zeugnisdetails an..
+     * Zeigt die Zeugnisdetails an.
      * @param halbjahrId die Id des Schulhalbjahres
      * @param klassenId die Id der Klasse
      * @param schuelerId die Id des Schuelers
@@ -455,7 +466,7 @@ public class ZeugnisController {
     }
 
     /**
-     * Speichert die neu angelegte Bemerkung.
+     * Speichert das veränderte Zeugnis.
      * @param halbjahrId die Id des Schulhalbjahres
      * @param klassenId die Id der Klasse
      * @param schuelerId die Id des Schuelers
@@ -482,4 +493,64 @@ public class ZeugnisController {
         return URL.createRedirectToZeugnisUrl(halbjahrId, klassenId, schuelerId);
     }
 
+
+    /**
+     * Zeigt die AG-Bewertungen an.
+     * @param halbjahrId die Id des Schulhalbjahres
+     * @param klassenId die Id der Klasse
+     * @param schuelerId die Id des Schuelers
+     * @param model das Model
+     * @return die logische View
+     */
+    @RequestMapping(value = URL.ZeugnisPath.ZEUGNIS_EDIT_AGS, method = RequestMethod.GET)
+    public String editArbeitsgruppen(@PathVariable(URL.Session
+            .P_HALBJAHR_ID) Long halbjahrId,
+            @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
+            @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
+            Model model) {
+        final Zeugnis zeugnis = zeugnisErfassungsService.getZeugnis(halbjahrId, klassenId, schuelerId);
+        for (AgBewertung agBewertung : zeugnis.getAgBewertungen()) {
+            LOG.info(agBewertung.toString());
+        }
+        fillArbeitsgruppenModel(model, halbjahrId, klassenId, schuelerId,zeugnis);
+        return EDIT_ZEUGNIS_AGS;
+    }
+
+    /**
+     * @param model
+     * @param halbjahrId
+     * @param klassenId
+     * @param schuelerId
+     * @param zeugnis
+     */
+    private void fillArbeitsgruppenModel(Model model, Long halbjahrId,
+            Long klassenId, Long schuelerId, final Zeugnis zeugnis) {
+        Collections.sort(zeugnis.getAgBewertungen());
+        model.addAttribute("zeugnis", zeugnis);
+        model.addAttribute("helpMessageId", "help.zeugnis.editArbeitsgruppen");
+        model.addAttribute("updateUrl", URL.filledURL(URL.ZeugnisPath.ZEUGNIS_EDIT_AGS, halbjahrId, klassenId, schuelerId));
+        model.addAttribute("cancelUrl", URL.createLinkToZeugnisUrl(halbjahrId, klassenId, schuelerId));
+    }
+
+    /**
+     * Speichert die neu angelegte AG-Bewertungen.
+     * @param halbjahrId die Id des Schulhalbjahres
+     * @param klassenId die Id der Klasse
+     * @param schuelerId die Id des Schuelers
+     * @param newZeugnis als Container für die AG-Bewertungen.
+     * @param model das Model
+     * @return die logische View
+     */
+    @RequestMapping(value = URL.ZeugnisPath.ZEUGNIS_EDIT_AGS, method = RequestMethod.POST)
+    public String updateArbeitsgruppen(@PathVariable(URL.Session
+            .P_HALBJAHR_ID) Long halbjahrId,
+            @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
+            @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
+            Zeugnis newZeugnis, BindingResult result, Model model) {
+        //Die Validierung ist nicht sinnvoll, da nichts schief gehen kann.
+        //Wenn man eine Validierung wollte müsste man sicherstellen, dass auch
+        //die Liste validiert wird, was so nicht erfolgt. Ein Form-Object wäre sinnvoll.
+        agBewertungService.save(newZeugnis.getAgBewertungen());
+        return URL.createRedirectToZeugnisUrl(halbjahrId, klassenId, schuelerId);
+    }
 }
