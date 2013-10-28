@@ -871,8 +871,10 @@ public class Zeugnis extends VersionedModel implements Serializable,
             Collections.sort(agBewertungen);
 
             for (final AgBewertung agBewertung : agBewertungen) {
-                besuchteArbeitsgruppen.add(agBewertung.getArbeitsgruppe()
-                        .getName());
+                if (agBewertung.getTeilgenommen().booleanValue()) {
+                    besuchteArbeitsgruppen.add(agBewertung.getArbeitsgruppe()
+                            .getName());
+                }
             }
         }
 
