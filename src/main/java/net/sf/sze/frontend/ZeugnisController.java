@@ -614,7 +614,7 @@ public class ZeugnisController {
         if (result.hasErrors()) {
             LOG.info("Fehler:" + result.getAllErrors());
             fillBuSoLModel(model, halbjahrId, klassenId, schuelerId,
-                    zeugnis);
+                    newZeugnis);
             return EDIT_ZEUGNIS_BU_SOL;
         }
 
