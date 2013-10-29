@@ -30,6 +30,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -193,7 +194,7 @@ public class BewertungenController {
             @PathVariable(URL.Session.P_SCHULFACH_ID) Long schulfachId,
             @RequestParam(Common.P_PREV_ID) Long prevId, @RequestParam(Common.P_NEXT_ID) Long nextId,
             @RequestParam(value=Common.P_ACTION, required=false) String action,
-            StandardBewertung bewertung,
+            @ModelAttribute("bewertung") StandardBewertung bewertung,
             BindingResult result, Model model,
             RedirectAttributes redirectAttributes) {
         return updateBewertung(halbjahrId, klassenId, schulfachId, bewertung,
@@ -216,7 +217,7 @@ public class BewertungenController {
             @PathVariable(URL.Session.P_SCHULFACH_ID) Long schulfachId,
             @RequestParam(Common.P_PREV_ID) Long prevId, @RequestParam(Common.P_NEXT_ID) Long nextId,
             @RequestParam(value=Common.P_ACTION, required=false) String action,
-            AussenDifferenzierteBewertung bewertung,
+            @ModelAttribute("bewertung") AussenDifferenzierteBewertung bewertung,
             BindingResult result, Model model,
             RedirectAttributes redirectAttributes) {
         return updateBewertung(halbjahrId, klassenId, schulfachId, bewertung,
@@ -237,7 +238,7 @@ public class BewertungenController {
             .P_HALBJAHR_ID) Long halbjahrId,
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
             @PathVariable(URL.Session.P_SCHULFACH_ID) Long schulfachId,
-            BinnenDifferenzierteBewertung bewertung,
+            @ModelAttribute("bewertung")BinnenDifferenzierteBewertung bewertung,
             @RequestParam(Common.P_PREV_ID) Long prevId, @RequestParam(Common.P_NEXT_ID) Long nextId,
             @RequestParam(value=Common.P_ACTION, required=false) String action,
             BindingResult result, Model model,
