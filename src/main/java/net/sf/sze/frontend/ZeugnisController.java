@@ -34,6 +34,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -296,7 +297,7 @@ public class ZeugnisController {
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
             @RequestParam(Common.P_PREV_ID) Long prevId, @RequestParam(Common.P_NEXT_ID) Long nextId,
             @RequestParam(value=Common.P_ACTION, required=false) String action,
-            StandardBewertung bewertung,
+            @ModelAttribute("bewertung") StandardBewertung bewertung,
             BindingResult result, Model model,
             RedirectAttributes redirectAttributes) {
         return updateBewertung(halbjahrId, klassenId, schuelerId, bewertung,
@@ -319,7 +320,7 @@ public class ZeugnisController {
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
             @RequestParam(Common.P_PREV_ID) Long prevId, @RequestParam(Common.P_NEXT_ID) Long nextId,
             @RequestParam(value=Common.P_ACTION, required=false) String action,
-            AussenDifferenzierteBewertung bewertung,
+            @ModelAttribute("bewertung") AussenDifferenzierteBewertung bewertung,
             BindingResult result, Model model,
             RedirectAttributes redirectAttributes) {
         return updateBewertung(halbjahrId, klassenId, schuelerId, bewertung,
@@ -340,7 +341,7 @@ public class ZeugnisController {
             .P_HALBJAHR_ID) Long halbjahrId,
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
-            BinnenDifferenzierteBewertung bewertung,
+            @ModelAttribute("bewertung") BinnenDifferenzierteBewertung bewertung,
             @RequestParam(Common.P_PREV_ID) Long prevId, @RequestParam(Common.P_NEXT_ID) Long nextId,
             @RequestParam(value=Common.P_ACTION, required=false) String action,
             BindingResult result, Model model,
@@ -484,7 +485,7 @@ public class ZeugnisController {
             .P_HALBJAHR_ID) Long halbjahrId,
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
-            Zeugnis zeugnis, BindingResult result, Model model) {
+            @ModelAttribute("zeugnis") Zeugnis zeugnis, BindingResult result, Model model) {
         validator.validate(zeugnis, result);
 
         if (result.hasErrors()) {
@@ -604,7 +605,7 @@ public class ZeugnisController {
             .P_HALBJAHR_ID) Long halbjahrId,
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
-            Zeugnis newZeugnis, BindingResult result, Model model) {
+            @ModelAttribute("zeugnis") Zeugnis newZeugnis, BindingResult result, Model model) {
         final Zeugnis zeugnis = zeugnisErfassungsService.getZeugnis(halbjahrId, klassenId, schuelerId);
         zeugnis.setBuBewertungsText(newZeugnis.getBuBewertungsText());
         zeugnis.setSoLBewertungsText(newZeugnis.getSoLBewertungsText());
