@@ -27,7 +27,7 @@
         <dependency>
             <groupId>de.ppi.oss</groupId>
             <artifactId>fuwesta-core</artifactId>
-            <version>0.5</version>
+            <version>0.6-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
         <!-- logging -->
@@ -97,11 +97,6 @@
             <groupId>net.sf.jodreports</groupId>
             <artifactId>jodreports</artifactId>
             <version>2.4.0</version> <!-- War 2.2.2 -->
-        </dependency>
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>1.4</version>
         </dependency>
 
         <!-- Openoffice -->

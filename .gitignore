@@ -3,3 +3,5 @@ target/*
 .svn
 *.log
 /target
+/oofiles
+/pdffiles

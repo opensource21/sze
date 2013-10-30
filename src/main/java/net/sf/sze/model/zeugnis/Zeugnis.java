@@ -784,9 +784,12 @@ public class Zeugnis extends VersionedModel implements Serializable,
                 : VariableUtility.PLATZHALTER_LEER, schueler, formular
                 .getNachteilsAusgleichsDatum(), false, (String) printMap.get(
                 "shj_jahr")));
-        printMap.put("soLBewertungsTextFix", StringUtils.isNotEmpty(
-                soLBewertungsText.getText()) ? soLBewertungsText.getText()
-                : VariableUtility.PLATZHALTER_LEER);
+        if (soLBewertungsText!= null &&
+                StringUtils.isNotEmpty(soLBewertungsText.getText())) {
+            printMap.put("soLBewertungsTextFix", soLBewertungsText.getText());
+        } else {
+            printMap.put("soLBewertungsTextFix", VariableUtility.PLATZHALTER_LEER);
+        }
 
         final List<String> schwachAusreichendFaecher = new ArrayList<String>();
         for (Bewertung bw : bewertungen) {

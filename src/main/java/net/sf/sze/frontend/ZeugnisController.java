@@ -5,11 +5,13 @@
 
 package net.sf.sze.frontend;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 
 import net.sf.sze.frontend.URL.Common;
 import net.sf.sze.model.stammdaten.Klasse;
@@ -24,6 +26,7 @@ import net.sf.sze.service.api.AgBewertungService;
 import net.sf.sze.service.api.BewertungService;
 import net.sf.sze.service.api.BewertungWithNeigbors;
 import net.sf.sze.service.api.SchulhalbjahrService;
+import net.sf.sze.service.api.ZeugnisCreatorService;
 import net.sf.sze.service.api.ZeugnisErfassungsService;
 
 import org.apache.commons.lang.StringUtils;
@@ -39,7 +42,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
+
+import de.ppi.fuwesta.spring.mvc.view.FileContentView;
 
 /**
  * Haupt-Controlller für die Zeugniserfassung.
@@ -97,6 +104,11 @@ public class ZeugnisController {
      */
     @Resource
     private AgBewertungService agBewertungService;
+
+    @Resource
+    private ZeugnisCreatorService zeugnisCreatorService;
+
+
     /**
      * Der Validator.
      */
@@ -228,9 +240,8 @@ public class ZeugnisController {
         model.addAttribute("otherBewertungen", otherBewertungen);
         model.addAttribute("urlShowZeugnis", URL.filledURL(URL.ZeugnisPath
                 .SHOW, Long.valueOf(halbjahrId), Long.valueOf(klassenId)));
-        model.addAttribute("urlPrintZeugnis", URL.filledURL(URL.Zeugnis
-                .ONE_PDF, selectedZeugnis.getSchueler().getId(), Long.valueOf(
-                halbjahrId)));
+        model.addAttribute("urlPrintZeugnis", URL.filledURL(URL.ZeugnisPath
+                .ONE_PDF, Long.valueOf(halbjahrId), Long.valueOf(klassenId), selectedZeugnis.getSchueler().getId()));
         model.addAttribute("arbeitsgruppenSatz", selectedZeugnis
                 .createArbeitsgruppenSatz());
         return "zeugnis/showZeugnis";
@@ -621,5 +632,24 @@ public class ZeugnisController {
         LOG.debug("Update Zeugnis: " + zeugnis);
         zeugnisErfassungsService.save(zeugnis);
         return URL.createRedirectToZeugnisUrl(halbjahrId, klassenId, schuelerId);
+    }
+
+    @RequestMapping(value=URL.ZeugnisPath.ONE_PDF, method = RequestMethod.GET)
+    public View createPDF(@PathVariable(URL.Session
+            .P_HALBJAHR_ID) Long halbjahrId,
+            @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
+            @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
+            HttpServletResponse response, RedirectAttributes redirectAttributes) {
+        final File zeugnisDatei = zeugnisCreatorService.createZeugnis(
+                zeugnisErfassungsService.getZeugnis(halbjahrId, klassenId, schuelerId));
+        if (zeugnisDatei.exists() && zeugnisDatei.canRead()) {
+            return new FileContentView(zeugnisDatei);
+        } else {
+            redirectAttributes.addFlashAttribute("message", "Zeugnis erstellt, aber nicht lesbar.");
+            LOG.warn("Kann " + zeugnisDatei.getAbsolutePath() + " nicht lesen. "
+                    + "Exists: " + zeugnisDatei.exists() +", canRead: "
+                    + zeugnisDatei.canRead());
+        }
+        return new RedirectView(URL.createLinkToZeugnisUrl(halbjahrId, klassenId, schuelerId), true);
     }
 }

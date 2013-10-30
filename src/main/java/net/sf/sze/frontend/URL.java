@@ -151,11 +151,6 @@ public final class URL {
          */
         String ALL_PDFS = HOME + "/pdfklasse";
 
-        /**
-         * Zeige PDF eines Schuelers.
-         */
-        String ONE_PDF = HOME + "/pdfschueler/{" + Session.P_SCHUELER_ID + "}" + "/{"
-                + Session.P_HALBJAHR_ID + "}";
 
     }
 
