@@ -155,8 +155,6 @@ public class ZeugnisController {
         model.addAttribute("urlShowBewertung", URL.filledURL(URL.Bewertungen.LIST));
         model.addAttribute("urlPrintZeugnis", URL.filledURL(URL.Zeugnis
                 .ALL_PDFS));
-//      model.addAttribute(URL.Zeugnis.P_HALBJAHR_ID, halbjahrId);
-//      model.addAttribute(URL.Zeugnis.P_KLASSEN_ID, klassenId);
 
         return "zeugnis/chooseClass";
     }
@@ -651,5 +649,22 @@ public class ZeugnisController {
                     + zeugnisDatei.canRead());
         }
         return new RedirectView(URL.createLinkToZeugnisUrl(halbjahrId, klassenId, schuelerId), true);
+    }
+
+    @RequestMapping(value=URL.Zeugnis.ALL_PDFS, method = RequestMethod.GET)
+    public View createAllPDFS(@RequestParam(URL.Session
+            .P_HALBJAHR_ID) Schulhalbjahr halbjahr,
+            @RequestParam(URL.Session.P_KLASSEN_ID) Klasse klasse,
+            HttpServletResponse response, RedirectAttributes redirectAttributes) {
+        final File zeugnisDatei = zeugnisCreatorService.createZeugnisse(halbjahr, klasse);
+        if (zeugnisDatei.exists() && zeugnisDatei.canRead()) {
+            return new FileContentView(zeugnisDatei, "Klasse_" + klasse.calculateKlassenname(halbjahr.getJahr())+".pdf");
+        } else {
+            redirectAttributes.addFlashAttribute("message", "Zeugnis erstellt, aber nicht lesbar.");
+            LOG.warn("Kann " + zeugnisDatei.getAbsolutePath() + " nicht lesen. "
+                    + "Exists: " + zeugnisDatei.exists() +", canRead: "
+                    + zeugnisDatei.canRead());
+        }
+        return new RedirectView(URL.filledURL(URL.ZeugnisPath.START, halbjahr.getId(), klasse.getId()), true);
     }
 }

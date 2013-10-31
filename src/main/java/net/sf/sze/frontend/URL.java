@@ -211,10 +211,6 @@ public final class URL {
         String ZEUGNIS_EDIT_AV_SV = DETAIL + "/editAvSv";
         String ZEUGNIS_EDIT_BU_SOL = DETAIL + "/editBuSoL";
 
-        /**
-         * Zeige PDF einer ganze Klasse.
-         */
-        String ALL_PDFS = HOME + "/pdfklasse";
 
         /**
          * Zeige PDF eines Schuelers.
