@@ -6,6 +6,8 @@
 package net.sf.sze.frontend;
 
 import de.ppi.fuwesta.spring.mvc.util.UrlDefinitionsToMessages.ParamFormat;
+import net.sf.sze.model.zeugnis.Bewertung;
+import net.sf.sze.model.zeugnis.SchulamtsBemerkung;
 
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -17,8 +19,8 @@ import java.util.concurrent.ConcurrentHashMap;
  * List of all URLs.
  *
  */
-//CSOFF: InterfaceIsType You must give the Annotations Strings and can't use
-//Enums.
+// CSOFF: InterfaceIsType You must give the Annotations Strings and can't use
+// Enums.
 public final class URL {
 
     /**
@@ -60,8 +62,8 @@ public final class URL {
     }
 
     /**
-     * Parameter die in verschiedenen View gebraucht werden
-     * und ähnlich wie bei einer Session in die URL abgelegt werden.
+     * Parameter die in verschiedenen View gebraucht werden und ähnlich wie bei
+     * einer Session in die URL abgelegt werden.
      *
      */
     public interface Session {
@@ -100,27 +102,27 @@ public final class URL {
         /**
          * Aktion gehe zum Nächsten.
          */
-        static final String ACTION_NEXT = "next";
+        String ACTION_NEXT = "next";
         /**
          * Action gehe zum vorherigen.
          */
-        static final String ACTION_PREV = "prev";
+        String ACTION_PREV = "prev";
         /**
          * Parameter zu letzt editierte Id.
          */
-        static final String P_LASTEDITED_ID = "lasteditedId";
+        String P_LASTEDITED_ID = "lasteditedId";
         /**
          * Parameter zum definieren der Aktion.
          */
-        static final String P_ACTION = "action";
+        String P_ACTION = "action";
         /**
          * Paramter für die nächste ID.
          */
-        static final String P_NEXT_ID = "nextId";
+        String P_NEXT_ID = "nextId";
         /**
          * Paramter für die vorherige ID.
          */
-        static final String P_PREV_ID = "prevId";
+        String P_PREV_ID = "prevId";
 
     }
 
@@ -134,7 +136,6 @@ public final class URL {
          */
         String HOME = "/zeugnis";
 
-
         /**
          * Zeugniserfassung base-url.
          */
@@ -145,15 +146,12 @@ public final class URL {
          */
         String SHOW = HOME + "/show";
 
-
         /**
          * Zeige PDF einer ganze Klasse.
          */
         String ALL_PDFS = HOME + "/pdfklasse";
 
-
     }
-
 
     /**
      * All URLs for the creation of a Zeugnis bei dem die Basis-Informationen
@@ -161,24 +159,35 @@ public final class URL {
      */
     public interface ZeugnisPath {
 
+        /**
+         * Parameter für die Id der Bewertung.
+         */
         @ParamFormat
         String P_BEWERTUNGS_ID = "bewertungsId";
 
+        /**
+         * Parameter für die Id der {@link Bemerkung}.
+         */
         @ParamFormat
         String P_BEMERKUNGS_ID = "bemerkungsId";
 
+        /**
+         * Parameter für die Id der {@link SchulamtsBemerkung}.
+         */
         @ParamFormat
         String P_SCHULAMTS_BEMERKUNGS_ID = "schulamtsBemerkungsId";
 
         /**
          * Zeugniserfassung base-url.
          */
-        String HOME = "/zeugnis/{" + Session.P_HALBJAHR_ID + "}/{" + Session.P_KLASSEN_ID + "}";
+        String HOME = "/zeugnis/{" + Session.P_HALBJAHR_ID + "}/{"
+                + Session.P_KLASSEN_ID + "}";
 
         /**
          * Standard-URL um Details von dem Zeugnis zu bearbeiten.
          */
-        String DETAIL = "/zeugnis/{" + Session.P_HALBJAHR_ID + "}/{" + Session.P_KLASSEN_ID + "}/{" + Session.P_SCHUELER_ID + "}";
+        String DETAIL = "/zeugnis/{" + Session.P_HALBJAHR_ID + "}/{"
+                + Session.P_KLASSEN_ID + "}/{" + Session.P_SCHUELER_ID + "}";
 
         /**
          * Zeugniserfassung base-url.
@@ -190,37 +199,93 @@ public final class URL {
          */
         String SHOW = HOME + "/show";
 
-        String BEWERTUNG_CANCEL = DETAIL + "/cancelBewertung/{"+ P_BEWERTUNGS_ID+ "}";
+        /**
+         * Breche die Bearbeitung der Bewertung ab.
+         */
+        String BEWERTUNG_CANCEL = DETAIL + "/cancelBewertung/{"
+                + P_BEWERTUNGS_ID + "}";
 
-        String BEWERTUNG_EDIT = DETAIL + "/editBewertung/{"+ P_BEWERTUNGS_ID+ "}";
+        /**
+         * Bearbeite die Bewertung.
+         */
+        String BEWERTUNG_EDIT = DETAIL + "/editBewertung/{" + P_BEWERTUNGS_ID
+                + "}";
 
+        /**
+         * Erstelle die {@link Bemerkung}.
+         */
         String BEMERKUNG_CREATE = DETAIL + "/createBemerkung";
+        /**
+         * Breche die Bearbeitung der {@link Bemerkung} ab.
+         */
         String BEMERKUNG_CANCEL = DETAIL + "/cancelBemerkung";
-        String BEMERKUNG_EDIT = DETAIL + "/editBemerkung/{" + P_BEMERKUNGS_ID + "}";
-        String BEMERKUNG_SHOW = DETAIL + "/showBemerkung/{" + P_BEMERKUNGS_ID + "}";
-        String BEMERKUNG_DELETE = DETAIL + "/deleteBemerkung/{" + P_BEMERKUNGS_ID + "}";
+        /**
+         * Bearbeite die {@link Bemerkung}.
+         */
+        String BEMERKUNG_EDIT = DETAIL + "/editBemerkung/{" + P_BEMERKUNGS_ID
+                + "}";
 
-        String SCHULAMTS_BEMERKUNG_CREATE = DETAIL + "/createSchulamtsBemerkung";
-        String SCHULAMTS_BEMERKUNG_CANCEL = DETAIL + "/cancelSchulamtsBemerkung";
-        String SCHULAMTS_BEMERKUNG_EDIT = DETAIL + "/editSchulamtsBemerkung/{" + P_SCHULAMTS_BEMERKUNGS_ID + "}";
-        String SCHULAMTS_BEMERKUNG_SHOW = DETAIL + "/showSchulamtsBemerkung/{" + P_SCHULAMTS_BEMERKUNGS_ID + "}";
-        String SCHULAMTS_BEMERKUNG_DELETE = DETAIL + "/deleteSchulamtsBemerkung/{" + P_SCHULAMTS_BEMERKUNGS_ID + "}";
+        /**
+         * Zeige die {@link Bemerkung}.
+         */
+        String BEMERKUNG_SHOW = DETAIL + "/showBemerkung/{" + P_BEMERKUNGS_ID
+                + "}";
+        /**
+         * Lösche die {@link Bemerkung}.
+         */
+        String BEMERKUNG_DELETE = DETAIL + "/deleteBemerkung/{"
+                + P_BEMERKUNGS_ID + "}";
 
+        /**
+         * Erstelle die {@link SchulamtsBemerkung}.
+         */
+        String SCHULAMTS_BEMERKUNG_CREATE = DETAIL
+                + "/createSchulamtsBemerkung";
+        /**
+         * Breche die Bearbeitung der {@link SchulamtsBemerkung} ab.
+         */
+        String SCHULAMTS_BEMERKUNG_CANCEL = DETAIL
+                + "/cancelSchulamtsBemerkung";
+        /**
+         * Bearbeite die {@link SchulamtsBemerkung}.
+         */
+        String SCHULAMTS_BEMERKUNG_EDIT = DETAIL + "/editSchulamtsBemerkung/{"
+                + P_SCHULAMTS_BEMERKUNGS_ID + "}";
+        /**
+         * Zeige die {@link SchulamtsBemerkung}.
+         */
+        String SCHULAMTS_BEMERKUNG_SHOW = DETAIL + "/showSchulamtsBemerkung/{"
+                + P_SCHULAMTS_BEMERKUNGS_ID + "}";
+        /**
+         * Lösche die {@link SchulamtsBemerkung}.
+         */
+        String SCHULAMTS_BEMERKUNG_DELETE = DETAIL
+                + "/deleteSchulamtsBemerkung/{" + P_SCHULAMTS_BEMERKUNGS_ID
+                + "}";
+
+        /**
+         * Bearbeite Zeugnis-Details.
+         */
         String ZEUGNIS_EDIT_DETAIL = DETAIL + "/editDetail";
+        /**
+         * Bearbeite Arbeitsgruppen Teilnahme.
+         */
         String ZEUGNIS_EDIT_AGS = DETAIL + "/editArbeitsgruppen";
+        /**
+         * Bearbeite Av-Sv-Bewertung.
+         */
         String ZEUGNIS_EDIT_AV_SV = DETAIL + "/editAvSv";
+        /**
+         * Bearbeite BU-Text und SoL.
+         */
         String ZEUGNIS_EDIT_BU_SOL = DETAIL + "/editBuSoL";
-
 
         /**
          * Zeige PDF eines Schuelers.
          */
         String ONE_PDF = DETAIL + "/pdfSchueler";
 
-
-
     }
-
 
     /**
      * Alle URLs für die Bewertungserfassung.
@@ -237,7 +302,6 @@ public final class URL {
          */
         String LIST = HOME + "/list";
 
-
     }
 
     /**
@@ -249,9 +313,12 @@ public final class URL {
         /**
          * Bewertungserfassung base-url.
          */
-        String HOME = "/bewertungen/{" + Session.P_HALBJAHR_ID + "}/{" +
-                Session.P_KLASSEN_ID  + "}";
+        String HOME = "/bewertungen/{" + Session.P_HALBJAHR_ID + "}/{"
+                + Session.P_KLASSEN_ID + "}";
 
+        /**
+         * Parameter mit der ID der {@link Bewertung}.
+         */
         @ParamFormat
         String P_BEWERTUNGS_ID = "bewertungsId";
 
@@ -260,10 +327,17 @@ public final class URL {
          */
         String LIST = HOME + "/list";
 
-        String EDIT = HOME + "/edit/{" +Session.P_SCHULFACH_ID  + "}/{"+ P_BEWERTUNGS_ID+ "}";
+        /**
+         * Bearbeite Bewertung.
+         */
+        String EDIT = HOME + "/edit/{" + Session.P_SCHULFACH_ID + "}/{"
+                + P_BEWERTUNGS_ID + "}";
 
-        String CANCEL = HOME + "/cancel/{" + Session.P_SCHULFACH_ID + "}/{"+ P_BEWERTUNGS_ID+ "}";
-
+        /**
+         * Breche die Bearbeitung der Bewertung ab.
+         */
+        String CANCEL = HOME + "/cancel/{" + Session.P_SCHULFACH_ID + "}/{"
+                + P_BEWERTUNGS_ID + "}";
 
     }
 
@@ -304,12 +378,6 @@ public final class URL {
         /** Create User-URL. */
         String CREATE = HOME + "/create";
     }
-
-
-
-
-
-
 
     /**
      * Replace all parameters in the URL with the given values.
@@ -377,8 +445,8 @@ public final class URL {
      * @param namedParameters the parameters
      * @return the redirect URL with parameters filled in.
      */
-    public static String redirect(String url, Map<String,
-            String> namedParameters) {
+    public static String redirect(String url,
+            Map<String, String> namedParameters) {
         return REDIRECT_PREFIX + filledURL(url, namedParameters);
     }
 
@@ -391,27 +459,31 @@ public final class URL {
 
     /**
      * Erstellt die URL um zurück auf die Show-Zeugnismaske zu gehen.
+     *
      * @param halbjahrId Id des Schulhalbjahres.
      * @param klassenId Id der Klasse
      * @param schuelerId Id des Schülers.
      * @return die Url
      */
-    public static String createRedirectToZeugnisUrl(Long halbjahrId, Long klassenId,
-            Long schuelerId) {
-        return REDIRECT_PREFIX + createLinkToZeugnisUrl(halbjahrId, klassenId, schuelerId);
+    public static String createRedirectToZeugnisUrl(Long halbjahrId,
+            Long klassenId, Long schuelerId) {
+        return REDIRECT_PREFIX
+                + createLinkToZeugnisUrl(halbjahrId, klassenId, schuelerId);
     }
 
     /**
-     * Erstellt die URL um zurück auf die Show-Zeugnismaske zu gehen ohne Redirect.
+     * Erstellt die URL um zurück auf die Show-Zeugnismaske zu gehen ohne
+     * Redirect.
+     *
      * @param halbjahrId Id des Schulhalbjahres.
      * @param klassenId Id der Klasse
      * @param schuelerId Id des Schülers.
      * @return die Url
      */
-    public static String createLinkToZeugnisUrl(Long halbjahrId, Long klassenId,
-            Long schuelerId) {
-        return filledURL(URL.ZeugnisPath.SHOW +"?" +
-                URL.Session.P_SCHUELER_ID + "=" + schuelerId, halbjahrId, klassenId);
+    public static String createLinkToZeugnisUrl(Long halbjahrId,
+            Long klassenId, Long schuelerId) {
+        return filledURL(URL.ZeugnisPath.SHOW + "?" + URL.Session.P_SCHUELER_ID
+                + "=" + schuelerId, halbjahrId, klassenId);
     }
 }
-//CSON: InterfaceIsType
+// CSON: InterfaceIsType

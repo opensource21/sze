@@ -38,7 +38,9 @@
             <property name="ignorePattern" value="^(( *)|(import )|( *\* ))(( *.@see .*)|( *.@link .*)|([^ ]+$))"/>
         </module>
         <module name="MethodLength" />
-        <module name="ParameterNumber" />
+        <module name="ParameterNumber">
+            <property name="max" value="10"/>
+        </module>
         <module name="EmptyForIteratorPad" />
         <module name="MethodParamPad" />
         <module name="NoWhitespaceAfter">

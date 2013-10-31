@@ -461,7 +461,7 @@ public class ZeugnisController {
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
             Model model) {
         final Zeugnis zeugnis = zeugnisErfassungsService.getZeugnis(halbjahrId, klassenId, schuelerId);
-        fillZeugnisDetailModel(model, halbjahrId, klassenId, schuelerId,zeugnis);
+        fillZeugnisDetailModel(model, halbjahrId, klassenId, schuelerId, zeugnis);
         return EDIT_ZEUGNIS_DETAIL_VIEW;
     }
 
@@ -524,8 +524,11 @@ public class ZeugnisController {
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
             Model model) {
-        final Zeugnis zeugnis = zeugnisErfassungsService.getZeugnis(halbjahrId, klassenId, schuelerId);
-        fillArbeitsgruppenModel(model, halbjahrId, klassenId, schuelerId,zeugnis);
+        final Zeugnis zeugnis =
+                zeugnisErfassungsService.getZeugnis(halbjahrId, klassenId,
+                        schuelerId);
+        fillArbeitsgruppenModel(model, halbjahrId, klassenId, schuelerId,
+                zeugnis);
         return EDIT_ZEUGNIS_AGS;
     }
 

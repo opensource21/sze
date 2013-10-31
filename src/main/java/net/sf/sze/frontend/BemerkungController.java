@@ -119,12 +119,14 @@ public class BemerkungController {
             .P_HALBJAHR_ID) Long halbjahrId,
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
-            Bemerkung bemerkung, @RequestParam(value=URL.Common.P_ACTION, required=false) String action,
+            Bemerkung bemerkung,
+            @RequestParam(value=URL.Common.P_ACTION, required=false) String action,
             BindingResult result, Model model) {
         validator.validate(bemerkung, result);
 
         if (result.hasErrors()) {
-            model.addAttribute("insertUrl", URL.filledURL(URL.ZeugnisPath.BEMERKUNG_CREATE, halbjahrId, klassenId, schuelerId));
+            model.addAttribute("insertUrl", URL.filledURL(
+                    URL.ZeugnisPath.BEMERKUNG_CREATE, halbjahrId, klassenId, schuelerId));
             fillModel(model, halbjahrId, klassenId, schuelerId, bemerkung);
             return EDIT_BEMERKUNG_VIEW;
         }

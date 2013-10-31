@@ -88,7 +88,7 @@ public class BewertungenController {
      * Zeigt die Bewertungen des entsprechenden Faches der Klasse in dem Halbjahr.
      * @param halbjahrId die Id des Schulhalbjahres
      * @param klassenId die Id der Klasse
-     * @param schulfachId die Id des Schulfaches.
+     * @param usedSchulfachId die Id des Schulfaches.
      * @param model das Model
      * @param redirectAttributes Fehlermeldungen.
      * @return die logische View
@@ -116,20 +116,23 @@ public class BewertungenController {
                     "Es wurden keine Schulfächer gefunden.");
             return URL.redirect(URL.ZeugnisPath.START, halbjahrId, klassenId);
         }
+        final Long usedSchulfachId;
         if (schulfachId == null) {
             LOG.debug("Nehme das erste Schulfach");
-            schulfachId = schulfaecher.get(0).getId();
+            usedSchulfachId = schulfaecher.get(0).getId();
+        } else {
+            usedSchulfachId = schulfachId;
         }
 
         final List<Bewertung> bewertungen = bewertungErfassungsService.
                 getSortedBewertungen(schulhalbjahr.getId().longValue(),
-                klasse.getId().longValue(), schulfachId.longValue());
+                klasse.getId().longValue(), usedSchulfachId.longValue());
 
         model.addAttribute("bewertungen", bewertungen);
         model.addAttribute("schulfaecher", schulfaecher);
         model.addAttribute("klasse", klasse);
         model.addAttribute("schulhalbjahr", schulhalbjahr);
-        model.addAttribute(URL.Session.P_SCHULFACH_ID, schulfachId);
+        model.addAttribute(URL.Session.P_SCHULFACH_ID, usedSchulfachId);
         return "bewertungen/listBewertungen";
 
     }
@@ -324,9 +327,9 @@ public class BewertungenController {
      */
     private String createRedirectToList(Long halbjahrId, Long klassenId,
             final Long schulfachId) {
-        return URL.redirect(URL.BewertungenPath.LIST +"?" +
-                URL.Session.P_SCHULFACH_ID + "=" + schulfachId
-                , halbjahrId, klassenId);
+        return URL.redirect(URL.BewertungenPath.LIST +"?"
+                + URL.Session.P_SCHULFACH_ID + "=" + schulfachId ,
+                halbjahrId, klassenId);
     }
 
 

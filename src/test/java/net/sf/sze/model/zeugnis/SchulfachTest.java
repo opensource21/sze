@@ -12,7 +12,7 @@ import org.junit.Test;
 
 
 /**
- * Class SchulfachTest
+ * Test für das {@link Schulfach}.
  *
  */
 public class SchulfachTest {

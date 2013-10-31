@@ -784,8 +784,8 @@ public class Zeugnis extends VersionedModel implements Serializable,
                 : VariableUtility.PLATZHALTER_LEER, schueler, formular
                 .getNachteilsAusgleichsDatum(), false, (String) printMap.get(
                 "shj_jahr")));
-        if (soLBewertungsText!= null &&
-                StringUtils.isNotEmpty(soLBewertungsText.getText())) {
+        if (soLBewertungsText != null
+                && StringUtils.isNotEmpty(soLBewertungsText.getText())) {
             printMap.put("soLBewertungsTextFix", soLBewertungsText.getText());
         } else {
             printMap.put("soLBewertungsTextFix", VariableUtility.PLATZHALTER_LEER);
