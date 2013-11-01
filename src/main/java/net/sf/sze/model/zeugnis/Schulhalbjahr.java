@@ -152,7 +152,8 @@ public class Schulhalbjahr extends VersionedModel implements Serializable,
     }
 
     /**
-     * @return
+     * Liefert das aktuelle Schuljahr.
+     * @return das Schuljahr.
      */
     public String getSchuljahr() {
         return (jahr - 1) + "/" + Integer.toString(jahr)

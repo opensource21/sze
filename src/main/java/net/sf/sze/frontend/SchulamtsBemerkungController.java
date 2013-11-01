@@ -91,7 +91,6 @@ public class SchulamtsBemerkungController {
      * @param klassenId die Id der Klasse
      * @param schuelerId die Id des Schuelers
      * @param model das Model
-     * @param redirectAttributes Fehlermeldungen.
      * @return die logische View
      */
     @RequestMapping(value = URL.ZeugnisPath.SCHULAMTS_BEMERKUNG_CREATE, method = RequestMethod.GET)
@@ -115,8 +114,9 @@ public class SchulamtsBemerkungController {
      * @param halbjahrId die Id des Schulhalbjahres
      * @param klassenId die Id der Klasse
      * @param schuelerId die Id des Schuelers
+     * @param action die als nächstes auszuführende Aktion.
      * @param model das Model
-     * @param redirectAttributes Fehlermeldungen.
+     * @param result das Bindingresult.
      * @return die logische View
      */
     @RequestMapping(value = URL.ZeugnisPath.SCHULAMTS_BEMERKUNG_CREATE, method = RequestMethod.POST)
@@ -158,7 +158,6 @@ public class SchulamtsBemerkungController {
      * @param schuelerId die Id des Schuelers
      * @param schulamtsBemerkungsId die Id der Bemerkung
      * @param model das Model
-     * @param redirectAttributes Fehlermeldungen.
      * @return die logische View
      */
     @RequestMapping(value = URL.ZeugnisPath.SCHULAMTS_BEMERKUNG_SHOW, method = RequestMethod.GET)
@@ -190,7 +189,6 @@ public class SchulamtsBemerkungController {
      * @param schuelerId die Id des Schuelers
      * @param schulamtsBemerkungsId die Id der Bemerkung
      * @param model das Model
-     * @param redirectAttributes Fehlermeldungen.
      * @return die logische View
      */
     @RequestMapping(value = URL.ZeugnisPath.SCHULAMTS_BEMERKUNG_EDIT, method = RequestMethod.GET)
@@ -218,6 +216,7 @@ public class SchulamtsBemerkungController {
      * @param klassenId die Id der Klasse
      * @param schuelerId die Id des Schuelers
      * @param schulamtsBemerkungsId die Id der Bemerkung
+     * @param action die als nächstes auszuführende Aktion.
      * @param model das Model
      * @return die logische View
      */

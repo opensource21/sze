@@ -110,7 +110,7 @@ public class AvSvBewertungController {
      * @param halbjahrId die Id des Schulhalbjahres
      * @param klassenId die Id der Klasse
      * @param schuelerId die Id des Schuelers
-     * @param newZeugnis als Container für die AG-Bewertungen.
+     * @param result das Bindingresult.
      * @param model das Model
      * @return die logische View
      */
@@ -133,6 +133,10 @@ public class AvSvBewertungController {
         return URL.createRedirectToZeugnisUrl(halbjahrId, klassenId, schuelerId);
     }
 
+    /**
+     * Container für die AvSv-Daten.
+     *
+     */
     public static class AvSvForm {
         @AssertValid
         private List<AvSvBewertung> avSvBewertungen;
@@ -141,7 +145,9 @@ public class AvSvBewertungController {
         private Klasse klasse;
         private Schulhalbjahr schulhalbjahr;
 
-
+        /**
+         * Initiates an object of type AvSvForm.
+         */
         public AvSvForm() {
 
         }

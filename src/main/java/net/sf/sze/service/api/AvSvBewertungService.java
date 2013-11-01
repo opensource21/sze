@@ -41,7 +41,7 @@ public interface AvSvBewertungService {
     /**
      * Save the given avSvBewertung.
      *
-     * @param avSvBewertung the avSvBewertung object.
+     * @param avSvBewertungen the avSvBewertung object.
      * @return the avSvBewertung object which may changed.
      *
      */

@@ -269,7 +269,7 @@ public class ZeugnisController {
      * @param halbjahrId die Id des Schulhalbjahres
      * @param klassenId die Id der Klasse
      * @param schulfachId die Id des Schulfaches.
-     * @param bewertung die Bewertung
+     * @param bewertungsId die Id der Bewertung
      * @param model das Model
      * @return die logische View
      */
@@ -295,9 +295,14 @@ public class ZeugnisController {
      * Aktualisiert die {@link StandardBewertung}.
      * @param halbjahrId die Id des Schulhalbjahres
      * @param klassenId die Id der Klasse
+     * @param schuelerId die Id des Schülers
+     * @param prevId die Id der vorherigen Bewertung.
+     * @param nextId die Id der nachfolgenden Bewertung.
      * @param bewertung die Bewertung
      * @param result das Bindingresult.
+     * @param action die als nächstes auszuführende Aktion.
      * @param model das Model
+     * @param redirectAttributes Fehlermeldungen.
      * @return die logische View
      */
     @RequestMapping(value = URL.ZeugnisPath.BEWERTUNG_EDIT,
@@ -320,9 +325,14 @@ public class ZeugnisController {
      * Aktualisiert die {@link AussenDifferenzierteBewertung}.
      * @param halbjahrId die Id des Schulhalbjahres
      * @param klassenId die Id der Klasse
+     * @param schuelerId die Id des Schülers
+     * @param prevId die Id der vorherigen Bewertung.
+     * @param nextId die Id der nachfolgenden Bewertung.
      * @param bewertung die Bewertung
      * @param result das Bindingresult.
+     * @param action die als nächstes auszuführende Aktion.
      * @param model das Model
+     * @param redirectAttributes Fehlermeldungen.
      * @return die logische View
      */
     @RequestMapping(value = URL.ZeugnisPath.BEWERTUNG_EDIT,
@@ -345,9 +355,14 @@ public class ZeugnisController {
      * Aktualisiert die {@link BinnenDifferenzierteBewertung}.
      * @param halbjahrId die Id des Schulhalbjahres
      * @param klassenId die Id der Klasse
+     * @param schuelerId die Id des Schülers
+     * @param prevId die Id der vorherigen Bewertung.
+     * @param nextId die Id der nachfolgenden Bewertung.
      * @param bewertung die Bewertung
+     * @param action die als nächstes auszuführende Aktion.
      * @param result das Bindingresult.
      * @param model das Model
+     * @param redirectAttributes Fehlermeldungen.
      * @return die logische View
      */
     @RequestMapping(value = URL.ZeugnisPath.BEWERTUNG_EDIT,
@@ -441,7 +456,9 @@ public class ZeugnisController {
      * Bricht die Bearbeitung einer Bewertung ab.
      * @param halbjahrId die Id des Schulhalbjahres
      * @param klassenId die Id der Klasse
+     * @param schuelerId die Id des Schülers
      * @param schulfachId
+     * @param redirectAttributes Fehlermeldungen.
      * @return die logische View
      */
     @RequestMapping(value = URL.ZeugnisPath.BEWERTUNG_CANCEL, method = RequestMethod.POST)

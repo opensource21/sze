@@ -20,6 +20,7 @@ public interface BemerkungsBausteinDao
 
     /**
      * Findet alle aktive sortiert nach Name.
+     * @return alle aktive sortiert nach Name.
      */
     List<BemerkungsBaustein> findAllByAktivTrueOrderByNameAsc();
 }

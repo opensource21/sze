@@ -23,6 +23,7 @@ public interface BewertungDao extends PagingAndSortingRepository<Bewertung,
      * Listet alle Bewertungen zu einer Klasse und einem Halbjahr.
      * @param klasseId Id der Klasse.
      * @param halbjahrId Id des Halbjahrs.
+     * @param schulfachId die Id des Schulfachs.
      * @return Die Liste aller Zeugnisse.
      */
     //TODO diese Methode scheint zu komplex zu sein, als das Hibernate sie

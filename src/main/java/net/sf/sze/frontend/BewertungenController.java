@@ -88,7 +88,7 @@ public class BewertungenController {
      * Zeigt die Bewertungen des entsprechenden Faches der Klasse in dem Halbjahr.
      * @param halbjahrId die Id des Schulhalbjahres
      * @param klassenId die Id der Klasse
-     * @param usedSchulfachId die Id des Schulfaches.
+     * @param schulfachId die Id des Schulfaches.
      * @param model das Model
      * @param redirectAttributes Fehlermeldungen.
      * @return die logische View
@@ -160,7 +160,7 @@ public class BewertungenController {
      * @param halbjahrId die Id des Schulhalbjahres
      * @param klassenId die Id der Klasse
      * @param schulfachId die Id des Schulfaches.
-     * @param bewertung die Bewertung
+     * @param bewertungsId die Id der Bewertung
      * @param model das Model
      * @return die logische View
      */
@@ -186,9 +186,14 @@ public class BewertungenController {
      * Aktualisiert die {@link StandardBewertung}.
      * @param halbjahrId die Id des Schulhalbjahres
      * @param klassenId die Id der Klasse
+     * @param schulfachId die Id des Schulfachs.
+     * @param prevId die Id der vorherigen Bewertung.
+     * @param nextId die Id der nachfolgenden Bewertung.
      * @param bewertung die Bewertung
+     * @param action die als nächstes auszuführende Aktion.
      * @param result das Bindingresult.
      * @param model das Model
+     * @param redirectAttributes Fehlermeldungen.
      * @return die logische View
      */
     @RequestMapping(value = URL.BewertungenPath.EDIT, method = RequestMethod.POST,
@@ -211,9 +216,14 @@ public class BewertungenController {
      * Aktualisiert die {@link AussenDifferenzierteBewertung}.
      * @param halbjahrId die Id des Schulhalbjahres
      * @param klassenId die Id der Klasse
+     * @param schulfachId die Id des Schulfachs.
+     * @param prevId die Id der vorherigen Bewertung.
+     * @param nextId die Id der nachfolgenden Bewertung.
      * @param bewertung die Bewertung
+     * @param action die als nächstes auszuführende Aktion.
      * @param result das Bindingresult.
      * @param model das Model
+     * @param redirectAttributes Fehlermeldungen.
      * @return die logische View
      */
     @RequestMapping(value = URL.BewertungenPath.EDIT, method = RequestMethod.POST,
@@ -236,9 +246,14 @@ public class BewertungenController {
      * Aktualisiert die {@link BinnenDifferenzierteBewertung}.
      * @param halbjahrId die Id des Schulhalbjahres
      * @param klassenId die Id der Klasse
+     * @param schulfachId die Id des Schulfachs.
+     * @param prevId die Id der vorherigen Bewertung.
+     * @param nextId die Id der nachfolgenden Bewertung.
      * @param bewertung die Bewertung
+     * @param action die als nächstes auszuführende Aktion.
      * @param result das Bindingresult.
      * @param model das Model
+     * @param redirectAttributes Fehlermeldungen.
      * @return die logische View
      */
     @RequestMapping(value = URL.BewertungenPath.EDIT,
@@ -346,7 +361,8 @@ public class BewertungenController {
      * Bricht die Bearbeitung einer Bewertung ab.
      * @param halbjahrId die Id des Schulhalbjahres
      * @param klassenId die Id der Klasse
-     * @param schulfachId
+     * @param schulfachId die Id des Schulfachs.
+     * @param redirectAttributes Fehlermeldungen.
      * @return die logische View
      */
     @RequestMapping(value = URL.BewertungenPath.CANCEL, method = RequestMethod.POST)

@@ -38,7 +38,7 @@ public interface AgBewertungService {
     /**
      * Save the given agBewertung.
      *
-     * @param agBewertung the agBewertung object.
+     * @param agBewertungen the agBewertung object.
      * @return the agBewertung object which may changed.
      *
      */
