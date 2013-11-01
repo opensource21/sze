@@ -88,7 +88,8 @@ public interface SchulamtsBemerkungService {
      * angezeigt werden soll.
      * @return alle relevanten SchulamtsBemerkungsbausteine sortiert.
      */
-    List<SchulamtsBemerkungsBaustein> getAllSchulamtsBemerkungsBausteine(SchulamtsBemerkung schulamtsBemerkung);
+    List<SchulamtsBemerkungsBaustein> getAllSchulamtsBemerkungsBausteine(
+            SchulamtsBemerkung schulamtsBemerkung);
 
     /**
      * Liefert alle relevanten Schulämter sortiert.

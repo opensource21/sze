@@ -80,8 +80,11 @@ public class AvSvBewertungController {
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
             Model model) {
-        final Zeugnis zeugnis = zeugnisErfassungsService.getZeugnis(halbjahrId, klassenId, schuelerId);
-        AvSvForm avSvForm = new AvSvForm(zeugnis.getAvSvBewertungen(), zeugnis.getSchueler(), zeugnis.getKlasse(), zeugnis.getSchulhalbjahr());
+        final Zeugnis zeugnis = zeugnisErfassungsService.getZeugnis(halbjahrId,
+                klassenId, schuelerId);
+        AvSvForm avSvForm = new AvSvForm(zeugnis.getAvSvBewertungen(),
+                zeugnis.getSchueler(), zeugnis.getKlasse(),
+                zeugnis.getSchulhalbjahr());
         Collections.sort(avSvForm.getAvSvBewertungen());
         fillModel(model, avSvForm, halbjahrId, klassenId, schuelerId);
         return EDIT_ZEUGNIS_AV_SV_VIEW;
@@ -91,13 +94,15 @@ public class AvSvBewertungController {
      * @param model
      * @param avSvForm
      */
-    private void fillModel(Model model, AvSvForm avSvForm, Long halbjahrId, Long klassenId, Long schuelerId) {
+    private void fillModel(Model model, AvSvForm avSvForm, Long halbjahrId,
+            Long klassenId, Long schuelerId) {
 
         model.addAttribute("avSvForm", avSvForm);
         model.addAttribute("noten", AvSvNote.values());
         model.addAttribute("updateUrl", URL.filledURL(URL.ZeugnisPath.ZEUGNIS_EDIT_AV_SV,
                 halbjahrId, klassenId, schuelerId));
-        model.addAttribute("cancelUrl", URL.createLinkToZeugnisUrl(halbjahrId, klassenId, schuelerId));
+        model.addAttribute("cancelUrl", URL.createLinkToZeugnisUrl(halbjahrId,
+                klassenId, schuelerId));
     }
 
     /**

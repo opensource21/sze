@@ -97,7 +97,8 @@ public class SchulamtsBemerkungsServiceImpl implements SchulamtsBemerkungService
     @Override
     @Transactional(readOnly = false)
     public void delete(Long schulamtsBemerkungsId) {
-        final SchulamtsBemerkung oldBemerkung = schulamtsBemerkungDao.findOne(schulamtsBemerkungsId);
+        final SchulamtsBemerkung oldBemerkung = schulamtsBemerkungDao.
+                findOne(schulamtsBemerkungsId);
         schulamtsBemerkungDao.delete(oldBemerkung);
     }
 
@@ -117,7 +118,8 @@ public class SchulamtsBemerkungsServiceImpl implements SchulamtsBemerkungService
                     SchulamtsBemerkung schulamtsBemerkung) {
         final List<SchulamtsBemerkungsBaustein> bausteine = schulamtsBemerkungsBausteinDao.
                 findAllByAktivTrueOrderByNameAsc();
-        if (schulamtsBemerkung != null && schulamtsBemerkung.getSchulamtsBemerkungsBaustein() != null ) {
+        if (schulamtsBemerkung != null && schulamtsBemerkung.
+                getSchulamtsBemerkungsBaustein() != null) {
             if (!bausteine.contains(schulamtsBemerkung.getSchulamtsBemerkungsBaustein())) {
                 bausteine.add(schulamtsBemerkung.getSchulamtsBemerkungsBaustein());
             }
@@ -133,7 +135,7 @@ public class SchulamtsBemerkungsServiceImpl implements SchulamtsBemerkungService
             SchulamtsBemerkung schulamtsBemerkung) {
         final List<Schulamt> bausteine = schulamtDao.
                 findAllByAktivTrueOrderByNameAsc();
-        if (schulamtsBemerkung != null && schulamtsBemerkung.getSchulamt() != null ) {
+        if (schulamtsBemerkung != null && schulamtsBemerkung.getSchulamt() != null) {
             if (!bausteine.contains(schulamtsBemerkung.getSchulamt())) {
                 bausteine.add(schulamtsBemerkung.getSchulamt());
             }

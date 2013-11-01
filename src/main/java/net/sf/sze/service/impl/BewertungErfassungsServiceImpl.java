@@ -87,13 +87,16 @@ public class BewertungErfassungsServiceImpl implements
             long schulfachId) {
         LOG.debug("Suche Bewertungn für {}, {} und {}", halbjahrId, klassenId, schulfachId);
         final List<Zeugnis>  zeugnisse = zeugnisDao.
-                findAllByKlasseIdAndSchulhalbjahrIdAndSchulhalbjahrSelectableIsTrueOrderBySchuelerNameAscSchuelerVornameAsc(klassenId, halbjahrId);
+                findAllByKlasseIdAndSchulhalbjahrIdAndSchulhalbjahrSelectableIsTrueOrderBySchuelerNameAscSchuelerVornameAsc(
+                klassenId, halbjahrId);
         //PERFORMANCE: 2 SQLs und eine handisches Suchen ist sicherlich nicht die schnellste Lösung.
         //Der Ansatz mit List<Bewertung>
         //findAllByZeugnisKlasseIdAndZeugnisSchulhalbjahrIdAndSchulfachIdOrderByZeugnisSchuelerNameAscZeugnisSchuelerVornameAsc(
-        // long klasseId, long halbjahrId, long schulfachId); Scheitert. Es gabe eine Fehlermeldung, dass er kein Element
-        // zu einer ZeugnisID findet. Das klingt nach einem Fehler in dem darunter liegenden Framework.
-        final List<Bewertung> bewertungen = bewertungDao.findAllBySchulfachIdAndZeugnisIn(schulfachId, zeugnisse);
+        // long klasseId, long halbjahrId, long schulfachId); Scheitert. Es
+        // gab eine Fehlermeldung, dass er kein Element zu einer ZeugnisID
+        // findet. Das klingt nach einem Fehler in dem darunter liegenden Framework.
+        final List<Bewertung> bewertungen = bewertungDao.
+                findAllBySchulfachIdAndZeugnisIn(schulfachId, zeugnisse);
         Collections.sort(bewertungen);
         return bewertungen;
     }
@@ -129,10 +132,10 @@ public class BewertungErfassungsServiceImpl implements
                     .contains(klassenStufe)) {
                 relevanteSchulfaecher.add(schulfach);
             } else if (schulfach.convertStufenMitBinnenDifferenzierungToList()
-                    .contains(klassenStufe)){
+                    .contains(klassenStufe)) {
                 relevanteSchulfaecher.add(schulfach);
             } else if (schulfach.convertStufenMitStandardBewertungToList()
-                    .contains(klassenStufe)){
+                    .contains(klassenStufe)) {
                 relevanteSchulfaecher.add(schulfach);
             }
         }

@@ -752,31 +752,7 @@ public class Zeugnis extends VersionedModel implements Serializable,
                 || (anzahlVerspaetungen.intValue() == 0)) ? VariableUtility
                 .PLATZHALTER_LEER : anzahlVerspaetungen.toString());
 
-        String versetzungsBemerkung = "";
-        if (schulhalbjahr.getHalbjahr() == Halbjahr.Beide_Halbjahre) {
-            if (klassenZielWurdeNichtErreicht.booleanValue()) {
-                versetzungsBemerkung = "Das Klassenziel wurde nicht erreicht. ";
-            }
-
-            if (ruecktAuf.booleanValue() && zeugnisArt
-                    .getPrintVersetzungsbemerkung().booleanValue()) {
-                int nextKlassenstufe = klasse.calculateKlassenstufe(
-                        schulhalbjahr.getJahr()) + 1;
-                versetzungsBemerkung = versetzungsBemerkung + schueler
-                        .getVorname() + " r\u00fcckt auf in Klasse "
-                        + nextKlassenstufe + ". ";
-            }
-        } else {
-            if (klassenZielGefaehrdet.booleanValue()) {
-                versetzungsBemerkung =
-                        "Das Erreichen des Klassenziels ist gef\u00e4hrdet. ";
-            }
-
-            if (klassenZielAusgeschlossen.booleanValue()) {
-                versetzungsBemerkung =
-                        "Das Erreichen des Klassenziels erscheint ausgeschlossen. ";
-            }
-        }
+        final String versetzungsBemerkung = buildVersetzungsBemerkung();
 
         printMap.put("bemerkung_versetzung", versetzungsBemerkung);
         printMap.put("buBewertungsText", VariableUtility.createPrintText(
@@ -805,24 +781,8 @@ public class Zeugnis extends VersionedModel implements Serializable,
             avSvBewertung.toPrintMap(printMap);
         }
 
-        String schwachausreichendBemerkung;
-        switch (schwachAusreichendFaecher.size()) {
-        case 0:
-            // Keine Bemerkung nötig
-            schwachausreichendBemerkung = "";
-            break;
-        case 1:
-            schwachausreichendBemerkung = "Die Leistungen im Fach "
-                    + schwachAusreichendFaecher.get(0)
-                    + " waren nur schwach ausreichend. ";
-            break;
-        default:
-            final String lastAusreichendFach = schwachAusreichendFaecher.remove(
-                    schwachAusreichendFaecher.size() - 1);
-            schwachausreichendBemerkung = "Die Leistungen in den Fächern "
-                    + StringUtils.join(schwachAusreichendFaecher, ", ") + " und "
-                    + lastAusreichendFach + " waren nur schwach ausreichend. ";
-        }
+        final String schwachausreichendBemerkung =
+                buildSchwachAusreichendBemerkung(schwachAusreichendFaecher);
 
         printMap.put("bemerkung_schwachausreichend",
                 schwachausreichendBemerkung);
@@ -847,6 +807,66 @@ public class Zeugnis extends VersionedModel implements Serializable,
         printMap.put("bemerkung_schulamt", schulamtsBemerkungsText.length() > 0
                 ? schulamtsBemerkungsText.toString()
                 : VariableUtility.PLATZHALTER_LEER);
+    }
+
+    /**
+     * @param schwachAusreichendFaecher
+     * @return
+     */
+    private String buildSchwachAusreichendBemerkung(
+            final List<String> schwachAusreichendFaecher) {
+        String schwachausreichendBemerkung;
+        switch (schwachAusreichendFaecher.size()) {
+        case 0:
+            // Keine Bemerkung nötig
+            schwachausreichendBemerkung = "";
+            break;
+        case 1:
+            schwachausreichendBemerkung = "Die Leistungen im Fach "
+                    + schwachAusreichendFaecher.get(0)
+                    + " waren nur schwach ausreichend. ";
+            break;
+        default:
+            final String lastAusreichendFach = schwachAusreichendFaecher.remove(
+                    schwachAusreichendFaecher.size() - 1);
+            schwachausreichendBemerkung = "Die Leistungen in den Fächern "
+                    + StringUtils.join(schwachAusreichendFaecher, ", ") + " und "
+                    + lastAusreichendFach + " waren nur schwach ausreichend. ";
+        }
+        return schwachausreichendBemerkung;
+    }
+
+    /**
+     * Bildet die Versetzungsbemerkung.
+     * @return die Versetzungsbemerkung.
+     */
+    private String buildVersetzungsBemerkung() {
+        String versetzungsBemerkung = "";
+        if (schulhalbjahr.getHalbjahr() == Halbjahr.Beide_Halbjahre) {
+            if (klassenZielWurdeNichtErreicht.booleanValue()) {
+                versetzungsBemerkung = "Das Klassenziel wurde nicht erreicht. ";
+            }
+
+            if (ruecktAuf.booleanValue() && zeugnisArt
+                    .getPrintVersetzungsbemerkung().booleanValue()) {
+                int nextKlassenstufe = klasse.calculateKlassenstufe(
+                        schulhalbjahr.getJahr()) + 1;
+                versetzungsBemerkung = versetzungsBemerkung + schueler
+                        .getVorname() + " r\u00fcckt auf in Klasse "
+                        + nextKlassenstufe + ". ";
+            }
+        } else {
+            if (klassenZielGefaehrdet.booleanValue()) {
+                versetzungsBemerkung =
+                        "Das Erreichen des Klassenziels ist gef\u00e4hrdet. ";
+            }
+
+            if (klassenZielAusgeschlossen.booleanValue()) {
+                versetzungsBemerkung =
+                        "Das Erreichen des Klassenziels erscheint ausgeschlossen. ";
+            }
+        }
+        return versetzungsBemerkung;
     }
 
     /**

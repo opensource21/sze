@@ -40,7 +40,7 @@ public class BewertungWithNeigbors {
      * @param bewertungen alle Bewertungen.
      * @param bewertungsId die Bewertung zu der die Nachbarn ermittelt werden sollen.
      */
-    public BewertungWithNeigbors(List<Bewertung> bewertungen, Long bewertungsId){
+    public BewertungWithNeigbors(List<Bewertung> bewertungen, Long bewertungsId) {
         Long prevId = null;
         Long nextId = null;
         Bewertung selectedBewertung = null;

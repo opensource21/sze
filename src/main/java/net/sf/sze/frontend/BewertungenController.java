@@ -94,10 +94,11 @@ public class BewertungenController {
      * @return die logische View
      */
     @RequestMapping(value = URL.BewertungenPath.LIST, method = RequestMethod.GET)
-    public String showBewertungenPath(@PathVariable(URL.Session
-            .P_HALBJAHR_ID) Long halbjahrId,
-            @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId, @RequestParam(value = URL.Session
-            .P_SCHULFACH_ID, required = false) Long schulfachId, Model model,
+    public String showBewertungenPath(
+            @PathVariable(URL.Session.P_HALBJAHR_ID) Long halbjahrId,
+            @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
+            @RequestParam(value = URL.Session.P_SCHULFACH_ID, required = false)
+            Long schulfachId, Model model,
             RedirectAttributes redirectAttributes) {
 
         final Klasse klasse = bewertungErfassungsService.getKlasse(klassenId.longValue());
@@ -163,7 +164,7 @@ public class BewertungenController {
      * @param model das Model
      * @return die logische View
      */
-    @RequestMapping(value= URL.BewertungenPath.EDIT, method = RequestMethod.GET)
+    @RequestMapping(value = URL.BewertungenPath.EDIT, method = RequestMethod.GET)
     public String editBewertung(@PathVariable(URL.Session
             .P_HALBJAHR_ID) Long halbjahrId,
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
@@ -190,13 +191,15 @@ public class BewertungenController {
      * @param model das Model
      * @return die logische View
      */
-    @RequestMapping(value= URL.BewertungenPath.EDIT, method = RequestMethod.POST, params= "type=standard")
-    public String updateStandardBewertung(@PathVariable(URL.Session
-            .P_HALBJAHR_ID) Long halbjahrId,
+    @RequestMapping(value = URL.BewertungenPath.EDIT, method = RequestMethod.POST,
+            params = "type = standard")
+    public String updateStandardBewertung(
+            @PathVariable(URL.Session.P_HALBJAHR_ID) Long halbjahrId,
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
             @PathVariable(URL.Session.P_SCHULFACH_ID) Long schulfachId,
-            @RequestParam(Common.P_PREV_ID) Long prevId, @RequestParam(Common.P_NEXT_ID) Long nextId,
-            @RequestParam(value=Common.P_ACTION, required=false) String action,
+            @RequestParam(Common.P_PREV_ID) Long prevId,
+            @RequestParam(Common.P_NEXT_ID) Long nextId,
+            @RequestParam(value = Common.P_ACTION, required = false) String action,
             @ModelAttribute("bewertung") StandardBewertung bewertung,
             BindingResult result, Model model,
             RedirectAttributes redirectAttributes) {
@@ -213,13 +216,15 @@ public class BewertungenController {
      * @param model das Model
      * @return die logische View
      */
-    @RequestMapping(value= URL.BewertungenPath.EDIT, method = RequestMethod.POST, params= "type=2niveau")
+    @RequestMapping(value = URL.BewertungenPath.EDIT, method = RequestMethod.POST,
+            params = "type =2niveau")
     public String update2NiveauBewertung(@PathVariable(URL.Session
             .P_HALBJAHR_ID) Long halbjahrId,
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
             @PathVariable(URL.Session.P_SCHULFACH_ID) Long schulfachId,
-            @RequestParam(Common.P_PREV_ID) Long prevId, @RequestParam(Common.P_NEXT_ID) Long nextId,
-            @RequestParam(value=Common.P_ACTION, required=false) String action,
+            @RequestParam(Common.P_PREV_ID) Long prevId,
+            @RequestParam(Common.P_NEXT_ID) Long nextId,
+            @RequestParam(value = Common.P_ACTION, required = false) String action,
             @ModelAttribute("bewertung") AussenDifferenzierteBewertung bewertung,
             BindingResult result, Model model,
             RedirectAttributes redirectAttributes) {
@@ -236,14 +241,16 @@ public class BewertungenController {
      * @param model das Model
      * @return die logische View
      */
-    @RequestMapping(value= URL.BewertungenPath.EDIT, method = RequestMethod.POST, params="type=3niveau")
-    public String update3NiveauBewertung(@PathVariable(URL.Session
-            .P_HALBJAHR_ID) Long halbjahrId,
+    @RequestMapping(value = URL.BewertungenPath.EDIT,
+            method = RequestMethod.POST, params = "type=3niveau")
+    public String update3NiveauBewertung(
+            @PathVariable(URL.Session.P_HALBJAHR_ID) Long halbjahrId,
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
             @PathVariable(URL.Session.P_SCHULFACH_ID) Long schulfachId,
             @ModelAttribute("bewertung")BinnenDifferenzierteBewertung bewertung,
-            @RequestParam(Common.P_PREV_ID) Long prevId, @RequestParam(Common.P_NEXT_ID) Long nextId,
-            @RequestParam(value=Common.P_ACTION, required=false) String action,
+            @RequestParam(Common.P_PREV_ID) Long prevId,
+            @RequestParam(Common.P_NEXT_ID) Long nextId,
+            @RequestParam(value = Common.P_ACTION, required = false) String action,
             BindingResult result, Model model,
             RedirectAttributes redirectAttributes) {
         return updateBewertung(halbjahrId, klassenId, schulfachId, bewertung,
@@ -264,12 +271,14 @@ public class BewertungenController {
      */
     private String updateBewertung(Long halbjahrId, Long klassenId,
             Long schulfachId, Bewertung bewertung, Long prevId, Long nextId,
-            String action, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
+            String action, BindingResult result, Model model,
+            RedirectAttributes redirectAttributes) {
         validator.validate(bewertung, result);
 
         if (result.hasErrors()) {
             LOG.info("Die Bewertung hat Fehler {}", result);
-            setEditModelValues(halbjahrId, klassenId, schulfachId, bewertung, prevId, nextId, model);
+            setEditModelValues(halbjahrId, klassenId, schulfachId, bewertung,
+                    prevId, nextId, model);
             return BEWERTUNGEN_EDIT_BEWERTUNG_VIEW;
         }
         bewertungService.save(bewertung);
@@ -327,7 +336,7 @@ public class BewertungenController {
      */
     private String createRedirectToList(Long halbjahrId, Long klassenId,
             final Long schulfachId) {
-        return URL.redirect(URL.BewertungenPath.LIST +"?"
+        return URL.redirect(URL.BewertungenPath.LIST + "?"
                 + URL.Session.P_SCHULFACH_ID + "=" + schulfachId ,
                 halbjahrId, klassenId);
     }
@@ -340,7 +349,7 @@ public class BewertungenController {
      * @param schulfachId
      * @return die logische View
      */
-    @RequestMapping(value= URL.BewertungenPath.CANCEL, method = RequestMethod.POST)
+    @RequestMapping(value = URL.BewertungenPath.CANCEL, method = RequestMethod.POST)
     public String cancelEditBewertung(@PathVariable(URL.Session
             .P_HALBJAHR_ID) Long halbjahrId,
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,

@@ -24,6 +24,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -96,11 +97,13 @@ public class BemerkungController {
             .P_HALBJAHR_ID) Long halbjahrId,
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId, Model model) {
-        final Zeugnis zeugnis = zeugnisErfassungsService.getZeugnis(halbjahrId, klassenId, schuelerId);
+        final Zeugnis zeugnis = zeugnisErfassungsService.getZeugnis(halbjahrId,
+                klassenId, schuelerId);
         final Bemerkung bemerkung = new Bemerkung();
         bemerkung.setZeugnis(zeugnis);
         fillModel(model, halbjahrId, klassenId, schuelerId, bemerkung);
-        model.addAttribute("insertUrl", URL.filledURL(URL.ZeugnisPath.BEMERKUNG_CREATE, halbjahrId, klassenId, schuelerId));
+        model.addAttribute("insertUrl", URL.filledURL(URL.ZeugnisPath.
+                BEMERKUNG_CREATE, halbjahrId, klassenId, schuelerId));
 
         return EDIT_BEMERKUNG_VIEW;
     }
@@ -120,7 +123,7 @@ public class BemerkungController {
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
             Bemerkung bemerkung,
-            @RequestParam(value=URL.Common.P_ACTION, required=false) String action,
+            @RequestParam(value = URL.Common.P_ACTION, required = false) String action,
             BindingResult result, Model model) {
         validator.validate(bemerkung, result);
 
@@ -164,9 +167,12 @@ public class BemerkungController {
         final Bemerkung bemerkung = bemerkungService.read(bemerkungsId);
         model.addAttribute("bemerkung", bemerkung);
         model.addAttribute("schulhalbjahr", schulhalbjahrService.read(halbjahrId));
-        model.addAttribute("cancelUrl", URL.createLinkToZeugnisUrl(halbjahrId, klassenId, schuelerId));
-        model.addAttribute("editUrl", URL.filledURL(URL.ZeugnisPath.BEMERKUNG_EDIT, halbjahrId, klassenId, schuelerId, bemerkungsId));
-        model.addAttribute("deleteUrl", URL.filledURL(URL.ZeugnisPath.BEMERKUNG_DELETE, halbjahrId, klassenId, schuelerId, bemerkungsId));
+        model.addAttribute("cancelUrl", URL.createLinkToZeugnisUrl(halbjahrId,
+                klassenId, schuelerId));
+        model.addAttribute("editUrl", URL.filledURL(URL.ZeugnisPath.
+                BEMERKUNG_EDIT, halbjahrId, klassenId, schuelerId, bemerkungsId));
+        model.addAttribute("deleteUrl", URL.filledURL(URL.ZeugnisPath.
+                BEMERKUNG_DELETE, halbjahrId, klassenId, schuelerId, bemerkungsId));
         return "bemerkung/showBemerkung";
     }
 
@@ -189,8 +195,10 @@ public class BemerkungController {
             Model model) {
         final Bemerkung bemerkung = bemerkungService.read(bemerkungsId);
         fillModel(model, halbjahrId, klassenId, schuelerId, bemerkung);
-        model.addAttribute("updateUrl", URL.filledURL(URL.ZeugnisPath.BEMERKUNG_EDIT, halbjahrId, klassenId, schuelerId, bemerkungsId));
-        model.addAttribute("deleteUrl", URL.filledURL(URL.ZeugnisPath.BEMERKUNG_DELETE, halbjahrId, klassenId, schuelerId, bemerkungsId));
+        model.addAttribute("updateUrl", URL.filledURL(URL.ZeugnisPath.
+                BEMERKUNG_EDIT, halbjahrId, klassenId, schuelerId, bemerkungsId));
+        model.addAttribute("deleteUrl", URL.filledURL(URL.ZeugnisPath.
+                BEMERKUNG_DELETE, halbjahrId, klassenId, schuelerId, bemerkungsId));
         return EDIT_BEMERKUNG_VIEW;
     }
 
@@ -204,18 +212,21 @@ public class BemerkungController {
      * @return die logische View
      */
     @RequestMapping(value = URL.ZeugnisPath.BEMERKUNG_EDIT, method = RequestMethod.POST)
-    public String updateBemerkung(@PathVariable(URL.Session
-            .P_HALBJAHR_ID) Long halbjahrId,
+    public String updateBemerkung(
+            @PathVariable(URL.Session.P_HALBJAHR_ID) Long halbjahrId,
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
             @PathVariable(URL.ZeugnisPath.P_BEMERKUNGS_ID) Long bemerkungsId,
-            Bemerkung bemerkung, @RequestParam(value=URL.Common.P_ACTION, required=false) String action,
-            BindingResult result, Model model) {
+            @ModelAttribute("bemerkung") Bemerkung bemerkung, BindingResult result,
+            @RequestParam(value = URL.Common.P_ACTION, required = false) String action,
+             Model model) {
         validator.validate(bemerkung, result);
 
         if (result.hasErrors()) {
-            model.addAttribute("updateUrl", URL.filledURL(URL.ZeugnisPath.BEMERKUNG_EDIT, halbjahrId, klassenId, schuelerId, bemerkungsId));
-            model.addAttribute("deleteUrl", URL.filledURL(URL.ZeugnisPath.BEMERKUNG_DELETE, halbjahrId, klassenId, schuelerId, bemerkungsId));
+            model.addAttribute("updateUrl", URL.filledURL(URL.ZeugnisPath.
+                    BEMERKUNG_EDIT, halbjahrId, klassenId, schuelerId, bemerkungsId));
+            model.addAttribute("deleteUrl", URL.filledURL(URL.ZeugnisPath.
+                    BEMERKUNG_DELETE, halbjahrId, klassenId, schuelerId, bemerkungsId));
             fillModel(model, halbjahrId, klassenId, schuelerId, bemerkung);
             return EDIT_BEMERKUNG_VIEW;
         }

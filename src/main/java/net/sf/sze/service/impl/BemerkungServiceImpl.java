@@ -110,7 +110,7 @@ public class BemerkungServiceImpl implements BemerkungService {
     public List<BemerkungsBaustein> getAllBausteine(Bemerkung bemerkung) {
         final List<BemerkungsBaustein> bausteine = bemerkungsBausteinDao.
                 findAllByAktivTrueOrderByNameAsc();
-        if (bemerkung != null && bemerkung.getBaustein() != null ) {
+        if (bemerkung != null && bemerkung.getBaustein() != null) {
             if (!bausteine.contains(bemerkung.getBaustein())) {
                 bausteine.add(bemerkung.getBaustein());
             }

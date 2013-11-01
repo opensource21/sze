@@ -20,7 +20,8 @@ public class SchulfachTest {
     private final Schulfach testee = new Schulfach();
 
     /**
-     * Test method for {@link net.sf.sze.model.zeugnis.Schulfach#convertStufenMitStandardBewertungToList()}.
+     * Test method for
+     * {@link net.sf.sze.model.zeugnis.Schulfach#convertStufenMitStandardBewertungToList()}.
      */
     @Test
     public void testConvertStufenMitStandardBewertungToList() {
@@ -34,7 +35,8 @@ public class SchulfachTest {
     }
 
     /**
-     * Test method for {@link net.sf.sze.model.zeugnis.Schulfach#convertStufenMitBinnenDifferenzierungToList()}.
+     * Test method for
+     * {@link net.sf.sze.model.zeugnis.Schulfach#convertStufenMitBinnenDifferenzierungToList()}.
      */
     @Test
     public void testConvertStufenMitBinnenDifferenzierungToList() {
@@ -48,7 +50,8 @@ public class SchulfachTest {
     }
 
     /**
-     * Test method for {@link net.sf.sze.model.zeugnis.Schulfach#convertStufenMitAussenDifferenzierungToList()}.
+     * Test method for
+     * {@link net.sf.sze.model.zeugnis.Schulfach#convertStufenMitAussenDifferenzierungToList()}.
      */
     @Test
     public void testConvertStufenMitAussenDifferenzierungToList() {

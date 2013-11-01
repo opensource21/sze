@@ -25,6 +25,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -42,7 +43,8 @@ public class SchulamtsBemerkungController {
     /**
      * View zum Editieren der Bemerkung.
      */
-    private static final String EDIT_SCHULAMTS_BEMERKUNG_VIEW = "schulamtsBemerkung/editSchulamtsBemerkung";
+    private static final String EDIT_SCHULAMTS_BEMERKUNG_VIEW =
+            "schulamtsBemerkung/editSchulamtsBemerkung";
 
 
     /**
@@ -97,11 +99,13 @@ public class SchulamtsBemerkungController {
             .P_HALBJAHR_ID) Long halbjahrId,
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId, Model model) {
-        final Zeugnis zeugnis = zeugnisErfassungsService.getZeugnis(halbjahrId, klassenId, schuelerId);
+        final Zeugnis zeugnis = zeugnisErfassungsService.getZeugnis(
+                halbjahrId, klassenId, schuelerId);
         final SchulamtsBemerkung schulamtsBemerkung = new SchulamtsBemerkung();
         schulamtsBemerkung.setZeugnis(zeugnis);
         fillModel(model, halbjahrId, klassenId, schuelerId, schulamtsBemerkung);
-        model.addAttribute("insertUrl", URL.filledURL(URL.ZeugnisPath.SCHULAMTS_BEMERKUNG_CREATE, halbjahrId, klassenId, schuelerId));
+        model.addAttribute("insertUrl", URL.filledURL(URL.ZeugnisPath.
+                SCHULAMTS_BEMERKUNG_CREATE, halbjahrId, klassenId, schuelerId));
 
         return EDIT_SCHULAMTS_BEMERKUNG_VIEW;
     }
@@ -116,17 +120,20 @@ public class SchulamtsBemerkungController {
      * @return die logische View
      */
     @RequestMapping(value = URL.ZeugnisPath.SCHULAMTS_BEMERKUNG_CREATE, method = RequestMethod.POST)
-    public String insertSchulamtsBemerkung(@PathVariable(URL.Session
-            .P_HALBJAHR_ID) Long halbjahrId,
+    public String insertSchulamtsBemerkung(
+            @PathVariable(URL.Session.P_HALBJAHR_ID) Long halbjahrId,
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
-            SchulamtsBemerkung schulamtsBemerkung, @RequestParam(value=URL.Common.P_ACTION, required=false) String action,
-            BindingResult result, Model model) {
+            @ModelAttribute("schulamtsBemerkung") SchulamtsBemerkung schulamtsBemerkung,
+            BindingResult result,
+            @RequestParam(value = URL.Common.P_ACTION, required = false) String action,
+             Model model) {
         validator.validate(schulamtsBemerkung, result);
 
         if (result.hasErrors()) {
             LOG.info("Fehler beim Speichern der Schulamtsbemerkung: {}", result.getAllErrors());
-            model.addAttribute("insertUrl", URL.filledURL(URL.ZeugnisPath.SCHULAMTS_BEMERKUNG_CREATE, halbjahrId, klassenId, schuelerId));
+            model.addAttribute("insertUrl", URL.filledURL(URL.ZeugnisPath.
+                    SCHULAMTS_BEMERKUNG_CREATE, halbjahrId, klassenId, schuelerId));
             fillModel(model, halbjahrId, klassenId, schuelerId, schulamtsBemerkung);
             return EDIT_SCHULAMTS_BEMERKUNG_VIEW;
         }
@@ -159,14 +166,20 @@ public class SchulamtsBemerkungController {
             .P_HALBJAHR_ID) Long halbjahrId,
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
-            @PathVariable(URL.ZeugnisPath.P_SCHULAMTS_BEMERKUNGS_ID) Long schulamtsBemerkungsId,
-            Model model) {
-        final SchulamtsBemerkung schulamtsBemerkung = schulamtsBemerkungService.read(schulamtsBemerkungsId);
+            @PathVariable(URL.ZeugnisPath.P_SCHULAMTS_BEMERKUNGS_ID)
+            Long schulamtsBemerkungsId, Model model) {
+        final SchulamtsBemerkung schulamtsBemerkung =
+                schulamtsBemerkungService.read(schulamtsBemerkungsId);
         model.addAttribute("bemerkung", schulamtsBemerkung);
         model.addAttribute("schulhalbjahr", schulhalbjahrService.read(halbjahrId));
-        model.addAttribute("cancelUrl", URL.createLinkToZeugnisUrl(halbjahrId, klassenId, schuelerId));
-        model.addAttribute("editUrl", URL.filledURL(URL.ZeugnisPath.SCHULAMTS_BEMERKUNG_EDIT, halbjahrId, klassenId, schuelerId, schulamtsBemerkungsId));
-        model.addAttribute("deleteUrl", URL.filledURL(URL.ZeugnisPath.SCHULAMTS_BEMERKUNG_DELETE, halbjahrId, klassenId, schuelerId, schulamtsBemerkungsId));
+        model.addAttribute("cancelUrl", URL.createLinkToZeugnisUrl(
+                halbjahrId, klassenId, schuelerId));
+        model.addAttribute("editUrl", URL.filledURL(URL.ZeugnisPath.
+                SCHULAMTS_BEMERKUNG_EDIT, halbjahrId, klassenId, schuelerId,
+                schulamtsBemerkungsId));
+        model.addAttribute("deleteUrl", URL.filledURL(URL.ZeugnisPath.
+                SCHULAMTS_BEMERKUNG_DELETE, halbjahrId, klassenId, schuelerId,
+                schulamtsBemerkungsId));
         return "schulamtsBemerkung/showSchulamtsBemerkung";
     }
 
@@ -187,10 +200,15 @@ public class SchulamtsBemerkungController {
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
             @PathVariable(URL.ZeugnisPath.P_SCHULAMTS_BEMERKUNGS_ID) Long schulamtsBemerkungsId,
             Model model) {
-        final SchulamtsBemerkung schulamtsBemerkung = schulamtsBemerkungService.read(schulamtsBemerkungsId);
+        final SchulamtsBemerkung schulamtsBemerkung = schulamtsBemerkungService.
+                read(schulamtsBemerkungsId);
         fillModel(model, halbjahrId, klassenId, schuelerId, schulamtsBemerkung);
-        model.addAttribute("updateUrl", URL.filledURL(URL.ZeugnisPath.SCHULAMTS_BEMERKUNG_EDIT, halbjahrId, klassenId, schuelerId, schulamtsBemerkungsId));
-        model.addAttribute("deleteUrl", URL.filledURL(URL.ZeugnisPath.SCHULAMTS_BEMERKUNG_DELETE, halbjahrId, klassenId, schuelerId, schulamtsBemerkungsId));
+        model.addAttribute("updateUrl", URL.filledURL(URL.ZeugnisPath.
+                SCHULAMTS_BEMERKUNG_EDIT, halbjahrId, klassenId, schuelerId,
+                schulamtsBemerkungsId));
+        model.addAttribute("deleteUrl", URL.filledURL(URL.ZeugnisPath.
+                SCHULAMTS_BEMERKUNG_DELETE, halbjahrId, klassenId, schuelerId,
+                schulamtsBemerkungsId));
         return EDIT_SCHULAMTS_BEMERKUNG_VIEW;
     }
 
@@ -209,13 +227,19 @@ public class SchulamtsBemerkungController {
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
             @PathVariable(URL.ZeugnisPath.P_SCHULAMTS_BEMERKUNGS_ID) Long schulamtsBemerkungsId,
-            SchulamtsBemerkung schulamtsBemerkung, @RequestParam(value=URL.Common.P_ACTION, required=false) String action,
-            BindingResult result, Model model) {
+            SchulamtsBemerkung schulamtsBemerkung, BindingResult result,
+            @RequestParam(value = URL.Common.P_ACTION, required = false)
+            String action,
+            Model model) {
         validator.validate(schulamtsBemerkung, result);
 
         if (result.hasErrors()) {
-            model.addAttribute("updateUrl", URL.filledURL(URL.ZeugnisPath.SCHULAMTS_BEMERKUNG_EDIT, halbjahrId, klassenId, schuelerId, schulamtsBemerkungsId));
-            model.addAttribute("deleteUrl", URL.filledURL(URL.ZeugnisPath.SCHULAMTS_BEMERKUNG_DELETE, halbjahrId, klassenId, schuelerId, schulamtsBemerkungsId));
+            model.addAttribute("updateUrl", URL.filledURL(URL.ZeugnisPath.
+                    SCHULAMTS_BEMERKUNG_EDIT, halbjahrId, klassenId,
+                    schuelerId, schulamtsBemerkungsId));
+            model.addAttribute("deleteUrl", URL.filledURL(URL.ZeugnisPath.
+                    SCHULAMTS_BEMERKUNG_DELETE, halbjahrId, klassenId,
+                    schuelerId, schulamtsBemerkungsId));
             fillModel(model, halbjahrId, klassenId, schuelerId, schulamtsBemerkung);
             return EDIT_SCHULAMTS_BEMERKUNG_VIEW;
         }

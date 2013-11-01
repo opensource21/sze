@@ -125,7 +125,7 @@ public class ZeugnisErfassungsServiceImpl implements ZeugnisErfassungsService {
     public List<ZeugnisArt> getAllZeugnisArten(Zeugnis zeugnis) {
         final List<ZeugnisArt> bausteine = zeugnisArtDao.
                 findAllByAktivTrueOrderBySortierungAsc();
-        if (zeugnis != null && zeugnis.getZeugnisArt() != null ) {
+        if (zeugnis != null && zeugnis.getZeugnisArt() != null) {
             if (!bausteine.contains(zeugnis.getZeugnisArt())) {
                 bausteine.add(zeugnis.getZeugnisArt());
             }
@@ -149,8 +149,8 @@ public class ZeugnisErfassungsServiceImpl implements ZeugnisErfassungsService {
      */
     @Override
     public Zeugnis getZeugnis(Long halbjahrId, Long klassenId, Long schuelerId) {
-
-        return zeugnisDao.findBySchulhalbjahrIdAndKlasseIdAndSchuelerId(halbjahrId, klassenId, schuelerId);
+        return zeugnisDao.findBySchulhalbjahrIdAndKlasseIdAndSchuelerId(halbjahrId,
+                klassenId, schuelerId);
     }
 
 
@@ -194,7 +194,7 @@ public class ZeugnisErfassungsServiceImpl implements ZeugnisErfassungsService {
      * {@inheritDoc}
      */
     @Override
-    @Transactional(readOnly=false)
+    @Transactional(readOnly = false)
     public Zeugnis save(Zeugnis zeugnis) {
         return zeugnisDao.save(zeugnis);
     }

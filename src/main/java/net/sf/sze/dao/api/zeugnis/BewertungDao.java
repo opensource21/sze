@@ -18,17 +18,6 @@ import org.springframework.data.repository.PagingAndSortingRepository;
  */
 public interface BewertungDao extends PagingAndSortingRepository<Bewertung,
         Long> {
-//
-//    /**
-//     * Listet alle Bewertungen zu einer Klasse und einem Halbjahr.
-//     * @param klasseId Id der Klasse.
-//     * @param halbjahrId Id des Halbjahrs.
-//     * @param pageable information zum Paginating.
-//     * @return ein Page-Objekt.
-//     */
-//    Page<Bewertung> findAllByZeugnisKlasseIdAndZeugnisSchulhalbjahrIdAndZeugnisSchulhalbjahrSelectableIsTrueOrderByZeugnisSchuelerNameAscZeugnisSchuelerVornameAsc(
-//            long klasseId, long halbjahrId, Pageable pageable);
-//
 
     /**
      * Listet alle Bewertungen zu einer Klasse und einem Halbjahr.
@@ -38,7 +27,8 @@ public interface BewertungDao extends PagingAndSortingRepository<Bewertung,
      */
     //TODO diese Methode scheint zu komplex zu sein, als das Hibernate sie
     //schafft , kann man wohl löschen.
-    List<Bewertung> findAllByZeugnisKlasseIdAndZeugnisSchulhalbjahrIdAndSchulfachIdOrderByZeugnisSchuelerNameAscZeugnisSchuelerVornameAsc(
+    List<Bewertung>
+    findAllByZeugnisKlasseIdAndZeugnisSchulhalbjahrIdAndSchulfachIdOrderByZeugnisSchuelerNameAscZeugnisSchuelerVornameAsc(
             long klasseId, long halbjahrId, long schulfachId);
 
     /**

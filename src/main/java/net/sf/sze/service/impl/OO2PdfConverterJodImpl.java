@@ -69,7 +69,7 @@ public class OO2PdfConverterJodImpl implements OO2PdfConverter {
         StringBuffer envUrl = null;
         if (userEnv != null) {
             try {
-                envUrl = new StringBuffer(" -env:UserInstallation=file:///");
+                envUrl = new StringBuffer(" -env:UserInstallation = file:///");
                 envUrl.append(userEnv.getCanonicalPath().replace('\\', '/'));
             } catch (final IOException e) {
                 log.error("Kann nicht die Umgebung setzen.", e);
@@ -153,11 +153,11 @@ public class OO2PdfConverterJodImpl implements OO2PdfConverter {
         } catch (final Exception e) {
             final ProcessBuilder processBuilder = new ProcessBuilder(
                     ooCommandFile.getAbsolutePath(), invisibleParam,
-                    "-accept=socket,host=127.0.0.1,port=" + ooPort + ";urp;",
+                    "-accept = socket,host =127.0.0.1,port =" + ooPort + ";urp;",
                     "-nofirststartwizard" + environmentUrl);
             try {
                 closeConnection();
-                log.info("Starte OO-Prozess. Init=" + init);
+                log.info("Starte OO-Prozess. Init =" + init);
                 ooProcess = processBuilder.start();
                 // 10 Sekunden warten damit OO-Starten kann.
                 Thread.sleep(10000);
@@ -191,8 +191,8 @@ public class OO2PdfConverterJodImpl implements OO2PdfConverter {
             if (!connected) {
                 log.error(
                         "Cant connect to OpenOffice. Is OpenOffice running on port "
-                        + ooPort + ". Please start: soffice -headless -accept="
-                        + "\"socket,host=127.0.0.1,port=" + ooPort
+                        + ooPort + ". Please start: soffice -headless -accept ="
+                        + "\"socket,host =127.0.0.1,port =" + ooPort
                         + ";urp;\" -nofirststartwizard");
 
                 if (!init) {

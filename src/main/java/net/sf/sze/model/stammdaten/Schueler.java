@@ -339,7 +339,9 @@ public class Schueler extends VersionedModel implements Serializable,
         final SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy",
                 Locale.GERMANY);
         printMap.put("schueler_geburtstag", formatter.format(geburtstag));
-        printMap.put("schueler_aufnahmeDatum", aufnahmeDatum == null?null:formatter.format(aufnahmeDatum));
-        printMap.put("schueler_abgangsDatum", abgangsDatum == null?null:formatter.format(abgangsDatum));
+        printMap.put("schueler_aufnahmeDatum",
+                aufnahmeDatum == null ? null : formatter.format(aufnahmeDatum));
+        printMap.put("schueler_abgangsDatum",
+                abgangsDatum == null ? null : formatter.format(abgangsDatum));
     }
 }
