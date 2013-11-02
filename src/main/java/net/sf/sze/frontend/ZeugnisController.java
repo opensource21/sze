@@ -305,7 +305,7 @@ public class ZeugnisController {
      * @return die logische View
      */
     @RequestMapping(value = URL.ZeugnisPath.BEWERTUNG_EDIT,
-            method = RequestMethod.POST, params = "type = standard")
+            method = RequestMethod.POST, params = "type=standard")
     public String updateStandardBewertung(
             @PathVariable(URL.Session.P_HALBJAHR_ID) Long halbjahrId,
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
@@ -335,7 +335,7 @@ public class ZeugnisController {
      * @return die logische View
      */
     @RequestMapping(value = URL.ZeugnisPath.BEWERTUNG_EDIT,
-            method = RequestMethod.POST, params = "type =2niveau")
+            method = RequestMethod.POST, params = "type=2niveau")
     public String update2NiveauBewertung(
             @PathVariable(URL.Session.P_HALBJAHR_ID) Long halbjahrId,
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
