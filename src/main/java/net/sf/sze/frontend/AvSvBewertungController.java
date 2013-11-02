@@ -24,6 +24,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -110,6 +111,7 @@ public class AvSvBewertungController {
      * @param halbjahrId die Id des Schulhalbjahres
      * @param klassenId die Id der Klasse
      * @param schuelerId die Id des Schuelers
+     * @param avSvForm Datencontainer für die AvSv-Daten.
      * @param result das Bindingresult.
      * @param model das Model
      * @return die logische View
@@ -119,7 +121,8 @@ public class AvSvBewertungController {
             .P_HALBJAHR_ID) Long halbjahrId,
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
-            AvSvForm avSvForm, BindingResult result, Model model) {
+            @ModelAttribute("avSvForm") AvSvForm avSvForm,
+            BindingResult result, Model model) {
         validator.validate(avSvForm, result);
         //Die Validierung kann eigentlich nicht schiefgehen. Außerdem bekommt
         //man nur einen "Field error in object 'avSvForm' on field 'avSvBewertungen'"
@@ -155,10 +158,10 @@ public class AvSvBewertungController {
 
         /**
          * Initiates an object of type AvSvForm.
-         * @param avSvBewertungen
-         * @param schueler
-         * @param klasse
-         * @param schulhalbjahr
+         * @param avSvBewertungen die Bewertungen.
+         * @param schueler der Schüler
+         * @param klasse die Klasse.
+         * @param schulhalbjahr das Schulhalbjahr.
          */
         public AvSvForm(List<AvSvBewertung> avSvBewertungen, Schueler schueler,
                 Klasse klasse, Schulhalbjahr schulhalbjahr) {

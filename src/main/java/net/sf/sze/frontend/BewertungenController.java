@@ -363,6 +363,7 @@ public class BewertungenController {
      * @param klassenId die Id der Klasse
      * @param schulfachId die Id des Schulfachs.
      * @param redirectAttributes Fehlermeldungen.
+     * @param bewertungsId die Id der Bewertung.
      * @return die logische View
      */
     @RequestMapping(value = URL.BewertungenPath.CANCEL, method = RequestMethod.POST)

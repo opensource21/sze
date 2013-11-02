@@ -112,6 +112,7 @@ public class BemerkungController {
      * @param halbjahrId die Id des Schulhalbjahres
      * @param klassenId die Id der Klasse
      * @param schuelerId die Id des Schuelers
+     * @param bemerkung die zu speichernde Bemerkung.
      * @param action die als nächstes auszuführende Aktion.
      * @param model das Model
      * @param result das Bindingresult.
@@ -122,7 +123,7 @@ public class BemerkungController {
             .P_HALBJAHR_ID) Long halbjahrId,
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
-            Bemerkung bemerkung,
+            @ModelAttribute("bemerkung") Bemerkung bemerkung,
             @RequestParam(value = URL.Common.P_ACTION, required = false) String action,
             BindingResult result, Model model) {
         validator.validate(bemerkung, result);
@@ -206,6 +207,7 @@ public class BemerkungController {
      * @param klassenId die Id der Klasse
      * @param schuelerId die Id des Schuelers
      * @param bemerkungsId die Id der Bemerkung
+     * @param bemerkung die zu speichernde Bemerkung.
      * @param action die als nächstes auszuführende Aktion.
      * @param result das Bindingresult.
      * @param model das Model
@@ -236,6 +238,13 @@ public class BemerkungController {
         return URL.createRedirectToZeugnisUrl(halbjahrId, klassenId, schuelerId);
     }
 
+    /**
+     * Breche die Bearbeitung der Bemerkung ab.
+     * @param halbjahrId Id des {@link Schulhalbjahr}.
+     * @param klassenId Id der {@link Klasse}.
+     * @param schuelerId Id des {@link Schueler}.
+     * @return die anzuzeigende View.
+     */
     @RequestMapping(value = URL.ZeugnisPath.BEMERKUNG_CANCEL, method = RequestMethod.POST)
     public String cancelEditBemerkung(@PathVariable(URL.Session
             .P_HALBJAHR_ID) Long halbjahrId,
@@ -244,6 +253,14 @@ public class BemerkungController {
         return URL.createRedirectToZeugnisUrl(halbjahrId, klassenId, schuelerId);
     }
 
+    /**
+     * Löscht die Bemerkung.
+     * @param halbjahrId Id des {@link Schulhalbjahr}.
+     * @param klassenId Id der {@link Klasse}.
+     * @param schuelerId Id des {@link Schueler}.
+     * @param bemerkungsId die Id der zu löschenden {@link Bemerkung}.
+     * @return die anzuzeigende View.
+     */
     @RequestMapping(value = URL.ZeugnisPath.BEMERKUNG_DELETE, method = RequestMethod.POST)
     public String deleteBemerkung(@PathVariable(URL.Session
             .P_HALBJAHR_ID) Long halbjahrId,

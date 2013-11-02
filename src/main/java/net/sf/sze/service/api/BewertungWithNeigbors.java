@@ -22,9 +22,9 @@ public class BewertungWithNeigbors {
 
     /**
      * Initiates an object of type BewertungWithNeigbors.
-     * @param bewertung
-     * @param prevBewertungsId
-     * @param nextBewertungsId
+     * @param bewertung die aktuelle Bewertung.
+     * @param prevBewertungsId die Id der vorherigen Bewertung.
+     * @param nextBewertungsId die Id der nächsten Bewertung.
      */
     public BewertungWithNeigbors(Bewertung bewertung,
             Long prevBewertungsId, Long nextBewertungsId) {

@@ -89,6 +89,7 @@ public interface ZeugnisErfassungsService {
 
     /**
      * Liefert alle SoL-Bewertungstexte, sortiert und passend zum Zeugnis.
+     * @param zeugnis das aktuelle bvZeugnis.
      * @return alle SoL-Bewertungstexte, sortiert und passend zum Zeugnis.
      */
     List<SoLBewertungsText> getSoLTexte(Zeugnis zeugnis);

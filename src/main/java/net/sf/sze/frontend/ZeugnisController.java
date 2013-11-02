@@ -11,7 +11,6 @@ import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletResponse;
 
 import net.sf.sze.frontend.URL.Common;
 import net.sf.sze.model.stammdaten.Klasse;
@@ -457,7 +456,7 @@ public class ZeugnisController {
      * @param halbjahrId die Id des Schulhalbjahres
      * @param klassenId die Id der Klasse
      * @param schuelerId die Id des Schülers
-     * @param schulfachId
+     * @param bewertungsId die Id der Bewertung.
      * @param redirectAttributes Fehlermeldungen.
      * @return die logische View
      */
@@ -515,6 +514,8 @@ public class ZeugnisController {
      * @param halbjahrId die Id des Schulhalbjahres
      * @param klassenId die Id der Klasse
      * @param schuelerId die Id des Schuelers
+     * @param result das Bindingresult.
+     * @param zeugnis das zu speichernde Zeugnis.
      * @param model das Model
      * @return die logische View
      */
@@ -523,7 +524,8 @@ public class ZeugnisController {
             .P_HALBJAHR_ID) Long halbjahrId,
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
-            @ModelAttribute("zeugnis") Zeugnis zeugnis, BindingResult result, Model model) {
+            @ModelAttribute("zeugnis") Zeugnis zeugnis,
+            BindingResult result, Model model) {
         validator.validate(zeugnis, result);
 
         if (result.hasErrors()) {
@@ -584,6 +586,7 @@ public class ZeugnisController {
      * @param klassenId die Id der Klasse
      * @param schuelerId die Id des Schuelers
      * @param newZeugnis als Container für die AG-Bewertungen.
+     * @param result das Bindingresult.
      * @param model das Model
      * @return die logische View
      */
@@ -643,6 +646,7 @@ public class ZeugnisController {
      * @param klassenId die Id der Klasse
      * @param schuelerId die Id des Schuelers
      * @param newZeugnis als Container für die AG-Bewertungen.
+     * @param result das Bindingresult.
      * @param model das Model
      * @return die logische View
      */
@@ -671,12 +675,20 @@ public class ZeugnisController {
         return URL.createRedirectToZeugnisUrl(halbjahrId, klassenId, schuelerId);
     }
 
+    /**
+     * Erstellt das PDF für einen Schüler.
+     * @param halbjahrId die Id des Schulhalbjahres
+     * @param klassenId die Id der Klasse
+     * @param schuelerId die Id des Schuelers
+     * @param redirectAttributes die Meldungen.
+     * @return die logische View
+     */
     @RequestMapping(value = URL.ZeugnisPath.ONE_PDF, method = RequestMethod.GET)
     public View createPDF(@PathVariable(URL.Session
             .P_HALBJAHR_ID) Long halbjahrId,
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
-            HttpServletResponse response, RedirectAttributes redirectAttributes) {
+            RedirectAttributes redirectAttributes) {
         final File zeugnisDatei = zeugnisCreatorService.createZeugnis(
                 zeugnisErfassungsService.getZeugnis(halbjahrId, klassenId, schuelerId));
         if (zeugnisDatei.exists() && zeugnisDatei.canRead()) {
@@ -691,11 +703,18 @@ public class ZeugnisController {
                 schuelerId), true);
     }
 
+    /**
+     * Erstellt das PDF für eine Klasse.
+     * @param halbjahr das Schulhalbjahr.
+     * @param klasse die Klasse
+     * @param redirectAttributes die Meldungen.
+     * @return die logische View
+     */
     @RequestMapping(value = URL.Zeugnis.ALL_PDFS, method = RequestMethod.GET)
     public View createAllPDFS(@RequestParam(URL.Session
             .P_HALBJAHR_ID) Schulhalbjahr halbjahr,
             @RequestParam(URL.Session.P_KLASSEN_ID) Klasse klasse,
-            HttpServletResponse response, RedirectAttributes redirectAttributes) {
+            RedirectAttributes redirectAttributes) {
         final File zeugnisDatei = zeugnisCreatorService.createZeugnisse(halbjahr, klasse);
         if (zeugnisDatei.exists() && zeugnisDatei.canRead()) {
             return new FileContentView(zeugnisDatei, "Klasse_" + klasse.

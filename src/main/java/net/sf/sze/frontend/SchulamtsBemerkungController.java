@@ -114,6 +114,7 @@ public class SchulamtsBemerkungController {
      * @param halbjahrId die Id des Schulhalbjahres
      * @param klassenId die Id der Klasse
      * @param schuelerId die Id des Schuelers
+     * @param schulamtsBemerkung die Schulamtsbemerkung.
      * @param action die als nächstes auszuführende Aktion.
      * @param model das Model
      * @param result das Bindingresult.
@@ -216,6 +217,8 @@ public class SchulamtsBemerkungController {
      * @param klassenId die Id der Klasse
      * @param schuelerId die Id des Schuelers
      * @param schulamtsBemerkungsId die Id der Bemerkung
+     * @param schulamtsBemerkung die SchulamtsBemerkung
+     * @param result das Bindingresult.
      * @param action die als nächstes auszuführende Aktion.
      * @param model das Model
      * @return die logische View
@@ -248,6 +251,13 @@ public class SchulamtsBemerkungController {
         return URL.createRedirectToZeugnisUrl(halbjahrId, klassenId, schuelerId);
     }
 
+    /**
+     * Brichte die Bearbeitung des SchulamtsBemerkung ab.
+     * @param halbjahrId die Id des Schulhalbjahres
+     * @param klassenId die Id der Klasse
+     * @param schuelerId die Id des Schuelers
+     * @return die logische View
+     */
     @RequestMapping(value = URL.ZeugnisPath.SCHULAMTS_BEMERKUNG_CANCEL, method = RequestMethod.POST)
     public String cancelEditSchulamtsBemerkung(@PathVariable(URL.Session
             .P_HALBJAHR_ID) Long halbjahrId,
@@ -257,6 +267,14 @@ public class SchulamtsBemerkungController {
     }
 
 
+    /**
+     * Löscht die Schulamts-Bemerkung.
+     * @param halbjahrId die Id des Schulhalbjahres
+     * @param klassenId die Id der Klasse
+     * @param schuelerId die Id des Schuelers
+     * @param schulamtsBemerkungsId die Id der Bemerkung
+     * @return die logische View
+     */
     @RequestMapping(value = URL.ZeugnisPath.SCHULAMTS_BEMERKUNG_DELETE, method = RequestMethod.POST)
     public String deleteSchulamtsBemerkung(@PathVariable(URL.Session
             .P_HALBJAHR_ID) Long halbjahrId,
