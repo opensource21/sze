@@ -25,6 +25,7 @@ import net.sf.sze.model.zeugnis.ZeugnisFormular;
 import net.sf.sze.service.api.OO2PdfConverter;
 import net.sf.sze.service.api.PdfConverter;
 import net.sf.sze.service.api.ZeugnisCreatorService;
+import net.sf.sze.util.MapPrinter;
 import net.sf.sze.util.ResultContainer;
 import net.sf.sze.util.VariableUtility;
 
@@ -473,7 +474,8 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
             } else if (value instanceof Map) {
                 removeNullAndAddBlank((Map<String, Object>) value);
             } else {
-                if (value.toString().endsWith(" ")) {
+                final String valueAsString = value.toString();
+                if (valueAsString.length() > 0 && !valueAsString.endsWith(" ")) {
                     printMap.put(key, value.toString() + " ");
                 }
             }
@@ -556,7 +558,11 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
     public void createZeugnis(File templateFile, Map<String, Object> data,
             File odtFile) {
         LOG.debug("Erstelle ODT-Datei");
-
+        if (LOG.isDebugEnabled()) {
+            final MapPrinter mapPrinter = new MapPrinter(odtFile.getName()
+                    + ".txt", false);
+            mapPrinter.print(data);
+        }
         try {
             if (templateFile.isDirectory() || !templateFile.exists()) {
                 throw new FileNotFoundException(templateFile.getAbsolutePath());
