@@ -576,6 +576,12 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
             // InputStreams sind auch OK
             final DocumentTemplate template = new DocumentTemplateFactory()
                     .getTemplate(templateFile);
+            //schaffe Abwärtskompatibilität, da JODREPORT 2.2.tab-patch ursrpünglich
+            //genutzt wurde. Jetzt 2.4.0 wegen Maven. Siehe
+            //http://sourceforge.net/apps/phpbb/jodreports/viewtopic.php?f=1&t=43
+            @SuppressWarnings("unchecked")
+            final Map<Object, Object> configurations = template.getConfigurations();
+            configurations.put("process_jooscript_only", Boolean.FALSE);
             try {
                 template.setContentWrapper(new SzeContentWrapper());
                 template.createDocument(data, new FileOutputStream(odtFile));
