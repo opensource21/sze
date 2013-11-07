@@ -232,7 +232,7 @@ public class Schulfach extends VersionedModel implements Serializable,
      * @return ein eindeutiger Name ohne Sonderzeichen.
      */
     public String technicalName() {
-        return StringUtil.deleteSpecialCharaters(typ.getShortKey() + " "
+        return StringUtil.deleteSpecialCharaters(typ.getShortKey() + "_"
                 + name);
     }
 }

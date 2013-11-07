@@ -151,7 +151,7 @@ public class ArbeitsUndSozialVerhalten extends VersionedModel
      * @return ein eindeutiger Name ohne Sonderzeichen.
      */
     public String technicalName() {
-        return typ.getShortKey() + " " + StringUtil.deleteSpecialCharaters(
+        return typ.getShortKey() + "_" + StringUtil.deleteSpecialCharaters(
                 name);
     }
 }
