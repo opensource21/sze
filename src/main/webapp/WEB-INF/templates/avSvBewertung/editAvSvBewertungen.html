@@ -25,6 +25,7 @@ cancelUrl
         </h4>
         <form class="well form-horizontal" method="post"
             th:object="${avSvForm}">
+            <div th:replace="/fragments::error"></div>
             <input type="hidden" th:value="*{klasse.id}" name="klasse"/>
             <input type="hidden" th:value="*{schueler.id}" name="schueler"/>
             <input type="hidden" th:value="*{schulhalbjahr.id}" name="schulhalbjahr"/>

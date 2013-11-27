@@ -26,7 +26,8 @@ deleteUrl
             im Hj: <span th:remove="tag" th:text="${schulhalbjahr}"></span>)
         </h4>
         <form class="well form-horizontal" method="post"
-            th:object="${bemerkung}">
+                th:object="${bemerkung}">
+            <div th:replace="/fragments::error"></div>
                         <!-- Schulamt -->
             <input type="text" bs:field="#{db.SchulamtsBemerkung.schulamt}"
                 class="span4 show" readonly="readonly">

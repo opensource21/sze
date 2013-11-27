@@ -42,6 +42,7 @@ import org.thymeleaf.spring3.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
 import de.ppi.fuwesta.spring.mvc.formatter.NonEmptyStringAnnotationFormatterFactory;
+import de.ppi.fuwesta.spring.mvc.oval.DbCheckConfigurer;
 import de.ppi.fuwesta.spring.mvc.oval.JPAAnnotationsConfigurer;
 import de.ppi.fuwesta.spring.mvc.oval.MessageLookupContextRenderer;
 import de.ppi.fuwesta.spring.mvc.oval.MessageLookupMessageValueFormatter;
@@ -57,7 +58,7 @@ import de.ppi.fuwesta.thymeleaf.bootstrap.BootstrapDialect;
  */
 @Configuration
 @ComponentScan(basePackages = {"net.sf.sze.frontend",
-        "net.sf.oval.integration.spring", "de.ppi.jpa.helper"})
+        "net.sf.oval.integration.spring", "de.ppi.fuwesta.jpa.helper"})
 @Import(RootConfig.class)
 public class WebMvcConfig extends WebMvcConfigurationSupport {
 
@@ -259,10 +260,11 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
     @Override
     protected org.springframework.validation.Validator getValidator() {
         final AnnotationsConfigurer annConfig = new AnnotationsConfigurer();
-        annConfig.addCheckInitializationListener(
-                SpringCheckInitializationListener.INSTANCE);
-
-        final Validator ovalValidator = new Validator(annConfig,
+        annConfig
+                .addCheckInitializationListener(SpringCheckInitializationListener.INSTANCE);
+        final DbCheckConfigurer dbConfig = new DbCheckConfigurer();
+        dbConfig.addCheckInitializationListener(SpringCheckInitializationListener.INSTANCE);
+        final Validator ovalValidator = new Validator(annConfig, dbConfig,
                 new JPAAnnotationsConfigurer(false));
         Validator.setMessageValueFormatter(
                 new MessageLookupMessageValueFormatter(

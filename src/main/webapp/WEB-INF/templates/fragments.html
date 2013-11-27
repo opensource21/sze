@@ -1,0 +1,20 @@
+        <div th:fragment="info" th:remove="tag">
+            <div class="alert alert-success" th:text="#{${success}}"
+                th:unless="${#strings.isEmpty(success)}"></div>
+
+            <div class="alert alert-info" th:text="#{${message}}"
+                th:unless="${#strings.isEmpty(message)}"></div>
+
+            <div class="alert alert-info" th:unless="${#lists.isEmpty(messages)}">
+                <ul th:each="message : ${messages}">
+                       <li th:text="#{${message}}"></li>
+                </ul>
+            </div>
+        </div>
+        <div th:fragment="error" th:remove="tag">
+            <div class="alert alert-error" th:if="${#fields.hasGlobalErrors()}">
+                <ul th:each="error: ${#fields.globalErrors()}">
+                    <li th:utext="${error}"></li>
+                </ul>
+            </div>
+        </div>

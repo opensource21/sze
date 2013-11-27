@@ -23,8 +23,8 @@ cancelUrl
                 th:text="${zeugnis?.klasse?.calculateKlassenname(zeugnis.schulhalbjahr.jahr)}"></span>
             im Hj: <span th:remove="tag" th:text="${zeugnis.schulhalbjahr}"></span>)
         </h4>
-        <form class="well form-horizontal" method="post"
-            th:object="${zeugnis}">
+        <form class="well form-horizontal" method="post" th:object="${zeugnis}">
+            <div th:replace="/fragments::error"></div>
             <input id="id" type="hidden" th:value="*{id}" name="id" />
             <input id="version" type="hidden" th:value="*{version}" name="version" />
             <input id="buBewertungsText" type="hidden" th:value="*{buBewertungsText}" name="buBewertungsText" />

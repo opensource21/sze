@@ -24,6 +24,7 @@ nextId
         (Klasse <span th:remove="tag" th:text="${bewertung?.zeugnis?.klasse?.calculateKlassenname(schulhalbjahr.jahr)}"></span>
          im Hj: <span th:remove="tag" th:text="${schulhalbjahr}"></span>)</h4>
         <form class="well form-horizontal" method="post" th:object="${bewertung}">
+            <div th:replace="/fragments::error"></div>
             <input id="prevId" type="hidden" th:value="${prevId}" name="prevId"/>
             <input id="nextId" type="hidden" th:value="${nextId}" name="nextId"/>
             <input id="type" type="hidden" th:value="${type}" name="type"/>

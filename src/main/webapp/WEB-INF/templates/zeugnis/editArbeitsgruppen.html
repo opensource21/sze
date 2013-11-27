@@ -23,8 +23,8 @@ cancelUrl
                 th:text="${zeugnis?.klasse?.calculateKlassenname(zeugnis.schulhalbjahr.jahr)}"></span>
             im Hj: <span th:remove="tag" th:text="${zeugnis.schulhalbjahr}"></span>)
         </h4>
-        <form class="well form-horizontal" method="post"
-            th:object="${zeugnis}">
+        <form class="well form-horizontal" method="post" th:object="${zeugnis}">
+            <div th:replace="/fragments::error"></div>
             <span th:remove="tag" th:each="agBewertung, stat: *{agBewertungen}">
                 <input type="hidden" th:value="*{agBewertungen[__${stat.index}__].id}" th:name="${'agBewertungen['+__${stat.index}__+'].id'}"/>
                 <input type="hidden" th:value="*{agBewertungen[__${stat.index}__].version}" th:name="${'agBewertungen['+__${stat.index}__+'].version'}"/>

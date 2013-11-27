@@ -4,7 +4,6 @@ helpMessageId - die MessageId für die Hilfe.
 success - Erfolgsmeldung
 message - ein Nachricht
 messages - eine Liste mit Meldungen.
-errors - eine Liste mit Fehlermeldungen.
  -->
 <html lang="de-DE" xmlns:th="http://www.thymeleaf.org"
     xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
@@ -74,22 +73,7 @@ errors - eine Liste mit Fehlermeldungen.
         </div>
     </div>
     <div class ="row-fluid">
-        <div class="alert alert-success" th:text="${success}"
-            th:unless="${#strings.isEmpty(success)}"></div>
-
-        <div class="alert alert-info" th:text="${message}"
-            th:unless="${#strings.isEmpty(message)}"></div>
-
-        <div class="alert alert-info" th:unless="${#lists.isEmpty(messages)}">
-            <ul th:each="message : ${messages}">
-                   <li th:text="${message}"></li>
-            </ul>
-        </div>
-        <div class="alert alert-error" th:unless="${#lists.isEmpty(errors)}">
-            <ul th:each="error: ${errors}">
-                <li th:text="${error}"></li>
-            </ul>
-        </div>
+        <div th:replace="/fragments::info"></div>
         <div layout:fragment="content" th:remove="tag">Hier wird die
             eigentlich Seite angezeigt.</div>
     </div>

@@ -27,7 +27,8 @@ deleteUrl
             im Hj: <span th:remove="tag" th:text="${schulhalbjahr}"></span>)
         </h4>
         <form class="well form-horizontal" method="post"
-            th:object="${bemerkung}">
+                th:object="${bemerkung}">
+            <div th:replace="/fragments::error"></div>
             <input id="id" type="hidden" th:value="*{id}" name="id" />
             <input id="version" type="hidden" th:value="*{version}" name="version" />
             <input id="zeugnis" type="hidden" th:value="*{zeugnis.id}" name="zeugnis" />

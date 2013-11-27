@@ -22,7 +22,7 @@
     <div layout:fragment="content">
         <div class="zeugnisNav" th:with="formId='chooseSchuelerFormTop'" th:fragment="zeugnisNav">
             <form class="form-horizontal" th:id="${formId}" method="get"
-                th:object="${zeugnis}" th:action="@{${urlShowZeugnis}}">
+                    th:object="${zeugnis}" th:action="@{${urlShowZeugnis}}">
                 Sch&uuml;ler der Klasse <span
                     th:remove="tag" th:text="${zeugnis.klasse}"></span>
                 <select class="cbauto" name="schueler_id">
