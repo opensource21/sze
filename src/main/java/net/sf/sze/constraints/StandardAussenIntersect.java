@@ -5,14 +5,14 @@
 
 package net.sf.sze.constraints;
 
-import net.sf.oval.configuration.annotation.Constraint;
-import net.sf.sze.model.zeugnis.AussenDifferenzierteBewertung;
-import net.sf.sze.model.zeugnis.Bewertung;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+
+import net.sf.oval.configuration.annotation.Constraint;
+import net.sf.sze.model.zeugnis.AussenDifferenzierteBewertung;
+import net.sf.sze.model.zeugnis.Bewertung;
 
 /**
  * Prüft ob es Schulfächer gibt die Standard- {@link Bewertung} und
