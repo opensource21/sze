@@ -27,8 +27,7 @@
         <dependency>
             <groupId>de.ppi.oss</groupId>
             <artifactId>fuwesta-core</artifactId>
-            <version>0.6</version>
-            <scope>compile</scope>
+            <version>0.7</version>
         </dependency>
         <!-- logging -->
         <dependency>
@@ -61,9 +60,9 @@
 
         <!-- Thymeleaf -->
         <dependency>
-            <groupId>nz.net.ultraq.web.thymeleaf</groupId>
+            <groupId>nz.net.ultraq.thymeleaf</groupId>
             <artifactId>thymeleaf-layout-dialect</artifactId>
-            <version>1.0.6</version>
+            <version>1.2</version>
             <scope>compile</scope>
         </dependency>
 

@@ -13,7 +13,7 @@ import net.sf.oval.configuration.annotation.AnnotationsConfigurer;
 import net.sf.oval.integration.spring.SpringCheckInitializationListener;
 import net.sf.oval.integration.spring.SpringValidator;
 import net.sf.sze.frontend.URL;
-import nz.net.ultraq.web.thymeleaf.LayoutDialect;
+import nz.net.ultraq.thymeleaf.LayoutDialect;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
