@@ -64,10 +64,11 @@ errors - eine Liste mit Fehlermeldungen.
     <div class="navbar">
         <div class="navbar-inner">
             <ul class="nav">
-                <li><a href="#" th:href="@{/admin}">Administration</a></li>
-                <li><a href="#" th:href="@{#{url.configuration.main}}">Konfiguration</a></li>
-                <!-- TODO feststellen was active ist. -->
-                <li class="active">
+                <li th:class="${#strings.contains(#httpServletRequest.getRequestURI(),'/admin/')?'active':''}">
+                    <a href="#" th:href="@{/admin}">Administration</a></li>
+                <li th:class="${#strings.contains(#httpServletRequest.getRequestURI(),'/konfig/')?'active':''}">
+                    <a href="#" th:href="@{#{url.configuration.main}}">Konfiguration</a></li>
+                <li th:class="${#strings.contains(#httpServletRequest.getRequestURI(),'/zeugnis/') or #strings.contains(#httpServletRequest.getRequestURI(),'/bewertungen/')?'active':''}">
                     <a href="#" th:href="@{#{url.zeugnispath.start(${#objects.nullSafe(halbjahr_id,0)},${#objects.nullSafe(klassen_id,0)})}}">Zeugnisse</a></li>
             </ul>
         </div>
