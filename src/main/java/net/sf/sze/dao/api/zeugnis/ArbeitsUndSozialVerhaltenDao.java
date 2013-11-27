@@ -5,6 +5,8 @@
 
 package net.sf.sze.dao.api.zeugnis;
 
+import java.util.List;
+
 import net.sf.sze.model.zeugnis.ArbeitsUndSozialVerhalten;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -15,5 +17,10 @@ import org.springframework.data.repository.PagingAndSortingRepository;
  */
 public interface ArbeitsUndSozialVerhaltenDao
         extends PagingAndSortingRepository<ArbeitsUndSozialVerhalten, Long> {
-    // Noch keine speziellen Methoden.
+    /**
+    *
+    * {@inheritDoc}
+    */
+   @Override
+   List<ArbeitsUndSozialVerhalten> findAll();
 }

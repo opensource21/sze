@@ -29,7 +29,7 @@ public class BinnenDifferenzierteBewertung extends Bewertung {
      *
      * Initiates an object of type BinnenDifferenzierteBewertung.
      */
-    BinnenDifferenzierteBewertung() {
+    public BinnenDifferenzierteBewertung() {
         super();
         setLeistungsniveau("G");
     }

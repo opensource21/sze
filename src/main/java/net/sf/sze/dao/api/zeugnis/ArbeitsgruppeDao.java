@@ -5,6 +5,8 @@
 
 package net.sf.sze.dao.api.zeugnis;
 
+import java.util.List;
+
 import net.sf.sze.model.zeugnis.Arbeitsgruppe;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -15,6 +17,12 @@ import org.springframework.data.repository.PagingAndSortingRepository;
  */
 public interface ArbeitsgruppeDao
         extends PagingAndSortingRepository<Arbeitsgruppe, Long> {
-    // Noch keine speziellen Methoden.
+
+    /**
+    *
+    * {@inheritDoc}
+    */
+   @Override
+   List<Arbeitsgruppe> findAll();
 
 }
