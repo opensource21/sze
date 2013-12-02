@@ -180,7 +180,9 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
      */
     @Override
     public void destroy() {
-        oo2pdfConverter.closeConnection();
+        if (oo2pdfConverter != null) {
+            oo2pdfConverter.closeConnection();
+        }
     }
 
     /**
