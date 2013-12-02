@@ -7,6 +7,7 @@ package net.sf.sze.checkberry.db;
 import org.junit.Test;
 
 
+
 /**
  * Testklasse zum Dumpen von Daten.
  *
@@ -17,9 +18,21 @@ public class DumpTest extends AbstractSzeDbTestCase {
      * Erzeugt die DTD.
      * @throws Exception bei Fehlern
      */
-    @Test
+    //@Test
     public void createDTD() throws Exception  {
-        getTestHandler().createCleanDtd("/src/test/resource/net/sf/sze/checkberry/db/sze-db.dtd");
+        getTestHandler().createCleanDtd("./src/test/resources/net/sf/sze/checkberry/db/sze-db.dtd");
+    }
+
+    /**
+     * Exportierte die Stammdaten.
+     * @throws Exception bei Fehlern.
+     */
+    @Test
+    public void dumpStammdaten() throws Exception  {
+        getTestHandler().dumpTables("./src/test/resources/net/sf/sze/stammdaten.xml",
+                "ARBEITSGRUPPE", "ARBEITS_UND_SOZIAL_VERHALTEN",
+                "BEMERKUNGS_BAUSTEIN", "SCHULAMT",
+                "SCHULAMTS_BEMERKUNGS_BAUSTEIN", "SCHULFACH", "ZEUGNIS_ART");
     }
 
 }

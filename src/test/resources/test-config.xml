@@ -7,9 +7,7 @@
       <bean id="resourceLoader" class=
         "de.conceptpeople.checkerberry.db.spring.jpa.bridge.resource.SpringClasspathResourceLoader"></bean>
     <bean id="databaseConnector" class=
-        "de.conceptpeople.checkerberry.db.spring.jpa.bridge.database.SpringJPADatabaseConnector">
-        <constructor-arg ref="entityManagerFactory"></constructor-arg>
-        <constructor-arg ref="dataSource"></constructor-arg>
+        "net.sf.sze.checkberry.db.SzeDatabaseConnector">
     </bean>
 
 </beans>
