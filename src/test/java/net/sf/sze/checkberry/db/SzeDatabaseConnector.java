@@ -4,9 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Map;
 
-import javax.annotation.Resource;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.sql.DataSource;
 
 import org.slf4j.Logger;
@@ -25,13 +23,23 @@ public class SzeDatabaseConnector implements DatabaseConnector {
     private static final Logger LOG = LoggerFactory.getLogger(
             SzeDatabaseConnector.class);
 
-    @PersistenceContext
-    private EntityManager entityManager;
-    @Resource
-    private DataSource dataSource;
+    private final EntityManager entityManager;
+    private final DataSource dataSource;
+
     private String jdbcUrl = null;
 
 
+    /**
+     * Initiates an object of type SzeDatabaseConnector.
+     * @param entityManager der EntityManager, kann null sein.
+     * @param dataSource die Datenbank.
+     */
+    public SzeDatabaseConnector(EntityManager entityManager,
+            DataSource dataSource) {
+        super();
+        this.entityManager = entityManager;
+        this.dataSource = dataSource;
+    }
 
     /**
      * {@inheritDoc}

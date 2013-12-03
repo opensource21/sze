@@ -35,21 +35,22 @@ public class AbstractSzeDbTestCase {
 
     /**
      * Initialisiert die {@link CheckerberryDbEnvironment}.
+     * @throws Exception Subklassen sollen die Möglichkeit haben Fehler zu werfen.
      */
     @Before
-    public void setUp() {
-      environment =  SpringCheckerberryDbEnvironmentCreator.createEnvironment(
-              new SzeDatabaseDescriptionCallback(), new SzeDbConfigurationCallback());
-      environment.setUp(this);
+    public void setUp() throws Exception {
+        environment = SpringCheckerberryDbEnvironmentCreator.createEnvironment();
+        environment.setUp(this);
     }
 
     /**
      * Fährt die {@link CheckerberryDbEnvironment} runter.
+     * @throws Exception Subklassen sollen die Möglichkeit haben Fehler zu werfen.
      */
     @After
-    public void tearDown() {
-      environment.tearDown();
-      environment = null;
+    public void tearDown() throws Exception  {
+        environment.tearDown();
+        environment = null;
     }
 
     /**

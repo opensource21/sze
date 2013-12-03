@@ -3,11 +3,6 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans.xsd">
-      <bean class="net.sf.sze.config.RootConfig"/>
-      <bean id="resourceLoader" class=
-        "de.conceptpeople.checkerberry.db.spring.jpa.bridge.resource.SpringClasspathResourceLoader"></bean>
-    <bean id="databaseConnector" class=
-        "net.sf.sze.checkberry.db.SzeDatabaseConnector">
-    </bean>
-
+    <bean class="net.sf.sze.config.RootConfig" />
+    <bean id="bridgeContainer" class="net.sf.sze.checkberry.db.SzeBridgeContainer"/>
 </beans>
