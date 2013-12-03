@@ -133,24 +133,54 @@
             <artifactId>checkerberry-db</artifactId>
             <version>${checkerberry.version}</version>
             <scope>test</scope>
+            <exclusions>
+                <!-- Exclude Commons Logging in favor of SLF4j -->
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>de.conceptpeople.checkerberry</groupId>
             <artifactId>checkerberry-db-spring-bridge</artifactId>
             <version>${checkerberry.version}</version>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+            </exclusions>
+
          </dependency>
         <dependency>
             <groupId>de.conceptpeople.checkerberry</groupId>
             <artifactId>checkerberry-db-spring-jpa-bridge</artifactId>
             <version>${checkerberry.version}</version>
             <scope>test</scope>
-         </dependency>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
         <dependency>
             <groupId>de.conceptpeople.checkerberry</groupId>
             <artifactId>checkerberry-spring-integration</artifactId>
             <version>${checkerberry.version}</version>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+            </exclusions>
          </dependency>
     </dependencies>
     <build>
