@@ -37,6 +37,7 @@ import net.sf.sze.util.ResultContainer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -50,8 +51,8 @@ import org.springframework.transaction.annotation.Transactional;
  * @author niels
  *
  */
+@Service
 @Transactional(readOnly = false)
-//TODO Test schreiben!
 public class ZeugnisInitialisierungServiceImpl implements ZeugnisInitialierungsService {
 
     /**

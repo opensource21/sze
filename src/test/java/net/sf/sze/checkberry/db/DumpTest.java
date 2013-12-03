@@ -27,12 +27,21 @@ public class DumpTest extends AbstractSzeDbTestCase {
      * Exportierte die Stammdaten.
      * @throws Exception bei Fehlern.
      */
-    @Test
+    //@Test
     public void dumpStammdaten() throws Exception  {
         getTestHandler().dumpTables("./src/test/resources/net/sf/sze/stammdaten.xml",
                 "ARBEITSGRUPPE", "ARBEITS_UND_SOZIAL_VERHALTEN",
                 "BEMERKUNGS_BAUSTEIN", "SCHULAMT",
                 "SCHULAMTS_BEMERKUNGS_BAUSTEIN", "SCHULFACH", "ZEUGNIS_ART");
+    }
+
+    /**
+     * Methode um einmal tetsweise was zu dumpen.
+     */
+    @Test
+    public void dumpTest() {
+        getTestHandler().dumpTables("./src/test/resources/net/sf/sze/test.xml",
+                "SCHULHALBJAHR");
     }
 
 }

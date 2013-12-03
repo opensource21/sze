@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE dataset PUBLIC "-//SZE_TEAM//DTD sze-db 1.0//EN" "checkberry/db/sze-db.dtd">
+<dataset>
+    <INCLUDE FILE="net/sf/sze/stammdaten.xml" LOCATION="CLASSPATH"/>
+    <!-- TODO Funktion um Klassenalter fix zu machen. -->
+    <KLASSE ID="1" GESCHLOSSEN="false" JAHRGANG="2003" SUFFIX="" VERSION="1"/>
+    <SCHULHALBJAHR ID="1" HALBJAHR="0" SELECTABLE="true" VERSION="1" JAHR="2013"/>
+    <SCHULHALBJAHR ID="2" HALBJAHR="1" SELECTABLE="true" VERSION="1" JAHR="2013"/>
+    <ZEUGNIS_FORMULAR SCHULHALBJAHR_ID="1" TEMPLATE_FILE_NAME="egal"
+    KLASSE_ID="1" ID="1" AUSGABE_DATUM="2013-01-31" BESCHREIBUNG="2013 erstes Halbjahr"
+    VERSION="1" NACHTEILS_AUSGLEICHS_DATUM="2012-09-14"/>
+
+</dataset>

@@ -36,7 +36,7 @@ public class SzeDatabaseDescriptionCallback implements
 
 
         //Stammdaten
-        databaseDescription.addTableDescription("KLASSE", Cacheable.Yes, "ID");
+        databaseDescription.addTableDescription("KLASSE", Cacheable.Yes, "JAHRGANG", "SUFFIX");
         databaseDescription.addTableDescription("SCHUELER", Cacheable.Yes, "ID");
 
         //Zeugnisdaten
