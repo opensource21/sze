@@ -1,7 +1,7 @@
 dbs
 target/*
 .svn
-*.log
+/logs/*
 /target
 /oofiles
 /pdffiles

@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-
+    <!-- Insert the current time formatted as "yyyyMMdd'T'HHmmss" under
+       the key "bySecond" into the logger context. This value will be
+       available to all subsequent configuration elements. -->
+    <timestamp key="bySecond" datePattern="yyyyMMdd'T'HHmmss"/>
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 
         <!-- encoders are assigned by default the type ch.qos.logback.classic.encoder.PatternLayoutEncoder -->
@@ -12,22 +15,9 @@
     </appender>
 
     <appender name="FILE"
-        class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>sze_test.log</file>
+                class="ch.qos.logback.core.FileAppender">
+        <file>logs/test/sze.log</file>
         <append>false</append>
-
-        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-            <fileNamePattern>tests.%i.log</fileNamePattern>
-            <minIndex>1</minIndex>
-            <maxIndex>3</maxIndex>
-        </rollingPolicy>
-
-        <triggeringPolicy
-            class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-            <maxFileSize>150MB</maxFileSize>
-        </triggeringPolicy>
-
-
         <!-- encoders are assigned by default the type ch.qos.logback.classic.encoder.PatternLayoutEncoder -->
         <encoder>
             <pattern>
@@ -38,21 +28,9 @@
 
 
     <appender name="THYMELEAF"
-        class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>thyemleaf.log</file>
+                class="ch.qos.logback.core.FileAppender">
+        <file>logs/test/thymeleaf.log</file>
         <append>false</append>
-
-        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-            <fileNamePattern>tests.%i.log</fileNamePattern>
-            <minIndex>1</minIndex>
-            <maxIndex>3</maxIndex>
-        </rollingPolicy>
-
-        <triggeringPolicy
-            class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-            <maxFileSize>50MB</maxFileSize>
-        </triggeringPolicy>
-
 
         <!-- encoders are assigned by default the type ch.qos.logback.classic.encoder.PatternLayoutEncoder -->
         <encoder>
@@ -64,7 +42,7 @@
 
     <appender name="CHECKERBERRY"
         class="ch.qos.logback.core.FileAppender">
-        <file>checkerberry.log</file>
+        <file>logs/test/checkerberry.log</file>
         <append>false</append>
         <!-- encoders are assigned by default the type ch.qos.logback.classic.encoder.PatternLayoutEncoder -->
         <encoder>
