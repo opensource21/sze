@@ -43,6 +43,19 @@ public class ZeugnisInitialisierungServiceImplIntegrationTest extends AbstractSz
 
     }
 
+    /**
+     * Test method for
+     * {@link net.sf.sze.service.impl.ZeugnisInitialisierungServiceImpl#initZeugnis(net.sf.sze.model.zeugnis.ZeugnisFormular)}.
+     * @throws Exception Fehler
+     */
+    @Test
+    public void testInitZeugnisZweitesHalbjahr() throws Exception {
+        zeugnisInitialierungsService.initZeugnis(zeugnisFormularDao.findOne(Long.valueOf(2)));
+//        getTestHandler().createDiffReport("initZeugnisAbweichung.html");
+        //dumpResult();
+        getTestHandler().assertEqualsExpected();
+
+    }
 
     /**
      * Methode zum Dumpen des erwarteten Ergebnis.
@@ -51,7 +64,8 @@ public class ZeugnisInitialisierungServiceImplIntegrationTest extends AbstractSz
     private void dumpResult() {
         getTestHandler().dumpTables(
                 "./src/test/resources/net/sf/sze/service/impl/"
-                + "ZeugnisInitialisierungServiceImplIntegrationTest_testInitZeugnis_result.xml",
+                + "ZeugnisInitialisierungServiceImplIntegrationTest_"
+                + "testInitZeugnisZweitesHalbjahr_result.xml",
                 "ZEUGNIS", "AG_BEWERTUNG", "AV_SV_BEWERTUNG", "BEWERTUNG");
     }
 

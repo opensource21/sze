@@ -2,7 +2,6 @@
 <!DOCTYPE dataset PUBLIC "-//SZE_TEAM//DTD sze-db 1.0//EN" "checkberry/db/sze-db.dtd">
 <dataset>
     <INCLUDE FILE="net/sf/sze/stammdaten.xml" LOCATION="CLASSPATH" />
-    <!-- TODO Funktion um Klassenalter fix zu machen. -->
     <KLASSE ID="1" GESCHLOSSEN="false" JAHRGANG="1999" SUFFIX=""
         VERSION="0" />
     <SCHUELER ID="1" VERSION="0" GEBURTSTAG="1992-06-15" GEBURTSORT="Hamburg" KLASSE_ID="1" VORNAME="ERWIN" GESCHLECHT="0" NAME="MUSTERMANN" />
