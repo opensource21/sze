@@ -33,10 +33,22 @@ public class ZeugnisInitialisierungServiceImplIntegrationTest extends AbstractSz
     /**
      * Test method for
      * {@link net.sf.sze.service.impl.ZeugnisInitialisierungServiceImpl#initZeugnis(net.sf.sze.model.zeugnis.ZeugnisFormular)}.
+     * @throws Exception Fehler
      */
     @Test
-    public void testInitZeugnis() {
+    public void testInitZeugnis() throws Exception {
         zeugnisInitialierungsService.initZeugnis(zeugnisFormularDao.findOne(Long.valueOf(1)));
+//        getTestHandler().createDiffReport("initZeugnisAbweichung.html");
+        getTestHandler().assertEqualsExpected();
+
+    }
+
+
+    /**
+     * Methode zum Dumpen des erwarteten Ergebnis.
+     */
+    @SuppressWarnings("unused")
+    private void dumpResult() {
         getTestHandler().dumpTables(
                 "./src/test/resources/net/sf/sze/service/impl/"
                 + "ZeugnisInitialisierungServiceImplIntegrationTest_testInitZeugnis_result.xml",

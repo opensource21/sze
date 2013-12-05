@@ -7,6 +7,7 @@ package net.sf.sze.checkberry.db;
 import de.conceptpeople.checkerberry.db.bridge.context.Cacheable;
 import de.conceptpeople.checkerberry.db.bridge.context.DatabaseDescription;
 import de.conceptpeople.checkerberry.db.bridge.context.DatabaseDescriptionCallback;
+import de.conceptpeople.checkerberry.db.bridge.context.DatabaseTableDescription;
 
 
 /**
@@ -41,18 +42,26 @@ public class SzeDatabaseDescriptionCallback implements
 
         //Zeugnisdaten
         databaseDescription.addTableDescription("SCHULHALBJAHR", Cacheable.No, "ID");
-        databaseDescription.addTableDescription("ZEUGNIS", Cacheable.No, "ID");
+        databaseDescription.addTableDescription("ZEUGNIS", Cacheable.No,
+                "FORMULAR_ID", "KLASSE_ID", "SCHUELER_ID");
         databaseDescription.addTableDescription("ZEUGNIS_FORMULAR", Cacheable.No, "ID");
 
         //Bewertungen
-        databaseDescription.addTableDescription("AG_BEWERTUNG", Cacheable.No, "ID");
-        databaseDescription.addTableDescription("AV_SV_BEWERTUNG", Cacheable.No, "ID");
-        databaseDescription.addTableDescription("BEWERTUNG", Cacheable.No, "ID");
+        databaseDescription.addTableDescription("AG_BEWERTUNG", Cacheable.No,
+                "ARBEITSGRUPPE_ID", "ZEUGNIS_ID");
+        databaseDescription.addTableDescription("AV_SV_BEWERTUNG", Cacheable.No,
+                "ARBEITS_UND_SOZIAL_VERHALTEN_ID", "ZEUGNIS_ID");
+        databaseDescription.addTableDescription("BEWERTUNG", Cacheable.No,
+                "SCHULFACH_ID", "ZEUGNIS_ID");
 
         databaseDescription.addTableDescription("BEMERKUNG", Cacheable.No, "ID");
         databaseDescription.addTableDescription("SCHULAMTS_BEMERKUNG", Cacheable.No, "ID");
         databaseDescription.addTableDescription("SOLBEWERTUNGS_TEXT", Cacheable.No, "ID");
 
+        for (DatabaseTableDescription databaseTableDescription
+                : databaseDescription.getTableDescriptions()) {
+            databaseTableDescription.addExcludedColumns("VERSION");
+        }
     }
 
 }
