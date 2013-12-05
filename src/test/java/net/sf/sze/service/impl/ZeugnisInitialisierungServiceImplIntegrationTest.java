@@ -36,7 +36,7 @@ public class ZeugnisInitialisierungServiceImplIntegrationTest extends AbstractSz
      * @throws Exception Fehler
      */
     @Test
-    public void testInitZeugnis() throws Exception {
+    public void testInitZeugnisErstesHalbjahr() throws Exception {
         zeugnisInitialierungsService.initZeugnis(zeugnisFormularDao.findOne(Long.valueOf(1)));
 //        getTestHandler().createDiffReport("initZeugnisAbweichung.html");
         getTestHandler().assertEqualsExpected();
