@@ -1,5 +1,6 @@
 package net.sf.sze.service.impl;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -177,6 +178,9 @@ public class ZeugnisInitialisierungServiceImpl implements ZeugnisInitialierungsS
             zeugnis.setZeugnisArt(zeugnisArt); //Owning
             zeugnis.setFormular(formular); //Owning
             zeugnis.setKlasse(klasse); //Owning
+            zeugnis.setAgBewertungen(new ArrayList<AgBewertung>());
+            zeugnis.setAvSvBewertungen(new ArrayList<AvSvBewertung>());
+            zeugnis.setBewertungen(new ArrayList<Bewertung>());
             zeugnisDao.save(zeugnis);
         }
 
@@ -269,6 +273,7 @@ public class ZeugnisInitialisierungServiceImpl implements ZeugnisInitialierungsS
             final AgBewertung newAgBw;
             if (arbeitsgruppe.convertKlasenStufenToList().contains(klassenstufe)) {
                 newAgBw = new AgBewertung();
+                newAgBw.setTeilgenommen(Boolean.FALSE);
                 newAgBw.setArbeitsgruppe(arbeitsgruppe);
                 newAgBw.setZeugnis(zeugnis);
             } else {

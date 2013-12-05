@@ -37,6 +37,10 @@ public class ZeugnisInitialisierungServiceImplIntegrationTest extends AbstractSz
     @Test
     public void testInitZeugnis() {
         zeugnisInitialierungsService.initZeugnis(zeugnisFormularDao.findOne(Long.valueOf(1)));
+        getTestHandler().dumpTables(
+                "./src/test/resources/net/sf/sze/service/impl/"
+                + "ZeugnisInitialisierungServiceImplIntegrationTest_testInitZeugnis_result.xml",
+                "ZEUGNIS", "AG_BEWERTUNG", "AV_SV_BEWERTUNG", "BEWERTUNG");
     }
 
 }

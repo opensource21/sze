@@ -73,7 +73,7 @@ public abstract class Bewertung extends VersionedModel implements Serializable,
     @Column(name = "sonder_note", nullable = false, length = 255)
     @CheckWith(value = SondernoteCheck.class,
             message = "validation.bewertung.sonderNote.invalid")
-    private String sonderNote;
+    private String sonderNote = "";
 
     /** The relevant. */
     @Column(nullable = false)
