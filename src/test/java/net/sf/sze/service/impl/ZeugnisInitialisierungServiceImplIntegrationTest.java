@@ -4,6 +4,8 @@
 // (c) SZE-Development Team
 package net.sf.sze.service.impl;
 
+import java.sql.SQLException;
+
 import javax.annotation.Resource;
 
 import net.sf.sze.checkberry.db.AbstractSzeDbTestCase;
@@ -12,6 +14,8 @@ import net.sf.sze.model.zeugnis.ZeugnisFormular;
 import net.sf.sze.service.api.ZeugnisInitialierungsService;
 
 import org.junit.Test;
+
+import de.conceptpeople.checkerberry.db.bridge.context.ParameterContext;
 
 
 /**
@@ -37,10 +41,22 @@ public class ZeugnisInitialisierungServiceImplIntegrationTest extends AbstractSz
      */
     @Test
     public void testInitZeugnisErstesHalbjahr() throws Exception {
-        zeugnisInitialierungsService.initZeugnis(zeugnisFormularDao.findOne(Long.valueOf(1)));
+        testInitZeugnis(1);
+    }
+
+    /**
+     * @param formularId
+     * @throws SQLException
+     */
+    private void testInitZeugnis(long formularId) throws SQLException {
+        final ZeugnisFormular zeugnisFormular = zeugnisFormularDao.findOne(
+                Long.valueOf(formularId));
+        zeugnisInitialierungsService.initZeugnis(zeugnisFormular);
+        ParameterContext parameterContext = getTestHandler().getParameterContext();
+        parameterContext.addParameter("formularId", zeugnisFormular.getId());
+        parameterContext.addParameter("halbjahrId", zeugnisFormular.getSchulhalbjahr().getId());
 //        getTestHandler().createDiffReport("initZeugnisAbweichung.html");
         getTestHandler().assertEqualsExpected();
-
     }
 
     /**
@@ -50,11 +66,7 @@ public class ZeugnisInitialisierungServiceImplIntegrationTest extends AbstractSz
      */
     @Test
     public void testInitZeugnisZweitesHalbjahr() throws Exception {
-        zeugnisInitialierungsService.initZeugnis(zeugnisFormularDao.findOne(Long.valueOf(2)));
-//        getTestHandler().createDiffReport("initZeugnisAbweichung.html");
-        //dumpResult();
-        getTestHandler().assertEqualsExpected();
-
+        testInitZeugnis(2);
     }
 
     /**
