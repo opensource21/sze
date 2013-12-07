@@ -105,7 +105,9 @@ public class ZeugnisInitialisierungServiceImplIntegrationTest extends AbstractSz
               + " <li>Bewertung für EDV wurde konvertiert von StandardBewertung nach AussenDifferenzierteBewertung</li>\n\t"
               + " <li>Bewertung für Textiles Werken wurde ergänzt.</li>\n\t"
               + " <li>Arbeitsgruppe AG Ballspiele wurde hinzugefügt.</li>\n\t"
-              + " <li>Arbeitsgruppe AG Theater wurde gelöscht.</li></ul>",
+              + " <li>Arbeitsgruppe AG Theater wurde gelöscht.</li>\n\t"
+              + " <li>Arbeits- und Sozialverhalten Lern-/Leistungsbereitschaft / Mitarbeit wurde gelöscht.</li>\n\t"
+              + " <li>Arbeits- und Sozialverhalten Ziel- und Ergebnisorientierung wurde hinzugefügt.</li></ul>",
               "Für den Schüler MUSTERFRAU, ERNA und das Halbjahr 2012/13 1. Hj. existiert schon ein Zeugnis.<ul>\n\t"
               + " <li>Bewertung für Deutsch wurde konvertiert von AussenDifferenzierteBewertung nach BinnenDifferenzierteBewertung</li>\n\t"
               + " <li>Bewertung für Englisch wurde konvertiert von AussenDifferenzierteBewertung nach StandardBewertung</li>\n\t"
@@ -116,7 +118,9 @@ public class ZeugnisInitialisierungServiceImplIntegrationTest extends AbstractSz
               + " <li>Bewertung für EDV wurde konvertiert von StandardBewertung nach AussenDifferenzierteBewertung</li>\n\t"
               + " <li>Bewertung für Textiles Werken wurde ergänzt.</li>\n\t"
               + " <li>Arbeitsgruppe AG Ballspiele wurde hinzugefügt.</li>\n\t"
-              + " <li>Arbeitsgruppe AG Theater wurde gelöscht.</li></ul>");
+              + " <li>Arbeitsgruppe AG Theater wurde gelöscht.</li>\n\t"
+              + " <li>Arbeits- und Sozialverhalten Lern-/Leistungsbereitschaft / Mitarbeit wurde gelöscht.</li>\n\t"
+              + " <li>Arbeits- und Sozialverhalten Ziel- und Ergebnisorientierung wurde hinzugefügt.</li></ul>");
          //J+
 //        dumpResult();
         getTestHandler().assertEqualsExpected();
