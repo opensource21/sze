@@ -4,6 +4,8 @@
 // (c) SZE-Development Team
 package net.sf.sze.checkberry.db;
 
+import org.junit.Test;
+
 
 
 
@@ -41,6 +43,14 @@ public class DumpIntegrationTest extends AbstractSzeDbTestCase {
     public void dumpTest() {
         getTestHandler().dumpTables("./src/test/resources/net/sf/sze/test.xml",
                 "SCHULHALBJAHR");
+    }
+
+    /**
+     * Methode damit man nicht immer Warnungen bekommt.
+     */
+    @Test
+    public void testNothing() {
+        //Testet nichts.
     }
 
 }

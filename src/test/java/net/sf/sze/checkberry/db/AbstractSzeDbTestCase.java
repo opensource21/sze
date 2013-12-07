@@ -29,7 +29,7 @@ import de.conceptpeople.checkerberry.db.spring.integration.TestMethodNameResolvi
     DependencyInjectionTestExecutionListener.class,
     TestMethodNameResolvingExecutionListener.class,
     ApplicationContextResolvingExecutionListener.class })
-public class AbstractSzeDbTestCase {
+public abstract class AbstractSzeDbTestCase {
 
     private CheckerberryDbEnvironment environment;
 

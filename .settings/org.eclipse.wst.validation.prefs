@@ -6,4 +6,5 @@ eclipse.preferences.version=1
 override=true
 suspend=false
 vals/org.eclipse.wst.html.core.HTMLValidator/global=FF01
+vals/org.eclipse.wst.xml.core.xml/groups=0107include06111contentType128org.eclipse.core.runtime.xmlT111contentType134org.eclipse.wst.xml.core.xmlsourceT111contentType134org.eclipse.wst.xml.core.xslsourceT111contentType134org.eclipse.jst.jsp.core.tldsourceT07fileext03xmlF04file115test-config.xmlF010107exclude06113projectNature134org.eclipse.jst.j2ee.ejb.EJBNature113projectNature130org.eclipse.jst.j2ee.EARNature04file08.projectT0104file110.classpathT0104file110.settings/T0204file115test-config.xmlF01
 vf.version=3
