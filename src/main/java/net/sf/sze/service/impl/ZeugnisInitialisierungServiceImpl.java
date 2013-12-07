@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import net.sf.sze.dao.api.stammdaten.SchuelerDao;
 import net.sf.sze.dao.api.zeugnis.AgBewertungDao;
@@ -70,6 +72,9 @@ public class ZeugnisInitialisierungServiceImpl implements ZeugnisInitialierungsS
     @Value("${schuljahre.max}")
     private int maximalesSchuljahr;
 
+
+    @PersistenceContext
+    private EntityManager em;
 
     /**
      * Dao für die {@link Zeugnis}.
@@ -330,10 +335,12 @@ public class ZeugnisInitialisierungServiceImpl implements ZeugnisInitialierungsS
                             append(schulfach.getName()).append(
                             " wurde konvertiert von ")
                             .append(oldBw.getClass().getSimpleName())
-                            .append(" nach ").append(newBw.getClass().getSimpleName());
+                            .append(" nach ").append(newBw.getClass().getSimpleName())
+                            .append("</li>");
                     zeugnis.getBewertungen().remove(oldBw);
                     oldBw.setZeugnis(null);
                     bewertungDao.delete(oldBw);
+                    em.flush();
                     newBw.setLeistungNurSchwachAusreichend(oldBw.getLeistungNurSchwachAusreichend());
                     newBw.setNote(oldBw.getNote());
                     newBw.setSonderNote(oldBw.getSonderNote());

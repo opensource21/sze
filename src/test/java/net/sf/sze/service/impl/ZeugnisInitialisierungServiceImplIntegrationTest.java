@@ -81,7 +81,40 @@ public class ZeugnisInitialisierungServiceImplIntegrationTest extends AbstractSz
         getTestHandler().assertEqualsExpected();
     }
 
+    /**
+     * Test method for
+     * {@link net.sf.sze.service.impl.ZeugnisInitialisierungServiceImpl#initZeugnis(net.sf.sze.model.zeugnis.ZeugnisFormular)}.
+     * @throws Exception Fehler
+     */
+    @Test
+    //CSOFF: LineLength Ist so übersichtlicher
+    public void testInitZeugnisUpdate() throws Exception {
+        final ZeugnisFormular zeugnisFormular = zeugnisFormularDao.findOne(
+                Long.valueOf(1));
+        ResultContainer result = zeugnisInitialierungsService.initZeugnis(zeugnisFormular);
+        assertThat(result.getErrors()).isEmpty();
+        //J-
+        assertThat(result.getMessages()).hasSize(2).contains(
+              "Für den Schüler MUSTERMANN, ERWIN und das Halbjahr 2012/13 1. Hj. existiert schon ein Zeugnis.<ul>\n\t"
+              + " <li>Bewertung für Deutsch wurde konvertiert von AussenDifferenzierteBewertung nach BinnenDifferenzierteBewertung</li>\n\t"
+              + " <li>Bewertung für Englisch wurde konvertiert von AussenDifferenzierteBewertung nach StandardBewertung</li>\n\t"
+              + " <li>Bewertung für Naturwissenschaften wurde konvertiert von BinnenDifferenzierteBewertung nach StandardBewertung</li>\n\t"
+              + " <li>Bewertung für Gesellschaftslehre wurde konvertiert von BinnenDifferenzierteBewertung nach AussenDifferenzierteBewertung</li>\n\t"
+              + " <li>Bewertung für Kunst wurde konvertiert von StandardBewertung nach BinnenDifferenzierteBewertung</li>\n\t"
+              + " <li>Bewertung für EDV wurde konvertiert von StandardBewertung nach AussenDifferenzierteBewertung</li></ul>",
+              "Für den Schüler MUSTERFRAU, ERNA und das Halbjahr 2012/13 1. Hj. existiert schon ein Zeugnis.<ul>\n\t"
+              + " <li>Bewertung für Deutsch wurde konvertiert von AussenDifferenzierteBewertung nach BinnenDifferenzierteBewertung</li>\n\t"
+              + " <li>Bewertung für Englisch wurde konvertiert von AussenDifferenzierteBewertung nach StandardBewertung</li>\n\t"
+              + " <li>Bewertung für Naturwissenschaften wurde konvertiert von BinnenDifferenzierteBewertung nach StandardBewertung</li>\n\t"
+              + " <li>Bewertung für Gesellschaftslehre wurde konvertiert von BinnenDifferenzierteBewertung nach AussenDifferenzierteBewertung</li>\n\t"
+              + " <li>Bewertung für Kunst wurde konvertiert von StandardBewertung nach BinnenDifferenzierteBewertung</li>\n\t"
+              + " <li>Bewertung für EDV wurde konvertiert von StandardBewertung nach AussenDifferenzierteBewertung</li></ul>");
+         //J+
+//        dumpResult();
+        getTestHandler().assertEqualsExpected();
 
+    }
+    //CSON: LineLength
 
 
     /**
@@ -92,7 +125,7 @@ public class ZeugnisInitialisierungServiceImplIntegrationTest extends AbstractSz
         getTestHandler().dumpTables(
                 "./src/test/resources/net/sf/sze/service/impl/"
                 + "ZeugnisInitialisierungServiceImplIntegrationTest_"
-                + "testInitZeugnisErstesHalbjahr_result.xml",
+                + "testInitZeugnisUpdate_result.xml",
                 "ZEUGNIS", "AG_BEWERTUNG", "AV_SV_BEWERTUNG", "BEWERTUNG");
     }
 
