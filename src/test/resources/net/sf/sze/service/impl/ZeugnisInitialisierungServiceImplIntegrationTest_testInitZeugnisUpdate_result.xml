@@ -11,13 +11,13 @@
   <AV_SV_BEWERTUNG ID="ge 0.0" VERSION="0" ARBEITS_UND_SOZIAL_VERHALTEN_ID="10" ZEUGNIS_ID="#{zeugnis1}"/>
   <AV_SV_BEWERTUNG ID="ge 0.0" VERSION="0" ARBEITS_UND_SOZIAL_VERHALTEN_ID="1" ZEUGNIS_ID="#{zeugnis2}"/>
   <AV_SV_BEWERTUNG ID="ge 0.0" VERSION="0" ARBEITS_UND_SOZIAL_VERHALTEN_ID="10" ZEUGNIS_ID="#{zeugnis2}"/>
-  <BEWERTUNG CLASS="net.sf.sze.zeugnis.AussenDifferenzierteBewertung" ID="ge 0.0" VERSION="0" LEISTUNG_NUR_SCHWACH_AUSREICHEND="false" LEISTUNGSNIVEAU="G" RELEVANT="true" SONDER_NOTE="" SCHULFACH_ID="1" ZEUGNIS_ID="#{zeugnis1}"/>
+  <BEWERTUNG CLASS="net.sf.sze.zeugnis.AussenDifferenzierteBewertung" ID="19" VERSION="0" LEISTUNG_NUR_SCHWACH_AUSREICHEND="false" LEISTUNGSNIVEAU="E" RELEVANT="true" SONDER_NOTE="TEST" SCHULFACH_ID="1" ZEUGNIS_ID="#{zeugnis1}"/>
   <BEWERTUNG CLASS="net.sf.sze.zeugnis.BinnenDifferenzierteBewertung" ID="ge 0.0" VERSION="0" LEISTUNG_NUR_SCHWACH_AUSREICHEND="false" LEISTUNGSNIVEAU="G" RELEVANT="true" SONDER_NOTE="" SCHULFACH_ID="2" ZEUGNIS_ID="#{zeugnis1}"/>
   <BEWERTUNG CLASS="net.sf.sze.zeugnis.StandardBewertung" ID="ge 0.0" VERSION="0" LEISTUNG_NUR_SCHWACH_AUSREICHEND="false" RELEVANT="true" SONDER_NOTE="" SCHULFACH_ID="3" ZEUGNIS_ID="#{zeugnis1}"/>
-  <BEWERTUNG CLASS="net.sf.sze.zeugnis.BinnenDifferenzierteBewertung" ID="ge 0.0" VERSION="0" LEISTUNG_NUR_SCHWACH_AUSREICHEND="false" LEISTUNGSNIVEAU="G" RELEVANT="true" SONDER_NOTE="" SCHULFACH_ID="4" ZEUGNIS_ID="#{zeugnis1}"/>
+  <BEWERTUNG CLASS="net.sf.sze.zeugnis.BinnenDifferenzierteBewertung" ID="22" VERSION="0" LEISTUNG_NUR_SCHWACH_AUSREICHEND="false" LEISTUNGSNIVEAU="Z" RELEVANT="true" SONDER_NOTE="TEST2" SCHULFACH_ID="4" ZEUGNIS_ID="#{zeugnis1}"/>
   <BEWERTUNG CLASS="net.sf.sze.zeugnis.StandardBewertung" ID="ge 0.0" VERSION="0" LEISTUNG_NUR_SCHWACH_AUSREICHEND="false" RELEVANT="true" SONDER_NOTE="" SCHULFACH_ID="5" ZEUGNIS_ID="#{zeugnis1}"/>
   <BEWERTUNG CLASS="net.sf.sze.zeugnis.AussenDifferenzierteBewertung" ID="ge 0.0" VERSION="0" LEISTUNG_NUR_SCHWACH_AUSREICHEND="false" LEISTUNGSNIVEAU="G" RELEVANT="true" SONDER_NOTE="" SCHULFACH_ID="6" ZEUGNIS_ID="#{zeugnis1}"/>
-  <BEWERTUNG CLASS="net.sf.sze.zeugnis.StandardBewertung" ID="ge 0.0" VERSION="0" LEISTUNG_NUR_SCHWACH_AUSREICHEND="false" RELEVANT="false" SONDER_NOTE="" SCHULFACH_ID="10" ZEUGNIS_ID="#{zeugnis1}"/>
+  <BEWERTUNG CLASS="net.sf.sze.zeugnis.StandardBewertung" ID="ge 0.0" VERSION="0" LEISTUNG_NUR_SCHWACH_AUSREICHEND="false" RELEVANT="false" SONDER_NOTE="" SCHULFACH_ID="13" ZEUGNIS_ID="#{zeugnis1}"/>
   <BEWERTUNG CLASS="net.sf.sze.zeugnis.BinnenDifferenzierteBewertung" ID="ge 0.0" VERSION="0" LEISTUNG_NUR_SCHWACH_AUSREICHEND="false" LEISTUNGSNIVEAU="G" RELEVANT="false" SONDER_NOTE="" SCHULFACH_ID="11" ZEUGNIS_ID="#{zeugnis1}"/>
   <BEWERTUNG CLASS="net.sf.sze.zeugnis.AussenDifferenzierteBewertung" ID="ge 0.0" VERSION="0" LEISTUNG_NUR_SCHWACH_AUSREICHEND="false" LEISTUNGSNIVEAU="G" RELEVANT="false" SONDER_NOTE="" SCHULFACH_ID="12" ZEUGNIS_ID="#{zeugnis1}"/>
 
@@ -27,7 +27,7 @@
   <BEWERTUNG CLASS="net.sf.sze.zeugnis.BinnenDifferenzierteBewertung" ID="ge 0.0" VERSION="0" LEISTUNG_NUR_SCHWACH_AUSREICHEND="false" LEISTUNGSNIVEAU="G" RELEVANT="true" SONDER_NOTE="" SCHULFACH_ID="4" ZEUGNIS_ID="#{zeugnis2}"/>
   <BEWERTUNG CLASS="net.sf.sze.zeugnis.StandardBewertung" ID="ge 0.0" VERSION="0" LEISTUNG_NUR_SCHWACH_AUSREICHEND="false" RELEVANT="true" SONDER_NOTE="" SCHULFACH_ID="5" ZEUGNIS_ID="#{zeugnis2}"/>
   <BEWERTUNG CLASS="net.sf.sze.zeugnis.AussenDifferenzierteBewertung" ID="ge 0.0" VERSION="0" LEISTUNG_NUR_SCHWACH_AUSREICHEND="false" LEISTUNGSNIVEAU="G" RELEVANT="true" SONDER_NOTE="" SCHULFACH_ID="6" ZEUGNIS_ID="#{zeugnis2}"/>
-  <BEWERTUNG CLASS="net.sf.sze.zeugnis.StandardBewertung" ID="ge 0.0" VERSION="0" LEISTUNG_NUR_SCHWACH_AUSREICHEND="false" RELEVANT="false" SONDER_NOTE="" SCHULFACH_ID="10" ZEUGNIS_ID="#{zeugnis2}"/>
+  <BEWERTUNG CLASS="net.sf.sze.zeugnis.StandardBewertung" ID="ge 0.0" VERSION="0" LEISTUNG_NUR_SCHWACH_AUSREICHEND="false" RELEVANT="false" SONDER_NOTE="" SCHULFACH_ID="13" ZEUGNIS_ID="#{zeugnis2}"/>
   <BEWERTUNG CLASS="net.sf.sze.zeugnis.BinnenDifferenzierteBewertung" ID="ge 0.0" VERSION="0" LEISTUNG_NUR_SCHWACH_AUSREICHEND="false" LEISTUNGSNIVEAU="G" RELEVANT="false" SONDER_NOTE="" SCHULFACH_ID="11" ZEUGNIS_ID="#{zeugnis2}"/>
   <BEWERTUNG CLASS="net.sf.sze.zeugnis.AussenDifferenzierteBewertung" ID="ge 0.0" VERSION="0" LEISTUNG_NUR_SCHWACH_AUSREICHEND="false" LEISTUNGSNIVEAU="G" RELEVANT="false" SONDER_NOTE="" SCHULFACH_ID="12" ZEUGNIS_ID="#{zeugnis2}"/>
 </dataset>

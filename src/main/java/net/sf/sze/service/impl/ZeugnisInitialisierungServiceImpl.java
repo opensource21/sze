@@ -326,7 +326,8 @@ public class ZeugnisInitialisierungServiceImpl implements ZeugnisInitialierungsS
                 //Pruefen, ob der Typ richtig ist.
                 if (newBw == null) {
                     changeMessage.append('\n').append('\t').append(
-                            "<li>Bewertung für ${schulfach.name} wurde gel\u00f6scht.</li>");
+                            " <li>Bewertung für " + schulfach.getName()
+                                + " wurde gel\u00f6scht.</li>");
                     zeugnis.getBewertungen().remove(oldBw);
                     oldBw.setZeugnis(null);
                     bewertungDao.delete(oldBw);
@@ -355,7 +356,8 @@ public class ZeugnisInitialisierungServiceImpl implements ZeugnisInitialierungsS
                 } else {
                     if (changeMessage.length() > 0) {
                         changeMessage.append('\n').append('\t').append(
-                                "<li>Bewertung für ${schulfach.name} wurde erg\u00e4nzt.</li>");
+                                " <li>Bewertung für " + schulfach.getName()
+                                + " wurde erg\u00e4nzt.</li>");
                     }
                     zeugnis.getBewertungen().add(newBw);
                     bewertungDao.save(newBw);
