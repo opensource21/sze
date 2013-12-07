@@ -103,7 +103,9 @@ public class ZeugnisInitialisierungServiceImplIntegrationTest extends AbstractSz
               + " <li>Bewertung für Musik wurde gelöscht.</li>\n\t"
               + " <li>Bewertung für Kunst wurde konvertiert von StandardBewertung nach BinnenDifferenzierteBewertung</li>\n\t"
               + " <li>Bewertung für EDV wurde konvertiert von StandardBewertung nach AussenDifferenzierteBewertung</li>\n\t"
-              + " <li>Bewertung für Textiles Werken wurde ergänzt.</li></ul>",
+              + " <li>Bewertung für Textiles Werken wurde ergänzt.</li>\n\t"
+              + " <li>Arbeitsgruppe AG Ballspiele wurde hinzugefügt.</li>\n\t"
+              + " <li>Arbeitsgruppe AG Theater wurde gelöscht.</li></ul>",
               "Für den Schüler MUSTERFRAU, ERNA und das Halbjahr 2012/13 1. Hj. existiert schon ein Zeugnis.<ul>\n\t"
               + " <li>Bewertung für Deutsch wurde konvertiert von AussenDifferenzierteBewertung nach BinnenDifferenzierteBewertung</li>\n\t"
               + " <li>Bewertung für Englisch wurde konvertiert von AussenDifferenzierteBewertung nach StandardBewertung</li>\n\t"
@@ -112,7 +114,9 @@ public class ZeugnisInitialisierungServiceImplIntegrationTest extends AbstractSz
               + " <li>Bewertung für Musik wurde gelöscht.</li>\n\t"
               + " <li>Bewertung für Kunst wurde konvertiert von StandardBewertung nach BinnenDifferenzierteBewertung</li>\n\t"
               + " <li>Bewertung für EDV wurde konvertiert von StandardBewertung nach AussenDifferenzierteBewertung</li>\n\t"
-              + " <li>Bewertung für Textiles Werken wurde ergänzt.</li></ul>");
+              + " <li>Bewertung für Textiles Werken wurde ergänzt.</li>\n\t"
+              + " <li>Arbeitsgruppe AG Ballspiele wurde hinzugefügt.</li>\n\t"
+              + " <li>Arbeitsgruppe AG Theater wurde gelöscht.</li></ul>");
          //J+
 //        dumpResult();
         getTestHandler().assertEqualsExpected();
