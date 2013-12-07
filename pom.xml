@@ -21,6 +21,7 @@
         <db.generateDdl>true</db.generateDdl>
         <db.schema>PUBLIC</db.schema>
         <db.hbm2ddl.auto>update</db.hbm2ddl.auto>
+        <checkerberry.version>3.0.6</checkerberry.version>
     </properties>
 
     <dependencies>
@@ -127,7 +128,60 @@
            <version>1.4.0</version>
            <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>de.conceptpeople.checkerberry</groupId>
+            <artifactId>checkerberry-db</artifactId>
+            <version>${checkerberry.version}</version>
+            <scope>test</scope>
+            <exclusions>
+                <!-- Exclude Commons Logging in favor of SLF4j -->
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>de.conceptpeople.checkerberry</groupId>
+            <artifactId>checkerberry-db-spring-bridge</artifactId>
+            <version>${checkerberry.version}</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+            </exclusions>
 
+         </dependency>
+        <dependency>
+            <groupId>de.conceptpeople.checkerberry</groupId>
+            <artifactId>checkerberry-db-spring-jpa-bridge</artifactId>
+            <version>${checkerberry.version}</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>de.conceptpeople.checkerberry</groupId>
+            <artifactId>checkerberry-spring-integration</artifactId>
+            <version>${checkerberry.version}</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+            </exclusions>
+         </dependency>
     </dependencies>
     <build>
         <pluginManagement>
@@ -346,5 +400,19 @@
             <id>opensource21</id>
             <url> http://opensource21.github.com/releases</url>
         </repository>
+        <repository>
+            <id>checkerberry</id>
+            <url>http://repo.checkerberry.de/maven2</url>
+        </repository>
+
     </repositories>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-core</artifactId>
+                <version>4.2.5.Final</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>

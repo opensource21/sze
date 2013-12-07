@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE dataset PUBLIC "-//SZE_TEAM//DTD sze-db 1.0//EN" "../../checkberry/db/sze-db.dtd">
+<dataset>
+    <INCLUDE FILE="ZeugnisInitialisierungServiceImplIntegrationTest_testInitZeugnisErstesHalbjahr_result.xml"
+        LOCATION="RELATIVE"/>
+</dataset>

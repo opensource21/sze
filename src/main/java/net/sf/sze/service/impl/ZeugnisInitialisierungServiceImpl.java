@@ -1,10 +1,13 @@
 package net.sf.sze.service.impl;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import net.sf.sze.dao.api.stammdaten.SchuelerDao;
 import net.sf.sze.dao.api.zeugnis.AgBewertungDao;
@@ -37,6 +40,7 @@ import net.sf.sze.util.ResultContainer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -50,8 +54,8 @@ import org.springframework.transaction.annotation.Transactional;
  * @author niels
  *
  */
+@Service
 @Transactional(readOnly = false)
-//TODO Test schreiben!
 public class ZeugnisInitialisierungServiceImpl implements ZeugnisInitialierungsService {
 
     /**
@@ -68,6 +72,9 @@ public class ZeugnisInitialisierungServiceImpl implements ZeugnisInitialierungsS
     @Value("${schuljahre.max}")
     private int maximalesSchuljahr;
 
+
+    @PersistenceContext
+    private EntityManager em;
 
     /**
      * Dao für die {@link Zeugnis}.
@@ -176,6 +183,9 @@ public class ZeugnisInitialisierungServiceImpl implements ZeugnisInitialierungsS
             zeugnis.setZeugnisArt(zeugnisArt); //Owning
             zeugnis.setFormular(formular); //Owning
             zeugnis.setKlasse(klasse); //Owning
+            zeugnis.setAgBewertungen(new ArrayList<AgBewertung>());
+            zeugnis.setAvSvBewertungen(new ArrayList<AvSvBewertung>());
+            zeugnis.setBewertungen(new ArrayList<Bewertung>());
             zeugnisDao.save(zeugnis);
         }
 
@@ -268,6 +278,7 @@ public class ZeugnisInitialisierungServiceImpl implements ZeugnisInitialierungsS
             final AgBewertung newAgBw;
             if (arbeitsgruppe.convertKlasenStufenToList().contains(klassenstufe)) {
                 newAgBw = new AgBewertung();
+                newAgBw.setTeilgenommen(Boolean.FALSE);
                 newAgBw.setArbeitsgruppe(arbeitsgruppe);
                 newAgBw.setZeugnis(zeugnis);
             } else {
@@ -315,7 +326,8 @@ public class ZeugnisInitialisierungServiceImpl implements ZeugnisInitialierungsS
                 //Pruefen, ob der Typ richtig ist.
                 if (newBw == null) {
                     changeMessage.append('\n').append('\t').append(
-                            "<li>Bewertung für ${schulfach.name} wurde gel\u00f6scht.</li>");
+                            " <li>Bewertung für " + schulfach.getName()
+                                + " wurde gel\u00f6scht.</li>");
                     zeugnis.getBewertungen().remove(oldBw);
                     oldBw.setZeugnis(null);
                     bewertungDao.delete(oldBw);
@@ -324,10 +336,12 @@ public class ZeugnisInitialisierungServiceImpl implements ZeugnisInitialierungsS
                             append(schulfach.getName()).append(
                             " wurde konvertiert von ")
                             .append(oldBw.getClass().getSimpleName())
-                            .append(" nach ").append(newBw.getClass().getSimpleName());
+                            .append(" nach ").append(newBw.getClass().getSimpleName())
+                            .append("</li>");
                     zeugnis.getBewertungen().remove(oldBw);
                     oldBw.setZeugnis(null);
                     bewertungDao.delete(oldBw);
+                    em.flush();
                     newBw.setLeistungNurSchwachAusreichend(oldBw.getLeistungNurSchwachAusreichend());
                     newBw.setNote(oldBw.getNote());
                     newBw.setSonderNote(oldBw.getSonderNote());
@@ -342,7 +356,8 @@ public class ZeugnisInitialisierungServiceImpl implements ZeugnisInitialierungsS
                 } else {
                     if (changeMessage.length() > 0) {
                         changeMessage.append('\n').append('\t').append(
-                                "<li>Bewertung für ${schulfach.name} wurde erg\u00e4nzt.</li>");
+                                " <li>Bewertung für " + schulfach.getName()
+                                + " wurde erg\u00e4nzt.</li>");
                     }
                     zeugnis.getBewertungen().add(newBw);
                     bewertungDao.save(newBw);

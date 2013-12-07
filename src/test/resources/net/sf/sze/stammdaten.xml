@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE dataset PUBLIC "-//SZE_TEAM//DTD sze-db 1.0//EN" "checkberry/db/sze-db.dtd">
+<dataset>
+  <ARBEITSGRUPPE ID="1" VERSION="0" KLASSENSTUFEN="3 4 5 6 7 8 9 10" NAME="AG Ballspiele" SORTIERUNG="10"/>
+  <ARBEITSGRUPPE ID="2" VERSION="0" KLASSENSTUFEN="7 8 9 10" NAME="AG Theater" SORTIERUNG="12"/>
+  <ARBEITSGRUPPE ID="4" VERSION="0" KLASSENSTUFEN="1 2 3 4 5 6 7 8 9 10" NAME="AG Fußball" SORTIERUNG="11"/>
+  <ARBEITSGRUPPE ID="5" VERSION="0" KLASSENSTUFEN="1 2 3 4 5 6 7 8 9 10" NAME="AG Technisches Werken für Fortgeschrittene" SORTIERUNG="20"/>
+  <ARBEITSGRUPPE ID="6" VERSION="0" KLASSENSTUFEN="" NAME="AG Sanitäter" SORTIERUNG="33"/>
+  <ARBEITSGRUPPE ID="7" VERSION="0" KLASSENSTUFEN="6" NAME="AG Schülerfirma &quot;KreaPrint&quot;" SORTIERUNG="16"/>
+  <ARBEITS_UND_SOZIAL_VERHALTEN ID="1" VERSION="0" KLASSENSTUFEN="5, 6, 7, 8, 9, 10" NAME="Lern-/Leistungsbereitschaft / Mitarbeit" SORTIERUNG="10" TYP="0"/>
+  <ARBEITS_UND_SOZIAL_VERHALTEN ID="2" VERSION="0" KLASSENSTUFEN="5, 6, 7, 8, 9, 10" NAME="Ziel- und Ergebnisorientierung" SORTIERUNG="11" TYP="0"/>
+  <ARBEITS_UND_SOZIAL_VERHALTEN ID="3" VERSION="0" KLASSENSTUFEN="5, 6, 7, 8, 9, 10" NAME="Kooperationsfähigkeit" SORTIERUNG="12" TYP="0"/>
+  <ARBEITS_UND_SOZIAL_VERHALTEN ID="4" VERSION="0" KLASSENSTUFEN="5, 6, 7, 8, 9, 10" NAME="Selbstständigkeit" SORTIERUNG="13" TYP="0"/>
+  <ARBEITS_UND_SOZIAL_VERHALTEN ID="5" VERSION="0" KLASSENSTUFEN="5, 6, 7, 8, 9, 10" NAME="Sorgfalt und Ausdauer" SORTIERUNG="14" TYP="0"/>
+  <ARBEITS_UND_SOZIAL_VERHALTEN ID="6" VERSION="0" KLASSENSTUFEN="5, 6, 7, 8, 9, 10" NAME="Verlässlichkeit" SORTIERUNG="15" TYP="0"/>
+  <ARBEITS_UND_SOZIAL_VERHALTEN ID="7" VERSION="0" KLASSENSTUFEN="5, 6, 7, 8, 9, 10" NAME="Reflexionsfähigkeit" SORTIERUNG="16" TYP="1"/>
+  <ARBEITS_UND_SOZIAL_VERHALTEN ID="8" VERSION="0" KLASSENSTUFEN="5, 6, 7, 8, 9, 10" NAME="Konfliktfähigkeit" SORTIERUNG="17" TYP="1"/>
+  <ARBEITS_UND_SOZIAL_VERHALTEN ID="9" VERSION="0" KLASSENSTUFEN="5, 6, 7, 8, 9, 10" NAME="Vereinbaren + Einhalten von Regeln / Fairness" SORTIERUNG="18" TYP="1"/>
+  <ARBEITS_UND_SOZIAL_VERHALTEN ID="10" VERSION="0" KLASSENSTUFEN="5, 6, 7, 8, 9, 10" NAME="Hilfsbereitschaft / Achtung anderer" SORTIERUNG="19" TYP="1"/>
+  <ARBEITS_UND_SOZIAL_VERHALTEN ID="11" VERSION="0" KLASSENSTUFEN="5, 6, 7, 8, 9, 10" NAME="Übernahme von Verantwortung" SORTIERUNG="20" TYP="1"/>
+  <ARBEITS_UND_SOZIAL_VERHALTEN ID="12" VERSION="0" KLASSENSTUFEN="5, 6, 7, 8, 9, 10" NAME="Mitgestaltung des Gemeinschaftslebens" SORTIERUNG="21" TYP="1"/>
+  <BEMERKUNGS_BAUSTEIN ID="1" VERSION="0" AKTIV="true" NAME="Rechtschreibschwäche" TEXT="Auf Beschluss der Klassenkonferenz vom @datum@ ist im Rechtschreiben von den Grundsätzen der Leistungsbewertung im Schuljahr @schuljahr@ abgewichen worden."/>
+  <BEMERKUNGS_BAUSTEIN ID="2" VERSION="0" AKTIV="true" NAME="Freitext" TEXT=""/>
+  <BEMERKUNGS_BAUSTEIN ID="5" VERSION="0" AKTIV="true" NAME="Aufstieg Aufbaustufe" TEXT="@NAME@ lernt im kommenden Schuljahr im Rahmen des Lehrplans der Aufbaustufe."/>
+  <BEMERKUNGS_BAUSTEIN ID="6" VERSION="0" AKTIV="true" NAME="Aufstieg Eingangsstu" TEXT="@NAME@ lernt im kommenden Schuljahr im Rahmen des Lehrplans der Eingangsstufe."/>
+  <BEMERKUNGS_BAUSTEIN ID="7" VERSION="0" AKTIV="true" NAME="Aufstieg nach Kl 5" TEXT="@NAME@ lernt im kommenden Schuljahr im Rahmen des Lehrplans für Klasse 5."/>
+  <BEMERKUNGS_BAUSTEIN ID="8" VERSION="0" AKTIV="true" NAME="verlässt die Schule" TEXT="@NAME@ verlässt die Schule, um die ???? Klasse der ???? zu besuchen."/>
+  <BEMERKUNGS_BAUSTEIN ID="9" VERSION="0" AKTIV="true" NAME="Praktikum" TEXT="@Name@ hat ein zweiwöchiges Betriebspraktikum absolviert."/>
+  <BEMERKUNGS_BAUSTEIN ID="10" VERSION="0" AKTIV="true" NAME="Praktikum + Mappe" TEXT="@Name@ hat ein zweiwöchiges Betriebspraktikum absolviert. @Seine|Ihre@ Dokumentation des Betriebspraktikums wurde mit &apos;sehr gut&apos; bewertet."/>
+  <SCHULAMT ID="1" VERSION="0" AKTIV="true" BESCHREIBENDER_SATZ="@Name@ übte das Amt @des Klassensprechers|der Klassensprecherin@ aus." NAME="Klassensprecher"/>
+  <SCHULAMT ID="2" VERSION="0" AKTIV="true" BESCHREIBENDER_SATZ="@Name@ übte das Amt @des Schülersprechers|der Schülersprecherin@ aus." NAME="Schülersprecher"/>
+  <SCHULAMT ID="3" VERSION="0" AKTIV="true" BESCHREIBENDER_SATZ="@Name@ führte das Klassenbuch." NAME="Klassenbuch"/>
+  <SCHULAMT ID="4" VERSION="0" AKTIV="true" BESCHREIBENDER_SATZ="@Name@ war für Kopieraufträge innerhalb der Klasse zuständig." NAME="Kopieraufträge"/>
+  <SCHULAMT ID="5" VERSION="0" AKTIV="true" BESCHREIBENDER_SATZ="@Name@ war Mitglied des Kreativteams der Klasse." NAME="Kreativteam"/>
+  <SCHULAMT ID="6" VERSION="0" AKTIV="true" BESCHREIBENDER_SATZ="@Name@ war als @Konfliktmediator|Konfliktmediatorin@ tätig." NAME="Konfliktmediator"/>
+  <SCHULAMT ID="7" VERSION="0" AKTIV="true" BESCHREIBENDER_SATZ="@Name@ gehörte zum Team des Schülerbüros." NAME="Schülerbüro"/>
+  <SCHULAMT ID="8" VERSION="0" AKTIV="true" BESCHREIBENDER_SATZ="@Name@ gehörte zum Aufsichtsteam in den großen Pausen." NAME="Aufsichtsteam"/>
+  <SCHULAMT ID="9" VERSION="0" AKTIV="true" BESCHREIBENDER_SATZ="@Name@ war @Mitarbeiter|Mitarbeiterin@ des FSN-Shops für Schulbedarf." NAME="FSN-Shop"/>
+  <SCHULAMT ID="10" VERSION="0" AKTIV="true" BESCHREIBENDER_SATZ="@Name@ war @Mitarbeiter|Mitarbeiterin@ des Schulkiosks für Pausensnacks." NAME="Schulkiosk"/>
+  <SCHULAMT ID="11" VERSION="0" AKTIV="true" BESCHREIBENDER_SATZ="@Name@  war als @EDV-Lotse|EDV-Lotsin@ tätig." NAME="EDV-Lotse"/>
+  <SCHULAMT ID="12" VERSION="0" AKTIV="false" BESCHREIBENDER_SATZ="@Name@  wurde als @Schulsanitäter|Schulsanitäterin@ ausgebildet." NAME="Schulsanitäter_Ausb."/>
+  <SCHULAMT ID="13" VERSION="0" AKTIV="true" BESCHREIBENDER_SATZ="@Name@ war als @Schulsanitäter|Schulsanitäterin@ tätig." NAME="Schulsanitäter_ferti"/>
+  <SCHULAMT ID="14" VERSION="0" AKTIV="false" BESCHREIBENDER_SATZ="" NAME="FREITEXT"/>
+  <SCHULAMT ID="15" VERSION="0" AKTIV="true" BESCHREIBENDER_SATZ="@Name@ gehörte zum Tafeldienst-Team der Klasse." NAME="Tafeldienst"/>
+  <SCHULAMT ID="16" VERSION="0" AKTIV="true" BESCHREIBENDER_SATZ="@Name@ übernahm die Entsorgung des Altpapiers im Mitarbeiterbereich." NAME="Altpapier"/>
+  <SCHULAMTS_BEMERKUNGS_BAUSTEIN ID="1" VERSION="0" AKTIV="true" BESCHREIBENDER_SATZ="" NAME="_LEER_" SORTIERUNG="10"/>
+  <SCHULAMTS_BEMERKUNGS_BAUSTEIN ID="2" VERSION="0" AKTIV="true" BESCHREIBENDER_SATZ="@Name@ zeichnete sich dabei durch große Zuverlässigkeit aus." NAME="Zuverlässigkeit" SORTIERUNG="20"/>
+  <SCHULAMTS_BEMERKUNGS_BAUSTEIN ID="3" VERSION="0" AKTIV="true" BESCHREIBENDER_SATZ="Dieses Amt erfüllte @name@ mit besonderer Zuverlässigkeit." NAME="besondere Zuverlässigkeit" SORTIERUNG="30"/>
+  <SCHULAMTS_BEMERKUNGS_BAUSTEIN ID="4" VERSION="0" AKTIV="true" BESCHREIBENDER_SATZ="@Name@ bewies in dieser Funktion hohe Einsatzbereitschaft." NAME="Einsatzbereitschaft" SORTIERUNG="40"/>
+  <SCHULAMTS_BEMERKUNGS_BAUSTEIN ID="5" VERSION="0" AKTIV="true" BESCHREIBENDER_SATZ="@Name@ bewies in dieser Funktion eine überdurchschnittliche Einsatzbereitschaft." NAME="überdurchschnittliche Einsatzbereitschaft" SORTIERUNG="50"/>
+  <SCHULAMTS_BEMERKUNGS_BAUSTEIN ID="6" VERSION="0" AKTIV="true" BESCHREIBENDER_SATZ="@Name@ zeigte bei dieser Aufgabe großes Engagement." NAME="großes Engagement" SORTIERUNG="60"/>
+  <SCHULAMTS_BEMERKUNGS_BAUSTEIN ID="7" VERSION="0" AKTIV="true" BESCHREIBENDER_SATZ="@Name@ hob sich in dieser Funktion durch soziales Engagement hervor." NAME="soziales Engagement" SORTIERUNG="70"/>
+  <SCHULAMTS_BEMERKUNGS_BAUSTEIN ID="8" VERSION="0" AKTIV="true" BESCHREIBENDER_SATZ="@Name@ bewies dabei überdurchschnittliches Engagement." NAME="überdurchschnittliches Engagement" SORTIERUNG="80"/>
+  <SCHULAMTS_BEMERKUNGS_BAUSTEIN ID="9" VERSION="0" AKTIV="true" BESCHREIBENDER_SATZ="@Name@ hob sich in dieser Funktion durch großes Verantwortungsbewusstsein hervor." NAME="Verantwortungsbewusstsein" SORTIERUNG="90"/>
+  <SCHULAMTS_BEMERKUNGS_BAUSTEIN ID="10" VERSION="0" AKTIV="true" BESCHREIBENDER_SATZ="@Name@ bewies in dieser Aufgabe überdurchschnittliches Engagement und ein hohes Maß an Einfühlungsvermögen." NAME="Engagement/Einfühlungsvermögen" SORTIERUNG="100"/>
+  <SCHULAMTS_BEMERKUNGS_BAUSTEIN ID="11" VERSION="0" AKTIV="true" BESCHREIBENDER_SATZ="@Name@ zeichnete sich in dieser Aufgabe durch Sorgfalt aus." NAME="Sorgfalt" SORTIERUNG="110"/>
+  <SCHULAMTS_BEMERKUNGS_BAUSTEIN ID="12" VERSION="0" AKTIV="true" BESCHREIBENDER_SATZ="@Name@ zeichnete sich in dieser Aufgabe durch besondere Sorgfalt und Zuverlässigkeit aus." NAME="Sorgfalt/Zuverlässigkeit" SORTIERUNG="120"/>
+  <SCHULAMTS_BEMERKUNGS_BAUSTEIN ID="13" VERSION="0" AKTIV="true" BESCHREIBENDER_SATZ="@Name@ bewies in dieser Aufgabe Gewissenhaftigkeit und Pflichtbewusstsein." NAME="Gewissenhaftigkeit/Pflichtbewusstsein" SORTIERUNG="130"/>
+  <SCHULAMTS_BEMERKUNGS_BAUSTEIN ID="14" VERSION="0" AKTIV="true" BESCHREIBENDER_SATZ="@Name@ hob sich in dieser Aufgabe durch Kooperationsfähigkeit mit Schülern und Lehrern hervor." NAME="Kooperationsfähigkeit Schüler/Lehrer" SORTIERUNG="140"/>
+  <SCHULAMTS_BEMERKUNGS_BAUSTEIN ID="15" VERSION="0" AKTIV="true" BESCHREIBENDER_SATZ="@Name@ bewies in dieser Funktion Durchsetzungsvermögen und hohe Einsatzbereitschaft." NAME="Durchsetzungsvermögen/Einsatzbereitschaft" SORTIERUNG="150"/>
+  <SCHULFACH ID="1" VERSION="0" NAME="Mathematik" SORTIERUNG="101" STUFEN_MIT_AUSSEN_DIFFERENZIERUNG="5 6 7 8 9 10" TYP="0"/>
+  <SCHULFACH ID="2" VERSION="0" NAME="Deutsch" SORTIERUNG="102" STUFEN_MIT_AUSSEN_DIFFERENZIERUNG="5 6 7 8 9 10" TYP="0"/>
+  <SCHULFACH ID="3" VERSION="0" NAME="Englisch" SORTIERUNG="103" STUFEN_MIT_AUSSEN_DIFFERENZIERUNG="5 6 7 8 9 10" TYP="0"/>
+  <SCHULFACH ID="4" VERSION="0" NAME="Französisch" SORTIERUNG="104" STUFEN_MIT_STANDARD_BEWERTUNG="8 9 10" TYP="1"/>
+  <SCHULFACH ID="5" VERSION="0" NAME="Naturwissenschaften" SORTIERUNG="105" STUFEN_MIT_AUSSEN_DIFFERENZIERUNG="5 6 7 9 10" STUFEN_MIT_STANDARD_BEWERTUNG="8" TYP="1"/>
+  <SCHULFACH ID="6" VERSION="0" NAME="Gesellschaftslehre" SORTIERUNG="106" STUFEN_MIT_AUSSEN_DIFFERENZIERUNG="5 6 7 8" STUFEN_MIT_STANDARD_BEWERTUNG="9 10" TYP="1"/>
+  <SCHULFACH ID="7" VERSION="0" NAME="Arbeit/Wirtschaft/Technik" SORTIERUNG="107" STUFEN_MIT_STANDARD_BEWERTUNG=" 7 8 9 10" TYP="1"/>
+  <SCHULFACH ID="8" VERSION="0" NAME="Sport" SORTIERUNG="108" STUFEN_MIT_STANDARD_BEWERTUNG="5 6 7 8 9 10" TYP="1"/>
+  <SCHULFACH ID="9" VERSION="0" NAME="Musik" SORTIERUNG="109" STUFEN_MIT_STANDARD_BEWERTUNG="5 6" TYP="1"/>
+  <SCHULFACH ID="10" VERSION="0" NAME="Musik" SORTIERUNG="110" STUFEN_MIT_STANDARD_BEWERTUNG="7 8 9 10" TYP="2"/>
+  <SCHULFACH ID="11" VERSION="0" NAME="Kunst" SORTIERUNG="111" STUFEN_MIT_STANDARD_BEWERTUNG="5 6 7 8 9 10" TYP="2"/>
+  <SCHULFACH ID="12" VERSION="0" NAME="EDV" SORTIERUNG="112" TYP="2"/>
+  <SCHULFACH ID="13" VERSION="0" NAME="Töpfern" SORTIERUNG="113" STUFEN_MIT_STANDARD_BEWERTUNG="5 6 7 8 9 10" TYP="2"/>
+  <SCHULFACH ID="14" VERSION="0" NAME="Textiles Werken" SORTIERUNG="114" STUFEN_MIT_STANDARD_BEWERTUNG="5 6" TYP="2"/>
+  <SCHULFACH ID="15" VERSION="0" NAME="Werken" SORTIERUNG="115" STUFEN_MIT_STANDARD_BEWERTUNG="5 6 7 8 9 10" TYP="2"/>
+  <SCHULFACH ID="16" VERSION="0" NAME="Hauswirtschaft" SORTIERUNG="116" STUFEN_MIT_STANDARD_BEWERTUNG="7 8 9 10" TYP="2"/>
+  <SCHULFACH ID="17" VERSION="0" NAME="Medienkunde" SORTIERUNG="117" STUFEN_MIT_STANDARD_BEWERTUNG="7 8 9 10" TYP="2"/>
+  <SCHULFACH ID="18" VERSION="0" NAME="Nat-Forscher" SORTIERUNG="118" STUFEN_MIT_STANDARD_BEWERTUNG="7 8 9 10" TYP="2"/>
+  <SCHULFACH ID="19" VERSION="0" NAME="Theater" SORTIERUNG="30" TYP="2"/>
+  <SCHULFACH ID="20" VERSION="0" NAME="Lernen lernen" SORTIERUNG="32" TYP="2"/>
+  <SCHULFACH ID="21" VERSION="0" NAME="Spanisch" SORTIERUNG="104" STUFEN_MIT_STANDARD_BEWERTUNG="6 7" TYP="1"/>
+  <ZEUGNIS_ART ID="1" VERSION="0" ABSCHLUSS_GRAD="" AKTIV="true" NAME="Standard-Zeugnis" NOTE_ALS_TEXT_DARSTELLEN="false" PLATZ_FUER_SIEGEL="false" PRINT_VERSETZUNGSBEMERKUNG="true" SORTIERUNG="10" TITEL="Zeugnis"/>
+  <ZEUGNIS_ART ID="2" VERSION="0" ABSCHLUSS_GRAD="Sekundarabschluss I - Realschulabschluss" AKTIV="true" NAME="Realschulabschluss" NOTE_ALS_TEXT_DARSTELLEN="true" PLATZ_FUER_SIEGEL="true" PRINT_VERSETZUNGSBEMERKUNG="false" SORTIERUNG="25" TITEL="Abschlusszeugnis"/>
+  <ZEUGNIS_ART ID="3" VERSION="0" ABSCHLUSS_GRAD="" AKTIV="true" NAME="Abgangszeugnis" NOTE_ALS_TEXT_DARSTELLEN="true" PLATZ_FUER_SIEGEL="true" PRINT_VERSETZUNGSBEMERKUNG="false" SORTIERUNG="50" TITEL="Abgangszeugnis"/>
+  <ZEUGNIS_ART ID="4" VERSION="0" ABSCHLUSS_GRAD="Hauptschulabschluss" AKTIV="true" NAME="Hauptschulabschluss" NOTE_ALS_TEXT_DARSTELLEN="true" PLATZ_FUER_SIEGEL="true" PRINT_VERSETZUNGSBEMERKUNG="false" SORTIERUNG="11" TITEL="Abschlusszeugnis"/>
+  <ZEUGNIS_ART ID="5" VERSION="0" ABSCHLUSS_GRAD="Sekundarabschluss I - Hauptschulabschluss" AKTIV="true" NAME="Hauptschulabschluss_nach_10" NOTE_ALS_TEXT_DARSTELLEN="true" PLATZ_FUER_SIEGEL="true" PRINT_VERSETZUNGSBEMERKUNG="false" SORTIERUNG="20" TITEL="Abschlusszeugnis"/>
+  <ZEUGNIS_ART ID="6" VERSION="0" ABSCHLUSS_GRAD="Erweiterter Sekundarabschluss I" AKTIV="true" NAME="Erweiterter_Realschulabschluss" NOTE_ALS_TEXT_DARSTELLEN="true" PLATZ_FUER_SIEGEL="true" PRINT_VERSETZUNGSBEMERKUNG="false" SORTIERUNG="30" TITEL="Abschlusszeugnis"/>
+</dataset>

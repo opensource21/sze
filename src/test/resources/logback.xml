@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-
+    <!-- Insert the current time formatted as "yyyyMMdd'T'HHmmss" under
+       the key "bySecond" into the logger context. This value will be
+       available to all subsequent configuration elements. -->
+    <timestamp key="bySecond" datePattern="yyyyMMdd'T'HHmmss"/>
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 
         <!-- encoders are assigned by default the type ch.qos.logback.classic.encoder.PatternLayoutEncoder -->
@@ -12,24 +15,9 @@
     </appender>
 
     <appender name="FILE"
-        class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>logs/sze.log</file>
-        <append>true</append>
-
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <!-- daily rollover-->
-            <fileNamePattern>logs/sze.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
-            <timeBasedFileNamingAndTriggeringPolicy
-                class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <!-- or whenever the file size reaches 10MB -->
-                <maxFileSize>500MB</maxFileSize>
-            </timeBasedFileNamingAndTriggeringPolicy>
-            <!-- keep 10 days' worth of history-->
-            <maxHistory>30</maxHistory>
-            <cleanHistoryOnStart>true</cleanHistoryOnStart>
-        </rollingPolicy>
-
-
+                class="ch.qos.logback.core.FileAppender">
+        <file>logs/test/sze.log</file>
+        <append>false</append>
         <!-- encoders are assigned by default the type ch.qos.logback.classic.encoder.PatternLayoutEncoder -->
         <encoder>
             <pattern>
@@ -40,23 +28,9 @@
 
 
     <appender name="THYMELEAF"
-        class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>logs/thyemleaf.log</file>
+                class="ch.qos.logback.core.FileAppender">
+        <file>logs/test/thymeleaf.log</file>
         <append>false</append>
-
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <!-- daily rollover-->
-            <fileNamePattern>logs/thyemleaf.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
-            <timeBasedFileNamingAndTriggeringPolicy
-                class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <!-- or whenever the file size reaches 10MB -->
-                <maxFileSize>500MB</maxFileSize>
-            </timeBasedFileNamingAndTriggeringPolicy>
-            <!-- keep 10 days' worth of history-->
-            <maxHistory>30</maxHistory>
-            <cleanHistoryOnStart>true</cleanHistoryOnStart>
-        </rollingPolicy>
-
 
         <!-- encoders are assigned by default the type ch.qos.logback.classic.encoder.PatternLayoutEncoder -->
         <encoder>
@@ -65,6 +39,20 @@
             </pattern>
         </encoder>
     </appender>
+
+    <appender name="CHECKERBERRY"
+        class="ch.qos.logback.core.FileAppender">
+        <file>logs/test/checkerberry.log</file>
+        <append>false</append>
+        <!-- encoders are assigned by default the type ch.qos.logback.classic.encoder.PatternLayoutEncoder -->
+        <encoder>
+            <pattern>
+                %d [%thread] %-5level %logger{36} - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+
     <!-- Application Loggers -->
 
     <!-- 3rdparty Loggers -->
@@ -90,7 +78,11 @@
         <appender-ref ref="THYMELEAF" />
     </logger>
 
-    <root level="DEBUG">
+    <logger name="de.conceptpeople" level="DEBUG" additivity="FALSE">
+        <appender-ref ref="CHECKERBERRY" />
+    </logger>
+
+    <root level="INFO">
         <appender-ref ref="FILE" />
         <appender-ref ref="STDOUT" />
     </root>
