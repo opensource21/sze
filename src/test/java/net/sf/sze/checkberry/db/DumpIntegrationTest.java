@@ -4,7 +4,6 @@
 // (c) SZE-Development Team
 package net.sf.sze.checkberry.db;
 
-import org.junit.Test;
 
 
 
@@ -12,7 +11,7 @@ import org.junit.Test;
  * Testklasse zum Dumpen von Daten.
  *
  */
-public class DumpTest extends AbstractSzeDbTestCase {
+public class DumpIntegrationTest extends AbstractSzeDbTestCase {
 
     /**
      * Erzeugt die DTD.
@@ -38,7 +37,7 @@ public class DumpTest extends AbstractSzeDbTestCase {
     /**
      * Methode um einmal tetsweise was zu dumpen.
      */
-    @Test
+    //@Test
     public void dumpTest() {
         getTestHandler().dumpTables("./src/test/resources/net/sf/sze/test.xml",
                 "SCHULHALBJAHR");
