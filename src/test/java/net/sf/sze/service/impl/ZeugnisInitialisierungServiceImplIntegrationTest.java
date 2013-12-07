@@ -4,6 +4,8 @@
 // (c) SZE-Development Team
 package net.sf.sze.service.impl;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.sql.SQLException;
 
 import javax.annotation.Resource;
@@ -12,6 +14,7 @@ import net.sf.sze.checkberry.db.AbstractSzeDbTestCase;
 import net.sf.sze.dao.api.zeugnis.ZeugnisFormularDao;
 import net.sf.sze.model.zeugnis.ZeugnisFormular;
 import net.sf.sze.service.api.ZeugnisInitialierungsService;
+import net.sf.sze.util.ResultContainer;
 
 import org.junit.Test;
 
@@ -44,7 +47,6 @@ public class ZeugnisInitialisierungServiceImplIntegrationTest extends AbstractSz
     @Test
     public void testInitZeugnisErstesHalbjahr() throws Exception {
         testInitZeugnis(1);
-//        dumpResult();
     }
 
     /**
@@ -64,13 +66,22 @@ public class ZeugnisInitialisierungServiceImplIntegrationTest extends AbstractSz
     private void testInitZeugnis(long formularId) throws SQLException {
         final ZeugnisFormular zeugnisFormular = zeugnisFormularDao.findOne(
                 Long.valueOf(formularId));
-        zeugnisInitialierungsService.initZeugnis(zeugnisFormular);
-        ParameterContext parameterContext = getTestHandler().getParameterContext();
+        ResultContainer result = zeugnisInitialierungsService.initZeugnis(zeugnisFormular);
+        assertThat(result.getErrors()).isEmpty();
+        assertThat(result.getMessages()).hasSize(2).contains(
+                "Für den Schüler MUSTERMANN, ERWIN und das Halbjahr "
+                 + zeugnisFormular.getSchulhalbjahr() + " wurde ein Zeugnis anlegt.",
+                "Für den Schüler MUSTERFRAU, ERNA und das Halbjahr "
+                + zeugnisFormular.getSchulhalbjahr() + " wurde ein Zeugnis anlegt.");
+
+        final ParameterContext parameterContext = getTestHandler().getParameterContext();
         parameterContext.addParameter("formularId", zeugnisFormular.getId());
         parameterContext.addParameter("halbjahrId", zeugnisFormular.getSchulhalbjahr().getId());
 //        getTestHandler().createDiffReport("initZeugnisAbweichung.html");
-        //getTestHandler().assertEqualsExpected();
+        getTestHandler().assertEqualsExpected();
     }
+
+
 
 
     /**

@@ -21,6 +21,22 @@ public class ResultContainer {
     private final Set<String> messages = new HashSet<String>();
 
     /**
+     * Liefert die Meldungen zurück.
+     * @return die Meldungen.
+     */
+    public Set<String> getMessages() {
+        return messages;
+    }
+
+    /**
+     * Liefert die Fehler zurück.
+     * @return die Fehler.
+     */
+    public Set<String> getErrors() {
+        return errors;
+    }
+
+    /**
      * Fehlermeldungen.
      */
     private final Set<String> errors = new HashSet<String>();
