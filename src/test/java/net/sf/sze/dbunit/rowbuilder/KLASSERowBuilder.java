@@ -16,8 +16,11 @@ public class KLASSERowBuilder extends DataRowBuilder {
 
     public static final String[] PRIMARY_KEY = {C_ID};
 
+    public static final String[] ALL_COLUMNS = {C_GESCHLOSSEN, C_ID, C_JAHRGANG, C_SUFFIX, C_VERSION};
+
     public KLASSERowBuilder(DataSetManipulator dataSetManipulator, boolean initNotNullValues, String... identifierColumns) {
         super(dataSetManipulator, TABLE_NAME, identifierColumns);
+        setAllColumnNames(ALL_COLUMNS);
         if (initNotNullValues) {
             with(C_JAHRGANG, new Integer("0"));
             with(C_VERSION, new Long("0"));

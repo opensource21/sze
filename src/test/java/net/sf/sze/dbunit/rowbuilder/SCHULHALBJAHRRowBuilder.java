@@ -16,8 +16,11 @@ public class SCHULHALBJAHRRowBuilder extends DataRowBuilder {
 
     public static final String[] PRIMARY_KEY = {C_ID};
 
+    public static final String[] ALL_COLUMNS = {C_HALBJAHR, C_ID, C_JAHR, C_SELECTABLE, C_VERSION};
+
     public SCHULHALBJAHRRowBuilder(DataSetManipulator dataSetManipulator, boolean initNotNullValues, String... identifierColumns) {
         super(dataSetManipulator, TABLE_NAME, identifierColumns);
+        setAllColumnNames(ALL_COLUMNS);
         if (initNotNullValues) {
             with(C_VERSION, new Long("0"));
             with(C_JAHR, new Integer("0"));

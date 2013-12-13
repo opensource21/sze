@@ -15,8 +15,11 @@ public class SOLBEWERTUNGS_TEXTRowBuilder extends DataRowBuilder {
 
     public static final String[] PRIMARY_KEY = {C_ID};
 
+    public static final String[] ALL_COLUMNS = {C_ID, C_NAME, C_TEXT, C_VERSION};
+
     public SOLBEWERTUNGS_TEXTRowBuilder(DataSetManipulator dataSetManipulator, boolean initNotNullValues, String... identifierColumns) {
         super(dataSetManipulator, TABLE_NAME, identifierColumns);
+        setAllColumnNames(ALL_COLUMNS);
         if (initNotNullValues) {
             with(C_NAME, "");
             with(C_VERSION, new Long("0"));

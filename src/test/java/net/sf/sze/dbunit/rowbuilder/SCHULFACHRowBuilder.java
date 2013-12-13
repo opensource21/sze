@@ -19,8 +19,11 @@ public class SCHULFACHRowBuilder extends DataRowBuilder {
 
     public static final String[] PRIMARY_KEY = {C_ID};
 
+    public static final String[] ALL_COLUMNS = {C_ID, C_NAME, C_SORTIERUNG, C_STUFEN_MIT_AUSSEN_DIFFERENZIERUNG, C_STUFEN_MIT_BINNEN_DIFFERENZIERUNG, C_STUFEN_MIT_STANDARD_BEWERTUNG, C_TYP, C_VERSION};
+
     public SCHULFACHRowBuilder(DataSetManipulator dataSetManipulator, boolean initNotNullValues, String... identifierColumns) {
         super(dataSetManipulator, TABLE_NAME, identifierColumns);
+        setAllColumnNames(ALL_COLUMNS);
         if (initNotNullValues) {
             with(C_NAME, "");
             with(C_TYP, new Integer("0"));

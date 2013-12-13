@@ -24,8 +24,11 @@ public class ZEUGNIS_FORMULARRowBuilder extends DataRowBuilder {
 
     public static final String[] PRIMARY_KEY = {C_ID};
 
+    public static final String[] ALL_COLUMNS = {C_AUSGABE_DATUM, C_BESCHREIBUNG, C_ID, C_KLASSE_ID, C_LEITSPRUCH, C_LEITSPRUCH2, C_NACHTEILS_AUSGLEICHS_DATUM, C_QUELLE_LEITSPRUCH, C_QUELLE_LEITSPRUCH2, C_SCHULHALBJAHR_ID, C_TEMPLATE_FILE_NAME, C_VERSION};
+
     public ZEUGNIS_FORMULARRowBuilder(DataSetManipulator dataSetManipulator, boolean initNotNullValues, String... identifierColumns) {
         super(dataSetManipulator, TABLE_NAME, identifierColumns);
+        setAllColumnNames(ALL_COLUMNS);
         if (initNotNullValues) {
             with(C_VERSION, new Long("0"));
             with(C_AUSGABE_DATUM, new Date(0));

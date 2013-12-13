@@ -16,6 +16,7 @@ import net.sf.sze.dao.api.zeugnis.ZeugnisDao;
 import net.sf.sze.dao.api.zeugnis.ZeugnisFormularDao;
 import net.sf.sze.dbunit.SzeBuilderDataSetWriter;
 import net.sf.sze.dbunit.SzeDataSet;
+import net.sf.sze.dbunit.SzeRowBuilderGenerator;
 import net.sf.sze.dbunit.dataset.InitZeugnis;
 import net.sf.sze.model.zeugnis.Zeugnis;
 import net.sf.sze.model.zeugnis.ZeugnisFormular;
@@ -127,6 +128,9 @@ public class ZeugnisInitialisierungServiceImplDbUnitIntegrationTest
      */
     @Test
     public void testInitZeugnisErstesHalbjahr() throws Exception {
+//        SzeRowBuilderGenerator rowBuilder = new SzeRowBuilderGenerator();
+//        rowBuilder.generate(databaseTester.getConnection().createDataSet());
+
         testInitZeugnis(1);
     }
 
@@ -227,8 +231,9 @@ public class ZeugnisInitialisierungServiceImplDbUnitIntegrationTest
      */
     @SuppressWarnings("unused")
     private void dumpResult() throws Exception {
-        SzeBuilderDataSetWriter writer = new SzeBuilderDataSetWriter(true,
-                "net.sf.sze.dbunit.dataset", "ResultDS");
+
+        SzeBuilderDataSetWriter writer = new SzeBuilderDataSetWriter("net.sf.sze.dbunit.dataset",
+                "ResultDS");
         writer.write(new FilteredDataSet(new String[]
                 {"ZEUGNIS", "AG_BEWERTUNG", "AV_SV_BEWERTUNG", "BEWERTUNG"},
                 databaseTester.getConnection().createDataSet()));

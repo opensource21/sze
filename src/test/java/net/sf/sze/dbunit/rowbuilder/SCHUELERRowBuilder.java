@@ -24,8 +24,11 @@ public class SCHUELERRowBuilder extends DataRowBuilder {
 
     public static final String[] PRIMARY_KEY = {C_ID};
 
+    public static final String[] ALL_COLUMNS = {C_ABGANGS_DATUM, C_AUFNAHME_DATUM, C_GEBURTSORT, C_GEBURTSTAG, C_GESCHLECHT, C_ID, C_KLASSE_ID, C_NAME, C_NUMMER, C_RUFNAME, C_VERSION, C_VORNAME};
+
     public SCHUELERRowBuilder(DataSetManipulator dataSetManipulator, boolean initNotNullValues, String... identifierColumns) {
         super(dataSetManipulator, TABLE_NAME, identifierColumns);
+        setAllColumnNames(ALL_COLUMNS);
         if (initNotNullValues) {
             with(C_GEBURTSTAG, new Timestamp(0));
             with(C_NAME, "");

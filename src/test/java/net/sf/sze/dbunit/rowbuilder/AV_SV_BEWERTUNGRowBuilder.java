@@ -16,8 +16,11 @@ public class AV_SV_BEWERTUNGRowBuilder extends DataRowBuilder {
 
     public static final String[] PRIMARY_KEY = {C_ID};
 
+    public static final String[] ALL_COLUMNS = {C_ARBEITS_UND_SOZIAL_VERHALTEN_ID, C_BEURTEILUNG, C_ID, C_VERSION, C_ZEUGNIS_ID};
+
     public AV_SV_BEWERTUNGRowBuilder(DataSetManipulator dataSetManipulator, boolean initNotNullValues, String... identifierColumns) {
         super(dataSetManipulator, TABLE_NAME, identifierColumns);
+        setAllColumnNames(ALL_COLUMNS);
         if (initNotNullValues) {
             with(C_VERSION, new Long("0"));
             with(C_ZEUGNIS_ID, new Long("0"));

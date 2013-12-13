@@ -17,8 +17,11 @@ public class ARBEITS_UND_SOZIAL_VERHALTENRowBuilder extends DataRowBuilder {
 
     public static final String[] PRIMARY_KEY = {C_ID};
 
+    public static final String[] ALL_COLUMNS = {C_ID, C_KLASSENSTUFEN, C_NAME, C_SORTIERUNG, C_TYP, C_VERSION};
+
     public ARBEITS_UND_SOZIAL_VERHALTENRowBuilder(DataSetManipulator dataSetManipulator, boolean initNotNullValues, String... identifierColumns) {
         super(dataSetManipulator, TABLE_NAME, identifierColumns);
+        setAllColumnNames(ALL_COLUMNS);
         if (initNotNullValues) {
             with(C_NAME, "");
             with(C_KLASSENSTUFEN, "");

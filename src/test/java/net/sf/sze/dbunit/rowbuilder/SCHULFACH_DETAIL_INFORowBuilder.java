@@ -16,8 +16,11 @@ public class SCHULFACH_DETAIL_INFORowBuilder extends DataRowBuilder {
 
     public static final String[] PRIMARY_KEY = {C_ID};
 
+    public static final String[] ALL_COLUMNS = {C_DETAIL_INFO, C_FORMULAR_ID, C_ID, C_SCHULFACH_ID, C_VERSION};
+
     public SCHULFACH_DETAIL_INFORowBuilder(DataSetManipulator dataSetManipulator, boolean initNotNullValues, String... identifierColumns) {
         super(dataSetManipulator, TABLE_NAME, identifierColumns);
+        setAllColumnNames(ALL_COLUMNS);
         if (initNotNullValues) {
             with(C_DETAIL_INFO, "");
             with(C_VERSION, new Long("0"));

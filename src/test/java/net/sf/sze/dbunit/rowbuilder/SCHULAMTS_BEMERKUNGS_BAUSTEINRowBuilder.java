@@ -17,8 +17,11 @@ public class SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder extends DataRowBuilder {
 
     public static final String[] PRIMARY_KEY = {C_ID};
 
+    public static final String[] ALL_COLUMNS = {C_AKTIV, C_BESCHREIBENDER_SATZ, C_ID, C_NAME, C_SORTIERUNG, C_VERSION};
+
     public SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder(DataSetManipulator dataSetManipulator, boolean initNotNullValues, String... identifierColumns) {
         super(dataSetManipulator, TABLE_NAME, identifierColumns);
+        setAllColumnNames(ALL_COLUMNS);
         if (initNotNullValues) {
             with(C_AKTIV, Boolean.FALSE);
             with(C_NAME, "");

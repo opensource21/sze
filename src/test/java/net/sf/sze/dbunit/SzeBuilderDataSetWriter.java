@@ -24,9 +24,8 @@ public class SzeBuilderDataSetWriter extends BuilderDataSetWriter {
      * @param className
      * @param importStatements
      */
-    public SzeBuilderDataSetWriter(boolean includeEmptyColumns, String packageName, String className,
-            String... importStatements) {
-        super(includeEmptyColumns, new File("src/test/java"), packageName, className, "UTF-8",
+    public SzeBuilderDataSetWriter(String packageName, String className, String... importStatements) {
+        super(new File("src/test/java"), packageName, className, "UTF-8",
                 "net.sf.sze.dbunit.rowbuilder", importStatements);
         this.addTypeMapping(BigInteger.class, Long.class);
         this.addTypeMapping(BigDecimal.class, Double.class);
