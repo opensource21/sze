@@ -6,7 +6,6 @@ package net.sf.sze.service.impl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.io.FileOutputStream;
 import java.sql.SQLException;
 
 import javax.annotation.Resource;
@@ -16,8 +15,8 @@ import net.sf.sze.dao.api.zeugnis.ZeugnisDao;
 import net.sf.sze.dao.api.zeugnis.ZeugnisFormularDao;
 import net.sf.sze.dbunit.SzeBuilderDataSetWriter;
 import net.sf.sze.dbunit.SzeDataSet;
-import net.sf.sze.dbunit.SzeRowBuilderGenerator;
 import net.sf.sze.dbunit.dataset.InitZeugnis;
+import net.sf.sze.dbunit.dataset.UpdateZeugnis;
 import net.sf.sze.model.zeugnis.Zeugnis;
 import net.sf.sze.model.zeugnis.ZeugnisFormular;
 import net.sf.sze.service.api.ZeugnisInitialierungsService;
@@ -26,10 +25,10 @@ import net.sf.sze.util.ResultContainer;
 import org.dbunit.AbstractDatabaseTester;
 import org.dbunit.Assertion;
 import org.dbunit.IDatabaseTester;
+import org.dbunit.database.DatabaseConfig;
 import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.dataset.FilteredDataSet;
 import org.dbunit.dataset.IDataSet;
-import org.dbunit.dataset.xml.FlatXmlWriter;
 import org.dbunit.ext.h2.H2Connection;
 import org.dbunit.ext.mssql.InsertIdentityOperation;
 import org.dbunit.operation.DatabaseOperation;
@@ -57,6 +56,10 @@ public class ZeugnisInitialisierungServiceImplDbUnitIntegrationTest
 
     private static IDataSet deleteDataSet = null;
 
+    /**
+     * Initialisiert  DBUnit.
+     * @throws Exception wenn was schief geht.
+     */
     @Before
     public void initDatabase() throws Exception {
         if (databaseTester == null) {
@@ -67,12 +70,20 @@ public class ZeugnisInitialisierungServiceImplDbUnitIntegrationTest
         }
     }
 
+    /**
+     * Sagt DbUnit das der Test vorbei ist.
+     * @throws Exception wenn was schief geht.
+     */
     @After
     public void tearDownDb() throws Exception {
         databaseTester.onTearDown();
     }
 
 
+    /**
+     * Fährt die Datenbank runter.
+     * @throws Exception wenn was schief geht.
+     */
     @AfterClass
     public static void destroyDatabase() throws Exception {
         deleteDataSet = null;
@@ -90,6 +101,10 @@ public class ZeugnisInitialisierungServiceImplDbUnitIntegrationTest
         databaseTester.onSetup();
     }
 
+    /**
+     *  Class H2DatabaseTester.
+     *
+     */
     private class H2DatabaseTester extends AbstractDatabaseTester {
 
         private final DataSource dataSource;
@@ -101,7 +116,12 @@ public class ZeugnisInitialisierungServiceImplDbUnitIntegrationTest
 
         @Override
         public IDatabaseConnection getConnection() throws Exception {
-            return new H2Connection(dataSource.getConnection(), getSchema());
+            final IDatabaseConnection connection =
+                    new H2Connection(dataSource.getConnection(), getSchema());
+            String id = "http://www.dbunit.org/features/batchedStatements";
+            DatabaseConfig config = connection.getConfig();
+            config.setProperty(id, Boolean.TRUE);
+            return connection;
         }
     }
 
@@ -173,9 +193,7 @@ public class ZeugnisInitialisierungServiceImplDbUnitIntegrationTest
                 zeugnisFormular.getId(), schulhalbjahrId);
         final IDataSet actual = new FilteredDataSet(expected.getTableNames(),
                 databaseTester.getConnection().createDataSet());
-//        new FlatXmlWriter(new FileOutputStream("result.xml")).write(expected);
-        Assertion.assertEquals(expected, new FilteredDataSet(expected.getTableNames(), actual),
-                new ValidatorFailureHandler());
+        Assertion.assertEquals(expected, actual, new ValidatorFailureHandler());
     }
 
     /**
@@ -186,6 +204,7 @@ public class ZeugnisInitialisierungServiceImplDbUnitIntegrationTest
     @Test
     //CSOFF: LineLength Ist so übersichtlicher
     public void testInitZeugnisUpdate() throws Exception {
+        cleanlyInsert(UpdateZeugnis.buildUpdateInit());
         final ZeugnisFormular zeugnisFormular = zeugnisFormularDao.findOne(
                 Long.valueOf(1));
         ResultContainer result = zeugnisInitialierungsService.initZeugnis(zeugnisFormular);
@@ -219,8 +238,17 @@ public class ZeugnisInitialisierungServiceImplDbUnitIntegrationTest
               + " <li>Arbeits- und Sozialverhalten Lern-/Leistungsbereitschaft / Mitarbeit wurde gelöscht.</li>\n\t"
               + " <li>Arbeits- und Sozialverhalten Ziel- und Ergebnisorientierung wurde hinzugefügt.</li></ul>");
          //J+
-//        dumpResult();
-        //getTestHandler().assertEqualsExpected();
+        final Long schulhalbjahrId = zeugnisFormular.getSchulhalbjahr().getId();
+        final Long klassenId = zeugnisFormular.getKlasse().getId();
+        final Long zeugnisId1 = zeugnisDao.findBySchulhalbjahrIdAndKlasseIdAndSchuelerId(
+                schulhalbjahrId, klassenId, Long.valueOf(1)).getId();
+        final Long zeugnisId2 = zeugnisDao.findBySchulhalbjahrIdAndKlasseIdAndSchuelerId(
+                schulhalbjahrId, klassenId, Long.valueOf(2)).getId();
+        final IDataSet expected = UpdateZeugnis.buildUpdateResult(zeugnisId1, zeugnisId2);
+        final IDataSet actual = new FilteredDataSet(expected.getTableNames(),
+                databaseTester.getConnection().createDataSet());
+        Assertion.assertEquals(expected, actual, new ValidatorFailureHandler());
+
 
     }
     //CSON: LineLength
@@ -234,6 +262,7 @@ public class ZeugnisInitialisierungServiceImplDbUnitIntegrationTest
 
         SzeBuilderDataSetWriter writer = new SzeBuilderDataSetWriter("net.sf.sze.dbunit.dataset",
                 "ResultDS");
+//        writer.write(deleteDataSet);
         writer.write(new FilteredDataSet(new String[]
                 {"ZEUGNIS", "AG_BEWERTUNG", "AV_SV_BEWERTUNG", "BEWERTUNG"},
                 databaseTester.getConnection().createDataSet()));
