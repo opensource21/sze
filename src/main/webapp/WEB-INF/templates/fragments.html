@@ -2,7 +2,7 @@
             <div class="alert alert-success" th:text="#{${success}}"
                 th:unless="${#strings.isEmpty(success)}"></div>
 
-            <div class="alert alert-info" th:text="#{${message}}"
+            <div class="alert alert-info" th:text="${message}"
                 th:unless="${#strings.isEmpty(message)}"></div>
 
             <div class="alert alert-info" th:unless="${#lists.isEmpty(messages)}">
