@@ -1,10 +1,9 @@
 package net.sf.sze.dbunit.rowbuilder;
 
-import org.dbunit.dataset.builder.DataRowBuilder;
-import org.dbunit.dataset.builder.DataSetManipulator;
-import org.dbunit.validator.Validator;
+import org.dbunit.dataset.builder.BasicDataRowBuilder;
+import org.dbunit.validator.IValidator;
 
-public class SCHULFACHRowBuilder extends DataRowBuilder {
+public class SCHULFACHRowBuilder extends BasicDataRowBuilder {
 
     public static final String TABLE_NAME = "SCHULFACH";
 
@@ -21,16 +20,14 @@ public class SCHULFACHRowBuilder extends DataRowBuilder {
 
     public static final String[] ALL_COLUMNS = {C_ID, C_NAME, C_SORTIERUNG, C_STUFEN_MIT_AUSSEN_DIFFERENZIERUNG, C_STUFEN_MIT_BINNEN_DIFFERENZIERUNG, C_STUFEN_MIT_STANDARD_BEWERTUNG, C_TYP, C_VERSION};
 
-    public SCHULFACHRowBuilder(DataSetManipulator dataSetManipulator, boolean initNotNullValues, String... identifierColumns) {
-        super(dataSetManipulator, TABLE_NAME, identifierColumns);
+    public SCHULFACHRowBuilder(String... identifierColumns) {
+        super(TABLE_NAME, identifierColumns);
         setAllColumnNames(ALL_COLUMNS);
-        if (initNotNullValues) {
-            with(C_NAME, "");
-            with(C_TYP, new Integer("0"));
-            with(C_VERSION, new Long("0"));
-            with(C_ID, new Long("0"));
-            with(C_SORTIERUNG, new Long("0"));
-        }
+        addDefaultValue(C_NAME, "");
+        addDefaultValue(C_TYP, new Integer("0"));
+        addDefaultValue(C_VERSION, new Long("0"));
+        addDefaultValue(C_ID, new Long("0"));
+        addDefaultValue(C_SORTIERUNG, new Long("0"));
     }
 
     public final SCHULFACHRowBuilder ID (Long value) {
@@ -38,7 +35,7 @@ public class SCHULFACHRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final SCHULFACHRowBuilder ID (Validator<?> value) {
+    public final SCHULFACHRowBuilder ID (IValidator<?> value) {
         with(C_ID, value);
         return this;
     }
@@ -48,7 +45,7 @@ public class SCHULFACHRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final SCHULFACHRowBuilder NAME (Validator<?> value) {
+    public final SCHULFACHRowBuilder NAME (IValidator<?> value) {
         with(C_NAME, value);
         return this;
     }
@@ -58,7 +55,7 @@ public class SCHULFACHRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final SCHULFACHRowBuilder SORTIERUNG (Validator<?> value) {
+    public final SCHULFACHRowBuilder SORTIERUNG (IValidator<?> value) {
         with(C_SORTIERUNG, value);
         return this;
     }
@@ -68,7 +65,7 @@ public class SCHULFACHRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final SCHULFACHRowBuilder STUFEN_MIT_AUSSEN_DIFFERENZIERUNG (Validator<?> value) {
+    public final SCHULFACHRowBuilder STUFEN_MIT_AUSSEN_DIFFERENZIERUNG (IValidator<?> value) {
         with(C_STUFEN_MIT_AUSSEN_DIFFERENZIERUNG, value);
         return this;
     }
@@ -78,7 +75,7 @@ public class SCHULFACHRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final SCHULFACHRowBuilder STUFEN_MIT_BINNEN_DIFFERENZIERUNG (Validator<?> value) {
+    public final SCHULFACHRowBuilder STUFEN_MIT_BINNEN_DIFFERENZIERUNG (IValidator<?> value) {
         with(C_STUFEN_MIT_BINNEN_DIFFERENZIERUNG, value);
         return this;
     }
@@ -88,7 +85,7 @@ public class SCHULFACHRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final SCHULFACHRowBuilder STUFEN_MIT_STANDARD_BEWERTUNG (Validator<?> value) {
+    public final SCHULFACHRowBuilder STUFEN_MIT_STANDARD_BEWERTUNG (IValidator<?> value) {
         with(C_STUFEN_MIT_STANDARD_BEWERTUNG, value);
         return this;
     }
@@ -98,7 +95,7 @@ public class SCHULFACHRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final SCHULFACHRowBuilder TYP (Validator<?> value) {
+    public final SCHULFACHRowBuilder TYP (IValidator<?> value) {
         with(C_TYP, value);
         return this;
     }
@@ -108,25 +105,18 @@ public class SCHULFACHRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final SCHULFACHRowBuilder VERSION (Validator<?> value) {
+    public final SCHULFACHRowBuilder VERSION (IValidator<?> value) {
         with(C_VERSION, value);
         return this;
     }
 
 
-    public static SCHULFACHRowBuilder newSCHULFACH(DataSetManipulator builder) {
-        return new SCHULFACHRowBuilder(builder, true, PRIMARY_KEY);
+    public static SCHULFACHRowBuilder newSCHULFACH() {
+        return new SCHULFACHRowBuilder(PRIMARY_KEY);
     }
 
-    public static SCHULFACHRowBuilder newSCHULFACH(DataSetManipulator builder, String... identifierColumns) {
-        return new SCHULFACHRowBuilder(builder, true, identifierColumns);
+    public static SCHULFACHRowBuilder newSCHULFACH(String... identifierColumns) {
+        return new SCHULFACHRowBuilder(identifierColumns);
     }
 
-    public static SCHULFACHRowBuilder newSCHULFACH(DataSetManipulator builder, boolean initNotNullValues) {
-        return new SCHULFACHRowBuilder(builder, initNotNullValues, PRIMARY_KEY);
-    }
-
-    public static SCHULFACHRowBuilder newSCHULFACH(DataSetManipulator builder, boolean initNotNullValues, String... identifierColumns) {
-        return new SCHULFACHRowBuilder(builder, initNotNullValues, identifierColumns);
-    }
 }

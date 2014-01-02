@@ -1,10 +1,9 @@
 package net.sf.sze.dbunit.rowbuilder;
 
-import org.dbunit.dataset.builder.DataRowBuilder;
-import org.dbunit.dataset.builder.DataSetManipulator;
-import org.dbunit.validator.Validator;
+import org.dbunit.dataset.builder.BasicDataRowBuilder;
+import org.dbunit.validator.IValidator;
 
-public class SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder extends DataRowBuilder {
+public class SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder extends BasicDataRowBuilder {
 
     public static final String TABLE_NAME = "SCHULAMTS_BEMERKUNGS_BAUSTEIN";
 
@@ -19,17 +18,15 @@ public class SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder extends DataRowBuilder {
 
     public static final String[] ALL_COLUMNS = {C_AKTIV, C_BESCHREIBENDER_SATZ, C_ID, C_NAME, C_SORTIERUNG, C_VERSION};
 
-    public SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder(DataSetManipulator dataSetManipulator, boolean initNotNullValues, String... identifierColumns) {
-        super(dataSetManipulator, TABLE_NAME, identifierColumns);
+    public SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder(String... identifierColumns) {
+        super(TABLE_NAME, identifierColumns);
         setAllColumnNames(ALL_COLUMNS);
-        if (initNotNullValues) {
-            with(C_AKTIV, Boolean.FALSE);
-            with(C_NAME, "");
-            with(C_VERSION, new Long("0"));
-            with(C_BESCHREIBENDER_SATZ, "");
-            with(C_ID, new Long("0"));
-            with(C_SORTIERUNG, new Long("0"));
-        }
+        addDefaultValue(C_AKTIV, Boolean.FALSE);
+        addDefaultValue(C_NAME, "");
+        addDefaultValue(C_VERSION, new Long("0"));
+        addDefaultValue(C_BESCHREIBENDER_SATZ, "");
+        addDefaultValue(C_ID, new Long("0"));
+        addDefaultValue(C_SORTIERUNG, new Long("0"));
     }
 
     public final SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder AKTIV (Boolean value) {
@@ -37,7 +34,7 @@ public class SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder AKTIV (Validator<?> value) {
+    public final SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder AKTIV (IValidator<?> value) {
         with(C_AKTIV, value);
         return this;
     }
@@ -47,7 +44,7 @@ public class SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder BESCHREIBENDER_SATZ (Validator<?> value) {
+    public final SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder BESCHREIBENDER_SATZ (IValidator<?> value) {
         with(C_BESCHREIBENDER_SATZ, value);
         return this;
     }
@@ -57,7 +54,7 @@ public class SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder ID (Validator<?> value) {
+    public final SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder ID (IValidator<?> value) {
         with(C_ID, value);
         return this;
     }
@@ -67,7 +64,7 @@ public class SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder NAME (Validator<?> value) {
+    public final SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder NAME (IValidator<?> value) {
         with(C_NAME, value);
         return this;
     }
@@ -77,7 +74,7 @@ public class SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder SORTIERUNG (Validator<?> value) {
+    public final SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder SORTIERUNG (IValidator<?> value) {
         with(C_SORTIERUNG, value);
         return this;
     }
@@ -87,25 +84,18 @@ public class SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder VERSION (Validator<?> value) {
+    public final SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder VERSION (IValidator<?> value) {
         with(C_VERSION, value);
         return this;
     }
 
 
-    public static SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder newSCHULAMTS_BEMERKUNGS_BAUSTEIN(DataSetManipulator builder) {
-        return new SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder(builder, true, PRIMARY_KEY);
+    public static SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder newSCHULAMTS_BEMERKUNGS_BAUSTEIN() {
+        return new SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder(PRIMARY_KEY);
     }
 
-    public static SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder newSCHULAMTS_BEMERKUNGS_BAUSTEIN(DataSetManipulator builder, String... identifierColumns) {
-        return new SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder(builder, true, identifierColumns);
+    public static SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder newSCHULAMTS_BEMERKUNGS_BAUSTEIN(String... identifierColumns) {
+        return new SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder(identifierColumns);
     }
 
-    public static SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder newSCHULAMTS_BEMERKUNGS_BAUSTEIN(DataSetManipulator builder, boolean initNotNullValues) {
-        return new SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder(builder, initNotNullValues, PRIMARY_KEY);
-    }
-
-    public static SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder newSCHULAMTS_BEMERKUNGS_BAUSTEIN(DataSetManipulator builder, boolean initNotNullValues, String... identifierColumns) {
-        return new SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder(builder, initNotNullValues, identifierColumns);
-    }
 }

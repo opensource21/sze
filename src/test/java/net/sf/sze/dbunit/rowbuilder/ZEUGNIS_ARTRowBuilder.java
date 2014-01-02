@@ -1,10 +1,9 @@
 package net.sf.sze.dbunit.rowbuilder;
 
-import org.dbunit.dataset.builder.DataRowBuilder;
-import org.dbunit.dataset.builder.DataSetManipulator;
-import org.dbunit.validator.Validator;
+import org.dbunit.dataset.builder.BasicDataRowBuilder;
+import org.dbunit.validator.IValidator;
 
-public class ZEUGNIS_ARTRowBuilder extends DataRowBuilder {
+public class ZEUGNIS_ARTRowBuilder extends BasicDataRowBuilder {
 
     public static final String TABLE_NAME = "ZEUGNIS_ART";
 
@@ -23,21 +22,19 @@ public class ZEUGNIS_ARTRowBuilder extends DataRowBuilder {
 
     public static final String[] ALL_COLUMNS = {C_ABSCHLUSS_GRAD, C_AKTIV, C_ID, C_NAME, C_NOTE_ALS_TEXT_DARSTELLEN, C_PLATZ_FUER_SIEGEL, C_PRINT_VERSETZUNGSBEMERKUNG, C_SORTIERUNG, C_TITEL, C_VERSION};
 
-    public ZEUGNIS_ARTRowBuilder(DataSetManipulator dataSetManipulator, boolean initNotNullValues, String... identifierColumns) {
-        super(dataSetManipulator, TABLE_NAME, identifierColumns);
+    public ZEUGNIS_ARTRowBuilder(String... identifierColumns) {
+        super(TABLE_NAME, identifierColumns);
         setAllColumnNames(ALL_COLUMNS);
-        if (initNotNullValues) {
-            with(C_PRINT_VERSETZUNGSBEMERKUNG, Boolean.FALSE);
-            with(C_TITEL, "");
-            with(C_AKTIV, Boolean.FALSE);
-            with(C_NAME, "");
-            with(C_ABSCHLUSS_GRAD, "");
-            with(C_VERSION, new Long("0"));
-            with(C_PLATZ_FUER_SIEGEL, Boolean.FALSE);
-            with(C_ID, new Long("0"));
-            with(C_SORTIERUNG, new Long("0"));
-            with(C_NOTE_ALS_TEXT_DARSTELLEN, Boolean.FALSE);
-        }
+        addDefaultValue(C_PRINT_VERSETZUNGSBEMERKUNG, Boolean.FALSE);
+        addDefaultValue(C_TITEL, "");
+        addDefaultValue(C_AKTIV, Boolean.FALSE);
+        addDefaultValue(C_NAME, "");
+        addDefaultValue(C_ABSCHLUSS_GRAD, "");
+        addDefaultValue(C_VERSION, new Long("0"));
+        addDefaultValue(C_PLATZ_FUER_SIEGEL, Boolean.FALSE);
+        addDefaultValue(C_ID, new Long("0"));
+        addDefaultValue(C_SORTIERUNG, new Long("0"));
+        addDefaultValue(C_NOTE_ALS_TEXT_DARSTELLEN, Boolean.FALSE);
     }
 
     public final ZEUGNIS_ARTRowBuilder ABSCHLUSS_GRAD (String value) {
@@ -45,7 +42,7 @@ public class ZEUGNIS_ARTRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final ZEUGNIS_ARTRowBuilder ABSCHLUSS_GRAD (Validator<?> value) {
+    public final ZEUGNIS_ARTRowBuilder ABSCHLUSS_GRAD (IValidator<?> value) {
         with(C_ABSCHLUSS_GRAD, value);
         return this;
     }
@@ -55,7 +52,7 @@ public class ZEUGNIS_ARTRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final ZEUGNIS_ARTRowBuilder AKTIV (Validator<?> value) {
+    public final ZEUGNIS_ARTRowBuilder AKTIV (IValidator<?> value) {
         with(C_AKTIV, value);
         return this;
     }
@@ -65,7 +62,7 @@ public class ZEUGNIS_ARTRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final ZEUGNIS_ARTRowBuilder ID (Validator<?> value) {
+    public final ZEUGNIS_ARTRowBuilder ID (IValidator<?> value) {
         with(C_ID, value);
         return this;
     }
@@ -75,7 +72,7 @@ public class ZEUGNIS_ARTRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final ZEUGNIS_ARTRowBuilder NAME (Validator<?> value) {
+    public final ZEUGNIS_ARTRowBuilder NAME (IValidator<?> value) {
         with(C_NAME, value);
         return this;
     }
@@ -85,7 +82,7 @@ public class ZEUGNIS_ARTRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final ZEUGNIS_ARTRowBuilder NOTE_ALS_TEXT_DARSTELLEN (Validator<?> value) {
+    public final ZEUGNIS_ARTRowBuilder NOTE_ALS_TEXT_DARSTELLEN (IValidator<?> value) {
         with(C_NOTE_ALS_TEXT_DARSTELLEN, value);
         return this;
     }
@@ -95,7 +92,7 @@ public class ZEUGNIS_ARTRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final ZEUGNIS_ARTRowBuilder PLATZ_FUER_SIEGEL (Validator<?> value) {
+    public final ZEUGNIS_ARTRowBuilder PLATZ_FUER_SIEGEL (IValidator<?> value) {
         with(C_PLATZ_FUER_SIEGEL, value);
         return this;
     }
@@ -105,7 +102,7 @@ public class ZEUGNIS_ARTRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final ZEUGNIS_ARTRowBuilder PRINT_VERSETZUNGSBEMERKUNG (Validator<?> value) {
+    public final ZEUGNIS_ARTRowBuilder PRINT_VERSETZUNGSBEMERKUNG (IValidator<?> value) {
         with(C_PRINT_VERSETZUNGSBEMERKUNG, value);
         return this;
     }
@@ -115,7 +112,7 @@ public class ZEUGNIS_ARTRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final ZEUGNIS_ARTRowBuilder SORTIERUNG (Validator<?> value) {
+    public final ZEUGNIS_ARTRowBuilder SORTIERUNG (IValidator<?> value) {
         with(C_SORTIERUNG, value);
         return this;
     }
@@ -125,7 +122,7 @@ public class ZEUGNIS_ARTRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final ZEUGNIS_ARTRowBuilder TITEL (Validator<?> value) {
+    public final ZEUGNIS_ARTRowBuilder TITEL (IValidator<?> value) {
         with(C_TITEL, value);
         return this;
     }
@@ -135,25 +132,18 @@ public class ZEUGNIS_ARTRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final ZEUGNIS_ARTRowBuilder VERSION (Validator<?> value) {
+    public final ZEUGNIS_ARTRowBuilder VERSION (IValidator<?> value) {
         with(C_VERSION, value);
         return this;
     }
 
 
-    public static ZEUGNIS_ARTRowBuilder newZEUGNIS_ART(DataSetManipulator builder) {
-        return new ZEUGNIS_ARTRowBuilder(builder, true, PRIMARY_KEY);
+    public static ZEUGNIS_ARTRowBuilder newZEUGNIS_ART() {
+        return new ZEUGNIS_ARTRowBuilder(PRIMARY_KEY);
     }
 
-    public static ZEUGNIS_ARTRowBuilder newZEUGNIS_ART(DataSetManipulator builder, String... identifierColumns) {
-        return new ZEUGNIS_ARTRowBuilder(builder, true, identifierColumns);
+    public static ZEUGNIS_ARTRowBuilder newZEUGNIS_ART(String... identifierColumns) {
+        return new ZEUGNIS_ARTRowBuilder(identifierColumns);
     }
 
-    public static ZEUGNIS_ARTRowBuilder newZEUGNIS_ART(DataSetManipulator builder, boolean initNotNullValues) {
-        return new ZEUGNIS_ARTRowBuilder(builder, initNotNullValues, PRIMARY_KEY);
-    }
-
-    public static ZEUGNIS_ARTRowBuilder newZEUGNIS_ART(DataSetManipulator builder, boolean initNotNullValues, String... identifierColumns) {
-        return new ZEUGNIS_ARTRowBuilder(builder, initNotNullValues, identifierColumns);
-    }
 }

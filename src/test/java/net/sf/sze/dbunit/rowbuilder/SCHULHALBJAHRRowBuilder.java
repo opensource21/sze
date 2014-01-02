@@ -1,10 +1,9 @@
 package net.sf.sze.dbunit.rowbuilder;
 
-import org.dbunit.dataset.builder.DataRowBuilder;
-import org.dbunit.dataset.builder.DataSetManipulator;
-import org.dbunit.validator.Validator;
+import org.dbunit.dataset.builder.BasicDataRowBuilder;
+import org.dbunit.validator.IValidator;
 
-public class SCHULHALBJAHRRowBuilder extends DataRowBuilder {
+public class SCHULHALBJAHRRowBuilder extends BasicDataRowBuilder {
 
     public static final String TABLE_NAME = "SCHULHALBJAHR";
 
@@ -18,16 +17,14 @@ public class SCHULHALBJAHRRowBuilder extends DataRowBuilder {
 
     public static final String[] ALL_COLUMNS = {C_HALBJAHR, C_ID, C_JAHR, C_SELECTABLE, C_VERSION};
 
-    public SCHULHALBJAHRRowBuilder(DataSetManipulator dataSetManipulator, boolean initNotNullValues, String... identifierColumns) {
-        super(dataSetManipulator, TABLE_NAME, identifierColumns);
+    public SCHULHALBJAHRRowBuilder(String... identifierColumns) {
+        super(TABLE_NAME, identifierColumns);
         setAllColumnNames(ALL_COLUMNS);
-        if (initNotNullValues) {
-            with(C_VERSION, new Long("0"));
-            with(C_JAHR, new Integer("0"));
-            with(C_ID, new Long("0"));
-            with(C_SELECTABLE, Boolean.FALSE);
-            with(C_HALBJAHR, new Integer("0"));
-        }
+        addDefaultValue(C_VERSION, new Long("0"));
+        addDefaultValue(C_JAHR, new Integer("0"));
+        addDefaultValue(C_ID, new Long("0"));
+        addDefaultValue(C_SELECTABLE, Boolean.FALSE);
+        addDefaultValue(C_HALBJAHR, new Integer("0"));
     }
 
     public final SCHULHALBJAHRRowBuilder HALBJAHR (Integer value) {
@@ -35,7 +32,7 @@ public class SCHULHALBJAHRRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final SCHULHALBJAHRRowBuilder HALBJAHR (Validator<?> value) {
+    public final SCHULHALBJAHRRowBuilder HALBJAHR (IValidator<?> value) {
         with(C_HALBJAHR, value);
         return this;
     }
@@ -45,7 +42,7 @@ public class SCHULHALBJAHRRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final SCHULHALBJAHRRowBuilder ID (Validator<?> value) {
+    public final SCHULHALBJAHRRowBuilder ID (IValidator<?> value) {
         with(C_ID, value);
         return this;
     }
@@ -55,7 +52,7 @@ public class SCHULHALBJAHRRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final SCHULHALBJAHRRowBuilder JAHR (Validator<?> value) {
+    public final SCHULHALBJAHRRowBuilder JAHR (IValidator<?> value) {
         with(C_JAHR, value);
         return this;
     }
@@ -65,7 +62,7 @@ public class SCHULHALBJAHRRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final SCHULHALBJAHRRowBuilder SELECTABLE (Validator<?> value) {
+    public final SCHULHALBJAHRRowBuilder SELECTABLE (IValidator<?> value) {
         with(C_SELECTABLE, value);
         return this;
     }
@@ -75,25 +72,18 @@ public class SCHULHALBJAHRRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final SCHULHALBJAHRRowBuilder VERSION (Validator<?> value) {
+    public final SCHULHALBJAHRRowBuilder VERSION (IValidator<?> value) {
         with(C_VERSION, value);
         return this;
     }
 
 
-    public static SCHULHALBJAHRRowBuilder newSCHULHALBJAHR(DataSetManipulator builder) {
-        return new SCHULHALBJAHRRowBuilder(builder, true, PRIMARY_KEY);
+    public static SCHULHALBJAHRRowBuilder newSCHULHALBJAHR() {
+        return new SCHULHALBJAHRRowBuilder(PRIMARY_KEY);
     }
 
-    public static SCHULHALBJAHRRowBuilder newSCHULHALBJAHR(DataSetManipulator builder, String... identifierColumns) {
-        return new SCHULHALBJAHRRowBuilder(builder, true, identifierColumns);
+    public static SCHULHALBJAHRRowBuilder newSCHULHALBJAHR(String... identifierColumns) {
+        return new SCHULHALBJAHRRowBuilder(identifierColumns);
     }
 
-    public static SCHULHALBJAHRRowBuilder newSCHULHALBJAHR(DataSetManipulator builder, boolean initNotNullValues) {
-        return new SCHULHALBJAHRRowBuilder(builder, initNotNullValues, PRIMARY_KEY);
-    }
-
-    public static SCHULHALBJAHRRowBuilder newSCHULHALBJAHR(DataSetManipulator builder, boolean initNotNullValues, String... identifierColumns) {
-        return new SCHULHALBJAHRRowBuilder(builder, initNotNullValues, identifierColumns);
-    }
 }

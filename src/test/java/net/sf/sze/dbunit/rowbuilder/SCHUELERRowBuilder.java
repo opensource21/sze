@@ -1,11 +1,10 @@
 package net.sf.sze.dbunit.rowbuilder;
 
-import org.dbunit.dataset.builder.DataRowBuilder;
-import org.dbunit.dataset.builder.DataSetManipulator;
-import org.dbunit.validator.Validator;
+import org.dbunit.dataset.builder.BasicDataRowBuilder;
+import org.dbunit.validator.IValidator;
 import java.sql.Timestamp;
 
-public class SCHUELERRowBuilder extends DataRowBuilder {
+public class SCHUELERRowBuilder extends BasicDataRowBuilder {
 
     public static final String TABLE_NAME = "SCHUELER";
 
@@ -26,19 +25,17 @@ public class SCHUELERRowBuilder extends DataRowBuilder {
 
     public static final String[] ALL_COLUMNS = {C_ABGANGS_DATUM, C_AUFNAHME_DATUM, C_GEBURTSORT, C_GEBURTSTAG, C_GESCHLECHT, C_ID, C_KLASSE_ID, C_NAME, C_NUMMER, C_RUFNAME, C_VERSION, C_VORNAME};
 
-    public SCHUELERRowBuilder(DataSetManipulator dataSetManipulator, boolean initNotNullValues, String... identifierColumns) {
-        super(dataSetManipulator, TABLE_NAME, identifierColumns);
+    public SCHUELERRowBuilder(String... identifierColumns) {
+        super(TABLE_NAME, identifierColumns);
         setAllColumnNames(ALL_COLUMNS);
-        if (initNotNullValues) {
-            with(C_GEBURTSTAG, new Timestamp(0));
-            with(C_NAME, "");
-            with(C_VERSION, new Long("0"));
-            with(C_VORNAME, "");
-            with(C_GESCHLECHT, new Integer("0"));
-            with(C_KLASSE_ID, new Long("0"));
-            with(C_ID, new Long("0"));
-            with(C_GEBURTSORT, "");
-        }
+        addDefaultValue(C_GEBURTSTAG, new Timestamp(0));
+        addDefaultValue(C_NAME, "");
+        addDefaultValue(C_VERSION, new Long("0"));
+        addDefaultValue(C_VORNAME, "");
+        addDefaultValue(C_GESCHLECHT, new Integer("0"));
+        addDefaultValue(C_KLASSE_ID, new Long("0"));
+        addDefaultValue(C_ID, new Long("0"));
+        addDefaultValue(C_GEBURTSORT, "");
     }
 
     public final SCHUELERRowBuilder ABGANGS_DATUM (Timestamp value) {
@@ -46,7 +43,7 @@ public class SCHUELERRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final SCHUELERRowBuilder ABGANGS_DATUM (Validator<?> value) {
+    public final SCHUELERRowBuilder ABGANGS_DATUM (IValidator<?> value) {
         with(C_ABGANGS_DATUM, value);
         return this;
     }
@@ -56,7 +53,7 @@ public class SCHUELERRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final SCHUELERRowBuilder AUFNAHME_DATUM (Validator<?> value) {
+    public final SCHUELERRowBuilder AUFNAHME_DATUM (IValidator<?> value) {
         with(C_AUFNAHME_DATUM, value);
         return this;
     }
@@ -66,7 +63,7 @@ public class SCHUELERRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final SCHUELERRowBuilder GEBURTSORT (Validator<?> value) {
+    public final SCHUELERRowBuilder GEBURTSORT (IValidator<?> value) {
         with(C_GEBURTSORT, value);
         return this;
     }
@@ -76,7 +73,7 @@ public class SCHUELERRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final SCHUELERRowBuilder GEBURTSTAG (Validator<?> value) {
+    public final SCHUELERRowBuilder GEBURTSTAG (IValidator<?> value) {
         with(C_GEBURTSTAG, value);
         return this;
     }
@@ -86,7 +83,7 @@ public class SCHUELERRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final SCHUELERRowBuilder GESCHLECHT (Validator<?> value) {
+    public final SCHUELERRowBuilder GESCHLECHT (IValidator<?> value) {
         with(C_GESCHLECHT, value);
         return this;
     }
@@ -96,7 +93,7 @@ public class SCHUELERRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final SCHUELERRowBuilder ID (Validator<?> value) {
+    public final SCHUELERRowBuilder ID (IValidator<?> value) {
         with(C_ID, value);
         return this;
     }
@@ -106,7 +103,7 @@ public class SCHUELERRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final SCHUELERRowBuilder KLASSE_ID (Validator<?> value) {
+    public final SCHUELERRowBuilder KLASSE_ID (IValidator<?> value) {
         with(C_KLASSE_ID, value);
         return this;
     }
@@ -116,7 +113,7 @@ public class SCHUELERRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final SCHUELERRowBuilder NAME (Validator<?> value) {
+    public final SCHUELERRowBuilder NAME (IValidator<?> value) {
         with(C_NAME, value);
         return this;
     }
@@ -126,7 +123,7 @@ public class SCHUELERRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final SCHUELERRowBuilder NUMMER (Validator<?> value) {
+    public final SCHUELERRowBuilder NUMMER (IValidator<?> value) {
         with(C_NUMMER, value);
         return this;
     }
@@ -136,7 +133,7 @@ public class SCHUELERRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final SCHUELERRowBuilder RUFNAME (Validator<?> value) {
+    public final SCHUELERRowBuilder RUFNAME (IValidator<?> value) {
         with(C_RUFNAME, value);
         return this;
     }
@@ -146,7 +143,7 @@ public class SCHUELERRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final SCHUELERRowBuilder VERSION (Validator<?> value) {
+    public final SCHUELERRowBuilder VERSION (IValidator<?> value) {
         with(C_VERSION, value);
         return this;
     }
@@ -156,25 +153,18 @@ public class SCHUELERRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final SCHUELERRowBuilder VORNAME (Validator<?> value) {
+    public final SCHUELERRowBuilder VORNAME (IValidator<?> value) {
         with(C_VORNAME, value);
         return this;
     }
 
 
-    public static SCHUELERRowBuilder newSCHUELER(DataSetManipulator builder) {
-        return new SCHUELERRowBuilder(builder, true, PRIMARY_KEY);
+    public static SCHUELERRowBuilder newSCHUELER() {
+        return new SCHUELERRowBuilder(PRIMARY_KEY);
     }
 
-    public static SCHUELERRowBuilder newSCHUELER(DataSetManipulator builder, String... identifierColumns) {
-        return new SCHUELERRowBuilder(builder, true, identifierColumns);
+    public static SCHUELERRowBuilder newSCHUELER(String... identifierColumns) {
+        return new SCHUELERRowBuilder(identifierColumns);
     }
 
-    public static SCHUELERRowBuilder newSCHUELER(DataSetManipulator builder, boolean initNotNullValues) {
-        return new SCHUELERRowBuilder(builder, initNotNullValues, PRIMARY_KEY);
-    }
-
-    public static SCHUELERRowBuilder newSCHUELER(DataSetManipulator builder, boolean initNotNullValues, String... identifierColumns) {
-        return new SCHUELERRowBuilder(builder, initNotNullValues, identifierColumns);
-    }
 }

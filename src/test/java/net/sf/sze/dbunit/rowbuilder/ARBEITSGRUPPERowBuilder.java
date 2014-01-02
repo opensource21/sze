@@ -1,10 +1,9 @@
 package net.sf.sze.dbunit.rowbuilder;
 
-import org.dbunit.dataset.builder.DataRowBuilder;
-import org.dbunit.dataset.builder.DataSetManipulator;
-import org.dbunit.validator.Validator;
+import org.dbunit.dataset.builder.BasicDataRowBuilder;
+import org.dbunit.validator.IValidator;
 
-public class ARBEITSGRUPPERowBuilder extends DataRowBuilder {
+public class ARBEITSGRUPPERowBuilder extends BasicDataRowBuilder {
 
     public static final String TABLE_NAME = "ARBEITSGRUPPE";
 
@@ -18,16 +17,14 @@ public class ARBEITSGRUPPERowBuilder extends DataRowBuilder {
 
     public static final String[] ALL_COLUMNS = {C_ID, C_KLASSENSTUFEN, C_NAME, C_SORTIERUNG, C_VERSION};
 
-    public ARBEITSGRUPPERowBuilder(DataSetManipulator dataSetManipulator, boolean initNotNullValues, String... identifierColumns) {
-        super(dataSetManipulator, TABLE_NAME, identifierColumns);
+    public ARBEITSGRUPPERowBuilder(String... identifierColumns) {
+        super(TABLE_NAME, identifierColumns);
         setAllColumnNames(ALL_COLUMNS);
-        if (initNotNullValues) {
-            with(C_NAME, "");
-            with(C_KLASSENSTUFEN, "");
-            with(C_VERSION, new Long("0"));
-            with(C_ID, new Long("0"));
-            with(C_SORTIERUNG, new Long("0"));
-        }
+        addDefaultValue(C_NAME, "");
+        addDefaultValue(C_KLASSENSTUFEN, "");
+        addDefaultValue(C_VERSION, new Long("0"));
+        addDefaultValue(C_ID, new Long("0"));
+        addDefaultValue(C_SORTIERUNG, new Long("0"));
     }
 
     public final ARBEITSGRUPPERowBuilder ID (Long value) {
@@ -35,7 +32,7 @@ public class ARBEITSGRUPPERowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final ARBEITSGRUPPERowBuilder ID (Validator<?> value) {
+    public final ARBEITSGRUPPERowBuilder ID (IValidator<?> value) {
         with(C_ID, value);
         return this;
     }
@@ -45,7 +42,7 @@ public class ARBEITSGRUPPERowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final ARBEITSGRUPPERowBuilder KLASSENSTUFEN (Validator<?> value) {
+    public final ARBEITSGRUPPERowBuilder KLASSENSTUFEN (IValidator<?> value) {
         with(C_KLASSENSTUFEN, value);
         return this;
     }
@@ -55,7 +52,7 @@ public class ARBEITSGRUPPERowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final ARBEITSGRUPPERowBuilder NAME (Validator<?> value) {
+    public final ARBEITSGRUPPERowBuilder NAME (IValidator<?> value) {
         with(C_NAME, value);
         return this;
     }
@@ -65,7 +62,7 @@ public class ARBEITSGRUPPERowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final ARBEITSGRUPPERowBuilder SORTIERUNG (Validator<?> value) {
+    public final ARBEITSGRUPPERowBuilder SORTIERUNG (IValidator<?> value) {
         with(C_SORTIERUNG, value);
         return this;
     }
@@ -75,25 +72,18 @@ public class ARBEITSGRUPPERowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final ARBEITSGRUPPERowBuilder VERSION (Validator<?> value) {
+    public final ARBEITSGRUPPERowBuilder VERSION (IValidator<?> value) {
         with(C_VERSION, value);
         return this;
     }
 
 
-    public static ARBEITSGRUPPERowBuilder newARBEITSGRUPPE(DataSetManipulator builder) {
-        return new ARBEITSGRUPPERowBuilder(builder, true, PRIMARY_KEY);
+    public static ARBEITSGRUPPERowBuilder newARBEITSGRUPPE() {
+        return new ARBEITSGRUPPERowBuilder(PRIMARY_KEY);
     }
 
-    public static ARBEITSGRUPPERowBuilder newARBEITSGRUPPE(DataSetManipulator builder, String... identifierColumns) {
-        return new ARBEITSGRUPPERowBuilder(builder, true, identifierColumns);
+    public static ARBEITSGRUPPERowBuilder newARBEITSGRUPPE(String... identifierColumns) {
+        return new ARBEITSGRUPPERowBuilder(identifierColumns);
     }
 
-    public static ARBEITSGRUPPERowBuilder newARBEITSGRUPPE(DataSetManipulator builder, boolean initNotNullValues) {
-        return new ARBEITSGRUPPERowBuilder(builder, initNotNullValues, PRIMARY_KEY);
-    }
-
-    public static ARBEITSGRUPPERowBuilder newARBEITSGRUPPE(DataSetManipulator builder, boolean initNotNullValues, String... identifierColumns) {
-        return new ARBEITSGRUPPERowBuilder(builder, initNotNullValues, identifierColumns);
-    }
 }

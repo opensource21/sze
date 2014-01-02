@@ -1,10 +1,9 @@
 package net.sf.sze.dbunit.rowbuilder;
 
-import org.dbunit.dataset.builder.DataRowBuilder;
-import org.dbunit.dataset.builder.DataSetManipulator;
-import org.dbunit.validator.Validator;
+import org.dbunit.dataset.builder.BasicDataRowBuilder;
+import org.dbunit.validator.IValidator;
 
-public class BEWERTUNGRowBuilder extends DataRowBuilder {
+public class BEWERTUNGRowBuilder extends BasicDataRowBuilder {
 
     public static final String TABLE_NAME = "BEWERTUNG";
 
@@ -23,19 +22,17 @@ public class BEWERTUNGRowBuilder extends DataRowBuilder {
 
     public static final String[] ALL_COLUMNS = {C_CLASS, C_ID, C_LEISTUNGSNIVEAU, C_LEISTUNG_NUR_SCHWACH_AUSREICHEND, C_NOTE, C_RELEVANT, C_SCHULFACH_ID, C_SONDER_NOTE, C_VERSION, C_ZEUGNIS_ID};
 
-    public BEWERTUNGRowBuilder(DataSetManipulator dataSetManipulator, boolean initNotNullValues, String... identifierColumns) {
-        super(dataSetManipulator, TABLE_NAME, identifierColumns);
+    public BEWERTUNGRowBuilder(String... identifierColumns) {
+        super(TABLE_NAME, identifierColumns);
         setAllColumnNames(ALL_COLUMNS);
-        if (initNotNullValues) {
-            with(C_CLASS, "");
-            with(C_VERSION, new Long("0"));
-            with(C_ZEUGNIS_ID, new Long("0"));
-            with(C_SCHULFACH_ID, new Long("0"));
-            with(C_RELEVANT, Boolean.FALSE);
-            with(C_ID, new Long("0"));
-            with(C_LEISTUNG_NUR_SCHWACH_AUSREICHEND, Boolean.FALSE);
-            with(C_SONDER_NOTE, "");
-        }
+        addDefaultValue(C_CLASS, "");
+        addDefaultValue(C_VERSION, new Long("0"));
+        addDefaultValue(C_ZEUGNIS_ID, new Long("0"));
+        addDefaultValue(C_SCHULFACH_ID, new Long("0"));
+        addDefaultValue(C_RELEVANT, Boolean.FALSE);
+        addDefaultValue(C_ID, new Long("0"));
+        addDefaultValue(C_LEISTUNG_NUR_SCHWACH_AUSREICHEND, Boolean.FALSE);
+        addDefaultValue(C_SONDER_NOTE, "");
     }
 
     public final BEWERTUNGRowBuilder CLASS (String value) {
@@ -43,7 +40,7 @@ public class BEWERTUNGRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final BEWERTUNGRowBuilder CLASS (Validator<?> value) {
+    public final BEWERTUNGRowBuilder CLASS (IValidator<?> value) {
         with(C_CLASS, value);
         return this;
     }
@@ -53,7 +50,7 @@ public class BEWERTUNGRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final BEWERTUNGRowBuilder ID (Validator<?> value) {
+    public final BEWERTUNGRowBuilder ID (IValidator<?> value) {
         with(C_ID, value);
         return this;
     }
@@ -63,7 +60,7 @@ public class BEWERTUNGRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final BEWERTUNGRowBuilder LEISTUNGSNIVEAU (Validator<?> value) {
+    public final BEWERTUNGRowBuilder LEISTUNGSNIVEAU (IValidator<?> value) {
         with(C_LEISTUNGSNIVEAU, value);
         return this;
     }
@@ -73,7 +70,7 @@ public class BEWERTUNGRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final BEWERTUNGRowBuilder LEISTUNG_NUR_SCHWACH_AUSREICHEND (Validator<?> value) {
+    public final BEWERTUNGRowBuilder LEISTUNG_NUR_SCHWACH_AUSREICHEND (IValidator<?> value) {
         with(C_LEISTUNG_NUR_SCHWACH_AUSREICHEND, value);
         return this;
     }
@@ -83,7 +80,7 @@ public class BEWERTUNGRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final BEWERTUNGRowBuilder NOTE (Validator<?> value) {
+    public final BEWERTUNGRowBuilder NOTE (IValidator<?> value) {
         with(C_NOTE, value);
         return this;
     }
@@ -93,7 +90,7 @@ public class BEWERTUNGRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final BEWERTUNGRowBuilder RELEVANT (Validator<?> value) {
+    public final BEWERTUNGRowBuilder RELEVANT (IValidator<?> value) {
         with(C_RELEVANT, value);
         return this;
     }
@@ -103,7 +100,7 @@ public class BEWERTUNGRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final BEWERTUNGRowBuilder SCHULFACH_ID (Validator<?> value) {
+    public final BEWERTUNGRowBuilder SCHULFACH_ID (IValidator<?> value) {
         with(C_SCHULFACH_ID, value);
         return this;
     }
@@ -113,7 +110,7 @@ public class BEWERTUNGRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final BEWERTUNGRowBuilder SONDER_NOTE (Validator<?> value) {
+    public final BEWERTUNGRowBuilder SONDER_NOTE (IValidator<?> value) {
         with(C_SONDER_NOTE, value);
         return this;
     }
@@ -123,7 +120,7 @@ public class BEWERTUNGRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final BEWERTUNGRowBuilder VERSION (Validator<?> value) {
+    public final BEWERTUNGRowBuilder VERSION (IValidator<?> value) {
         with(C_VERSION, value);
         return this;
     }
@@ -133,25 +130,18 @@ public class BEWERTUNGRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final BEWERTUNGRowBuilder ZEUGNIS_ID (Validator<?> value) {
+    public final BEWERTUNGRowBuilder ZEUGNIS_ID (IValidator<?> value) {
         with(C_ZEUGNIS_ID, value);
         return this;
     }
 
 
-    public static BEWERTUNGRowBuilder newBEWERTUNG(DataSetManipulator builder) {
-        return new BEWERTUNGRowBuilder(builder, true, PRIMARY_KEY);
+    public static BEWERTUNGRowBuilder newBEWERTUNG() {
+        return new BEWERTUNGRowBuilder(PRIMARY_KEY);
     }
 
-    public static BEWERTUNGRowBuilder newBEWERTUNG(DataSetManipulator builder, String... identifierColumns) {
-        return new BEWERTUNGRowBuilder(builder, true, identifierColumns);
+    public static BEWERTUNGRowBuilder newBEWERTUNG(String... identifierColumns) {
+        return new BEWERTUNGRowBuilder(identifierColumns);
     }
 
-    public static BEWERTUNGRowBuilder newBEWERTUNG(DataSetManipulator builder, boolean initNotNullValues) {
-        return new BEWERTUNGRowBuilder(builder, initNotNullValues, PRIMARY_KEY);
-    }
-
-    public static BEWERTUNGRowBuilder newBEWERTUNG(DataSetManipulator builder, boolean initNotNullValues, String... identifierColumns) {
-        return new BEWERTUNGRowBuilder(builder, initNotNullValues, identifierColumns);
-    }
 }

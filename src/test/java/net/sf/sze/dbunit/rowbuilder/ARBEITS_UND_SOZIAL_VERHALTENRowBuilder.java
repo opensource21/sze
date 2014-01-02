@@ -1,10 +1,9 @@
 package net.sf.sze.dbunit.rowbuilder;
 
-import org.dbunit.dataset.builder.DataRowBuilder;
-import org.dbunit.dataset.builder.DataSetManipulator;
-import org.dbunit.validator.Validator;
+import org.dbunit.dataset.builder.BasicDataRowBuilder;
+import org.dbunit.validator.IValidator;
 
-public class ARBEITS_UND_SOZIAL_VERHALTENRowBuilder extends DataRowBuilder {
+public class ARBEITS_UND_SOZIAL_VERHALTENRowBuilder extends BasicDataRowBuilder {
 
     public static final String TABLE_NAME = "ARBEITS_UND_SOZIAL_VERHALTEN";
 
@@ -19,17 +18,15 @@ public class ARBEITS_UND_SOZIAL_VERHALTENRowBuilder extends DataRowBuilder {
 
     public static final String[] ALL_COLUMNS = {C_ID, C_KLASSENSTUFEN, C_NAME, C_SORTIERUNG, C_TYP, C_VERSION};
 
-    public ARBEITS_UND_SOZIAL_VERHALTENRowBuilder(DataSetManipulator dataSetManipulator, boolean initNotNullValues, String... identifierColumns) {
-        super(dataSetManipulator, TABLE_NAME, identifierColumns);
+    public ARBEITS_UND_SOZIAL_VERHALTENRowBuilder(String... identifierColumns) {
+        super(TABLE_NAME, identifierColumns);
         setAllColumnNames(ALL_COLUMNS);
-        if (initNotNullValues) {
-            with(C_NAME, "");
-            with(C_KLASSENSTUFEN, "");
-            with(C_TYP, new Integer("0"));
-            with(C_VERSION, new Long("0"));
-            with(C_ID, new Long("0"));
-            with(C_SORTIERUNG, new Long("0"));
-        }
+        addDefaultValue(C_NAME, "");
+        addDefaultValue(C_KLASSENSTUFEN, "");
+        addDefaultValue(C_TYP, new Integer("0"));
+        addDefaultValue(C_VERSION, new Long("0"));
+        addDefaultValue(C_ID, new Long("0"));
+        addDefaultValue(C_SORTIERUNG, new Long("0"));
     }
 
     public final ARBEITS_UND_SOZIAL_VERHALTENRowBuilder ID (Long value) {
@@ -37,7 +34,7 @@ public class ARBEITS_UND_SOZIAL_VERHALTENRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final ARBEITS_UND_SOZIAL_VERHALTENRowBuilder ID (Validator<?> value) {
+    public final ARBEITS_UND_SOZIAL_VERHALTENRowBuilder ID (IValidator<?> value) {
         with(C_ID, value);
         return this;
     }
@@ -47,7 +44,7 @@ public class ARBEITS_UND_SOZIAL_VERHALTENRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final ARBEITS_UND_SOZIAL_VERHALTENRowBuilder KLASSENSTUFEN (Validator<?> value) {
+    public final ARBEITS_UND_SOZIAL_VERHALTENRowBuilder KLASSENSTUFEN (IValidator<?> value) {
         with(C_KLASSENSTUFEN, value);
         return this;
     }
@@ -57,7 +54,7 @@ public class ARBEITS_UND_SOZIAL_VERHALTENRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final ARBEITS_UND_SOZIAL_VERHALTENRowBuilder NAME (Validator<?> value) {
+    public final ARBEITS_UND_SOZIAL_VERHALTENRowBuilder NAME (IValidator<?> value) {
         with(C_NAME, value);
         return this;
     }
@@ -67,7 +64,7 @@ public class ARBEITS_UND_SOZIAL_VERHALTENRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final ARBEITS_UND_SOZIAL_VERHALTENRowBuilder SORTIERUNG (Validator<?> value) {
+    public final ARBEITS_UND_SOZIAL_VERHALTENRowBuilder SORTIERUNG (IValidator<?> value) {
         with(C_SORTIERUNG, value);
         return this;
     }
@@ -77,7 +74,7 @@ public class ARBEITS_UND_SOZIAL_VERHALTENRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final ARBEITS_UND_SOZIAL_VERHALTENRowBuilder TYP (Validator<?> value) {
+    public final ARBEITS_UND_SOZIAL_VERHALTENRowBuilder TYP (IValidator<?> value) {
         with(C_TYP, value);
         return this;
     }
@@ -87,25 +84,18 @@ public class ARBEITS_UND_SOZIAL_VERHALTENRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final ARBEITS_UND_SOZIAL_VERHALTENRowBuilder VERSION (Validator<?> value) {
+    public final ARBEITS_UND_SOZIAL_VERHALTENRowBuilder VERSION (IValidator<?> value) {
         with(C_VERSION, value);
         return this;
     }
 
 
-    public static ARBEITS_UND_SOZIAL_VERHALTENRowBuilder newARBEITS_UND_SOZIAL_VERHALTEN(DataSetManipulator builder) {
-        return new ARBEITS_UND_SOZIAL_VERHALTENRowBuilder(builder, true, PRIMARY_KEY);
+    public static ARBEITS_UND_SOZIAL_VERHALTENRowBuilder newARBEITS_UND_SOZIAL_VERHALTEN() {
+        return new ARBEITS_UND_SOZIAL_VERHALTENRowBuilder(PRIMARY_KEY);
     }
 
-    public static ARBEITS_UND_SOZIAL_VERHALTENRowBuilder newARBEITS_UND_SOZIAL_VERHALTEN(DataSetManipulator builder, String... identifierColumns) {
-        return new ARBEITS_UND_SOZIAL_VERHALTENRowBuilder(builder, true, identifierColumns);
+    public static ARBEITS_UND_SOZIAL_VERHALTENRowBuilder newARBEITS_UND_SOZIAL_VERHALTEN(String... identifierColumns) {
+        return new ARBEITS_UND_SOZIAL_VERHALTENRowBuilder(identifierColumns);
     }
 
-    public static ARBEITS_UND_SOZIAL_VERHALTENRowBuilder newARBEITS_UND_SOZIAL_VERHALTEN(DataSetManipulator builder, boolean initNotNullValues) {
-        return new ARBEITS_UND_SOZIAL_VERHALTENRowBuilder(builder, initNotNullValues, PRIMARY_KEY);
-    }
-
-    public static ARBEITS_UND_SOZIAL_VERHALTENRowBuilder newARBEITS_UND_SOZIAL_VERHALTEN(DataSetManipulator builder, boolean initNotNullValues, String... identifierColumns) {
-        return new ARBEITS_UND_SOZIAL_VERHALTENRowBuilder(builder, initNotNullValues, identifierColumns);
-    }
 }

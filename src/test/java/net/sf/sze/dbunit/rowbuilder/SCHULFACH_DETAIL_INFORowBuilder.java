@@ -1,10 +1,9 @@
 package net.sf.sze.dbunit.rowbuilder;
 
-import org.dbunit.dataset.builder.DataRowBuilder;
-import org.dbunit.dataset.builder.DataSetManipulator;
-import org.dbunit.validator.Validator;
+import org.dbunit.dataset.builder.BasicDataRowBuilder;
+import org.dbunit.validator.IValidator;
 
-public class SCHULFACH_DETAIL_INFORowBuilder extends DataRowBuilder {
+public class SCHULFACH_DETAIL_INFORowBuilder extends BasicDataRowBuilder {
 
     public static final String TABLE_NAME = "SCHULFACH_DETAIL_INFO";
 
@@ -18,16 +17,14 @@ public class SCHULFACH_DETAIL_INFORowBuilder extends DataRowBuilder {
 
     public static final String[] ALL_COLUMNS = {C_DETAIL_INFO, C_FORMULAR_ID, C_ID, C_SCHULFACH_ID, C_VERSION};
 
-    public SCHULFACH_DETAIL_INFORowBuilder(DataSetManipulator dataSetManipulator, boolean initNotNullValues, String... identifierColumns) {
-        super(dataSetManipulator, TABLE_NAME, identifierColumns);
+    public SCHULFACH_DETAIL_INFORowBuilder(String... identifierColumns) {
+        super(TABLE_NAME, identifierColumns);
         setAllColumnNames(ALL_COLUMNS);
-        if (initNotNullValues) {
-            with(C_DETAIL_INFO, "");
-            with(C_VERSION, new Long("0"));
-            with(C_SCHULFACH_ID, new Long("0"));
-            with(C_ID, new Long("0"));
-            with(C_FORMULAR_ID, new Long("0"));
-        }
+        addDefaultValue(C_DETAIL_INFO, "");
+        addDefaultValue(C_VERSION, new Long("0"));
+        addDefaultValue(C_SCHULFACH_ID, new Long("0"));
+        addDefaultValue(C_ID, new Long("0"));
+        addDefaultValue(C_FORMULAR_ID, new Long("0"));
     }
 
     public final SCHULFACH_DETAIL_INFORowBuilder DETAIL_INFO (String value) {
@@ -35,7 +32,7 @@ public class SCHULFACH_DETAIL_INFORowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final SCHULFACH_DETAIL_INFORowBuilder DETAIL_INFO (Validator<?> value) {
+    public final SCHULFACH_DETAIL_INFORowBuilder DETAIL_INFO (IValidator<?> value) {
         with(C_DETAIL_INFO, value);
         return this;
     }
@@ -45,7 +42,7 @@ public class SCHULFACH_DETAIL_INFORowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final SCHULFACH_DETAIL_INFORowBuilder FORMULAR_ID (Validator<?> value) {
+    public final SCHULFACH_DETAIL_INFORowBuilder FORMULAR_ID (IValidator<?> value) {
         with(C_FORMULAR_ID, value);
         return this;
     }
@@ -55,7 +52,7 @@ public class SCHULFACH_DETAIL_INFORowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final SCHULFACH_DETAIL_INFORowBuilder ID (Validator<?> value) {
+    public final SCHULFACH_DETAIL_INFORowBuilder ID (IValidator<?> value) {
         with(C_ID, value);
         return this;
     }
@@ -65,7 +62,7 @@ public class SCHULFACH_DETAIL_INFORowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final SCHULFACH_DETAIL_INFORowBuilder SCHULFACH_ID (Validator<?> value) {
+    public final SCHULFACH_DETAIL_INFORowBuilder SCHULFACH_ID (IValidator<?> value) {
         with(C_SCHULFACH_ID, value);
         return this;
     }
@@ -75,25 +72,18 @@ public class SCHULFACH_DETAIL_INFORowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final SCHULFACH_DETAIL_INFORowBuilder VERSION (Validator<?> value) {
+    public final SCHULFACH_DETAIL_INFORowBuilder VERSION (IValidator<?> value) {
         with(C_VERSION, value);
         return this;
     }
 
 
-    public static SCHULFACH_DETAIL_INFORowBuilder newSCHULFACH_DETAIL_INFO(DataSetManipulator builder) {
-        return new SCHULFACH_DETAIL_INFORowBuilder(builder, true, PRIMARY_KEY);
+    public static SCHULFACH_DETAIL_INFORowBuilder newSCHULFACH_DETAIL_INFO() {
+        return new SCHULFACH_DETAIL_INFORowBuilder(PRIMARY_KEY);
     }
 
-    public static SCHULFACH_DETAIL_INFORowBuilder newSCHULFACH_DETAIL_INFO(DataSetManipulator builder, String... identifierColumns) {
-        return new SCHULFACH_DETAIL_INFORowBuilder(builder, true, identifierColumns);
+    public static SCHULFACH_DETAIL_INFORowBuilder newSCHULFACH_DETAIL_INFO(String... identifierColumns) {
+        return new SCHULFACH_DETAIL_INFORowBuilder(identifierColumns);
     }
 
-    public static SCHULFACH_DETAIL_INFORowBuilder newSCHULFACH_DETAIL_INFO(DataSetManipulator builder, boolean initNotNullValues) {
-        return new SCHULFACH_DETAIL_INFORowBuilder(builder, initNotNullValues, PRIMARY_KEY);
-    }
-
-    public static SCHULFACH_DETAIL_INFORowBuilder newSCHULFACH_DETAIL_INFO(DataSetManipulator builder, boolean initNotNullValues, String... identifierColumns) {
-        return new SCHULFACH_DETAIL_INFORowBuilder(builder, initNotNullValues, identifierColumns);
-    }
 }

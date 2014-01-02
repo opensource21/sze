@@ -1,10 +1,9 @@
 package net.sf.sze.dbunit.rowbuilder;
 
-import org.dbunit.dataset.builder.DataRowBuilder;
-import org.dbunit.dataset.builder.DataSetManipulator;
-import org.dbunit.validator.Validator;
+import org.dbunit.dataset.builder.BasicDataRowBuilder;
+import org.dbunit.validator.IValidator;
 
-public class SOLBEWERTUNGS_TEXTRowBuilder extends DataRowBuilder {
+public class SOLBEWERTUNGS_TEXTRowBuilder extends BasicDataRowBuilder {
 
     public static final String TABLE_NAME = "SOLBEWERTUNGS_TEXT";
 
@@ -17,15 +16,13 @@ public class SOLBEWERTUNGS_TEXTRowBuilder extends DataRowBuilder {
 
     public static final String[] ALL_COLUMNS = {C_ID, C_NAME, C_TEXT, C_VERSION};
 
-    public SOLBEWERTUNGS_TEXTRowBuilder(DataSetManipulator dataSetManipulator, boolean initNotNullValues, String... identifierColumns) {
-        super(dataSetManipulator, TABLE_NAME, identifierColumns);
+    public SOLBEWERTUNGS_TEXTRowBuilder(String... identifierColumns) {
+        super(TABLE_NAME, identifierColumns);
         setAllColumnNames(ALL_COLUMNS);
-        if (initNotNullValues) {
-            with(C_NAME, "");
-            with(C_VERSION, new Long("0"));
-            with(C_TEXT, "");
-            with(C_ID, new Long("0"));
-        }
+        addDefaultValue(C_NAME, "");
+        addDefaultValue(C_VERSION, new Long("0"));
+        addDefaultValue(C_TEXT, "");
+        addDefaultValue(C_ID, new Long("0"));
     }
 
     public final SOLBEWERTUNGS_TEXTRowBuilder ID (Long value) {
@@ -33,7 +30,7 @@ public class SOLBEWERTUNGS_TEXTRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final SOLBEWERTUNGS_TEXTRowBuilder ID (Validator<?> value) {
+    public final SOLBEWERTUNGS_TEXTRowBuilder ID (IValidator<?> value) {
         with(C_ID, value);
         return this;
     }
@@ -43,7 +40,7 @@ public class SOLBEWERTUNGS_TEXTRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final SOLBEWERTUNGS_TEXTRowBuilder NAME (Validator<?> value) {
+    public final SOLBEWERTUNGS_TEXTRowBuilder NAME (IValidator<?> value) {
         with(C_NAME, value);
         return this;
     }
@@ -53,7 +50,7 @@ public class SOLBEWERTUNGS_TEXTRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final SOLBEWERTUNGS_TEXTRowBuilder TEXT (Validator<?> value) {
+    public final SOLBEWERTUNGS_TEXTRowBuilder TEXT (IValidator<?> value) {
         with(C_TEXT, value);
         return this;
     }
@@ -63,25 +60,18 @@ public class SOLBEWERTUNGS_TEXTRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final SOLBEWERTUNGS_TEXTRowBuilder VERSION (Validator<?> value) {
+    public final SOLBEWERTUNGS_TEXTRowBuilder VERSION (IValidator<?> value) {
         with(C_VERSION, value);
         return this;
     }
 
 
-    public static SOLBEWERTUNGS_TEXTRowBuilder newSOLBEWERTUNGS_TEXT(DataSetManipulator builder) {
-        return new SOLBEWERTUNGS_TEXTRowBuilder(builder, true, PRIMARY_KEY);
+    public static SOLBEWERTUNGS_TEXTRowBuilder newSOLBEWERTUNGS_TEXT() {
+        return new SOLBEWERTUNGS_TEXTRowBuilder(PRIMARY_KEY);
     }
 
-    public static SOLBEWERTUNGS_TEXTRowBuilder newSOLBEWERTUNGS_TEXT(DataSetManipulator builder, String... identifierColumns) {
-        return new SOLBEWERTUNGS_TEXTRowBuilder(builder, true, identifierColumns);
+    public static SOLBEWERTUNGS_TEXTRowBuilder newSOLBEWERTUNGS_TEXT(String... identifierColumns) {
+        return new SOLBEWERTUNGS_TEXTRowBuilder(identifierColumns);
     }
 
-    public static SOLBEWERTUNGS_TEXTRowBuilder newSOLBEWERTUNGS_TEXT(DataSetManipulator builder, boolean initNotNullValues) {
-        return new SOLBEWERTUNGS_TEXTRowBuilder(builder, initNotNullValues, PRIMARY_KEY);
-    }
-
-    public static SOLBEWERTUNGS_TEXTRowBuilder newSOLBEWERTUNGS_TEXT(DataSetManipulator builder, boolean initNotNullValues, String... identifierColumns) {
-        return new SOLBEWERTUNGS_TEXTRowBuilder(builder, initNotNullValues, identifierColumns);
-    }
 }

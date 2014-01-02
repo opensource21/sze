@@ -1,11 +1,10 @@
 package net.sf.sze.dbunit.rowbuilder;
 
-import org.dbunit.dataset.builder.DataRowBuilder;
-import org.dbunit.dataset.builder.DataSetManipulator;
-import org.dbunit.validator.Validator;
+import org.dbunit.dataset.builder.BasicDataRowBuilder;
+import org.dbunit.validator.IValidator;
 import java.sql.Date;
 
-public class ZEUGNIS_FORMULARRowBuilder extends DataRowBuilder {
+public class ZEUGNIS_FORMULARRowBuilder extends BasicDataRowBuilder {
 
     public static final String TABLE_NAME = "ZEUGNIS_FORMULAR";
 
@@ -26,19 +25,17 @@ public class ZEUGNIS_FORMULARRowBuilder extends DataRowBuilder {
 
     public static final String[] ALL_COLUMNS = {C_AUSGABE_DATUM, C_BESCHREIBUNG, C_ID, C_KLASSE_ID, C_LEITSPRUCH, C_LEITSPRUCH2, C_NACHTEILS_AUSGLEICHS_DATUM, C_QUELLE_LEITSPRUCH, C_QUELLE_LEITSPRUCH2, C_SCHULHALBJAHR_ID, C_TEMPLATE_FILE_NAME, C_VERSION};
 
-    public ZEUGNIS_FORMULARRowBuilder(DataSetManipulator dataSetManipulator, boolean initNotNullValues, String... identifierColumns) {
-        super(dataSetManipulator, TABLE_NAME, identifierColumns);
+    public ZEUGNIS_FORMULARRowBuilder(String... identifierColumns) {
+        super(TABLE_NAME, identifierColumns);
         setAllColumnNames(ALL_COLUMNS);
-        if (initNotNullValues) {
-            with(C_VERSION, new Long("0"));
-            with(C_AUSGABE_DATUM, new Date(0));
-            with(C_SCHULHALBJAHR_ID, new Long("0"));
-            with(C_KLASSE_ID, new Long("0"));
-            with(C_ID, new Long("0"));
-            with(C_TEMPLATE_FILE_NAME, "");
-            with(C_BESCHREIBUNG, "");
-            with(C_NACHTEILS_AUSGLEICHS_DATUM, new Date(0));
-        }
+        addDefaultValue(C_VERSION, new Long("0"));
+        addDefaultValue(C_AUSGABE_DATUM, new Date(0));
+        addDefaultValue(C_SCHULHALBJAHR_ID, new Long("0"));
+        addDefaultValue(C_KLASSE_ID, new Long("0"));
+        addDefaultValue(C_ID, new Long("0"));
+        addDefaultValue(C_TEMPLATE_FILE_NAME, "");
+        addDefaultValue(C_BESCHREIBUNG, "");
+        addDefaultValue(C_NACHTEILS_AUSGLEICHS_DATUM, new Date(0));
     }
 
     public final ZEUGNIS_FORMULARRowBuilder AUSGABE_DATUM (Date value) {
@@ -46,7 +43,7 @@ public class ZEUGNIS_FORMULARRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final ZEUGNIS_FORMULARRowBuilder AUSGABE_DATUM (Validator<?> value) {
+    public final ZEUGNIS_FORMULARRowBuilder AUSGABE_DATUM (IValidator<?> value) {
         with(C_AUSGABE_DATUM, value);
         return this;
     }
@@ -56,7 +53,7 @@ public class ZEUGNIS_FORMULARRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final ZEUGNIS_FORMULARRowBuilder BESCHREIBUNG (Validator<?> value) {
+    public final ZEUGNIS_FORMULARRowBuilder BESCHREIBUNG (IValidator<?> value) {
         with(C_BESCHREIBUNG, value);
         return this;
     }
@@ -66,7 +63,7 @@ public class ZEUGNIS_FORMULARRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final ZEUGNIS_FORMULARRowBuilder ID (Validator<?> value) {
+    public final ZEUGNIS_FORMULARRowBuilder ID (IValidator<?> value) {
         with(C_ID, value);
         return this;
     }
@@ -76,7 +73,7 @@ public class ZEUGNIS_FORMULARRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final ZEUGNIS_FORMULARRowBuilder KLASSE_ID (Validator<?> value) {
+    public final ZEUGNIS_FORMULARRowBuilder KLASSE_ID (IValidator<?> value) {
         with(C_KLASSE_ID, value);
         return this;
     }
@@ -86,7 +83,7 @@ public class ZEUGNIS_FORMULARRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final ZEUGNIS_FORMULARRowBuilder LEITSPRUCH (Validator<?> value) {
+    public final ZEUGNIS_FORMULARRowBuilder LEITSPRUCH (IValidator<?> value) {
         with(C_LEITSPRUCH, value);
         return this;
     }
@@ -96,7 +93,7 @@ public class ZEUGNIS_FORMULARRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final ZEUGNIS_FORMULARRowBuilder LEITSPRUCH2 (Validator<?> value) {
+    public final ZEUGNIS_FORMULARRowBuilder LEITSPRUCH2 (IValidator<?> value) {
         with(C_LEITSPRUCH2, value);
         return this;
     }
@@ -106,7 +103,7 @@ public class ZEUGNIS_FORMULARRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final ZEUGNIS_FORMULARRowBuilder NACHTEILS_AUSGLEICHS_DATUM (Validator<?> value) {
+    public final ZEUGNIS_FORMULARRowBuilder NACHTEILS_AUSGLEICHS_DATUM (IValidator<?> value) {
         with(C_NACHTEILS_AUSGLEICHS_DATUM, value);
         return this;
     }
@@ -116,7 +113,7 @@ public class ZEUGNIS_FORMULARRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final ZEUGNIS_FORMULARRowBuilder QUELLE_LEITSPRUCH (Validator<?> value) {
+    public final ZEUGNIS_FORMULARRowBuilder QUELLE_LEITSPRUCH (IValidator<?> value) {
         with(C_QUELLE_LEITSPRUCH, value);
         return this;
     }
@@ -126,7 +123,7 @@ public class ZEUGNIS_FORMULARRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final ZEUGNIS_FORMULARRowBuilder QUELLE_LEITSPRUCH2 (Validator<?> value) {
+    public final ZEUGNIS_FORMULARRowBuilder QUELLE_LEITSPRUCH2 (IValidator<?> value) {
         with(C_QUELLE_LEITSPRUCH2, value);
         return this;
     }
@@ -136,7 +133,7 @@ public class ZEUGNIS_FORMULARRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final ZEUGNIS_FORMULARRowBuilder SCHULHALBJAHR_ID (Validator<?> value) {
+    public final ZEUGNIS_FORMULARRowBuilder SCHULHALBJAHR_ID (IValidator<?> value) {
         with(C_SCHULHALBJAHR_ID, value);
         return this;
     }
@@ -146,7 +143,7 @@ public class ZEUGNIS_FORMULARRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final ZEUGNIS_FORMULARRowBuilder TEMPLATE_FILE_NAME (Validator<?> value) {
+    public final ZEUGNIS_FORMULARRowBuilder TEMPLATE_FILE_NAME (IValidator<?> value) {
         with(C_TEMPLATE_FILE_NAME, value);
         return this;
     }
@@ -156,25 +153,18 @@ public class ZEUGNIS_FORMULARRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final ZEUGNIS_FORMULARRowBuilder VERSION (Validator<?> value) {
+    public final ZEUGNIS_FORMULARRowBuilder VERSION (IValidator<?> value) {
         with(C_VERSION, value);
         return this;
     }
 
 
-    public static ZEUGNIS_FORMULARRowBuilder newZEUGNIS_FORMULAR(DataSetManipulator builder) {
-        return new ZEUGNIS_FORMULARRowBuilder(builder, true, PRIMARY_KEY);
+    public static ZEUGNIS_FORMULARRowBuilder newZEUGNIS_FORMULAR() {
+        return new ZEUGNIS_FORMULARRowBuilder(PRIMARY_KEY);
     }
 
-    public static ZEUGNIS_FORMULARRowBuilder newZEUGNIS_FORMULAR(DataSetManipulator builder, String... identifierColumns) {
-        return new ZEUGNIS_FORMULARRowBuilder(builder, true, identifierColumns);
+    public static ZEUGNIS_FORMULARRowBuilder newZEUGNIS_FORMULAR(String... identifierColumns) {
+        return new ZEUGNIS_FORMULARRowBuilder(identifierColumns);
     }
 
-    public static ZEUGNIS_FORMULARRowBuilder newZEUGNIS_FORMULAR(DataSetManipulator builder, boolean initNotNullValues) {
-        return new ZEUGNIS_FORMULARRowBuilder(builder, initNotNullValues, PRIMARY_KEY);
-    }
-
-    public static ZEUGNIS_FORMULARRowBuilder newZEUGNIS_FORMULAR(DataSetManipulator builder, boolean initNotNullValues, String... identifierColumns) {
-        return new ZEUGNIS_FORMULARRowBuilder(builder, initNotNullValues, identifierColumns);
-    }
 }

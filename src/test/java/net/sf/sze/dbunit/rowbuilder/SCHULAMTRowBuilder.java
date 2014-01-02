@@ -1,10 +1,9 @@
 package net.sf.sze.dbunit.rowbuilder;
 
-import org.dbunit.dataset.builder.DataRowBuilder;
-import org.dbunit.dataset.builder.DataSetManipulator;
-import org.dbunit.validator.Validator;
+import org.dbunit.dataset.builder.BasicDataRowBuilder;
+import org.dbunit.validator.IValidator;
 
-public class SCHULAMTRowBuilder extends DataRowBuilder {
+public class SCHULAMTRowBuilder extends BasicDataRowBuilder {
 
     public static final String TABLE_NAME = "SCHULAMT";
 
@@ -18,16 +17,14 @@ public class SCHULAMTRowBuilder extends DataRowBuilder {
 
     public static final String[] ALL_COLUMNS = {C_AKTIV, C_BESCHREIBENDER_SATZ, C_ID, C_NAME, C_VERSION};
 
-    public SCHULAMTRowBuilder(DataSetManipulator dataSetManipulator, boolean initNotNullValues, String... identifierColumns) {
-        super(dataSetManipulator, TABLE_NAME, identifierColumns);
+    public SCHULAMTRowBuilder(String... identifierColumns) {
+        super(TABLE_NAME, identifierColumns);
         setAllColumnNames(ALL_COLUMNS);
-        if (initNotNullValues) {
-            with(C_AKTIV, Boolean.FALSE);
-            with(C_NAME, "");
-            with(C_VERSION, new Long("0"));
-            with(C_BESCHREIBENDER_SATZ, "");
-            with(C_ID, new Long("0"));
-        }
+        addDefaultValue(C_AKTIV, Boolean.FALSE);
+        addDefaultValue(C_NAME, "");
+        addDefaultValue(C_VERSION, new Long("0"));
+        addDefaultValue(C_BESCHREIBENDER_SATZ, "");
+        addDefaultValue(C_ID, new Long("0"));
     }
 
     public final SCHULAMTRowBuilder AKTIV (Boolean value) {
@@ -35,7 +32,7 @@ public class SCHULAMTRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final SCHULAMTRowBuilder AKTIV (Validator<?> value) {
+    public final SCHULAMTRowBuilder AKTIV (IValidator<?> value) {
         with(C_AKTIV, value);
         return this;
     }
@@ -45,7 +42,7 @@ public class SCHULAMTRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final SCHULAMTRowBuilder BESCHREIBENDER_SATZ (Validator<?> value) {
+    public final SCHULAMTRowBuilder BESCHREIBENDER_SATZ (IValidator<?> value) {
         with(C_BESCHREIBENDER_SATZ, value);
         return this;
     }
@@ -55,7 +52,7 @@ public class SCHULAMTRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final SCHULAMTRowBuilder ID (Validator<?> value) {
+    public final SCHULAMTRowBuilder ID (IValidator<?> value) {
         with(C_ID, value);
         return this;
     }
@@ -65,7 +62,7 @@ public class SCHULAMTRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final SCHULAMTRowBuilder NAME (Validator<?> value) {
+    public final SCHULAMTRowBuilder NAME (IValidator<?> value) {
         with(C_NAME, value);
         return this;
     }
@@ -75,25 +72,18 @@ public class SCHULAMTRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final SCHULAMTRowBuilder VERSION (Validator<?> value) {
+    public final SCHULAMTRowBuilder VERSION (IValidator<?> value) {
         with(C_VERSION, value);
         return this;
     }
 
 
-    public static SCHULAMTRowBuilder newSCHULAMT(DataSetManipulator builder) {
-        return new SCHULAMTRowBuilder(builder, true, PRIMARY_KEY);
+    public static SCHULAMTRowBuilder newSCHULAMT() {
+        return new SCHULAMTRowBuilder(PRIMARY_KEY);
     }
 
-    public static SCHULAMTRowBuilder newSCHULAMT(DataSetManipulator builder, String... identifierColumns) {
-        return new SCHULAMTRowBuilder(builder, true, identifierColumns);
+    public static SCHULAMTRowBuilder newSCHULAMT(String... identifierColumns) {
+        return new SCHULAMTRowBuilder(identifierColumns);
     }
 
-    public static SCHULAMTRowBuilder newSCHULAMT(DataSetManipulator builder, boolean initNotNullValues) {
-        return new SCHULAMTRowBuilder(builder, initNotNullValues, PRIMARY_KEY);
-    }
-
-    public static SCHULAMTRowBuilder newSCHULAMT(DataSetManipulator builder, boolean initNotNullValues, String... identifierColumns) {
-        return new SCHULAMTRowBuilder(builder, initNotNullValues, identifierColumns);
-    }
 }

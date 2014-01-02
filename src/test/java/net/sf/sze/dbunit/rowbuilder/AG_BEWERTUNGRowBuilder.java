@@ -1,10 +1,9 @@
 package net.sf.sze.dbunit.rowbuilder;
 
-import org.dbunit.dataset.builder.DataRowBuilder;
-import org.dbunit.dataset.builder.DataSetManipulator;
-import org.dbunit.validator.Validator;
+import org.dbunit.dataset.builder.BasicDataRowBuilder;
+import org.dbunit.validator.IValidator;
 
-public class AG_BEWERTUNGRowBuilder extends DataRowBuilder {
+public class AG_BEWERTUNGRowBuilder extends BasicDataRowBuilder {
 
     public static final String TABLE_NAME = "AG_BEWERTUNG";
 
@@ -18,16 +17,14 @@ public class AG_BEWERTUNGRowBuilder extends DataRowBuilder {
 
     public static final String[] ALL_COLUMNS = {C_ARBEITSGRUPPE_ID, C_ID, C_TEILGENOMMEN, C_VERSION, C_ZEUGNIS_ID};
 
-    public AG_BEWERTUNGRowBuilder(DataSetManipulator dataSetManipulator, boolean initNotNullValues, String... identifierColumns) {
-        super(dataSetManipulator, TABLE_NAME, identifierColumns);
+    public AG_BEWERTUNGRowBuilder(String... identifierColumns) {
+        super(TABLE_NAME, identifierColumns);
         setAllColumnNames(ALL_COLUMNS);
-        if (initNotNullValues) {
-            with(C_VERSION, new Long("0"));
-            with(C_ZEUGNIS_ID, new Long("0"));
-            with(C_TEILGENOMMEN, Boolean.FALSE);
-            with(C_ID, new Long("0"));
-            with(C_ARBEITSGRUPPE_ID, new Long("0"));
-        }
+        addDefaultValue(C_VERSION, new Long("0"));
+        addDefaultValue(C_ZEUGNIS_ID, new Long("0"));
+        addDefaultValue(C_TEILGENOMMEN, Boolean.FALSE);
+        addDefaultValue(C_ID, new Long("0"));
+        addDefaultValue(C_ARBEITSGRUPPE_ID, new Long("0"));
     }
 
     public final AG_BEWERTUNGRowBuilder ARBEITSGRUPPE_ID (Long value) {
@@ -35,7 +32,7 @@ public class AG_BEWERTUNGRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final AG_BEWERTUNGRowBuilder ARBEITSGRUPPE_ID (Validator<?> value) {
+    public final AG_BEWERTUNGRowBuilder ARBEITSGRUPPE_ID (IValidator<?> value) {
         with(C_ARBEITSGRUPPE_ID, value);
         return this;
     }
@@ -45,7 +42,7 @@ public class AG_BEWERTUNGRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final AG_BEWERTUNGRowBuilder ID (Validator<?> value) {
+    public final AG_BEWERTUNGRowBuilder ID (IValidator<?> value) {
         with(C_ID, value);
         return this;
     }
@@ -55,7 +52,7 @@ public class AG_BEWERTUNGRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final AG_BEWERTUNGRowBuilder TEILGENOMMEN (Validator<?> value) {
+    public final AG_BEWERTUNGRowBuilder TEILGENOMMEN (IValidator<?> value) {
         with(C_TEILGENOMMEN, value);
         return this;
     }
@@ -65,7 +62,7 @@ public class AG_BEWERTUNGRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final AG_BEWERTUNGRowBuilder VERSION (Validator<?> value) {
+    public final AG_BEWERTUNGRowBuilder VERSION (IValidator<?> value) {
         with(C_VERSION, value);
         return this;
     }
@@ -75,25 +72,18 @@ public class AG_BEWERTUNGRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final AG_BEWERTUNGRowBuilder ZEUGNIS_ID (Validator<?> value) {
+    public final AG_BEWERTUNGRowBuilder ZEUGNIS_ID (IValidator<?> value) {
         with(C_ZEUGNIS_ID, value);
         return this;
     }
 
 
-    public static AG_BEWERTUNGRowBuilder newAG_BEWERTUNG(DataSetManipulator builder) {
-        return new AG_BEWERTUNGRowBuilder(builder, true, PRIMARY_KEY);
+    public static AG_BEWERTUNGRowBuilder newAG_BEWERTUNG() {
+        return new AG_BEWERTUNGRowBuilder(PRIMARY_KEY);
     }
 
-    public static AG_BEWERTUNGRowBuilder newAG_BEWERTUNG(DataSetManipulator builder, String... identifierColumns) {
-        return new AG_BEWERTUNGRowBuilder(builder, true, identifierColumns);
+    public static AG_BEWERTUNGRowBuilder newAG_BEWERTUNG(String... identifierColumns) {
+        return new AG_BEWERTUNGRowBuilder(identifierColumns);
     }
 
-    public static AG_BEWERTUNGRowBuilder newAG_BEWERTUNG(DataSetManipulator builder, boolean initNotNullValues) {
-        return new AG_BEWERTUNGRowBuilder(builder, initNotNullValues, PRIMARY_KEY);
-    }
-
-    public static AG_BEWERTUNGRowBuilder newAG_BEWERTUNG(DataSetManipulator builder, boolean initNotNullValues, String... identifierColumns) {
-        return new AG_BEWERTUNGRowBuilder(builder, initNotNullValues, identifierColumns);
-    }
 }

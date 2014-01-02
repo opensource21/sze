@@ -1,10 +1,9 @@
 package net.sf.sze.dbunit.rowbuilder;
 
-import org.dbunit.dataset.builder.DataRowBuilder;
-import org.dbunit.dataset.builder.DataSetManipulator;
-import org.dbunit.validator.Validator;
+import org.dbunit.dataset.builder.BasicDataRowBuilder;
+import org.dbunit.validator.IValidator;
 
-public class BEMERKUNGS_BAUSTEINRowBuilder extends DataRowBuilder {
+public class BEMERKUNGS_BAUSTEINRowBuilder extends BasicDataRowBuilder {
 
     public static final String TABLE_NAME = "BEMERKUNGS_BAUSTEIN";
 
@@ -18,16 +17,14 @@ public class BEMERKUNGS_BAUSTEINRowBuilder extends DataRowBuilder {
 
     public static final String[] ALL_COLUMNS = {C_AKTIV, C_ID, C_NAME, C_TEXT, C_VERSION};
 
-    public BEMERKUNGS_BAUSTEINRowBuilder(DataSetManipulator dataSetManipulator, boolean initNotNullValues, String... identifierColumns) {
-        super(dataSetManipulator, TABLE_NAME, identifierColumns);
+    public BEMERKUNGS_BAUSTEINRowBuilder(String... identifierColumns) {
+        super(TABLE_NAME, identifierColumns);
         setAllColumnNames(ALL_COLUMNS);
-        if (initNotNullValues) {
-            with(C_AKTIV, Boolean.FALSE);
-            with(C_NAME, "");
-            with(C_VERSION, new Long("0"));
-            with(C_TEXT, "");
-            with(C_ID, new Long("0"));
-        }
+        addDefaultValue(C_AKTIV, Boolean.FALSE);
+        addDefaultValue(C_NAME, "");
+        addDefaultValue(C_VERSION, new Long("0"));
+        addDefaultValue(C_TEXT, "");
+        addDefaultValue(C_ID, new Long("0"));
     }
 
     public final BEMERKUNGS_BAUSTEINRowBuilder AKTIV (Boolean value) {
@@ -35,7 +32,7 @@ public class BEMERKUNGS_BAUSTEINRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final BEMERKUNGS_BAUSTEINRowBuilder AKTIV (Validator<?> value) {
+    public final BEMERKUNGS_BAUSTEINRowBuilder AKTIV (IValidator<?> value) {
         with(C_AKTIV, value);
         return this;
     }
@@ -45,7 +42,7 @@ public class BEMERKUNGS_BAUSTEINRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final BEMERKUNGS_BAUSTEINRowBuilder ID (Validator<?> value) {
+    public final BEMERKUNGS_BAUSTEINRowBuilder ID (IValidator<?> value) {
         with(C_ID, value);
         return this;
     }
@@ -55,7 +52,7 @@ public class BEMERKUNGS_BAUSTEINRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final BEMERKUNGS_BAUSTEINRowBuilder NAME (Validator<?> value) {
+    public final BEMERKUNGS_BAUSTEINRowBuilder NAME (IValidator<?> value) {
         with(C_NAME, value);
         return this;
     }
@@ -65,7 +62,7 @@ public class BEMERKUNGS_BAUSTEINRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final BEMERKUNGS_BAUSTEINRowBuilder TEXT (Validator<?> value) {
+    public final BEMERKUNGS_BAUSTEINRowBuilder TEXT (IValidator<?> value) {
         with(C_TEXT, value);
         return this;
     }
@@ -75,25 +72,18 @@ public class BEMERKUNGS_BAUSTEINRowBuilder extends DataRowBuilder {
         return this;
     }
 
-    public final BEMERKUNGS_BAUSTEINRowBuilder VERSION (Validator<?> value) {
+    public final BEMERKUNGS_BAUSTEINRowBuilder VERSION (IValidator<?> value) {
         with(C_VERSION, value);
         return this;
     }
 
 
-    public static BEMERKUNGS_BAUSTEINRowBuilder newBEMERKUNGS_BAUSTEIN(DataSetManipulator builder) {
-        return new BEMERKUNGS_BAUSTEINRowBuilder(builder, true, PRIMARY_KEY);
+    public static BEMERKUNGS_BAUSTEINRowBuilder newBEMERKUNGS_BAUSTEIN() {
+        return new BEMERKUNGS_BAUSTEINRowBuilder(PRIMARY_KEY);
     }
 
-    public static BEMERKUNGS_BAUSTEINRowBuilder newBEMERKUNGS_BAUSTEIN(DataSetManipulator builder, String... identifierColumns) {
-        return new BEMERKUNGS_BAUSTEINRowBuilder(builder, true, identifierColumns);
+    public static BEMERKUNGS_BAUSTEINRowBuilder newBEMERKUNGS_BAUSTEIN(String... identifierColumns) {
+        return new BEMERKUNGS_BAUSTEINRowBuilder(identifierColumns);
     }
 
-    public static BEMERKUNGS_BAUSTEINRowBuilder newBEMERKUNGS_BAUSTEIN(DataSetManipulator builder, boolean initNotNullValues) {
-        return new BEMERKUNGS_BAUSTEINRowBuilder(builder, initNotNullValues, PRIMARY_KEY);
-    }
-
-    public static BEMERKUNGS_BAUSTEINRowBuilder newBEMERKUNGS_BAUSTEIN(DataSetManipulator builder, boolean initNotNullValues, String... identifierColumns) {
-        return new BEMERKUNGS_BAUSTEINRowBuilder(builder, initNotNullValues, identifierColumns);
-    }
 }
