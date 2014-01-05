@@ -1,3 +1,5 @@
+- Entscheidung ob DBUnit oder checkerberry.
+
 - Die Aufteilung auf Services überdenken, Bündelung nach DB nach Controller?
 - Beschreibung von Session und URL.
 - Umstellung auf neue Thymeleaf-version
