@@ -4,5 +4,4 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans.xsd">
     <bean class="net.sf.sze.config.RootConfig" />
-    <bean id="bridgeContainer" class="net.sf.sze.checkberry.db.SzeBridgeContainer"/>
 </beans>
