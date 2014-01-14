@@ -107,7 +107,9 @@ public class BewertungenController {
         if (BooleanUtils.isFalse(schulhalbjahr.getSelectable())) {
             redirectAttributes.addFlashAttribute("message",
                     "Das Schulhalbjahr ist nicht mehr selektierbar.");
-            return URL.redirect(URL.ZeugnisPath.START, halbjahrId, klassenId);
+            return URL.redirectWithNamedParams(URL.ZeugnisPath.START,
+                    URL.Session.P_HALBJAHR_ID, halbjahrId,
+                    URL.Session.P_KLASSEN_ID, klassenId);
         }
         final List<Schulfach> schulfaecher = bewertungErfassungsService.
                 getActiveSchulfaecherOrderByName(schulhalbjahr, klasse);
@@ -115,7 +117,9 @@ public class BewertungenController {
         if (CollectionUtils.isEmpty(schulfaecher)) {
             redirectAttributes.addFlashAttribute("message",
                     "Es wurden keine Schulfächer gefunden.");
-            return URL.redirect(URL.ZeugnisPath.START, halbjahrId, klassenId);
+            return URL.redirectWithNamedParams(URL.ZeugnisPath.START,
+                    URL.Session.P_HALBJAHR_ID, halbjahrId,
+                    URL.Session.P_KLASSEN_ID, klassenId);
         }
         final Long usedSchulfachId;
         if (schulfachId == null) {
@@ -151,7 +155,9 @@ public class BewertungenController {
             .P_HALBJAHR_ID) Long halbjahrId, @RequestParam(URL.Session
             .P_KLASSEN_ID) Long klassenId, Model model,
             RedirectAttributes redirectAttributes) {
-        return URL.redirect(URL.BewertungenPath.LIST, halbjahrId, klassenId);
+        return URL.redirectWithNamedParams(URL.BewertungenPath.LIST,
+                URL.Session.P_HALBJAHR_ID, halbjahrId,
+                URL.Session.P_KLASSEN_ID, klassenId);
     }
 
 
@@ -299,11 +305,17 @@ public class BewertungenController {
         bewertungService.save(bewertung);
         final String nextUrl;
         if (StringUtils.equalsIgnoreCase(action, Common.ACTION_PREV)) {
-            nextUrl = URL.redirect(URL.BewertungenPath.EDIT,
-                    halbjahrId, klassenId, schulfachId, prevId);
+            nextUrl = URL.redirectWithNamedParams(URL.BewertungenPath.EDIT,
+                    URL.Session.P_HALBJAHR_ID, halbjahrId,
+                    URL.Session.P_KLASSEN_ID, klassenId,
+                    URL.Session.P_SCHULFACH_ID, schulfachId,
+                    URL.BewertungenPath.P_BEWERTUNGS_ID, prevId);
         } else if (StringUtils.equalsIgnoreCase(action, Common.ACTION_NEXT)) {
-            nextUrl = URL.redirect(URL.BewertungenPath.EDIT,
-                    halbjahrId, klassenId, schulfachId, nextId);
+            nextUrl = URL.redirectWithNamedParams(URL.BewertungenPath.EDIT,
+                    URL.Session.P_HALBJAHR_ID, halbjahrId,
+                    URL.Session.P_KLASSEN_ID, klassenId,
+                    URL.Session.P_SCHULFACH_ID, schulfachId,
+                    URL.BewertungenPath.P_BEWERTUNGS_ID, nextId);
 
         } else {
             redirectAttributes.addFlashAttribute(Common.P_LASTEDITED_ID, bewertung.getId());
@@ -334,10 +346,18 @@ public class BewertungenController {
         model.addAttribute("schulhalbjahr", schulhalbjahrService.read(halbjahrId));
         model.addAttribute(Common.P_PREV_ID, prevId);
         model.addAttribute(Common.P_NEXT_ID, nextId);
-        model.addAttribute("saveUrl", URL.filledURL(URL.BewertungenPath.EDIT,
-                halbjahrId, klassenId, schulfachId, bewertung.getId()));
-        model.addAttribute("cancelUrl", URL.filledURL(URL.BewertungenPath.CANCEL,
-                halbjahrId, klassenId, schulfachId, bewertung.getId()));
+        model.addAttribute("saveUrl",
+                URL.filledURLWithNamedParams(URL.BewertungenPath.EDIT,
+                URL.Session.P_HALBJAHR_ID, halbjahrId,
+                URL.Session.P_KLASSEN_ID, klassenId,
+                URL.Session.P_SCHULFACH_ID, schulfachId,
+                URL.BewertungenPath.P_BEWERTUNGS_ID, bewertung.getId()));
+        model.addAttribute("cancelUrl",
+                URL.filledURLWithNamedParams(URL.BewertungenPath.CANCEL,
+                URL.Session.P_HALBJAHR_ID, halbjahrId,
+                URL.Session.P_KLASSEN_ID, klassenId,
+                URL.Session.P_SCHULFACH_ID, schulfachId,
+                URL.BewertungenPath.P_BEWERTUNGS_ID, bewertung.getId()));
         model.addAttribute("type", type);
         model.addAttribute("helpMessageId", "help.bewertung.edit");
     }
@@ -351,9 +371,10 @@ public class BewertungenController {
      */
     private String createRedirectToList(Long halbjahrId, Long klassenId,
             final Long schulfachId) {
-        return URL.redirect(URL.BewertungenPath.LIST + "?"
+        return URL.redirectWithNamedParams(URL.BewertungenPath.LIST + "?"
                 + URL.Session.P_SCHULFACH_ID + "=" + schulfachId ,
-                halbjahrId, klassenId);
+                URL.Session.P_HALBJAHR_ID, halbjahrId,
+                URL.Session.P_KLASSEN_ID, klassenId);
     }
 
 

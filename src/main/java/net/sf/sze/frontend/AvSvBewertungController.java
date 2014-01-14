@@ -100,8 +100,11 @@ public class AvSvBewertungController {
 
         model.addAttribute("avSvForm", avSvForm);
         model.addAttribute("noten", AvSvNote.values());
-        model.addAttribute("updateUrl", URL.filledURL(URL.ZeugnisPath.ZEUGNIS_EDIT_AV_SV,
-                halbjahrId, klassenId, schuelerId));
+        model.addAttribute("updateUrl", URL.filledURLWithNamedParams(
+                URL.ZeugnisPath.ZEUGNIS_EDIT_AV_SV,
+                URL.Session.P_HALBJAHR_ID, halbjahrId,
+                URL.Session.P_KLASSEN_ID, klassenId,
+                URL.Session.P_SCHUELER_ID, schuelerId));
         model.addAttribute("cancelUrl", URL.createLinkToZeugnisUrl(halbjahrId,
                 klassenId, schuelerId));
     }

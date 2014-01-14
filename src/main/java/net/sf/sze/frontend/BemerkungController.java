@@ -101,8 +101,11 @@ public class BemerkungController {
         final Bemerkung bemerkung = new Bemerkung();
         bemerkung.setZeugnis(zeugnis);
         fillModel(model, halbjahrId, klassenId, schuelerId, bemerkung);
-        model.addAttribute("insertUrl", URL.filledURL(URL.ZeugnisPath.
-                BEMERKUNG_CREATE, halbjahrId, klassenId, schuelerId));
+        model.addAttribute("insertUrl", URL.filledURLWithNamedParams(
+                URL.ZeugnisPath.BEMERKUNG_CREATE,
+                URL.Session.P_HALBJAHR_ID, halbjahrId,
+                URL.Session.P_KLASSEN_ID, klassenId,
+                URL.Session.P_SCHUELER_ID, schuelerId));
 
         return EDIT_BEMERKUNG_VIEW;
     }
@@ -129,8 +132,11 @@ public class BemerkungController {
         validator.validate(bemerkung, result);
 
         if (result.hasErrors()) {
-            model.addAttribute("insertUrl", URL.filledURL(
-                    URL.ZeugnisPath.BEMERKUNG_CREATE, halbjahrId, klassenId, schuelerId));
+            model.addAttribute("insertUrl", URL.filledURLWithNamedParams(
+                    URL.ZeugnisPath.BEMERKUNG_CREATE,
+                    URL.Session.P_HALBJAHR_ID, halbjahrId,
+                    URL.Session.P_KLASSEN_ID, klassenId,
+                    URL.Session.P_SCHUELER_ID, schuelerId));
             fillModel(model, halbjahrId, klassenId, schuelerId, bemerkung);
             return EDIT_BEMERKUNG_VIEW;
         }
@@ -139,8 +145,10 @@ public class BemerkungController {
         bemerkungService.save(bemerkung);
         final String nextUrl;
         if (StringUtils.equalsIgnoreCase(action, Common.ACTION_NEXT)) {
-            nextUrl = URL.redirect(URL.ZeugnisPath.BEMERKUNG_CREATE,
-                    halbjahrId, klassenId, schuelerId);
+            nextUrl = URL.redirectWithNamedParams(URL.ZeugnisPath.BEMERKUNG_CREATE,
+                    URL.Session.P_HALBJAHR_ID, halbjahrId,
+                    URL.Session.P_KLASSEN_ID, klassenId,
+                    URL.Session.P_SCHUELER_ID, schuelerId);
         } else {
             nextUrl = URL.createRedirectToZeugnisUrl(halbjahrId, klassenId, schuelerId);
         }
@@ -169,10 +177,18 @@ public class BemerkungController {
         model.addAttribute("schulhalbjahr", schulhalbjahrService.read(halbjahrId));
         model.addAttribute("cancelUrl", URL.createLinkToZeugnisUrl(halbjahrId,
                 klassenId, schuelerId));
-        model.addAttribute("editUrl", URL.filledURL(URL.ZeugnisPath.
-                BEMERKUNG_EDIT, halbjahrId, klassenId, schuelerId, bemerkungsId));
-        model.addAttribute("deleteUrl", URL.filledURL(URL.ZeugnisPath.
-                BEMERKUNG_DELETE, halbjahrId, klassenId, schuelerId, bemerkungsId));
+        model.addAttribute("editUrl", URL.filledURLWithNamedParams(
+                URL.ZeugnisPath.BEMERKUNG_EDIT,
+                URL.Session.P_HALBJAHR_ID, halbjahrId,
+                URL.Session.P_KLASSEN_ID, klassenId,
+                URL.Session.P_SCHUELER_ID, schuelerId,
+                URL.Bemerkung.P_BEMERKUNGID, bemerkungsId));
+        model.addAttribute("deleteUrl", URL.filledURLWithNamedParams(
+                URL.ZeugnisPath.BEMERKUNG_DELETE,
+                URL.Session.P_HALBJAHR_ID, halbjahrId,
+                URL.Session.P_KLASSEN_ID, klassenId,
+                URL.Session.P_SCHUELER_ID, schuelerId,
+                URL.Bemerkung.P_BEMERKUNGID, bemerkungsId));
         return "bemerkung/showBemerkung";
     }
 
@@ -194,11 +210,32 @@ public class BemerkungController {
             Model model) {
         final Bemerkung bemerkung = bemerkungService.read(bemerkungsId);
         fillModel(model, halbjahrId, klassenId, schuelerId, bemerkung);
-        model.addAttribute("updateUrl", URL.filledURL(URL.ZeugnisPath.
-                BEMERKUNG_EDIT, halbjahrId, klassenId, schuelerId, bemerkungsId));
-        model.addAttribute("deleteUrl", URL.filledURL(URL.ZeugnisPath.
-                BEMERKUNG_DELETE, halbjahrId, klassenId, schuelerId, bemerkungsId));
+        fillModelWithUpdateAndDeleteURLs(model, halbjahrId, klassenId,
+                schuelerId, bemerkungsId);
         return EDIT_BEMERKUNG_VIEW;
+    }
+
+    /**
+     * @param model
+     * @param halbjahrId
+     * @param klassenId
+     * @param schuelerId
+     * @param bemerkungsId
+     */
+    private void fillModelWithUpdateAndDeleteURLs(Model model, Long halbjahrId,
+            Long klassenId, Long schuelerId, Long bemerkungsId) {
+        model.addAttribute("updateUrl", URL.filledURLWithNamedParams(
+                URL.ZeugnisPath.BEMERKUNG_EDIT,
+                URL.Session.P_HALBJAHR_ID, halbjahrId,
+                URL.Session.P_KLASSEN_ID, klassenId,
+                URL.Session.P_SCHUELER_ID, schuelerId,
+                URL.Bemerkung.P_BEMERKUNGID, bemerkungsId));
+        model.addAttribute("deleteUrl", URL.filledURLWithNamedParams(
+                URL.ZeugnisPath.BEMERKUNG_DELETE,
+                URL.Session.P_HALBJAHR_ID, halbjahrId,
+                URL.Session.P_KLASSEN_ID, klassenId,
+                URL.Session.P_SCHUELER_ID, schuelerId,
+                URL.Bemerkung.P_BEMERKUNGID, bemerkungsId));
     }
 
     /**
@@ -225,10 +262,8 @@ public class BemerkungController {
         validator.validate(bemerkung, result);
 
         if (result.hasErrors()) {
-            model.addAttribute("updateUrl", URL.filledURL(URL.ZeugnisPath.
-                    BEMERKUNG_EDIT, halbjahrId, klassenId, schuelerId, bemerkungsId));
-            model.addAttribute("deleteUrl", URL.filledURL(URL.ZeugnisPath.
-                    BEMERKUNG_DELETE, halbjahrId, klassenId, schuelerId, bemerkungsId));
+            fillModelWithUpdateAndDeleteURLs(model, halbjahrId, klassenId,
+                    schuelerId, bemerkungsId);
             fillModel(model, halbjahrId, klassenId, schuelerId, bemerkung);
             return EDIT_BEMERKUNG_VIEW;
         }
@@ -278,8 +313,11 @@ public class BemerkungController {
                 bemerkungService.getAllBausteine(bemerkung);
         model.addAttribute("bemerkung", bemerkung);
         model.addAttribute("schulhalbjahr", schulhalbjahrService.read(halbjahrId));
-        model.addAttribute("cancelUrl",
-                URL.filledURL(URL.ZeugnisPath.BEMERKUNG_CANCEL, halbjahrId, klassenId, schuelerId));
+        model.addAttribute("cancelUrl", URL.filledURLWithNamedParams(
+                URL.ZeugnisPath.BEMERKUNG_CANCEL,
+                URL.Session.P_HALBJAHR_ID, halbjahrId,
+                URL.Session.P_KLASSEN_ID, klassenId,
+                URL.Session.P_SCHUELER_ID, schuelerId));
         model.addAttribute("bemerkungsBausteine", bemerkungsBausteine);
         model.addAttribute("helpMessageId", "help.bemerkung.edit");
     }

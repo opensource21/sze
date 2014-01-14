@@ -182,8 +182,9 @@ public class ZeugnisController {
         if (CollectionUtils.isEmpty(zeugnisse)) {
             redirectAttributes.addFlashAttribute("message",
                     "Es wurden keine Zeugnisse gefunden");
-            return URL.redirect(URL.ZeugnisPath.START, Long.valueOf(
-                    halbjahrId), Long.valueOf(klassenId));
+            return URL.redirectWithNamedParams(URL.ZeugnisPath.START,
+                    URL.Session.P_HALBJAHR_ID, Long.valueOf(halbjahrId),
+                    URL.Session.P_KLASSEN_ID, Long.valueOf(klassenId));
         }
 
         final List<Schueler> schuelerListe = new ArrayList<Schueler>(zeugnisse
@@ -216,8 +217,9 @@ public class ZeugnisController {
         if (selectedZeugnis == null) {
             redirectAttributes.addFlashAttribute("message",
                     "Der angegebene Schüler hat kein Zeugnis, gehe zum ersten.");
-            return URL.redirect(URL.ZeugnisPath.SHOW, Long.valueOf(halbjahrId),
-                    Long.valueOf(klassenId));
+            return URL.redirectWithNamedParams(URL.ZeugnisPath.SHOW,
+                    URL.Session.P_HALBJAHR_ID, Long.valueOf(halbjahrId),
+                    URL.Session.P_KLASSEN_ID, Long.valueOf(klassenId));
         }
 
         Collections.sort(selectedZeugnis.getSchulamtsBemerkungen());
@@ -235,11 +237,15 @@ public class ZeugnisController {
         model.addAttribute("nextSchuelerId", nextSchuelerId);
         model.addAttribute("wpBewertungen", wpBewertungen);
         model.addAttribute("otherBewertungen", otherBewertungen);
-        model.addAttribute("urlShowZeugnis", URL.filledURL(URL.ZeugnisPath
-                .SHOW, Long.valueOf(halbjahrId), Long.valueOf(klassenId)));
-        model.addAttribute("urlPrintZeugnis", URL.filledURL(URL.ZeugnisPath
-                .ONE_PDF, Long.valueOf(halbjahrId), Long.valueOf(klassenId),
-                selectedZeugnis.getSchueler().getId()));
+        model.addAttribute("urlShowZeugnis", URL.filledURLWithNamedParams(
+                URL.ZeugnisPath.SHOW,
+                URL.Session.P_HALBJAHR_ID, Long.valueOf(halbjahrId),
+                URL.Session.P_KLASSEN_ID, Long.valueOf(klassenId)));
+        model.addAttribute("urlPrintZeugnis", URL.filledURLWithNamedParams(
+                URL.ZeugnisPath.ONE_PDF,
+                URL.Session.P_HALBJAHR_ID, Long.valueOf(halbjahrId),
+                URL.Session.P_KLASSEN_ID, Long.valueOf(klassenId),
+                URL.Session.P_SCHUELER_ID, selectedZeugnis.getSchueler().getId()));
         model.addAttribute("arbeitsgruppenSatz", selectedZeugnis
                 .createArbeitsgruppenSatz());
         return "zeugnis/showZeugnis";
@@ -260,7 +266,9 @@ public class ZeugnisController {
             .P_HALBJAHR_ID) Long halbjahrId, @RequestParam(URL.Session
             .P_KLASSEN_ID) Long klassenId, Model model,
             RedirectAttributes redirectAttributes) {
-        return URL.redirect(URL.ZeugnisPath.SHOW, halbjahrId, klassenId);
+        return URL.redirectWithNamedParams(URL.ZeugnisPath.SHOW,
+                URL.Session.P_HALBJAHR_ID, halbjahrId,
+                URL.Session.P_KLASSEN_ID, klassenId);
     }
 
     /**
@@ -407,11 +415,19 @@ public class ZeugnisController {
         bewertungService.save(bewertung);
         final String nextUrl;
         if (StringUtils.equalsIgnoreCase(action, Common.ACTION_PREV)) {
-            nextUrl = URL.redirect(URL.ZeugnisPath.BEWERTUNG_EDIT,
-                    halbjahrId, klassenId, schuelerId, prevId);
+            nextUrl = URL.redirectWithNamedParams(
+                    URL.ZeugnisPath.BEWERTUNG_EDIT,
+                    URL.Session.P_HALBJAHR_ID, halbjahrId,
+                    URL.Session.P_KLASSEN_ID, klassenId,
+                    URL.Session.P_SCHUELER_ID, schuelerId,
+                    URL.ZeugnisPath.P_BEWERTUNGS_ID, prevId);
         } else if (StringUtils.equalsIgnoreCase(action, Common.ACTION_NEXT)) {
-            nextUrl = URL.redirect(URL.ZeugnisPath.BEWERTUNG_EDIT,
-                    halbjahrId, klassenId, schuelerId, nextId);
+            nextUrl = URL.redirectWithNamedParams(
+                    URL.ZeugnisPath.BEWERTUNG_EDIT,
+                    URL.Session.P_HALBJAHR_ID, halbjahrId,
+                    URL.Session.P_KLASSEN_ID, klassenId,
+                    URL.Session.P_SCHUELER_ID, schuelerId,
+                    URL.ZeugnisPath.P_BEWERTUNGS_ID, nextId);
 
         } else {
             redirectAttributes.addFlashAttribute(Common.P_LASTEDITED_ID, bewertung.getId());
@@ -442,10 +458,18 @@ public class ZeugnisController {
         model.addAttribute("schulhalbjahr", schulhalbjahrService.read(halbjahrId));
         model.addAttribute(Common.P_PREV_ID, prevId);
         model.addAttribute(Common.P_NEXT_ID, nextId);
-        model.addAttribute("saveUrl", URL.filledURL(URL.ZeugnisPath.BEWERTUNG_EDIT,
-                halbjahrId, klassenId, schuelerId, bewertung.getId()));
-        model.addAttribute("cancelUrl", URL.filledURL(URL.ZeugnisPath.BEWERTUNG_CANCEL,
-                halbjahrId, klassenId, schuelerId, bewertung.getId()));
+        model.addAttribute("saveUrl", URL.filledURLWithNamedParams(
+                URL.ZeugnisPath.BEWERTUNG_EDIT,
+                URL.Session.P_HALBJAHR_ID, halbjahrId,
+                URL.Session.P_KLASSEN_ID, klassenId,
+                URL.Session.P_SCHUELER_ID, schuelerId,
+                URL.ZeugnisPath.P_BEWERTUNGS_ID, bewertung.getId()));
+        model.addAttribute("cancelUrl", URL.filledURLWithNamedParams(
+                URL.ZeugnisPath.BEWERTUNG_CANCEL,
+                URL.Session.P_HALBJAHR_ID, halbjahrId,
+                URL.Session.P_KLASSEN_ID, klassenId,
+                URL.Session.P_SCHUELER_ID, schuelerId,
+                URL.ZeugnisPath.P_BEWERTUNGS_ID, bewertung.getId()));
         model.addAttribute("type", type);
         model.addAttribute("helpMessageId", "help.bewertung.edit");
     }
@@ -503,8 +527,11 @@ public class ZeugnisController {
         model.addAttribute("zeugnis", zeugnis);
         model.addAttribute("zeugnisArten", zeugnisErfassungsService.getAllZeugnisArten(zeugnis));
         model.addAttribute("helpMessageId", "help.zeugnis.editDetail");
-        model.addAttribute("updateUrl", URL.filledURL(URL.ZeugnisPath.
-                ZEUGNIS_EDIT_DETAIL, halbjahrId, klassenId, schuelerId));
+        model.addAttribute("updateUrl", URL.filledURLWithNamedParams(
+                URL.ZeugnisPath.ZEUGNIS_EDIT_DETAIL,
+                URL.Session.P_HALBJAHR_ID, halbjahrId,
+                URL.Session.P_KLASSEN_ID, klassenId,
+                URL.Session.P_SCHUELER_ID, schuelerId));
         model.addAttribute("cancelUrl", URL.createLinkToZeugnisUrl(halbjahrId,
                 klassenId, schuelerId));
     }
@@ -574,8 +601,11 @@ public class ZeugnisController {
             Long klassenId, Long schuelerId, final Zeugnis zeugnis) {
         Collections.sort(zeugnis.getAgBewertungen());
         model.addAttribute("zeugnis", zeugnis);
-        model.addAttribute("updateUrl", URL.filledURL(URL.ZeugnisPath.
-                ZEUGNIS_EDIT_AGS, halbjahrId, klassenId, schuelerId));
+        model.addAttribute("updateUrl", URL.filledURLWithNamedParams(
+                URL.ZeugnisPath.ZEUGNIS_EDIT_AGS,
+                URL.Session.P_HALBJAHR_ID, halbjahrId,
+                URL.Session.P_KLASSEN_ID, klassenId,
+                URL.Session.P_SCHUELER_ID, schuelerId));
         model.addAttribute("cancelUrl", URL.createLinkToZeugnisUrl(halbjahrId,
                 klassenId, schuelerId));
     }
@@ -634,8 +664,11 @@ public class ZeugnisController {
             Long klassenId, Long schuelerId, final Zeugnis zeugnis) {
         model.addAttribute("zeugnis", zeugnis);
         model.addAttribute("solBewertungsTexte", zeugnisErfassungsService.getSoLTexte(zeugnis));
-        model.addAttribute("updateUrl", URL.filledURL(URL.ZeugnisPath.
-                ZEUGNIS_EDIT_BU_SOL, halbjahrId, klassenId, schuelerId));
+        model.addAttribute("updateUrl", URL.filledURLWithNamedParams(
+                URL.ZeugnisPath.ZEUGNIS_EDIT_BU_SOL,
+                URL.Session.P_HALBJAHR_ID, halbjahrId,
+                URL.Session.P_KLASSEN_ID, klassenId,
+                URL.Session.P_SCHUELER_ID, schuelerId));
         model.addAttribute("cancelUrl", URL.createLinkToZeugnisUrl(halbjahrId,
                 klassenId, schuelerId));
     }
@@ -725,7 +758,9 @@ public class ZeugnisController {
                     + "Exists: " + zeugnisDatei.exists() + ", canRead: "
                     + zeugnisDatei.canRead());
         }
-        return new RedirectView(URL.filledURL(URL.ZeugnisPath.START,
-                halbjahr.getId(), klasse.getId()), true);
+        return new RedirectView(URL.filledURLWithNamedParams(
+                URL.ZeugnisPath.START,
+                URL.Session.P_HALBJAHR_ID, halbjahr.getId(),
+                URL.Session.P_KLASSEN_ID, klasse.getId()), true);
     }
 }

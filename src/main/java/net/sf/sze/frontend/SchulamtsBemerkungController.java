@@ -103,8 +103,11 @@ public class SchulamtsBemerkungController {
         final SchulamtsBemerkung schulamtsBemerkung = new SchulamtsBemerkung();
         schulamtsBemerkung.setZeugnis(zeugnis);
         fillModel(model, halbjahrId, klassenId, schuelerId, schulamtsBemerkung);
-        model.addAttribute("insertUrl", URL.filledURL(URL.ZeugnisPath.
-                SCHULAMTS_BEMERKUNG_CREATE, halbjahrId, klassenId, schuelerId));
+        model.addAttribute("insertUrl", URL.filledURLWithNamedParams(
+                URL.ZeugnisPath.SCHULAMTS_BEMERKUNG_CREATE,
+                URL.Session.P_HALBJAHR_ID, halbjahrId,
+                URL.Session.P_KLASSEN_ID, klassenId,
+                URL.Session.P_SCHUELER_ID, schuelerId));
 
         return EDIT_SCHULAMTS_BEMERKUNG_VIEW;
     }
@@ -133,8 +136,11 @@ public class SchulamtsBemerkungController {
 
         if (result.hasErrors()) {
             LOG.info("Fehler beim Speichern der Schulamtsbemerkung: {}", result.getAllErrors());
-            model.addAttribute("insertUrl", URL.filledURL(URL.ZeugnisPath.
-                    SCHULAMTS_BEMERKUNG_CREATE, halbjahrId, klassenId, schuelerId));
+            model.addAttribute("insertUrl", URL.filledURLWithNamedParams(
+                    URL.ZeugnisPath.SCHULAMTS_BEMERKUNG_CREATE,
+                    URL.Session.P_HALBJAHR_ID, halbjahrId,
+                    URL.Session.P_KLASSEN_ID, klassenId,
+                    URL.Session.P_SCHUELER_ID, schuelerId));
             fillModel(model, halbjahrId, klassenId, schuelerId, schulamtsBemerkung);
             return EDIT_SCHULAMTS_BEMERKUNG_VIEW;
         }
@@ -143,8 +149,11 @@ public class SchulamtsBemerkungController {
         schulamtsBemerkungService.save(schulamtsBemerkung);
         final String nextUrl;
         if (StringUtils.equalsIgnoreCase(action, Common.ACTION_NEXT)) {
-            nextUrl = URL.redirect(URL.ZeugnisPath.SCHULAMTS_BEMERKUNG_CREATE,
-                    halbjahrId, klassenId, schuelerId);
+            nextUrl = URL.redirectWithNamedParams(
+                    URL.ZeugnisPath.SCHULAMTS_BEMERKUNG_CREATE,
+                    URL.Session.P_HALBJAHR_ID, halbjahrId,
+                    URL.Session.P_KLASSEN_ID, klassenId,
+                    URL.Session.P_SCHUELER_ID, schuelerId);
         } else {
             nextUrl = URL.createRedirectToZeugnisUrl(halbjahrId, klassenId, schuelerId);
         }
@@ -174,12 +183,18 @@ public class SchulamtsBemerkungController {
         model.addAttribute("schulhalbjahr", schulhalbjahrService.read(halbjahrId));
         model.addAttribute("cancelUrl", URL.createLinkToZeugnisUrl(
                 halbjahrId, klassenId, schuelerId));
-        model.addAttribute("editUrl", URL.filledURL(URL.ZeugnisPath.
-                SCHULAMTS_BEMERKUNG_EDIT, halbjahrId, klassenId, schuelerId,
-                schulamtsBemerkungsId));
-        model.addAttribute("deleteUrl", URL.filledURL(URL.ZeugnisPath.
-                SCHULAMTS_BEMERKUNG_DELETE, halbjahrId, klassenId, schuelerId,
-                schulamtsBemerkungsId));
+        model.addAttribute("editUrl", URL.filledURLWithNamedParams(
+                URL.ZeugnisPath.SCHULAMTS_BEMERKUNG_EDIT,
+                URL.Session.P_HALBJAHR_ID, halbjahrId,
+                URL.Session.P_KLASSEN_ID, klassenId,
+                URL.Session.P_SCHUELER_ID, schuelerId,
+                URL.ZeugnisPath.P_SCHULAMTS_BEMERKUNGS_ID, schulamtsBemerkungsId));
+        model.addAttribute("deleteUrl", URL.filledURLWithNamedParams(
+                URL.ZeugnisPath.SCHULAMTS_BEMERKUNG_DELETE,
+                URL.Session.P_HALBJAHR_ID, halbjahrId,
+                URL.Session.P_KLASSEN_ID, klassenId,
+                URL.Session.P_SCHUELER_ID, schuelerId,
+                URL.ZeugnisPath.P_SCHULAMTS_BEMERKUNGS_ID, schulamtsBemerkungsId));
         return "schulamtsBemerkung/showSchulamtsBemerkung";
     }
 
@@ -202,12 +217,18 @@ public class SchulamtsBemerkungController {
         final SchulamtsBemerkung schulamtsBemerkung = schulamtsBemerkungService.
                 read(schulamtsBemerkungsId);
         fillModel(model, halbjahrId, klassenId, schuelerId, schulamtsBemerkung);
-        model.addAttribute("updateUrl", URL.filledURL(URL.ZeugnisPath.
-                SCHULAMTS_BEMERKUNG_EDIT, halbjahrId, klassenId, schuelerId,
-                schulamtsBemerkungsId));
-        model.addAttribute("deleteUrl", URL.filledURL(URL.ZeugnisPath.
-                SCHULAMTS_BEMERKUNG_DELETE, halbjahrId, klassenId, schuelerId,
-                schulamtsBemerkungsId));
+        model.addAttribute("updateUrl", URL.filledURLWithNamedParams(
+                URL.ZeugnisPath.SCHULAMTS_BEMERKUNG_EDIT,
+                URL.Session.P_HALBJAHR_ID, halbjahrId,
+                URL.Session.P_KLASSEN_ID, klassenId,
+                URL.Session.P_SCHUELER_ID, schuelerId,
+                URL.ZeugnisPath.P_SCHULAMTS_BEMERKUNGS_ID, schulamtsBemerkungsId));
+        model.addAttribute("deleteUrl", URL.filledURLWithNamedParams(
+                URL.ZeugnisPath.SCHULAMTS_BEMERKUNG_DELETE,
+                URL.Session.P_HALBJAHR_ID, halbjahrId,
+                URL.Session.P_KLASSEN_ID, klassenId,
+                URL.Session.P_SCHUELER_ID, schuelerId,
+                URL.ZeugnisPath.P_SCHULAMTS_BEMERKUNGS_ID, schulamtsBemerkungsId));
         return EDIT_SCHULAMTS_BEMERKUNG_VIEW;
     }
 
@@ -236,12 +257,18 @@ public class SchulamtsBemerkungController {
         validator.validate(schulamtsBemerkung, result);
 
         if (result.hasErrors()) {
-            model.addAttribute("updateUrl", URL.filledURL(URL.ZeugnisPath.
-                    SCHULAMTS_BEMERKUNG_EDIT, halbjahrId, klassenId,
-                    schuelerId, schulamtsBemerkungsId));
-            model.addAttribute("deleteUrl", URL.filledURL(URL.ZeugnisPath.
-                    SCHULAMTS_BEMERKUNG_DELETE, halbjahrId, klassenId,
-                    schuelerId, schulamtsBemerkungsId));
+            model.addAttribute("updateUrl", URL.filledURLWithNamedParams(
+                    URL.ZeugnisPath.SCHULAMTS_BEMERKUNG_EDIT,
+                    URL.Session.P_HALBJAHR_ID, halbjahrId,
+                    URL.Session.P_KLASSEN_ID, klassenId,
+                    URL.Session.P_SCHUELER_ID, schuelerId,
+                    URL.ZeugnisPath.P_SCHULAMTS_BEMERKUNGS_ID, schulamtsBemerkungsId));
+            model.addAttribute("deleteUrl", URL.filledURLWithNamedParams(
+                    URL.ZeugnisPath.SCHULAMTS_BEMERKUNG_DELETE,
+                    URL.Session.P_HALBJAHR_ID, halbjahrId,
+                    URL.Session.P_KLASSEN_ID, klassenId,
+                    URL.Session.P_SCHUELER_ID, schuelerId,
+                    URL.ZeugnisPath.P_SCHULAMTS_BEMERKUNGS_ID, schulamtsBemerkungsId));
             fillModel(model, halbjahrId, klassenId, schuelerId, schulamtsBemerkung);
             return EDIT_SCHULAMTS_BEMERKUNG_VIEW;
         }
@@ -294,8 +321,11 @@ public class SchulamtsBemerkungController {
                 schulamtsBemerkungService.getAllSchulaemter(schulamtsBemerkung);
         model.addAttribute("schulamtsBemerkung", schulamtsBemerkung);
         model.addAttribute("schulhalbjahr", schulhalbjahrService.read(halbjahrId));
-        model.addAttribute("cancelUrl", URL.filledURL(
-                URL.ZeugnisPath.SCHULAMTS_BEMERKUNG_CANCEL, halbjahrId, klassenId, schuelerId));
+        model.addAttribute("cancelUrl", URL.filledURLWithNamedParams(
+                URL.ZeugnisPath.SCHULAMTS_BEMERKUNG_CANCEL,
+                URL.Session.P_HALBJAHR_ID, halbjahrId,
+                URL.Session.P_KLASSEN_ID, klassenId,
+                URL.Session.P_SCHUELER_ID, schuelerId));
         model.addAttribute("bemerkungsBausteine", schulamtsBemerkungsBausteine);
         model.addAttribute("schulaemter", schulaemter);
         model.addAttribute("helpMessageId", "help.schulamtsBemerkung.edit");
