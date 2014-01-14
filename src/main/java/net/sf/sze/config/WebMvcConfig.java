@@ -119,7 +119,6 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
                 new UrlDefinitionsToMessages(classes);
         urlDefinitions.addParamGroupAsMessages();
         urlDefinitions.addParamsAsMessages();
-        urlDefinitions.addUrlsAsMessages();
         urlDefinitions.addUrlsAsMessagesWithNamedParameters();
         Properties staticMessages = urlDefinitions.getMessages();
         final EntityPropertiesToMessages epm =

@@ -182,13 +182,13 @@ public class BemerkungController {
                 URL.Session.P_HALBJAHR_ID, halbjahrId,
                 URL.Session.P_KLASSEN_ID, klassenId,
                 URL.Session.P_SCHUELER_ID, schuelerId,
-                URL.Bemerkung.P_BEMERKUNGID, bemerkungsId));
+                URL.ZeugnisPath.P_BEMERKUNGS_ID, bemerkungsId));
         model.addAttribute("deleteUrl", URL.filledURLWithNamedParams(
                 URL.ZeugnisPath.BEMERKUNG_DELETE,
                 URL.Session.P_HALBJAHR_ID, halbjahrId,
                 URL.Session.P_KLASSEN_ID, klassenId,
                 URL.Session.P_SCHUELER_ID, schuelerId,
-                URL.Bemerkung.P_BEMERKUNGID, bemerkungsId));
+                URL.ZeugnisPath.P_BEMERKUNGS_ID, bemerkungsId));
         return "bemerkung/showBemerkung";
     }
 
@@ -229,13 +229,13 @@ public class BemerkungController {
                 URL.Session.P_HALBJAHR_ID, halbjahrId,
                 URL.Session.P_KLASSEN_ID, klassenId,
                 URL.Session.P_SCHUELER_ID, schuelerId,
-                URL.Bemerkung.P_BEMERKUNGID, bemerkungsId));
+                URL.ZeugnisPath.P_BEMERKUNGS_ID, bemerkungsId));
         model.addAttribute("deleteUrl", URL.filledURLWithNamedParams(
                 URL.ZeugnisPath.BEMERKUNG_DELETE,
                 URL.Session.P_HALBJAHR_ID, halbjahrId,
                 URL.Session.P_KLASSEN_ID, klassenId,
                 URL.Session.P_SCHUELER_ID, schuelerId,
-                URL.Bemerkung.P_BEMERKUNGID, bemerkungsId));
+                URL.ZeugnisPath.P_BEMERKUNGS_ID, bemerkungsId));
     }
 
     /**
