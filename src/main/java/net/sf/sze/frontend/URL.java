@@ -12,6 +12,7 @@ import net.sf.sze.model.zeugnis.SchulamtsBemerkung;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -386,6 +387,7 @@ public final class URL {
      * @param parameters the parameters
      * @return the URL with parameters filled in
      */
+    @Deprecated
     public static String filledURL(String url, Object... parameters) {
         if ((parameters == null) || (parameters.length == 0)) {
             return url;
@@ -393,6 +395,56 @@ public final class URL {
 
         final UriComponents uricomponent = getUriComponent(url);
         return uricomponent.expand(parameters).encode().toUriString();
+    }
+
+    /**
+     * Replace all parameters in the URL with the given values.
+     *
+     * @param url the URL.
+     * @param parameter the parameter
+     * @return the URL with parameters filled in
+     */
+    public static String filledURL(String url, Object parameter) {
+        final UriComponents uricomponent = getUriComponent(url);
+        return uricomponent.expand(parameter).encode().toUriString();
+    }
+
+    /**
+     * Replace all parameters in the URL with the given values.
+     *
+     * @param url the URL.
+     * @return the URL with parameters filled in
+     */
+    public static String filledURL(String url) {
+        final UriComponents uricomponent = getUriComponent(url);
+        return uricomponent.expand().encode().toUriString();
+    }
+
+    /**
+     * Replace all parameters in the URL with the given values.
+     *
+     * @param url the URL.
+     * @param keyValuePairs the parameters as pair of name and value.
+     * @return the URL with parameters filled in
+     */
+    public static String filledURLWithNamedParams(String url, Object... keyValuePairs) {
+        if ((keyValuePairs == null) || (keyValuePairs.length == 0)) {
+            return url;
+        }
+        if (keyValuePairs.length % 2 != 0) {
+            throw new IllegalArgumentException(
+                    "The array has to be of an even size - size is "
+                            + keyValuePairs.length);
+        }
+
+        final Map<String, Object> values = new HashMap<String, Object>();
+
+        for (int x = 0; x < keyValuePairs.length; x += 2) {
+            values.put((String) keyValuePairs[x], keyValuePairs[x + 1]);
+        }
+
+        final UriComponents uricomponent = getUriComponent(url);
+        return uricomponent.expand(values).encode().toUriString();
     }
 
     /**
@@ -416,7 +468,7 @@ public final class URL {
      * @param parameters the parameters
      * @return the URL with parameters filled in
      */
-    public static String filledURL(String url, Map<String, String> parameters) {
+    public static String filledURL(String url, Map<String, ?> parameters) {
         if ((parameters == null) || (parameters.size() == 0)) {
             return url;
         }
@@ -433,8 +485,44 @@ public final class URL {
      * @param parameters the parameters
      * @return the redirect URL with parameters filled in
      */
+    @Deprecated
     public static String redirect(String url, Object... parameters) {
         return REDIRECT_PREFIX + filledURL(url, parameters);
+    }
+
+    /**
+     * Replace all parameters in the URL with the given values and make a
+     * redirect.
+     *
+     * @param url the URL.
+     * @param parameter the parameter
+     * @return the redirect URL with parameters filled in
+     */
+    public static String redirect(String url, Object parameter) {
+        return REDIRECT_PREFIX + filledURL(url, parameter);
+    }
+
+    /**
+     * Replace all parameters in the URL with the given values and make a
+     * redirect.
+     *
+     * @param url the URL.
+     * @return the redirect URL with parameters filled in
+     */
+    public static String redirect(String url) {
+        return REDIRECT_PREFIX + filledURL(url);
+    }
+
+    /**
+     * Replace all parameters in the URL with the given values and make a
+     * redirect.
+     *
+     * @param url the URL.
+     * @param keyValuePairs the parameters as pair of name and value
+     * @return the redirect URL with parameters filled in
+     */
+    public static String redirectWithNamedParams(String url, Object... keyValuePairs) {
+        return REDIRECT_PREFIX + filledURLWithNamedParams(url, keyValuePairs);
     }
 
     /**
