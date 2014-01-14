@@ -66,9 +66,11 @@ messages - eine Liste mit Meldungen.
                 <li th:class="${#strings.contains(#httpServletRequest.getRequestURI(),'/admin/')?'active':''}">
                     <a href="#" th:href="@{/admin}">Administration</a></li>
                 <li th:class="${#strings.contains(#httpServletRequest.getRequestURI(),'/konfig/')?'active':''}">
-                    <a href="#" th:href="@{#{url.configuration.main}}">Konfiguration</a></li>
+                    <a href="#" th:href="@{#{nurl.configuration.main}}">Konfiguration</a></li>
                 <li th:class="${#strings.contains(#httpServletRequest.getRequestURI(),'/zeugnis/') or #strings.contains(#httpServletRequest.getRequestURI(),'/bewertungen/')?'active':''}">
-                    <a href="#" th:href="@{#{url.zeugnispath.start(${#objects.nullSafe(halbjahr_id,0)},${#objects.nullSafe(klassen_id,0)})}}">Zeugnisse</a></li>
+                    <a href="#" th:with="#{par.session.halbjahr_id}=${#objects.nullSafe(halbjahr_id,0)},
+                        #{par.session.klassen_id}=${#objects.nullSafe(klassen_id,0)}"
+                        th:href="@{|__#{nurl.zeugnispath.start}__|}">Zeugnisse</a></li>
             </ul>
         </div>
     </div>

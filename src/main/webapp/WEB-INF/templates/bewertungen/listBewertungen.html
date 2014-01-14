@@ -22,7 +22,7 @@ schulfachId - die Id des Schulfachs.
         <div class="bewertungenNav" th:with="formId='chooseSchulfachFormTop'" th:fragment="bewertungNav">
             <form class="form-horizontal" th:id="${formId}" method="get"
                 th:object="${zeugnis}"
-                th:action="@{#{url.bewertungenpath.list(${__#{par.session.halbjahr_id}__}, ${__#{par.session.klassen_id}__})}}">
+                th:action="@{|__#{nurl.bewertungenpath.list}__|}">
                 <!-- (schulhalbjahr.id, klasse.id, schulfachId) und die URL muss auch her.  -->
                 <select class="cbauto" th:name="#{par.session.schulfach_id}">
                     <option th:each="item : ${schulfaecher}" th:value="${item.id}"
@@ -48,9 +48,8 @@ schulfachId - die Id des Schulfachs.
                 </thead>
                 <tbody>
                     <tr th:each="bewertungInstance:${bewertungen}" th:class="${(lasteditedId==bewertungInstance.id)?'lastEdited':''}"
-                        th:with="url=@{#{url.bewertungenpath.edit(${__#{par.session.halbjahr_id}__},
-                                ${__#{par.session.klassen_id}__}, ${bewertungInstance.schulfach.id},
-                                ${bewertungInstance.id})}}">
+                        th:with="#{par.bewertungenpath.bewertungs_id}=${bewertungInstance.id},
+                            url=@{|__#{nurl.bewertungenpath.edit}__|}">
                         <td><a th:href="${url}" th:text="${bewertungInstance.zeugnis}"></a></td>
                         <td><a th:href="${url}" th:text="${bewertungInstance.schulfach}"></a></td>
                         <td><a th:href="${url}" th:text="${bewertungInstance.leistungsniveau}"></a></td>
