@@ -875,7 +875,7 @@ public class Zeugnis extends VersionedModel implements Serializable,
      * @return die Anzahl an Tage in Textform.
      */
     private String dayToString(final Integer day) {
-        if (day == null) {
+        if (day == null || day.intValue() == 0) {
             return VariableUtility.PLATZHALTER_LEER;
         } else if (day.longValue() == 1) {
             return "1 Tag";
