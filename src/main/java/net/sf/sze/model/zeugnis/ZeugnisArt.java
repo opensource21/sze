@@ -37,12 +37,10 @@ public class ZeugnisArt extends VersionedModel implements Serializable,
 
     /** The sortierung. */
     @Column(nullable = false)
-
     private Long sortierung = Long.valueOf(10);
 
     /** Titel des Zeugnisses. */
     @Column(nullable = false, length = 255)
-
     private String titel = "Zeugnis";
 
     /** The abschluss grad. */

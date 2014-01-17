@@ -43,7 +43,6 @@ public class Schueler extends VersionedModel implements Serializable,
 
     /** The name. */
     @Column(nullable = false, length = 40)
-
     @Size(max = 40)
     private String name;
 
