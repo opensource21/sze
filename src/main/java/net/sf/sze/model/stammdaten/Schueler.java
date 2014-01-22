@@ -5,32 +5,26 @@
 
 package net.sf.sze.model.stammdaten;
 
-import de.ppi.fuwesta.jpa.helper.VersionedModel;
-
-import net.sf.oval.constraint.Past;
-import net.sf.oval.constraint.Size;
-import net.sf.sze.model.zeugnis.Zeugnis;
-
-import org.apache.commons.lang.builder.CompareToBuilder;
-
 import java.io.Serializable;
-
 import java.text.SimpleDateFormat;
-
 import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import net.sf.oval.constraint.Past;
+import net.sf.oval.constraint.Size;
+
+import org.apache.commons.lang.builder.CompareToBuilder;
+
+import de.ppi.fuwesta.jpa.helper.VersionedModel;
 
 /**
  * Ein Schüler einer Schule.
@@ -89,12 +83,6 @@ public class Schueler extends VersionedModel implements Serializable,
     @ManyToOne(optional = false)
     @JoinColumn(name = "klasse_id", nullable = false)
     private Klasse klasse;
-
-    // bi-directional many-to-one association to Zeugni
-
-    /** The zeugnisse. */
-    @OneToMany(mappedBy = "schueler", cascade = CascadeType.ALL)
-    private Set<Zeugnis> zeugnisse;
 
     /**
      * Gets the abgangs datum.
@@ -276,24 +264,6 @@ public class Schueler extends VersionedModel implements Serializable,
         this.klasse = klasse;
     }
 
-    /**
-     * Gets the zeugnisse.
-     *
-     * @return the zeugnisse
-     */
-    public Set<Zeugnis> getZeugnisse() {
-        return this.zeugnisse;
-    }
-
-    /**
-     * Sets the zeugnisse.
-     *
-     * @param zeugnis the new zeugnisse
-     */
-    public void setZeugnisse(final Set<Zeugnis> zeugnis) {
-        this.zeugnisse = zeugnis;
-    }
-
     // Hier beginnen die echten Methoden
 
     /**
@@ -321,7 +291,6 @@ public class Schueler extends VersionedModel implements Serializable,
         compareBuilder.append(this.getNummer(), other.getNummer());
         compareBuilder.append(this.getAufnahmeDatum(), other.getAufnahmeDatum());
         compareBuilder.append(this.getAbgangsDatum(), other.getAbgangsDatum());
-        compareBuilder.append(this.getZeugnisse(), other.getZeugnisse());
         return compareBuilder.toComparison();
     }
 
