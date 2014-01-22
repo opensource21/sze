@@ -82,13 +82,13 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
     private boolean ooEnv;
 
     @Value("${odtOutputDir}")
-    private String odtOutputDir;
+    private String odtOutputBaseDirAsString;
 
     @Value("${pdfPrintOutputDir}")
-    private String pdfPrintOutputDir;
+    private String pdfPrintOutputBaseDirAsString;
 
     @Value("${pdfScreenOutputDir}")
-    private String pdfScreenOutputDir;
+    private String pdfScreenOutputBaseDirAsString;
 
     @Value("${templateDir}")
     private String templateDir;
@@ -170,9 +170,9 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
             LOG.info("Init PDF-Creation mit  {}", converter);
         }
 
-        odtOutputBaseDir = new File(odtOutputDir);
-        pdfPrintOutputBaseDir = new File(pdfPrintOutputDir);
-        pdfScreenOutputBaseDir = new File(pdfScreenOutputDir);
+        odtOutputBaseDir = new File(odtOutputBaseDirAsString);
+        pdfPrintOutputBaseDir = new File(pdfPrintOutputBaseDirAsString);
+        pdfScreenOutputBaseDir = new File(pdfScreenOutputBaseDirAsString);
     }
 
     /**
