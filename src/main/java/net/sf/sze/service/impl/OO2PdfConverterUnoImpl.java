@@ -96,7 +96,7 @@ public class OO2PdfConverterUnoImpl implements OO2PdfConverter {
             PropertyValue[] propertyValue = new PropertyValue[1];
             propertyValue[0] = new PropertyValue();
             propertyValue[0].Name = "Hidden";
-            propertyValue[0].Value = new Boolean(true);
+            propertyValue[0].Value = Boolean.TRUE;
 
             Object oDocToStore = xCompLoader.loadComponentFromURL(sLoadUrl
                     .toString(), "_blank", 0, propertyValue);
@@ -108,7 +108,7 @@ public class OO2PdfConverterUnoImpl implements OO2PdfConverter {
             propertyValue = new PropertyValue[2];
             propertyValue[0] = new PropertyValue();
             propertyValue[0].Name = "Overwrite";
-            propertyValue[0].Value = new Boolean(true);
+            propertyValue[0].Value = Boolean.TRUE;
             propertyValue[1] = new PropertyValue();
             propertyValue[1].Name = "FilterName";
             propertyValue[1].Value = "writer_pdf_Export";
@@ -146,7 +146,7 @@ public class OO2PdfConverterUnoImpl implements OO2PdfConverter {
      * @author niels
      *
      */
-    public class ConvertionException extends RuntimeException {
+    public static class ConvertionException extends RuntimeException {
 
         /** The Constant serialVersionUID. */
         private static final long serialVersionUID = 1L;
