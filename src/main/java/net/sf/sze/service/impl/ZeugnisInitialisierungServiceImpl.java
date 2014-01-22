@@ -242,7 +242,7 @@ public class ZeugnisInitialisierungServiceImpl implements ZeugnisInitialierungsS
                 changeMessage.append("\n\t <li>Arbeits- und Sozialverhalten ").
                     append(avSv.getName()).
                     append(" wurde gel\u00f6scht.</li>");
-                zeugnis.getAgBewertungen().remove(oldAvSvBw);
+                zeugnis.getAvSvBewertungen().remove(oldAvSvBw);
                 avSvBewertungDao.delete(oldAvSvBw);
             } else if (oldAvSvBw == null && newAvSvBw != null) {
                 if (changeMessage.length() > 0) {
