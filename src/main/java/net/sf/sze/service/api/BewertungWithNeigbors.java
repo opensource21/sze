@@ -44,17 +44,17 @@ public class BewertungWithNeigbors {
         Long prevId = null;
         Long nextId = null;
         Bewertung selectedBewertung = null;
-        for (Bewertung bewertung : bewertungen) {
+        for (Bewertung currentBewertung : bewertungen) {
             if ((selectedBewertung != null) && (nextId == null)) {
-                nextId = bewertung.getId();
+                nextId = currentBewertung.getId();
             }
 
-            if (bewertungsId.equals(bewertung.getId())) {
-                selectedBewertung = bewertung;
+            if (bewertungsId.equals(currentBewertung.getId())) {
+                selectedBewertung = currentBewertung;
             }
 
             if (selectedBewertung == null) {
-                prevId = bewertung.getId();
+                prevId = currentBewertung.getId();
             }
         }
         if (selectedBewertung == null) {

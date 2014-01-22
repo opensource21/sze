@@ -59,7 +59,7 @@ public final class VariableUtility {
         final String[] tokens = ("Text" + text).split("@");
         for (int i = 0; i < tokens.length; i++) {
             final String token = tokens[i];
-            if ((i % 2 == 1) && !VARIABLE_NAMES_LIST.contains(token) && !token
+            if ((i % 2 != 0) && !VARIABLE_NAMES_LIST.contains(token) && !token
                     .contains("|")) {
                 unknownVariables.add(token);
             }
@@ -94,7 +94,7 @@ public final class VariableUtility {
         for (int i = 0; i < tokens.length; i++) {
             final String token = tokens[i];
             String replacement;
-            if (i % 2 == 1) {
+            if (i % 2 != 0) {
                 if ("NAME".equals(token)) {
                     replacement = rufnameNotNull;
                 } else if ("name".equals(token)) {

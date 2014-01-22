@@ -17,7 +17,6 @@ import net.sf.sze.model.zeugnis.AvSvNote;
 import net.sf.sze.model.zeugnis.Schulhalbjahr;
 import net.sf.sze.model.zeugnis.Zeugnis;
 import net.sf.sze.service.api.AvSvBewertungService;
-import net.sf.sze.service.api.SchulhalbjahrService;
 import net.sf.sze.service.api.ZeugnisErfassungsService;
 
 import org.springframework.stereotype.Controller;
@@ -55,14 +54,6 @@ public class AvSvBewertungController {
      */
     @Resource
     private Validator validator;
-
-
-    /**
-     * Der {@link SchulhalbjahrService}.
-     */
-    @Resource
-    private SchulhalbjahrService schulhalbjahrService;
-
 
     private static final String EDIT_ZEUGNIS_AV_SV_VIEW = "avSvBewertung/editAvSvBewertungen";
 

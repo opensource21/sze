@@ -125,10 +125,9 @@ public class ZeugnisErfassungsServiceImpl implements ZeugnisErfassungsService {
     public List<ZeugnisArt> getAllZeugnisArten(Zeugnis zeugnis) {
         final List<ZeugnisArt> bausteine = zeugnisArtDao.
                 findAllByAktivTrueOrderBySortierungAsc();
-        if (zeugnis != null && zeugnis.getZeugnisArt() != null) {
-            if (!bausteine.contains(zeugnis.getZeugnisArt())) {
-                bausteine.add(zeugnis.getZeugnisArt());
-            }
+        final boolean gotZeugnisArt = zeugnis != null && zeugnis.getZeugnisArt() != null;
+        if (gotZeugnisArt && !bausteine.contains(zeugnis.getZeugnisArt())) {
+            bausteine.add(zeugnis.getZeugnisArt());
         }
         return bausteine;
     }

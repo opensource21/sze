@@ -118,11 +118,11 @@ public class SchulamtsBemerkungsServiceImpl implements SchulamtsBemerkungService
                     SchulamtsBemerkung schulamtsBemerkung) {
         final List<SchulamtsBemerkungsBaustein> bausteine = schulamtsBemerkungsBausteinDao.
                 findAllByAktivTrueOrderByNameAsc();
-        if (schulamtsBemerkung != null && schulamtsBemerkung.
-                getSchulamtsBemerkungsBaustein() != null) {
-            if (!bausteine.contains(schulamtsBemerkung.getSchulamtsBemerkungsBaustein())) {
-                bausteine.add(schulamtsBemerkung.getSchulamtsBemerkungsBaustein());
-            }
+        final boolean gotSchulamtsBemerkungsBausteine = schulamtsBemerkung != null
+                && schulamtsBemerkung.getSchulamtsBemerkungsBaustein() != null;
+        if (gotSchulamtsBemerkungsBausteine && !bausteine.contains(
+                schulamtsBemerkung.getSchulamtsBemerkungsBaustein())) {
+            bausteine.add(schulamtsBemerkung.getSchulamtsBemerkungsBaustein());
         }
         return bausteine;
     }
@@ -135,10 +135,10 @@ public class SchulamtsBemerkungsServiceImpl implements SchulamtsBemerkungService
             SchulamtsBemerkung schulamtsBemerkung) {
         final List<Schulamt> bausteine = schulamtDao.
                 findAllByAktivTrueOrderByNameAsc();
-        if (schulamtsBemerkung != null && schulamtsBemerkung.getSchulamt() != null) {
-            if (!bausteine.contains(schulamtsBemerkung.getSchulamt())) {
-                bausteine.add(schulamtsBemerkung.getSchulamt());
-            }
+        final boolean gotSchulaemter = schulamtsBemerkung != null
+                && schulamtsBemerkung.getSchulamt() != null;
+        if (gotSchulaemter && !bausteine.contains(schulamtsBemerkung.getSchulamt())) {
+            bausteine.add(schulamtsBemerkung.getSchulamt());
         }
         return bausteine;
 

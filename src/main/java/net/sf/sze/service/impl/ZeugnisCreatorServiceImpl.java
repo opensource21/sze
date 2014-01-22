@@ -82,13 +82,13 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
     private boolean ooEnv;
 
     @Value("${odtOutputDir}")
-    private String odtOutputDir;
+    private String odtOutputBaseDirAsString;
 
     @Value("${pdfPrintOutputDir}")
-    private String pdfPrintOutputDir;
+    private String pdfPrintOutputBaseDirAsString;
 
     @Value("${pdfScreenOutputDir}")
-    private String pdfScreenOutputDir;
+    private String pdfScreenOutputBaseDirAsString;
 
     @Value("${templateDir}")
     private String templateDir;
@@ -148,12 +148,10 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
                 if (ooEnv) {
                     userEnv = new File("./ooenv");
 
-                    if (!userEnv.exists()) {
-                        if (!userEnv.mkdirs()) {
-                            throw new IllegalStateException(userEnv
-                                    .getAbsolutePath()
-                                    + " kann nicht angelegt werden.");
-                        }
+                    if (!userEnv.exists() && !userEnv.mkdirs()) {
+                        throw new IllegalStateException(userEnv
+                                .getAbsolutePath()
+                                + " kann nicht angelegt werden.");
                     }
                 }
 
@@ -170,9 +168,9 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
             LOG.info("Init PDF-Creation mit  {}", converter);
         }
 
-        odtOutputBaseDir = new File(odtOutputDir);
-        pdfPrintOutputBaseDir = new File(pdfPrintOutputDir);
-        pdfScreenOutputBaseDir = new File(pdfScreenOutputDir);
+        odtOutputBaseDir = new File(odtOutputBaseDirAsString);
+        pdfPrintOutputBaseDir = new File(pdfPrintOutputBaseDirAsString);
+        pdfScreenOutputBaseDir = new File(pdfScreenOutputBaseDirAsString);
     }
 
     /**
@@ -539,12 +537,10 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
         }
 
         for (final File outputFile : outputFiles) {
-            if (outputFile.exists()) {
-                if (!outputFile.delete()) {
-                    throw new IllegalStateException(outputFile
-                            .getAbsolutePath()
-                            + " konnte nicht gelöscht werden.");
-                }
+            if (outputFile.exists() && !outputFile.delete()) {
+                throw new IllegalStateException(outputFile
+                        .getAbsolutePath()
+                        + " konnte nicht gelöscht werden.");
             }
         }
     }
