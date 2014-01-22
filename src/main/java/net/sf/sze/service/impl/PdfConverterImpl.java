@@ -61,6 +61,91 @@ public class PdfConverterImpl implements PdfConverter {
             PdfConverterImpl.class);
 
     /**
+     * Leere Seite.
+     */
+    private static final int EMPTY_PAGE = 0;
+
+    /**
+     * Seite Nummer 1.
+     */
+    private static final int PAGE_NR_1 = 1;
+
+    /**
+     * Seite Nummer 2.
+     */
+    private static final int PAGE_NR_2 = 2;
+
+    /**
+     * Seite Nummer 3.
+     */
+    private static final int PAGE_NR_3 = 3;
+
+    /**
+     * Seite Nummer 4.
+     */
+    private static final int PAGE_NR_4 = 4;
+
+    /**
+     * Seite Nummer 5.
+     */
+    private static final int PAGE_NR_5 = 5;
+
+    /**
+     * Seite Nummer 6.
+     */
+    private static final int PAGE_NR_6 = 6;
+
+    /**
+     * Seite Nummer 7.
+     */
+    private static final int PAGE_NR_7 = 7;
+
+    /**
+     * Seite Nummer 8.
+     */
+    private static final int PAGE_NR_8 = 8;
+
+    /**
+     * Seite Nummer 9.
+     */
+    private static final int PAGE_NR_9 = 9;
+
+    /**
+     * Seite Nummer 10.
+     */
+    private static final int PAGE_NR_10 = 10;
+
+    /**
+     * 4 Seiten.
+     */
+    private static final int NR_OF_PAGES_4 = 4;
+
+    /**
+     * 5 Seiten.
+     */
+    private static final int NR_OF_PAGES_5 = 5;
+
+    /**
+     * 6 Seiten.
+     */
+    private static final int NR_OF_PAGES_6 = PAGE_NR_6;
+
+    /**
+     * 8 Seiten.
+     */
+    private static final int NR_OF_PAGES_8 = 8;
+
+    /**
+     * 9 Seiten.
+     */
+    private static final int NR_OF_PAGES_9 = 9;
+
+    /**
+     * 10 Seiten.
+     */
+    private static final int NR_OF_PAGES_10 = 10;
+
+    /**
      * Reader zum erstellen einer leeren Seite.
      */
     private PdfReader emptyPdfPage;
@@ -185,30 +270,37 @@ public class PdfConverterImpl implements PdfConverter {
             // we retrieve the total number of pages
             final int pageNrs = reader.getNumberOfPages();
             switch (pageNrs) {
-            case 4:
-                createA3Subdocument(reader, targetPdfFileA3, 4, 1, 2, 3);
+            case NR_OF_PAGES_4:
+                createA3Subdocument(reader, targetPdfFileA3,
+                        PAGE_NR_4, PAGE_NR_1, PAGE_NR_2, PAGE_NR_3);
                 break;
-            case 5:
-                createA3Subdocument(reader, targetPdfFileA3, 0, 1, 2, 0);
-                createA4Subdocument(reader, targetPdfFileA4, 3, 4);
+            case NR_OF_PAGES_5:
+                createA3Subdocument(reader, targetPdfFileA3,
+                        EMPTY_PAGE, PAGE_NR_1, PAGE_NR_2, EMPTY_PAGE);
+                createA4Subdocument(reader, targetPdfFileA4, PAGE_NR_3, PAGE_NR_4);
                 break;
-            case 6:
-                createA3Subdocument(reader, targetPdfFileA3, 6, 1, 2, 5);
-                createA4Subdocument(reader, targetPdfFileA4, 3, 4);
+            case NR_OF_PAGES_6:
+                createA3Subdocument(reader, targetPdfFileA3,
+                        PAGE_NR_6, PAGE_NR_1, PAGE_NR_2, PAGE_NR_5);
+                createA4Subdocument(reader, targetPdfFileA4,
+                        PAGE_NR_3, PAGE_NR_4);
                 break;
-            case 8:
-                createA3Subdocument(reader, targetPdfFileA3, 8, 1, 2, 7, 6, 3,
-                        4, 5);
+            case NR_OF_PAGES_8:
+                createA3Subdocument(reader, targetPdfFileA3,
+                        PAGE_NR_8, PAGE_NR_1, PAGE_NR_2, PAGE_NR_7,
+                        PAGE_NR_6, PAGE_NR_3, PAGE_NR_4, PAGE_NR_5);
                 break;
-            case 9:
-                createA3Subdocument(reader, targetPdfFileA3, 0, 1, 2, 9, 8, 3,
-                        4, 7);
-                createA4Subdocument(reader, targetPdfFileA4, 5, 6);
+            case NR_OF_PAGES_9:
+                createA3Subdocument(reader, targetPdfFileA3,
+                        EMPTY_PAGE, PAGE_NR_1, PAGE_NR_2, PAGE_NR_9,
+                        PAGE_NR_8, PAGE_NR_3, PAGE_NR_4, PAGE_NR_7);
+                createA4Subdocument(reader, targetPdfFileA4, PAGE_NR_5, PAGE_NR_6);
                 break;
-            case 10:
-                createA3Subdocument(reader, targetPdfFileA3, 10, 1, 2, 9, 8, 3,
-                        4, 7);
-                createA4Subdocument(reader, targetPdfFileA4, 5, 6);
+            case NR_OF_PAGES_10:
+                createA3Subdocument(reader, targetPdfFileA3,
+                        PAGE_NR_10, PAGE_NR_1, PAGE_NR_2, PAGE_NR_9,
+                        PAGE_NR_8, PAGE_NR_3, PAGE_NR_4, PAGE_NR_7);
+                createA4Subdocument(reader, targetPdfFileA4, PAGE_NR_5, PAGE_NR_6);
                 break;
             default:
                 LOG.warn(sourcePdfFileA4.getAbsolutePath()
@@ -339,9 +431,11 @@ public class PdfConverterImpl implements PdfConverter {
     private synchronized PdfReader getEmptyPDFPage(Rectangle pageSize) {
         if (emptyPdfPage == null) {
             try {
-                ByteArrayOutputStream baos = new ByteArrayOutputStream(1024);
-                Document emptyDoc = new Document(pageSize);
-                PdfWriter w = PdfWriter.getInstance(emptyDoc, baos);
+                final int initialByteSize = 1024;
+                final ByteArrayOutputStream baos =
+                        new ByteArrayOutputStream(initialByteSize);
+                final Document emptyDoc = new Document(pageSize);
+                final PdfWriter w = PdfWriter.getInstance(emptyDoc, baos);
                 emptyDoc.open();
                 w.getDirectContent().setLiteral(' ');
                 emptyDoc.close();
