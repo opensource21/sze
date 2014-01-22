@@ -13,7 +13,6 @@ import net.sf.sze.model.zeugnis.Bemerkung;
 import net.sf.sze.model.zeugnis.BemerkungsBaustein;
 import net.sf.sze.model.zeugnis.Zeugnis;
 import net.sf.sze.service.api.BemerkungService;
-import net.sf.sze.service.api.BemerkungsBausteineService;
 import net.sf.sze.service.api.SchulhalbjahrService;
 import net.sf.sze.service.api.ZeugnisErfassungsService;
 
@@ -57,12 +56,6 @@ public class BemerkungController {
      */
     @Resource
     private BemerkungService bemerkungService;
-
-    /**
-     * Der {@link BemerkungsBausteineService}.
-     */
-    @Resource
-    private BemerkungsBausteineService bemerkungsBausteineService;
 
 
     /**

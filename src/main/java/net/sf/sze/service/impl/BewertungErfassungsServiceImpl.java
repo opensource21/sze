@@ -14,7 +14,6 @@ import javax.annotation.Resource;
 import net.sf.sze.dao.api.stammdaten.KlasseDao;
 import net.sf.sze.dao.api.zeugnis.BewertungDao;
 import net.sf.sze.dao.api.zeugnis.SchulfachDao;
-import net.sf.sze.dao.api.zeugnis.SchulhalbjahrDao;
 import net.sf.sze.dao.api.zeugnis.ZeugnisDao;
 import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.zeugnis.Bewertung;
@@ -50,13 +49,6 @@ public class BewertungErfassungsServiceImpl implements
      */
     @Resource
     private BewertungDao bewertungDao;
-
-
-    /**
-     * Dao fürs {@link Schulhalbjahr}.
-     */
-    @Resource
-    private SchulhalbjahrDao schulhalbjahrDao;
 
 
     /**
