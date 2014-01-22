@@ -148,12 +148,10 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
                 if (ooEnv) {
                     userEnv = new File("./ooenv");
 
-                    if (!userEnv.exists()) {
-                        if (!userEnv.mkdirs()) {
-                            throw new IllegalStateException(userEnv
-                                    .getAbsolutePath()
-                                    + " kann nicht angelegt werden.");
-                        }
+                    if (!userEnv.exists() && !userEnv.mkdirs()) {
+                        throw new IllegalStateException(userEnv
+                                .getAbsolutePath()
+                                + " kann nicht angelegt werden.");
                     }
                 }
 
@@ -539,12 +537,10 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
         }
 
         for (final File outputFile : outputFiles) {
-            if (outputFile.exists()) {
-                if (!outputFile.delete()) {
-                    throw new IllegalStateException(outputFile
-                            .getAbsolutePath()
-                            + " konnte nicht gelöscht werden.");
-                }
+            if (outputFile.exists() && !outputFile.delete()) {
+                throw new IllegalStateException(outputFile
+                        .getAbsolutePath()
+                        + " konnte nicht gelöscht werden.");
             }
         }
     }
