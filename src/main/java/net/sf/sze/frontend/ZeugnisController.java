@@ -52,7 +52,8 @@ import de.ppi.fuwesta.spring.mvc.view.FileContentView;
  *
  */
 @Controller
-public class ZeugnisController {
+public class ZeugnisController implements ModelAttributes {
+
 
     /**
      * The Logger for the controller.
@@ -180,7 +181,7 @@ public class ZeugnisController {
         LOG.debug("SchülerId =>{}<)", schuelerId);
 
         if (CollectionUtils.isEmpty(zeugnisse)) {
-            redirectAttributes.addFlashAttribute("message",
+            redirectAttributes.addFlashAttribute(MESSAGE,
                     "Es wurden keine Zeugnisse gefunden");
             return URL.redirectWithNamedParams(URL.ZeugnisPath.START,
                     URL.Session.P_HALBJAHR_ID, Long.valueOf(halbjahrId),
@@ -215,7 +216,7 @@ public class ZeugnisController {
         }
 
         if (selectedZeugnis == null) {
-            redirectAttributes.addFlashAttribute("message",
+            redirectAttributes.addFlashAttribute(MESSAGE,
                     "Der angegebene Schüler hat kein Zeugnis, gehe zum ersten.");
             return URL.redirectWithNamedParams(URL.ZeugnisPath.SHOW,
                     URL.Session.P_HALBJAHR_ID, Long.valueOf(halbjahrId),
@@ -321,7 +322,7 @@ public class ZeugnisController {
             @RequestParam(Common.P_PREV_ID) Long prevId,
             @RequestParam(Common.P_NEXT_ID) Long nextId,
             @RequestParam(value = Common.P_ACTION, required = false) String action,
-            @ModelAttribute("bewertung") StandardBewertung bewertung,
+            @ModelAttribute(BEWERTUNG) StandardBewertung bewertung,
             BindingResult result, Model model,
             RedirectAttributes redirectAttributes) {
         return updateBewertung(halbjahrId, klassenId, schuelerId, bewertung,
@@ -464,7 +465,7 @@ public class ZeugnisController {
                 URL.Session.P_KLASSEN_ID, klassenId,
                 URL.Session.P_SCHUELER_ID, schuelerId,
                 URL.ZeugnisPath.P_BEWERTUNGS_ID, bewertung.getId()));
-        model.addAttribute("cancelUrl", URL.filledURLWithNamedParams(
+        model.addAttribute(CANCEL_URL, URL.filledURLWithNamedParams(
                 URL.ZeugnisPath.BEWERTUNG_CANCEL,
                 URL.Session.P_HALBJAHR_ID, halbjahrId,
                 URL.Session.P_KLASSEN_ID, klassenId,
@@ -532,7 +533,7 @@ public class ZeugnisController {
                 URL.Session.P_HALBJAHR_ID, halbjahrId,
                 URL.Session.P_KLASSEN_ID, klassenId,
                 URL.Session.P_SCHUELER_ID, schuelerId));
-        model.addAttribute("cancelUrl", URL.createLinkToZeugnisUrl(halbjahrId,
+        model.addAttribute(CANCEL_URL, URL.createLinkToZeugnisUrl(halbjahrId,
                 klassenId, schuelerId));
     }
 
@@ -606,7 +607,7 @@ public class ZeugnisController {
                 URL.Session.P_HALBJAHR_ID, halbjahrId,
                 URL.Session.P_KLASSEN_ID, klassenId,
                 URL.Session.P_SCHUELER_ID, schuelerId));
-        model.addAttribute("cancelUrl", URL.createLinkToZeugnisUrl(halbjahrId,
+        model.addAttribute(CANCEL_URL, URL.createLinkToZeugnisUrl(halbjahrId,
                 klassenId, schuelerId));
     }
 
@@ -669,7 +670,7 @@ public class ZeugnisController {
                 URL.Session.P_HALBJAHR_ID, halbjahrId,
                 URL.Session.P_KLASSEN_ID, klassenId,
                 URL.Session.P_SCHUELER_ID, schuelerId));
-        model.addAttribute("cancelUrl", URL.createLinkToZeugnisUrl(halbjahrId,
+        model.addAttribute(CANCEL_URL, URL.createLinkToZeugnisUrl(halbjahrId,
                 klassenId, schuelerId));
     }
 
@@ -727,7 +728,7 @@ public class ZeugnisController {
         if (zeugnisDatei.exists() && zeugnisDatei.canRead()) {
             return new FileContentView(zeugnisDatei);
         } else {
-            redirectAttributes.addFlashAttribute("message", "Zeugnis erstellt, aber nicht lesbar.");
+            redirectAttributes.addFlashAttribute(MESSAGE, "Zeugnis erstellt, aber nicht lesbar.");
             LOG.warn("Kann " + zeugnisDatei.getAbsolutePath() + " nicht lesen. "
                     + "Exists: " + zeugnisDatei.exists() + ", canRead: "
                     + zeugnisDatei.canRead());
@@ -753,7 +754,7 @@ public class ZeugnisController {
             return new FileContentView(zeugnisDatei, "Klasse_" + klasse.
                     calculateKlassenname(halbjahr.getJahr()) + ".pdf");
         } else {
-            redirectAttributes.addFlashAttribute("message", "Zeugnis erstellt, aber nicht lesbar.");
+            redirectAttributes.addFlashAttribute(MESSAGE, "Zeugnis erstellt, aber nicht lesbar.");
             LOG.warn("Kann " + zeugnisDatei.getAbsolutePath() + " nicht lesen. "
                     + "Exists: " + zeugnisDatei.exists() + ", canRead: "
                     + zeugnisDatei.canRead());

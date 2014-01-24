@@ -35,7 +35,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  *
  */
 @Controller
-public class BemerkungController {
+public class BemerkungController implements ModelAttributes {
 
 
     /**
@@ -119,7 +119,7 @@ public class BemerkungController {
             .P_HALBJAHR_ID) Long halbjahrId,
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
-            @ModelAttribute("bemerkung") Bemerkung bemerkung,
+            @ModelAttribute(BEMERKUNG) Bemerkung bemerkung,
             @RequestParam(value = URL.Common.P_ACTION, required = false) String action,
             BindingResult result, Model model) {
         validator.validate(bemerkung, result);
@@ -166,7 +166,7 @@ public class BemerkungController {
             @PathVariable(URL.ZeugnisPath.P_BEMERKUNGS_ID) Long bemerkungsId,
             Model model) {
         final Bemerkung bemerkung = bemerkungService.read(bemerkungsId);
-        model.addAttribute("bemerkung", bemerkung);
+        model.addAttribute(BEMERKUNG, bemerkung);
         model.addAttribute("schulhalbjahr", schulhalbjahrService.read(halbjahrId));
         model.addAttribute("cancelUrl", URL.createLinkToZeugnisUrl(halbjahrId,
                 klassenId, schuelerId));
@@ -249,7 +249,7 @@ public class BemerkungController {
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
             @PathVariable(URL.ZeugnisPath.P_BEMERKUNGS_ID) Long bemerkungsId,
-            @ModelAttribute("bemerkung") Bemerkung bemerkung, BindingResult result,
+            @ModelAttribute(BEMERKUNG) Bemerkung bemerkung, BindingResult result,
             @RequestParam(value = URL.Common.P_ACTION, required = false) String action,
              Model model) {
         validator.validate(bemerkung, result);
@@ -304,7 +304,7 @@ public class BemerkungController {
             Long klassenId, Long schuelerId, Bemerkung bemerkung) {
         final List<BemerkungsBaustein> bemerkungsBausteine =
                 bemerkungService.getAllBausteine(bemerkung);
-        model.addAttribute("bemerkung", bemerkung);
+        model.addAttribute(BEMERKUNG, bemerkung);
         model.addAttribute("schulhalbjahr", schulhalbjahrService.read(halbjahrId));
         model.addAttribute("cancelUrl", URL.filledURLWithNamedParams(
                 URL.ZeugnisPath.BEMERKUNG_CANCEL,

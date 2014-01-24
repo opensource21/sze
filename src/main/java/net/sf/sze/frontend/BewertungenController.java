@@ -43,7 +43,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  *
  */
 @Controller
-public class BewertungenController {
+public class BewertungenController implements ModelAttributes {
+
+
 
     /**
      * Die View um eine Bewertung zu editieren im Rahmen der Bewertungenerfassung.
@@ -211,7 +213,7 @@ public class BewertungenController {
             @RequestParam(Common.P_PREV_ID) Long prevId,
             @RequestParam(Common.P_NEXT_ID) Long nextId,
             @RequestParam(value = Common.P_ACTION, required = false) String action,
-            @ModelAttribute("bewertung") StandardBewertung bewertung,
+            @ModelAttribute(BEWERTUNG) StandardBewertung bewertung,
             BindingResult result, Model model,
             RedirectAttributes redirectAttributes) {
         return updateBewertung(halbjahrId, klassenId, schulfachId, bewertung,
@@ -241,7 +243,7 @@ public class BewertungenController {
             @RequestParam(Common.P_PREV_ID) Long prevId,
             @RequestParam(Common.P_NEXT_ID) Long nextId,
             @RequestParam(value = Common.P_ACTION, required = false) String action,
-            @ModelAttribute("bewertung") AussenDifferenzierteBewertung bewertung,
+            @ModelAttribute(BEWERTUNG) AussenDifferenzierteBewertung bewertung,
             BindingResult result, Model model,
             RedirectAttributes redirectAttributes) {
         return updateBewertung(halbjahrId, klassenId, schulfachId, bewertung,
@@ -268,7 +270,7 @@ public class BewertungenController {
             @PathVariable(URL.Session.P_HALBJAHR_ID) Long halbjahrId,
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
             @PathVariable(URL.Session.P_SCHULFACH_ID) Long schulfachId,
-            @ModelAttribute("bewertung")BinnenDifferenzierteBewertung bewertung,
+            @ModelAttribute(BEWERTUNG)BinnenDifferenzierteBewertung bewertung,
             @RequestParam(Common.P_PREV_ID) Long prevId,
             @RequestParam(Common.P_NEXT_ID) Long nextId,
             @RequestParam(value = Common.P_ACTION, required = false) String action,
@@ -342,7 +344,7 @@ public class BewertungenController {
         } else {
             type = "standard";
         }
-        model.addAttribute("bewertung", bewertung);
+        model.addAttribute(BEWERTUNG, bewertung);
         model.addAttribute("schulhalbjahr", schulhalbjahrService.read(halbjahrId));
         model.addAttribute(Common.P_PREV_ID, prevId);
         model.addAttribute(Common.P_NEXT_ID, nextId);
