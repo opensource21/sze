@@ -39,18 +39,15 @@ public class Schulfach extends VersionedModel implements Serializable,
 
     /** The name. */
     @Column(nullable = false, length = 30)
-
     @Size(max = 30)
     private String name;
 
     /** The sortierung. */
     @Column(nullable = false)
-
     private Long sortierung;
 
     /** The typ. */
     @Column(nullable = false)
-
     @Enumerated(EnumType.ORDINAL)
     private Schulfachtyp typ;
 

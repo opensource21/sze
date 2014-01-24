@@ -5,10 +5,11 @@
 
 package net.sf.sze.config;
 
-import com.jolbox.bonecp.BoneCPDataSource;
+import java.util.Properties;
+
+import javax.sql.DataSource;
 
 import org.hibernate.cfg.Environment;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,11 +22,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.TransactionManagementConfigurer;
 
-import java.util.Properties;
-
-import javax.persistence.EntityManager;
-
-import javax.sql.DataSource;
+import com.jolbox.bonecp.BoneCPDataSource;
 
 /**
  * Spring configuration for persistence.
