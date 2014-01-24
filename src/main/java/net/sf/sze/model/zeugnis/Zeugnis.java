@@ -788,7 +788,7 @@ public class Zeugnis extends VersionedModel implements Serializable,
                 schwachausreichendBemerkung);
 
         final StringBuffer allgemeineBemerkungen = new StringBuffer("");
-        for (Bemerkung aBemerkung : bemerkungen) {
+        for (AbstractBemerkung aBemerkung : bemerkungen) {
             allgemeineBemerkungen.append(aBemerkung.createPrintText(schueler,
                     formular.getNachteilsAusgleichsDatum(), (String) printMap
                     .get("shj_jahr")));
