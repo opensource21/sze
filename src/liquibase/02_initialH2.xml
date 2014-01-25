@@ -1,0 +1,590 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+    <changeSet author="niels (generated)" id="1350468362951-1">
+        <createTable tableName="AG_BEWERTUNG">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_AG_BEWERTUNG"/>
+            </column>
+            <column name="VERSION" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ARBEITSGRUPPE_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TEILGENOMMEN" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ZEUGNIS_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-2">
+        <createTable tableName="ARBEITS_UND_SOZIAL_VERHALTEN">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_ARBEITS_UND_SOZIAL_VERHALTEN"/>
+            </column>
+            <column name="VERSION" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="KLASSENSTUFEN" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SORTIERUNG" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TYP" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-3">
+        <createTable tableName="ARBEITSGRUPPE">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_ARBEITSGRUPPE"/>
+            </column>
+            <column name="VERSION" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="KLASSENSTUFEN" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME" type="VARCHAR(70)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SORTIERUNG" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-4">
+        <createTable tableName="AV_SV_BEWERTUNG">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_AV_SV_BEWERTUNG"/>
+            </column>
+            <column name="VERSION" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ARBEITS_UND_SOZIAL_VERHALTEN_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="BEURTEILUNG" type="INT"/>
+            <column name="ZEUGNIS_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-5">
+        <createTable tableName="BEMERKUNG">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_BEMERKUNG"/>
+            </column>
+            <column name="VERSION" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="BAUSTEIN_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ER_SIE_STATT_NAMEN" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FREI_TEXT" type="VARCHAR(500)"/>
+            <column name="SORTIERUNG" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ZEUGNIS_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-6">
+        <createTable tableName="BEMERKUNGS_BAUSTEIN">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_BEMERKUNGS_BAUSTEIN"/>
+            </column>
+            <column name="VERSION" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="AKTIV" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TEXT" type="VARCHAR(500)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-7">
+        <createTable tableName="BEWERTUNG">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_BEWERTUNG"/>
+            </column>
+            <column name="VERSION" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LEISTUNG_NUR_SCHWACH_AUSREICHEND" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LEISTUNGSNIVEAU" type="VARCHAR(255)"/>
+            <column name="NOTE" type="BIGINT"/>
+            <column name="RELEVANT" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SCHULFACH_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SONDER_NOTE" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ZEUGNIS_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CLASS" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-8">
+        <createTable tableName="ENCRYPTED_DATA">
+            <column name="ID" type="VARCHAR(32)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_ENCRYPTED_DATA"/>
+            </column>
+            <column name="VERSION" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DATA_ITEM" type="VARCHAR(512)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-9">
+        <createTable tableName="GSEC_PERMISSION">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_GSEC_PERMISSION"/>
+            </column>
+            <column name="VERSION" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ACTIONS" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TARGET" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TYPE" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-10">
+        <createTable tableName="GSEC_ROLE">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_GSEC_ROLE"/>
+            </column>
+            <column name="VERSION" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-11">
+        <createTable tableName="GSEC_ROLE_PERMISSIONS">
+            <column name="GSEC_ROLE_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="GSEC_PERMISSION_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-12">
+        <createTable tableName="GSEC_USER">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_GSEC_USER"/>
+            </column>
+            <column name="VERSION" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DESCRIPTION" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="EMAIL_ADRESS" type="VARCHAR(255)"/>
+            <column name="ENABLED" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="EXPIRED_DATE" type="TIMESTAMP"/>
+            <column name="FIRSTNAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LOGIN_FAILED_COUNT" type="INT"/>
+            <column name="NAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PASSWORD_HASH" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="USERNAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-13">
+        <createTable tableName="GSEC_USER_PERMISSIONS">
+            <column name="GSEC_PERMISSION_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="GSEC_USER_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-14">
+        <createTable tableName="GSEC_USER_ROLES">
+            <column name="GSEC_ROLE_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="GSEC_USER_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-15">
+        <createTable tableName="KLASSE">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_KLASSE"/>
+            </column>
+            <column name="VERSION" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="GESCHLOSSEN" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="JAHRGANG" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SUFFIX" type="VARCHAR(1)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-16">
+        <createTable tableName="SCHUELER">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_SCHUELER"/>
+            </column>
+            <column name="VERSION" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ABGANGS_DATUM" type="TIMESTAMP"/>
+            <column name="AUFNAHME_DATUM" type="TIMESTAMP"/>
+            <column name="GEBURTSORT" type="VARCHAR(40)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="GEBURTSTAG" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="GESCHLECHT" type="CHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="KLASSE_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME" type="VARCHAR(40)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NUMMER" type="BIGINT"/>
+            <column name="RUFNAME" type="VARCHAR(20)"/>
+            <column name="VORNAME" type="VARCHAR(40)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-17">
+        <createTable tableName="SCHULAMT">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_SCHULAMT"/>
+            </column>
+            <column name="VERSION" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="AKTIV" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="BESCHREIBENDER_SATZ" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-18">
+        <createTable tableName="SCHULAMTS_BEMERKUNG">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_SCHULAMTS_BEMERKUNG"/>
+            </column>
+            <column name="VERSION" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ER_SIE_STATT_NAMEN" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FREI_TEXT" type="VARCHAR(600)"/>
+            <column name="SCHULAMT_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SCHULAMTS_BAUSTEIN_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SORTIERUNG" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ZEUGNIS_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-19">
+        <createTable tableName="SCHULAMTS_BEMERKUNGS_BAUSTEIN">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_SCHULAMTS_BEMERKUNGS_BAUSTEIN"/>
+            </column>
+            <column name="VERSION" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="AKTIV" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="BESCHREIBENDER_SATZ" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SORTIERUNG" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-20">
+        <createTable tableName="SCHULFACH">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_SCHULFACH"/>
+            </column>
+            <column name="VERSION" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME" type="VARCHAR(30)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SORTIERUNG" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="STUFEN_MIT_AUSSEN_DIFFERENZIERUNG" type="VARCHAR(255)"/>
+            <column name="STUFEN_MIT_BINNEN_DIFFERENZIERUNG" type="VARCHAR(255)"/>
+            <column name="STUFEN_MIT_STANDARD_BEWERTUNG" type="VARCHAR(255)"/>
+            <column name="TYP" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-21">
+        <createTable tableName="SCHULFACH_DETAIL_INFO">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_SCHULFACH_DETAIL_INFO"/>
+            </column>
+            <column name="VERSION" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DETAIL_INFO" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FORMULAR_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SCHULFACH_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-22">
+        <createTable tableName="SCHULHALBJAHR">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_SCHULHALBJAHR"/>
+            </column>
+            <column name="VERSION" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="HALBJAHR" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="JAHR" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SELECTABLE" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-23">
+        <createTable tableName="SOLBEWERTUNGS_TEXT">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_SOLBEWERTUNGS_TEXT"/>
+            </column>
+            <column name="VERSION" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TEXT" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-24">
+        <createTable tableName="VERSION_HISTORY">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_VERSION_HISTORY"/>
+            </column>
+            <column name="VERSION" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="APP_VERSION" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="INSTALL_DATE" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-25">
+        <createTable tableName="ZEUGNIS">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_ZEUGNIS"/>
+            </column>
+            <column name="VERSION" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ANZAHL_FEHLTAGE_GESAMT" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ANZAHL_FEHLTAGE_UNENTSCHULDIGT" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ANZAHL_VERSPAETUNGEN" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="BU_BEWERTUNGS_TEXT" type="VARCHAR(1500)"/>
+            <column name="FORMULAR_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="INDIVIDUELLER_LEITSPRUCH" type="VARCHAR(300)"/>
+            <column name="INDIVIDUELLER_LEITSPRUCH2" type="VARCHAR(300)"/>
+            <column name="INDIVIDUELLES_AUSGABE_DATUM" type="TIMESTAMP"/>
+            <column name="KLASSE_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="KLASSEN_ZIEL_AUSGESCHLOSSEN" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="KLASSEN_ZIEL_GEFAEHRDET" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="KLASSEN_ZIEL_WURDE_NICHT_ERREICHT" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="QUELLE_INDIVIDUELLER_LEITSPRUCH" type="VARCHAR(60)"/>
+            <column name="QUELLE_INDIVIDUELLER_LEITSPRUCH2" type="VARCHAR(60)"/>
+            <column name="RUECKT_AUF" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SCHUELER_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SCHULHALBJAHR_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SOLBEWERTUNGS_TEXT_ID" type="BIGINT"/>
+            <column name="ZEUGNIS_ART_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-26">
+        <createTable tableName="ZEUGNIS_ART">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_ZEUGNIS_ART"/>
+            </column>
+            <column name="VERSION" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ABSCHLUSS_GRAD" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="AKTIV" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME" type="VARCHAR(30)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NOTE_ALS_TEXT_DARSTELLEN" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PLATZ_FUER_SIEGEL" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PRINT_VERSETZUNGSBEMERKUNG" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SORTIERUNG" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TITEL" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-27">
+        <createTable tableName="ZEUGNIS_FORMULAR">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_ZEUGNIS_FORMULAR"/>
+            </column>
+            <column name="VERSION" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="AUSGABE_DATUM" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="BESCHREIBUNG" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="KLASSE_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LEITSPRUCH" type="VARCHAR(300)"/>
+            <column name="LEITSPRUCH2" type="VARCHAR(300)"/>
+            <column name="NACHTEILS_AUSGLEICHS_DATUM" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="QUELLE_LEITSPRUCH" type="VARCHAR(60)"/>
+            <column name="QUELLE_LEITSPRUCH2" type="VARCHAR(60)"/>
+            <column name="SCHULHALBJAHR_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TEMPLATE_FILE_NAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

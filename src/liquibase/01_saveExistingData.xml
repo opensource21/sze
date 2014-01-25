@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+    <changeSet id="20140125-1" author="niels">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="AG_BEWERTUNG"/>
+        </preConditions>
+        <comment>The table-exist, so I move all of them to migold</comment>
+        <renameTable oldTableName="AG_BEWERTUNG" newTableName="MIGOLD_AG_BEWERTUNG"/>
+        <renameTable oldTableName="ARBEITSGRUPPE" newTableName="MIGOLD_ARBEITSGRUPPE"/>
+        <renameTable oldTableName="ARBEITS_UND_SOZIAL_VERHALTEN" newTableName="MIGOLD_ARBEITS_UND_SOZIAL_VERHALTEN"/>
+        <renameTable oldTableName="AV_SV_BEWERTUNG" newTableName="MIGOLD_AV_SV_BEWERTUNG"/>
+        <renameTable oldTableName="BEMERKUNG" newTableName="MIGOLD_BEMERKUNG"/>
+        <renameTable oldTableName="BEMERKUNGS_BAUSTEIN" newTableName="MIGOLD_BEMERKUNGS_BAUSTEIN"/>
+        <renameTable oldTableName="BEWERTUNG" newTableName="MIGOLD_BEWERTUNG"/>
+        <renameTable oldTableName="ENCRYPTED_DATA" newTableName="MIGOLD_ENCRYPTED_DATA"/>
+        <renameTable oldTableName="GSEC_PERMISSION" newTableName="MIGOLD_GSEC_PERMISSION"/>
+        <renameTable oldTableName="GSEC_ROLE" newTableName="MIGOLD_GSEC_ROLE"/>
+        <renameTable oldTableName="GSEC_ROLE_PERMISSIONS" newTableName="MIGOLD_GSEC_ROLE_PERMISSIONS"/>
+        <renameTable oldTableName="GSEC_USER" newTableName="MIGOLD_GSEC_USER"/>
+        <renameTable oldTableName="GSEC_USER_PERMISSIONS" newTableName="MIGOLD_GSEC_USER_PERMISSIONS"/>
+        <renameTable oldTableName="GSEC_USER_ROLES" newTableName="MIGOLD_GSEC_USER_ROLES"/>
+        <renameTable oldTableName="KLASSE" newTableName="MIGOLD_KLASSE"/>
+        <renameTable oldTableName="SCHUELER" newTableName="MIGOLD_SCHUELER"/>
+        <renameTable oldTableName="SCHULAMT" newTableName="MIGOLD_SCHULAMT"/>
+        <renameTable oldTableName="SCHULAMTS_BEMERKUNG" newTableName="MIGOLD_SCHULAMTS_BEMERKUNG"/>
+        <renameTable oldTableName="SCHULAMTS_BEMERKUNGS_BAUSTEIN" newTableName="MIGOLD_SCHULAMTS_BEMERKUNGS_BAUSTEIN"/>
+        <renameTable oldTableName="SCHULFACH" newTableName="MIGOLD_SCHULFACH"/>
+        <renameTable oldTableName="SCHULFACH_DETAIL_INFO" newTableName="MIGOLD_SCHULFACH_DETAIL_INFO"/>
+        <renameTable oldTableName="SCHULHALBJAHR" newTableName="MIGOLD_SCHULHALBJAHR"/>
+        <renameTable oldTableName="SOLBEWERTUNGS_TEXT" newTableName="MIGOLD_SOLBEWERTUNGS_TEXT"/>
+        <renameTable oldTableName="VERSION_HISTORY" newTableName="MIGOLD_VERSION_HISTORY"/>
+        <renameTable oldTableName="ZEUGNIS" newTableName="MIGOLD_ZEUGNIS"/>
+        <renameTable oldTableName="ZEUGNIS_ART" newTableName="MIGOLD_ZEUGNIS_ART"/>
+        <renameTable oldTableName="ZEUGNIS_FORMULAR" newTableName="MIGOLD_ZEUGNIS_FORMULAR"/>
+    </changeSet>
+</databaseChangeLog>
