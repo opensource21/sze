@@ -36,7 +36,6 @@ public abstract class AbstractBemerkung extends VersionedModel implements Serial
     private boolean erSieStattNamen = false;
 
     /** The frei text. */
-    //TODO Datenbank anpassen! 500 -> 600
     @Column(name = "frei_text", length = 600)
     @ValidVariableText
     private String freiText;

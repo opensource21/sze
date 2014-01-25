@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+<databaseChangeLog logicalFilePath="/liquibase/3.0/04_initialH2Constraints.xml"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
      <changeSet author="niels (generated)" id="1350468362951-28">
         <addPrimaryKey columnNames="GSEC_ROLE_ID, GSEC_PERMISSION_ID" constraintName="PK_GSEC_ROLE_PERMISSIONS" tableName="GSEC_ROLE_PERMISSIONS"/>
     </changeSet>
@@ -186,10 +189,10 @@
             <column name="SCHULHALBJAHR_ID"/>
             <column name="KLASSE_ID"/>
             <column name="BESCHREIBUNG"/>
-        </createIndex> 
+        </createIndex>
     </changeSet>
     <changeSet author="niels" id="1349769107445-56" dbms="postgresql">
         <createSequence schemaName="public" sequenceName="hibernate_sequence"/>
     </changeSet>
-    
+
 </databaseChangeLog>

@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+<databaseChangeLog logicalFilePath="/liquibase/3.0/05_upgradeH2.xml"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
     <changeSet author="niels" id="1350468477768-1a" >
         <renameColumn tableName="SCHUELER" oldColumnName="GESCHLECHT" newColumnName="GESCHLECHT_CHAR"/>
      </changeSet>
@@ -49,5 +52,9 @@
         <sql>update arbeits_und_sozial_verhalten set typ = typ - 1</sql>
         <sql>update schulhalbjahr set halbjahr = halbjahr - 1</sql>
         <sql>update schulfach set typ = typ - 1</sql>
+    </changeSet>
+    <changeSet id="20140125-4" author="niels">
+        <comment>Vereinheitlichung der Länge vom Freitext bei Bemerkungen</comment>
+        <modifyDataType tableName="BEMERKUNG" columnName="FREI_TEXT" newDataType="VARCHAR(600)"/>
     </changeSet>
 </databaseChangeLog>
