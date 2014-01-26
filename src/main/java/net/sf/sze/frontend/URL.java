@@ -36,11 +36,6 @@ public final class URL {
             new ConcurrentHashMap<String, UriComponents>();
 
     /**
-     * Home-Url.
-     */
-    public static final String HOME = "/home";
-
-    /**
      * Eine Url. für Todos.
      */
     public static final String TODO = "/todo";

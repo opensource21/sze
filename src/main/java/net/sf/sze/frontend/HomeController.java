@@ -32,9 +32,9 @@ public class HomeController {
      *
      * @return the logical view-name.
      */
-    @RequestMapping({"/", URL.HOME})
+    @RequestMapping({"/"})
     public String showHomePage() {
-        return "example/home";
+        return URL.redirect(URL.Zeugnis.START);
     }
 
     /**

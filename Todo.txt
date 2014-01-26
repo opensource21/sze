@@ -1,11 +1,9 @@
 #PRIO 1
 
-- PDF-Erstellung ist noch Fehlerhaft.
-
 - Admin-Bereich (3 PT?), Schüler müssen filterbar sein, nach Abgangsdatum!
   Standardmäßig alle abgegangen Schüler ausblenden. Insbedesondere bei der Klasse.
 
-- Beim Setzen von Freitexten den Namen durch $Name$ ersetzen.
+- Beim Setzen von Freitexten den Namen durch @NAME@ oder @Vorname@  ersetzen.
 
 - Security
 
@@ -20,6 +18,8 @@
 
 - Beim Start von OO sollte man die Parameter mit -- anstatt - übergeben. Ist allerdings nur deprecated.
   Schüler die abgemeldet sind sollten in einer anderen Farbe dargestellt werden.
+
+
 
 #PRIO 3
 - Die Aufteilung auf Services überdenken, Bündelung nach DB nach Controller?
