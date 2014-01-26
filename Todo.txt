@@ -1,35 +1,40 @@
-- Entscheidung ob DBUnit oder checkerberry.
+#PRIO 1
 
-- Die Aufteilung auf Services überdenken, Bündelung nach DB nach Controller?
-- Beschreibung von Session und URL.
-- Umstellung auf neue Thymeleaf-version
 - PDF-Erstellung ist noch Fehlerhaft.
 
-- Umgang mit UniqueKeys diese müssen direkt beim Attribut definiert werden.
-Oder zusätzlich ein @Unique
+- Admin-Bereich (3 PT?), Schüler müssen filterbar sein, nach Abgangsdatum!
+  Standardmäßig alle abgegangen Schüler ausblenden. Insbedesondere bei der Klasse.
+
+- Beim Setzen von Freitexten den Namen durch $Name$ ersetzen.
+
+- Security
+
+#PRIO 2
+- Der Titel wird nicht gesetzt.
+
+- 3Niveau und 2NiveauBewertung
+
+- Bessere Template Unterstützung. Siehe seu/projects/schule/felderUndPlatzhalter.md
+
+- https://github.com/mgonto/jpa-passive-logging-example
+
+- Beim Start von OO sollte man die Parameter mit -- anstatt - übergeben. Ist allerdings nur deprecated.
+  Schüler die abgemeldet sind sollten in einer anderen Farbe dargestellt werden.
+
+#PRIO 3
+- Die Aufteilung auf Services überdenken, Bündelung nach DB nach Controller?
+
+- Beschreibung von Session und URL.
 
 - Es wäre schöner wenn die Help-Messages direkt in der View definiert werden.
 
 - Umstellung auf #{db....}
 
-- Initialisierung (4h)
-- Bearbeiten/Hinzufügen von Bemerkungen (2h)
-- Admin-Bereich (3 PT?)
+- Tests für Controller
 
-- Der Titel wird nicht gesetzt.
+- Test der Initialisierung bzgl Abgangsdatum!
 
-Fachliche Klärung:
-- Sortierung nach Schulfachname
-- Soll die Klasse immer zum aktuellen Datum oder zum Schuljahr umgesetzt werden.
-
-
-Forschung
-- Man muss die aktuelle URL herausbekommen um den aktuellen Menüpunkt zu setzen.
-
-    Thanks for creating that feature request zemi.
-
-    Just to provide some added context:
-
+- Aktives Menü eleganter setzen?
     I'm trying to apply a css class to a menu item based on the current page URL.  So all pages under '/jobs/' should result in my jobs menu item being active.
 
                 <ul class="nav">
@@ -52,23 +57,28 @@ Forschung
                 values.put("class", "active");
             }
 
-    By the way, I'm loving thymeleaf.  It is refreshing to work with HTML files that actually look like HTML files :)
 
-    Cheers,
-    -Daniel
+#Fachliche Klärung:
+- Sortierung nach Schulfachname
+- Soll die Klasse immer zum aktuellen Datum oder zum Schuljahr umgesetzt werden.
 
-    Sind auch vorhanden.
-    #httpServletRequest
-    #httpSession
+
+#Forschung:
 
 - Scaffolding
+
 - Bei den komplexeren Masken fehlt die Anzeige von Validierungsfehlern!
+
 - Wenn man eine Unterlist bearbeitet fehlt auch die Validierung.
 
 
 Bootstrap3 http://code.divshot.com/bootstrap3_upgrader/
 
 Erledigt
++ Umgang mit UniqueKeys diese müssen direkt beim Attribut definiert werden.
+Oder zusätzlich ein @Unique -> Aktuell kein Problem, da nicht durch GUI verletzbar.
+
+
 + Das Encoding stimmt auf den Seiten nicht, insbesonder bei Kommentaren -> Liegt aber auch daran,
     dass das Response-Encoding nicht korrekt gesetzt wird (Gefixt). Bei den Kommentaren ist es sehr merkwürdig,
     muss man mal im Original analysieren bzw in der Datenbank,
