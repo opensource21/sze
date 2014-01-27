@@ -116,6 +116,21 @@ public class PdfConverterImpl implements PdfConverter {
     private static final int PAGE_NR_10 = 10;
 
     /**
+     * 1 Seiten.
+     */
+    private static final int NR_OF_PAGES_1 = 1;
+
+    /**
+     * 2 Seiten.
+     */
+    private static final int NR_OF_PAGES_2 = 2;
+
+    /**
+     * 2 Seiten.
+     */
+    private static final int NR_OF_PAGES_3 = 3;
+
+    /**
      * 4 Seiten.
      */
     private static final int NR_OF_PAGES_4 = 4;
@@ -270,6 +285,18 @@ public class PdfConverterImpl implements PdfConverter {
             // we retrieve the total number of pages
             final int pageNrs = reader.getNumberOfPages();
             switch (pageNrs) {
+            case NR_OF_PAGES_1:
+                createA4Subdocument(reader, targetPdfFileA4,
+                        PAGE_NR_1, EMPTY_PAGE);
+                break;
+            case NR_OF_PAGES_2:
+                createA4Subdocument(reader, targetPdfFileA4,
+                        PAGE_NR_1, PAGE_NR_2);
+                break;
+            case NR_OF_PAGES_3:
+                createA3Subdocument(reader, targetPdfFileA3,
+                        EMPTY_PAGE, PAGE_NR_1, PAGE_NR_2, PAGE_NR_3);
+                break;
             case NR_OF_PAGES_4:
                 createA3Subdocument(reader, targetPdfFileA3,
                         PAGE_NR_4, PAGE_NR_1, PAGE_NR_2, PAGE_NR_3);
@@ -354,7 +381,7 @@ public class PdfConverterImpl implements PdfConverter {
         for (int i = 0; i < pdfPages.length; i++) {
             final int pageNr = pages[i];
             final PdfTemplate page;
-            if (pageNr == 0) {
+            if (pageNr == EMPTY_PAGE) {
                 page = writer.getImportedPage(getEmptyPDFPage(psize), 1);
             } else {
                 page = writer.getImportedPage(reader, pageNr);
@@ -376,7 +403,7 @@ public class PdfConverterImpl implements PdfConverter {
     }
 
     /**
-     * Create from a DIN-A4-dcoument a DIN-A4 subdocument.
+     * Create from a DIN-A4-document a DIN-A4 subdocument.
      * @param reader reader for DIN-A4-document
      * @param pdfFileA4 file in which the new A4-document will be saved.
      * @param pages page-numbers in the order they will placed the paper.
@@ -393,9 +420,13 @@ public class PdfConverterImpl implements PdfConverter {
         // step 3: we open the document
         document.open();
         addPdfAInfosToDictonary(copy);
-
+        final Rectangle psize = reader.getPageSize(1);
         for (int pageNr : pages) {
-            copy.addPage(copy.getImportedPage(reader, pageNr));
+            if (pageNr == EMPTY_PAGE) {
+                copy.addPage(copy.getImportedPage(getEmptyPDFPage(psize), 1));
+            } else {
+                copy.addPage(copy.getImportedPage(reader, pageNr));
+            }
         }
 
         copy.createXmpMetadata();

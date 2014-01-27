@@ -41,7 +41,11 @@ public interface PdfConverter {
      * Converts the given A4 file into a A3 file,
      * with following rules:
      * <ul>
-     *  <li>number of pages < 4 nothing</li>
+     *  <li>number of pages 1 create one din-a2-document,
+     *  with an empty page as the end.</li>
+     *  <li>number of pages 2 create one din-a2-document.</li>     *
+     *  <li>number of pages = 3 create one din-a3-document,
+     *  with an empty page as the end.</li>
      *  <li>number of pages 4 create one din-a3-document.</li>
      *  <li>number of pages = 5 creates a din a3-document an one a4-pdf.
      *      Page 3 and 4 to Din-A4</li>
