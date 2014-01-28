@@ -39,7 +39,7 @@ public class PDFCreationJobs {
      * Erzeugt alle PDFs.
      */
     //Seconds, Minutes, Hours, Day-of-Month, Month,Day-of-Week
-    @Scheduled(cron = "0 0 23 * * *")
+    @Scheduled(cron = "${cron.pdfCreation}")
     public void createAllPDFs() {
         LOG.info("Starte pdfCreation Job");
         zeugnisCreatorService.createAllZeugnisse();

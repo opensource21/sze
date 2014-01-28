@@ -45,7 +45,7 @@ public class DatabaseBackup {
     /**
      * Sicherung einer H2-Datenbank.
      */
-    @Scheduled(cron = "0 0 1 * * *")
+    @Scheduled(cron = "${cron.dbBackup}")//
     public void backupH2Database() {
         if (env.getProperty("db.driver").equals("org.h2.Driver")) {
             final String backupDir = env.getProperty("backupDir", "databases/backup");
