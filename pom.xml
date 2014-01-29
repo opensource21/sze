@@ -27,7 +27,7 @@
         <dependency>
             <groupId>de.ppi.oss</groupId>
             <artifactId>fuwesta-core</artifactId>
-            <version>0.8</version>
+            <version>0.9</version>
         </dependency>
         <!-- logging -->
         <dependency>
@@ -56,6 +56,24 @@
             <artifactId>servlet-api</artifactId>
             <version>2.5</version>
             <scope>provided</scope>
+        </dependency>
+        <!-- DBDependencies -->
+        <dependency>
+            <groupId>com.jolbox</groupId>
+            <artifactId>bonecp</artifactId>
+            <version>0.7.1.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>4.2.5.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.3.168</version>
         </dependency>
 
         <!-- Thymeleaf -->
