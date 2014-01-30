@@ -187,7 +187,7 @@ public class PdfConverterImpl implements PdfConverter {
                 Arrays.sort(pdfs);
 
                 for (String pdfName : pdfs) {
-                    if (completePdfName.equals(pdfName)) {
+                    if (completePdfName.equals(pdfName) || pdfName.startsWith(".")) {
                         continue;
                     }
 
