@@ -43,7 +43,7 @@ public class AnonymisierungsServiceImpl implements AnonymisierungsService {
     @Resource
     private SchuelerDao schuelerDao;
 
-    private static final String[] maedchenNamen = { "Mia", "Emma", "Hannah ",
+    private static final String[] MAEDCHEN_NAMEN = { "Mia", "Emma", "Hannah ",
             "Sofia ", "Anna", "Lea ", "Emilia", "Marie", "Lena", "Leonie",
             "Emily ", "Lina", "Amelie", "Sophie ", "Lilly ", "Luisa ",
             "Johanna", "Laura", "Nele ", "Lara", "Maja ", "Charlotte",
@@ -53,7 +53,7 @@ public class AnonymisierungsServiceImpl implements AnonymisierungsService {
             "Victoria ", "Josephine", "Finja ", "Isabell ", "Helena",
             "Isabella", "Elisa" };
 
-    private static final String[] jungsNamen = { "Ben", "Luca ", "Paul",
+    private static final String[] JUNGS_NAMEN = { "Ben", "Luca ", "Paul",
             "Jonas", "Finn ", "Leon", "Luis ", "Lukas ", "Maximilian", "Felix",
             "Noah", "Elias", "Julian", "Max", "Tim", "Moritz", "Henry ",
             "Niklas ", "Philipp", "Jakob ", "Tom", "Jan", "Emil", "Alexander",
@@ -62,7 +62,7 @@ public class AnonymisierungsServiceImpl implements AnonymisierungsService {
             "Hannes", "Mika", "Vincent", "Adrian", "Jonathan", "Theo", "Nico ",
             "Till", "Benjamin", "Florian", "Marlon", "Julius" };
 
-    private static final String[] nachnamen = { "Müller", "Schmidt",
+    private static final String[] NACHNAMEN = { "Müller", "Schmidt",
             "Schneider", "Fischer", "Weber", "Meyer", "Wagner", "Becker",
             "Schulz", "Hoffmann", "Schäfer", "Koch", "Bauer", "Richter",
             "Klein", "Wolf", "Schröder", "Neumann", "Schwarz", "Zimmermann",
@@ -107,18 +107,22 @@ public class AnonymisierungsServiceImpl implements AnonymisierungsService {
         int i = 0;
         for (Schueler schueler : allSchueler) {
             if (Geschlecht.WEIBLICH.equals(schueler.getGeschlecht())) {
-                schueler.setVorname(maedchenNamen[i % maedchenNamen.length]);
+                schueler.setVorname(MAEDCHEN_NAMEN[i % MAEDCHEN_NAMEN.length]);
             } else {
-                schueler.setVorname(jungsNamen[i % jungsNamen.length]);
+                schueler.setVorname(JUNGS_NAMEN[i % JUNGS_NAMEN.length]);
             }
-            schueler.setName(nachnamen[i % nachnamen.length]);
+            schueler.setName(NACHNAMEN[i % NACHNAMEN.length]);
             schueler.setRufname(null);
+            int dayDiff = RandomUtils.nextInt(360) - 180;
+            if (dayDiff == 0) {
+                dayDiff = 1;
+            }
             if (schueler.getAufnahmeDatum() != null) {
                 schueler.setAufnahmeDatum(DateUtils.addDays(
-                        schueler.getAufnahmeDatum(), RandomUtils.nextInt(360) - 180));
+                        schueler.getAufnahmeDatum(), dayDiff));
             }
             schueler.setGeburtstag(DateUtils.addDays(schueler.getGeburtstag(),
-                    RandomUtils.nextInt(360) - 180));
+                    dayDiff));
             schueler.setGeburtsort("Erde " + schueler.getId());
             schuelerDao.save(schueler);
             i++;

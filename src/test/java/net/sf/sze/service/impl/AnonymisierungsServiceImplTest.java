@@ -4,7 +4,6 @@
 // (c) SZE-Development Team
 package net.sf.sze.service.impl;
 
-import static org.junit.Assert.fail;
 import static org.mockito.Matchers.argThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -18,13 +17,10 @@ import net.sf.sze.model.stammdaten.Geschlecht;
 import net.sf.sze.model.stammdaten.Schueler;
 import net.sf.sze.service.api.AnonymisierungsService;
 
-import org.codehaus.plexus.util.cli.Commandline.Argument;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentMatcher;
 import org.mockito.InjectMocks;
-import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.slf4j.Logger;
@@ -117,6 +113,11 @@ public class AnonymisierungsServiceImplTest {
         return schueler;
     }
 
+    /**
+     * Matcher der nur dann zuschlägt, wenn sich alle personen relevanten
+     * geändert haben.
+     *
+     */
     private static final class SchuelerMatcher extends ArgumentMatcher<Schueler> {
 
         private final Schueler schueler;
