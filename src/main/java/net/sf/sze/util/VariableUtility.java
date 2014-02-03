@@ -9,11 +9,12 @@ import net.sf.sze.model.stammdaten.Geschlecht;
 import net.sf.sze.model.stammdaten.Schueler;
 
 import java.text.SimpleDateFormat;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+
+import org.springframework.util.StringUtils;
 
 /**
  * An verschiedenen Stellen werden Textbausteine mit Variablen benötigt. Hier
@@ -26,15 +27,27 @@ public final class VariableUtility {
     // NICE Test schreiben.
     // Führendes Leerzeichen wird von OO geschluckt, daher 00A0 was auch nix anzeigt.
 
-    /** The Constant PLATZHALTER_LEER. */
-    public static final String PLATZHALTER_LEER = "\u00A0/ ";
+    /** Die Konstanten für > / <. */
+    public static final String PLATZHALTER_LEER = "\u00a0/ ";
 
-    /** The Constant PLATZHALTER_AUSGEWAEHLT. */
+    /** Die Konstante für > X <. */
     public static final String PLATZHALTER_AUSGEWAEHLT = "\u00A0X ";
 
-    /** The Constant VARIABLE_NAMES. */
+    /** Die Konstanten mit den Variablen:
+     * <ul>
+     * <li> datum - setzt das Datum, welches beim Schulformular definiert ist.</li>
+     * <li> name - ersetzt den Rufnamen oder er/sie, </li>
+     * <li> Name - ersetzt den Rufnamen oder Er/Sie, </li>
+     * <li> NAME - ersetzt den Rufamen, </li>
+     * <li> Vorname - setzt den Vornamen, </li>
+     * <li> Nachname -  den Nachnamen. </li>
+     * <li> schuljahr f\u00fcgt das entsprechende Schuljahr ein. </li>
+     * <li> AT - @
+     * <li> &lt;M\u00e4nnlicher Text&gt;|&lt;Weiblicher Text&gt; setzt in
+     *    Abh\u00e4ngigkeit des Geschlechts den einen oder anderen Text.</li>
+     * </ul>. */
     public static final String[] VARIABLE_NAMES = {
-        "name", "Name", "NAME", "datum", "schuljahr", "Vorname", "Nachname"
+        "name", "Name", "NAME", "datum", "schuljahr", "Vorname", "Nachname", "AT"
     };
 
     /** The Constant VARIABLE_NAMES_LIST. */
@@ -85,8 +98,7 @@ public final class VariableUtility {
             return text;
         }
 
-        final String rufnameNotNull = (schueler.getRufname() != null) ? schueler
-                .getRufname() : schueler.getVorname();
+        final String rufnameNotNull = schueler.getRufnameOrVorname();
         final StringBuffer printText = new StringBuffer();
         boolean erSieStattNamen = erSieStattNamenRule;
         // Der Präfix muss davor, damit der erste Token nie eine Variable ist.
@@ -122,6 +134,8 @@ public final class VariableUtility {
                 } else if (token.contains("|")) {
                     replacement = getGenderSpecificText(token, schueler
                             .getGeschlecht());
+                } else if ("AT".equals(token)) {
+                    replacement = "@";
                 } else {
                     throw new IllegalStateException(token + " is not allowed");
                 }
@@ -173,5 +187,26 @@ public final class VariableUtility {
         } else {
             return rufname;
         }
+    }
+
+    /**
+     * Ersetzt in dem Text vorkommene Variablen:
+     * <ul>
+     * <li> NAME - ersetzt den Rufamen, </li>
+     * <li> Vorname - setzt den Vornamen, </li>
+     * <li> Nachname -  den Nachnamen. </li>
+     * </ul>
+     * @param text der urspüngliche Text
+     * @param schueler das Schüler-Objekt
+     * @return den Text mit den Variablen.
+     */
+    public static String insertVariables(String text, Schueler schueler) {
+        String result = text;
+        if (!schueler.getRufnameOrVorname().equals(schueler.getVorname())) {
+            result = StringUtils.replace(result, schueler.getVorname(), "@Vorname@");
+        }
+        result = StringUtils.replace(result, schueler.getName(), "@Nachname@");
+        result = StringUtils.replace(result, schueler.getRufnameOrVorname(), "@NAME@");
+        return result;
     }
 }

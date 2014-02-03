@@ -93,4 +93,10 @@ public interface ZeugnisErfassungsService {
      * @return alle SoL-Bewertungstexte, sortiert und passend zum Zeugnis.
      */
     List<SoLBewertungsText> getSoLTexte(Zeugnis zeugnis);
+
+    /**
+     * Liefert alle Zeugnisse.
+     * @return alle Zeugnisse.
+     */
+    List<Zeugnis> getAllZeugnisse();
 }

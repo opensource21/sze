@@ -14,6 +14,7 @@ import net.sf.sze.dao.api.zeugnis.BemerkungsBausteinDao;
 import net.sf.sze.model.zeugnis.Bemerkung;
 import net.sf.sze.model.zeugnis.BemerkungsBaustein;
 import net.sf.sze.service.api.BemerkungService;
+import net.sf.sze.util.VariableUtility;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -73,6 +74,9 @@ public class BemerkungServiceImpl implements BemerkungService {
     @Override
     @Transactional(readOnly = false)
     public Bemerkung save(Bemerkung bemerkung) {
+        bemerkung.setFreiText(VariableUtility.insertVariables(
+                bemerkung.getFreiText(), bemerkung.getZeugnis().getSchueler()));
+
         return bemerkungDao.save(bemerkung);
 
     }

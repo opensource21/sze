@@ -16,6 +16,7 @@ import net.sf.sze.model.zeugnis.Schulamt;
 import net.sf.sze.model.zeugnis.SchulamtsBemerkung;
 import net.sf.sze.model.zeugnis.SchulamtsBemerkungsBaustein;
 import net.sf.sze.service.api.SchulamtsBemerkungService;
+import net.sf.sze.util.VariableUtility;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -79,6 +80,10 @@ public class SchulamtsBemerkungsServiceImpl implements SchulamtsBemerkungService
     @Override
     @Transactional(readOnly = false)
     public SchulamtsBemerkung save(SchulamtsBemerkung schulamtsBemerkung) {
+        schulamtsBemerkung.setFreiText(VariableUtility.insertVariables(
+                schulamtsBemerkung.getFreiText(),
+                schulamtsBemerkung.getZeugnis().getSchueler()));
+
         return schulamtsBemerkungDao.save(schulamtsBemerkung);
 
     }
