@@ -26,6 +26,7 @@ import net.sf.sze.model.zeugnis.Zeugnis;
 import net.sf.sze.model.zeugnis.ZeugnisArt;
 import net.sf.sze.service.api.BewertungWithNeigbors;
 import net.sf.sze.service.api.ZeugnisErfassungsService;
+import net.sf.sze.util.VariableUtility;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -195,6 +196,8 @@ public class ZeugnisErfassungsServiceImpl implements ZeugnisErfassungsService {
     @Override
     @Transactional(readOnly = false)
     public Zeugnis save(Zeugnis zeugnis) {
+        zeugnis.setBuBewertungsText(VariableUtility.insertVariables(
+                zeugnis.getBuBewertungsText(), zeugnis.getSchueler()));
         return zeugnisDao.save(zeugnis);
     }
 
