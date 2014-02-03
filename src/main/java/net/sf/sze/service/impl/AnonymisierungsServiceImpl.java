@@ -43,6 +43,42 @@ public class AnonymisierungsServiceImpl implements AnonymisierungsService {
     @Resource
     private SchuelerDao schuelerDao;
 
+    private static final String[] maedchenNamen = { "Mia", "Emma", "Hannah ",
+            "Sofia ", "Anna", "Lea ", "Emilia", "Marie", "Lena", "Leonie",
+            "Emily ", "Lina", "Amelie", "Sophie ", "Lilly ", "Luisa ",
+            "Johanna", "Laura", "Nele ", "Lara", "Maja ", "Charlotte",
+            "Clara ", "Leni", "Sarah ", "Pia", "Mila", "Alina", "Lisa",
+            "Lotta", "Ida", "Julia", "Greta", "Mathilda ", "Melina", "Zoe ",
+            "Frieda ", "Lia ", "Paula", "Marlene", "Ella", "Emely ", "Jana",
+            "Victoria ", "Josephine", "Finja ", "Isabell ", "Helena",
+            "Isabella", "Elisa" };
+
+    private static final String[] jungsNamen = { "Ben", "Luca ", "Paul",
+            "Jonas", "Finn ", "Leon", "Luis ", "Lukas ", "Maximilian", "Felix",
+            "Noah", "Elias", "Julian", "Max", "Tim", "Moritz", "Henry ",
+            "Niklas ", "Philipp", "Jakob ", "Tom", "Jan", "Emil", "Alexander",
+            "David", "Oskar ", "Fabian", "Anton", "Erik ", "Rafael ", "Matteo",
+            "Leo", "Mats ", "Simon", "Jannik ", "Lennard ", "Liam", "Linus",
+            "Hannes", "Mika", "Vincent", "Adrian", "Jonathan", "Theo", "Nico ",
+            "Till", "Benjamin", "Florian", "Marlon", "Julius" };
+
+    private static final String[] nachnamen = { "Müller", "Schmidt",
+            "Schneider", "Fischer", "Weber", "Meyer", "Wagner", "Becker",
+            "Schulz", "Hoffmann", "Schäfer", "Koch", "Bauer", "Richter",
+            "Klein", "Wolf", "Schröder", "Neumann", "Schwarz", "Zimmermann",
+            "Braun", "Krüger", "Hofmann", "Hartmann", "Lange", "Schmitt",
+            "Werner", "Schmitz", "Krause", "Meier", "Lehmann", "Schmid",
+            "Schulze", "Maier", "Köhler", "Herrmann", "König", "Walter",
+            "Mayer", "Huber", "Kaiser", "Fuchs", "Peters", "Lang", "Scholz",
+            "Möller", "Weiß", "Jung", "Hahn", "Schubert", "Vogel", "Friedrich",
+            "Keller", "Günther", "Frank", "Berger", "Winkler", "Roth", "Beck",
+            "Lorenz", "Baumann", "Franke", "Albrecht", "Schuster", "Simon",
+            "Ludwig", "Böhm", "Winter", "Kraus", "Martin", "Schumacher",
+            "Krämer", "Vogt", "Stein", "Jäger", "Otto", "Sommer", "Groß",
+            "Seidel", "Heinrich", "Brandt", "Haas", "Schreiber", "Graf",
+            "Schulte", "Dietrich", "Ziegler", "Kuhn", "Kühn", "Pohl", "Engel",
+            "Horn", "Busch", "Bergmann", "Thomas", "Voigt", "Sauer", "Arnold",
+            "Wolff", "Pfeiffer" };
 
     /**
      * {@inheritDoc}
@@ -68,14 +104,14 @@ public class AnonymisierungsServiceImpl implements AnonymisierungsService {
     @Override
     public void anonymisierSchueler() {
         final Iterable<Schueler> allSchueler = schuelerDao.findAll();
-        //TODO 30 Jungs und Mädchennamen besorgen und Nachnamen.
+        int i = 0;
         for (Schueler schueler : allSchueler) {
             if (Geschlecht.WEIBLICH.equals(schueler.getGeschlecht())) {
-                schueler.setVorname("Maria" + schueler.getId());
+                schueler.setVorname(maedchenNamen[i % maedchenNamen.length]);
             } else {
-                schueler.setVorname("Peter" + schueler.getId());
+                schueler.setVorname(jungsNamen[i % jungsNamen.length]);
             }
-            schueler.setName("Mueller " + schueler.getId());
+            schueler.setName(nachnamen[i % nachnamen.length]);
             schueler.setRufname(null);
             if (schueler.getAufnahmeDatum() != null) {
                 schueler.setAufnahmeDatum(DateUtils.addDays(
@@ -85,6 +121,7 @@ public class AnonymisierungsServiceImpl implements AnonymisierungsService {
                     RandomUtils.nextInt(360) - 180));
             schueler.setGeburtsort("Erde " + schueler.getId());
             schuelerDao.save(schueler);
+            i++;
         }
 
     }
