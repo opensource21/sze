@@ -4,12 +4,6 @@
 // (c) SZE-Development Team
 package net.sf.sze.service.impl;
 
-import static net.sf.sze.dbunit.rowbuilder.BEMERKUNGRowBuilder.newBEMERKUNG;
-import static net.sf.sze.dbunit.rowbuilder.SCHULAMTS_BEMERKUNGRowBuilder.newSCHULAMTS_BEMERKUNG;
-import static net.sf.sze.dbunit.rowbuilder.ZEUGNISRowBuilder.newZEUGNIS;
-import static org.junit.Assert.*;
-import static org.dbunit.validator.Validators.*;
-
 import javax.annotation.Resource;
 
 import net.sf.sze.dbunit.AbstractSzeDbUnitTest;
@@ -17,12 +11,7 @@ import net.sf.sze.dbunit.dataset.Anonymisierung;
 import net.sf.sze.service.api.AnonymisierungsService;
 
 import org.dbunit.dataset.IDataSet;
-import org.dbunit.dataset.builder.DataSetRowChanger;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 
 /**
@@ -48,7 +37,7 @@ public class AnonymisierungsServiceImplIntegrationTest extends AbstractSzeDbUnit
 
         anonymisierungsService.replaceAllNamesWithVariables();
 
-        checkResult(Anonymisierung.buildVariableresult(startDataSet));
+        checkResult(Anonymisierung.buildVariableResult(startDataSet));
 
     }
 
@@ -59,7 +48,11 @@ public class AnonymisierungsServiceImplIntegrationTest extends AbstractSzeDbUnit
      */
     @Test
     public void testAnonymisierSchueler() throws Exception {
-        fail();
+        cleanlyInsert(Anonymisierung.buildSchuelerInit());
+
+        anonymisierungsService.anonymisierSchueler();
+
+        checkResult(Anonymisierung.buildSchuelerResult());
     }
 
 }

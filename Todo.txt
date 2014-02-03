@@ -3,8 +3,6 @@
 - Admin-Bereich (3 PT?), Schüler müssen filterbar sein, nach Abgangsdatum!
   Standardmäßig alle abgegangen Schüler ausblenden. Insbedesondere bei der Klasse.
 
-- Beim Setzen von Freitexten den Namen durch @NAME@ oder @Vorname@  ersetzen.
-
 - Security
 
 #PRIO 2

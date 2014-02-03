@@ -52,7 +52,7 @@ public class Anonymisierung {
     }
 
     @SuppressWarnings("boxing")
-    public static IDataSet buildVariableresult(IDataSet startDataSet) throws DataSetException  {
+    public static IDataSet buildVariableResult(IDataSet startDataSet) throws DataSetException  {
         final DataSetRowChanger b = new DataSetRowChanger(startDataSet);
         newZEUGNIS("ID").ID(3L).BU_BEWERTUNGS_TEXT("@NAME@ @Nachname@ IST fleissigA").VERSION(gt(0)).addTo(b);
         newZEUGNIS("ID").ID(4L).BU_BEWERTUNGS_TEXT("@NAME@ @Nachname@ ist fleissigB").VERSION(gt(0)).addTo(b);
@@ -62,5 +62,32 @@ public class Anonymisierung {
         newSCHULAMTS_BEMERKUNG("ID").ID(2L).FREI_TEXT("@NAME@ @Nachname@ ist fleissig4").VERSION(gt(0)).addTo(b);
         return b.build();
     }
+
+
+    @SuppressWarnings("boxing")
+    public static IDataSet buildSchuelerInit() throws DataSetException {
+
+        final DataSetBuilder b = new DataSetBuilder();
+
+        newKLASSE().ID(1L).GESCHLOSSEN(Boolean.FALSE).JAHRGANG(2006).SUFFIX("").addTo(b);
+        newSCHUELER().ID(1L).GEBURTSORT("Hamburg").GEBURTSTAG(Timestamp.valueOf("2000-06-15 00:00:00.0")).GESCHLECHT(0).NAME("MUSTERMANN").VORNAME("ERWIN").KLASSE_ID(1L).addTo(b);
+        newSCHUELER().ID(2L).GEBURTSORT("Kiel").GEBURTSTAG(Timestamp.valueOf("2000-03-15 00:00:00.0")).GESCHLECHT(1).NAME("MUSTERFRAU").VORNAME("ERNA").KLASSE_ID(1L).addTo(b);
+
+        return b.build();
+    }
+
+    @SuppressWarnings("boxing")
+    //TODO um das sauber zu testen bräuchte man sehr viele Validatoren.
+    public static IDataSet buildSchuelerResult() throws DataSetException {
+
+        final DataSetBuilder b = new DataSetBuilder();
+
+        newKLASSE().ID(1L).GESCHLOSSEN(Boolean.FALSE).JAHRGANG(2006).SUFFIX("").addTo(b);
+//        newSCHUELER().ID(1L).GEBURTSORT("Hamburg").GEBURTSTAG(Timestamp.valueOf("2000-06-15 00:00:00.0")).GESCHLECHT(0).NAME("MUSTERMANN").VORNAME("ERWIN").KLASSE_ID(1L).addTo(b);
+//        newSCHUELER().ID(2L).GEBURTSORT("Kiel").GEBURTSTAG(Timestamp.valueOf("2000-03-15 00:00:00.0")).GESCHLECHT(1).NAME("MUSTERFRAU").VORNAME("ERNA").KLASSE_ID(1L).addTo(b);
+
+        return b.build();
+    }
+
 }
 

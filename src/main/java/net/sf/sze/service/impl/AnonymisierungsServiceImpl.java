@@ -77,8 +77,12 @@ public class AnonymisierungsServiceImpl implements AnonymisierungsService {
             }
             schueler.setName("Mueller " + schueler.getId());
             schueler.setRufname(null);
-            DateUtils.addDays(schueler.getAufnahmeDatum(), RandomUtils.nextInt(360) - 180);
-            DateUtils.addDays(schueler.getGeburtstag(), RandomUtils.nextInt(360) - 180);
+            if (schueler.getAufnahmeDatum() != null) {
+                schueler.setAufnahmeDatum(DateUtils.addDays(
+                        schueler.getAufnahmeDatum(), RandomUtils.nextInt(360) - 180));
+            }
+            schueler.setGeburtstag(DateUtils.addDays(schueler.getGeburtstag(),
+                    RandomUtils.nextInt(360) - 180));
             schueler.setGeburtsort("Erde " + schueler.getId());
         }
 
