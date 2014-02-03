@@ -210,4 +210,13 @@ public class ZeugnisErfassungsServiceImpl implements ZeugnisErfassungsService {
         return result;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<Zeugnis> getAllZeugnisse() {
+
+        return zeugnisDao.findAll();
+    }
+
 }

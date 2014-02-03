@@ -73,4 +73,7 @@ public interface ZeugnisDao extends PagingAndSortingRepository<Zeugnis, Long> {
      */
     Zeugnis findBySchulhalbjahrIdAndKlasseIdAndSchuelerId(Long halbjahrId,
             Long klassenId, Long schuelerId);
+
+    @Override
+    List<Zeugnis> findAll();
 }
