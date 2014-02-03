@@ -84,6 +84,7 @@ public class AnonymisierungsServiceImpl implements AnonymisierungsService {
             schueler.setGeburtstag(DateUtils.addDays(schueler.getGeburtstag(),
                     RandomUtils.nextInt(360) - 180));
             schueler.setGeburtsort("Erde " + schueler.getId());
+            schuelerDao.save(schueler);
         }
 
     }
