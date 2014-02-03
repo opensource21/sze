@@ -275,6 +275,15 @@ public class Schueler extends VersionedModel implements Serializable,
                 .currentTimeMillis());
     }
 
+
+    /**
+     * Liefert falls vorhanden den Rufnamen, sonst den Vornamen.
+     * @return falls vorhanden den Rufnamen, sonst den Vornamen.
+     */
+    public String getRufnameOrVorname() {
+        return (rufname != null) ? rufname : vorname;
+    }
+
     @Override
     public String toString() {
         return name + ", " + vorname;

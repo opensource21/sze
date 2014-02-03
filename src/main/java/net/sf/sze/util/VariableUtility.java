@@ -9,11 +9,12 @@ import net.sf.sze.model.stammdaten.Geschlecht;
 import net.sf.sze.model.stammdaten.Schueler;
 
 import java.text.SimpleDateFormat;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+
+import org.springframework.util.StringUtils;
 
 /**
  * An verschiedenen Stellen werden Textbausteine mit Variablen benötigt. Hier
@@ -97,8 +98,7 @@ public final class VariableUtility {
             return text;
         }
 
-        final String rufnameNotNull = (schueler.getRufname() != null) ? schueler
-                .getRufname() : schueler.getVorname();
+        final String rufnameNotNull = schueler.getRufnameOrVorname();
         final StringBuffer printText = new StringBuffer();
         boolean erSieStattNamen = erSieStattNamenRule;
         // Der Präfix muss davor, damit der erste Token nie eine Variable ist.
@@ -196,11 +196,17 @@ public final class VariableUtility {
      * <li> Vorname - setzt den Vornamen, </li>
      * <li> Nachname -  den Nachnamen. </li>
      * </ul>
-     * @param message der urspüngliche Text
+     * @param text der urspüngliche Text
      * @param schueler das Schüler-Objekt
      * @return den Text mit den Variablen.
      */
-    public static String insertVariables(String message, Schueler schueler) {
-        return "";
+    public static String insertVariables(String text, Schueler schueler) {
+        String result = text;
+        if (!schueler.getRufnameOrVorname().equals(schueler.getVorname())) {
+            result = StringUtils.replace(result, schueler.getVorname(), "@Vorname@");
+        }
+        result = StringUtils.replace(result, schueler.getName(), "@Nachname@");
+        result = StringUtils.replace(result, schueler.getRufnameOrVorname(), "@NAME@");
+        return result;
     }
 }

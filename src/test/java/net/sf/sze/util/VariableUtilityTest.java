@@ -178,11 +178,59 @@ public class VariableUtilityTest {
     }
 
     /**
-     * Test method for {@link net.sf.sze.util.VariableUtility#insertVariables(java.lang.String, net.sf.sze.model.stammdaten.Schueler)}.
+     * Test method for
+     * {@link net.sf.sze.util.VariableUtility#insertVariables(java.lang.String, net.sf.sze.model.stammdaten.Schueler)}.
      */
     @Test
-    public void testInsertVariables() {
-        fail("Not yet implemented");
+    public void testInsertVariablesVornameUnequalsRufname() {
+        //Arrange
+        final String text = "Willfried Siegbert Mustermann hat den Rufnamen Willi.";
+        final Schueler schueler = new Schueler();
+        schueler.setVorname("Willfried Siegbert");
+        schueler.setName("Mustermann");
+        schueler.setRufname("Willi");
+        schueler.setGeschlecht(Geschlecht.MAENNLICH);
+        //Act
+        String result = VariableUtility.insertVariables(text, schueler);
+        //Assert
+        assertThat(result).isEqualTo("@Vorname@ @Nachname@ hat den Rufnamen @NAME@.");
+    }
+
+    /**
+     * Test method for
+     * {@link net.sf.sze.util.VariableUtility#insertVariables(java.lang.String, net.sf.sze.model.stammdaten.Schueler)}.
+     */
+    @Test
+    public void testInsertVariablesVornameEqualsRufame() {
+        //Arrange
+        final String text = "Willi Mustermann hat den Rufnamen Willi.";
+        final Schueler schueler = new Schueler();
+        schueler.setVorname("Willi");
+        schueler.setName("Mustermann");
+        schueler.setRufname("Willi");
+        schueler.setGeschlecht(Geschlecht.MAENNLICH);
+        //Act
+        String result = VariableUtility.insertVariables(text, schueler);
+        //Assert
+        assertThat(result).isEqualTo("@NAME@ @Nachname@ hat den Rufnamen @NAME@.");
+    }
+
+    /**
+     * Test method for
+     * {@link net.sf.sze.util.VariableUtility#insertVariables(java.lang.String, net.sf.sze.model.stammdaten.Schueler)}.
+     */
+    @Test
+    public void testInsertVariablesRufnameNull() {
+        //Arrange
+        final String text = "Willi Mustermann hat den Rufnamen Willi.";
+        final Schueler schueler = new Schueler();
+        schueler.setVorname("Willi");
+        schueler.setName("Mustermann");
+        schueler.setGeschlecht(Geschlecht.MAENNLICH);
+        //Act
+        String result = VariableUtility.insertVariables(text, schueler);
+        //Assert
+        assertThat(result).isEqualTo("@NAME@ @Nachname@ hat den Rufnamen @NAME@.");
     }
 
 }
