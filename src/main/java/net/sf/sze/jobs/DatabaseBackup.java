@@ -5,6 +5,7 @@
 package net.sf.sze.jobs;
 
 import java.io.File;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -49,17 +50,16 @@ public class DatabaseBackup {
     public void backupH2Database() {
         if (env.getProperty("db.driver").equals("org.h2.Driver")) {
             final String backupDir = env.getProperty("backupDir", "databases/backup");
-            try {
-                 final DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss");
-                 final File backupFile = new File(backupDir, "sze_"
-                         + dateFormat.format(new Date()) + ".zip");
-                 LOG.info("Backup to {}", backupFile.getAbsolutePath());
-                 dataSource.getConnection().createStatement().execute(
-                         "BACKUP TO '" + backupFile.getAbsolutePath() + "'");
-            } catch (SQLException sqlE) {
-                LOG.error("Couldn't create Database-Backup!", sqlE);
-
-            }
+             final DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss");
+             final File backupFile = new File(backupDir, "sze_"
+                     + dateFormat.format(new Date()) + ".zip");
+             final String backupCmd = "BACKUP TO '" + backupFile.getAbsolutePath() + "'";
+             LOG.info("Backup to {}", backupFile.getAbsolutePath());
+             try (Connection conn = dataSource.getConnection()) {
+                 conn.createStatement().execute(backupCmd);
+             } catch (SQLException sqlE) {
+                 LOG.error("Couldn't create Database-Backup!", sqlE);
+             }
         }
 
     }
