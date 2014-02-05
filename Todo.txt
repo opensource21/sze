@@ -25,6 +25,7 @@
 - Beschreibung von Session und URL.
 
 - Es wäre schöner wenn die Help-Messages direkt in der View definiert werden.
+  Das kann man erreichen mit th:with="helpMessageId=willi"
 
 - Umstellung auf #{db....}
 
