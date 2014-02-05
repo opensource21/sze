@@ -2,13 +2,15 @@
 //
 // Licensed under the AGPL - http://www.gnu.org/licenses/agpl-3.0.txt
 // (c) SZE-Development Team
-package net.sf.sze.frontend;
+package net.sf.sze.frontend.zeugnis;
 
 import java.util.List;
 
 import javax.annotation.Resource;
 
-import net.sf.sze.frontend.URL.Common;
+import net.sf.sze.frontend.base.ModelAttributes;
+import net.sf.sze.frontend.base.URL;
+import net.sf.sze.frontend.base.URL.Common;
 import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.zeugnis.AussenDifferenzierteBewertung;
 import net.sf.sze.model.zeugnis.Bewertung;

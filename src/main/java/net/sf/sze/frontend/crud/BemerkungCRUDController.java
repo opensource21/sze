@@ -7,14 +7,12 @@ package net.sf.sze.frontend.crud;
 
 import de.ppi.fuwesta.spring.mvc.util.PageWrapper;
 import de.ppi.fuwesta.spring.mvc.util.ResourceNotFoundException;
-
-import net.sf.sze.frontend.URL;
+import net.sf.sze.frontend.base.URL;
 import net.sf.sze.model.zeugnis.Bemerkung;
 import net.sf.sze.service.api.BemerkungService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;

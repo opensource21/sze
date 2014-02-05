@@ -5,7 +5,7 @@
 
 package net.sf.sze.model.zeugnis;
 
-import net.sf.sze.frontend.URL;
+import net.sf.sze.frontend.base.URL;
 
 import org.junit.Test;
 
@@ -22,7 +22,7 @@ public class URLTest {
 
     /**
      * Test method for
-     * {@link de.ppi.samples.springmvc.frontend.URL#redirect(java.lang.String, java.lang.String[])}
+     * {@link net.sf.sze.frontend.base.samples.springmvc.frontend.URL#redirect(java.lang.String, java.lang.String[])}
      * .
      */
     @Test
@@ -40,7 +40,7 @@ public class URLTest {
 
     /**
      * Test method for
-     * {@link de.ppi.samples.springmvc.frontend.URL#filledURL(java.lang.String, java.lang.String[])}
+     * {@link net.sf.sze.frontend.base.samples.springmvc.frontend.URL#filledURL(java.lang.String, java.lang.String[])}
      * .
      */
     @Test
@@ -60,7 +60,7 @@ public class URLTest {
 
     /**
      * Test method for
-     * {@link de.ppi.samples.springmvc.frontend.URL#filledURL(java.lang.String, java.lang.String[])}
+     * {@link net.sf.sze.frontend.base.samples.springmvc.frontend.URL#filledURL(java.lang.String, java.lang.String[])}
      * .
      */
     @Test
@@ -79,7 +79,7 @@ public class URLTest {
 
     /**
      * Test method for
-     * {@link de.ppi.samples.springmvc.frontend.URL#filledURL(java.lang.String, java.lang.String[])}
+     * {@link net.sf.sze.frontend.base.samples.springmvc.frontend.URL#filledURL(java.lang.String, java.lang.String[])}
      * .
      */
     @Test
@@ -96,7 +96,7 @@ public class URLTest {
 
     /**
      * Test method for
-     * {@link de.ppi.samples.springmvc.frontend.URL#filledURL(java.lang.String, java.lang.String[])}
+     * {@link net.sf.sze.frontend.base.samples.springmvc.frontend.URL#filledURL(java.lang.String, java.lang.String[])}
      * .
      */
     @Test
@@ -115,7 +115,7 @@ public class URLTest {
 
     /**
      * Test method for
-     * {@link de.ppi.samples.springmvc.frontend.URL#filledURL(java.lang.String, java.util.Map)}
+     * {@link net.sf.sze.frontend.base.samples.springmvc.frontend.URL#filledURL(java.lang.String, java.util.Map)}
      * .
      */
     @Test
@@ -138,7 +138,7 @@ public class URLTest {
 
     /**
      * Test method for
-     * {@link de.ppi.samples.springmvc.frontend.URL#redirect(java.lang.String, java.util.Map)}
+     * {@link net.sf.sze.frontend.base.samples.springmvc.frontend.URL#redirect(java.lang.String, java.util.Map)}
      * .
      */
     @Test
