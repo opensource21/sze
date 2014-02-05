@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!-- PARAMS:
+-->
+<html lang="de-DE" xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+    layout:decorator="/main">
+<head>
+<script type="text/javascript"
+    src="../../../resources/js/jquery-1.8.2.js" th:remove="all"></script>
+<script type="text/javascript"
+    src="../../../resources/js/thymelaefbs.js?1" th:remove="all"></script>
+</head>
+<body>
+    <div layout:fragment="content">
+        <h1>Konfigurationsmöglichkeiten der Anwendung</h1>
+        <h2>Halbjährliche Arbeiten</h2>
+        <ul>
+            <li><a th:href="@{/}">Halbjahrs-Verwaltung</a></li>
+            <li><a th:href="@{zeugnisFormular}">Formular-Verwaltung</a></li>
+            <li><a th:href="@{zeugnisKonfiguration}">Zeugnis-Initialisierung</a></li>
+        </ul>
+        <h2>Jährliche Arbeiten</h2>
+        <ul>
+            <li><a th:href="@{klasse}">Klassen-Verwaltung</a></li>
+            <li><a th:href="@{schueler}">Schüler-Verwaltung</a></li>
+        </ul>
+        <h2>Grund-Konfiguration</h2>
+        <ul>
+            <li><a th:href="@{schulfach}">Schulfach-Verwaltung</a></li>
+            <li><a th:href="@{arbeitsUndSozialVerhalten}">AvSv-Verwaltung</a></li>
+            <li><a th:href="@{arbeitsgruppe}">AG-Verwaltung</a></li>
+            <li><a th:href="@{bemerkungsBaustein}">Verwaltung der Bemerkungsbausteine</a></li>
+            <li><a th:href="@{schulamt}">Verwaltung der Schulämter</a></li>
+            <li><a th:href="@{schulamtsBemerkungsBaustein}">Verwaltung der Schulamts-Bemerkungsbausteine</a></li>
+            <li><a th:href="@{soLBewertungsText}">Verwaltung der Bemerkungstexte für SoL</a></li>
+            <li><a th:href="@{zeugnisArt}">Verwaltung der Zeugnisarten</a></li>
+        </ul>
+    </div>
+</body>
+</html>
