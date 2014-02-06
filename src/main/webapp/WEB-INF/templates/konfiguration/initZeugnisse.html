@@ -13,6 +13,18 @@ formularlist - Liste aller Formulare.
 </head>
 <body th:with="formularList=${formularList}">
     <div layout:fragment="content">
+        <div class="infobox" th:unless="${result==null}">
+            <div class="alert alert-error" th:unless="${#sets.isEmpty(result.errors)}">
+                <ul th:each="message : ${result.errors}">
+                       <li th:utext="${message}"></li>
+                </ul>
+            </div>
+            <div class="alert alert-info" th:unless="${#sets.isEmpty(result.messages)}">
+                <ul th:each="message : ${result.messages}">
+                       <li th:utext="${message}"></li>
+                </ul>
+            </div>
+        </div>
         <form class="well form-horizontal" th:action="@{#{nurl.configuration.init_zeugnisse}}" th:method="POST">
             <select class="span3" bs:name="#{par.configuration.formular}" multiple="multiple">
                 <option th:each="formular:${formularList}" th:value="${formular.id}"

@@ -3,6 +3,8 @@
 - Admin-Bereich (3 PT?), Schüler müssen filterbar sein, nach Abgangsdatum!
   Standardmäßig alle abgegangen Schüler ausblenden. Insbedesondere bei der Klasse.
 
+- Beim Initialiseren von Klasse 1-2 komplett gibt es eine Exception.
+
 - Security
 
 #PRIO 2
@@ -23,6 +25,9 @@
 - Die Aufteilung auf Services überdenken, Bündelung nach DB nach Controller?
 
 - Beschreibung von Session und URL.
+
+- Bei den Nachrichten zur Initialisierung sollte man evtl. die Klasse mit
+  ausgeben. Entweder als Überschrift (schöner) oder in die Nachricht selbst mit rein (einfacher).
 
 - Es wäre schöner wenn die Help-Messages direkt in der View definiert werden.
   Das kann man erreichen mit th:with="helpMessageId=willi"

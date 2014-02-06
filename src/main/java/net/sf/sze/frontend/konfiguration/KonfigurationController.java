@@ -4,7 +4,6 @@
 // (c) SZE-Development Team
 package net.sf.sze.frontend.konfiguration;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -77,10 +76,7 @@ public class KonfigurationController {
             for (ZeugnisFormular zeugnisFormular : formulare) {
                 result.addResultContainer(zeugnisInitialierungsService.initZeugnis(zeugnisFormular));
             }
-            final List<String> messages = new ArrayList<String>(result.getMessages());
-            final List<String> errors = new ArrayList<String>(result.getErrors());
-            redirectAttributes.addFlashAttribute("messages", messages);
-            redirectAttributes.addFlashAttribute("errors", errors);
+            redirectAttributes.addFlashAttribute("result", result);
         }
         return URL.redirect(URL.Configuration.INIT_ZEUGNISSE);
     }
