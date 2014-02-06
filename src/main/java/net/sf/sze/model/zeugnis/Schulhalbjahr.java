@@ -39,14 +39,12 @@ public class Schulhalbjahr extends VersionedModel implements Serializable,
      * erstes oder 2.Halbjahr.
      */
     @Column(nullable = false)
-
     private Halbjahr halbjahr;
 
     /**
      * Kennzeichen, ob diese Jahr in der Auswahlliste erscheinen soll.
      */
     @Column(nullable = false)
-
     private Boolean selectable = Boolean.FALSE;
 
     /**
