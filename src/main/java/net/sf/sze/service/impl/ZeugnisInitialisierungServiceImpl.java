@@ -144,18 +144,28 @@ public class ZeugnisInitialisierungServiceImpl implements ZeugnisInitialierungsS
                 new Date(), formular.getKlasse());
 
         for (Schueler einSchueler : schueler) {
+            //TODO Transaktionshandling klären.
+            try {
                 result.addResultContainer(initZeugnisForSchueler(
                         formular, zeugnisArt.get(0),  einSchueler));
+            } catch (RuntimeException rE) {
+                final String message = "Schwerer Fehler bei Schüler "
+                        + einSchueler.getName() + ", " + einSchueler.getVorname()
+                        + "(" + einSchueler.getId() + ")" + rE.getMessage();
+                LOG.error(message, rE);
+                result.addError(message);
+             }
+
         }
         return result;
     }
-
 
     private ResultContainer initZeugnisForSchueler(ZeugnisFormular formular,
             ZeugnisArt zeugnisArt, Schueler schueler) {
         final ResultContainer result = new ResultContainer();
         final Schulhalbjahr halbjahr = formular.getSchulhalbjahr();
         final Klasse klasse = schueler.getKlasse();
+        LOG.info("Schulhalbjahr: {}, Klasse {}, Schueler{}", halbjahr, klasse, schueler);
         Zeugnis zeugnis = zeugnisDao.findBySchulhalbjahrIdAndKlasseIdAndSchuelerId(
                 halbjahr.getId(), klasse.getId(), schueler.getId());
 
