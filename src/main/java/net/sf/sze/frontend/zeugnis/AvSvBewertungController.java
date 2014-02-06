@@ -2,7 +2,7 @@
 //
 // Licensed under the AGPL - http://www.gnu.org/licenses/agpl-3.0.txt
 // (c) SZE-Development Team
-package net.sf.sze.frontend;
+package net.sf.sze.frontend.zeugnis;
 
 import java.util.Collections;
 import java.util.List;
@@ -10,6 +10,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import net.sf.oval.constraint.AssertValid;
+import net.sf.sze.frontend.base.URL;
 import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.stammdaten.Schueler;
 import net.sf.sze.model.zeugnis.AvSvBewertung;

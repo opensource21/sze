@@ -3,7 +3,7 @@
 // Licensed under the AGPL - http://www.gnu.org/licenses/agpl-3.0.txt
 // (c) SZE-Development-Team
 
-package net.sf.sze.frontend;
+package net.sf.sze.frontend.base;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

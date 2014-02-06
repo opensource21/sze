@@ -5,6 +5,8 @@
 
 package net.sf.sze.dao.api.zeugnis;
 
+import java.util.List;
+
 import net.sf.sze.model.zeugnis.ZeugnisFormular;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -15,5 +17,14 @@ import org.springframework.data.repository.PagingAndSortingRepository;
  */
 public interface ZeugnisFormularDao
         extends PagingAndSortingRepository<ZeugnisFormular, Long> {
-    // Noch keine speziellen Methoden.
+
+    /**
+     * Liefert die Liste aller Zeugnisformulare sortiert zurück.
+     * @param selectable true, wenn nur die selektierbaren ausgegeben werden sollen.
+     * @return die Zeugnisformulare
+     */
+    //J-
+    List<ZeugnisFormular>
+            findAllBySchulhalbjahrSelectableOrderBySchulhalbjahrJahrDescSchulhalbjahrHalbjahrDescKlasseJahrgangDescKlasseSuffixAscBeschreibungDesc(
+            boolean selectable);
 }

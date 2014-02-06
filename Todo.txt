@@ -3,10 +3,16 @@
 - Admin-Bereich (3 PT?), Schüler müssen filterbar sein, nach Abgangsdatum!
   Standardmäßig alle abgegangen Schüler ausblenden. Insbedesondere bei der Klasse.
 
+- Beim Initialiseren von Klasse 1-2 komplett gibt es eine Exception.
+    -> Das lag daran, dass erst initialisiert wurde und dann der Schüler
+       die Klasse gewechselt hat. Das können wir technisch noch nicht.
+    -> Man muss die Möglichkeit bekommen Zeugnisse zu löschen, sofern man
+       bestimmte Rechte hat.
+
 - Security
 
 #PRIO 2
-- Der Titel wird nicht gesetzt.
+- Der Titel wird generell nicht Dialog-spezifisch gesetzt.
 
 - 3Niveau und 2NiveauBewertung
 
@@ -24,7 +30,11 @@
 
 - Beschreibung von Session und URL.
 
+- Bei den Nachrichten zur Initialisierung sollte man evtl. die Klasse mit
+  ausgeben. Entweder als Überschrift (schöner) oder in die Nachricht selbst mit rein (einfacher).
+
 - Es wäre schöner wenn die Help-Messages direkt in der View definiert werden.
+  Das kann man erreichen mit th:with="helpMessageId=willi"
 
 - Umstellung auf #{db....}
 

@@ -2,7 +2,7 @@
 //
 // Licensed under the AGPL - http://www.gnu.org/licenses/agpl-3.0.txt
 // (c) SZE-Development Team
-package net.sf.sze.frontend;
+package net.sf.sze.frontend.base;
 
 
 
@@ -11,7 +11,7 @@ package net.sf.sze.frontend;
  *
  */
 //CSOFF: InterfaceIsType Konstanten müssen String sein.
-interface ModelAttributes {
+public interface ModelAttributes {
 
     /**
      * Attribut-Name für Bemerkungen.

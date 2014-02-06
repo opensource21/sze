@@ -1,4 +1,9 @@
         <div th:fragment="info" th:remove="tag">
+            <div class="alert alert-error" th:unless="${#lists.isEmpty(errors)}">
+                <ul th:each="error : ${errors}">
+                       <li th:text="#{${error}}"></li>
+                </ul>
+            </div>
             <div class="alert alert-success" th:text="#{${success}}"
                 th:unless="${#strings.isEmpty(success)}"></div>
 
