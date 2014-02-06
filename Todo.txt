@@ -4,6 +4,10 @@
   Standardmäßig alle abgegangen Schüler ausblenden. Insbedesondere bei der Klasse.
 
 - Beim Initialiseren von Klasse 1-2 komplett gibt es eine Exception.
+    -> Das lag daran, dass erst initialisiert wurde und dann der Schüler
+       die Klasse gewechselt hat. Das können wir technisch noch nicht.
+    -> Man muss die Möglichkeit bekommen Zeugnisse zu löschen, sofern man
+       bestimmte Rechte hat.
 
 - Security
 
