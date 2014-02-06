@@ -55,6 +55,17 @@ public final class URL {
          */
         String MAIN = HOME + "/";
 
+        /**
+         * Parameter zum Übergeben der Formular-Ids.
+         */
+        String P_FORMULAR = "formular";
+
+
+        /**
+         * Url zum initialisieren der Zeugnisse.
+         */
+        String INIT_ZEUGNISSE = HOME + "/initZeugnisse";
+
     }
 
     /**

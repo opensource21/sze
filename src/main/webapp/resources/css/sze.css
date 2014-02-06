@@ -26,6 +26,10 @@ select[readonly="readonly"].show, input[readonly="readonly"].show {
     vertical-align:middle;
 }
 
+.infobox {
+    max-height: 50%
+}
+
 i.delete {
     background: transparent url(../images/skin/database_delete.png) 5px 50% no-repeat;
     padding-left: 28px;

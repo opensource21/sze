@@ -6,7 +6,7 @@
 - Security
 
 #PRIO 2
-- Der Titel wird nicht gesetzt.
+- Der Titel wird generell nicht Dialog-spezifisch gesetzt.
 
 - 3Niveau und 2NiveauBewertung
 
