@@ -241,6 +241,18 @@ public class Zeugnis extends VersionedModel implements Serializable,
     }
 
     /**
+     * Gets the bu bewertungs text mit Variablenersetzung.
+     *
+     * @return the bu bewertungs text
+     */
+    public String getBuBewertungsPrintText() {
+        return VariableUtility.createPrintText(
+                StringUtils.isNotEmpty(buBewertungsText) ? buBewertungsText
+                : VariableUtility.PLATZHALTER_LEER, schueler, formular
+                .getNachteilsAusgleichsDatum(), false, schulhalbjahr.getSchuljahr());
+    }
+
+    /**
      * Sets the bu bewertungs text.
      *
      * @param buBewertungsText the new bu bewertungs text
@@ -755,11 +767,8 @@ public class Zeugnis extends VersionedModel implements Serializable,
         final String versetzungsBemerkung = buildVersetzungsBemerkung();
 
         printMap.put("bemerkung_versetzung", versetzungsBemerkung);
-        printMap.put("buBewertungsText", VariableUtility.createPrintText(
-                StringUtils.isNotEmpty(buBewertungsText) ? buBewertungsText
-                : VariableUtility.PLATZHALTER_LEER, schueler, formular
-                .getNachteilsAusgleichsDatum(), false, (String) printMap.get(
-                "shj_jahr")));
+        printMap.put("buBewertungsText", getBuBewertungsPrintText());
+
         if (soLBewertungsText != null
                 && StringUtils.isNotEmpty(soLBewertungsText.getText())) {
             printMap.put("soLBewertungsTextFix", soLBewertungsText.getText());
