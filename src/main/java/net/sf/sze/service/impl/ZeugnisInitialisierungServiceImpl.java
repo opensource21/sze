@@ -41,7 +41,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.TransactionCallback;
+import org.springframework.transaction.support.TransactionTemplate;
 
 /**
  * Service welcher für die Sch&uuml;ler ein Zeugnis-Objekt mit
@@ -55,7 +58,7 @@ import org.springframework.transaction.annotation.Transactional;
  *
  */
 @Service
-@Transactional(readOnly = false)
+//Transaktionshandling erfolgt hier Programmatisch.
 public class ZeugnisInitialisierungServiceImpl implements ZeugnisInitialierungsService {
 
     /**
@@ -75,6 +78,9 @@ public class ZeugnisInitialisierungServiceImpl implements ZeugnisInitialierungsS
 
     @PersistenceContext
     private EntityManager em;
+
+    @Resource
+    private PlatformTransactionManager transactionManager;
 
     /**
      * Dao für die {@link Zeugnis}.
@@ -136,18 +142,25 @@ public class ZeugnisInitialisierungServiceImpl implements ZeugnisInitialierungsS
      * {@inheritDoc}
      */
     @Override
-    public ResultContainer initZeugnis(ZeugnisFormular formular) {
+    public ResultContainer initZeugnis(final ZeugnisFormular formular) {
         final ResultContainer result = new ResultContainer();
         final List<ZeugnisArt> zeugnisArt = zeugnisArtDao.findAllByAktivTrueOrderBySortierungAsc();
         final List<Schueler> schueler = schuelerDao.
                 findAllByAbgangsDatumIsNullOrFutureAndKlasse(
                 new Date(), formular.getKlasse());
+        TransactionTemplate tt = new TransactionTemplate(transactionManager);
 
-        for (Schueler einSchueler : schueler) {
-            //TODO Transaktionshandling klären.
+        for (final Schueler einSchueler : schueler) {
             try {
-                result.addResultContainer(initZeugnisForSchueler(
-                        formular, zeugnisArt.get(0),  einSchueler));
+                result.addResultContainer(
+                        tt.execute(new TransactionCallback<ResultContainer>() {
+                            @Override
+                            public ResultContainer doInTransaction(TransactionStatus status) {
+                                return initZeugnisForSchueler(
+                                        formular, zeugnisArt.get(0),  einSchueler);
+                            }
+                        })
+                );
             } catch (RuntimeException rE) {
                 final String message = "Schwerer Fehler bei Schüler "
                         + einSchueler.getName() + ", " + einSchueler.getVorname()
