@@ -35,12 +35,26 @@ tags - a list of selectable tag
     <div layout:fragment="content">
     <h3 th:text="#{schulhalbjahr.form.title}"></h3>
     <form class="well form-horizontal" method="post" th:object="${schulhalbjahr}">
-        <th:block th:text="#{par.schulhalbjahr.schulhalbjahr_id}"></th:block>
-    TODO ERROR
         <div th:replace="/fragments::error"></div>
 
         <input id="id" type="hidden" th:value="*{id}" name="id"/>
         <input id="version" type="hidden" th:value="*{version}" name="version"/>
+        <input type="text" bs:field="jahr" disabled="disabled" th:if="${disabled}"/>
+        <select bs:field="jahr" th:unless="${disabled}">
+            <option th:each="jz : ${jahre}" th:value="${jz}" th:text="${jz}" th:classappend="${jz==schulhalbjahr.jahr}? 'highlight'"></option>
+        </select>
+
+        <div class="control-group" layout:include="fragments::bsfield" th:with="fId='halbjahr'"  th:remove="tag">
+            <span layout:fragment="bsinput">
+                <label th:inline="text" class="radio inline" th:each="hj : ${halbjahre}" th:for="${#ids.next('__${fId}__')}"  th:unless="${disabled}">
+                        <input type="radio" th:field="*{__${fId}__}" th:value="${hj.name()}" />
+                        [[${hj}]]
+                </label>
+                <label class="control-label" th:text="*{__${fId}__}" th:if="${disabled}"/>
+            </span>
+        </div>
+
+        <input type="checkbox" bs:field="selectable" th:disabled="${disabled}"/>
 <!--
         <input type="text" bs:field="title" bs:label="#{${post.class.name} +'.title'}" th:disabled="${disabled}"/>
 
@@ -72,8 +86,8 @@ tags - a list of selectable tag
  -->
         <button type="submit" th:formaction="@{${saveUrl}}" class="btn" th:unless="${disabled || saveUrl == null}">
             <i class="save"></i>Speichern</button>
-        <button type="submit"  th:formaction="@{|__#{nurl.schulhalbjahr.edit}__|}" class="btn" th:if="${disabled}">
-            <i class="edit"></i>Bearbeiten</button>
+        <a th:href="@{|__#{nurl.schulhalbjahr.edit}__|}" class="btn" th:if="${disabled}">
+            <i class="edit"></i>Bearbeiten</a>
         <a th:href="@{#{nurl.schulhalbjahr.list}}" class="btn">
             <i class="cancel"></i>Abbrechen</a>
         <th:block th:include="/fragments::deletebutton(#{nurl.schulhalbjahr.delete})"></th:block>

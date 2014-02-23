@@ -5,10 +5,13 @@
 
 package net.sf.sze.frontend.konfiguration;
 
+import java.util.Calendar;
+
 import javax.annotation.Resource;
 
 import net.sf.sze.frontend.base.ModelAttributes;
 import net.sf.sze.frontend.base.URL;
+import net.sf.sze.model.zeugnis.Halbjahr;
 import net.sf.sze.model.zeugnis.Schulhalbjahr;
 import net.sf.sze.service.api.SchulhalbjahrService;
 
@@ -96,7 +99,9 @@ public class SchulhalbjahrCRUDController {
      */
     @RequestMapping(value = URL.Schulhalbjahr.CREATE, method = RequestMethod.GET)
     public String create(Model model) {
-        addStandardModelData(new Schulhalbjahr(), URL.Schulhalbjahr.CREATE, false,
+        final Schulhalbjahr schulhalbjahr = new Schulhalbjahr();
+        schulhalbjahr.setJahr(Calendar.getInstance().get(Calendar.YEAR));
+        addStandardModelData(schulhalbjahr, URL.Schulhalbjahr.CREATE, false,
                 model);
         return SCHULHALBJAHR_FORM;
     }
@@ -203,7 +208,12 @@ public class SchulhalbjahrCRUDController {
         if (schulhalbjahr == null) {
             throw new ResourceNotFoundException();
         }
-
+        int[] jahre = new int[51];
+        for (int i = 0; i <= 50; i++) {
+            jahre[i] = 2000 + i;
+        }
+        model.addAttribute("halbjahre", Halbjahr.values());
+        model.addAttribute("jahre", jahre);
         model.addAttribute("schulhalbjahr", schulhalbjahr);
         model.addAttribute("disabled", Boolean.valueOf(disabled));
         model.addAttribute("saveUrl", saveUrl);
@@ -218,7 +228,7 @@ public class SchulhalbjahrCRUDController {
      * @return String which defines the next page.
      */
     @RequestMapping(value = URL.Schulhalbjahr.EDIT, method = RequestMethod.POST)
-    public String update(@ModelAttribute("Schulhalbjahr") Schulhalbjahr schulhalbjahr,
+    public String update(@ModelAttribute("schulhalbjahr") Schulhalbjahr schulhalbjahr,
             BindingResult result, Model model) {
         validator.validate(schulhalbjahr, result);
 

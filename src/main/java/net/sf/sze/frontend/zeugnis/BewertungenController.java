@@ -108,7 +108,7 @@ public class BewertungenController implements ModelAttributes {
         final Klasse klasse = bewertungErfassungsService.getKlasse(klassenId.longValue());
         final Schulhalbjahr schulhalbjahr = schulhalbjahrService.read(halbjahrId);
 
-        if (BooleanUtils.isFalse(schulhalbjahr.getSelectable())) {
+        if (BooleanUtils.isFalse(schulhalbjahr.isSelectable())) {
             redirectAttributes.addFlashAttribute("message",
                     "Das Schulhalbjahr ist nicht mehr selektierbar.");
             return URL.redirectWithNamedParams(URL.ZeugnisPath.START,

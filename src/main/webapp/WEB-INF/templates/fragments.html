@@ -58,3 +58,17 @@
             <button th:formaction="@{${deleteUrl}}" type="submit" formmethod="post" class="btn">
                 <i class="delete"></i>Löschen</button> -->
         </div>
+
+        <div layout:fragment="bsfield">
+          <div class="control-group" th:classappend="${#fields.hasErrors('__${fId}__')}? 'error'">
+            <label class="control-label" th:for="${fId}"
+                th:text="#{__*{class.name}__.__${fId}__}+':'"/>
+            <div class="controls">
+                <span layout:fragment="bsinput" th:remove="tag">
+                <input type="text" class="replace" th:field="*{__${fId}__}" th:disabled="${disabled}"/>
+                </span>
+                <span class="help-inline" th:if="${#fields.hasErrors('__${fId}__')}"
+                    th:errors="*{__${fId}__}"></span>
+            </div>
+      </div>
+  </div>

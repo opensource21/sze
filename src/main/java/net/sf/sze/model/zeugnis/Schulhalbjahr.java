@@ -32,7 +32,6 @@ public class Schulhalbjahr extends VersionedModel implements Serializable,
      * Das Jahr in dem die Zeugnisse für das Schuljahr erstellt werden.
      */
     @Column(nullable = false)
-    // TODO Gui-Darstellung mit CB 2000..2050, besser Default raten.
     private int jahr;
 
     /**
@@ -44,8 +43,7 @@ public class Schulhalbjahr extends VersionedModel implements Serializable,
     /**
      * Kennzeichen, ob diese Jahr in der Auswahlliste erscheinen soll.
      */
-    @Column(nullable = false)
-    private Boolean selectable = Boolean.FALSE;
+    private boolean selectable = false;
 
     /**
      * Gets the erstes oder 2.
@@ -91,7 +89,7 @@ public class Schulhalbjahr extends VersionedModel implements Serializable,
      * @return the kennzeichen, ob diese Jahr in der Auswahlliste erscheinen
      *         soll
      */
-    public Boolean getSelectable() {
+    public boolean isSelectable() {
         return this.selectable;
     }
 
@@ -101,7 +99,7 @@ public class Schulhalbjahr extends VersionedModel implements Serializable,
      * @param selectable the new kennzeichen, ob diese Jahr in der Auswahlliste
      *            erscheinen soll
      */
-    public void setSelectable(final Boolean selectable) {
+    public void setSelectable(final boolean selectable) {
         this.selectable = selectable;
     }
 
