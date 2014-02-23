@@ -416,7 +416,7 @@ public final class URL {
         /**
          * Delete-Url.
          */
-        String DELETE = HOME + "/delete/{" + P_SCHULHALBJAHR_ID + "}";
+        String DELETE = HOME + "/delete";
 
         /** List-URL. */
         String LIST = HOME + "/list";

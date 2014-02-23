@@ -1,17 +1,16 @@
 <!-- Parameter:
-post - a Post-Object
+schulhalbjahr - ein schulhalbjahr
 
 disabled - flag if the view should be editable.
-url - the url for the form-action. TODO wirklich die URL geben lassen?
+saveUrl - die URL zum speichern.
 users - a list of selectable user
 tags - a list of selectable tag
  -->
 <!DOCTYPE HTML>
-<html lang="de-DE" xmlns:th="http://www.thymeleaf.org">
+<html lang="de-DE" xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+    layout:decorator="/main">
 <head >
-<title th:text="#{App.Title} + ' - ' + #{post.form.title}">
-    SpringMVC-Sample - Form of posts</title>
-<th:block th:include="/example/main::head"/>
 <script th:inline="javascript">
     $(function() {
         $('.datepicker').datepicker(
@@ -33,18 +32,16 @@ tags - a list of selectable tag
 
 </head>
 <body>
-    <div th:replace="/example/main::.navbar"></div>
-    <div th:replace="/example/main::info"></div>
-    <h3 th:text="#{post.form.title}">Form of posts</h3>
-    <a class="btn" href="/" th:href="@{/}"><i class="icon-home"></i>Home</a>
-    <a class="btn" th:href="@{__#{nurl.schulhalbjahr.list}__}">Goto list</a>
-    <form th:action="@{${url}}" class="well form-horizontal" method="post" th:object="${schulhalbjahr}">
+    <div layout:fragment="content">
+    <h3 th:text="#{schulhalbjahr.form.title}"></h3>
+    <form class="well form-horizontal" method="post" th:object="${schulhalbjahr}">
+        <th:block th:text="#{par.schulhalbjahr.schulhalbjahr_id}"></th:block>
     TODO ERROR
-        <div th:replace="/example/main::error"></div>
+        <div th:replace="/fragments::error"></div>
 
         <input id="id" type="hidden" th:value="*{id}" name="id"/>
         <input id="version" type="hidden" th:value="*{version}" name="version"/>
-
+<!--
         <input type="text" bs:field="title" bs:label="#{${post.class.name} +'.title'}" th:disabled="${disabled}"/>
 
         <textarea rows="4" bs:field="content" th:disabled="${disabled}"></textarea>
@@ -72,13 +69,18 @@ tags - a list of selectable tag
                 </li>
             </ul>
         </span>
-
-        <input name="" value="Save" type="submit" th:if="${not disabled}"/>
-        <input name="" value="Reset" type="reset" th:if="${not disabled}"/>
-        TODO hier muss auch ein Reload hin. Warum nehme ich da keine Buttons.
+ -->
+        <button type="submit" th:formaction="@{${saveUrl}}" class="btn" th:unless="${disabled || saveUrl == null}">
+            <i class="save"></i>Speichern</button>
+        <button type="submit"  th:formaction="@{|__#{nurl.schulhalbjahr.edit}__|}" class="btn" th:if="${disabled}">
+            <i class="edit"></i>Bearbeiten</button>
+        <a th:href="@{#{nurl.schulhalbjahr.list}}" class="btn">
+            <i class="cancel"></i>Abbrechen</a>
+        <a th:href="@{#{nurl.schulhalbjahr.delete}(#{par.schulhalbjahr.schulhalbjahr_id}=*{id})}" class="btn">
+            <i class="delete"></i>Löschen</a>
     </form>
 
 
-
+    </div>
 </body>
 </html>

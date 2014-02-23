@@ -123,22 +123,6 @@ public class SchulhalbjahrCRUDController {
         return URL.redirect(URL.Schulhalbjahr.LIST);
     }
 
-    /**
-     * Create confirmation for deleting a Schulhalbjahr.
-     *
-     * @param schulhalbjahrId the Id of the Schulhalbjahr.
-     * @param model the datamodel.
-     * @return String which defines the next page.
-     */
-    @RequestMapping(value = URL.Schulhalbjahr.DELETE, method = RequestMethod.GET)
-    public String deleteConfirm(@PathVariable(URL.Schulhalbjahr
-            .P_SCHULHALBJAHR_ID) Long schulhalbjahrId, Model model) {
-        LOG.debug("Confirm delete schulhalbjahrId: " + schulhalbjahrId);
-        model.addAttribute("deleteURL", URL.filledURLWithNamedParams(URL.Schulhalbjahr.DELETE,
-                URL.Schulhalbjahr.P_SCHULHALBJAHR_ID, schulhalbjahrId));
-        model.addAttribute("cancelURL", URL.filledURL(URL.Schulhalbjahr.LIST));
-        return "example/confirmDelete";
-    }
 
     /**
      * Delete a Schulhalbjahr.
@@ -147,7 +131,7 @@ public class SchulhalbjahrCRUDController {
      * @return String which defines the next page.
      */
     @RequestMapping(value = URL.Schulhalbjahr.DELETE,
-            method = {RequestMethod.DELETE, RequestMethod.POST})
+            method = {RequestMethod.DELETE, RequestMethod.POST, RequestMethod.GET})
     public String delete(@PathVariable(URL.Schulhalbjahr
             .P_SCHULHALBJAHR_ID) Long schulhalbjahrId) {
         LOG.debug("Delete schulhalbjahrId: " + schulhalbjahrId);
@@ -194,10 +178,10 @@ public class SchulhalbjahrCRUDController {
      *
      * @param schulhalbjahr the Schulhalbjahr
      * @param disabled true if the data should be only show.
-     * @param url the action URL.
+     * @param saveUrl die URL zum speichern.
      * @param model the model
      */
-    private void addStandardModelData(Schulhalbjahr schulhalbjahr, String url,
+    private void addStandardModelData(Schulhalbjahr schulhalbjahr, String saveUrl,
             boolean disabled, Model model) {
         LOG.info("Schulhalbjahr: {}", schulhalbjahr);
 
@@ -205,9 +189,9 @@ public class SchulhalbjahrCRUDController {
             throw new ResourceNotFoundException();
         }
 
-        model.addAttribute("Schulhalbjahr", schulhalbjahr);
+        model.addAttribute("schulhalbjahr", schulhalbjahr);
         model.addAttribute("disabled", Boolean.valueOf(disabled));
-        model.addAttribute("url", url);
+        model.addAttribute("saveUrl", saveUrl);
     }
 
     /**
