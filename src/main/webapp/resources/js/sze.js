@@ -34,7 +34,7 @@ function hideandshow() {
 };
 
 function confirmDelete() {
-    $('button .delete').each(function(index) {
+    $('.btn .delete').each(function(index) {
         var myBtn = $(this).parent().get(0)
         myBtn.addEventListener('click',function(event) {
           if(!confirm('Wollen Sie wirklich löschen?'))
