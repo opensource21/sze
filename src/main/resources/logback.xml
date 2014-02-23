@@ -82,6 +82,9 @@
 
     <logger name="org.springframework.data" level="WARN" />
 
+    <!-- Auf TRACE setzen bei 400 -Fehlern -->
+    <logger name="org.springframework.web.servlet.mvc.method.annotation" level="WARN"/>
+
     <logger name="org.springframework" level="WARN" />
 
     <logger name="org.hibernate" level="WARN" />
