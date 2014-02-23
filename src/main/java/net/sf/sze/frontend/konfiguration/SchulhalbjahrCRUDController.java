@@ -71,7 +71,7 @@ public class SchulhalbjahrCRUDController {
     @RequestMapping(value = {URL.Schulhalbjahr.HOME, URL.Schulhalbjahr.LIST},
             method = RequestMethod.GET)
     public String list(Model model, @PageableDefault(page = 0, size = 1000,
-            sort = {"jahr", "halbjahr"}, direction = Direction.ASC) Pageable pageRequest,
+            sort = {"jahr", "halbjahr"}, direction = Direction.DESC) Pageable pageRequest,
             RedirectAttributes redirectAttributes) {
         final PageWrapper<Schulhalbjahr> schulhalbjahrList = new PageWrapper<Schulhalbjahr>(
                 schulhalbjahrService.getSchulhalbjahr(pageRequest), URL.Schulhalbjahr.LIST);
