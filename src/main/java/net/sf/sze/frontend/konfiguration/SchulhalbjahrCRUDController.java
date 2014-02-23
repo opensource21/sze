@@ -70,7 +70,7 @@ public class SchulhalbjahrCRUDController {
      */
     @RequestMapping(value = {URL.Schulhalbjahr.HOME, URL.Schulhalbjahr.LIST},
             method = RequestMethod.GET)
-    public String list(Model model, @PageableDefault(page = 0, value = 0,
+    public String list(Model model, @PageableDefault(page = 0, size = 1000,
             sort = {"jahr", "halbjahr"}, direction = Direction.ASC) Pageable pageRequest,
             RedirectAttributes redirectAttributes) {
         final PageWrapper<Schulhalbjahr> schulhalbjahrList = new PageWrapper<Schulhalbjahr>(
@@ -78,7 +78,7 @@ public class SchulhalbjahrCRUDController {
         if (schulhalbjahrList.getSize() == 0) {
             LOG.info("No Schulhalbjahr found redirect to create");
             redirectAttributes.addFlashAttribute(ModelAttributes.MESSAGE,
-                    "Bitte legen sie dsa erste Schulhalbjahr an.");
+                    "Bitte legen sie das erste Schulhalbjahr an.");
             return URL.redirect(URL.Schulhalbjahr.CREATE);
         }
 

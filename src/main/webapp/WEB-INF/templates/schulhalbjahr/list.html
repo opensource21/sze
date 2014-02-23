@@ -15,7 +15,7 @@ pageRequest - the parameter of this search.
 </head>
 <body>
     <div layout:fragment="content">
-        <h3 th:text="#{schulhalbjahre.list.title}">Liste</h3>
+        <h3 th:text="#{schulhalbjahr.list.title}">Liste</h3>
         <a class="btn" href="/" th:href="@{#{nurl.schulhalbjahr.create}}" th:text="#{label.action.create}">Create a new entry</a>
         <div id="data">
             <span th:if="${#lists.isEmpty(schulhalbjahrList)}" th:text="#{label.no_data_found}"></span>
@@ -33,7 +33,7 @@ pageRequest - the parameter of this search.
                     <tr th:each="schulhalbjahr : ${schulhalbjahrList.content}">
                         <td th:text="${schulhalbjahr.jahr}">1</td>
                         <td th:text="${schulhalbjahr.halbjahr}">1</td>
-                        <td th:text="#{'bln'+${schulhalbjahr.halbjahr}}">1</td>
+                        <td th:text="#{'blt.'+${schulhalbjahr.selectable}}">1</td>
                         <td th:with="#{par.schulhalbjahr.schulhalbjahr_id}=${schulhalbjahr.id}">
                             <a class="btn" href="show/1" th:href="@{|__#{nurl.schulhalbjahr.show}__|}" th:text="#{label.action.show}">Show</a>
                             <a class="btn" href="edit/1" th:href="@{|__#{nurl.schulhalbjahr.edit}__|}" th:text="#{label.action.edit}">Update</a>
@@ -44,7 +44,7 @@ pageRequest - the parameter of this search.
             </table>
         </div>
 
-        <div class="pagination pagination-centered"  th:with="page=${schulhalbjahrList}" th:include="example/templates::paginationbar" >
+        <div class="pagination pagination-centered"  th:with="page=${schulhalbjahrList}" th:include="fragments::paginationbar" >
             <ul>
               <li >
                 <a >&larr; First</a>
