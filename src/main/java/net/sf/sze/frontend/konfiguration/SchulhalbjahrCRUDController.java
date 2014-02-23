@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import de.ppi.fuwesta.spring.mvc.util.PageWrapper;
@@ -123,20 +124,35 @@ public class SchulhalbjahrCRUDController {
         return URL.redirect(URL.Schulhalbjahr.LIST);
     }
 
+    /**
+     * Create confirmation for deleting a Schulhalbjahr.
+     *
+     * @param schulhalbjahrId the Id of the Schulhalbjahr.
+     * @param model the datamodel.
+     * @return String which defines the next page.
+     */
+    @RequestMapping(value = URL.Schulhalbjahr.DELETE, method = RequestMethod.GET)
+    public String deleteConfirm(@RequestParam(URL.Schulhalbjahr
+            .P_SCHULHALBJAHR_ID) Long schulhalbjahrId, Model model) {
+        LOG.debug("Confirm delete schulhalbjahrId: " + schulhalbjahrId);
+        model.addAttribute("deleteURL", URL.Schulhalbjahr.DELETE);
+        model.addAttribute("id", schulhalbjahrId);
+        model.addAttribute("cancelURL", URL.filledURL(URL.Schulhalbjahr.LIST));
+        return "confirmDelete";
+    }
 
     /**
      * Delete a Schulhalbjahr.
      *
-     * @param schulhalbjahrId the Id of the Schulhalbjahr.
+     * @param id the Id of the Schulhalbjahr.
      * @return String which defines the next page.
      */
     @RequestMapping(value = URL.Schulhalbjahr.DELETE,
-            method = {RequestMethod.DELETE, RequestMethod.POST, RequestMethod.GET})
-    public String delete(@PathVariable(URL.Schulhalbjahr
-            .P_SCHULHALBJAHR_ID) Long schulhalbjahrId) {
-        LOG.debug("Delete schulhalbjahrId: " + schulhalbjahrId);
-        schulhalbjahrService.delete(schulhalbjahrId);
-        LOG.debug("Deleted schulhalbjahrId: " + schulhalbjahrId);
+            method = {RequestMethod.DELETE, RequestMethod.POST})
+    public String delete(Long id) {
+        LOG.debug("Delete schulhalbjahrId: " + id);
+        schulhalbjahrService.delete(id);
+        LOG.debug("Deleted schulhalbjahrId: " + id);
         return URL.redirect(URL.Schulhalbjahr.LIST);
     }
 
