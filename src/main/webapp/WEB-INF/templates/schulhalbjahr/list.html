@@ -20,7 +20,7 @@ pageRequest - the parameter of this search.
         <a class="btn" href="/" th:href="@{#{nurl.schulhalbjahr.create}}" th:text="#{label.action.create}">Create a new entry</a>
         <div id="data">
             <span th:if="${#lists.isEmpty(schulhalbjahrList)}" th:text="#{label.no_data_found}"></span>
-            <table class="datatable table table-striped table-hover">
+            <table class="datatable_with_action table table-striped table-hover">
                 <thead>
                     <tr>
                         <th th:text="#{net.sf.sze.model.zeugnis.Schulhalbjahr.jahr}">Id</th>
