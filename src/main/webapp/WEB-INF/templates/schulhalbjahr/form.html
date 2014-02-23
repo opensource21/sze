@@ -76,10 +76,7 @@ tags - a list of selectable tag
             <i class="edit"></i>Bearbeiten</button>
         <a th:href="@{#{nurl.schulhalbjahr.list}}" class="btn">
             <i class="cancel"></i>Abbrechen</a>
-        <a th:href="@{#{nurl.schulhalbjahr.delete}(#{par.schulhalbjahr.schulhalbjahr_id}=*{id})}" class="btn">
-            <i class="delete"></i>Löschen</a>
-        <button th:formaction="@{#{nurl.schulhalbjahr.delete}}" type="submit" formmethod="post" class="btn">
-            <i class="delete"></i>Löschen</button>
+        <th:block th:include="/fragments::deletebutton(#{nurl.schulhalbjahr.delete})"></th:block>
     </form>
 
 

@@ -127,16 +127,15 @@ public class SchulhalbjahrCRUDController {
     /**
      * Create confirmation for deleting a Schulhalbjahr.
      *
-     * @param schulhalbjahrId the Id of the Schulhalbjahr.
+     * @param id the Id of the Schulhalbjahr.
      * @param model the datamodel.
      * @return String which defines the next page.
      */
     @RequestMapping(value = URL.Schulhalbjahr.DELETE, method = RequestMethod.GET)
-    public String deleteConfirm(@RequestParam(URL.Schulhalbjahr
-            .P_SCHULHALBJAHR_ID) Long schulhalbjahrId, Model model) {
-        LOG.debug("Confirm delete schulhalbjahrId: " + schulhalbjahrId);
+    public String deleteConfirm(@RequestParam("id") Long id, Model model) {
+        LOG.debug("Confirm delete schulhalbjahrId: " + id);
         model.addAttribute("deleteURL", URL.Schulhalbjahr.DELETE);
-        model.addAttribute("id", schulhalbjahrId);
+        model.addAttribute("id", id);
         model.addAttribute("cancelURL", URL.filledURL(URL.Schulhalbjahr.LIST));
         return "confirmDelete";
     }

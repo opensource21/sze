@@ -50,3 +50,11 @@
             </ul>
             </th:block>
         </div>
+
+        <div th:fragment="deletebutton(deleteUrl)" >
+            <a th:href="@{${deleteUrl}(id=*{id})}" class="btn">
+                <i class="delete"></i>Löschen</a>
+            <!--
+            <button th:formaction="@{${deleteUrl}}" type="submit" formmethod="post" class="btn">
+                <i class="delete"></i>Löschen</button> -->
+        </div>
