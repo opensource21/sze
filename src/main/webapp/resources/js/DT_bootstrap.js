@@ -153,7 +153,9 @@ $(document).ready(function() {
         "sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
         "sPaginationType": "bootstrap",
         "oLanguage": {
-            "sLengthMenu": "_MENU_ records per page",
+            "sLengthMenu": "_MENU_ Einträge pro Seite",
+            "sInfo": "Eintrag _START_ bis _END_ von _TOTAL_ ",
+            "sSearch": "Suche:",
             "sInfoThousands": "."
         },
         "aaSorting":[],
