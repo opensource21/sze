@@ -20,9 +20,6 @@ public class SzeRowBuilderGenerator extends CustomRowBuilderGenerator {
 
     /**
      * Initiates an object of type SzeRowBuilderGenerator.
-     * @param destinationDir
-     * @param packageName
-     * @param encoding
      */
     public SzeRowBuilderGenerator() {
         super(new File("src/test/java"), "net.sf.sze.dbunit.rowbuilder", "UTF-8");
