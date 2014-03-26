@@ -4,9 +4,16 @@
 // (c) SZE-Development Team
 package net.sf.sze.dbunit;
 
+import java.sql.SQLException;
+
 import org.dbunit.database.AmbiguousTableNameException;
+import org.dbunit.database.DatabaseSequenceFilter;
+import org.dbunit.database.IDatabaseConnection;
+import org.dbunit.dataset.DataSetException;
 import org.dbunit.dataset.FilteredDataSet;
 import org.dbunit.dataset.IDataSet;
+import org.dbunit.dataset.ITableIterator;
+import org.dbunit.dataset.filter.ITableFilter;
 
 
 /**
@@ -34,6 +41,22 @@ public class SzeDataSet extends FilteredDataSet {
     public SzeDataSet(IDataSet dataSet)
             throws AmbiguousTableNameException {
         super(TABLE_NAMES, dataSet);
+    }
+
+    /**
+     * Druckt die Datenbanktabelle in der Reihenfolge der Abhängigkeiten.
+     * @param conn eine Datenbankverbindung.
+     * @throws DataSetException Fehler im DataSet.
+     * @throws SQLException Fehler von der Datenbank.
+     */
+    public static void printTableNames(IDatabaseConnection conn) throws DataSetException, SQLException {
+        final ITableFilter filter = new DatabaseSequenceFilter(conn);
+        final ITableIterator tables = filter.iterator(conn.createDataSet(), false);
+        System.out.println("########### Datenbanktabellen");
+        while (tables.next()) {
+            System.out.print("\"" + tables.getTableMetaData().getTableName() + "\", ");
+        }
+        System.out.println();
     }
 
 }
