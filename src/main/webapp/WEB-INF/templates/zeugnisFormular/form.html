@@ -53,13 +53,16 @@ tags - a list of selectable tag
             </select> -->
             <input type="text" bs:field="templateFileName"
                 th:disabled="${disabled}" />
-            <input type="text" class="datepicker" bs:field="ausgabeDatum" th:disabled="${disabled}" />
-            <input type="text" class="datepicker" bs:field="nachteilsAusgleichsDatum"
+            <input type="text" class="datepicker" bs:field="ausgabeDatum"
                 th:disabled="${disabled}" />
-            <textarea rows="5" class="span4" bs:field="leitspruch" th:disabled="${disabled}" />
+            <input type="text" class="datepicker"
+                bs:field="nachteilsAusgleichsDatum" th:disabled="${disabled}" />
+            <textarea rows="5" class="span4" bs:field="leitspruch"
+                th:disabled="${disabled}" />
             <input type="text" bs:field="quelleLeitspruch"
                 th:disabled="${disabled}" />
-            <textarea rows="5" class="span4" bs:field="leitspruch2" th:disabled="${disabled}" />
+            <textarea rows="5" class="span4" bs:field="leitspruch2"
+                th:disabled="${disabled}" />
             <input type="text" bs:field="quelleLeitspruch2"
                 th:disabled="${disabled}" />
             <!-- schulfachDetailInfos : List Wichtig hier muss man auch neue Anlegen können und damit
@@ -71,8 +74,9 @@ tags - a list of selectable tag
             </button>
             <a th:href="@{|__#{nurl.zeugnisFormular.edit}__|}" class="btn">
                 <i class="edit"></i>Bearbeiten
-            </a> <a th:href="@{#{nurl.zeugnisFormular.list}}" class="btn"> <i
-                class="cancel"></i>Abbrechen
+            </a>
+            <a th:href="@{#{nurl.zeugnisFormular.list}}" class="btn">
+                <i class="cancel"></i>Abbrechen
             </a>
             <th:block
                 th:include="/fragments::deletebutton(#{nurl.zeugnisFormular.delete})"></th:block>
