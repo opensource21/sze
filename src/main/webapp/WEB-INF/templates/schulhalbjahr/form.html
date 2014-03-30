@@ -55,35 +55,6 @@ tags - a list of selectable tag
         </div>
 
         <input type="checkbox" bs:field="selectable" th:disabled="${disabled}"/>
-<!--
-        <input type="text" bs:field="title" bs:label="#{${post.class.name} +'.title'}" th:disabled="${disabled}"/>
-
-        <textarea rows="4" bs:field="content" th:disabled="${disabled}"></textarea>
-
-        <input type="text" class="datepicker" bs:field="creationTime"  th:disabled="${disabled}"/>
-
-        <span  th:unless="${disabled}" th:remove="tag">
-            <select bs:field="user">
-                <option th:each="item : ${users}" th:value="${item.id}"
-                        th:text="${item.userId} +'(' + ${item.lastName} +', '+${item.firstName} +')' "></option>
-            </select>
-
-            <select bs:field="tags" multiple="multiple">
-                <option th:each="item : ${tags}" th:value="${item.id}"
-                    th:text="${item.name}" th:disabled="${not item.active}">Beispielswert</option>
-            </select>
-        </span>
-        <span th:if="${disabled}" th:remove="tag">
-            <a th:with="#{par.user.userid}=${post.user.id}" bs:field="#{db.Post.user}" th:href="@{|__#{nurl.user.show}__|}"
-                th:text="${post.user.userId} +'(' + ${post.user.lastName} +', '+${post.user.firstName} +')'"
-                th:unless="${post.user==null}">Mustermann, Erwin</a>
-            <ul bs:field="tags">
-                <li th:each="item : *{tags}"  >
-                    <a th:with="#{par.tag.tagid}=${item.id}" th:href="@{|__#{nurl.tag.show}__|}" th:text="${item.name}">Wichtig</a>
-                </li>
-            </ul>
-        </span>
- -->
         <button type="submit" th:formaction="@{${saveUrl}}" class="btn" th:unless="${disabled || saveUrl == null}">
             <i class="save"></i>Speichern</button>
         <a th:href="@{|__#{nurl.schulhalbjahr.edit}__|}" class="btn" th:if="${disabled}">
