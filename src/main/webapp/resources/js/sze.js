@@ -81,6 +81,7 @@ $(document).ready(function() {
         "aaSorting":[],
         "aoColumnDefs": [
               {
+                 "bSortable": false,
                  "bSearchable": false,
                  "aTargets": [ -1 ]
               }
