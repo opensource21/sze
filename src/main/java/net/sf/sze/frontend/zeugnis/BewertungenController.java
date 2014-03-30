@@ -23,7 +23,6 @@ import net.sf.sze.service.api.BewertungService;
 import net.sf.sze.service.api.BewertungWithNeigbors;
 import net.sf.sze.service.api.SchulhalbjahrService;
 
-import org.apache.commons.lang.BooleanUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -108,7 +107,7 @@ public class BewertungenController implements ModelAttributes {
         final Klasse klasse = bewertungErfassungsService.getKlasse(klassenId.longValue());
         final Schulhalbjahr schulhalbjahr = schulhalbjahrService.read(halbjahrId);
 
-        if (BooleanUtils.isFalse(schulhalbjahr.isSelectable())) {
+        if (!schulhalbjahr.isSelectable()) {
             redirectAttributes.addFlashAttribute("message",
                     "Das Schulhalbjahr ist nicht mehr selektierbar.");
             return URL.redirectWithNamedParams(URL.ZeugnisPath.START,
