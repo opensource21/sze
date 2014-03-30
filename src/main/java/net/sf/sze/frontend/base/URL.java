@@ -426,6 +426,44 @@ public final class URL {
     }
 
     /**
+     * All URLS for the {@link ZeugnisFormular}.
+     *
+     */
+    public interface ZeugnisFormular {
+
+        /**
+         * Home-Url.
+         */
+        String HOME = "/zeugnisFormular";
+
+        /**
+         * Parametername for the halbjahrs-id.
+         */
+        String P_ZEUGNISFORMULAR_ID = "zeugnisFormularId";
+
+        /**
+         * Edit-Url.
+         */
+        String EDIT = HOME + "/edit/{" + P_ZEUGNISFORMULAR_ID + "}";
+
+        /**
+         * Show-Url.
+         */
+        String SHOW = HOME + "/show/{" + P_ZEUGNISFORMULAR_ID + "}";
+
+        /**
+         * Delete-Url.
+         */
+        String DELETE = HOME + "/delete";
+
+        /** List-URL. */
+        String LIST = HOME + "/list";
+
+        /** Create URL. */
+        String CREATE = HOME + "/create";
+    }
+
+    /**
      * Replace all parameters in the URL with the given values.
      *
      * @param url the URL.
