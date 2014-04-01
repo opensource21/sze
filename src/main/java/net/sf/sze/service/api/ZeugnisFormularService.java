@@ -5,6 +5,10 @@
 
 package net.sf.sze.service.api;
 
+import java.util.List;
+
+import net.sf.sze.model.stammdaten.Klasse;
+import net.sf.sze.model.zeugnis.Schulhalbjahr;
 import net.sf.sze.model.zeugnis.ZeugnisFormular;
 
 import org.springframework.data.domain.Page;
@@ -51,6 +55,19 @@ public interface ZeugnisFormularService {
      *
      */
     void delete(Long zeugnisFormularId);
+
+    /**
+     * Liefert die Liste aller aktiven Klassen.
+     * @param zeugnisFormular das Zeugnisformular.
+     * @return die Liste aller Klassen
+     */
+    List<Klasse> getActiveClasses(ZeugnisFormular zeugnisFormular);
+
+    /**
+     * Liefert das neueste Schulhalbjahr.
+     * @return das neuste Schulhalbjahr.
+     */
+    Schulhalbjahr getNewestSchulhalbjahr();
 
 
 }

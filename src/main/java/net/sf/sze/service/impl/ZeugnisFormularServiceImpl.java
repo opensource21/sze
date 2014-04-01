@@ -5,12 +5,20 @@
 
 package net.sf.sze.service.impl;
 
+import java.util.Calendar;
+import java.util.List;
+
 import javax.annotation.Resource;
 
+import net.sf.sze.dao.api.stammdaten.KlasseDao;
+import net.sf.sze.dao.api.zeugnis.SchulhalbjahrDao;
 import net.sf.sze.dao.api.zeugnis.ZeugnisFormularDao;
+import net.sf.sze.model.stammdaten.Klasse;
+import net.sf.sze.model.zeugnis.Schulhalbjahr;
 import net.sf.sze.model.zeugnis.ZeugnisFormular;
 import net.sf.sze.service.api.ZeugnisFormularService;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -23,10 +31,25 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class ZeugnisFormularServiceImpl implements ZeugnisFormularService {
 
+    /** Minimales Schuljahr. */
+    @Value("${schuljahre.min}")
+    private int minimalesSchuljahr;
+
+    /** Maximales Schuljahr. */
+    @Value("${schuljahre.max}")
+    private int maximalesSchuljahr;
 
     /** Das Dao für {@link ZeugnisFormular}. */
     @Resource
     private ZeugnisFormularDao zeugnisFormularDao;
+
+    /** Das Dao für {@link Klasse}.*/
+    @Resource
+    private KlasseDao klasseDao;
+
+    /** Das Dao für {@link Schulhalbjahr}.*/
+    @Resource
+    private SchulhalbjahrDao schulhalbjahrDao;
 
 
 
@@ -64,5 +87,41 @@ public class ZeugnisFormularServiceImpl implements ZeugnisFormularService {
     public void delete(Long zeugnisFormularId) {
         final ZeugnisFormular oldZeugnisFormular = zeugnisFormularDao.findOne(zeugnisFormularId);
         zeugnisFormularDao.delete(oldZeugnisFormular);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<Klasse> getActiveClasses(ZeugnisFormular zeugnisFormular) {
+        final Schulhalbjahr schulhalbjahr = zeugnisFormular.getSchulhalbjahr();
+        final int currentJahr;
+        if (schulhalbjahr != null) {
+            currentJahr = schulhalbjahr.getJahr();
+        } else {
+            currentJahr = Calendar.getInstance().get(Calendar.YEAR);
+        }
+        final List<Klasse> klassen = klasseDao
+                .findAllByJahrgangBetweenAndGeschlossen(currentJahr
+                - maximalesSchuljahr, currentJahr - minimalesSchuljahr, false);
+        if (zeugnisFormular.getKlasse() != null && klassen.contains(zeugnisFormular.getKlasse())) {
+            klassen.add(0, zeugnisFormular.getKlasse());
+        }
+        return klassen;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Schulhalbjahr getNewestSchulhalbjahr() {
+        int currentJahr = Calendar.getInstance().get(Calendar.YEAR);
+        final List<Schulhalbjahr> schulhalbjahre = schulhalbjahrDao.
+                findAllByJahrGreaterThanOrderByJahrDescHalbjahrDesc(currentJahr - 2);
+        if (schulhalbjahre.size() > 0) {
+            return schulhalbjahre.get(0);
+        } else {
+            return null;
+        }
     }
 }

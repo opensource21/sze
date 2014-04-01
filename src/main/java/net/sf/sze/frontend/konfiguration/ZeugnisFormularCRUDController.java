@@ -97,6 +97,7 @@ public class ZeugnisFormularCRUDController {
     @RequestMapping(value = URL.ZeugnisFormular.CREATE, method = RequestMethod.GET)
     public String create(Model model) {
         final ZeugnisFormular zeugnisFormular = new ZeugnisFormular();
+        zeugnisFormular.setSchulhalbjahr(zeugnisFormularService.getNewestSchulhalbjahr());
         addStandardModelData(zeugnisFormular, URL.ZeugnisFormular.CREATE, false,
                     model);
         return SCHULHALBJAHR_FORM;
@@ -204,6 +205,8 @@ public class ZeugnisFormularCRUDController {
         if (zeugnisFormular == null) {
             throw new ResourceNotFoundException();
         }
+        model.addAttribute("klassenListe", zeugnisFormularService.
+                getActiveClasses(zeugnisFormular));
         model.addAttribute("zeugnisFormular", zeugnisFormular);
         model.addAttribute("disabled", Boolean.valueOf(disabled));
         model.addAttribute("saveUrl", saveUrl);
