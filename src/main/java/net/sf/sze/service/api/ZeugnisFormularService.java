@@ -69,5 +69,12 @@ public interface ZeugnisFormularService {
      */
     Schulhalbjahr getNewestSchulhalbjahr();
 
+    /**
+     * Liefert aller aktiven Schulhalbjahre.
+     * @param zeugnisFormular aktuelles Zeugnisformular.
+     * @return alle aktiven Schulhalbjahre.
+     */
+    List<Schulhalbjahr> getActiveSchulhalbjahre(ZeugnisFormular zeugnisFormular);
+
 
 }

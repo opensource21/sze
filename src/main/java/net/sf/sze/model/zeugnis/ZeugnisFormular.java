@@ -332,8 +332,15 @@ public class ZeugnisFormular extends VersionedModel implements Serializable,
     // ********************************************************************
     @Override
     public String toString() {
-        return beschreibung + " Hj: " + schulhalbjahr + " Klasse: " + klasse
-                .calculateKlassenname(schulhalbjahr.getJahr());
+
+        final String klassenStr;
+        if (klasse != null && schulhalbjahr != null) {
+            klassenStr = klasse
+                    .calculateKlassenname(schulhalbjahr.getJahr());
+        } else {
+            klassenStr = "unbekannt " + klasse + " in " + schulhalbjahr;
+        }
+        return beschreibung + " Hj: " + schulhalbjahr + " Klasse: " + klassenStr;
     }
 
     @Override

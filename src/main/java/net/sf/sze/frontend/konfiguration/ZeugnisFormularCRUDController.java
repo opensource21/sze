@@ -207,6 +207,8 @@ public class ZeugnisFormularCRUDController {
         }
         model.addAttribute("klassenListe", zeugnisFormularService.
                 getActiveClasses(zeugnisFormular));
+        model.addAttribute("schulhalbjahre", zeugnisFormularService.
+                getActiveSchulhalbjahre(zeugnisFormular));
         model.addAttribute("zeugnisFormular", zeugnisFormular);
         model.addAttribute("disabled", Boolean.valueOf(disabled));
         model.addAttribute("saveUrl", saveUrl);

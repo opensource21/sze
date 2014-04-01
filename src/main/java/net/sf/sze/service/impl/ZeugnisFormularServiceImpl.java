@@ -104,7 +104,7 @@ public class ZeugnisFormularServiceImpl implements ZeugnisFormularService {
         final List<Klasse> klassen = klasseDao
                 .findAllByJahrgangBetweenAndGeschlossen(currentJahr
                 - maximalesSchuljahr, currentJahr - minimalesSchuljahr, false);
-        if (zeugnisFormular.getKlasse() != null && klassen.contains(zeugnisFormular.getKlasse())) {
+        if (zeugnisFormular.getKlasse() != null && !klassen.contains(zeugnisFormular.getKlasse())) {
             klassen.add(0, zeugnisFormular.getKlasse());
         }
         return klassen;
@@ -123,5 +123,20 @@ public class ZeugnisFormularServiceImpl implements ZeugnisFormularService {
         } else {
             return null;
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<Schulhalbjahr> getActiveSchulhalbjahre(
+            ZeugnisFormular zeugnisFormular) {
+        final List<Schulhalbjahr> halbjahre = schulhalbjahrDao.
+                findAllBySelectableOrderByJahrDescHalbjahrDesc(true);
+        if (zeugnisFormular.getSchulhalbjahr() != null
+                && !halbjahre.contains(zeugnisFormular.getSchulhalbjahr())) {
+            halbjahre.add(0, zeugnisFormular.getSchulhalbjahr());
+        }
+        return halbjahre;
     }
 }
