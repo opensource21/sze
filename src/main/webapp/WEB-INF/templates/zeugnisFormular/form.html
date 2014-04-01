@@ -70,6 +70,9 @@ tags - a list of selectable tag
             <!-- schulfachDetailInfos : List Wichtig hier muss man auch neue Anlegen können und damit
             auf eine weitere Seite kommen. Damit ist der Zeugnisdetailinfo-Controller auch zu erstellen :-(
             <SchulfachDetailInfo> zeugnis : List<Zeugnis> Hier immer lesend die Zeugnisse zeigen-->
+            <ul bs:field="zeugnis">
+                <li th:each="item : *{zeugnis}"  th:text="${item}"></li>
+            </ul>
             <button type="submit" th:formaction="@{${saveUrl}}" class="btn"
                 th:unless="${disabled || saveUrl == null}">
                 <i class="save"></i>Speichern
