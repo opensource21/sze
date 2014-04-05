@@ -50,7 +50,7 @@ tags - a list of selectable tag
             </select>
             <select bs:field="klasse" th:unless="${disabled}">
                 <option th:each="item : ${klassenListe}" th:value="${item.id}" th:text="${item}"
-                    th:classappend="${item.id==zeugnisFormular.klasse.id}? 'highlight'"
+                    th:classappend="${item.id==zeugnisFormular?.klasse?.id}? 'highlight'"
                     th:disabled="${item.geschlossen}"></option>
             </select>
             <input type="text" bs:field="templateFileName"

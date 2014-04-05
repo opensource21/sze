@@ -120,7 +120,7 @@ public class ZeugnisFormularCRUDController {
      * @return String which defines the next page.
      */
     @RequestMapping(value = URL.ZeugnisFormular.CREATE, method = RequestMethod.POST)
-    public String insert(@ModelAttribute("ZeugnisFormular") ZeugnisFormular zeugnisFormular,
+    public String insert(@ModelAttribute("zeugnisFormular") ZeugnisFormular zeugnisFormular,
             BindingResult result, Model model) {
         validator.validate(zeugnisFormular, result);
 
