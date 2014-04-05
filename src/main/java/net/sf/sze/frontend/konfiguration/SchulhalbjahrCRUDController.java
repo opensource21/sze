@@ -135,7 +135,7 @@ public class SchulhalbjahrCRUDController {
      * @return String which defines the next page.
      */
     @RequestMapping(value = URL.Schulhalbjahr.CREATE, method = RequestMethod.POST)
-    public String insert(@ModelAttribute("Schulhalbjahr") Schulhalbjahr schulhalbjahr,
+    public String insert(@ModelAttribute("schulhalbjahr") Schulhalbjahr schulhalbjahr,
             BindingResult result, Model model) {
         validator.validate(schulhalbjahr, result);
 
