@@ -11,7 +11,7 @@ import org.thymeleaf.spring3.SpringTemplateEngine;
 import org.thymeleaf.spring3.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
-import de.ppi.fuwesta.thymeleaf.bootstrap.BootstrapDialect;
+import de.ppi.fuwesta.thymeleaf.bootstrap2.Bootstrap2Dialect;
 
 /**
  * Configuration of Thymeleaf.
@@ -58,7 +58,7 @@ public class ThymeleafConfig {
         SpringTemplateEngine ste = new SpringTemplateEngine();
         ste.setTemplateResolver(templateResolver());
         ste.addDialect(new LayoutDialect());
-        ste.addDialect(new BootstrapDialect());
+        ste.addDialect(new Bootstrap2Dialect());
         return ste;
     }
 

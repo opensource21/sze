@@ -6,6 +6,7 @@
 package net.sf.sze.frontend.konfiguration;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import net.sf.sze.frontend.base.ModelAttributes;
 import net.sf.sze.frontend.base.URL;
@@ -28,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import de.ppi.fuwesta.spring.mvc.bind.ServletBindingService;
 import de.ppi.fuwesta.spring.mvc.util.PageWrapper;
 import de.ppi.fuwesta.spring.mvc.util.ResourceNotFoundException;
 
@@ -54,6 +56,12 @@ public class ZeugnisFormularCRUDController {
      */
     @Resource
     private ZeugnisFormularService zeugnisFormularService;
+
+    /**
+     * Small service which helps to bind requestdata to an object.
+     */
+    @Resource
+    private ServletBindingService servletBindingService;
 
     /**
      * The generic validator.
@@ -218,23 +226,20 @@ public class ZeugnisFormularCRUDController {
      * Update a ZeugnisFormular.
      *
      * @param zeugnisFormular the ZeugnisFormular.
-     * @param result the bindings result.
+     * @param request request-data
      * @param model the model
      * @return String which defines the next page.
      */
     @RequestMapping(value = URL.ZeugnisFormular.EDIT, method = RequestMethod.POST)
-    public String update(@ModelAttribute("zeugnisFormular") ZeugnisFormular zeugnisFormular,
-            BindingResult result, Model model) {
-        validator.validate(zeugnisFormular, result);
-
-        if (result.hasErrors()) {
+    public String update(@RequestParam("id") ZeugnisFormular zeugnisFormular,
+            HttpServletRequest request, Model model) {
+        if (servletBindingService.bindAndValidate(request, model, zeugnisFormular,
+                "zeugnisFormular").hasErrors()) {
             addStandardModelData(zeugnisFormular, URL.filledURL(URL.ZeugnisFormular.EDIT,
                     zeugnisFormular.getId()), false, model);
             return SCHULHALBJAHR_FORM;
         }
-
         LOG.debug("Update ZeugnisFormular: " + zeugnisFormular);
-
         zeugnisFormularService.save(zeugnisFormular);
 
         return URL.redirect(URL.ZeugnisFormular.LIST);

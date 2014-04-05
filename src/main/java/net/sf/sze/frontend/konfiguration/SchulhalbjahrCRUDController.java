@@ -8,6 +8,7 @@ package net.sf.sze.frontend.konfiguration;
 import java.util.Calendar;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import net.sf.sze.frontend.base.ModelAttributes;
 import net.sf.sze.frontend.base.URL;
@@ -31,6 +32,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import de.ppi.fuwesta.spring.mvc.bind.ServletBindingService;
 import de.ppi.fuwesta.spring.mvc.util.PageWrapper;
 import de.ppi.fuwesta.spring.mvc.util.ResourceNotFoundException;
 
@@ -57,6 +59,12 @@ public class SchulhalbjahrCRUDController {
      */
     @Resource
     private SchulhalbjahrService schulhalbjahrService;
+
+    /**
+     * Small service which helps to bind requestdata to an object.
+     */
+    @Resource
+    private ServletBindingService servletBindingService;
 
     /**
      * The generic validator.
@@ -236,16 +244,15 @@ public class SchulhalbjahrCRUDController {
      * Update a Schulhalbjahr.
      *
      * @param schulhalbjahr the Schulhalbjahr.
-     * @param result the bindings result.
+     * @param request the request-data
      * @param model the model
      * @return String which defines the next page.
      */
     @RequestMapping(value = URL.Schulhalbjahr.EDIT, method = RequestMethod.POST)
-    public String update(@ModelAttribute("schulhalbjahr") Schulhalbjahr schulhalbjahr,
-            BindingResult result, Model model) {
-        validator.validate(schulhalbjahr, result);
-
-        if (result.hasErrors()) {
+    public String update(@RequestParam("id") Schulhalbjahr schulhalbjahr,
+            HttpServletRequest request, Model model) {
+        if (servletBindingService.bindAndValidate(request, model, schulhalbjahr, "schulhalbjahr")
+                .hasErrors()) {
             addStandardModelData(schulhalbjahr, URL.filledURL(URL.Schulhalbjahr.EDIT,
                     schulhalbjahr.getId()), false, model);
             return SCHULHALBJAHR_FORM;
