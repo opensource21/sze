@@ -4,6 +4,8 @@
 // (c) SZE-Development Team
 package net.sf.sze.dbunit;
 
+import java.sql.DatabaseMetaData;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,6 +34,8 @@ import net.sf.sze.dbunit.rowbuilder.ZEUGNIS_FORMULARRowBuilder;
 
 import org.dbunit.AbstractDatabaseTester;
 import org.dbunit.Assertion;
+import org.dbunit.DatabaseUnitException;
+import org.dbunit.DefaultOperationListener;
 import org.dbunit.IDatabaseTester;
 import org.dbunit.database.DatabaseConfig;
 import org.dbunit.database.IDatabaseConnection;
@@ -42,11 +46,13 @@ import org.dbunit.dataset.ITableIterator;
 import org.dbunit.dataset.SortedTable;
 import org.dbunit.ext.h2.H2Connection;
 import org.dbunit.ext.mssql.InsertIdentityOperation;
+import org.dbunit.ext.mysql.MySqlConnection;
 import org.dbunit.operation.DatabaseOperation;
 import org.dbunit.validator.ValidatorFailureHandler;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
@@ -60,6 +66,13 @@ public abstract class AbstractSzeDbUnitTest extends AbstractJUnit4SpringContextT
 
     @Resource
     private DataSource dataSource;
+
+    /**
+     * DB-Schema.
+     */
+    @Value("${db.schema}")
+    private String schema;
+
 
     private static IDatabaseTester databaseTester = null;
 
@@ -121,13 +134,25 @@ public abstract class AbstractSzeDbUnitTest extends AbstractJUnit4SpringContextT
     @Before
     public void initDatabase() throws Exception {
         if (databaseTester == null) {
-            databaseTester = new H2DatabaseTester(dataSource);
+            databaseTester = new GenericDatabaseTester(dataSource, schema);
+            setUpDatabaseConfig(databaseTester.getConnection().getConfig());
+
         }
         if (deleteDataSet == null) {
             deleteDataSet = new SzeDataSet(databaseTester.getConnection().createDataSet());
         }
 
         //SzeDataSet.printTableNames(databaseTester.getConnection());
+    }
+
+    /**
+     * Override method to set custom properties/features
+     */
+    protected void setUpDatabaseConfig(DatabaseConfig config) {
+        config.setProperty(DatabaseConfig.PROPERTY_BATCH_SIZE,
+                Integer.valueOf(100));
+        config.setProperty(DatabaseConfig.FEATURE_BATCHED_STATEMENTS,
+                Boolean.TRUE);
     }
 
     /**
@@ -168,6 +193,9 @@ public abstract class AbstractSzeDbUnitTest extends AbstractJUnit4SpringContextT
         while (expectdTables.next()) {
             final String tableName = expectdTables.getTable().getTableMetaData().getTableName();
             final String[] uk = tableToUniqueKey.get(tableName);
+            if (uk ==null) {
+                throw new IllegalStateException("You must define a unique-key for each table.");
+            }
             final ITable expectedTable  = new SortedTable(expected.getTable(tableName), uk);
             final ITable actualTable = new SortedTable(actual.getTable(tableName), uk);
             Assertion.assertEquals(expectedTable, actualTable, new ValidatorFailureHandler());
@@ -196,28 +224,56 @@ public abstract class AbstractSzeDbUnitTest extends AbstractJUnit4SpringContextT
 
 
     /**
-     *  Class H2DatabaseTester.
+     * Class GenericDatabaseTester.
      *
      */
-    private class H2DatabaseTester extends AbstractDatabaseTester {
+    private class GenericDatabaseTester extends AbstractDatabaseTester {
 
-        private final DataSource dataSource;
+        public static final String PRODUCT_H2 = "H2";
+        public static final String PRODUCT_MYSQL = "MySQL";
 
-        public H2DatabaseTester(DataSource dataSource) {
+        private final IDatabaseConnection connection;
+
+        public GenericDatabaseTester(DataSource dataSource, String schema)
+                throws DatabaseUnitException, SQLException {
             super();
-            this.dataSource = dataSource;
+            DatabaseMetaData metaData = dataSource.getConnection()
+                    .getMetaData();
+            final String productName = metaData.getDatabaseProductName();
+            setOperationListener(new DefaultOperationListener() {
+                @Override
+                public void operationSetUpFinished(
+                        IDatabaseConnection aConnection) {
+                    // Do not invoke the "super" method to avoid that the
+                    // connection is closed
+                }
+
+                @Override
+                public void operationTearDownFinished(
+                        IDatabaseConnection aConnection) {
+                    // Do not invoke the "super" method to avoid that the
+                    // connection is closed
+                }
+            });
+            if (PRODUCT_H2.equals(productName)) {
+                connection = new H2Connection(dataSource.getConnection(),
+                        schema);
+            } else if (PRODUCT_MYSQL.equals(productName)) {
+                connection = new MySqlConnection(dataSource.getConnection(),
+                        schema);
+            } else {
+                throw new IllegalStateException("Der Treiber " + productName
+                        + " ist unbekannt.");
+            }
         }
 
         @Override
         public IDatabaseConnection getConnection() throws Exception {
-            final IDatabaseConnection connection =
-                    new H2Connection(dataSource.getConnection(), getSchema());
-            String id = "http://www.dbunit.org/features/batchedStatements";
-            DatabaseConfig config = connection.getConfig();
-            config.setProperty(id, Boolean.TRUE);
             return connection;
         }
+
     }
+
 
 
 
