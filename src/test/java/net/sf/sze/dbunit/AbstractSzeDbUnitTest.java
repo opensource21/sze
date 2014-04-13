@@ -126,6 +126,8 @@ public abstract class AbstractSzeDbUnitTest extends AbstractJUnit4SpringContextT
         if (deleteDataSet == null) {
             deleteDataSet = new SzeDataSet(databaseTester.getConnection().createDataSet());
         }
+
+        //SzeDataSet.printTableNames(databaseTester.getConnection());
     }
 
     /**

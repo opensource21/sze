@@ -42,4 +42,11 @@ public interface SchulhalbjahrDao
      * @return das Schulhalbjahr.
      */
     Schulhalbjahr findByJahrAndHalbjahr(int jahr, Halbjahr halbjahr);
+
+    /**
+     * The newest {@link Schulhalbjahr}.
+     * @param year referenceyear.
+     * @return first year of the list.
+     */
+    List<Schulhalbjahr> findAllByJahrGreaterThanOrderByJahrDescHalbjahrDesc(int year);
 }

@@ -6,6 +6,7 @@
 package net.sf.sze.model.zeugnis;
 
 import de.ppi.fuwesta.jpa.helper.VersionedModel;
+import de.ppi.fuwesta.oval.validation.Unique;
 
 import org.apache.commons.lang.builder.CompareToBuilder;
 
@@ -32,22 +33,19 @@ public class Schulhalbjahr extends VersionedModel implements Serializable,
      * Das Jahr in dem die Zeugnisse für das Schuljahr erstellt werden.
      */
     @Column(nullable = false)
-    // TODO Gui-Darstellung mit CB 2000..2050, besser Default raten.
-    private int jahr;
+    private Integer jahr;
 
     /**
      * erstes oder 2.Halbjahr.
      */
     @Column(nullable = false)
-
+    @Unique(value = "jahr", message = "validation.unique.schuljahr")
     private Halbjahr halbjahr;
 
     /**
      * Kennzeichen, ob diese Jahr in der Auswahlliste erscheinen soll.
      */
-    @Column(nullable = false)
-
-    private Boolean selectable = Boolean.FALSE;
+    private boolean selectable = false;
 
     /**
      * Gets the erstes oder 2.
@@ -74,7 +72,7 @@ public class Schulhalbjahr extends VersionedModel implements Serializable,
      *         werden
      */
     public int getJahr() {
-        return this.jahr;
+        return this.jahr.intValue();
     }
 
     /**
@@ -84,7 +82,7 @@ public class Schulhalbjahr extends VersionedModel implements Serializable,
      *            erstellt werden
      */
     public void setJahr(final int jahr) {
-        this.jahr = jahr;
+        this.jahr = Integer.valueOf(jahr);
     }
 
     /**
@@ -93,7 +91,7 @@ public class Schulhalbjahr extends VersionedModel implements Serializable,
      * @return the kennzeichen, ob diese Jahr in der Auswahlliste erscheinen
      *         soll
      */
-    public Boolean getSelectable() {
+    public boolean isSelectable() {
         return this.selectable;
     }
 
@@ -103,7 +101,7 @@ public class Schulhalbjahr extends VersionedModel implements Serializable,
      * @param selectable the new kennzeichen, ob diese Jahr in der Auswahlliste
      *            erscheinen soll
      */
-    public void setSelectable(final Boolean selectable) {
+    public void setSelectable(final boolean selectable) {
         this.selectable = selectable;
     }
 
@@ -117,7 +115,7 @@ public class Schulhalbjahr extends VersionedModel implements Serializable,
 
     @Override
     public String toString() {
-        return (jahr - 1) + "/" + jahr % 100 + " " + halbjahr;
+        return (jahr.intValue() - 1) + "/" + jahr.intValue() % 100 + " " + halbjahr;
     }
 
     /**
@@ -125,7 +123,7 @@ public class Schulhalbjahr extends VersionedModel implements Serializable,
      * @return der relative Pfad.
      */
     public String createRelativePathName() {
-        return (jahr - 1) + "-" + jahr % 100 + "/" + halbjahr
+        return (jahr.intValue() - 1) + "-" + jahr.intValue() % 100 + "/" + halbjahr
                 .createRelativePathName();
     }
 
@@ -156,7 +154,6 @@ public class Schulhalbjahr extends VersionedModel implements Serializable,
      * @return das Schuljahr.
      */
     public String getSchuljahr() {
-        return (jahr - 1) + "/" + Integer.toString(jahr)
-                .substring(2, 4);
+        return (jahr.intValue() - 1) + "/" + jahr.toString().substring(2, 4);
     }
 }

@@ -12,6 +12,10 @@ select[readonly="readonly"].show, input[readonly="readonly"].show {
     text-align: left;
 }
 
+.highlight {
+    font-weight: bold;
+}
+
 #header {
     display: table;
 }

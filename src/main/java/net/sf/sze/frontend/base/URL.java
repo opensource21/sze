@@ -5,16 +5,17 @@
 
 package net.sf.sze.frontend.base;
 
-import de.ppi.fuwesta.spring.mvc.util.UrlDefinitionsToMessages.ParamFormat;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 import net.sf.sze.model.zeugnis.Bewertung;
 import net.sf.sze.model.zeugnis.SchulamtsBemerkung;
 
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import de.ppi.fuwesta.spring.mvc.util.UrlDefinitionsToMessages.ParamFormat;
 
 /**
  * List of all URLs.
@@ -383,6 +384,82 @@ public final class URL {
         String LIST = HOME + "/list";
 
         /** Create User-URL. */
+        String CREATE = HOME + "/create";
+    }
+
+    /**
+     * All URLS for the {@link Schulhalbjahr}.
+     *
+     */
+    public interface Schulhalbjahr {
+
+        /**
+         * Home-Url.
+         */
+        String HOME = "/schulhalbjahr";
+
+        /**
+         * Parametername for the halbjahrs-id.
+         */
+        String P_SCHULHALBJAHR_ID = "schulhalbjahrId";
+
+        /**
+         * Edit-Url.
+         */
+        String EDIT = HOME + "/edit/{" + P_SCHULHALBJAHR_ID + "}";
+
+        /**
+         * Show-Url.
+         */
+        String SHOW = HOME + "/show/{" + P_SCHULHALBJAHR_ID + "}";
+
+        /**
+         * Delete-Url.
+         */
+        String DELETE = HOME + "/delete";
+
+        /** List-URL. */
+        String LIST = HOME + "/list";
+
+        /** Create URL. */
+        String CREATE = HOME + "/create";
+    }
+
+    /**
+     * All URLS for the {@link ZeugnisFormular}.
+     *
+     */
+    public interface ZeugnisFormular {
+
+        /**
+         * Home-Url.
+         */
+        String HOME = "/zeugnisFormular";
+
+        /**
+         * Parametername for the halbjahrs-id.
+         */
+        String P_ZEUGNISFORMULAR_ID = "zeugnisFormularId";
+
+        /**
+         * Edit-Url.
+         */
+        String EDIT = HOME + "/edit/{" + P_ZEUGNISFORMULAR_ID + "}";
+
+        /**
+         * Show-Url.
+         */
+        String SHOW = HOME + "/show/{" + P_ZEUGNISFORMULAR_ID + "}";
+
+        /**
+         * Delete-Url.
+         */
+        String DELETE = HOME + "/delete";
+
+        /** List-URL. */
+        String LIST = HOME + "/list";
+
+        /** Create URL. */
         String CREATE = HOME + "/create";
     }
 

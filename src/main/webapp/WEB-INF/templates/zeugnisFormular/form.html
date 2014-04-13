@@ -1,0 +1,93 @@
+<!-- Parameter:
+zeugnisFormular - ein zeugnisFormular
+
+disabled - flag if the view should be editable.
+saveUrl - die URL zum speichern.
+users - a list of selectable user
+tags - a list of selectable tag
+ -->
+<!DOCTYPE HTML>
+<html lang="de-DE" xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+    layout:decorator="/main">
+<head>
+<script th:inline="javascript">
+    $(function() {
+        $('.datepicker').datepicker(
+                {
+                    showOn : "both",
+                    buttonImage : /*[[@{/resources/css/calendar.gif}]]*/ '../../../../resources/css/calendar.gif',
+                    buttonImageOnly : true,
+                    dayNamesMin : [ "So", "Mo", "Di", "Mi", "Do", "Fr", "Sa" ],
+                    monthNamesShort : [ "Jan", "Feb", "Mrz", "Apr", "Mai",
+                            "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez" ],
+                    dateFormat : "dd.mm.yy",
+                    changeMonth : true,
+                    changeYear : true,
+                    showWeek : true,
+                    firstDay : 1
+                });
+    });
+</script>
+
+</head>
+<body>
+    <div layout:fragment="content">
+        <h3 th:text="#{zeugnisFormular.form.title}"></h3>
+        <form class="well form-horizontal" method="post"
+            th:object="${zeugnisFormular}">
+            <div th:replace="/fragments::error"></div>
+
+            <input id="id" type="hidden" th:value="*{id}" name="id" />
+            <input id="version" type="hidden" th:value="*{version}"
+                name="version" />
+            <input type="text" bs:field="beschreibung" th:disabled="${disabled}" />
+
+            <!-- Hier die Listen füllen-->
+            <select bs:field="schulhalbjahr" th:unless="${disabled}">
+                <option th:each="item : ${schulhalbjahre}" th:value="${item.id}" th:text="${item}"
+                    th:classappend="${item.id==zeugnisFormular.schulhalbjahr.id}? 'highlight'"></option>
+            </select>
+            <select bs:field="klasse" th:unless="${disabled}">
+                <option th:each="item : ${klassenListe}" th:value="${item.id}" th:text="${item}"
+                    th:classappend="${item.id==zeugnisFormular?.klasse?.id}? 'highlight'"
+                    th:disabled="${item.geschlossen}"></option>
+            </select>
+            <input type="text" bs:field="templateFileName"
+                th:disabled="${disabled}" />
+            <input type="text" class="datepicker" bs:field="ausgabeDatum"
+                th:disabled="${disabled}" />
+            <input type="text" class="datepicker"
+                bs:field="nachteilsAusgleichsDatum" th:disabled="${disabled}" />
+            <textarea rows="5" class="span4" bs:field="leitspruch"
+                th:disabled="${disabled}" />
+            <input type="text" bs:field="quelleLeitspruch"
+                th:disabled="${disabled}" />
+            <textarea rows="5" class="span4" bs:field="leitspruch2"
+                th:disabled="${disabled}" />
+            <input type="text" bs:field="quelleLeitspruch2"
+                th:disabled="${disabled}" />
+            <!-- schulfachDetailInfos : List Wichtig hier muss man auch neue Anlegen können und damit
+            auf eine weitere Seite kommen. Damit ist der Zeugnisdetailinfo-Controller auch zu erstellen :-(
+            <SchulfachDetailInfo> zeugnis : List<Zeugnis> Hier immer lesend die Zeugnisse zeigen-->
+            <ul bs:field="zeugnis">
+                <li th:each="item : *{zeugnis}"  th:text="${item}"></li>
+            </ul>
+            <button type="submit" th:formaction="@{${saveUrl}}" class="btn"
+                th:unless="${disabled || saveUrl == null}">
+                <i class="save"></i>Speichern
+            </button>
+            <a th:href="@{|__#{nurl.zeugnisformular.edit}__|}" class="btn" th:if="${disabled}">
+                <i class="edit"></i>Bearbeiten
+            </a>
+            <a th:href="@{#{nurl.zeugnisformular.list}}" class="btn">
+                <i class="cancel"></i>Abbrechen
+            </a>
+            <th:block
+                th:include="/fragments::deletebutton(#{nurl.zeugnisformular.delete})"></th:block>
+        </form>
+
+
+    </div>
+</body>
+</html>

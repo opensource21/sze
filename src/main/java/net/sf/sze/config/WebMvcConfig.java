@@ -35,6 +35,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
+import de.ppi.fuwesta.spring.mvc.bind.ServletBindingService;
 import de.ppi.fuwesta.spring.mvc.formatter.NonEmptyStringAnnotationFormatterFactory;
 import de.ppi.fuwesta.spring.mvc.oval.DbCheckConfigurer;
 import de.ppi.fuwesta.spring.mvc.oval.JPAAnnotationsConfigurer;
@@ -220,5 +221,15 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
     public DomainClassConverter<?> domainClassConverter() {
         return new DomainClassConverter<FormattingConversionService>(
                 mvcConversionService());
+    }
+
+    /**
+     * Creates a small service to bind request data to an object.
+     *
+     * @return the binding service.
+     */
+    @Bean
+    public ServletBindingService servletBindingService() {
+        return new ServletBindingService();
     }
 }

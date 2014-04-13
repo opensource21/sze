@@ -6,15 +6,13 @@
 package net.sf.sze.model.zeugnis;
 
 import de.ppi.fuwesta.jpa.helper.VersionedModel;
-
+import de.ppi.fuwesta.oval.validation.Unique;
 import net.sf.sze.model.stammdaten.Klasse;
 
 import org.apache.commons.lang.builder.CompareToBuilder;
 
 import java.io.Serializable;
-
-import java.sql.Date;
-
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -39,11 +37,12 @@ public class ZeugnisFormular extends VersionedModel implements Serializable,
 
     /** The beschreibung. */
     @Column(nullable = false, length = 50)
+    @Unique(value = "schulhalbjahr, klasse",
+        message = "validation.unique.schuljahr_klasse")
     private String beschreibung;
 
     /** The template file name. */
     @Column(name = "template_file_name", nullable = false, length = 255)
-
     private String templateFileName;
 
     /** Defaultfall für diese Klasse kann im Zeugnis überschrieben werden. */
@@ -64,12 +63,10 @@ public class ZeugnisFormular extends VersionedModel implements Serializable,
 
     /** Defaultfall für diese Klasse kann im Zeugnis überschrieben werden. */
     @Column(name = "ausgabe_datum", nullable = false)
-
     private Date ausgabeDatum;
 
     /** The nachteils ausgleichs datum. */
     @Column(name = "nachteils_ausgleichs_datum", nullable = false)
-
     private Date nachteilsAusgleichsDatum;
 
     // bi-directional many-to-one association to SchulfachDetailInfo
@@ -89,7 +86,6 @@ public class ZeugnisFormular extends VersionedModel implements Serializable,
     /** The klasse. */
     @ManyToOne(optional = false)
     @JoinColumn(name = "klasse_id", nullable = false)
-
     private Klasse klasse;
 
     // bi-directional many-to-one association to Schulhalbjahr
@@ -332,8 +328,15 @@ public class ZeugnisFormular extends VersionedModel implements Serializable,
     // ********************************************************************
     @Override
     public String toString() {
-        return beschreibung + " Hj: " + schulhalbjahr + " Klasse: " + klasse
-                .calculateKlassenname(schulhalbjahr.getJahr());
+
+        final String klassenStr;
+        if (klasse != null && schulhalbjahr != null) {
+            klassenStr = klasse
+                    .calculateKlassenname(schulhalbjahr.getJahr());
+        } else {
+            klassenStr = "unbekannt " + klasse + " in " + schulhalbjahr;
+        }
+        return beschreibung + " Hj: " + schulhalbjahr + " Klasse: " + klassenStr;
     }
 
     @Override

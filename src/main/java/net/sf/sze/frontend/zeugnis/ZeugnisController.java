@@ -149,7 +149,6 @@ public class ZeugnisController implements ModelAttributes {
         final List<Klasse> klassen = zeugnisErfassungsService.getActiveKlassen(
                 halbjahre);
         Collections.sort(klassen);
-        Collections.sort(halbjahre);
         model.addAttribute("klassen", klassen);
         model.addAttribute("halbjahre", halbjahre);
         model.addAttribute("helpMessageId", "help.chooseClass");
