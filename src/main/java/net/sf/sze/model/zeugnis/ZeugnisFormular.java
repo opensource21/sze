@@ -21,6 +21,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
 /**
@@ -62,10 +64,12 @@ public class ZeugnisFormular extends VersionedModel implements Serializable,
     private String quelleLeitspruch2;
 
     /** Defaultfall für diese Klasse kann im Zeugnis überschrieben werden. */
+    @Temporal(TemporalType.DATE)
     @Column(name = "ausgabe_datum", nullable = false)
     private Date ausgabeDatum;
 
     /** The nachteils ausgleichs datum. */
+    @Temporal(TemporalType.DATE)
     @Column(name = "nachteils_ausgleichs_datum", nullable = false)
     private Date nachteilsAusgleichsDatum;
 
