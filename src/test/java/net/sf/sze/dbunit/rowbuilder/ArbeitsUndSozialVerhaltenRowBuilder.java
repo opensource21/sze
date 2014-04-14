@@ -3,7 +3,7 @@ package net.sf.sze.dbunit.rowbuilder;
 import org.dbunit.dataset.builder.BasicDataRowBuilder;
 import org.dbunit.validator.IValidator;
 
-public class ARBEITS_UND_SOZIAL_VERHALTENRowBuilder extends BasicDataRowBuilder {
+public class ArbeitsUndSozialVerhaltenRowBuilder extends BasicDataRowBuilder {
 
     public static final String TABLE_NAME = "ARBEITS_UND_SOZIAL_VERHALTEN";
 
@@ -18,7 +18,7 @@ public class ARBEITS_UND_SOZIAL_VERHALTENRowBuilder extends BasicDataRowBuilder 
 
     public static final String[] ALL_COLUMNS = {C_ID, C_KLASSENSTUFEN, C_NAME, C_SORTIERUNG, C_TYP, C_VERSION};
 
-    public ARBEITS_UND_SOZIAL_VERHALTENRowBuilder(String... identifierColumns) {
+    public ArbeitsUndSozialVerhaltenRowBuilder(String... identifierColumns) {
         super(TABLE_NAME, identifierColumns);
         setAllColumnNames(ALL_COLUMNS);
         addDefaultValue(C_NAME, "");
@@ -29,73 +29,73 @@ public class ARBEITS_UND_SOZIAL_VERHALTENRowBuilder extends BasicDataRowBuilder 
         addDefaultValue(C_SORTIERUNG, new Long("0"));
     }
 
-    public final ARBEITS_UND_SOZIAL_VERHALTENRowBuilder ID (Long value) {
+    public final ArbeitsUndSozialVerhaltenRowBuilder Id (Long value) {
         with(C_ID, value);
         return this;
     }
 
-    public final ARBEITS_UND_SOZIAL_VERHALTENRowBuilder ID (IValidator<?> value) {
+    public final ArbeitsUndSozialVerhaltenRowBuilder Id (IValidator<?> value) {
         with(C_ID, value);
         return this;
     }
 
-    public final ARBEITS_UND_SOZIAL_VERHALTENRowBuilder KLASSENSTUFEN (String value) {
+    public final ArbeitsUndSozialVerhaltenRowBuilder Klassenstufen (String value) {
         with(C_KLASSENSTUFEN, value);
         return this;
     }
 
-    public final ARBEITS_UND_SOZIAL_VERHALTENRowBuilder KLASSENSTUFEN (IValidator<?> value) {
+    public final ArbeitsUndSozialVerhaltenRowBuilder Klassenstufen (IValidator<?> value) {
         with(C_KLASSENSTUFEN, value);
         return this;
     }
 
-    public final ARBEITS_UND_SOZIAL_VERHALTENRowBuilder NAME (String value) {
+    public final ArbeitsUndSozialVerhaltenRowBuilder Name (String value) {
         with(C_NAME, value);
         return this;
     }
 
-    public final ARBEITS_UND_SOZIAL_VERHALTENRowBuilder NAME (IValidator<?> value) {
+    public final ArbeitsUndSozialVerhaltenRowBuilder Name (IValidator<?> value) {
         with(C_NAME, value);
         return this;
     }
 
-    public final ARBEITS_UND_SOZIAL_VERHALTENRowBuilder SORTIERUNG (Long value) {
+    public final ArbeitsUndSozialVerhaltenRowBuilder Sortierung (Long value) {
         with(C_SORTIERUNG, value);
         return this;
     }
 
-    public final ARBEITS_UND_SOZIAL_VERHALTENRowBuilder SORTIERUNG (IValidator<?> value) {
+    public final ArbeitsUndSozialVerhaltenRowBuilder Sortierung (IValidator<?> value) {
         with(C_SORTIERUNG, value);
         return this;
     }
 
-    public final ARBEITS_UND_SOZIAL_VERHALTENRowBuilder TYP (Integer value) {
+    public final ArbeitsUndSozialVerhaltenRowBuilder Typ (Integer value) {
         with(C_TYP, value);
         return this;
     }
 
-    public final ARBEITS_UND_SOZIAL_VERHALTENRowBuilder TYP (IValidator<?> value) {
+    public final ArbeitsUndSozialVerhaltenRowBuilder Typ (IValidator<?> value) {
         with(C_TYP, value);
         return this;
     }
 
-    public final ARBEITS_UND_SOZIAL_VERHALTENRowBuilder VERSION (Long value) {
+    public final ArbeitsUndSozialVerhaltenRowBuilder Version (Long value) {
         with(C_VERSION, value);
         return this;
     }
 
-    public final ARBEITS_UND_SOZIAL_VERHALTENRowBuilder VERSION (IValidator<?> value) {
+    public final ArbeitsUndSozialVerhaltenRowBuilder Version (IValidator<?> value) {
         with(C_VERSION, value);
         return this;
     }
 
 
-    public static ARBEITS_UND_SOZIAL_VERHALTENRowBuilder newARBEITS_UND_SOZIAL_VERHALTEN() {
-        return new ARBEITS_UND_SOZIAL_VERHALTENRowBuilder(PRIMARY_KEY);
+    public static ArbeitsUndSozialVerhaltenRowBuilder newArbeitsUndSozialVerhalten() {
+        return new ArbeitsUndSozialVerhaltenRowBuilder(PRIMARY_KEY);
     }
 
-    public static ARBEITS_UND_SOZIAL_VERHALTENRowBuilder newARBEITS_UND_SOZIAL_VERHALTEN(String... identifierColumns) {
-        return new ARBEITS_UND_SOZIAL_VERHALTENRowBuilder(identifierColumns);
+    public static ArbeitsUndSozialVerhaltenRowBuilder newArbeitsUndSozialVerhalten(String... identifierColumns) {
+        return new ArbeitsUndSozialVerhaltenRowBuilder(identifierColumns);
     }
 
 }

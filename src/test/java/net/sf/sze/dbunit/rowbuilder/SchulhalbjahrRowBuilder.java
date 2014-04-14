@@ -3,7 +3,7 @@ package net.sf.sze.dbunit.rowbuilder;
 import org.dbunit.dataset.builder.BasicDataRowBuilder;
 import org.dbunit.validator.IValidator;
 
-public class SCHULHALBJAHRRowBuilder extends BasicDataRowBuilder {
+public class SchulhalbjahrRowBuilder extends BasicDataRowBuilder {
 
     public static final String TABLE_NAME = "SCHULHALBJAHR";
 
@@ -17,7 +17,7 @@ public class SCHULHALBJAHRRowBuilder extends BasicDataRowBuilder {
 
     public static final String[] ALL_COLUMNS = {C_HALBJAHR, C_ID, C_JAHR, C_SELECTABLE, C_VERSION};
 
-    public SCHULHALBJAHRRowBuilder(String... identifierColumns) {
+    public SchulhalbjahrRowBuilder(String... identifierColumns) {
         super(TABLE_NAME, identifierColumns);
         setAllColumnNames(ALL_COLUMNS);
         addDefaultValue(C_VERSION, new Long("0"));
@@ -27,63 +27,63 @@ public class SCHULHALBJAHRRowBuilder extends BasicDataRowBuilder {
         addDefaultValue(C_HALBJAHR, new Integer("0"));
     }
 
-    public final SCHULHALBJAHRRowBuilder HALBJAHR (Integer value) {
+    public final SchulhalbjahrRowBuilder Halbjahr (Integer value) {
         with(C_HALBJAHR, value);
         return this;
     }
 
-    public final SCHULHALBJAHRRowBuilder HALBJAHR (IValidator<?> value) {
+    public final SchulhalbjahrRowBuilder Halbjahr (IValidator<?> value) {
         with(C_HALBJAHR, value);
         return this;
     }
 
-    public final SCHULHALBJAHRRowBuilder ID (Long value) {
+    public final SchulhalbjahrRowBuilder Id (Long value) {
         with(C_ID, value);
         return this;
     }
 
-    public final SCHULHALBJAHRRowBuilder ID (IValidator<?> value) {
+    public final SchulhalbjahrRowBuilder Id (IValidator<?> value) {
         with(C_ID, value);
         return this;
     }
 
-    public final SCHULHALBJAHRRowBuilder JAHR (Integer value) {
+    public final SchulhalbjahrRowBuilder Jahr (Integer value) {
         with(C_JAHR, value);
         return this;
     }
 
-    public final SCHULHALBJAHRRowBuilder JAHR (IValidator<?> value) {
+    public final SchulhalbjahrRowBuilder Jahr (IValidator<?> value) {
         with(C_JAHR, value);
         return this;
     }
 
-    public final SCHULHALBJAHRRowBuilder SELECTABLE (Boolean value) {
+    public final SchulhalbjahrRowBuilder Selectable (Boolean value) {
         with(C_SELECTABLE, value);
         return this;
     }
 
-    public final SCHULHALBJAHRRowBuilder SELECTABLE (IValidator<?> value) {
+    public final SchulhalbjahrRowBuilder Selectable (IValidator<?> value) {
         with(C_SELECTABLE, value);
         return this;
     }
 
-    public final SCHULHALBJAHRRowBuilder VERSION (Long value) {
+    public final SchulhalbjahrRowBuilder Version (Long value) {
         with(C_VERSION, value);
         return this;
     }
 
-    public final SCHULHALBJAHRRowBuilder VERSION (IValidator<?> value) {
+    public final SchulhalbjahrRowBuilder Version (IValidator<?> value) {
         with(C_VERSION, value);
         return this;
     }
 
 
-    public static SCHULHALBJAHRRowBuilder newSCHULHALBJAHR() {
-        return new SCHULHALBJAHRRowBuilder(PRIMARY_KEY);
+    public static SchulhalbjahrRowBuilder newSchulhalbjahr() {
+        return new SchulhalbjahrRowBuilder(PRIMARY_KEY);
     }
 
-    public static SCHULHALBJAHRRowBuilder newSCHULHALBJAHR(String... identifierColumns) {
-        return new SCHULHALBJAHRRowBuilder(identifierColumns);
+    public static SchulhalbjahrRowBuilder newSchulhalbjahr(String... identifierColumns) {
+        return new SchulhalbjahrRowBuilder(identifierColumns);
     }
 
 }

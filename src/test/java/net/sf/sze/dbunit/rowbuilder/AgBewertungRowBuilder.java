@@ -3,7 +3,7 @@ package net.sf.sze.dbunit.rowbuilder;
 import org.dbunit.dataset.builder.BasicDataRowBuilder;
 import org.dbunit.validator.IValidator;
 
-public class AG_BEWERTUNGRowBuilder extends BasicDataRowBuilder {
+public class AgBewertungRowBuilder extends BasicDataRowBuilder {
 
     public static final String TABLE_NAME = "AG_BEWERTUNG";
 
@@ -17,7 +17,7 @@ public class AG_BEWERTUNGRowBuilder extends BasicDataRowBuilder {
 
     public static final String[] ALL_COLUMNS = {C_ARBEITSGRUPPE_ID, C_ID, C_TEILGENOMMEN, C_VERSION, C_ZEUGNIS_ID};
 
-    public AG_BEWERTUNGRowBuilder(String... identifierColumns) {
+    public AgBewertungRowBuilder(String... identifierColumns) {
         super(TABLE_NAME, identifierColumns);
         setAllColumnNames(ALL_COLUMNS);
         addDefaultValue(C_VERSION, new Long("0"));
@@ -27,63 +27,63 @@ public class AG_BEWERTUNGRowBuilder extends BasicDataRowBuilder {
         addDefaultValue(C_ARBEITSGRUPPE_ID, new Long("0"));
     }
 
-    public final AG_BEWERTUNGRowBuilder ARBEITSGRUPPE_ID (Long value) {
+    public final AgBewertungRowBuilder ArbeitsgruppeId (Long value) {
         with(C_ARBEITSGRUPPE_ID, value);
         return this;
     }
 
-    public final AG_BEWERTUNGRowBuilder ARBEITSGRUPPE_ID (IValidator<?> value) {
+    public final AgBewertungRowBuilder ArbeitsgruppeId (IValidator<?> value) {
         with(C_ARBEITSGRUPPE_ID, value);
         return this;
     }
 
-    public final AG_BEWERTUNGRowBuilder ID (Long value) {
+    public final AgBewertungRowBuilder Id (Long value) {
         with(C_ID, value);
         return this;
     }
 
-    public final AG_BEWERTUNGRowBuilder ID (IValidator<?> value) {
+    public final AgBewertungRowBuilder Id (IValidator<?> value) {
         with(C_ID, value);
         return this;
     }
 
-    public final AG_BEWERTUNGRowBuilder TEILGENOMMEN (Boolean value) {
+    public final AgBewertungRowBuilder Teilgenommen (Boolean value) {
         with(C_TEILGENOMMEN, value);
         return this;
     }
 
-    public final AG_BEWERTUNGRowBuilder TEILGENOMMEN (IValidator<?> value) {
+    public final AgBewertungRowBuilder Teilgenommen (IValidator<?> value) {
         with(C_TEILGENOMMEN, value);
         return this;
     }
 
-    public final AG_BEWERTUNGRowBuilder VERSION (Long value) {
+    public final AgBewertungRowBuilder Version (Long value) {
         with(C_VERSION, value);
         return this;
     }
 
-    public final AG_BEWERTUNGRowBuilder VERSION (IValidator<?> value) {
+    public final AgBewertungRowBuilder Version (IValidator<?> value) {
         with(C_VERSION, value);
         return this;
     }
 
-    public final AG_BEWERTUNGRowBuilder ZEUGNIS_ID (Long value) {
+    public final AgBewertungRowBuilder ZeugnisId (Long value) {
         with(C_ZEUGNIS_ID, value);
         return this;
     }
 
-    public final AG_BEWERTUNGRowBuilder ZEUGNIS_ID (IValidator<?> value) {
+    public final AgBewertungRowBuilder ZeugnisId (IValidator<?> value) {
         with(C_ZEUGNIS_ID, value);
         return this;
     }
 
 
-    public static AG_BEWERTUNGRowBuilder newAG_BEWERTUNG() {
-        return new AG_BEWERTUNGRowBuilder(PRIMARY_KEY);
+    public static AgBewertungRowBuilder newAgBewertung() {
+        return new AgBewertungRowBuilder(PRIMARY_KEY);
     }
 
-    public static AG_BEWERTUNGRowBuilder newAG_BEWERTUNG(String... identifierColumns) {
-        return new AG_BEWERTUNGRowBuilder(identifierColumns);
+    public static AgBewertungRowBuilder newAgBewertung(String... identifierColumns) {
+        return new AgBewertungRowBuilder(identifierColumns);
     }
 
 }

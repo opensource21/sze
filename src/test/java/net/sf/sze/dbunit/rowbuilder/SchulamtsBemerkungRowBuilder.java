@@ -3,7 +3,7 @@ package net.sf.sze.dbunit.rowbuilder;
 import org.dbunit.dataset.builder.BasicDataRowBuilder;
 import org.dbunit.validator.IValidator;
 
-public class SCHULAMTS_BEMERKUNGRowBuilder extends BasicDataRowBuilder {
+public class SchulamtsBemerkungRowBuilder extends BasicDataRowBuilder {
 
     public static final String TABLE_NAME = "SCHULAMTS_BEMERKUNG";
 
@@ -20,7 +20,7 @@ public class SCHULAMTS_BEMERKUNGRowBuilder extends BasicDataRowBuilder {
 
     public static final String[] ALL_COLUMNS = {C_ER_SIE_STATT_NAMEN, C_FREI_TEXT, C_ID, C_SCHULAMTS_BAUSTEIN_ID, C_SCHULAMT_ID, C_SORTIERUNG, C_VERSION, C_ZEUGNIS_ID};
 
-    public SCHULAMTS_BEMERKUNGRowBuilder(String... identifierColumns) {
+    public SchulamtsBemerkungRowBuilder(String... identifierColumns) {
         super(TABLE_NAME, identifierColumns);
         setAllColumnNames(ALL_COLUMNS);
         addDefaultValue(C_SCHULAMT_ID, new Long("0"));
@@ -32,93 +32,93 @@ public class SCHULAMTS_BEMERKUNGRowBuilder extends BasicDataRowBuilder {
         addDefaultValue(C_SCHULAMTS_BAUSTEIN_ID, new Long("0"));
     }
 
-    public final SCHULAMTS_BEMERKUNGRowBuilder ER_SIE_STATT_NAMEN (Boolean value) {
+    public final SchulamtsBemerkungRowBuilder ErSieStattNamen (Boolean value) {
         with(C_ER_SIE_STATT_NAMEN, value);
         return this;
     }
 
-    public final SCHULAMTS_BEMERKUNGRowBuilder ER_SIE_STATT_NAMEN (IValidator<?> value) {
+    public final SchulamtsBemerkungRowBuilder ErSieStattNamen (IValidator<?> value) {
         with(C_ER_SIE_STATT_NAMEN, value);
         return this;
     }
 
-    public final SCHULAMTS_BEMERKUNGRowBuilder FREI_TEXT (String value) {
+    public final SchulamtsBemerkungRowBuilder FreiText (String value) {
         with(C_FREI_TEXT, value);
         return this;
     }
 
-    public final SCHULAMTS_BEMERKUNGRowBuilder FREI_TEXT (IValidator<?> value) {
+    public final SchulamtsBemerkungRowBuilder FreiText (IValidator<?> value) {
         with(C_FREI_TEXT, value);
         return this;
     }
 
-    public final SCHULAMTS_BEMERKUNGRowBuilder ID (Long value) {
+    public final SchulamtsBemerkungRowBuilder Id (Long value) {
         with(C_ID, value);
         return this;
     }
 
-    public final SCHULAMTS_BEMERKUNGRowBuilder ID (IValidator<?> value) {
+    public final SchulamtsBemerkungRowBuilder Id (IValidator<?> value) {
         with(C_ID, value);
         return this;
     }
 
-    public final SCHULAMTS_BEMERKUNGRowBuilder SCHULAMTS_BAUSTEIN_ID (Long value) {
+    public final SchulamtsBemerkungRowBuilder SchulamtsBausteinId (Long value) {
         with(C_SCHULAMTS_BAUSTEIN_ID, value);
         return this;
     }
 
-    public final SCHULAMTS_BEMERKUNGRowBuilder SCHULAMTS_BAUSTEIN_ID (IValidator<?> value) {
+    public final SchulamtsBemerkungRowBuilder SchulamtsBausteinId (IValidator<?> value) {
         with(C_SCHULAMTS_BAUSTEIN_ID, value);
         return this;
     }
 
-    public final SCHULAMTS_BEMERKUNGRowBuilder SCHULAMT_ID (Long value) {
+    public final SchulamtsBemerkungRowBuilder SchulamtId (Long value) {
         with(C_SCHULAMT_ID, value);
         return this;
     }
 
-    public final SCHULAMTS_BEMERKUNGRowBuilder SCHULAMT_ID (IValidator<?> value) {
+    public final SchulamtsBemerkungRowBuilder SchulamtId (IValidator<?> value) {
         with(C_SCHULAMT_ID, value);
         return this;
     }
 
-    public final SCHULAMTS_BEMERKUNGRowBuilder SORTIERUNG (Long value) {
+    public final SchulamtsBemerkungRowBuilder Sortierung (Long value) {
         with(C_SORTIERUNG, value);
         return this;
     }
 
-    public final SCHULAMTS_BEMERKUNGRowBuilder SORTIERUNG (IValidator<?> value) {
+    public final SchulamtsBemerkungRowBuilder Sortierung (IValidator<?> value) {
         with(C_SORTIERUNG, value);
         return this;
     }
 
-    public final SCHULAMTS_BEMERKUNGRowBuilder VERSION (Long value) {
+    public final SchulamtsBemerkungRowBuilder Version (Long value) {
         with(C_VERSION, value);
         return this;
     }
 
-    public final SCHULAMTS_BEMERKUNGRowBuilder VERSION (IValidator<?> value) {
+    public final SchulamtsBemerkungRowBuilder Version (IValidator<?> value) {
         with(C_VERSION, value);
         return this;
     }
 
-    public final SCHULAMTS_BEMERKUNGRowBuilder ZEUGNIS_ID (Long value) {
+    public final SchulamtsBemerkungRowBuilder ZeugnisId (Long value) {
         with(C_ZEUGNIS_ID, value);
         return this;
     }
 
-    public final SCHULAMTS_BEMERKUNGRowBuilder ZEUGNIS_ID (IValidator<?> value) {
+    public final SchulamtsBemerkungRowBuilder ZeugnisId (IValidator<?> value) {
         with(C_ZEUGNIS_ID, value);
         return this;
     }
 
 
-    public static SCHULAMTS_BEMERKUNGRowBuilder newSCHULAMTS_BEMERKUNG() {
-        return new SCHULAMTS_BEMERKUNGRowBuilder(PRIMARY_KEY);
+    public static SchulamtsBemerkungRowBuilder newSchulamtsBemerkung() {
+        return new SchulamtsBemerkungRowBuilder(PRIMARY_KEY);
     }
 
-    public static SCHULAMTS_BEMERKUNGRowBuilder newSCHULAMTS_BEMERKUNG(String... identifierColumns) {
-        return new SCHULAMTS_BEMERKUNGRowBuilder(identifierColumns);
+    public static SchulamtsBemerkungRowBuilder newSchulamtsBemerkung(String... identifierColumns) {
+        return new SchulamtsBemerkungRowBuilder(identifierColumns);
     }
 
 }

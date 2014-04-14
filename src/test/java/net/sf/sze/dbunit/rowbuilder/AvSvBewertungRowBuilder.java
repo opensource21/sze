@@ -3,7 +3,7 @@ package net.sf.sze.dbunit.rowbuilder;
 import org.dbunit.dataset.builder.BasicDataRowBuilder;
 import org.dbunit.validator.IValidator;
 
-public class AV_SV_BEWERTUNGRowBuilder extends BasicDataRowBuilder {
+public class AvSvBewertungRowBuilder extends BasicDataRowBuilder {
 
     public static final String TABLE_NAME = "AV_SV_BEWERTUNG";
 
@@ -17,7 +17,7 @@ public class AV_SV_BEWERTUNGRowBuilder extends BasicDataRowBuilder {
 
     public static final String[] ALL_COLUMNS = {C_ARBEITS_UND_SOZIAL_VERHALTEN_ID, C_BEURTEILUNG, C_ID, C_VERSION, C_ZEUGNIS_ID};
 
-    public AV_SV_BEWERTUNGRowBuilder(String... identifierColumns) {
+    public AvSvBewertungRowBuilder(String... identifierColumns) {
         super(TABLE_NAME, identifierColumns);
         setAllColumnNames(ALL_COLUMNS);
         addDefaultValue(C_VERSION, new Long("0"));
@@ -26,63 +26,63 @@ public class AV_SV_BEWERTUNGRowBuilder extends BasicDataRowBuilder {
         addDefaultValue(C_ARBEITS_UND_SOZIAL_VERHALTEN_ID, new Long("0"));
     }
 
-    public final AV_SV_BEWERTUNGRowBuilder ARBEITS_UND_SOZIAL_VERHALTEN_ID (Long value) {
+    public final AvSvBewertungRowBuilder ArbeitsUndSozialVerhaltenId (Long value) {
         with(C_ARBEITS_UND_SOZIAL_VERHALTEN_ID, value);
         return this;
     }
 
-    public final AV_SV_BEWERTUNGRowBuilder ARBEITS_UND_SOZIAL_VERHALTEN_ID (IValidator<?> value) {
+    public final AvSvBewertungRowBuilder ArbeitsUndSozialVerhaltenId (IValidator<?> value) {
         with(C_ARBEITS_UND_SOZIAL_VERHALTEN_ID, value);
         return this;
     }
 
-    public final AV_SV_BEWERTUNGRowBuilder BEURTEILUNG (Integer value) {
+    public final AvSvBewertungRowBuilder Beurteilung (Integer value) {
         with(C_BEURTEILUNG, value);
         return this;
     }
 
-    public final AV_SV_BEWERTUNGRowBuilder BEURTEILUNG (IValidator<?> value) {
+    public final AvSvBewertungRowBuilder Beurteilung (IValidator<?> value) {
         with(C_BEURTEILUNG, value);
         return this;
     }
 
-    public final AV_SV_BEWERTUNGRowBuilder ID (Long value) {
+    public final AvSvBewertungRowBuilder Id (Long value) {
         with(C_ID, value);
         return this;
     }
 
-    public final AV_SV_BEWERTUNGRowBuilder ID (IValidator<?> value) {
+    public final AvSvBewertungRowBuilder Id (IValidator<?> value) {
         with(C_ID, value);
         return this;
     }
 
-    public final AV_SV_BEWERTUNGRowBuilder VERSION (Long value) {
+    public final AvSvBewertungRowBuilder Version (Long value) {
         with(C_VERSION, value);
         return this;
     }
 
-    public final AV_SV_BEWERTUNGRowBuilder VERSION (IValidator<?> value) {
+    public final AvSvBewertungRowBuilder Version (IValidator<?> value) {
         with(C_VERSION, value);
         return this;
     }
 
-    public final AV_SV_BEWERTUNGRowBuilder ZEUGNIS_ID (Long value) {
+    public final AvSvBewertungRowBuilder ZeugnisId (Long value) {
         with(C_ZEUGNIS_ID, value);
         return this;
     }
 
-    public final AV_SV_BEWERTUNGRowBuilder ZEUGNIS_ID (IValidator<?> value) {
+    public final AvSvBewertungRowBuilder ZeugnisId (IValidator<?> value) {
         with(C_ZEUGNIS_ID, value);
         return this;
     }
 
 
-    public static AV_SV_BEWERTUNGRowBuilder newAV_SV_BEWERTUNG() {
-        return new AV_SV_BEWERTUNGRowBuilder(PRIMARY_KEY);
+    public static AvSvBewertungRowBuilder newAvSvBewertung() {
+        return new AvSvBewertungRowBuilder(PRIMARY_KEY);
     }
 
-    public static AV_SV_BEWERTUNGRowBuilder newAV_SV_BEWERTUNG(String... identifierColumns) {
-        return new AV_SV_BEWERTUNGRowBuilder(identifierColumns);
+    public static AvSvBewertungRowBuilder newAvSvBewertung(String... identifierColumns) {
+        return new AvSvBewertungRowBuilder(identifierColumns);
     }
 
 }

@@ -3,7 +3,7 @@ package net.sf.sze.dbunit.rowbuilder;
 import org.dbunit.dataset.builder.BasicDataRowBuilder;
 import org.dbunit.validator.IValidator;
 
-public class SCHULAMTRowBuilder extends BasicDataRowBuilder {
+public class SchulamtRowBuilder extends BasicDataRowBuilder {
 
     public static final String TABLE_NAME = "SCHULAMT";
 
@@ -17,7 +17,7 @@ public class SCHULAMTRowBuilder extends BasicDataRowBuilder {
 
     public static final String[] ALL_COLUMNS = {C_AKTIV, C_BESCHREIBENDER_SATZ, C_ID, C_NAME, C_VERSION};
 
-    public SCHULAMTRowBuilder(String... identifierColumns) {
+    public SchulamtRowBuilder(String... identifierColumns) {
         super(TABLE_NAME, identifierColumns);
         setAllColumnNames(ALL_COLUMNS);
         addDefaultValue(C_AKTIV, Boolean.FALSE);
@@ -27,63 +27,63 @@ public class SCHULAMTRowBuilder extends BasicDataRowBuilder {
         addDefaultValue(C_ID, new Long("0"));
     }
 
-    public final SCHULAMTRowBuilder AKTIV (Boolean value) {
+    public final SchulamtRowBuilder Aktiv (Boolean value) {
         with(C_AKTIV, value);
         return this;
     }
 
-    public final SCHULAMTRowBuilder AKTIV (IValidator<?> value) {
+    public final SchulamtRowBuilder Aktiv (IValidator<?> value) {
         with(C_AKTIV, value);
         return this;
     }
 
-    public final SCHULAMTRowBuilder BESCHREIBENDER_SATZ (String value) {
+    public final SchulamtRowBuilder BeschreibenderSatz (String value) {
         with(C_BESCHREIBENDER_SATZ, value);
         return this;
     }
 
-    public final SCHULAMTRowBuilder BESCHREIBENDER_SATZ (IValidator<?> value) {
+    public final SchulamtRowBuilder BeschreibenderSatz (IValidator<?> value) {
         with(C_BESCHREIBENDER_SATZ, value);
         return this;
     }
 
-    public final SCHULAMTRowBuilder ID (Long value) {
+    public final SchulamtRowBuilder Id (Long value) {
         with(C_ID, value);
         return this;
     }
 
-    public final SCHULAMTRowBuilder ID (IValidator<?> value) {
+    public final SchulamtRowBuilder Id (IValidator<?> value) {
         with(C_ID, value);
         return this;
     }
 
-    public final SCHULAMTRowBuilder NAME (String value) {
+    public final SchulamtRowBuilder Name (String value) {
         with(C_NAME, value);
         return this;
     }
 
-    public final SCHULAMTRowBuilder NAME (IValidator<?> value) {
+    public final SchulamtRowBuilder Name (IValidator<?> value) {
         with(C_NAME, value);
         return this;
     }
 
-    public final SCHULAMTRowBuilder VERSION (Long value) {
+    public final SchulamtRowBuilder Version (Long value) {
         with(C_VERSION, value);
         return this;
     }
 
-    public final SCHULAMTRowBuilder VERSION (IValidator<?> value) {
+    public final SchulamtRowBuilder Version (IValidator<?> value) {
         with(C_VERSION, value);
         return this;
     }
 
 
-    public static SCHULAMTRowBuilder newSCHULAMT() {
-        return new SCHULAMTRowBuilder(PRIMARY_KEY);
+    public static SchulamtRowBuilder newSchulamt() {
+        return new SchulamtRowBuilder(PRIMARY_KEY);
     }
 
-    public static SCHULAMTRowBuilder newSCHULAMT(String... identifierColumns) {
-        return new SCHULAMTRowBuilder(identifierColumns);
+    public static SchulamtRowBuilder newSchulamt(String... identifierColumns) {
+        return new SchulamtRowBuilder(identifierColumns);
     }
 
 }

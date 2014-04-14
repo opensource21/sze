@@ -4,7 +4,7 @@ import org.dbunit.dataset.builder.BasicDataRowBuilder;
 import org.dbunit.validator.IValidator;
 import java.sql.Timestamp;
 
-public class SCHUELERRowBuilder extends BasicDataRowBuilder {
+public class SchuelerRowBuilder extends BasicDataRowBuilder {
 
     public static final String TABLE_NAME = "SCHUELER";
 
@@ -25,7 +25,7 @@ public class SCHUELERRowBuilder extends BasicDataRowBuilder {
 
     public static final String[] ALL_COLUMNS = {C_ABGANGS_DATUM, C_AUFNAHME_DATUM, C_GEBURTSORT, C_GEBURTSTAG, C_GESCHLECHT, C_ID, C_KLASSE_ID, C_NAME, C_NUMMER, C_RUFNAME, C_VERSION, C_VORNAME};
 
-    public SCHUELERRowBuilder(String... identifierColumns) {
+    public SchuelerRowBuilder(String... identifierColumns) {
         super(TABLE_NAME, identifierColumns);
         setAllColumnNames(ALL_COLUMNS);
         addDefaultValue(C_GEBURTSTAG, new Timestamp(0));
@@ -38,133 +38,133 @@ public class SCHUELERRowBuilder extends BasicDataRowBuilder {
         addDefaultValue(C_GEBURTSORT, "");
     }
 
-    public final SCHUELERRowBuilder ABGANGS_DATUM (Timestamp value) {
+    public final SchuelerRowBuilder AbgangsDatum (Timestamp value) {
         with(C_ABGANGS_DATUM, value);
         return this;
     }
 
-    public final SCHUELERRowBuilder ABGANGS_DATUM (IValidator<?> value) {
+    public final SchuelerRowBuilder AbgangsDatum (IValidator<?> value) {
         with(C_ABGANGS_DATUM, value);
         return this;
     }
 
-    public final SCHUELERRowBuilder AUFNAHME_DATUM (Timestamp value) {
+    public final SchuelerRowBuilder AufnahmeDatum (Timestamp value) {
         with(C_AUFNAHME_DATUM, value);
         return this;
     }
 
-    public final SCHUELERRowBuilder AUFNAHME_DATUM (IValidator<?> value) {
+    public final SchuelerRowBuilder AufnahmeDatum (IValidator<?> value) {
         with(C_AUFNAHME_DATUM, value);
         return this;
     }
 
-    public final SCHUELERRowBuilder GEBURTSORT (String value) {
+    public final SchuelerRowBuilder Geburtsort (String value) {
         with(C_GEBURTSORT, value);
         return this;
     }
 
-    public final SCHUELERRowBuilder GEBURTSORT (IValidator<?> value) {
+    public final SchuelerRowBuilder Geburtsort (IValidator<?> value) {
         with(C_GEBURTSORT, value);
         return this;
     }
 
-    public final SCHUELERRowBuilder GEBURTSTAG (Timestamp value) {
+    public final SchuelerRowBuilder Geburtstag (Timestamp value) {
         with(C_GEBURTSTAG, value);
         return this;
     }
 
-    public final SCHUELERRowBuilder GEBURTSTAG (IValidator<?> value) {
+    public final SchuelerRowBuilder Geburtstag (IValidator<?> value) {
         with(C_GEBURTSTAG, value);
         return this;
     }
 
-    public final SCHUELERRowBuilder GESCHLECHT (Integer value) {
+    public final SchuelerRowBuilder Geschlecht (Integer value) {
         with(C_GESCHLECHT, value);
         return this;
     }
 
-    public final SCHUELERRowBuilder GESCHLECHT (IValidator<?> value) {
+    public final SchuelerRowBuilder Geschlecht (IValidator<?> value) {
         with(C_GESCHLECHT, value);
         return this;
     }
 
-    public final SCHUELERRowBuilder ID (Long value) {
+    public final SchuelerRowBuilder Id (Long value) {
         with(C_ID, value);
         return this;
     }
 
-    public final SCHUELERRowBuilder ID (IValidator<?> value) {
+    public final SchuelerRowBuilder Id (IValidator<?> value) {
         with(C_ID, value);
         return this;
     }
 
-    public final SCHUELERRowBuilder KLASSE_ID (Long value) {
+    public final SchuelerRowBuilder KlasseId (Long value) {
         with(C_KLASSE_ID, value);
         return this;
     }
 
-    public final SCHUELERRowBuilder KLASSE_ID (IValidator<?> value) {
+    public final SchuelerRowBuilder KlasseId (IValidator<?> value) {
         with(C_KLASSE_ID, value);
         return this;
     }
 
-    public final SCHUELERRowBuilder NAME (String value) {
+    public final SchuelerRowBuilder Name (String value) {
         with(C_NAME, value);
         return this;
     }
 
-    public final SCHUELERRowBuilder NAME (IValidator<?> value) {
+    public final SchuelerRowBuilder Name (IValidator<?> value) {
         with(C_NAME, value);
         return this;
     }
 
-    public final SCHUELERRowBuilder NUMMER (Long value) {
+    public final SchuelerRowBuilder Nummer (Long value) {
         with(C_NUMMER, value);
         return this;
     }
 
-    public final SCHUELERRowBuilder NUMMER (IValidator<?> value) {
+    public final SchuelerRowBuilder Nummer (IValidator<?> value) {
         with(C_NUMMER, value);
         return this;
     }
 
-    public final SCHUELERRowBuilder RUFNAME (String value) {
+    public final SchuelerRowBuilder Rufname (String value) {
         with(C_RUFNAME, value);
         return this;
     }
 
-    public final SCHUELERRowBuilder RUFNAME (IValidator<?> value) {
+    public final SchuelerRowBuilder Rufname (IValidator<?> value) {
         with(C_RUFNAME, value);
         return this;
     }
 
-    public final SCHUELERRowBuilder VERSION (Long value) {
+    public final SchuelerRowBuilder Version (Long value) {
         with(C_VERSION, value);
         return this;
     }
 
-    public final SCHUELERRowBuilder VERSION (IValidator<?> value) {
+    public final SchuelerRowBuilder Version (IValidator<?> value) {
         with(C_VERSION, value);
         return this;
     }
 
-    public final SCHUELERRowBuilder VORNAME (String value) {
+    public final SchuelerRowBuilder Vorname (String value) {
         with(C_VORNAME, value);
         return this;
     }
 
-    public final SCHUELERRowBuilder VORNAME (IValidator<?> value) {
+    public final SchuelerRowBuilder Vorname (IValidator<?> value) {
         with(C_VORNAME, value);
         return this;
     }
 
 
-    public static SCHUELERRowBuilder newSCHUELER() {
-        return new SCHUELERRowBuilder(PRIMARY_KEY);
+    public static SchuelerRowBuilder newSchueler() {
+        return new SchuelerRowBuilder(PRIMARY_KEY);
     }
 
-    public static SCHUELERRowBuilder newSCHUELER(String... identifierColumns) {
-        return new SCHUELERRowBuilder(identifierColumns);
+    public static SchuelerRowBuilder newSchueler(String... identifierColumns) {
+        return new SchuelerRowBuilder(identifierColumns);
     }
 
 }

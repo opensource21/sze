@@ -3,7 +3,7 @@ package net.sf.sze.dbunit.rowbuilder;
 import org.dbunit.dataset.builder.BasicDataRowBuilder;
 import org.dbunit.validator.IValidator;
 
-public class SOLBEWERTUNGS_TEXTRowBuilder extends BasicDataRowBuilder {
+public class SolbewertungsTextRowBuilder extends BasicDataRowBuilder {
 
     public static final String TABLE_NAME = "SOLBEWERTUNGS_TEXT";
 
@@ -16,7 +16,7 @@ public class SOLBEWERTUNGS_TEXTRowBuilder extends BasicDataRowBuilder {
 
     public static final String[] ALL_COLUMNS = {C_ID, C_NAME, C_TEXT, C_VERSION};
 
-    public SOLBEWERTUNGS_TEXTRowBuilder(String... identifierColumns) {
+    public SolbewertungsTextRowBuilder(String... identifierColumns) {
         super(TABLE_NAME, identifierColumns);
         setAllColumnNames(ALL_COLUMNS);
         addDefaultValue(C_NAME, "");
@@ -25,53 +25,53 @@ public class SOLBEWERTUNGS_TEXTRowBuilder extends BasicDataRowBuilder {
         addDefaultValue(C_ID, new Long("0"));
     }
 
-    public final SOLBEWERTUNGS_TEXTRowBuilder ID (Long value) {
+    public final SolbewertungsTextRowBuilder Id (Long value) {
         with(C_ID, value);
         return this;
     }
 
-    public final SOLBEWERTUNGS_TEXTRowBuilder ID (IValidator<?> value) {
+    public final SolbewertungsTextRowBuilder Id (IValidator<?> value) {
         with(C_ID, value);
         return this;
     }
 
-    public final SOLBEWERTUNGS_TEXTRowBuilder NAME (String value) {
+    public final SolbewertungsTextRowBuilder Name (String value) {
         with(C_NAME, value);
         return this;
     }
 
-    public final SOLBEWERTUNGS_TEXTRowBuilder NAME (IValidator<?> value) {
+    public final SolbewertungsTextRowBuilder Name (IValidator<?> value) {
         with(C_NAME, value);
         return this;
     }
 
-    public final SOLBEWERTUNGS_TEXTRowBuilder TEXT (String value) {
+    public final SolbewertungsTextRowBuilder Text (String value) {
         with(C_TEXT, value);
         return this;
     }
 
-    public final SOLBEWERTUNGS_TEXTRowBuilder TEXT (IValidator<?> value) {
+    public final SolbewertungsTextRowBuilder Text (IValidator<?> value) {
         with(C_TEXT, value);
         return this;
     }
 
-    public final SOLBEWERTUNGS_TEXTRowBuilder VERSION (Long value) {
+    public final SolbewertungsTextRowBuilder Version (Long value) {
         with(C_VERSION, value);
         return this;
     }
 
-    public final SOLBEWERTUNGS_TEXTRowBuilder VERSION (IValidator<?> value) {
+    public final SolbewertungsTextRowBuilder Version (IValidator<?> value) {
         with(C_VERSION, value);
         return this;
     }
 
 
-    public static SOLBEWERTUNGS_TEXTRowBuilder newSOLBEWERTUNGS_TEXT() {
-        return new SOLBEWERTUNGS_TEXTRowBuilder(PRIMARY_KEY);
+    public static SolbewertungsTextRowBuilder newSolbewertungsText() {
+        return new SolbewertungsTextRowBuilder(PRIMARY_KEY);
     }
 
-    public static SOLBEWERTUNGS_TEXTRowBuilder newSOLBEWERTUNGS_TEXT(String... identifierColumns) {
-        return new SOLBEWERTUNGS_TEXTRowBuilder(identifierColumns);
+    public static SolbewertungsTextRowBuilder newSolbewertungsText(String... identifierColumns) {
+        return new SolbewertungsTextRowBuilder(identifierColumns);
     }
 
 }

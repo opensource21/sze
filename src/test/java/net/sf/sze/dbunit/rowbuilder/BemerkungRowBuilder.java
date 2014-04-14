@@ -3,7 +3,7 @@ package net.sf.sze.dbunit.rowbuilder;
 import org.dbunit.dataset.builder.BasicDataRowBuilder;
 import org.dbunit.validator.IValidator;
 
-public class BEMERKUNGRowBuilder extends BasicDataRowBuilder {
+public class BemerkungRowBuilder extends BasicDataRowBuilder {
 
     public static final String TABLE_NAME = "BEMERKUNG";
 
@@ -19,7 +19,7 @@ public class BEMERKUNGRowBuilder extends BasicDataRowBuilder {
 
     public static final String[] ALL_COLUMNS = {C_BAUSTEIN_ID, C_ER_SIE_STATT_NAMEN, C_FREI_TEXT, C_ID, C_SORTIERUNG, C_VERSION, C_ZEUGNIS_ID};
 
-    public BEMERKUNGRowBuilder(String... identifierColumns) {
+    public BemerkungRowBuilder(String... identifierColumns) {
         super(TABLE_NAME, identifierColumns);
         setAllColumnNames(ALL_COLUMNS);
         addDefaultValue(C_VERSION, new Long("0"));
@@ -30,83 +30,83 @@ public class BEMERKUNGRowBuilder extends BasicDataRowBuilder {
         addDefaultValue(C_BAUSTEIN_ID, new Long("0"));
     }
 
-    public final BEMERKUNGRowBuilder BAUSTEIN_ID (Long value) {
+    public final BemerkungRowBuilder BausteinId (Long value) {
         with(C_BAUSTEIN_ID, value);
         return this;
     }
 
-    public final BEMERKUNGRowBuilder BAUSTEIN_ID (IValidator<?> value) {
+    public final BemerkungRowBuilder BausteinId (IValidator<?> value) {
         with(C_BAUSTEIN_ID, value);
         return this;
     }
 
-    public final BEMERKUNGRowBuilder ER_SIE_STATT_NAMEN (Boolean value) {
+    public final BemerkungRowBuilder ErSieStattNamen (Boolean value) {
         with(C_ER_SIE_STATT_NAMEN, value);
         return this;
     }
 
-    public final BEMERKUNGRowBuilder ER_SIE_STATT_NAMEN (IValidator<?> value) {
+    public final BemerkungRowBuilder ErSieStattNamen (IValidator<?> value) {
         with(C_ER_SIE_STATT_NAMEN, value);
         return this;
     }
 
-    public final BEMERKUNGRowBuilder FREI_TEXT (String value) {
+    public final BemerkungRowBuilder FreiText (String value) {
         with(C_FREI_TEXT, value);
         return this;
     }
 
-    public final BEMERKUNGRowBuilder FREI_TEXT (IValidator<?> value) {
+    public final BemerkungRowBuilder FreiText (IValidator<?> value) {
         with(C_FREI_TEXT, value);
         return this;
     }
 
-    public final BEMERKUNGRowBuilder ID (Long value) {
+    public final BemerkungRowBuilder Id (Long value) {
         with(C_ID, value);
         return this;
     }
 
-    public final BEMERKUNGRowBuilder ID (IValidator<?> value) {
+    public final BemerkungRowBuilder Id (IValidator<?> value) {
         with(C_ID, value);
         return this;
     }
 
-    public final BEMERKUNGRowBuilder SORTIERUNG (Long value) {
+    public final BemerkungRowBuilder Sortierung (Long value) {
         with(C_SORTIERUNG, value);
         return this;
     }
 
-    public final BEMERKUNGRowBuilder SORTIERUNG (IValidator<?> value) {
+    public final BemerkungRowBuilder Sortierung (IValidator<?> value) {
         with(C_SORTIERUNG, value);
         return this;
     }
 
-    public final BEMERKUNGRowBuilder VERSION (Long value) {
+    public final BemerkungRowBuilder Version (Long value) {
         with(C_VERSION, value);
         return this;
     }
 
-    public final BEMERKUNGRowBuilder VERSION (IValidator<?> value) {
+    public final BemerkungRowBuilder Version (IValidator<?> value) {
         with(C_VERSION, value);
         return this;
     }
 
-    public final BEMERKUNGRowBuilder ZEUGNIS_ID (Long value) {
+    public final BemerkungRowBuilder ZeugnisId (Long value) {
         with(C_ZEUGNIS_ID, value);
         return this;
     }
 
-    public final BEMERKUNGRowBuilder ZEUGNIS_ID (IValidator<?> value) {
+    public final BemerkungRowBuilder ZeugnisId (IValidator<?> value) {
         with(C_ZEUGNIS_ID, value);
         return this;
     }
 
 
-    public static BEMERKUNGRowBuilder newBEMERKUNG() {
-        return new BEMERKUNGRowBuilder(PRIMARY_KEY);
+    public static BemerkungRowBuilder newBemerkung() {
+        return new BemerkungRowBuilder(PRIMARY_KEY);
     }
 
-    public static BEMERKUNGRowBuilder newBEMERKUNG(String... identifierColumns) {
-        return new BEMERKUNGRowBuilder(identifierColumns);
+    public static BemerkungRowBuilder newBemerkung(String... identifierColumns) {
+        return new BemerkungRowBuilder(identifierColumns);
     }
 
 }

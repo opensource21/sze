@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 
 import org.dbunit.dataset.builder.CustomRowBuilderGenerator;
+import org.dbunit.dataset.builder.JavaFriendlyNameCreator;
 
 
 /**
@@ -22,7 +23,8 @@ public class SzeRowBuilderGenerator extends CustomRowBuilderGenerator {
      * Initiates an object of type SzeRowBuilderGenerator.
      */
     public SzeRowBuilderGenerator() {
-        super(new File("src/test/java"), "net.sf.sze.dbunit.rowbuilder", "UTF-8");
+        super(new File("src/test/java"), "net.sf.sze.dbunit.rowbuilder", "UTF-8",
+                new JavaFriendlyNameCreator());
         this.addTypeMapping(BigInteger.class, Long.class);
         this.addTypeMapping(BigDecimal.class, Double.class);
     }

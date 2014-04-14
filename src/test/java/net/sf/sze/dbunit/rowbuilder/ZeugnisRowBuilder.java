@@ -4,7 +4,7 @@ import org.dbunit.dataset.builder.BasicDataRowBuilder;
 import org.dbunit.validator.IValidator;
 import java.sql.Timestamp;
 
-public class ZEUGNISRowBuilder extends BasicDataRowBuilder {
+public class ZeugnisRowBuilder extends BasicDataRowBuilder {
 
     public static final String TABLE_NAME = "ZEUGNIS";
 
@@ -34,7 +34,7 @@ public class ZEUGNISRowBuilder extends BasicDataRowBuilder {
 
     public static final String[] ALL_COLUMNS = {C_ANZAHL_FEHLTAGE_GESAMT, C_ANZAHL_FEHLTAGE_UNENTSCHULDIGT, C_ANZAHL_VERSPAETUNGEN, C_BU_BEWERTUNGS_TEXT, C_FORMULAR_ID, C_ID, C_INDIVIDUELLER_LEITSPRUCH, C_INDIVIDUELLER_LEITSPRUCH2, C_INDIVIDUELLES_AUSGABE_DATUM, C_KLASSEN_ZIEL_AUSGESCHLOSSEN, C_KLASSEN_ZIEL_GEFAEHRDET, C_KLASSEN_ZIEL_WURDE_NICHT_ERREICHT, C_KLASSE_ID, C_QUELLE_INDIVIDUELLER_LEITSPRUCH, C_QUELLE_INDIVIDUELLER_LEITSPRUCH2, C_RUECKT_AUF, C_SCHUELER_ID, C_SCHULHALBJAHR_ID, C_SOLBEWERTUNGS_TEXT_ID, C_VERSION, C_ZEUGNIS_ART_ID};
 
-    public ZEUGNISRowBuilder(String... identifierColumns) {
+    public ZeugnisRowBuilder(String... identifierColumns) {
         super(TABLE_NAME, identifierColumns);
         setAllColumnNames(ALL_COLUMNS);
         addDefaultValue(C_ANZAHL_FEHLTAGE_GESAMT, new Integer("0"));
@@ -53,223 +53,223 @@ public class ZEUGNISRowBuilder extends BasicDataRowBuilder {
         addDefaultValue(C_SCHUELER_ID, new Long("0"));
     }
 
-    public final ZEUGNISRowBuilder ANZAHL_FEHLTAGE_GESAMT (Integer value) {
+    public final ZeugnisRowBuilder AnzahlFehltageGesamt (Integer value) {
         with(C_ANZAHL_FEHLTAGE_GESAMT, value);
         return this;
     }
 
-    public final ZEUGNISRowBuilder ANZAHL_FEHLTAGE_GESAMT (IValidator<?> value) {
+    public final ZeugnisRowBuilder AnzahlFehltageGesamt (IValidator<?> value) {
         with(C_ANZAHL_FEHLTAGE_GESAMT, value);
         return this;
     }
 
-    public final ZEUGNISRowBuilder ANZAHL_FEHLTAGE_UNENTSCHULDIGT (Integer value) {
+    public final ZeugnisRowBuilder AnzahlFehltageUnentschuldigt (Integer value) {
         with(C_ANZAHL_FEHLTAGE_UNENTSCHULDIGT, value);
         return this;
     }
 
-    public final ZEUGNISRowBuilder ANZAHL_FEHLTAGE_UNENTSCHULDIGT (IValidator<?> value) {
+    public final ZeugnisRowBuilder AnzahlFehltageUnentschuldigt (IValidator<?> value) {
         with(C_ANZAHL_FEHLTAGE_UNENTSCHULDIGT, value);
         return this;
     }
 
-    public final ZEUGNISRowBuilder ANZAHL_VERSPAETUNGEN (Integer value) {
+    public final ZeugnisRowBuilder AnzahlVerspaetungen (Integer value) {
         with(C_ANZAHL_VERSPAETUNGEN, value);
         return this;
     }
 
-    public final ZEUGNISRowBuilder ANZAHL_VERSPAETUNGEN (IValidator<?> value) {
+    public final ZeugnisRowBuilder AnzahlVerspaetungen (IValidator<?> value) {
         with(C_ANZAHL_VERSPAETUNGEN, value);
         return this;
     }
 
-    public final ZEUGNISRowBuilder BU_BEWERTUNGS_TEXT (String value) {
+    public final ZeugnisRowBuilder BuBewertungsText (String value) {
         with(C_BU_BEWERTUNGS_TEXT, value);
         return this;
     }
 
-    public final ZEUGNISRowBuilder BU_BEWERTUNGS_TEXT (IValidator<?> value) {
+    public final ZeugnisRowBuilder BuBewertungsText (IValidator<?> value) {
         with(C_BU_BEWERTUNGS_TEXT, value);
         return this;
     }
 
-    public final ZEUGNISRowBuilder FORMULAR_ID (Long value) {
+    public final ZeugnisRowBuilder FormularId (Long value) {
         with(C_FORMULAR_ID, value);
         return this;
     }
 
-    public final ZEUGNISRowBuilder FORMULAR_ID (IValidator<?> value) {
+    public final ZeugnisRowBuilder FormularId (IValidator<?> value) {
         with(C_FORMULAR_ID, value);
         return this;
     }
 
-    public final ZEUGNISRowBuilder ID (Long value) {
+    public final ZeugnisRowBuilder Id (Long value) {
         with(C_ID, value);
         return this;
     }
 
-    public final ZEUGNISRowBuilder ID (IValidator<?> value) {
+    public final ZeugnisRowBuilder Id (IValidator<?> value) {
         with(C_ID, value);
         return this;
     }
 
-    public final ZEUGNISRowBuilder INDIVIDUELLER_LEITSPRUCH (String value) {
+    public final ZeugnisRowBuilder IndividuellerLeitspruch (String value) {
         with(C_INDIVIDUELLER_LEITSPRUCH, value);
         return this;
     }
 
-    public final ZEUGNISRowBuilder INDIVIDUELLER_LEITSPRUCH (IValidator<?> value) {
+    public final ZeugnisRowBuilder IndividuellerLeitspruch (IValidator<?> value) {
         with(C_INDIVIDUELLER_LEITSPRUCH, value);
         return this;
     }
 
-    public final ZEUGNISRowBuilder INDIVIDUELLER_LEITSPRUCH2 (String value) {
+    public final ZeugnisRowBuilder IndividuellerLeitspruch2 (String value) {
         with(C_INDIVIDUELLER_LEITSPRUCH2, value);
         return this;
     }
 
-    public final ZEUGNISRowBuilder INDIVIDUELLER_LEITSPRUCH2 (IValidator<?> value) {
+    public final ZeugnisRowBuilder IndividuellerLeitspruch2 (IValidator<?> value) {
         with(C_INDIVIDUELLER_LEITSPRUCH2, value);
         return this;
     }
 
-    public final ZEUGNISRowBuilder INDIVIDUELLES_AUSGABE_DATUM (Timestamp value) {
+    public final ZeugnisRowBuilder IndividuellesAusgabeDatum (Timestamp value) {
         with(C_INDIVIDUELLES_AUSGABE_DATUM, value);
         return this;
     }
 
-    public final ZEUGNISRowBuilder INDIVIDUELLES_AUSGABE_DATUM (IValidator<?> value) {
+    public final ZeugnisRowBuilder IndividuellesAusgabeDatum (IValidator<?> value) {
         with(C_INDIVIDUELLES_AUSGABE_DATUM, value);
         return this;
     }
 
-    public final ZEUGNISRowBuilder KLASSEN_ZIEL_AUSGESCHLOSSEN (Boolean value) {
+    public final ZeugnisRowBuilder KlassenZielAusgeschlossen (Boolean value) {
         with(C_KLASSEN_ZIEL_AUSGESCHLOSSEN, value);
         return this;
     }
 
-    public final ZEUGNISRowBuilder KLASSEN_ZIEL_AUSGESCHLOSSEN (IValidator<?> value) {
+    public final ZeugnisRowBuilder KlassenZielAusgeschlossen (IValidator<?> value) {
         with(C_KLASSEN_ZIEL_AUSGESCHLOSSEN, value);
         return this;
     }
 
-    public final ZEUGNISRowBuilder KLASSEN_ZIEL_GEFAEHRDET (Boolean value) {
+    public final ZeugnisRowBuilder KlassenZielGefaehrdet (Boolean value) {
         with(C_KLASSEN_ZIEL_GEFAEHRDET, value);
         return this;
     }
 
-    public final ZEUGNISRowBuilder KLASSEN_ZIEL_GEFAEHRDET (IValidator<?> value) {
+    public final ZeugnisRowBuilder KlassenZielGefaehrdet (IValidator<?> value) {
         with(C_KLASSEN_ZIEL_GEFAEHRDET, value);
         return this;
     }
 
-    public final ZEUGNISRowBuilder KLASSEN_ZIEL_WURDE_NICHT_ERREICHT (Boolean value) {
+    public final ZeugnisRowBuilder KlassenZielWurdeNichtErreicht (Boolean value) {
         with(C_KLASSEN_ZIEL_WURDE_NICHT_ERREICHT, value);
         return this;
     }
 
-    public final ZEUGNISRowBuilder KLASSEN_ZIEL_WURDE_NICHT_ERREICHT (IValidator<?> value) {
+    public final ZeugnisRowBuilder KlassenZielWurdeNichtErreicht (IValidator<?> value) {
         with(C_KLASSEN_ZIEL_WURDE_NICHT_ERREICHT, value);
         return this;
     }
 
-    public final ZEUGNISRowBuilder KLASSE_ID (Long value) {
+    public final ZeugnisRowBuilder KlasseId (Long value) {
         with(C_KLASSE_ID, value);
         return this;
     }
 
-    public final ZEUGNISRowBuilder KLASSE_ID (IValidator<?> value) {
+    public final ZeugnisRowBuilder KlasseId (IValidator<?> value) {
         with(C_KLASSE_ID, value);
         return this;
     }
 
-    public final ZEUGNISRowBuilder QUELLE_INDIVIDUELLER_LEITSPRUCH (String value) {
+    public final ZeugnisRowBuilder QuelleIndividuellerLeitspruch (String value) {
         with(C_QUELLE_INDIVIDUELLER_LEITSPRUCH, value);
         return this;
     }
 
-    public final ZEUGNISRowBuilder QUELLE_INDIVIDUELLER_LEITSPRUCH (IValidator<?> value) {
+    public final ZeugnisRowBuilder QuelleIndividuellerLeitspruch (IValidator<?> value) {
         with(C_QUELLE_INDIVIDUELLER_LEITSPRUCH, value);
         return this;
     }
 
-    public final ZEUGNISRowBuilder QUELLE_INDIVIDUELLER_LEITSPRUCH2 (String value) {
+    public final ZeugnisRowBuilder QuelleIndividuellerLeitspruch2 (String value) {
         with(C_QUELLE_INDIVIDUELLER_LEITSPRUCH2, value);
         return this;
     }
 
-    public final ZEUGNISRowBuilder QUELLE_INDIVIDUELLER_LEITSPRUCH2 (IValidator<?> value) {
+    public final ZeugnisRowBuilder QuelleIndividuellerLeitspruch2 (IValidator<?> value) {
         with(C_QUELLE_INDIVIDUELLER_LEITSPRUCH2, value);
         return this;
     }
 
-    public final ZEUGNISRowBuilder RUECKT_AUF (Boolean value) {
+    public final ZeugnisRowBuilder RuecktAuf (Boolean value) {
         with(C_RUECKT_AUF, value);
         return this;
     }
 
-    public final ZEUGNISRowBuilder RUECKT_AUF (IValidator<?> value) {
+    public final ZeugnisRowBuilder RuecktAuf (IValidator<?> value) {
         with(C_RUECKT_AUF, value);
         return this;
     }
 
-    public final ZEUGNISRowBuilder SCHUELER_ID (Long value) {
+    public final ZeugnisRowBuilder SchuelerId (Long value) {
         with(C_SCHUELER_ID, value);
         return this;
     }
 
-    public final ZEUGNISRowBuilder SCHUELER_ID (IValidator<?> value) {
+    public final ZeugnisRowBuilder SchuelerId (IValidator<?> value) {
         with(C_SCHUELER_ID, value);
         return this;
     }
 
-    public final ZEUGNISRowBuilder SCHULHALBJAHR_ID (Long value) {
+    public final ZeugnisRowBuilder SchulhalbjahrId (Long value) {
         with(C_SCHULHALBJAHR_ID, value);
         return this;
     }
 
-    public final ZEUGNISRowBuilder SCHULHALBJAHR_ID (IValidator<?> value) {
+    public final ZeugnisRowBuilder SchulhalbjahrId (IValidator<?> value) {
         with(C_SCHULHALBJAHR_ID, value);
         return this;
     }
 
-    public final ZEUGNISRowBuilder SOLBEWERTUNGS_TEXT_ID (Long value) {
+    public final ZeugnisRowBuilder SolbewertungsTextId (Long value) {
         with(C_SOLBEWERTUNGS_TEXT_ID, value);
         return this;
     }
 
-    public final ZEUGNISRowBuilder SOLBEWERTUNGS_TEXT_ID (IValidator<?> value) {
+    public final ZeugnisRowBuilder SolbewertungsTextId (IValidator<?> value) {
         with(C_SOLBEWERTUNGS_TEXT_ID, value);
         return this;
     }
 
-    public final ZEUGNISRowBuilder VERSION (Long value) {
+    public final ZeugnisRowBuilder Version (Long value) {
         with(C_VERSION, value);
         return this;
     }
 
-    public final ZEUGNISRowBuilder VERSION (IValidator<?> value) {
+    public final ZeugnisRowBuilder Version (IValidator<?> value) {
         with(C_VERSION, value);
         return this;
     }
 
-    public final ZEUGNISRowBuilder ZEUGNIS_ART_ID (Long value) {
+    public final ZeugnisRowBuilder ZeugnisArtId (Long value) {
         with(C_ZEUGNIS_ART_ID, value);
         return this;
     }
 
-    public final ZEUGNISRowBuilder ZEUGNIS_ART_ID (IValidator<?> value) {
+    public final ZeugnisRowBuilder ZeugnisArtId (IValidator<?> value) {
         with(C_ZEUGNIS_ART_ID, value);
         return this;
     }
 
 
-    public static ZEUGNISRowBuilder newZEUGNIS() {
-        return new ZEUGNISRowBuilder(PRIMARY_KEY);
+    public static ZeugnisRowBuilder newZeugnis() {
+        return new ZeugnisRowBuilder(PRIMARY_KEY);
     }
 
-    public static ZEUGNISRowBuilder newZEUGNIS(String... identifierColumns) {
-        return new ZEUGNISRowBuilder(identifierColumns);
+    public static ZeugnisRowBuilder newZeugnis(String... identifierColumns) {
+        return new ZeugnisRowBuilder(identifierColumns);
     }
 
 }

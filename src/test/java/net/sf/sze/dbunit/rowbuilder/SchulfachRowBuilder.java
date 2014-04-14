@@ -3,7 +3,7 @@ package net.sf.sze.dbunit.rowbuilder;
 import org.dbunit.dataset.builder.BasicDataRowBuilder;
 import org.dbunit.validator.IValidator;
 
-public class SCHULFACHRowBuilder extends BasicDataRowBuilder {
+public class SchulfachRowBuilder extends BasicDataRowBuilder {
 
     public static final String TABLE_NAME = "SCHULFACH";
 
@@ -20,7 +20,7 @@ public class SCHULFACHRowBuilder extends BasicDataRowBuilder {
 
     public static final String[] ALL_COLUMNS = {C_ID, C_NAME, C_SORTIERUNG, C_STUFEN_MIT_AUSSEN_DIFFERENZIERUNG, C_STUFEN_MIT_BINNEN_DIFFERENZIERUNG, C_STUFEN_MIT_STANDARD_BEWERTUNG, C_TYP, C_VERSION};
 
-    public SCHULFACHRowBuilder(String... identifierColumns) {
+    public SchulfachRowBuilder(String... identifierColumns) {
         super(TABLE_NAME, identifierColumns);
         setAllColumnNames(ALL_COLUMNS);
         addDefaultValue(C_NAME, "");
@@ -30,93 +30,93 @@ public class SCHULFACHRowBuilder extends BasicDataRowBuilder {
         addDefaultValue(C_SORTIERUNG, new Long("0"));
     }
 
-    public final SCHULFACHRowBuilder ID (Long value) {
+    public final SchulfachRowBuilder Id (Long value) {
         with(C_ID, value);
         return this;
     }
 
-    public final SCHULFACHRowBuilder ID (IValidator<?> value) {
+    public final SchulfachRowBuilder Id (IValidator<?> value) {
         with(C_ID, value);
         return this;
     }
 
-    public final SCHULFACHRowBuilder NAME (String value) {
+    public final SchulfachRowBuilder Name (String value) {
         with(C_NAME, value);
         return this;
     }
 
-    public final SCHULFACHRowBuilder NAME (IValidator<?> value) {
+    public final SchulfachRowBuilder Name (IValidator<?> value) {
         with(C_NAME, value);
         return this;
     }
 
-    public final SCHULFACHRowBuilder SORTIERUNG (Long value) {
+    public final SchulfachRowBuilder Sortierung (Long value) {
         with(C_SORTIERUNG, value);
         return this;
     }
 
-    public final SCHULFACHRowBuilder SORTIERUNG (IValidator<?> value) {
+    public final SchulfachRowBuilder Sortierung (IValidator<?> value) {
         with(C_SORTIERUNG, value);
         return this;
     }
 
-    public final SCHULFACHRowBuilder STUFEN_MIT_AUSSEN_DIFFERENZIERUNG (String value) {
+    public final SchulfachRowBuilder StufenMitAussenDifferenzierung (String value) {
         with(C_STUFEN_MIT_AUSSEN_DIFFERENZIERUNG, value);
         return this;
     }
 
-    public final SCHULFACHRowBuilder STUFEN_MIT_AUSSEN_DIFFERENZIERUNG (IValidator<?> value) {
+    public final SchulfachRowBuilder StufenMitAussenDifferenzierung (IValidator<?> value) {
         with(C_STUFEN_MIT_AUSSEN_DIFFERENZIERUNG, value);
         return this;
     }
 
-    public final SCHULFACHRowBuilder STUFEN_MIT_BINNEN_DIFFERENZIERUNG (String value) {
+    public final SchulfachRowBuilder StufenMitBinnenDifferenzierung (String value) {
         with(C_STUFEN_MIT_BINNEN_DIFFERENZIERUNG, value);
         return this;
     }
 
-    public final SCHULFACHRowBuilder STUFEN_MIT_BINNEN_DIFFERENZIERUNG (IValidator<?> value) {
+    public final SchulfachRowBuilder StufenMitBinnenDifferenzierung (IValidator<?> value) {
         with(C_STUFEN_MIT_BINNEN_DIFFERENZIERUNG, value);
         return this;
     }
 
-    public final SCHULFACHRowBuilder STUFEN_MIT_STANDARD_BEWERTUNG (String value) {
+    public final SchulfachRowBuilder StufenMitStandardBewertung (String value) {
         with(C_STUFEN_MIT_STANDARD_BEWERTUNG, value);
         return this;
     }
 
-    public final SCHULFACHRowBuilder STUFEN_MIT_STANDARD_BEWERTUNG (IValidator<?> value) {
+    public final SchulfachRowBuilder StufenMitStandardBewertung (IValidator<?> value) {
         with(C_STUFEN_MIT_STANDARD_BEWERTUNG, value);
         return this;
     }
 
-    public final SCHULFACHRowBuilder TYP (Integer value) {
+    public final SchulfachRowBuilder Typ (Integer value) {
         with(C_TYP, value);
         return this;
     }
 
-    public final SCHULFACHRowBuilder TYP (IValidator<?> value) {
+    public final SchulfachRowBuilder Typ (IValidator<?> value) {
         with(C_TYP, value);
         return this;
     }
 
-    public final SCHULFACHRowBuilder VERSION (Long value) {
+    public final SchulfachRowBuilder Version (Long value) {
         with(C_VERSION, value);
         return this;
     }
 
-    public final SCHULFACHRowBuilder VERSION (IValidator<?> value) {
+    public final SchulfachRowBuilder Version (IValidator<?> value) {
         with(C_VERSION, value);
         return this;
     }
 
 
-    public static SCHULFACHRowBuilder newSCHULFACH() {
-        return new SCHULFACHRowBuilder(PRIMARY_KEY);
+    public static SchulfachRowBuilder newSchulfach() {
+        return new SchulfachRowBuilder(PRIMARY_KEY);
     }
 
-    public static SCHULFACHRowBuilder newSCHULFACH(String... identifierColumns) {
-        return new SCHULFACHRowBuilder(identifierColumns);
+    public static SchulfachRowBuilder newSchulfach(String... identifierColumns) {
+        return new SchulfachRowBuilder(identifierColumns);
     }
 
 }

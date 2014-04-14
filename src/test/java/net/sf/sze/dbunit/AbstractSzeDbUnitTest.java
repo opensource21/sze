@@ -12,25 +12,25 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 
-import net.sf.sze.dbunit.rowbuilder.AG_BEWERTUNGRowBuilder;
-import net.sf.sze.dbunit.rowbuilder.ARBEITSGRUPPERowBuilder;
-import net.sf.sze.dbunit.rowbuilder.ARBEITS_UND_SOZIAL_VERHALTENRowBuilder;
-import net.sf.sze.dbunit.rowbuilder.AV_SV_BEWERTUNGRowBuilder;
-import net.sf.sze.dbunit.rowbuilder.BEMERKUNGRowBuilder;
-import net.sf.sze.dbunit.rowbuilder.BEMERKUNGS_BAUSTEINRowBuilder;
-import net.sf.sze.dbunit.rowbuilder.BEWERTUNGRowBuilder;
-import net.sf.sze.dbunit.rowbuilder.KLASSERowBuilder;
-import net.sf.sze.dbunit.rowbuilder.SCHUELERRowBuilder;
-import net.sf.sze.dbunit.rowbuilder.SCHULAMTRowBuilder;
-import net.sf.sze.dbunit.rowbuilder.SCHULAMTS_BEMERKUNGRowBuilder;
-import net.sf.sze.dbunit.rowbuilder.SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder;
-import net.sf.sze.dbunit.rowbuilder.SCHULFACHRowBuilder;
-import net.sf.sze.dbunit.rowbuilder.SCHULFACH_DETAIL_INFORowBuilder;
-import net.sf.sze.dbunit.rowbuilder.SCHULHALBJAHRRowBuilder;
-import net.sf.sze.dbunit.rowbuilder.SOLBEWERTUNGS_TEXTRowBuilder;
-import net.sf.sze.dbunit.rowbuilder.ZEUGNISRowBuilder;
-import net.sf.sze.dbunit.rowbuilder.ZEUGNIS_ARTRowBuilder;
-import net.sf.sze.dbunit.rowbuilder.ZEUGNIS_FORMULARRowBuilder;
+import net.sf.sze.dbunit.rowbuilder.AgBewertungRowBuilder;
+import net.sf.sze.dbunit.rowbuilder.ArbeitsUndSozialVerhaltenRowBuilder;
+import net.sf.sze.dbunit.rowbuilder.ArbeitsgruppeRowBuilder;
+import net.sf.sze.dbunit.rowbuilder.AvSvBewertungRowBuilder;
+import net.sf.sze.dbunit.rowbuilder.BemerkungRowBuilder;
+import net.sf.sze.dbunit.rowbuilder.BemerkungsBausteinRowBuilder;
+import net.sf.sze.dbunit.rowbuilder.BewertungRowBuilder;
+import net.sf.sze.dbunit.rowbuilder.KlasseRowBuilder;
+import net.sf.sze.dbunit.rowbuilder.SchuelerRowBuilder;
+import net.sf.sze.dbunit.rowbuilder.SchulamtRowBuilder;
+import net.sf.sze.dbunit.rowbuilder.SchulamtsBemerkungRowBuilder;
+import net.sf.sze.dbunit.rowbuilder.SchulamtsBemerkungsBausteinRowBuilder;
+import net.sf.sze.dbunit.rowbuilder.SchulfachDetailInfoRowBuilder;
+import net.sf.sze.dbunit.rowbuilder.SchulfachRowBuilder;
+import net.sf.sze.dbunit.rowbuilder.SchulhalbjahrRowBuilder;
+import net.sf.sze.dbunit.rowbuilder.SolbewertungsTextRowBuilder;
+import net.sf.sze.dbunit.rowbuilder.ZeugnisArtRowBuilder;
+import net.sf.sze.dbunit.rowbuilder.ZeugnisFormularRowBuilder;
+import net.sf.sze.dbunit.rowbuilder.ZeugnisRowBuilder;
 
 import org.dbunit.AbstractDatabaseTester;
 import org.dbunit.Assertion;
@@ -81,50 +81,53 @@ public abstract class AbstractSzeDbUnitTest extends AbstractJUnit4SpringContextT
     private static Map<String, String[]> tableToUniqueKey = new HashMap<>();
 
     static {
-        tableToUniqueKey.put(ARBEITSGRUPPERowBuilder.TABLE_NAME,
-                new String[] { ARBEITSGRUPPERowBuilder.C_NAME });
-        tableToUniqueKey.put(ARBEITS_UND_SOZIAL_VERHALTENRowBuilder.TABLE_NAME,
-                new String[] { ARBEITS_UND_SOZIAL_VERHALTENRowBuilder.C_TYP,
-                ARBEITS_UND_SOZIAL_VERHALTENRowBuilder.C_NAME });
-        tableToUniqueKey.put(BEMERKUNGS_BAUSTEINRowBuilder.TABLE_NAME,
-                new String[] { BEMERKUNGS_BAUSTEINRowBuilder.C_NAME });
-        tableToUniqueKey.put(SCHULAMTRowBuilder.TABLE_NAME, new String[] { SCHULAMTRowBuilder.C_NAME });
-        tableToUniqueKey.put(SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder.TABLE_NAME,
-                new String[] { SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder.C_NAME });
-        tableToUniqueKey.put(SCHULFACHRowBuilder.TABLE_NAME,
-                new String[] { SCHULFACHRowBuilder.C_TYP,  SCHULFACHRowBuilder.C_NAME});
-        tableToUniqueKey.put(SCHULFACH_DETAIL_INFORowBuilder.TABLE_NAME, new String[] {
-                SCHULFACH_DETAIL_INFORowBuilder.C_FORMULAR_ID, SCHULFACH_DETAIL_INFORowBuilder.C_SCHULFACH_ID });
-        tableToUniqueKey.put(ZEUGNIS_ARTRowBuilder.TABLE_NAME,
-                new String[] { ZEUGNIS_ARTRowBuilder.C_NAME });
+        tableToUniqueKey.put(ArbeitsgruppeRowBuilder.TABLE_NAME,
+                new String[] { ArbeitsgruppeRowBuilder.C_NAME });
+        tableToUniqueKey.put(ArbeitsUndSozialVerhaltenRowBuilder.TABLE_NAME,
+                new String[] { ArbeitsUndSozialVerhaltenRowBuilder.C_TYP,
+                ArbeitsUndSozialVerhaltenRowBuilder.C_NAME });
+        tableToUniqueKey.put(BemerkungsBausteinRowBuilder.TABLE_NAME,
+                new String[] { BemerkungsBausteinRowBuilder.C_NAME });
+        tableToUniqueKey.put(SchulamtRowBuilder.TABLE_NAME, new String[] { SchulamtRowBuilder.C_NAME });
+        tableToUniqueKey.put(SchulamtsBemerkungsBausteinRowBuilder.TABLE_NAME,
+                new String[] { SchulamtsBemerkungsBausteinRowBuilder.C_NAME });
+        tableToUniqueKey.put(SchulfachRowBuilder.TABLE_NAME,
+                new String[] { SchulfachRowBuilder.C_TYP,  SchulfachRowBuilder.C_NAME});
+        tableToUniqueKey.put(SchulfachDetailInfoRowBuilder.TABLE_NAME, new String[] {
+                SchulfachDetailInfoRowBuilder.C_FORMULAR_ID, SchulfachDetailInfoRowBuilder.C_SCHULFACH_ID });
+        tableToUniqueKey.put(ZeugnisArtRowBuilder.TABLE_NAME,
+                new String[] { ZeugnisArtRowBuilder.C_NAME });
 
         // Stammdaten
-        tableToUniqueKey.put(KLASSERowBuilder.TABLE_NAME,
-                new String[] { KLASSERowBuilder.C_JAHRGANG, KLASSERowBuilder.C_SUFFIX });
+        tableToUniqueKey.put(KlasseRowBuilder.TABLE_NAME,
+                new String[] { KlasseRowBuilder.C_JAHRGANG, KlasseRowBuilder.C_SUFFIX });
 
-        tableToUniqueKey.put(SCHUELERRowBuilder.TABLE_NAME, new String[] { "ID" });
+        tableToUniqueKey.put(SchuelerRowBuilder.TABLE_NAME, new String[] { "ID" });
 
         // Zeugnisdaten
-        tableToUniqueKey.put(SCHULHALBJAHRRowBuilder.TABLE_NAME,
-                new String[] { SCHULHALBJAHRRowBuilder.C_JAHR, SCHULHALBJAHRRowBuilder.C_HALBJAHR });
-        tableToUniqueKey.put(ZEUGNISRowBuilder.TABLE_NAME,
-                new String[] { ZEUGNISRowBuilder.C_FORMULAR_ID,
-                ZEUGNISRowBuilder.C_KLASSE_ID, ZEUGNISRowBuilder.C_SCHUELER_ID });
-        tableToUniqueKey.put(ZEUGNIS_FORMULARRowBuilder.TABLE_NAME, new String[] { ZEUGNIS_FORMULARRowBuilder.C_SCHULHALBJAHR_ID,
-                ZEUGNIS_FORMULARRowBuilder.C_KLASSE_ID, ZEUGNIS_FORMULARRowBuilder.C_BESCHREIBUNG });
+        tableToUniqueKey.put(SchulhalbjahrRowBuilder.TABLE_NAME,
+                new String[] { SchulhalbjahrRowBuilder.C_JAHR, SchulhalbjahrRowBuilder.C_HALBJAHR });
+        tableToUniqueKey.put(ZeugnisRowBuilder.TABLE_NAME,
+                new String[] { ZeugnisRowBuilder.C_FORMULAR_ID,
+                ZeugnisRowBuilder.C_KLASSE_ID, ZeugnisRowBuilder.C_SCHUELER_ID });
+        tableToUniqueKey.put(ZeugnisFormularRowBuilder.TABLE_NAME, new String[] {
+                ZeugnisFormularRowBuilder.C_SCHULHALBJAHR_ID,
+                ZeugnisFormularRowBuilder.C_KLASSE_ID, ZeugnisFormularRowBuilder.C_BESCHREIBUNG });
 
         // Bewertungen
-        tableToUniqueKey.put(AG_BEWERTUNGRowBuilder.TABLE_NAME,
-                new String[] { AG_BEWERTUNGRowBuilder.C_ARBEITSGRUPPE_ID,
-                AG_BEWERTUNGRowBuilder.C_ZEUGNIS_ID });
-        tableToUniqueKey.put(AV_SV_BEWERTUNGRowBuilder.TABLE_NAME, new String[] {
-                AV_SV_BEWERTUNGRowBuilder.C_ARBEITS_UND_SOZIAL_VERHALTEN_ID, AV_SV_BEWERTUNGRowBuilder.C_ZEUGNIS_ID });
-        tableToUniqueKey.put(BEWERTUNGRowBuilder.TABLE_NAME, new String[] {
-                BEWERTUNGRowBuilder.C_SCHULFACH_ID, BEWERTUNGRowBuilder.C_ZEUGNIS_ID });
+        tableToUniqueKey.put(AgBewertungRowBuilder.TABLE_NAME,
+                new String[] { AgBewertungRowBuilder.C_ARBEITSGRUPPE_ID,
+                AgBewertungRowBuilder.C_ZEUGNIS_ID });
+        tableToUniqueKey.put(AvSvBewertungRowBuilder.TABLE_NAME, new String[] {
+                AvSvBewertungRowBuilder.C_ARBEITS_UND_SOZIAL_VERHALTEN_ID,
+                AvSvBewertungRowBuilder.C_ZEUGNIS_ID });
+        tableToUniqueKey.put(BewertungRowBuilder.TABLE_NAME, new String[] {
+                BewertungRowBuilder.C_SCHULFACH_ID, BewertungRowBuilder.C_ZEUGNIS_ID });
 
-        tableToUniqueKey.put(BEMERKUNGRowBuilder.TABLE_NAME, new String[] { "ID" });
-        tableToUniqueKey.put(SCHULAMTS_BEMERKUNGRowBuilder.TABLE_NAME, new String[] { "ID" });
-        tableToUniqueKey.put(SOLBEWERTUNGS_TEXTRowBuilder.TABLE_NAME, new String[] { SOLBEWERTUNGS_TEXTRowBuilder.C_NAME });
+        tableToUniqueKey.put(BemerkungRowBuilder.TABLE_NAME, new String[] { "ID" });
+        tableToUniqueKey.put(SchulamtsBemerkungRowBuilder.TABLE_NAME, new String[] { "ID" });
+        tableToUniqueKey.put(SolbewertungsTextRowBuilder.TABLE_NAME, new String[] {
+                SolbewertungsTextRowBuilder.C_NAME });
     }
 
     /**

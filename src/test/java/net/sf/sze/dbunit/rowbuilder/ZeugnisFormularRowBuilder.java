@@ -2,9 +2,11 @@ package net.sf.sze.dbunit.rowbuilder;
 
 import org.dbunit.dataset.builder.BasicDataRowBuilder;
 import org.dbunit.validator.IValidator;
+
+import java.sql.Timestamp;
 import java.sql.Date;
 
-public class ZEUGNIS_FORMULARRowBuilder extends BasicDataRowBuilder {
+public class ZeugnisFormularRowBuilder extends BasicDataRowBuilder {
 
     public static final String TABLE_NAME = "ZEUGNIS_FORMULAR";
 
@@ -25,146 +27,146 @@ public class ZEUGNIS_FORMULARRowBuilder extends BasicDataRowBuilder {
 
     public static final String[] ALL_COLUMNS = {C_AUSGABE_DATUM, C_BESCHREIBUNG, C_ID, C_KLASSE_ID, C_LEITSPRUCH, C_LEITSPRUCH2, C_NACHTEILS_AUSGLEICHS_DATUM, C_QUELLE_LEITSPRUCH, C_QUELLE_LEITSPRUCH2, C_SCHULHALBJAHR_ID, C_TEMPLATE_FILE_NAME, C_VERSION};
 
-    public ZEUGNIS_FORMULARRowBuilder(String... identifierColumns) {
+    public ZeugnisFormularRowBuilder(String... identifierColumns) {
         super(TABLE_NAME, identifierColumns);
         setAllColumnNames(ALL_COLUMNS);
         addDefaultValue(C_VERSION, new Long("0"));
-        addDefaultValue(C_AUSGABE_DATUM, new Date(0));
+        addDefaultValue(C_AUSGABE_DATUM, new Timestamp(0));
         addDefaultValue(C_SCHULHALBJAHR_ID, new Long("0"));
         addDefaultValue(C_KLASSE_ID, new Long("0"));
         addDefaultValue(C_ID, new Long("0"));
         addDefaultValue(C_TEMPLATE_FILE_NAME, "");
         addDefaultValue(C_BESCHREIBUNG, "");
-        addDefaultValue(C_NACHTEILS_AUSGLEICHS_DATUM, new Date(0));
+        addDefaultValue(C_NACHTEILS_AUSGLEICHS_DATUM, new Timestamp(0));
     }
 
-    public final ZEUGNIS_FORMULARRowBuilder AUSGABE_DATUM (Date value) {
+    public final ZeugnisFormularRowBuilder AusgabeDatum (Date value) {
         with(C_AUSGABE_DATUM, value);
         return this;
     }
 
-    public final ZEUGNIS_FORMULARRowBuilder AUSGABE_DATUM (IValidator<?> value) {
+    public final ZeugnisFormularRowBuilder AusgabeDatum (IValidator<?> value) {
         with(C_AUSGABE_DATUM, value);
         return this;
     }
 
-    public final ZEUGNIS_FORMULARRowBuilder BESCHREIBUNG (String value) {
+    public final ZeugnisFormularRowBuilder Beschreibung (String value) {
         with(C_BESCHREIBUNG, value);
         return this;
     }
 
-    public final ZEUGNIS_FORMULARRowBuilder BESCHREIBUNG (IValidator<?> value) {
+    public final ZeugnisFormularRowBuilder Beschreibung (IValidator<?> value) {
         with(C_BESCHREIBUNG, value);
         return this;
     }
 
-    public final ZEUGNIS_FORMULARRowBuilder ID (Long value) {
+    public final ZeugnisFormularRowBuilder Id (Long value) {
         with(C_ID, value);
         return this;
     }
 
-    public final ZEUGNIS_FORMULARRowBuilder ID (IValidator<?> value) {
+    public final ZeugnisFormularRowBuilder Id (IValidator<?> value) {
         with(C_ID, value);
         return this;
     }
 
-    public final ZEUGNIS_FORMULARRowBuilder KLASSE_ID (Long value) {
+    public final ZeugnisFormularRowBuilder KlasseId (Long value) {
         with(C_KLASSE_ID, value);
         return this;
     }
 
-    public final ZEUGNIS_FORMULARRowBuilder KLASSE_ID (IValidator<?> value) {
+    public final ZeugnisFormularRowBuilder KlasseId (IValidator<?> value) {
         with(C_KLASSE_ID, value);
         return this;
     }
 
-    public final ZEUGNIS_FORMULARRowBuilder LEITSPRUCH (String value) {
+    public final ZeugnisFormularRowBuilder Leitspruch (String value) {
         with(C_LEITSPRUCH, value);
         return this;
     }
 
-    public final ZEUGNIS_FORMULARRowBuilder LEITSPRUCH (IValidator<?> value) {
+    public final ZeugnisFormularRowBuilder Leitspruch (IValidator<?> value) {
         with(C_LEITSPRUCH, value);
         return this;
     }
 
-    public final ZEUGNIS_FORMULARRowBuilder LEITSPRUCH2 (String value) {
+    public final ZeugnisFormularRowBuilder Leitspruch2 (String value) {
         with(C_LEITSPRUCH2, value);
         return this;
     }
 
-    public final ZEUGNIS_FORMULARRowBuilder LEITSPRUCH2 (IValidator<?> value) {
+    public final ZeugnisFormularRowBuilder Leitspruch2 (IValidator<?> value) {
         with(C_LEITSPRUCH2, value);
         return this;
     }
 
-    public final ZEUGNIS_FORMULARRowBuilder NACHTEILS_AUSGLEICHS_DATUM (Date value) {
+    public final ZeugnisFormularRowBuilder NachteilsAusgleichsDatum (Date value) {
         with(C_NACHTEILS_AUSGLEICHS_DATUM, value);
         return this;
     }
 
-    public final ZEUGNIS_FORMULARRowBuilder NACHTEILS_AUSGLEICHS_DATUM (IValidator<?> value) {
+    public final ZeugnisFormularRowBuilder NachteilsAusgleichsDatum (IValidator<?> value) {
         with(C_NACHTEILS_AUSGLEICHS_DATUM, value);
         return this;
     }
 
-    public final ZEUGNIS_FORMULARRowBuilder QUELLE_LEITSPRUCH (String value) {
+    public final ZeugnisFormularRowBuilder QuelleLeitspruch (String value) {
         with(C_QUELLE_LEITSPRUCH, value);
         return this;
     }
 
-    public final ZEUGNIS_FORMULARRowBuilder QUELLE_LEITSPRUCH (IValidator<?> value) {
+    public final ZeugnisFormularRowBuilder QuelleLeitspruch (IValidator<?> value) {
         with(C_QUELLE_LEITSPRUCH, value);
         return this;
     }
 
-    public final ZEUGNIS_FORMULARRowBuilder QUELLE_LEITSPRUCH2 (String value) {
+    public final ZeugnisFormularRowBuilder QuelleLeitspruch2 (String value) {
         with(C_QUELLE_LEITSPRUCH2, value);
         return this;
     }
 
-    public final ZEUGNIS_FORMULARRowBuilder QUELLE_LEITSPRUCH2 (IValidator<?> value) {
+    public final ZeugnisFormularRowBuilder QuelleLeitspruch2 (IValidator<?> value) {
         with(C_QUELLE_LEITSPRUCH2, value);
         return this;
     }
 
-    public final ZEUGNIS_FORMULARRowBuilder SCHULHALBJAHR_ID (Long value) {
+    public final ZeugnisFormularRowBuilder SchulhalbjahrId (Long value) {
         with(C_SCHULHALBJAHR_ID, value);
         return this;
     }
 
-    public final ZEUGNIS_FORMULARRowBuilder SCHULHALBJAHR_ID (IValidator<?> value) {
+    public final ZeugnisFormularRowBuilder SchulhalbjahrId (IValidator<?> value) {
         with(C_SCHULHALBJAHR_ID, value);
         return this;
     }
 
-    public final ZEUGNIS_FORMULARRowBuilder TEMPLATE_FILE_NAME (String value) {
+    public final ZeugnisFormularRowBuilder TemplateFileName (String value) {
         with(C_TEMPLATE_FILE_NAME, value);
         return this;
     }
 
-    public final ZEUGNIS_FORMULARRowBuilder TEMPLATE_FILE_NAME (IValidator<?> value) {
+    public final ZeugnisFormularRowBuilder TemplateFileName (IValidator<?> value) {
         with(C_TEMPLATE_FILE_NAME, value);
         return this;
     }
 
-    public final ZEUGNIS_FORMULARRowBuilder VERSION (Long value) {
+    public final ZeugnisFormularRowBuilder Version (Long value) {
         with(C_VERSION, value);
         return this;
     }
 
-    public final ZEUGNIS_FORMULARRowBuilder VERSION (IValidator<?> value) {
+    public final ZeugnisFormularRowBuilder Version (IValidator<?> value) {
         with(C_VERSION, value);
         return this;
     }
 
 
-    public static ZEUGNIS_FORMULARRowBuilder newZEUGNIS_FORMULAR() {
-        return new ZEUGNIS_FORMULARRowBuilder(PRIMARY_KEY);
+    public static ZeugnisFormularRowBuilder newZeugnisFormular() {
+        return new ZeugnisFormularRowBuilder(PRIMARY_KEY);
     }
 
-    public static ZEUGNIS_FORMULARRowBuilder newZEUGNIS_FORMULAR(String... identifierColumns) {
-        return new ZEUGNIS_FORMULARRowBuilder(identifierColumns);
+    public static ZeugnisFormularRowBuilder newZeugnisFormular(String... identifierColumns) {
+        return new ZeugnisFormularRowBuilder(identifierColumns);
     }
 
 }

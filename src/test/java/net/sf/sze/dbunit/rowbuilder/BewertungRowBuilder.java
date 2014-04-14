@@ -3,7 +3,7 @@ package net.sf.sze.dbunit.rowbuilder;
 import org.dbunit.dataset.builder.BasicDataRowBuilder;
 import org.dbunit.validator.IValidator;
 
-public class BEWERTUNGRowBuilder extends BasicDataRowBuilder {
+public class BewertungRowBuilder extends BasicDataRowBuilder {
 
     public static final String TABLE_NAME = "BEWERTUNG";
 
@@ -22,7 +22,7 @@ public class BEWERTUNGRowBuilder extends BasicDataRowBuilder {
 
     public static final String[] ALL_COLUMNS = {C_CLASS, C_ID, C_LEISTUNGSNIVEAU, C_LEISTUNG_NUR_SCHWACH_AUSREICHEND, C_NOTE, C_RELEVANT, C_SCHULFACH_ID, C_SONDER_NOTE, C_VERSION, C_ZEUGNIS_ID};
 
-    public BEWERTUNGRowBuilder(String... identifierColumns) {
+    public BewertungRowBuilder(String... identifierColumns) {
         super(TABLE_NAME, identifierColumns);
         setAllColumnNames(ALL_COLUMNS);
         addDefaultValue(C_CLASS, "");
@@ -35,113 +35,113 @@ public class BEWERTUNGRowBuilder extends BasicDataRowBuilder {
         addDefaultValue(C_SONDER_NOTE, "");
     }
 
-    public final BEWERTUNGRowBuilder CLASS (String value) {
+    public final BewertungRowBuilder Class (String value) {
         with(C_CLASS, value);
         return this;
     }
 
-    public final BEWERTUNGRowBuilder CLASS (IValidator<?> value) {
+    public final BewertungRowBuilder Class (IValidator<?> value) {
         with(C_CLASS, value);
         return this;
     }
 
-    public final BEWERTUNGRowBuilder ID (Long value) {
+    public final BewertungRowBuilder Id (Long value) {
         with(C_ID, value);
         return this;
     }
 
-    public final BEWERTUNGRowBuilder ID (IValidator<?> value) {
+    public final BewertungRowBuilder Id (IValidator<?> value) {
         with(C_ID, value);
         return this;
     }
 
-    public final BEWERTUNGRowBuilder LEISTUNGSNIVEAU (String value) {
+    public final BewertungRowBuilder Leistungsniveau (String value) {
         with(C_LEISTUNGSNIVEAU, value);
         return this;
     }
 
-    public final BEWERTUNGRowBuilder LEISTUNGSNIVEAU (IValidator<?> value) {
+    public final BewertungRowBuilder Leistungsniveau (IValidator<?> value) {
         with(C_LEISTUNGSNIVEAU, value);
         return this;
     }
 
-    public final BEWERTUNGRowBuilder LEISTUNG_NUR_SCHWACH_AUSREICHEND (Boolean value) {
+    public final BewertungRowBuilder LeistungNurSchwachAusreichend (Boolean value) {
         with(C_LEISTUNG_NUR_SCHWACH_AUSREICHEND, value);
         return this;
     }
 
-    public final BEWERTUNGRowBuilder LEISTUNG_NUR_SCHWACH_AUSREICHEND (IValidator<?> value) {
+    public final BewertungRowBuilder LeistungNurSchwachAusreichend (IValidator<?> value) {
         with(C_LEISTUNG_NUR_SCHWACH_AUSREICHEND, value);
         return this;
     }
 
-    public final BEWERTUNGRowBuilder NOTE (Long value) {
+    public final BewertungRowBuilder Note (Long value) {
         with(C_NOTE, value);
         return this;
     }
 
-    public final BEWERTUNGRowBuilder NOTE (IValidator<?> value) {
+    public final BewertungRowBuilder Note (IValidator<?> value) {
         with(C_NOTE, value);
         return this;
     }
 
-    public final BEWERTUNGRowBuilder RELEVANT (Boolean value) {
+    public final BewertungRowBuilder Relevant (Boolean value) {
         with(C_RELEVANT, value);
         return this;
     }
 
-    public final BEWERTUNGRowBuilder RELEVANT (IValidator<?> value) {
+    public final BewertungRowBuilder Relevant (IValidator<?> value) {
         with(C_RELEVANT, value);
         return this;
     }
 
-    public final BEWERTUNGRowBuilder SCHULFACH_ID (Long value) {
+    public final BewertungRowBuilder SchulfachId (Long value) {
         with(C_SCHULFACH_ID, value);
         return this;
     }
 
-    public final BEWERTUNGRowBuilder SCHULFACH_ID (IValidator<?> value) {
+    public final BewertungRowBuilder SchulfachId (IValidator<?> value) {
         with(C_SCHULFACH_ID, value);
         return this;
     }
 
-    public final BEWERTUNGRowBuilder SONDER_NOTE (String value) {
+    public final BewertungRowBuilder SonderNote (String value) {
         with(C_SONDER_NOTE, value);
         return this;
     }
 
-    public final BEWERTUNGRowBuilder SONDER_NOTE (IValidator<?> value) {
+    public final BewertungRowBuilder SonderNote (IValidator<?> value) {
         with(C_SONDER_NOTE, value);
         return this;
     }
 
-    public final BEWERTUNGRowBuilder VERSION (Long value) {
+    public final BewertungRowBuilder Version (Long value) {
         with(C_VERSION, value);
         return this;
     }
 
-    public final BEWERTUNGRowBuilder VERSION (IValidator<?> value) {
+    public final BewertungRowBuilder Version (IValidator<?> value) {
         with(C_VERSION, value);
         return this;
     }
 
-    public final BEWERTUNGRowBuilder ZEUGNIS_ID (Long value) {
+    public final BewertungRowBuilder ZeugnisId (Long value) {
         with(C_ZEUGNIS_ID, value);
         return this;
     }
 
-    public final BEWERTUNGRowBuilder ZEUGNIS_ID (IValidator<?> value) {
+    public final BewertungRowBuilder ZeugnisId (IValidator<?> value) {
         with(C_ZEUGNIS_ID, value);
         return this;
     }
 
 
-    public static BEWERTUNGRowBuilder newBEWERTUNG() {
-        return new BEWERTUNGRowBuilder(PRIMARY_KEY);
+    public static BewertungRowBuilder newBewertung() {
+        return new BewertungRowBuilder(PRIMARY_KEY);
     }
 
-    public static BEWERTUNGRowBuilder newBEWERTUNG(String... identifierColumns) {
-        return new BEWERTUNGRowBuilder(identifierColumns);
+    public static BewertungRowBuilder newBewertung(String... identifierColumns) {
+        return new BewertungRowBuilder(identifierColumns);
     }
 
 }

@@ -4,7 +4,7 @@ import org.dbunit.dataset.builder.BasicDataRowBuilder;
 import org.dbunit.validator.IValidator;
 import java.sql.Timestamp;
 
-public class VERSION_HISTORYRowBuilder extends BasicDataRowBuilder {
+public class VersionHistoryRowBuilder extends BasicDataRowBuilder {
 
     public static final String TABLE_NAME = "VERSION_HISTORY";
 
@@ -17,7 +17,7 @@ public class VERSION_HISTORYRowBuilder extends BasicDataRowBuilder {
 
     public static final String[] ALL_COLUMNS = {C_APP_VERSION, C_ID, C_INSTALL_DATE, C_VERSION};
 
-    public VERSION_HISTORYRowBuilder(String... identifierColumns) {
+    public VersionHistoryRowBuilder(String... identifierColumns) {
         super(TABLE_NAME, identifierColumns);
         setAllColumnNames(ALL_COLUMNS);
         addDefaultValue(C_VERSION, new Long("0"));
@@ -26,53 +26,53 @@ public class VERSION_HISTORYRowBuilder extends BasicDataRowBuilder {
         addDefaultValue(C_APP_VERSION, "");
     }
 
-    public final VERSION_HISTORYRowBuilder APP_VERSION (String value) {
+    public final VersionHistoryRowBuilder AppVersion (String value) {
         with(C_APP_VERSION, value);
         return this;
     }
 
-    public final VERSION_HISTORYRowBuilder APP_VERSION (IValidator<?> value) {
+    public final VersionHistoryRowBuilder AppVersion (IValidator<?> value) {
         with(C_APP_VERSION, value);
         return this;
     }
 
-    public final VERSION_HISTORYRowBuilder ID (Long value) {
+    public final VersionHistoryRowBuilder Id (Long value) {
         with(C_ID, value);
         return this;
     }
 
-    public final VERSION_HISTORYRowBuilder ID (IValidator<?> value) {
+    public final VersionHistoryRowBuilder Id (IValidator<?> value) {
         with(C_ID, value);
         return this;
     }
 
-    public final VERSION_HISTORYRowBuilder INSTALL_DATE (Timestamp value) {
+    public final VersionHistoryRowBuilder InstallDate (Timestamp value) {
         with(C_INSTALL_DATE, value);
         return this;
     }
 
-    public final VERSION_HISTORYRowBuilder INSTALL_DATE (IValidator<?> value) {
+    public final VersionHistoryRowBuilder InstallDate (IValidator<?> value) {
         with(C_INSTALL_DATE, value);
         return this;
     }
 
-    public final VERSION_HISTORYRowBuilder VERSION (Long value) {
+    public final VersionHistoryRowBuilder Version (Long value) {
         with(C_VERSION, value);
         return this;
     }
 
-    public final VERSION_HISTORYRowBuilder VERSION (IValidator<?> value) {
+    public final VersionHistoryRowBuilder Version (IValidator<?> value) {
         with(C_VERSION, value);
         return this;
     }
 
 
-    public static VERSION_HISTORYRowBuilder newVERSION_HISTORY() {
-        return new VERSION_HISTORYRowBuilder(PRIMARY_KEY);
+    public static VersionHistoryRowBuilder newVersionHistory() {
+        return new VersionHistoryRowBuilder(PRIMARY_KEY);
     }
 
-    public static VERSION_HISTORYRowBuilder newVERSION_HISTORY(String... identifierColumns) {
-        return new VERSION_HISTORYRowBuilder(identifierColumns);
+    public static VersionHistoryRowBuilder newVersionHistory(String... identifierColumns) {
+        return new VersionHistoryRowBuilder(identifierColumns);
     }
 
 }

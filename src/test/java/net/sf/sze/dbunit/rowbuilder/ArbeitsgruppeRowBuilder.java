@@ -3,7 +3,7 @@ package net.sf.sze.dbunit.rowbuilder;
 import org.dbunit.dataset.builder.BasicDataRowBuilder;
 import org.dbunit.validator.IValidator;
 
-public class ARBEITSGRUPPERowBuilder extends BasicDataRowBuilder {
+public class ArbeitsgruppeRowBuilder extends BasicDataRowBuilder {
 
     public static final String TABLE_NAME = "ARBEITSGRUPPE";
 
@@ -17,7 +17,7 @@ public class ARBEITSGRUPPERowBuilder extends BasicDataRowBuilder {
 
     public static final String[] ALL_COLUMNS = {C_ID, C_KLASSENSTUFEN, C_NAME, C_SORTIERUNG, C_VERSION};
 
-    public ARBEITSGRUPPERowBuilder(String... identifierColumns) {
+    public ArbeitsgruppeRowBuilder(String... identifierColumns) {
         super(TABLE_NAME, identifierColumns);
         setAllColumnNames(ALL_COLUMNS);
         addDefaultValue(C_NAME, "");
@@ -27,63 +27,63 @@ public class ARBEITSGRUPPERowBuilder extends BasicDataRowBuilder {
         addDefaultValue(C_SORTIERUNG, new Long("0"));
     }
 
-    public final ARBEITSGRUPPERowBuilder ID (Long value) {
+    public final ArbeitsgruppeRowBuilder Id (Long value) {
         with(C_ID, value);
         return this;
     }
 
-    public final ARBEITSGRUPPERowBuilder ID (IValidator<?> value) {
+    public final ArbeitsgruppeRowBuilder Id (IValidator<?> value) {
         with(C_ID, value);
         return this;
     }
 
-    public final ARBEITSGRUPPERowBuilder KLASSENSTUFEN (String value) {
+    public final ArbeitsgruppeRowBuilder Klassenstufen (String value) {
         with(C_KLASSENSTUFEN, value);
         return this;
     }
 
-    public final ARBEITSGRUPPERowBuilder KLASSENSTUFEN (IValidator<?> value) {
+    public final ArbeitsgruppeRowBuilder Klassenstufen (IValidator<?> value) {
         with(C_KLASSENSTUFEN, value);
         return this;
     }
 
-    public final ARBEITSGRUPPERowBuilder NAME (String value) {
+    public final ArbeitsgruppeRowBuilder Name (String value) {
         with(C_NAME, value);
         return this;
     }
 
-    public final ARBEITSGRUPPERowBuilder NAME (IValidator<?> value) {
+    public final ArbeitsgruppeRowBuilder Name (IValidator<?> value) {
         with(C_NAME, value);
         return this;
     }
 
-    public final ARBEITSGRUPPERowBuilder SORTIERUNG (Long value) {
+    public final ArbeitsgruppeRowBuilder Sortierung (Long value) {
         with(C_SORTIERUNG, value);
         return this;
     }
 
-    public final ARBEITSGRUPPERowBuilder SORTIERUNG (IValidator<?> value) {
+    public final ArbeitsgruppeRowBuilder Sortierung (IValidator<?> value) {
         with(C_SORTIERUNG, value);
         return this;
     }
 
-    public final ARBEITSGRUPPERowBuilder VERSION (Long value) {
+    public final ArbeitsgruppeRowBuilder Version (Long value) {
         with(C_VERSION, value);
         return this;
     }
 
-    public final ARBEITSGRUPPERowBuilder VERSION (IValidator<?> value) {
+    public final ArbeitsgruppeRowBuilder Version (IValidator<?> value) {
         with(C_VERSION, value);
         return this;
     }
 
 
-    public static ARBEITSGRUPPERowBuilder newARBEITSGRUPPE() {
-        return new ARBEITSGRUPPERowBuilder(PRIMARY_KEY);
+    public static ArbeitsgruppeRowBuilder newArbeitsgruppe() {
+        return new ArbeitsgruppeRowBuilder(PRIMARY_KEY);
     }
 
-    public static ARBEITSGRUPPERowBuilder newARBEITSGRUPPE(String... identifierColumns) {
-        return new ARBEITSGRUPPERowBuilder(identifierColumns);
+    public static ArbeitsgruppeRowBuilder newArbeitsgruppe(String... identifierColumns) {
+        return new ArbeitsgruppeRowBuilder(identifierColumns);
     }
 
 }

@@ -3,7 +3,7 @@ package net.sf.sze.dbunit.rowbuilder;
 import org.dbunit.dataset.builder.BasicDataRowBuilder;
 import org.dbunit.validator.IValidator;
 
-public class ZEUGNIS_ARTRowBuilder extends BasicDataRowBuilder {
+public class ZeugnisArtRowBuilder extends BasicDataRowBuilder {
 
     public static final String TABLE_NAME = "ZEUGNIS_ART";
 
@@ -22,7 +22,7 @@ public class ZEUGNIS_ARTRowBuilder extends BasicDataRowBuilder {
 
     public static final String[] ALL_COLUMNS = {C_ABSCHLUSS_GRAD, C_AKTIV, C_ID, C_NAME, C_NOTE_ALS_TEXT_DARSTELLEN, C_PLATZ_FUER_SIEGEL, C_PRINT_VERSETZUNGSBEMERKUNG, C_SORTIERUNG, C_TITEL, C_VERSION};
 
-    public ZEUGNIS_ARTRowBuilder(String... identifierColumns) {
+    public ZeugnisArtRowBuilder(String... identifierColumns) {
         super(TABLE_NAME, identifierColumns);
         setAllColumnNames(ALL_COLUMNS);
         addDefaultValue(C_PRINT_VERSETZUNGSBEMERKUNG, Boolean.FALSE);
@@ -37,113 +37,113 @@ public class ZEUGNIS_ARTRowBuilder extends BasicDataRowBuilder {
         addDefaultValue(C_NOTE_ALS_TEXT_DARSTELLEN, Boolean.FALSE);
     }
 
-    public final ZEUGNIS_ARTRowBuilder ABSCHLUSS_GRAD (String value) {
+    public final ZeugnisArtRowBuilder AbschlussGrad (String value) {
         with(C_ABSCHLUSS_GRAD, value);
         return this;
     }
 
-    public final ZEUGNIS_ARTRowBuilder ABSCHLUSS_GRAD (IValidator<?> value) {
+    public final ZeugnisArtRowBuilder AbschlussGrad (IValidator<?> value) {
         with(C_ABSCHLUSS_GRAD, value);
         return this;
     }
 
-    public final ZEUGNIS_ARTRowBuilder AKTIV (Boolean value) {
+    public final ZeugnisArtRowBuilder Aktiv (Boolean value) {
         with(C_AKTIV, value);
         return this;
     }
 
-    public final ZEUGNIS_ARTRowBuilder AKTIV (IValidator<?> value) {
+    public final ZeugnisArtRowBuilder Aktiv (IValidator<?> value) {
         with(C_AKTIV, value);
         return this;
     }
 
-    public final ZEUGNIS_ARTRowBuilder ID (Long value) {
+    public final ZeugnisArtRowBuilder Id (Long value) {
         with(C_ID, value);
         return this;
     }
 
-    public final ZEUGNIS_ARTRowBuilder ID (IValidator<?> value) {
+    public final ZeugnisArtRowBuilder Id (IValidator<?> value) {
         with(C_ID, value);
         return this;
     }
 
-    public final ZEUGNIS_ARTRowBuilder NAME (String value) {
+    public final ZeugnisArtRowBuilder Name (String value) {
         with(C_NAME, value);
         return this;
     }
 
-    public final ZEUGNIS_ARTRowBuilder NAME (IValidator<?> value) {
+    public final ZeugnisArtRowBuilder Name (IValidator<?> value) {
         with(C_NAME, value);
         return this;
     }
 
-    public final ZEUGNIS_ARTRowBuilder NOTE_ALS_TEXT_DARSTELLEN (Boolean value) {
+    public final ZeugnisArtRowBuilder NoteAlsTextDarstellen (Boolean value) {
         with(C_NOTE_ALS_TEXT_DARSTELLEN, value);
         return this;
     }
 
-    public final ZEUGNIS_ARTRowBuilder NOTE_ALS_TEXT_DARSTELLEN (IValidator<?> value) {
+    public final ZeugnisArtRowBuilder NoteAlsTextDarstellen (IValidator<?> value) {
         with(C_NOTE_ALS_TEXT_DARSTELLEN, value);
         return this;
     }
 
-    public final ZEUGNIS_ARTRowBuilder PLATZ_FUER_SIEGEL (Boolean value) {
+    public final ZeugnisArtRowBuilder PlatzFuerSiegel (Boolean value) {
         with(C_PLATZ_FUER_SIEGEL, value);
         return this;
     }
 
-    public final ZEUGNIS_ARTRowBuilder PLATZ_FUER_SIEGEL (IValidator<?> value) {
+    public final ZeugnisArtRowBuilder PlatzFuerSiegel (IValidator<?> value) {
         with(C_PLATZ_FUER_SIEGEL, value);
         return this;
     }
 
-    public final ZEUGNIS_ARTRowBuilder PRINT_VERSETZUNGSBEMERKUNG (Boolean value) {
+    public final ZeugnisArtRowBuilder PrintVersetzungsbemerkung (Boolean value) {
         with(C_PRINT_VERSETZUNGSBEMERKUNG, value);
         return this;
     }
 
-    public final ZEUGNIS_ARTRowBuilder PRINT_VERSETZUNGSBEMERKUNG (IValidator<?> value) {
+    public final ZeugnisArtRowBuilder PrintVersetzungsbemerkung (IValidator<?> value) {
         with(C_PRINT_VERSETZUNGSBEMERKUNG, value);
         return this;
     }
 
-    public final ZEUGNIS_ARTRowBuilder SORTIERUNG (Long value) {
+    public final ZeugnisArtRowBuilder Sortierung (Long value) {
         with(C_SORTIERUNG, value);
         return this;
     }
 
-    public final ZEUGNIS_ARTRowBuilder SORTIERUNG (IValidator<?> value) {
+    public final ZeugnisArtRowBuilder Sortierung (IValidator<?> value) {
         with(C_SORTIERUNG, value);
         return this;
     }
 
-    public final ZEUGNIS_ARTRowBuilder TITEL (String value) {
+    public final ZeugnisArtRowBuilder Titel (String value) {
         with(C_TITEL, value);
         return this;
     }
 
-    public final ZEUGNIS_ARTRowBuilder TITEL (IValidator<?> value) {
+    public final ZeugnisArtRowBuilder Titel (IValidator<?> value) {
         with(C_TITEL, value);
         return this;
     }
 
-    public final ZEUGNIS_ARTRowBuilder VERSION (Long value) {
+    public final ZeugnisArtRowBuilder Version (Long value) {
         with(C_VERSION, value);
         return this;
     }
 
-    public final ZEUGNIS_ARTRowBuilder VERSION (IValidator<?> value) {
+    public final ZeugnisArtRowBuilder Version (IValidator<?> value) {
         with(C_VERSION, value);
         return this;
     }
 
 
-    public static ZEUGNIS_ARTRowBuilder newZEUGNIS_ART() {
-        return new ZEUGNIS_ARTRowBuilder(PRIMARY_KEY);
+    public static ZeugnisArtRowBuilder newZeugnisArt() {
+        return new ZeugnisArtRowBuilder(PRIMARY_KEY);
     }
 
-    public static ZEUGNIS_ARTRowBuilder newZEUGNIS_ART(String... identifierColumns) {
-        return new ZEUGNIS_ARTRowBuilder(identifierColumns);
+    public static ZeugnisArtRowBuilder newZeugnisArt(String... identifierColumns) {
+        return new ZeugnisArtRowBuilder(identifierColumns);
     }
 
 }

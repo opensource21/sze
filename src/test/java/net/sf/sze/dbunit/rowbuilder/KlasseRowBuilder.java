@@ -3,7 +3,7 @@ package net.sf.sze.dbunit.rowbuilder;
 import org.dbunit.dataset.builder.BasicDataRowBuilder;
 import org.dbunit.validator.IValidator;
 
-public class KLASSERowBuilder extends BasicDataRowBuilder {
+public class KlasseRowBuilder extends BasicDataRowBuilder {
 
     public static final String TABLE_NAME = "KLASSE";
 
@@ -17,7 +17,7 @@ public class KLASSERowBuilder extends BasicDataRowBuilder {
 
     public static final String[] ALL_COLUMNS = {C_GESCHLOSSEN, C_ID, C_JAHRGANG, C_SUFFIX, C_VERSION};
 
-    public KLASSERowBuilder(String... identifierColumns) {
+    public KlasseRowBuilder(String... identifierColumns) {
         super(TABLE_NAME, identifierColumns);
         setAllColumnNames(ALL_COLUMNS);
         addDefaultValue(C_JAHRGANG, new Integer("0"));
@@ -27,63 +27,63 @@ public class KLASSERowBuilder extends BasicDataRowBuilder {
         addDefaultValue(C_GESCHLOSSEN, Boolean.FALSE);
     }
 
-    public final KLASSERowBuilder GESCHLOSSEN (Boolean value) {
+    public final KlasseRowBuilder Geschlossen (Boolean value) {
         with(C_GESCHLOSSEN, value);
         return this;
     }
 
-    public final KLASSERowBuilder GESCHLOSSEN (IValidator<?> value) {
+    public final KlasseRowBuilder Geschlossen (IValidator<?> value) {
         with(C_GESCHLOSSEN, value);
         return this;
     }
 
-    public final KLASSERowBuilder ID (Long value) {
+    public final KlasseRowBuilder Id (Long value) {
         with(C_ID, value);
         return this;
     }
 
-    public final KLASSERowBuilder ID (IValidator<?> value) {
+    public final KlasseRowBuilder Id (IValidator<?> value) {
         with(C_ID, value);
         return this;
     }
 
-    public final KLASSERowBuilder JAHRGANG (Integer value) {
+    public final KlasseRowBuilder Jahrgang (Integer value) {
         with(C_JAHRGANG, value);
         return this;
     }
 
-    public final KLASSERowBuilder JAHRGANG (IValidator<?> value) {
+    public final KlasseRowBuilder Jahrgang (IValidator<?> value) {
         with(C_JAHRGANG, value);
         return this;
     }
 
-    public final KLASSERowBuilder SUFFIX (String value) {
+    public final KlasseRowBuilder Suffix (String value) {
         with(C_SUFFIX, value);
         return this;
     }
 
-    public final KLASSERowBuilder SUFFIX (IValidator<?> value) {
+    public final KlasseRowBuilder Suffix (IValidator<?> value) {
         with(C_SUFFIX, value);
         return this;
     }
 
-    public final KLASSERowBuilder VERSION (Long value) {
+    public final KlasseRowBuilder Version (Long value) {
         with(C_VERSION, value);
         return this;
     }
 
-    public final KLASSERowBuilder VERSION (IValidator<?> value) {
+    public final KlasseRowBuilder Version (IValidator<?> value) {
         with(C_VERSION, value);
         return this;
     }
 
 
-    public static KLASSERowBuilder newKLASSE() {
-        return new KLASSERowBuilder(PRIMARY_KEY);
+    public static KlasseRowBuilder newKlasse() {
+        return new KlasseRowBuilder(PRIMARY_KEY);
     }
 
-    public static KLASSERowBuilder newKLASSE(String... identifierColumns) {
-        return new KLASSERowBuilder(identifierColumns);
+    public static KlasseRowBuilder newKlasse(String... identifierColumns) {
+        return new KlasseRowBuilder(identifierColumns);
     }
 
 }

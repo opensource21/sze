@@ -3,7 +3,7 @@ package net.sf.sze.dbunit.rowbuilder;
 import org.dbunit.dataset.builder.BasicDataRowBuilder;
 import org.dbunit.validator.IValidator;
 
-public class SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder extends BasicDataRowBuilder {
+public class SchulamtsBemerkungsBausteinRowBuilder extends BasicDataRowBuilder {
 
     public static final String TABLE_NAME = "SCHULAMTS_BEMERKUNGS_BAUSTEIN";
 
@@ -18,7 +18,7 @@ public class SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder extends BasicDataRowBuilder
 
     public static final String[] ALL_COLUMNS = {C_AKTIV, C_BESCHREIBENDER_SATZ, C_ID, C_NAME, C_SORTIERUNG, C_VERSION};
 
-    public SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder(String... identifierColumns) {
+    public SchulamtsBemerkungsBausteinRowBuilder(String... identifierColumns) {
         super(TABLE_NAME, identifierColumns);
         setAllColumnNames(ALL_COLUMNS);
         addDefaultValue(C_AKTIV, Boolean.FALSE);
@@ -29,73 +29,73 @@ public class SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder extends BasicDataRowBuilder
         addDefaultValue(C_SORTIERUNG, new Long("0"));
     }
 
-    public final SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder AKTIV (Boolean value) {
+    public final SchulamtsBemerkungsBausteinRowBuilder Aktiv (Boolean value) {
         with(C_AKTIV, value);
         return this;
     }
 
-    public final SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder AKTIV (IValidator<?> value) {
+    public final SchulamtsBemerkungsBausteinRowBuilder Aktiv (IValidator<?> value) {
         with(C_AKTIV, value);
         return this;
     }
 
-    public final SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder BESCHREIBENDER_SATZ (String value) {
+    public final SchulamtsBemerkungsBausteinRowBuilder BeschreibenderSatz (String value) {
         with(C_BESCHREIBENDER_SATZ, value);
         return this;
     }
 
-    public final SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder BESCHREIBENDER_SATZ (IValidator<?> value) {
+    public final SchulamtsBemerkungsBausteinRowBuilder BeschreibenderSatz (IValidator<?> value) {
         with(C_BESCHREIBENDER_SATZ, value);
         return this;
     }
 
-    public final SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder ID (Long value) {
+    public final SchulamtsBemerkungsBausteinRowBuilder Id (Long value) {
         with(C_ID, value);
         return this;
     }
 
-    public final SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder ID (IValidator<?> value) {
+    public final SchulamtsBemerkungsBausteinRowBuilder Id (IValidator<?> value) {
         with(C_ID, value);
         return this;
     }
 
-    public final SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder NAME (String value) {
+    public final SchulamtsBemerkungsBausteinRowBuilder Name (String value) {
         with(C_NAME, value);
         return this;
     }
 
-    public final SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder NAME (IValidator<?> value) {
+    public final SchulamtsBemerkungsBausteinRowBuilder Name (IValidator<?> value) {
         with(C_NAME, value);
         return this;
     }
 
-    public final SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder SORTIERUNG (Long value) {
+    public final SchulamtsBemerkungsBausteinRowBuilder Sortierung (Long value) {
         with(C_SORTIERUNG, value);
         return this;
     }
 
-    public final SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder SORTIERUNG (IValidator<?> value) {
+    public final SchulamtsBemerkungsBausteinRowBuilder Sortierung (IValidator<?> value) {
         with(C_SORTIERUNG, value);
         return this;
     }
 
-    public final SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder VERSION (Long value) {
+    public final SchulamtsBemerkungsBausteinRowBuilder Version (Long value) {
         with(C_VERSION, value);
         return this;
     }
 
-    public final SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder VERSION (IValidator<?> value) {
+    public final SchulamtsBemerkungsBausteinRowBuilder Version (IValidator<?> value) {
         with(C_VERSION, value);
         return this;
     }
 
 
-    public static SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder newSCHULAMTS_BEMERKUNGS_BAUSTEIN() {
-        return new SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder(PRIMARY_KEY);
+    public static SchulamtsBemerkungsBausteinRowBuilder newSchulamtsBemerkungsBaustein() {
+        return new SchulamtsBemerkungsBausteinRowBuilder(PRIMARY_KEY);
     }
 
-    public static SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder newSCHULAMTS_BEMERKUNGS_BAUSTEIN(String... identifierColumns) {
-        return new SCHULAMTS_BEMERKUNGS_BAUSTEINRowBuilder(identifierColumns);
+    public static SchulamtsBemerkungsBausteinRowBuilder newSchulamtsBemerkungsBaustein(String... identifierColumns) {
+        return new SchulamtsBemerkungsBausteinRowBuilder(identifierColumns);
     }
 
 }

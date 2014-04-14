@@ -3,7 +3,7 @@ package net.sf.sze.dbunit.rowbuilder;
 import org.dbunit.dataset.builder.BasicDataRowBuilder;
 import org.dbunit.validator.IValidator;
 
-public class BEMERKUNGS_BAUSTEINRowBuilder extends BasicDataRowBuilder {
+public class BemerkungsBausteinRowBuilder extends BasicDataRowBuilder {
 
     public static final String TABLE_NAME = "BEMERKUNGS_BAUSTEIN";
 
@@ -17,7 +17,7 @@ public class BEMERKUNGS_BAUSTEINRowBuilder extends BasicDataRowBuilder {
 
     public static final String[] ALL_COLUMNS = {C_AKTIV, C_ID, C_NAME, C_TEXT, C_VERSION};
 
-    public BEMERKUNGS_BAUSTEINRowBuilder(String... identifierColumns) {
+    public BemerkungsBausteinRowBuilder(String... identifierColumns) {
         super(TABLE_NAME, identifierColumns);
         setAllColumnNames(ALL_COLUMNS);
         addDefaultValue(C_AKTIV, Boolean.FALSE);
@@ -27,63 +27,63 @@ public class BEMERKUNGS_BAUSTEINRowBuilder extends BasicDataRowBuilder {
         addDefaultValue(C_ID, new Long("0"));
     }
 
-    public final BEMERKUNGS_BAUSTEINRowBuilder AKTIV (Boolean value) {
+    public final BemerkungsBausteinRowBuilder Aktiv (Boolean value) {
         with(C_AKTIV, value);
         return this;
     }
 
-    public final BEMERKUNGS_BAUSTEINRowBuilder AKTIV (IValidator<?> value) {
+    public final BemerkungsBausteinRowBuilder Aktiv (IValidator<?> value) {
         with(C_AKTIV, value);
         return this;
     }
 
-    public final BEMERKUNGS_BAUSTEINRowBuilder ID (Long value) {
+    public final BemerkungsBausteinRowBuilder Id (Long value) {
         with(C_ID, value);
         return this;
     }
 
-    public final BEMERKUNGS_BAUSTEINRowBuilder ID (IValidator<?> value) {
+    public final BemerkungsBausteinRowBuilder Id (IValidator<?> value) {
         with(C_ID, value);
         return this;
     }
 
-    public final BEMERKUNGS_BAUSTEINRowBuilder NAME (String value) {
+    public final BemerkungsBausteinRowBuilder Name (String value) {
         with(C_NAME, value);
         return this;
     }
 
-    public final BEMERKUNGS_BAUSTEINRowBuilder NAME (IValidator<?> value) {
+    public final BemerkungsBausteinRowBuilder Name (IValidator<?> value) {
         with(C_NAME, value);
         return this;
     }
 
-    public final BEMERKUNGS_BAUSTEINRowBuilder TEXT (String value) {
+    public final BemerkungsBausteinRowBuilder Text (String value) {
         with(C_TEXT, value);
         return this;
     }
 
-    public final BEMERKUNGS_BAUSTEINRowBuilder TEXT (IValidator<?> value) {
+    public final BemerkungsBausteinRowBuilder Text (IValidator<?> value) {
         with(C_TEXT, value);
         return this;
     }
 
-    public final BEMERKUNGS_BAUSTEINRowBuilder VERSION (Long value) {
+    public final BemerkungsBausteinRowBuilder Version (Long value) {
         with(C_VERSION, value);
         return this;
     }
 
-    public final BEMERKUNGS_BAUSTEINRowBuilder VERSION (IValidator<?> value) {
+    public final BemerkungsBausteinRowBuilder Version (IValidator<?> value) {
         with(C_VERSION, value);
         return this;
     }
 
 
-    public static BEMERKUNGS_BAUSTEINRowBuilder newBEMERKUNGS_BAUSTEIN() {
-        return new BEMERKUNGS_BAUSTEINRowBuilder(PRIMARY_KEY);
+    public static BemerkungsBausteinRowBuilder newBemerkungsBaustein() {
+        return new BemerkungsBausteinRowBuilder(PRIMARY_KEY);
     }
 
-    public static BEMERKUNGS_BAUSTEINRowBuilder newBEMERKUNGS_BAUSTEIN(String... identifierColumns) {
-        return new BEMERKUNGS_BAUSTEINRowBuilder(identifierColumns);
+    public static BemerkungsBausteinRowBuilder newBemerkungsBaustein(String... identifierColumns) {
+        return new BemerkungsBausteinRowBuilder(identifierColumns);
     }
 
 }

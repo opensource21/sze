@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 
 import org.dbunit.dataset.builder.BuilderDataSetWriter;
+import org.dbunit.dataset.builder.JavaFriendlyNameCreator;
 
 
 /**
@@ -26,7 +27,8 @@ public class SzeBuilderDataSetWriter extends BuilderDataSetWriter {
      */
     public SzeBuilderDataSetWriter(String packageName, String className, String... importStatements) {
         super(new File("src/test/java"), packageName, className, "UTF-8",
-                "net.sf.sze.dbunit.rowbuilder", true, importStatements);
+                "net.sf.sze.dbunit.rowbuilder", true,
+                new JavaFriendlyNameCreator(), importStatements);
         this.addTypeMapping(BigInteger.class, Long.class);
         this.addTypeMapping(BigDecimal.class, Double.class);
     }

@@ -148,7 +148,7 @@
         <dependency>
             <groupId>org.dbunit.datasetbuilder</groupId>
             <artifactId>dbunit-datasetbuilder</artifactId>
-            <version>1.1</version>
+            <version>1.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
