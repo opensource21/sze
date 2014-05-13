@@ -70,10 +70,6 @@ public class PersistenceConfig implements TransactionManagementConfigurer {
     @Value("${db.idleConnectionTestPeriodInMinutes}")
     private final int idleConnectionTestPeriodInMinutes = 240;
 
-    /** The release helper threads. */
-    @Value("${db.releaseHelperThreads}")
-    private final int releaseHelperThreads = 3;
-
     /** The statements cache size. */
     @Value("${db.statementsCacheSize}")
     private final int statementsCacheSize = 100;
@@ -118,8 +114,6 @@ public class PersistenceConfig implements TransactionManagementConfigurer {
         dataSource.setPartitionCount(partitionCount);
         dataSource.setAcquireIncrement(acquireIncrement);
         dataSource.setStatementsCacheSize(statementsCacheSize);
-        dataSource.setReleaseHelperThreads(releaseHelperThreads);
-
         return dataSource;
     }
 
