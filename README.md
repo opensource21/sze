@@ -5,4 +5,4 @@ make it as simple as possible, so no internationalization is planned and
 the complete documentation will be in German.
 You can get more information in German at [Sourceforge](http://sze.sf.net).
 
-Die Dokumentation findet sich bei der alten Grails-Implementierung [Sourceforge](http://sze.sf.net).
+Die Dokumentation findet sich im [Wiki](https://github.com/opensource21/sze/wiki)
