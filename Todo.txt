@@ -1,11 +1,13 @@
 #PRIO 1
 
-- Admin-Bereich (3 PT?), Schüler müssen filterbar sein, nach Abgangsdatum!
-  Standardmäßig alle abgegangen Schüler ausblenden. Insbedesondere bei der Klasse.
+- Admin-Bereich (3 PT?) (Halbjahr, Formular, #Klasse, Schüler, Schulfach, AvSv, AG, Bemerkungsbaustein,
+    Schulamt, Schulamtsbemerkunsbaustein, SoLBewertungstext, Zeugnisart)
+    Schüler müssen filterbar sein, nach Abgangsdatum!
+    Standardmäßig alle abgegangen Schüler ausblenden. Insbedesondere bei der Klasse.
 
 - Beim Initialiseren von Klasse 1-2 komplett gibt es eine Exception.
     -> Das lag daran, dass erst initialisiert wurde und dann der Schüler
-       die Klasse gewechselt hat. Das können wir technisch noch nicht.
+       die Klasse gewechselt hat. Das können wir technisch noch nicht. (Gefixt!)
     -> Man muss die Möglichkeit bekommen Zeugnisse zu löschen, sofern man
        bestimmte Rechte hat.
 
@@ -68,6 +70,8 @@
             }
 
 
+- Wenn man eine Unterlist bearbeitet fehlt auch die Validierung. -> Geht mit neustem Fuwesta SpringValidateNestedProperty!
+
 #Fachliche Klärung:
 - Sortierung nach Schulfachname
 - Soll die Klasse immer zum aktuellen Datum oder zum Schuljahr umgesetzt werden.
@@ -77,9 +81,9 @@
 
 - Scaffolding
 
-- Bei den komplexeren Masken fehlt die Anzeige von Validierungsfehlern!
+- Bei den komplexeren Masken fehlt die Anzeige von Validierungsfehlern! ???
 
-- Wenn man eine Unterlist bearbeitet fehlt auch die Validierung.
+
 
 - http://jackcess.sourceforge.net/
 
