@@ -51,8 +51,9 @@ public class UpdateZeugnis {
         newBemerkungsBaustein().Id(1L).Aktiv(Boolean.TRUE).Name("Rechtschreibschwäche").Text("Auf Beschluss der Klassenkonferenz vom @datum@ ist im Rechtschreiben von den Grundsätzen der Leistungsbewertung im Schuljahr @schuljahr@ abgewichen worden.").addTo(b);
 
         newKlasse().Id(1L).Geschlossen(Boolean.FALSE).Jahrgang(2006).Suffix("").addTo(b);
-        newSchueler().Id(1L).Geburtsort("Hamburg").Geburtstag(Timestamp.valueOf("2000-06-15 00:00:00.0")).Geschlecht(0).Name("MUSTERMANN").Vorname("ERWIN").KlasseId(1L).addTo(b);
-        newSchueler().Id(2L).Geburtsort("Kiel").Geburtstag(Timestamp.valueOf("2000-03-15 00:00:00.0")).Geschlecht(1).Name("MUSTERFRAU").Vorname("ERNA").KlasseId(1L).addTo(b);
+        newKlasse().Id(2L).Geschlossen(Boolean.FALSE).Jahrgang(2006).Suffix("b").addTo(b);
+        newSchueler().Id(1L).Geburtsort("Hamburg").Geburtstag(Timestamp.valueOf("2000-06-15 00:00:00.0")).Geschlecht(0).Name("MUSTERMANN").Vorname("ERWIN").KlasseId(2L).addTo(b);
+        newSchueler().Id(2L).Geburtsort("Kiel").Geburtstag(Timestamp.valueOf("2000-03-15 00:00:00.0")).Geschlecht(1).Name("MUSTERFRAU").Vorname("ERNA").KlasseId(2L).addTo(b);
         newSchulamt().Id(1L).Aktiv(Boolean.TRUE).BeschreibenderSatz("@Name@ übte das Amt @des Klassensprechers|der Klassensprecherin@ aus.").Name("Klassensprecher").addTo(b);
         newSchulamtsBemerkungsBaustein().Id(1L).Aktiv(Boolean.TRUE).BeschreibenderSatz("").Name("_LEER_").Sortierung(10L).addTo(b);
         newSchulamtsBemerkungsBaustein().Id(2L).Aktiv(Boolean.TRUE).BeschreibenderSatz("@Name@ zeichnete sich dabei durch große Zuverlässigkeit aus.").Name("Zuverlässigkeit").Sortierung(20L).addTo(b);
@@ -76,7 +77,7 @@ public class UpdateZeugnis {
         newSchulhalbjahr().Id(2L).Halbjahr(1).Jahr(2013).Selectable(Boolean.TRUE).addTo(b);
         newZeugnisArt().Id(1L).AbschlussGrad("").Aktiv(Boolean.TRUE).Name("Standard-Zeugnis").NoteAlsTextDarstellen(Boolean.FALSE).PlatzFuerSiegel(Boolean.FALSE).PrintVersetzungsbemerkung(Boolean.TRUE).Sortierung(10L).Titel("Zeugnis").addTo(b);
         newZeugnisFormular().Id(1L).AusgabeDatum(Date.valueOf("2013-01-31")).Beschreibung("2013 erstes Halbjahr").NachteilsAusgleichsDatum(Date.valueOf("2012-09-14")).TemplateFileName("egal").KlasseId(1L).SchulhalbjahrId(1L).addTo(b);
-        newZeugnisFormular().Id(2L).AusgabeDatum(Date.valueOf("2013-07-01")).Beschreibung("2013 zweites Halbjahr").NachteilsAusgleichsDatum(Date.valueOf("2012-09-14")).TemplateFileName("egal").KlasseId(1L).SchulhalbjahrId(2L).addTo(b);
+        newZeugnisFormular().Id(2L).AusgabeDatum(Date.valueOf("2013-07-01")).Beschreibung("2013 zweites Halbjahr").NachteilsAusgleichsDatum(Date.valueOf("2012-09-14")).TemplateFileName("egal").KlasseId(2L).SchulhalbjahrId(1L).addTo(b);
         newZeugnis().Id(3L).AnzahlFehltageGesamt(0).AnzahlFehltageUnentschuldigt(0).AnzahlVerspaetungen(0).BuBewertungsText("").KlassenZielAusgeschlossen(Boolean.FALSE).KlassenZielGefaehrdet(Boolean.FALSE).KlassenZielWurdeNichtErreicht(Boolean.FALSE).RuecktAuf(Boolean.TRUE).FormularId(1L).KlasseId(1L).SchuelerId(1L).SchulhalbjahrId(1L).ZeugnisArtId(1L).addTo(b);
         newZeugnis().Id(4L).AnzahlFehltageGesamt(0).AnzahlFehltageUnentschuldigt(0).AnzahlVerspaetungen(0).BuBewertungsText("").KlassenZielAusgeschlossen(Boolean.FALSE).KlassenZielGefaehrdet(Boolean.FALSE).KlassenZielWurdeNichtErreicht(Boolean.FALSE).RuecktAuf(Boolean.TRUE).FormularId(1L).KlasseId(1L).SchuelerId(2L).SchulhalbjahrId(1L).ZeugnisArtId(1L).addTo(b);
         newAgBewertung().Id(5L).Teilgenommen(Boolean.FALSE).ArbeitsgruppeId(2L).ZeugnisId(3L).addTo(b);
@@ -111,8 +112,8 @@ public class UpdateZeugnis {
     @SuppressWarnings("boxing")
     public static IDataSet buildUpdateResult(Long zeugnisId1, Long zeugnisId2) throws DataSetException {
         final DataSetBuilder b = new DataSetBuilder();
-        newZeugnis().Id(zeugnisId1).Version(0L).AnzahlFehltageGesamt(0).AnzahlFehltageUnentschuldigt(0).AnzahlVerspaetungen(0).BuBewertungsText("").KlassenZielAusgeschlossen(Boolean.FALSE).KlassenZielGefaehrdet(Boolean.FALSE).KlassenZielWurdeNichtErreicht(Boolean.FALSE).RuecktAuf(Boolean.TRUE).FormularId(1L).KlasseId(1L).SchuelerId(1L).SchulhalbjahrId(1L).ZeugnisArtId(1L).addTo(b);
-        newZeugnis().Id(zeugnisId2).Version(0L).AnzahlFehltageGesamt(0).AnzahlFehltageUnentschuldigt(0).AnzahlVerspaetungen(0).BuBewertungsText("").KlassenZielAusgeschlossen(Boolean.FALSE).KlassenZielGefaehrdet(Boolean.FALSE).KlassenZielWurdeNichtErreicht(Boolean.FALSE).RuecktAuf(Boolean.TRUE).FormularId(1L).KlasseId(1L).SchuelerId(2L).SchulhalbjahrId(1L).ZeugnisArtId(1L).addTo(b);
+        newZeugnis().Id(zeugnisId1).Version(1L).AnzahlFehltageGesamt(0).AnzahlFehltageUnentschuldigt(0).AnzahlVerspaetungen(0).BuBewertungsText("").KlassenZielAusgeschlossen(Boolean.FALSE).KlassenZielGefaehrdet(Boolean.FALSE).KlassenZielWurdeNichtErreicht(Boolean.FALSE).RuecktAuf(Boolean.TRUE).FormularId(2L).KlasseId(2L).SchuelerId(1L).SchulhalbjahrId(1L).ZeugnisArtId(1L).addTo(b);
+        newZeugnis().Id(zeugnisId2).Version(1L).AnzahlFehltageGesamt(0).AnzahlFehltageUnentschuldigt(0).AnzahlVerspaetungen(0).BuBewertungsText("").KlassenZielAusgeschlossen(Boolean.FALSE).KlassenZielGefaehrdet(Boolean.FALSE).KlassenZielWurdeNichtErreicht(Boolean.FALSE).RuecktAuf(Boolean.TRUE).FormularId(2L).KlasseId(2L).SchuelerId(2L).SchulhalbjahrId(1L).ZeugnisArtId(1L).addTo(b);
         newAgBewertung().Id(new GreaterThan(0)).Version(0L).Teilgenommen(Boolean.FALSE).ArbeitsgruppeId(5L).ZeugnisId(zeugnisId1).addTo(b);
         newAgBewertung().Id(new GreaterThan(0)).Version(0L).Teilgenommen(Boolean.FALSE).ArbeitsgruppeId(5L).ZeugnisId(zeugnisId2).addTo(b);
         newAgBewertung().Id(new GreaterThan(0)).Version(0L).Teilgenommen(Boolean.FALSE).ArbeitsgruppeId(1L).ZeugnisId(zeugnisId1).addTo(b);

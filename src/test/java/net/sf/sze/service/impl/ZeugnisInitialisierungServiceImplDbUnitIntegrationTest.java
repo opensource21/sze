@@ -87,7 +87,6 @@ public class ZeugnisInitialisierungServiceImplDbUnitIntegrationTest
                 + zeugnisFormular.getSchulhalbjahr() + " wurde ein Zeugnis anlegt.");
 
         final Long schulhalbjahrId = zeugnisFormular.getSchulhalbjahr().getId();
-        final Long klassenId = zeugnisFormular.getKlasse().getId();
         final Long zeugnisId1 = zeugnisDao.findBySchulhalbjahrIdAndSchuelerId(
                 schulhalbjahrId, Long.valueOf(1)).getId();
         final Long zeugnisId2 = zeugnisDao.findBySchulhalbjahrIdAndSchuelerId(
@@ -109,7 +108,7 @@ public class ZeugnisInitialisierungServiceImplDbUnitIntegrationTest
     public void testInitZeugnisUpdate() throws Exception {
         cleanlyInsert(UpdateZeugnis.buildUpdateInit());
         final ZeugnisFormular zeugnisFormular = zeugnisFormularDao.findOne(
-                Long.valueOf(1));
+                Long.valueOf(2));
         ResultContainer result = zeugnisInitialierungsService.initZeugnis(zeugnisFormular);
         assertThat(result.getErrors()).isEmpty();
         //J-
@@ -142,7 +141,6 @@ public class ZeugnisInitialisierungServiceImplDbUnitIntegrationTest
               + " <li>Arbeits- und Sozialverhalten Ziel- und Ergebnisorientierung wurde hinzugefügt.</li></ul>");
          //J+
         final Long schulhalbjahrId = zeugnisFormular.getSchulhalbjahr().getId();
-        final Long klassenId = zeugnisFormular.getKlasse().getId();
         final Long zeugnisId1 = zeugnisDao.findBySchulhalbjahrIdAndSchuelerId(
                 schulhalbjahrId, Long.valueOf(1)).getId();
         final Long zeugnisId2 = zeugnisDao.findBySchulhalbjahrIdAndSchuelerId(
