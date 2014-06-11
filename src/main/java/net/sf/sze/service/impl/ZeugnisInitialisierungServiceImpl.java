@@ -179,8 +179,8 @@ public class ZeugnisInitialisierungServiceImpl implements ZeugnisInitialierungsS
         final Schulhalbjahr halbjahr = formular.getSchulhalbjahr();
         final Klasse klasse = schueler.getKlasse();
         LOG.info("Schulhalbjahr: {}, Klasse {}, Schueler{}", halbjahr, klasse, schueler);
-        Zeugnis zeugnis = zeugnisDao.findBySchulhalbjahrIdAndKlasseIdAndSchuelerId(
-                halbjahr.getId(), klasse.getId(), schueler.getId());
+        Zeugnis zeugnis = zeugnisDao.findBySchulhalbjahrIdAndSchuelerId(
+                halbjahr.getId(), schueler.getId());
 
         final int klassenstufeAsInt = klasse.calculateKlassenstufe(halbjahr.getJahr());
         final String klassenstufe = String.valueOf(klassenstufeAsInt);
@@ -199,6 +199,9 @@ public class ZeugnisInitialisierungServiceImpl implements ZeugnisInitialierungsS
             changeMessage.append("Für den Sch\u00fcler ").append(schueler).
                     append(" und das Halbjahr ").append(halbjahr).
                     append(" existiert schon ein Zeugnis.<ul>");
+            zeugnis.setSchulhalbjahr(halbjahr); //Owning
+            zeugnis.setFormular(formular); //Owning
+            zeugnis.setKlasse(klasse); //Owning
         } else {
             zeugnis = new Zeugnis();
             zeugnis.setSchueler(schueler); //Owning

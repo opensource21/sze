@@ -88,10 +88,10 @@ public class ZeugnisInitialisierungServiceImplDbUnitIntegrationTest
 
         final Long schulhalbjahrId = zeugnisFormular.getSchulhalbjahr().getId();
         final Long klassenId = zeugnisFormular.getKlasse().getId();
-        final Long zeugnisId1 = zeugnisDao.findBySchulhalbjahrIdAndKlasseIdAndSchuelerId(
-                schulhalbjahrId, klassenId, Long.valueOf(1)).getId();
-        final Long zeugnisId2 = zeugnisDao.findBySchulhalbjahrIdAndKlasseIdAndSchuelerId(
-                schulhalbjahrId, klassenId, Long.valueOf(2)).getId();
+        final Long zeugnisId1 = zeugnisDao.findBySchulhalbjahrIdAndSchuelerId(
+                schulhalbjahrId, Long.valueOf(1)).getId();
+        final Long zeugnisId2 = zeugnisDao.findBySchulhalbjahrIdAndSchuelerId(
+                schulhalbjahrId, Long.valueOf(2)).getId();
         final IDataSet expected = InitZeugnis.buildInitResult(zeugnisId1, zeugnisId2,
                 zeugnisFormular.getId(), schulhalbjahrId);
         checkResult(expected);
@@ -143,10 +143,10 @@ public class ZeugnisInitialisierungServiceImplDbUnitIntegrationTest
          //J+
         final Long schulhalbjahrId = zeugnisFormular.getSchulhalbjahr().getId();
         final Long klassenId = zeugnisFormular.getKlasse().getId();
-        final Long zeugnisId1 = zeugnisDao.findBySchulhalbjahrIdAndKlasseIdAndSchuelerId(
-                schulhalbjahrId, klassenId, Long.valueOf(1)).getId();
-        final Long zeugnisId2 = zeugnisDao.findBySchulhalbjahrIdAndKlasseIdAndSchuelerId(
-                schulhalbjahrId, klassenId, Long.valueOf(2)).getId();
+        final Long zeugnisId1 = zeugnisDao.findBySchulhalbjahrIdAndSchuelerId(
+                schulhalbjahrId, Long.valueOf(1)).getId();
+        final Long zeugnisId2 = zeugnisDao.findBySchulhalbjahrIdAndSchuelerId(
+                schulhalbjahrId, Long.valueOf(2)).getId();
         final IDataSet expected = UpdateZeugnis.buildUpdateResult(zeugnisId1, zeugnisId2);
         checkResult(expected);
     }

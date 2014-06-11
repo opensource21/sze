@@ -92,7 +92,7 @@ public class SchulamtsBemerkungController {
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId, Model model) {
         final Zeugnis zeugnis = zeugnisErfassungsService.getZeugnis(
-                halbjahrId, klassenId, schuelerId);
+                halbjahrId, schuelerId);
         final SchulamtsBemerkung schulamtsBemerkung = new SchulamtsBemerkung();
         schulamtsBemerkung.setZeugnis(zeugnis);
         fillModel(model, halbjahrId, klassenId, schuelerId, schulamtsBemerkung);

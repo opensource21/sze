@@ -148,9 +148,9 @@ public class ZeugnisErfassungsServiceImpl implements ZeugnisErfassungsService {
      * {@inheritDoc}
      */
     @Override
-    public Zeugnis getZeugnis(Long halbjahrId, Long klassenId, Long schuelerId) {
-        return zeugnisDao.findBySchulhalbjahrIdAndKlasseIdAndSchuelerId(halbjahrId,
-                klassenId, schuelerId);
+    public Zeugnis getZeugnis(Long halbjahrId, Long schuelerId) {
+        return zeugnisDao.findBySchulhalbjahrIdAndSchuelerId(halbjahrId,
+                schuelerId);
     }
 
 

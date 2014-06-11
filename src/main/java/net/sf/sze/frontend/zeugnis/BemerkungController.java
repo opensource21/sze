@@ -92,7 +92,7 @@ public class BemerkungController implements ModelAttributes {
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId, Model model) {
         final Zeugnis zeugnis = zeugnisErfassungsService.getZeugnis(halbjahrId,
-                klassenId, schuelerId);
+                schuelerId);
         final Bemerkung bemerkung = new Bemerkung();
         bemerkung.setZeugnis(zeugnis);
         fillModel(model, halbjahrId, klassenId, schuelerId, bemerkung);

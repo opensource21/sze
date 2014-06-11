@@ -74,7 +74,7 @@ public class AvSvBewertungController {
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
             Model model) {
         final Zeugnis zeugnis = zeugnisErfassungsService.getZeugnis(halbjahrId,
-                klassenId, schuelerId);
+                schuelerId);
         AvSvForm avSvForm = new AvSvForm(zeugnis.getAvSvBewertungen(),
                 zeugnis.getSchueler(), zeugnis.getKlasse(),
                 zeugnis.getSchulhalbjahr());

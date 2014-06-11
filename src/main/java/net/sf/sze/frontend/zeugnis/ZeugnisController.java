@@ -512,7 +512,7 @@ public class ZeugnisController implements ModelAttributes {
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
             Model model) {
         final Zeugnis zeugnis = zeugnisErfassungsService.getZeugnis(
-                halbjahrId, klassenId, schuelerId);
+                halbjahrId, schuelerId);
         fillZeugnisDetailModel(model, halbjahrId, klassenId, schuelerId, zeugnis);
         return EDIT_ZEUGNIS_DETAIL_VIEW;
     }
@@ -585,8 +585,7 @@ public class ZeugnisController implements ModelAttributes {
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
             Model model) {
         final Zeugnis zeugnis =
-                zeugnisErfassungsService.getZeugnis(halbjahrId, klassenId,
-                        schuelerId);
+                zeugnisErfassungsService.getZeugnis(halbjahrId, schuelerId);
         fillArbeitsgruppenModel(model, halbjahrId, klassenId, schuelerId,
                 zeugnis);
         return EDIT_ZEUGNIS_AGS;
@@ -650,7 +649,7 @@ public class ZeugnisController implements ModelAttributes {
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
             Model model) {
         final Zeugnis zeugnis = zeugnisErfassungsService.
-                getZeugnis(halbjahrId, klassenId, schuelerId);
+                getZeugnis(halbjahrId, schuelerId);
         fillBuSoLModel(model, halbjahrId, klassenId, schuelerId, zeugnis);
         return EDIT_ZEUGNIS_BU_SOL;
     }
@@ -693,7 +692,7 @@ public class ZeugnisController implements ModelAttributes {
             @ModelAttribute("zeugnis") Zeugnis newZeugnis, BindingResult result,
             Model model) {
         final Zeugnis zeugnis = zeugnisErfassungsService.getZeugnis(
-                halbjahrId, klassenId, schuelerId);
+                halbjahrId, schuelerId);
         zeugnis.setBuBewertungsText(newZeugnis.getBuBewertungsText());
         zeugnis.setSoLBewertungsText(newZeugnis.getSoLBewertungsText());
 
@@ -725,7 +724,7 @@ public class ZeugnisController implements ModelAttributes {
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
             RedirectAttributes redirectAttributes) {
         final File zeugnisDatei = zeugnisCreatorService.createZeugnis(
-                zeugnisErfassungsService.getZeugnis(halbjahrId, klassenId, schuelerId));
+                zeugnisErfassungsService.getZeugnis(halbjahrId, schuelerId));
         if (zeugnisDatei.exists() && zeugnisDatei.canRead()) {
             return new FileContentView(zeugnisDatei);
         } else {
