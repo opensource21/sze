@@ -71,6 +71,7 @@
 
 
 - Wenn man eine Unterlist bearbeitet fehlt auch die Validierung. -> Geht mit neustem Fuwesta SpringValidateNestedProperty!
+- Man könnte alle enums auf Konstanten umstellen.
 
 #Fachliche Klärung:
 - Sortierung nach Schulfachname
