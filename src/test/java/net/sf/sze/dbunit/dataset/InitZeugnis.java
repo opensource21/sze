@@ -51,8 +51,8 @@ public class InitZeugnis {
         newBemerkungsBaustein().Id(1L).Version(0L).Aktiv(Boolean.TRUE).Name("Rechtschreibschwäche").Text("Auf Beschluss der Klassenkonferenz vom @datum@ ist im Rechtschreiben von den Grundsätzen der Leistungsbewertung im Schuljahr @schuljahr@ abgewichen worden.").addTo(b);
         newKlasse().Id(1L).Version(0L).Geschlossen(Boolean.FALSE).Jahrgang(2006).Suffix("").addTo(b);
 
-        newSchueler().Id(1L).Version(0L).Geburtsort("Hamburg").Geburtstag(Timestamp.valueOf("2000-06-15 00:00:00.0")).Geschlecht(0).Name("MUSTERMANN").Vorname("ERWIN").KlasseId(1L).addTo(b);
-        newSchueler().Id(2L).Version(0L).Geburtsort("Kiel").Geburtstag(Timestamp.valueOf("2000-03-15 00:00:00.0")).Geschlecht(1).Name("MUSTERFRAU").Vorname("ERNA").KlasseId(1L).addTo(b);
+        newSchueler().Id(1L).Version(0L).Geburtsort("Hamburg").Geburtstag(Timestamp.valueOf("2000-06-15 00:00:00.0")).Geschlecht("m").Name("MUSTERMANN").Vorname("ERWIN").KlasseId(1L).addTo(b);
+        newSchueler().Id(2L).Version(0L).Geburtsort("Kiel").Geburtstag(Timestamp.valueOf("2000-03-15 00:00:00.0")).Geschlecht("w").Name("MUSTERFRAU").Vorname("ERNA").KlasseId(1L).addTo(b);
 
         newSchulamt().Id(1L).Version(0L).Aktiv(Boolean.TRUE).BeschreibenderSatz("@Name@ übte das Amt @des Klassensprechers|der Klassensprecherin@ aus.").Name("Klassensprecher").addTo(b);
         newSchulamtsBemerkungsBaustein().Id(1L).Version(0L).Aktiv(Boolean.TRUE).BeschreibenderSatz("").Name("_LEER_").Sortierung(10L).addTo(b);

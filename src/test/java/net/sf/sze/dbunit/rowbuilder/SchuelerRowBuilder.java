@@ -32,7 +32,7 @@ public class SchuelerRowBuilder extends BasicDataRowBuilder {
         addDefaultValue(C_NAME, "");
         addDefaultValue(C_VERSION, new Long("0"));
         addDefaultValue(C_VORNAME, "");
-        addDefaultValue(C_GESCHLECHT, new Integer("0"));
+        addDefaultValue(C_GESCHLECHT, "");
         addDefaultValue(C_KLASSE_ID, new Long("0"));
         addDefaultValue(C_ID, new Long("0"));
         addDefaultValue(C_GEBURTSORT, "");
@@ -78,7 +78,7 @@ public class SchuelerRowBuilder extends BasicDataRowBuilder {
         return this;
     }
 
-    public final SchuelerRowBuilder Geschlecht (Integer value) {
+    public final SchuelerRowBuilder Geschlecht (String value) {
         with(C_GESCHLECHT, value);
         return this;
     }

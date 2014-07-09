@@ -3,21 +3,7 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-    <changeSet author="niels" id="1350468477768-1a" >
-        <renameColumn tableName="SCHUELER" oldColumnName="GESCHLECHT" newColumnName="GESCHLECHT_CHAR"/>
-     </changeSet>
-     <changeSet author="niels" id="1350468477768-1b" >
-        <addColumn tableName="SCHUELER">
-            <column name="GESCHLECHT" type="INT"/>
-        </addColumn>
-        <addNotNullConstraint tableName="SCHUELER" columnName="GESCHLECHT" columnDataType="INT"  defaultNullValue="2"/>
-     </changeSet>
-     <changeSet author="niels" id="1350468477768-1c" >
-        <comment>Umstellung auf Ordinal bei Enums, vorher sprechender Buchstabe.</comment>
-        <sql>update SCHUELER set GESCHLECHT = '0' where GESCHLECHT_CHAR='m'</sql>
-        <sql>update SCHUELER set GESCHLECHT = '1' where GESCHLECHT_CHAR='w'</sql>
-        <dropColumn tableName="SCHUELER" columnName="GESCHLECHT_CHAR"/>
-    </changeSet>
+
     <changeSet author="niels (generated)" id="1350468477768-2">
         <modifyDataType columnName="AUSGABE_DATUM" newDataType="DATE" tableName="ZEUGNIS_FORMULAR"/>
     </changeSet>

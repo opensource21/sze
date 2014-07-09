@@ -52,8 +52,8 @@ public class UpdateZeugnis {
 
         newKlasse().Id(1L).Geschlossen(Boolean.FALSE).Jahrgang(2006).Suffix("").addTo(b);
         newKlasse().Id(2L).Geschlossen(Boolean.FALSE).Jahrgang(2006).Suffix("b").addTo(b);
-        newSchueler().Id(1L).Geburtsort("Hamburg").Geburtstag(Timestamp.valueOf("2000-06-15 00:00:00.0")).Geschlecht(0).Name("MUSTERMANN").Vorname("ERWIN").KlasseId(2L).addTo(b);
-        newSchueler().Id(2L).Geburtsort("Kiel").Geburtstag(Timestamp.valueOf("2000-03-15 00:00:00.0")).Geschlecht(1).Name("MUSTERFRAU").Vorname("ERNA").KlasseId(2L).addTo(b);
+        newSchueler().Id(1L).Geburtsort("Hamburg").Geburtstag(Timestamp.valueOf("2000-06-15 00:00:00.0")).Geschlecht("m").Name("MUSTERMANN").Vorname("ERWIN").KlasseId(2L).addTo(b);
+        newSchueler().Id(2L).Geburtsort("Kiel").Geburtstag(Timestamp.valueOf("2000-03-15 00:00:00.0")).Geschlecht("w").Name("MUSTERFRAU").Vorname("ERNA").KlasseId(2L).addTo(b);
         newSchulamt().Id(1L).Aktiv(Boolean.TRUE).BeschreibenderSatz("@Name@ übte das Amt @des Klassensprechers|der Klassensprecherin@ aus.").Name("Klassensprecher").addTo(b);
         newSchulamtsBemerkungsBaustein().Id(1L).Aktiv(Boolean.TRUE).BeschreibenderSatz("").Name("_LEER_").Sortierung(10L).addTo(b);
         newSchulamtsBemerkungsBaustein().Id(2L).Aktiv(Boolean.TRUE).BeschreibenderSatz("@Name@ zeichnete sich dabei durch große Zuverlässigkeit aus.").Name("Zuverlässigkeit").Sortierung(20L).addTo(b);

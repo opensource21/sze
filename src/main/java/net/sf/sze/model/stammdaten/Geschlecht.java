@@ -19,7 +19,8 @@ public enum Geschlecht {
     WEIBLICH('w');
 
     /** The id. */
-    private final char id;
+    private final Character id;
+
 
     /**
      *
@@ -27,12 +28,41 @@ public enum Geschlecht {
      * @param id die Id
      */
     private Geschlecht(char id) {
-        this.id = id;
+        this.id = Character.valueOf(id);
     }
+
+    /**
+     * Liefert den Typ zu der Id.
+     * @param id die Id des Typen.
+     * @return den Typ zu der Id.
+     */
+    public static Geschlecht getType(Character id) {
+        if (id == null) {
+            return null;
+        }
+        switch (id.charValue()) {
+        case 'm':
+            return MAENNLICH;
+        case 'w':
+            return WEIBLICH;
+        default:
+            throw new IllegalStateException("Geschlecht " + id
+                    + " ist nicht zulässig.");
+        }
+    }
+
+    /**
+     * Returns the identifier.
+     * @return the identifier.
+     */
+    public Character getId() {
+        return id;
+    }
+
 
     @Override
     public String toString() {
-        switch (id) {
+        switch (id.charValue()) {
         case 'm':
             return "männlich";
         case 'w':

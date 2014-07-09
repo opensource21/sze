@@ -2,8 +2,6 @@ package net.sf.sze.dbunit.rowbuilder;
 
 import org.dbunit.dataset.builder.BasicDataRowBuilder;
 import org.dbunit.validator.IValidator;
-
-import java.sql.Timestamp;
 import java.sql.Date;
 
 public class ZeugnisFormularRowBuilder extends BasicDataRowBuilder {
@@ -31,13 +29,13 @@ public class ZeugnisFormularRowBuilder extends BasicDataRowBuilder {
         super(TABLE_NAME, identifierColumns);
         setAllColumnNames(ALL_COLUMNS);
         addDefaultValue(C_VERSION, new Long("0"));
-        addDefaultValue(C_AUSGABE_DATUM, new Timestamp(0));
+        addDefaultValue(C_AUSGABE_DATUM, new Date(0));
         addDefaultValue(C_SCHULHALBJAHR_ID, new Long("0"));
         addDefaultValue(C_KLASSE_ID, new Long("0"));
         addDefaultValue(C_ID, new Long("0"));
         addDefaultValue(C_TEMPLATE_FILE_NAME, "");
         addDefaultValue(C_BESCHREIBUNG, "");
-        addDefaultValue(C_NACHTEILS_AUSGLEICHS_DATUM, new Timestamp(0));
+        addDefaultValue(C_NACHTEILS_AUSGLEICHS_DATUM, new Date(0));
     }
 
     public final ZeugnisFormularRowBuilder AusgabeDatum (Date value) {

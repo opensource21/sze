@@ -13,8 +13,6 @@ import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -74,8 +72,7 @@ public class Schueler extends VersionedModel implements Serializable,
 
     /** The geschlecht. */
     @Column(nullable = false, length = 1)
-    @Enumerated(EnumType.ORDINAL)
-    private Geschlecht geschlecht;
+    private Character geschlecht;
 
     // bi-directional many-to-one association to Klasse
 
@@ -162,7 +159,7 @@ public class Schueler extends VersionedModel implements Serializable,
      * @return the geschlecht
      */
     public Geschlecht getGeschlecht() {
-        return this.geschlecht;
+        return Geschlecht.getType(this.geschlecht);
     }
 
     /**
@@ -171,7 +168,7 @@ public class Schueler extends VersionedModel implements Serializable,
      * @param geschlecht the new geschlecht
      */
     public void setGeschlecht(final Geschlecht geschlecht) {
-        this.geschlecht = geschlecht;
+        this.geschlecht = geschlecht.getId();
     }
 
     /**

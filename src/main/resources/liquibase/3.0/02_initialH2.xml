@@ -296,7 +296,7 @@
             <column name="GEBURTSTAG" type="TIMESTAMP">
                 <constraints nullable="false"/>
             </column>
-            <column name="GESCHLECHT" type="CHAR(255)">
+            <column name="GESCHLECHT" type="CHAR(1)">
                 <constraints nullable="false"/>
             </column>
             <column name="KLASSE_ID" type="BIGINT">

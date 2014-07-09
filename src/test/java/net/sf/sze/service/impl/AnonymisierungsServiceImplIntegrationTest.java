@@ -32,6 +32,7 @@ public class AnonymisierungsServiceImplIntegrationTest extends AbstractSzeDbUnit
      */
     @Test
     public void testReplaceAllNamesWithVariables() throws Exception {
+        super.generateRowBuilder();
         final IDataSet startDataSet = Anonymisierung.buildVariableInit();
         cleanlyInsert(startDataSet);
 
