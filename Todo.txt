@@ -22,10 +22,11 @@
 
 - Bessere Template Unterstützung. Siehe seu/projects/schule/felderUndPlatzhalter.md
 
-- https://github.com/mgonto/jpa-passive-logging-example
+- https://github.com/mgonto/jpa-passive-logging-example (Siehe auch http://struberg.wordpress.com/2010/07/31/howto-changelog-with-jpa/)
 
 - Beim Start von OO sollte man die Parameter mit -- anstatt - übergeben. Ist allerdings nur deprecated.
-  Schüler die abgemeldet sind sollten in einer anderen Farbe dargestellt werden.
+
+- Schüler die abgemeldet sind sollten in einer anderen Farbe dargestellt werden.
 
 
 
@@ -45,6 +46,10 @@
 - Tests für Controller
 
 - Test der Initialisierung bzgl Abgangsdatum!
+
+- Zeugnisformular Klasse und Schulhalbjahr sind zur Zeit geschützt durch
+  disablen der Felder in der Gui. Ein Check wäre robuster und man sieht gleich
+  den Text.
 
 - Aktives Menü eleganter setzen?
     I'm trying to apply a css class to a menu item based on the current page URL.  So all pages under '/jobs/' should result in my jobs menu item being active.

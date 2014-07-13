@@ -44,15 +44,19 @@ tags - a list of selectable tag
             <input type="text" bs:field="beschreibung" th:disabled="${disabled}" />
 
             <!-- Hier die Listen füllen-->
-            <select bs:field="schulhalbjahr" th:unless="${disabled}">
+            <select bs:field="schulhalbjahr" th:unless="${disabled or zeugnisFormular.zeugnis.size() > 0}">
                 <option th:each="item : ${schulhalbjahre}" th:value="${item.id}" th:text="${item}"
                     th:classappend="${item.id==zeugnisFormular.schulhalbjahr.id}? 'highlight'"></option>
             </select>
-            <select bs:field="klasse" th:unless="${disabled}">
+            <input type="text" bs:field="schulhalbjahr"
+                disabled="disabled" th:if="${disabled or zeugnisFormular.zeugnis.size() > 0}"  />
+            <select bs:field="klasse" th:unless="${disabled or zeugnisFormular.zeugnis.size() > 0}">
                 <option th:each="item : ${klassenListe}" th:value="${item.id}" th:text="${item}"
                     th:classappend="${item.id==zeugnisFormular?.klasse?.id}? 'highlight'"
                     th:disabled="${item.geschlossen}"></option>
             </select>
+            <input type="text" bs:field="klasse"
+                disabled="disabled" th:if="${disabled or zeugnisFormular.zeugnis.size() > 0}"/>
             <input type="text" bs:field="templateFileName"
                 th:disabled="${disabled}" />
             <input type="text" class="datepicker" bs:field="ausgabeDatum"
