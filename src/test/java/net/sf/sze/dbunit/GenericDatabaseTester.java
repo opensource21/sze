@@ -4,10 +4,9 @@
 // (c) SZE-Development Team
 package net.sf.sze.dbunit;
 
+import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.SQLException;
-
-import javax.sql.DataSource;
 
 import org.dbunit.AbstractDatabaseTester;
 import org.dbunit.DatabaseUnitException;
@@ -27,10 +26,10 @@ public class GenericDatabaseTester extends AbstractDatabaseTester {
 
     private final IDatabaseConnection connection;
 
-    public GenericDatabaseTester(DataSource dataSource, String schema)
+    public GenericDatabaseTester(Connection jdbcConnection, String schema)
             throws DatabaseUnitException, SQLException {
         super();
-        DatabaseMetaData metaData = dataSource.getConnection().getMetaData();
+        DatabaseMetaData metaData = jdbcConnection.getMetaData();
         final String productName = metaData.getDatabaseProductName();
         setOperationListener(new DefaultOperationListener() {
             @Override
@@ -47,10 +46,10 @@ public class GenericDatabaseTester extends AbstractDatabaseTester {
             }
         });
         if (PRODUCT_H2.equals(productName)) {
-            connection = new H2Connection(dataSource.getConnection(), schema);
+            connection = new H2Connection(jdbcConnection, schema);
         } else if (PRODUCT_MYSQL.equals(productName)) {
             connection =
-                    new MySqlConnection(dataSource.getConnection(), schema);
+                    new MySqlConnection(jdbcConnection, schema);
         } else {
             throw new IllegalStateException("Der Treiber " + productName
                     + " ist unbekannt.");

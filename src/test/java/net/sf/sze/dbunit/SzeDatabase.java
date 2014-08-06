@@ -4,10 +4,9 @@
 // (c) SZE-Development Team
 package net.sf.sze.dbunit;
 
+import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.sql.DataSource;
 
 import net.sf.sze.dbunit.rowbuilder.AgBewertungRowBuilder;
 import net.sf.sze.dbunit.rowbuilder.ArbeitsUndSozialVerhaltenRowBuilder;
@@ -51,7 +50,7 @@ import org.junit.runners.model.Statement;
 public class SzeDatabase implements TestRule {
 
 
-    private final DataSource dataSource;
+    private final Connection connection;
 
     private final String schema;
 
@@ -124,9 +123,9 @@ public class SzeDatabase implements TestRule {
      *
      * @param dataSource
      */
-    public SzeDatabase(DataSource dataSource, String schema) {
+    public SzeDatabase(Connection connection, String schema) {
         super();
-        this.dataSource = dataSource;
+        this.connection = connection;
         this.schema = schema;
     }
 
@@ -137,7 +136,7 @@ public class SzeDatabase implements TestRule {
      */
     public void initDatabase() throws Exception {
         if (databaseTester == null) {
-            databaseTester = new GenericDatabaseTester(dataSource, schema);
+            databaseTester = new GenericDatabaseTester(connection, schema);
             setUpDatabaseConfig(databaseTester.getConnection().getConfig());
         }
         if (deleteDataSet == null) {

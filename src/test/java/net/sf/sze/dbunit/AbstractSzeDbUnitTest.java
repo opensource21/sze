@@ -4,6 +4,8 @@
 // (c) SZE-Development Team
 package net.sf.sze.dbunit;
 
+import java.sql.SQLException;
+
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 
@@ -63,9 +65,9 @@ public abstract class AbstractSzeDbUnitTest extends AbstractJUnit4SpringContextT
 
 
     @Rule
-    public SzeDatabase getSzeDatebase() {
+    public SzeDatabase getSzeDatebase() throws SQLException {
         if (szeDatabase == null) {
-            szeDatabase = new SzeDatabase(dataSource, schema);
+            szeDatabase = new SzeDatabase(dataSource.getConnection(), schema);
         }
         return szeDatabase;
     }
