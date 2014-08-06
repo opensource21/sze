@@ -74,7 +74,7 @@ public abstract class AbstractSzeDbUnitTest extends AbstractJUnit4SpringContextT
     }
 
     @AfterClass
-    public void closeDB() throws Exception {
+    public static void closeDB() throws Exception {
         SzeDatabase.destroyDatabase();
     }
 
