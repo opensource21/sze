@@ -10,6 +10,7 @@ import javax.annotation.Resource;
 import javax.sql.DataSource;
 
 import org.dbunit.dataset.IDataSet;
+import org.junit.AfterClass;
 import org.junit.Rule;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.ContextConfiguration;
@@ -70,6 +71,11 @@ public abstract class AbstractSzeDbUnitTest extends AbstractJUnit4SpringContextT
             szeDatabase = new SzeDatabase(dataSource.getConnection(), schema);
         }
         return szeDatabase;
+    }
+
+    @AfterClass
+    public void closeDB() throws Exception {
+        SzeDatabase.destroyDatabase();
     }
 
 
