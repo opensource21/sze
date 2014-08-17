@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import net.sf.sze.frontend.base.ModelAttributes;
 import net.sf.sze.frontend.base.URL;
 import net.sf.sze.model.stammdaten.Klasse;
-import net.sf.sze.model.zeugnis.Halbjahr;
 import net.sf.sze.service.api.KlasseService;
 import net.sf.sze.service.api.SchuelerService;
 
@@ -225,13 +224,6 @@ public class KlasseCRUDController {
         if (klasse == null) {
             throw new ResourceNotFoundException();
         }
-//        int currentYear = klasse.getJahr() + 3;
-        int[] jahre = new int[7];
-        for (int i = 0; i <= 6; i++) {
-//            jahre[i] = currentYear - i;
-        }
-        model.addAttribute("halbjahre", Halbjahr.values());
-        model.addAttribute("jahre", jahre);
         model.addAttribute("klasse", klasse);
         model.addAttribute("disabled", Boolean.valueOf(disabled));
         model.addAttribute("saveUrl", saveUrl);

@@ -33,7 +33,7 @@ import net.sf.sze.model.zeugnis.StandardBewertung;
 import net.sf.sze.model.zeugnis.Zeugnis;
 import net.sf.sze.model.zeugnis.ZeugnisArt;
 import net.sf.sze.model.zeugnis.ZeugnisFormular;
-import net.sf.sze.service.api.SchulkalenderService;
+import net.sf.sze.service.api.SchuelerService;
 import net.sf.sze.service.api.ZeugnisInitialierungsService;
 import net.sf.sze.util.ResultContainer;
 
@@ -83,10 +83,10 @@ public class ZeugnisInitialisierungServiceImpl implements ZeugnisInitialierungsS
     private PlatformTransactionManager transactionManager;
 
     /**
-     * Schulkalenderservice.
+     * {@link SchuelerService}.
      */
     @Resource
-    private SchulkalenderService schulkalenderService;
+    private SchuelerService schuelerService;
 
     /**
      * Dao für die {@link Zeugnis}.
@@ -151,9 +151,8 @@ public class ZeugnisInitialisierungServiceImpl implements ZeugnisInitialierungsS
     public ResultContainer initZeugnis(final ZeugnisFormular formular) {
         final ResultContainer result = new ResultContainer();
         final List<ZeugnisArt> zeugnisArt = zeugnisArtDao.findAllByAktivTrueOrderBySortierungAsc();
-        final List<Schueler> schueler = schuelerDao.
-                findAllByAbgangsDatumIsNullOrFutureAndKlasse(
-                        schulkalenderService.getLeavedSchoolDate().getTime(), formular.getKlasse());
+        final List<Schueler> schueler =
+                        schuelerService.getActiveSchueler(formular.getKlasse());
         TransactionTemplate tt = new TransactionTemplate(transactionManager);
 
         for (final Schueler einSchueler : schueler) {
