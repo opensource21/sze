@@ -5,8 +5,6 @@
 
 package net.sf.sze.frontend.konfiguration;
 
-import java.util.Calendar;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,6 +13,7 @@ import net.sf.sze.frontend.base.URL;
 import net.sf.sze.model.zeugnis.Halbjahr;
 import net.sf.sze.model.zeugnis.Schulhalbjahr;
 import net.sf.sze.service.api.SchulhalbjahrService;
+import net.sf.sze.service.api.SchulkalenderService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,6 +58,12 @@ public class SchulhalbjahrCRUDController {
      */
     @Resource
     private SchulhalbjahrService schulhalbjahrService;
+
+    /**
+     * Ein Schulkalenderservice.
+     */
+    @Resource
+    private SchulkalenderService schulkalenderService;
 
     /**
      * Small service which helps to bind requestdata to an object.
@@ -108,18 +113,8 @@ public class SchulhalbjahrCRUDController {
     @RequestMapping(value = URL.Schulhalbjahr.CREATE, method = RequestMethod.GET)
     public String create(Model model) {
         final Schulhalbjahr schulhalbjahr = new Schulhalbjahr();
-        final Calendar currentDate = Calendar.getInstance();
-        if (currentDate.get(Calendar.MONTH) >= Calendar.AUGUST) {
-            schulhalbjahr.setJahr(currentDate.get(Calendar.YEAR) + 1);
-        } else {
-            schulhalbjahr.setJahr(currentDate.get(Calendar.YEAR));
-        }
-        if (currentDate.get(Calendar.MONTH) >= Calendar.MARCH
-                && currentDate.get(Calendar.MONTH) < Calendar.AUGUST) {
-            schulhalbjahr.setHalbjahr(Halbjahr.Beide_Halbjahre);
-        } else {
-            schulhalbjahr.setHalbjahr(Halbjahr.Erstes_Halbjahr);
-        }
+        schulhalbjahr.setHalbjahr(schulkalenderService.getCurrentHalbjahr());
+        schulhalbjahr.setJahr(schulkalenderService.getCurrentSchuljahr());
         schulhalbjahr.setSelectable(true);
         addStandardModelData(schulhalbjahr, URL.Schulhalbjahr.CREATE, false,
                     model);

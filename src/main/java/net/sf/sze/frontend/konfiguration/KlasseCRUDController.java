@@ -5,8 +5,6 @@
 
 package net.sf.sze.frontend.konfiguration;
 
-import java.util.Calendar;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -109,19 +107,6 @@ public class KlasseCRUDController {
     @RequestMapping(value = URL.Klasse.CREATE, method = RequestMethod.GET)
     public String create(Model model) {
         final Klasse klasse = new Klasse();
-        final Calendar currentDate = Calendar.getInstance();
-//        if (currentDate.get(Calendar.MONTH) >= Calendar.AUGUST) {
-//            klasse.setJahr(currentDate.get(Calendar.YEAR) + 1);
-//        } else {
-//            klasse.setJahr(currentDate.get(Calendar.YEAR));
-//        }
-//        if (currentDate.get(Calendar.MONTH) >= Calendar.MARCH
-//                && currentDate.get(Calendar.MONTH) < Calendar.AUGUST) {
-//            klasse.setHalbjahr(Halbjahr.Beide_Halbjahre);
-//        } else {
-//            klasse.setHalbjahr(Halbjahr.Erstes_Halbjahr);
-//        }
-//        klasse.setSelectable(true);
         addStandardModelData(klasse, URL.Klasse.CREATE, false,
                     model);
         return KLASSE_FORM;
