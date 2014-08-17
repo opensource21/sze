@@ -7,7 +7,7 @@ messages - eine Liste mit Meldungen.
  -->
 <html lang="de-DE" xmlns:th="http://www.thymeleaf.org"
     xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
-<head>
+<head th:attr="data-baseurl=@{'/'}">
 <meta charset="UTF-8" />
 <link rel="shortcut icon" href="../../resources/images/sze.ico"
     type="image/x-icon" th:href="@{/resources/images/sze.ico}" />
