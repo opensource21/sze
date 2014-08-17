@@ -46,7 +46,7 @@ public class SchulhalbjahrCRUDController {
     /**
      * View which is used as form.
      */
-    private static final String SCHULHALBJAHR_FORM = "schulhalbjahr/form";
+    private static final String SCHULHALBJAHR_FORM = "schulhalbjahr/schulhalbjahrform";
 
     /**
      * The Logger for the controller.
@@ -96,7 +96,7 @@ public class SchulhalbjahrCRUDController {
 
         model.addAttribute("pageRequest", pageRequest);
         model.addAttribute("schulhalbjahrList", schulhalbjahrList);
-        return "schulhalbjahr/list";
+        return "schulhalbjahr/schulhalbjahrlist";
     }
 
     /**
