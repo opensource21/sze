@@ -426,7 +426,7 @@ public final class URL {
     }
 
     /**
-     * All URLS for the {@link ZeugnisFormular}.
+     * All URLS for the {@link net.sf.sze.model.zeugnis.ZeugnisFormular}.
      *
      */
     public interface ZeugnisFormular {
@@ -464,11 +464,50 @@ public final class URL {
     }
 
     /**
+     * All URLS for the {@link net.sf.sze.model.stammdaten.Klasse}.
+     *
+     */
+    public interface Klasse {
+
+        /**
+         * Home-Url.
+         */
+        String HOME = "/klasse";
+
+        /**
+         * Parametername for the klasse-id.
+         */
+        String P_KLASSE_ID = "klasseId";
+
+        /**
+         * Edit-Url.
+         */
+        String EDIT = HOME + "/edit/{" + P_KLASSE_ID + "}";
+
+        /**
+         * Show-Url.
+         */
+        String SHOW = HOME + "/show/{" + P_KLASSE_ID + "}";
+
+        /**
+         * Delete-Url.
+         */
+        String DELETE = HOME + "/delete";
+
+        /** List-URL. */
+        String LIST = HOME + "/list";
+
+        /** Create URL. */
+        String CREATE = HOME + "/create";
+    }
+
+    /**
      * Replace all parameters in the URL with the given values.
      *
      * @param url the URL.
      * @param parameters the parameters
      * @return the URL with parameters filled in
+     * @deprecated please use {@link URL#filledURLWithNamedParams(String, Object...)}
      */
     @Deprecated
     public static String filledURL(String url, Object... parameters) {
