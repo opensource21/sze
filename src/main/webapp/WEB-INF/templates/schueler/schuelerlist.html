@@ -1,5 +1,5 @@
 <!-- Parameter:
-schulhalbjahrList - PageWrapper<Schulhalbjahr>
+schuelerList - PageWrapper<Schueler>
 
 pageRequest - the parameter of this search.
  -->
@@ -16,35 +16,41 @@ pageRequest - the parameter of this search.
 </head>
 <body>
     <div layout:fragment="content" class="container-fluid">
-        <h3 th:text="#{schulhalbjahr.list.title}">Liste</h3>
-        <a class="btn" href="/" th:href="@{#{nurl.schulhalbjahr.create}}" th:text="#{label.action.create}">Create a new entry</a>
+        <h3 th:text="#{schueler.list.title}">Liste</h3>
+        <a class="btn" href="/" th:href="@{#{nurl.schueler.create}}" th:text="#{label.action.create}">Create a new entry</a>
         <div id="data">
-            <span th:if="${#lists.isEmpty(schulhalbjahrList)}" th:text="#{label.no_data_found}"></span>
+            <span th:if="${#lists.isEmpty(schuelerList)}" th:text="#{label.no_data_found}"></span>
             <table class="datatable_with_action table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th th:text="#{net.sf.sze.model.zeugnis.Schulhalbjahr.jahr}">Id</th>
-                        <th th:text="#{net.sf.sze.model.zeugnis.Schulhalbjahr.halbjahr}">Id</th>
-                        <th th:text="#{net.sf.sze.model.zeugnis.Schulhalbjahr.selectable}">Id</th>
+                        <th th:text="#{net.sf.sze.model.stammdaten.Schueler.vorname}">vorname</th>
+                        <th th:text="#{net.sf.sze.model.stammdaten.Schueler.rufname}">rufname</th>
+                        <th th:text="#{net.sf.sze.model.stammdaten.Schueler.name}">name</th>
+                        <th th:text="#{net.sf.sze.model.stammdaten.Schueler.geburtsort}">geburtsort</th>
+                        <th th:text="#{net.sf.sze.model.stammdaten.Schueler.geburtstag}">geburtstag</th>
+                        <th th:text="#{net.sf.sze.model.stammdaten.Schueler.klasse}">klasse</th>
                         <th th:text="#{label.actions}">Actions</th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    <tr th:each="schulhalbjahr : ${schulhalbjahrList.content}">
-                        <td th:text="${schulhalbjahr.jahr}">1</td>
-                        <td th:text="${schulhalbjahr.halbjahr}">1</td>
-                        <td th:text="#{'blt.'+${schulhalbjahr.selectable}}">1</td>
-                        <td th:with="#{par.schulhalbjahr.schulhalbjahr_id}=${schulhalbjahr.id}">
-                            <a class="btn" href="show/1" th:href="@{|__#{nurl.schulhalbjahr.show}__|}" ><i class="imageshow"></i></a>
-                            <a class="btn" href="edit/1" th:href="@{|__#{nurl.schulhalbjahr.edit}__|}" ><i class="edit"></i></a>
+                    <tr th:each="schueler : ${schuelerList.content}">
+                        <td th:text="${{schueler.vorname}}">vorname</td>
+                        <td th:text="${{schueler.rufname}}">rufname</td>
+                        <td th:text="${{schueler.name}}">name</td>
+                        <td th:text="${{schueler.geburtsort}}">geburtsort</td>
+                        <td th:text="${{schueler.geburtstag}}">geburtstag</td>
+                        <td th:text="${{schueler.klasse}}">klasse</td>
+                        <td th:with="#{par.schueler.schueler_id}=${schueler.id}">
+                            <a class="btn" href="show/1" th:href="@{|__#{nurl.schueler.show}__|}" ><i class="imageshow"></i></a>
+                            <a class="btn" href="edit/1" th:href="@{|__#{nurl.schueler.edit}__|}" ><i class="edit"></i></a>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
-        <div class="pagination pagination-centered"  th:with="page=${schulhalbjahrList}" th:include="fragments::paginationbar" >
+        <div class="pagination pagination-centered"  th:with="page=${schuelerList}" th:include="fragments::paginationbar" >
             <ul>
               <li >
                 <a >&larr; First</a>
