@@ -502,6 +502,44 @@ public final class URL {
     }
 
     /**
+     * All URLS for the {@link Schueler}.
+     *
+     */
+    public interface Schueler {
+
+        /**
+         * Home-Url.
+         */
+        String HOME = "/schueler";
+
+        /**
+         * Parametername for the halbjahrs-id.
+         */
+        String P_SCHUELER_ID = "schuelerId";
+
+        /**
+         * Edit-Url.
+         */
+        String EDIT = HOME + "/edit/{" + P_SCHUELER_ID + "}";
+
+        /**
+         * Show-Url.
+         */
+        String SHOW = HOME + "/show/{" + P_SCHUELER_ID + "}";
+
+        /**
+         * Delete-Url.
+         */
+        String DELETE = HOME + "/delete";
+
+        /** List-URL. */
+        String LIST = HOME + "/list";
+
+        /** Create URL. */
+        String CREATE = HOME + "/create";
+    }
+
+    /**
      * Replace all parameters in the URL with the given values.
      *
      * @param url the URL.

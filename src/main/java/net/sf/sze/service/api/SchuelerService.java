@@ -1,0 +1,67 @@
+// schulfächer.ervice.java
+//
+// Licensed under the AGPL - http://www.gnu.org/licenses/agpl-3.0.txt
+// (c) SZE-Development-Team
+
+package net.sf.sze.service.api;
+
+import java.util.List;
+
+import net.sf.sze.model.stammdaten.Klasse;
+import net.sf.sze.model.stammdaten.Schueler;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+/**
+ * Service that handles work which must be done for {@link Schueler}.
+ *
+ * @author niels
+ *
+ */
+public interface SchuelerService {
+
+    /**
+     * Deliver a page of Schuelere.
+     *
+     * @param page information about pagination.
+     * @return the page of Schuelere.
+     */
+    Page<Schueler> getSchueler(Pageable page);
+
+    /**
+     * Deliver a page of active Schuelere.
+     *
+     * @param klasse the class.
+     * @return the page of active Schuelere.
+     */
+    List<Schueler> getActiveSchueler(Klasse klasse);
+
+    /**
+     * Save the given schueler.
+     *
+     * @param schueler the schueler object.
+     * @return the schueler object which may changed.
+     *
+     */
+    Schueler save(Schueler schueler);
+
+    /**
+     * Read the schueler.
+     *
+     * @param schuelerId the ID of the schueler object.
+     * @return the schueler object.
+     *
+     */
+    Schueler read(Long schuelerId);
+
+    /**
+     * Delete the schueler.
+     *
+     * @param schuelerId the ID of the schueler object.
+     *
+     */
+    void delete(Long schuelerId);
+
+
+}

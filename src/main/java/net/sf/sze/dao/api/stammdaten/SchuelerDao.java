@@ -30,7 +30,7 @@ public interface SchuelerDao extends PagingAndSortingRepository<Schueler,
      */
     @Query("select s from Schueler as s where "
             + "(s.abgangsDatum is null or s.abgangsDatum >= :stichtag) "
-            + "and klasse = :klasse")
+            + "and klasse = :klasse order by name, vorname")
     List<Schueler> findAllByAbgangsDatumIsNullOrFutureAndKlasse(
             @Param("stichtag") Date stichtag,
             @Param("klasse") Klasse klasse);

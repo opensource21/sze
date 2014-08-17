@@ -13,6 +13,7 @@ import net.sf.sze.frontend.base.URL;
 import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.zeugnis.Halbjahr;
 import net.sf.sze.service.api.KlasseService;
+import net.sf.sze.service.api.SchuelerService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,6 +58,14 @@ public class KlasseCRUDController {
      */
     @Resource
     private KlasseService klasseService;
+
+    /**
+     * Der {@link SchuelerService}.
+     */
+    @Resource
+    private SchuelerService schuelerService;
+
+
 
     /**
      * Small service which helps to bind requestdata to an object.
@@ -177,9 +186,11 @@ public class KlasseCRUDController {
     public String show(@PathVariable(URL.Klasse
             .P_KLASSE_ID) Long klasseId, Model model) {
         LOG.debug("Show klasseId: " + klasseId);
-
-        addStandardModelData(klasseService.read(klasseId), URL.Klasse
+        final Klasse klasse = klasseService.read(klasseId);
+        addStandardModelData(klasse, URL.Klasse
                 .LIST, true, model);
+
+        model.addAttribute("schuelerList", schuelerService.getActiveSchueler(klasse));
         return KLASSE_FORM;
     }
 
