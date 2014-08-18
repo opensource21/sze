@@ -48,9 +48,9 @@ tags - a list of selectable tag
             <i class="save"></i>Speichern</button>
         <a th:href="@{|__#{nurl.schueler.edit}__|}" class="btn" th:if="${disabled}">
             <i class="edit"></i>Bearbeiten</a>
-        <a th:href="@{#{nurl.schueler.list}}" class="btn">
+        <a th:href="@{|__#{nurl.schueler.list}__|}" class="btn">
             <i class="cancel"></i>Abbrechen</a>
-        <th:block th:include="/fragments::deletebutton(#{nurl.schueler.delete})"></th:block>
+        <th:block th:include="/fragments::deletebutton(|__#{nurl.schueler.delete}__|)"></th:block>
     </form>
 
 

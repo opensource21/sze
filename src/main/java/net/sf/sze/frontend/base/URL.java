@@ -508,9 +508,22 @@ public final class URL {
     public interface Schueler {
 
         /**
+         * Parametername for the halbjahrs-id.
+         */
+        String P_AKTIV = "aktiv";
+
+
+        /**
          * Home-Url.
          */
-        String HOME = "/schueler";
+        String HOME = "/schueler/";
+
+
+
+        /**
+         * Home-Url.
+         */
+        String BASE = "/schueler/{" + P_AKTIV + ":aktiv|passiv}";
 
         /**
          * Parametername for the halbjahrs-id.
@@ -520,23 +533,23 @@ public final class URL {
         /**
          * Edit-Url.
          */
-        String EDIT = HOME + "/edit/{" + P_SCHUELER_ID + "}";
+        String EDIT = BASE + "/edit/{" + P_SCHUELER_ID + "}";
 
         /**
          * Show-Url.
          */
-        String SHOW = HOME + "/show/{" + P_SCHUELER_ID + "}";
+        String SHOW = BASE + "/show/{" + P_SCHUELER_ID + "}";
 
         /**
          * Delete-Url.
          */
-        String DELETE = HOME + "/delete";
+        String DELETE = BASE + "/delete";
 
         /** List-URL. */
-        String LIST = HOME + "/list";
+        String LIST = BASE + "/list";
 
         /** Create URL. */
-        String CREATE = HOME + "/create";
+        String CREATE = BASE + "/create";
     }
 
     /**

@@ -44,16 +44,30 @@ import de.ppi.fuwesta.spring.mvc.util.ResourceNotFoundException;
 @Controller()
 public class SchuelerCRUDController {
 
-    /**
-     * View which is used as form.
-     */
-    private static final String SCHUELER_FORM = "schueler/schuelerform";
 
     /**
      * The Logger for the controller.
      */
     private static final Logger LOG = LoggerFactory
             .getLogger(SchuelerCRUDController.class);
+
+
+
+    /**
+     * Kennzeichen das nur aktive Schüler angezeigt werden sollen.
+     */
+    private static final String AKTIV = "aktiv";
+
+    /**
+     * Kennzeichen das nur passive Schüler angezeigt werden sollen.
+     */
+    private static final String PASSIV = "passiv";
+
+
+    /**
+     * View which is used as form.
+     */
+    private static final String SCHUELER_FORM = "schueler/schuelerform";
 
     /**
      * The schuelerService instance.
@@ -86,17 +100,27 @@ public class SchuelerCRUDController {
     private Validator validator;
 
     /**
+     * Einstiegspunkt in die Schülerverwaltung.
+     * @return Redirect zur aktiven Liste.
+     */
+    @RequestMapping(value = URL.Schueler.HOME, method = RequestMethod.GET)
+    public String start() {
+        return URL.redirectWithNamedParams(URL.Schueler.LIST, URL.Schueler.P_AKTIV, AKTIV);
+    }
+
+    /**
      * List all Schuelers.
      *
+     * @param aktiv Kennzeichen ob die aktiven oder passiven Schüler bearbeitet werden sollen.
      * @param model the model.
      * @param pageRequest attributes about paginating.
      * @param redirectAttributes die {@link RedirectAttributes}.
      * @return String which defines the next page.
      */
-    @RequestMapping(value = { URL.Schueler.HOME, URL.Schueler.LIST },
-            method = RequestMethod.GET)
-    public String list(Model model, @PageableDefault(page = 0, size = 1000,
-            sort = { "name", "vorname" }, direction = Direction.DESC) Pageable pageRequest,
+    @RequestMapping(value = URL.Schueler.LIST, method = RequestMethod.GET)
+    public String list(@PathVariable(URL.Schueler.P_AKTIV) String aktiv, Model model,
+            @PageableDefault(page = 0, size = 1000, sort = { "name", "vorname" },
+            direction = Direction.DESC) Pageable pageRequest,
             RedirectAttributes redirectAttributes) {
         final PageWrapper<Schueler> schuelerList =
                 new PageWrapper<Schueler>(
@@ -106,7 +130,7 @@ public class SchuelerCRUDController {
             LOG.info("No Schueler found redirect to create");
             redirectAttributes.addFlashAttribute(ModelAttributes.MESSAGE,
                     "Bitte legen sie das erste Schueler an.");
-            return URL.redirect(URL.Schueler.CREATE);
+            return URL.redirectWithNamedParams(URL.Schueler.CREATE, URL.Schueler.P_AKTIV, aktiv);
         }
 
         model.addAttribute("pageRequest", pageRequest);
@@ -117,11 +141,12 @@ public class SchuelerCRUDController {
     /**
      * Create a new Schueler form.
      *
+     * @param aktiv Kennzeichen ob die aktiven oder passiven Schüler bearbeitet werden sollen.
      * @param model the model.
      * @return String which defines the next page.
      */
     @RequestMapping(value = URL.Schueler.CREATE, method = RequestMethod.GET)
-    public String create(Model model) {
+    public String create(@PathVariable(URL.Schueler.P_AKTIV) String aktiv, Model model) {
         final Schueler schueler = new Schueler();
         addStandardModelData(schueler, URL.Schueler.CREATE, false, model);
         return SCHUELER_FORM;
@@ -130,13 +155,15 @@ public class SchuelerCRUDController {
     /**
      * Insert a new Schueler.
      *
+     * @param aktiv Kennzeichen ob die aktiven oder passiven Schüler bearbeitet werden sollen.
      * @param schueler the Schueler.
      * @param result the bindingsresult.
      * @param model the model.
      * @return String which defines the next page.
      */
     @RequestMapping(value = URL.Schueler.CREATE, method = RequestMethod.POST)
-    public String insert(@ModelAttribute("schueler") Schueler schueler,
+    public String insert(@PathVariable(URL.Schueler.P_AKTIV) String aktiv,
+            @ModelAttribute("schueler") Schueler schueler,
             BindingResult result, Model model) {
         validator.validate(schueler, result);
 
@@ -147,49 +174,54 @@ public class SchuelerCRUDController {
 
         LOG.debug("Create Schueler: " + schueler);
         schuelerService.save(schueler);
-        return URL.redirect(URL.Schueler.LIST);
+        return URL.redirectWithNamedParams(URL.Schueler.LIST, URL.Schueler.P_AKTIV, aktiv);
     }
 
     /**
      * Create confirmation for deleting a Schueler.
      *
+     * @param aktiv Kennzeichen ob die aktiven oder passiven Schüler bearbeitet werden sollen.
      * @param id the Id of the Schueler.
      * @param model the datamodel.
      * @return String which defines the next page.
      */
     @RequestMapping(value = URL.Schueler.DELETE, method = RequestMethod.GET)
-    public String deleteConfirm(@RequestParam("id") Long id, Model model) {
+    public String deleteConfirm(@PathVariable(URL.Schueler.P_AKTIV) String aktiv,
+            @RequestParam("id") Long id, Model model) {
         LOG.debug("Confirm delete schuelerId: " + id);
         model.addAttribute("deleteURL", URL.Schueler.DELETE);
         model.addAttribute("id", id);
-        model.addAttribute("cancelURL", URL.filledURL(URL.Schueler.LIST));
+        model.addAttribute("cancelURL", URL.filledURLWithNamedParams(
+                URL.Schueler.LIST, URL.Schueler.P_AKTIV, aktiv));
         return "confirmDelete";
     }
 
     /**
      * Delete a Schueler.
      *
+     * @param aktiv Kennzeichen ob die aktiven oder passiven Schüler bearbeitet werden sollen.
      * @param id the Id of the Schueler.
      * @return String which defines the next page.
      */
     @RequestMapping(value = URL.Schueler.DELETE, method = {
             RequestMethod.DELETE, RequestMethod.POST })
-    public String delete(Long id) {
+    public String delete(@PathVariable(URL.Schueler.P_AKTIV) String aktiv, Long id) {
         LOG.debug("Delete schuelerId: " + id);
         schuelerService.delete(id);
         LOG.debug("Deleted schuelerId: " + id);
-        return URL.redirect(URL.Schueler.LIST);
+        return URL.redirectWithNamedParams(URL.Schueler.LIST, URL.Schueler.P_AKTIV, aktiv);
     }
 
     /**
      * Show a Schueler.
      *
+     * @param aktiv Kennzeichen ob die aktiven oder passiven Schüler bearbeitet werden sollen.
      * @param schuelerId the Id of the Schueler.
      * @param model the model.
      * @return String which defines the next page.
      */
     @RequestMapping(value = URL.Schueler.SHOW, method = RequestMethod.GET)
-    public String show(
+    public String show(@PathVariable(URL.Schueler.P_AKTIV) String aktiv,
             @PathVariable(URL.Schueler.P_SCHUELER_ID) Long schuelerId,
             Model model) {
         LOG.debug("Show schuelerId: " + schuelerId);
@@ -202,17 +234,20 @@ public class SchuelerCRUDController {
     /**
      * Edit a Schueler.
      *
+     * @param aktiv Kennzeichen ob die aktiven oder passiven Schüler bearbeitet werden sollen.
      * @param schuelerId the Id of the Schueler.
      * @param model the model.
      * @return String which defines the next page.
      */
     @RequestMapping(value = URL.Schueler.EDIT, method = RequestMethod.GET)
-    public String edit(
+    public String edit(@PathVariable(URL.Schueler.P_AKTIV) String aktiv,
             @PathVariable(URL.Schueler.P_SCHUELER_ID) Long schuelerId,
             Model model) {
         LOG.debug("Edit schuelerId: " + schuelerId);
         addStandardModelData(schuelerService.read(schuelerId),
-                URL.filledURL(URL.Schueler.EDIT, schuelerId), false, model);
+                URL.filledURLWithNamedParams(URL.Schueler.EDIT,
+                        URL.Schueler.P_AKTIV, aktiv,
+                        URL.Schueler.P_SCHUELER_ID, schuelerId), false, model);
         return SCHUELER_FORM;
     }
 
@@ -242,18 +277,22 @@ public class SchuelerCRUDController {
     /**
      * Update a Schueler.
      *
+     * @param aktiv Kennzeichen ob die aktiven oder passiven Schüler bearbeitet werden sollen.
      * @param schueler the Schueler.
      * @param request the request-data
      * @param model the model
      * @return String which defines the next page.
      */
     @RequestMapping(value = URL.Schueler.EDIT, method = RequestMethod.POST)
-    public String update(@RequestParam("id") Schueler schueler,
+    public String update(@PathVariable(URL.Schueler.P_AKTIV) String aktiv,
+            @RequestParam("id") Schueler schueler,
             HttpServletRequest request, Model model) {
         if (servletBindingService.bindAndValidate(request, model, schueler,
                 "schueler").hasErrors()) {
             addStandardModelData(schueler,
-                    URL.filledURL(URL.Schueler.EDIT, schueler.getId()), false,
+                    URL.filledURLWithNamedParams(URL.Schueler.EDIT,
+                            URL.Schueler.P_AKTIV, aktiv,
+                            URL.Schueler.P_SCHUELER_ID, schueler.getId()), false,
                     model);
             return SCHUELER_FORM;
         }
@@ -262,6 +301,6 @@ public class SchuelerCRUDController {
 
         schuelerService.save(schueler);
 
-        return URL.redirect(URL.Schueler.LIST);
+        return URL.redirectWithNamedParams(URL.Schueler.LIST, URL.Schueler.P_AKTIV, aktiv);
     }
 }
