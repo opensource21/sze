@@ -18,11 +18,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import net.sf.oval.constraint.Past;
-import net.sf.oval.constraint.Size;
 
 import org.apache.commons.lang.builder.CompareToBuilder;
 
 import de.ppi.fuwesta.jpa.helper.VersionedModel;
+import de.ppi.fuwesta.oval.validation.LaterThan;
+import de.ppi.fuwesta.spring.mvc.formatter.NonEmpty;
 
 /**
  * Ein Schüler einer Schule.
@@ -35,18 +36,16 @@ public class Schueler extends VersionedModel implements Serializable,
 
     /** The name. */
     @Column(nullable = false, length = 40)
-    @Size(max = 40)
+    @NonEmpty
     private String name;
 
     /** The vorname. */
     @Column(nullable = false, length = 40)
-
-    @Size(max = 40)
+    @NonEmpty
     private String vorname;
 
     /** The rufname. */
     @Column(length = 20)
-    @Size(max = 20)
     private String rufname;
 
     /** The geburtstag. */
@@ -56,18 +55,18 @@ public class Schueler extends VersionedModel implements Serializable,
 
     /** The geburtsort. */
     @Column(nullable = false, length = 40)
-    @Size(max = 40)
+    @NonEmpty
     private String geburtsort;
 
     /** The nummer. */
     private Long nummer;
 
     /** The aufnahme datum. */
-    @Column(name = "aufnahme_datum")
+    @LaterThan("geburtstag")
     private Date aufnahmeDatum;
 
     /** The abgangs datum. */
-    @Column(name = "abgangs_datum")
+    @LaterThan("aufnahmeDatum")
     private Date abgangsDatum;
 
     /** The geschlecht. */
