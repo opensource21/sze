@@ -5,18 +5,7 @@
 
 package net.sf.sze.model.zeugnis;
 
-import de.ppi.fuwesta.jpa.helper.VersionedModel;
-
-import net.sf.oval.constraint.Size;
-import net.sf.sze.constraints.BinnenAussenIntersect;
-import net.sf.sze.constraints.StandardAussenIntersect;
-import net.sf.sze.constraints.StandardBinnenIntersect;
-import net.sf.sze.util.StringUtil;
-
-import org.apache.commons.lang.builder.CompareToBuilder;
-
 import java.io.Serializable;
-
 import java.util.List;
 
 import javax.persistence.Column;
@@ -25,6 +14,16 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+import net.sf.sze.constraints.BinnenAussenIntersect;
+import net.sf.sze.constraints.StandardAussenIntersect;
+import net.sf.sze.constraints.StandardBinnenIntersect;
+import net.sf.sze.util.StringUtil;
+
+import org.apache.commons.lang.builder.CompareToBuilder;
+
+import de.ppi.fuwesta.jpa.helper.VersionedModel;
+import de.ppi.fuwesta.spring.mvc.formatter.NonEmpty;
 
 /**
  * Ein Schulfach.
@@ -39,11 +38,12 @@ public class Schulfach extends VersionedModel implements Serializable,
 
     /** The name. */
     @Column(nullable = false, length = 30)
-    @Size(max = 30)
+    @NonEmpty
     private String name;
 
     /** The sortierung. */
     @Column(nullable = false)
+    @NonEmpty
     private Long sortierung;
 
     /** The typ. */

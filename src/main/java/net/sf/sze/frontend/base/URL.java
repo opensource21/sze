@@ -553,6 +553,44 @@ public final class URL {
     }
 
     /**
+     * All URLS for the {@link Schulfach}.
+     *
+     */
+    public interface Schulfach {
+
+        /**
+         * Home-Url.
+         */
+        String HOME = "/schulfach";
+
+        /**
+         * Parametername for the halbjahrs-id.
+         */
+        String P_SCHULFACH_ID = "schulfachId";
+
+        /**
+         * Edit-Url.
+         */
+        String EDIT = HOME + "/edit/{" + P_SCHULFACH_ID + "}";
+
+        /**
+         * Show-Url.
+         */
+        String SHOW = HOME + "/show/{" + P_SCHULFACH_ID + "}";
+
+        /**
+         * Delete-Url.
+         */
+        String DELETE = HOME + "/delete";
+
+        /** List-URL. */
+        String LIST = HOME + "/list";
+
+        /** Create URL. */
+        String CREATE = HOME + "/create";
+    }
+
+    /**
      * Replace all parameters in the URL with the given values.
      *
      * @param url the URL.

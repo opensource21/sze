@@ -1,0 +1,45 @@
+<!-- Parameter:
+schulfach - ein schulfach
+
+disabled - flag if the view should be editable.
+saveUrl - die URL zum speichern.
+users - a list of selectable user
+tags - a list of selectable tag
+ -->
+<!DOCTYPE HTML>
+<html lang="de-DE" xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+    layout:decorator="/main">
+<head >
+
+</head>
+<body>
+    <div layout:fragment="content">
+    <h3 th:text="#{schulfach.form.title}"></h3>
+    <form class="well form-horizontal" method="post" th:object="${schulfach}">
+        <div th:replace="/fragments::error"></div>
+
+        <input id="id" type="hidden" th:value="*{id}" name="id"/>
+        <input id="version" type="hidden" th:value="*{version}" name="version"/>
+        <input type="text" bs:field="name" th:disabled="${disabled}"/>
+        <input type="text" bs:field="sortierung" th:disabled="${disabled}"/>
+        <input type="text" bs:field="typ" disabled="disabled" th:if="${disabled}"/>
+        <select bs:field="typ" th:unless="${disabled}">
+            <option th:each="typ : ${schulfachtypen}" th:value="${typ.name()}" th:text="${typ}" th:classappend="${typ==schulfach.typ}? 'highlight'"></option>
+        </select>
+        <input type="text" bs:field="stufenMitStandardBewertung" th:disabled="${disabled}"/>
+        <input type="text" bs:field="stufenMitAussenDifferenzierung" th:disabled="${disabled}"/>
+        <input type="text" bs:field="stufenMitBinnenDifferenzierung" th:disabled="${disabled}"/>
+        <button type="submit" th:formaction="@{${saveUrl}}" class="btn" th:unless="${disabled || saveUrl == null}">
+            <i class="save"></i>Speichern</button>
+        <a th:href="@{|__#{nurl.schulfach.edit}__|}" class="btn" th:if="${disabled}">
+            <i class="edit"></i>Bearbeiten</a>
+        <a th:href="@{#{nurl.schulfach.list}}" class="btn">
+            <i class="cancel"></i>Abbrechen</a>
+        <th:block th:include="/fragments::deletebutton(#{nurl.schulfach.delete})"></th:block>
+    </form>
+
+
+    </div>
+</body>
+</html>
