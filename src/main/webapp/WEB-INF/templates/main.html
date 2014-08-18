@@ -72,7 +72,7 @@ messages - eine Liste mit Meldungen.
             <ul class="nav">
                 <li th:class="${#strings.contains(#httpServletRequest.getRequestURI(),'/admin/')?'active':''}">
                     <a href="#" th:href="@{/admin}">Administration</a></li>
-                <li th:class="${#strings.contains(#httpServletRequest.getRequestURI(),'/konfig/')?'active':''}">
+                <li th:class="${#strings.contains(#httpServletRequest.getRequestURI(),'/konfiguration/')?'active':''}">
                     <a href="#" th:href="@{#{nurl.configuration.main}}">Konfiguration</a></li>
                 <li th:class="${#strings.contains(#httpServletRequest.getRequestURI(),'/zeugnis/') or #strings.contains(#httpServletRequest.getRequestURI(),'/bewertungen/')?'active':''}">
                     <a href="#" th:with="#{par.session.halbjahr_id}=${#objects.nullSafe(halbjahr_id,0)},

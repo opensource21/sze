@@ -49,7 +49,7 @@ public final class URL {
         /**
          * Zeugnisconfiguration base-url.
          */
-        String HOME = "/zeugnisKonfiguration";
+        String HOME = "/konfiguration";
 
         /**
          * Zeugnisconfiguration start-url.
@@ -396,7 +396,7 @@ public final class URL {
         /**
          * Home-Url.
          */
-        String HOME = "/schulhalbjahr";
+        String HOME = "/konfiguration/schulhalbjahr";
 
         /**
          * Parametername for the halbjahrs-id.
@@ -434,7 +434,7 @@ public final class URL {
         /**
          * Home-Url.
          */
-        String HOME = "/zeugnisFormular";
+        String HOME = "/konfiguration/zeugnisFormular";
 
         /**
          * Parametername for the halbjahrs-id.
@@ -472,7 +472,7 @@ public final class URL {
         /**
          * Home-Url.
          */
-        String HOME = "/klasse";
+        String HOME = "/konfiguration/klasse";
 
         /**
          * Parametername for the klasse-id.
@@ -516,14 +516,14 @@ public final class URL {
         /**
          * Home-Url.
          */
-        String HOME = "/schueler/";
+        String HOME = "/konfiguration/schueler/";
 
 
 
         /**
          * Home-Url.
          */
-        String BASE = "/schueler/{" + P_AKTIV + ":aktiv|passiv}";
+        String BASE = "/konfiguration/schueler/{" + P_AKTIV + ":aktiv|passiv}";
 
         /**
          * Parametername for the halbjahrs-id.
@@ -561,7 +561,7 @@ public final class URL {
         /**
          * Home-Url.
          */
-        String HOME = "/schulfach";
+        String HOME = "/konfiguration/schulfach";
 
         /**
          * Parametername for the halbjahrs-id.
