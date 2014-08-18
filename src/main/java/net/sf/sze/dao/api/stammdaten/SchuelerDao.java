@@ -38,7 +38,7 @@ public interface SchuelerDao extends PagingAndSortingRepository<Schueler,
             @Param("klasse") Klasse klasse);
 
     /**
-     * Liest alle nicht abgegangenen Schüler zu einer Klasse.
+     * Liest alle nicht abgegangenen Schüler.
      * @param stichtag Datum bis zu dem die Schüler noch mit ausgewählt werden.
      * @param pageable Angaben zum Paginating.
      * @return eine Liste von Schülern.
@@ -47,4 +47,16 @@ public interface SchuelerDao extends PagingAndSortingRepository<Schueler,
             + "(s.abgangsDatum is null or s.abgangsDatum >= :stichtag) ")
     Page<Schueler> findAllByAbgangsDatumIsNullOrFuture(
             @Param("stichtag") Date stichtag, Pageable pageable);
+
+    /**
+     * Liest alle abgegangenen Schüler.
+     * @param stichtag Datum bis zu dem die Schüler noch mit ausgewählt werden.
+     * @param pageable Angaben zum Paginating.
+     * @return eine Liste von Schülern.
+     */
+    @Query("select s from Schueler as s where "
+            + "s.abgangsDatum < :stichtag")
+    Page<Schueler> findAllByAbgangsDatumIsHistory(
+            @Param("stichtag") Date stichtag, Pageable pageable);
+
 }

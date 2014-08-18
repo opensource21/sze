@@ -122,10 +122,11 @@ public class SchuelerCRUDController {
             @PageableDefault(page = 0, size = 1000, sort = { "name", "vorname" },
             direction = Direction.DESC) Pageable pageRequest,
             RedirectAttributes redirectAttributes) {
+        final boolean onlyActiveSchueler = !PASSIV.equalsIgnoreCase(aktiv);
         final PageWrapper<Schueler> schuelerList =
                 new PageWrapper<Schueler>(
-                        schuelerService.getSchueler(pageRequest),
-                        URL.Schueler.LIST);
+                schuelerService.getSchueler(pageRequest, onlyActiveSchueler),
+                URL.filledURLWithNamedParams(URL.Schueler.LIST, URL.Schueler.P_AKTIV, aktiv));
         if (schuelerList.getSize() == 0) {
             LOG.info("No Schueler found redirect to create");
             redirectAttributes.addFlashAttribute(ModelAttributes.MESSAGE,

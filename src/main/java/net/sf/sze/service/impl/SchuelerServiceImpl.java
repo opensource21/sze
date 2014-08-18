@@ -5,6 +5,7 @@
 
 package net.sf.sze.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -43,8 +44,14 @@ public class SchuelerServiceImpl implements SchuelerService {
      * {@inheritDoc}
      */
     @Override
-    public Page<Schueler> getSchueler(Pageable page) {
-        return schuelerDao.findAll(page);
+    public Page<Schueler> getSchueler(Pageable page, boolean onlyActiveSchueler) {
+        final Date leavedSchoolDate = schulkalenderService.getLeavedSchoolDate().getTime();
+        if (onlyActiveSchueler) {
+            return schuelerDao.findAllByAbgangsDatumIsNullOrFuture(
+                    leavedSchoolDate, page);
+        } else {
+            return schuelerDao.findAllByAbgangsDatumIsHistory(leavedSchoolDate, page);
+        }
     }
 
     /**

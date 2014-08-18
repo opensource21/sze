@@ -16,7 +16,14 @@ pageRequest - the parameter of this search.
 </head>
 <body>
     <div layout:fragment="content" class="container-fluid">
-        <h3 th:text="#{schueler.list.title}">Liste</h3>
+        <th:block th:unless="${aktiv=='passiv'}">
+        </th:block>
+        <th:block th:if="${aktiv=='passiv'}">
+        </th:block>
+        <h3 th:unless="${aktiv=='passiv'}" th:inline="text">Aktive [[#{schueler.list.title}]]
+            (<a th:with="aktiv='passiv'" th:href="@{|__#{nurl.schueler.list}__|}">zeige ehemalige</a>)</h3>
+        <h3 th:if="${aktiv=='passiv'}" th:inline="text">Ehemalige [[#{schueler.list.title}]]
+            (<a th:with="aktiv='aktiv'" th:href="@{|__#{nurl.schueler.list}__|}">zeige aktive</a>)</h3>
         <a class="btn" href="/" th:href="@{#{nurl.schueler.create}}" th:text="#{label.action.create}">Create a new entry</a>
         <div id="data">
             <span th:if="${#lists.isEmpty(schuelerList)}" th:text="#{label.no_data_found}"></span>

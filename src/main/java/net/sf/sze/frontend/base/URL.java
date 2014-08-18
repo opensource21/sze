@@ -508,7 +508,7 @@ public final class URL {
     public interface Schueler {
 
         /**
-         * Parametername for the halbjahrs-id.
+         * Parametername mit Kennzeichen nur aktive oder alle..
          */
         String P_AKTIV = "aktiv";
 

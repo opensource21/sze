@@ -25,9 +25,10 @@ public interface SchuelerService {
      * Deliver a page of Schuelere.
      *
      * @param page information about pagination.
+     * @param onlyActiveSchueler true wenn nur aktive Schueler gewollt sind.
      * @return the page of Schuelere.
      */
-    Page<Schueler> getSchueler(Pageable page);
+    Page<Schueler> getSchueler(Pageable page, boolean onlyActiveSchueler);
 
     /**
      * Deliver a page of active Schuelere.
