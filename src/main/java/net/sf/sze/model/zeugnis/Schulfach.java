@@ -44,7 +44,7 @@ public class Schulfach extends VersionedModel implements Serializable,
     /** The sortierung. */
     @Column(nullable = false)
     @NonEmpty
-    private Long sortierung;
+    private Long sortierung = Long.valueOf(100);
 
     /** The typ. */
     @Column(nullable = false)
