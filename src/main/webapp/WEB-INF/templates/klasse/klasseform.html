@@ -1,0 +1,44 @@
+<!-- Parameter:
+klasse - ein klasse
+
+disabled - flag if the view should be editable.
+saveUrl - die URL zum speichern.
+users - a list of selectable user
+tags - a list of selectable tag
+ -->
+<!DOCTYPE HTML>
+<html lang="de-DE" xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+    layout:decorator="/main">
+<head >
+
+</head>
+<body>
+    <div layout:fragment="content">
+    <h3 th:text="#{klasse.form.title}"></h3>
+    <form class="well form-horizontal" method="post" th:object="${klasse}">
+        <div th:replace="/fragments::error"></div>
+
+        <input id="id" type="hidden" th:value="*{id}" name="id"/>
+        <input id="version" type="hidden" th:value="*{version}" name="version"/>
+        <input type="text" bs:field="jahrgang" th:disabled="${disabled}"/>
+        <input type="text" bs:field="suffix" th:disabled="${disabled}"/>
+        <input type="checkbox" bs:field="geschlossen" th:disabled="${disabled}"/>
+        <ul bs:field="schueler" th:unless="${#lists.isEmpty(schuelerList)}">
+            <li th:each="schueler:${schuelerList}" th:with="schuelerId=${schueler.id}">
+                <a th:text="${schueler}" th:href="@{|__#{nurl.schueler.show}__|}"></a>
+            </li>
+        </ul>
+        <button type="submit" th:formaction="@{${saveUrl}}" class="btn" th:unless="${disabled || saveUrl == null}">
+            <i class="save"></i>Speichern</button>
+        <a th:href="@{|__#{nurl.klasse.edit}__|}" class="btn" th:if="${disabled}">
+            <i class="edit"></i>Bearbeiten</a>
+        <a th:href="@{#{nurl.klasse.list}}" class="btn">
+            <i class="cancel"></i>Abbrechen</a>
+        <th:block th:include="/fragments::deletebutton(#{nurl.klasse.delete})"></th:block>
+    </form>
+
+
+    </div>
+</body>
+</html>

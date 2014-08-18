@@ -11,6 +11,8 @@ import java.util.List;
 import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.stammdaten.Schueler;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
@@ -29,9 +31,32 @@ public interface SchuelerDao extends PagingAndSortingRepository<Schueler,
      * @return eine Liste von Schülern.
      */
     @Query("select s from Schueler as s where "
-            + "(s.abgangsDatum is null or s.abgangsDatum > :stichtag) "
-            + "and klasse = :klasse")
+            + "(s.abgangsDatum is null or s.abgangsDatum >= :stichtag) "
+            + "and klasse = :klasse order by name, vorname")
     List<Schueler> findAllByAbgangsDatumIsNullOrFutureAndKlasse(
             @Param("stichtag") Date stichtag,
             @Param("klasse") Klasse klasse);
+
+    /**
+     * Liest alle nicht abgegangenen Schüler.
+     * @param stichtag Datum bis zu dem die Schüler noch mit ausgewählt werden.
+     * @param pageable Angaben zum Paginating.
+     * @return eine Liste von Schülern.
+     */
+    @Query("select s from Schueler as s where "
+            + "(s.abgangsDatum is null or s.abgangsDatum >= :stichtag) ")
+    Page<Schueler> findAllByAbgangsDatumIsNullOrFuture(
+            @Param("stichtag") Date stichtag, Pageable pageable);
+
+    /**
+     * Liest alle abgegangenen Schüler.
+     * @param stichtag Datum bis zu dem die Schüler noch mit ausgewählt werden.
+     * @param pageable Angaben zum Paginating.
+     * @return eine Liste von Schülern.
+     */
+    @Query("select s from Schueler as s where "
+            + "s.abgangsDatum < :stichtag")
+    Page<Schueler> findAllByAbgangsDatumIsHistory(
+            @Param("stichtag") Date stichtag, Pageable pageable);
+
 }

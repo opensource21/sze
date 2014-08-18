@@ -1,0 +1,59 @@
+<!-- Parameter:
+schueler - ein schueler
+
+disabled - flag if the view should be editable.
+saveUrl - die URL zum speichern.
+users - a list of selectable user
+tags - a list of selectable tag
+ -->
+<!DOCTYPE HTML>
+<html lang="de-DE" xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+    layout:decorator="/main">
+<head >
+
+</head>
+<body>
+    <div layout:fragment="content">
+    <h3 th:text="#{schueler.form.title}"></h3>
+    <form class="well form-horizontal" method="post" th:object="${schueler}">
+        <div th:replace="/fragments::error"></div>
+
+        <input id="id" type="hidden" th:value="*{id}" name="id"/>
+        <input id="version" type="hidden" th:value="*{version}" name="version"/>
+        <input type="text" bs:field="nummer" th:disabled="${disabled}"/>
+        <input type="text" bs:field="vorname" th:disabled="${disabled}"/>
+        <input type="text" bs:field="rufname" th:disabled="${disabled}"/>
+        <input type="text" bs:field="name" th:disabled="${disabled}"/>
+         <div class="control-group" layout:include="fragments::bsfield" th:with="fId='geschlecht'"  th:remove="tag">
+            <span layout:fragment="bsinput">
+                <label th:inline="text" class="radio inline" th:each="item: ${geschlechter}" th:for="${#ids.next('__${fId}__')}"  th:unless="${disabled}">
+                        <input type="radio" th:field="*{__${fId}__}" th:value="${item.name()}" />
+                        [[${item}]]
+                </label>
+                <label class="control-label" th:text="*{__${fId}__}" th:if="${disabled}"/>
+            </span>
+        </div>
+        <input type="text" class="datepicker" bs:field="aufnahmeDatum" th:disabled="${disabled}"/>
+        <input type="text" class="datepicker" bs:field="abgangsDatum" th:disabled="${disabled}"/>
+        <input type="text" class="datepicker" bs:field="geburtstag" th:disabled="${disabled}"/>
+        <input type="text" bs:field="geburtsort" th:disabled="${disabled}"/>
+
+        <input type="text" bs:field="klasse" disabled="disabled" th:if="${disabled}"/>
+        <select bs:field="klasse" th:unless="${disabled}">
+            <option th:each="kl : ${klassen}" th:value="${kl.id}" th:text="${kl}" th:classappend="${kl==schueler.klasse}? 'highlight'"></option>
+        </select>
+
+        <button type="submit" th:formaction="@{${saveUrl}}" class="btn" th:unless="${disabled || saveUrl == null}">
+            <i class="save"></i>Speichern</button>
+        <a th:href="@{|__#{nurl.schueler.edit}__|}" class="btn" th:if="${disabled}">
+            <i class="edit"></i>Bearbeiten</a>
+        <a th:href="@{|__#{nurl.schueler.list}__|}" class="btn">
+            <i class="cancel"></i>Abbrechen</a>
+        <th:block th:include="/fragments::deletebutton(|__#{nurl.schueler.delete}__|)"></th:block>
+    </form>
+
+
+    </div>
+</body>
+</html>

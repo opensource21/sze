@@ -1,6 +1,6 @@
 #PRIO 1
 
-- Admin-Bereich (3 PT?) (Halbjahr, Formular, #Klasse, Schüler, Schulfach, AvSv, AG, Bemerkungsbaustein,
+- Admin-Bereich (3 PT?) (Halbjahr, Formular, Klasse, #Schüler, Schulfach, AvSv, AG, Bemerkungsbaustein,
     Schulamt, Schulamtsbemerkunsbaustein, SoLBewertungstext, Zeugnisart)
     Schüler müssen filterbar sein, nach Abgangsdatum!
     Standardmäßig alle abgegangen Schüler ausblenden. Insbedesondere bei der Klasse.
