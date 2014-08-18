@@ -46,7 +46,7 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionTemplate;
 
-/**
+/**
  * Service welcher für die Sch&uuml;ler ein Zeugnis-Objekt mit
  * <ul>
  *  <li>den Schulfach-Bewertungen</li>
