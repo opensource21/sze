@@ -447,7 +447,7 @@
             <column name="VERSION" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
-            <column name="NAME" type="VARCHAR(255)">
+            <column name="NAME" type="VARCHAR(50)">
                 <constraints nullable="false"/>
             </column>
             <column name="TEXT" type="VARCHAR(100)">

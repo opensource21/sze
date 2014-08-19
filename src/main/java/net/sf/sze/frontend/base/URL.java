@@ -781,6 +781,44 @@ public final class URL {
     }
 
     /**
+     * All URLS for the {@link SoLBewertungsText}.
+     *
+     */
+    public interface SoLBewertungsText {
+
+        /**
+         * Home-Url.
+         */
+        String HOME = Configuration.HOME + "/solBewertungsText";
+
+        /**
+         * Parametername for the halbjahrs-id.
+         */
+        String P_SOL_BEWERTUNGS_TEXT_ID = "solBewertungsTextId";
+
+        /**
+         * Edit-Url.
+         */
+        String EDIT = HOME + "/edit/{" + P_SOL_BEWERTUNGS_TEXT_ID + "}";
+
+        /**
+         * Show-Url.
+         */
+        String SHOW = HOME + "/show/{" + P_SOL_BEWERTUNGS_TEXT_ID + "}";
+
+        /**
+         * Delete-Url.
+         */
+        String DELETE = HOME + "/delete";
+
+        /** List-URL. */
+        String LIST = HOME + "/list";
+
+        /** Create URL. */
+        String CREATE = HOME + "/create";
+    }
+
+    /**
      * Replace all parameters in the URL with the given values.
      *
      * @param url the URL.
