@@ -743,6 +743,44 @@ public final class URL {
     }
 
     /**
+     * All URLS for the {@link SchulamtsBemerkungsBaustein}.
+     *
+     */
+    public interface SchulamtsBemerkungsBaustein {
+
+        /**
+         * Home-Url.
+         */
+        String HOME = Configuration.HOME + "/schulamtsBemerkungsBaustein";
+
+        /**
+         * Parametername for the halbjahrs-id.
+         */
+        String P_SCHULAMTS_BEMERKUNGS_BAUSTEIN_ID = "schulamtsBemerkungsBausteinId";
+
+        /**
+         * Edit-Url.
+         */
+        String EDIT = HOME + "/edit/{" + P_SCHULAMTS_BEMERKUNGS_BAUSTEIN_ID + "}";
+
+        /**
+         * Show-Url.
+         */
+        String SHOW = HOME + "/show/{" + P_SCHULAMTS_BEMERKUNGS_BAUSTEIN_ID + "}";
+
+        /**
+         * Delete-Url.
+         */
+        String DELETE = HOME + "/delete";
+
+        /** List-URL. */
+        String LIST = HOME + "/list";
+
+        /** Create URL. */
+        String CREATE = HOME + "/create";
+    }
+
+    /**
      * Replace all parameters in the URL with the given values.
      *
      * @param url the URL.

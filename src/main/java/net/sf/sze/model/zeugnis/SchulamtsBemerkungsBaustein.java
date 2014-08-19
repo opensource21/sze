@@ -5,19 +5,19 @@
 
 package net.sf.sze.model.zeugnis;
 
-import de.ppi.fuwesta.jpa.helper.VersionedModel;
-
-import net.sf.oval.constraint.Size;
-import net.sf.sze.constraints.ValidVariableText;
-
-import org.apache.commons.lang.builder.CompareToBuilder;
-
 import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+import net.sf.sze.constraints.ValidVariableText;
+
+import org.apache.commons.lang.builder.CompareToBuilder;
+
+import de.ppi.fuwesta.jpa.helper.VersionedModel;
+import de.ppi.fuwesta.spring.mvc.formatter.NonEmpty;
 
 /**
  * Schüler können verschieden Ämter inne haben. Zu diesnen kann man zusätzliche
@@ -33,8 +33,7 @@ public class SchulamtsBemerkungsBaustein extends VersionedModel
 
     /** The name. */
     @Column(nullable = false, length = 50)
-
-    @Size(max = 50)
+    @NonEmpty
     private String name;
 
     /** The beschreibender satz. */
@@ -44,13 +43,11 @@ public class SchulamtsBemerkungsBaustein extends VersionedModel
 
     /** The aktiv. */
     @Column(nullable = false)
-
     private Boolean aktiv = Boolean.TRUE;
 
     /** The sortierung. */
     @Column(nullable = false)
-
-    private Long sortierung;
+    private Long sortierung = Long.valueOf(100);
 
     /**
      * Gets the aktiv.

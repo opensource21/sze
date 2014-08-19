@@ -1,8 +1,8 @@
 #PRIO 1
 
 - Admin-Bereich (3 PT?) (Halbjahr, Formular, Klasse, Schüler, Schulfach,
-    AvSv, AG, Bemerkungsbaustein, Schulamt,
-    #Schulamtsbemerkunsbaustein, SoLBewertungstext, Zeugnisart)
+    AvSv, AG, Bemerkungsbaustein, Schulamt, Schulamtsbemerkunsbaustein,
+    SoLBewertungstext, Zeugnisart)
 
 - Beim Initialiseren von Klasse 1-2 komplett gibt es eine Exception.
     -> Das lag daran, dass erst initialisiert wurde und dann der Schüler
