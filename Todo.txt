@@ -1,8 +1,5 @@
 #PRIO 1
 
-- Admin-Bereich (3 PT?) (Halbjahr, Formular, Klasse, Schüler, Schulfach,
-    AvSv, AG, Bemerkungsbaustein, Schulamt, Schulamtsbemerkunsbaustein,
-    SoLBewertungstext, Zeugnisart)
 
 - Beim Initialiseren von Klasse 1-2 komplett gibt es eine Exception.
     -> Das lag daran, dass erst initialisiert wurde und dann der Schüler
@@ -120,6 +117,11 @@ Oder zusätzlich ein @Unique -> Aktuell kein Problem, da nicht durch GUI verletz
 + th:fragment solle im aktuelle Template schauen können. -> Im Forum gepostet. wird in 2.1 möglich :-))
 + Boolean-Darstellung muss man immer einzeln Programmieren, da wäre eine Erweiterung sinnvoll. -> Ins Forum gestellt. ->
   Eleganter #{'bool.'+${var}}
+
++ Admin-Bereich (3 PT?) (Halbjahr, Formular, Klasse, Schüler, Schulfach,
+    AvSv, AG, Bemerkungsbaustein, Schulamt, Schulamtsbemerkunsbaustein,
+    SoLBewertungstext, Zeugnisart)
+
 
 + Owning-Side bei Many-To-One oder One-To-Many: Immer Many. Bei Many-Many die ohne mappedBy
 + Inverse Side: Die One-Side (also da wo One-To steht) oder die mit mappedBy. Hier ist das Speichern und veränden komplexer.

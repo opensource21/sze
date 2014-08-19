@@ -819,6 +819,44 @@ public final class URL {
     }
 
     /**
+     * All URLS for the {@link ZeugnisArt}.
+     *
+     */
+    public interface ZeugnisArt {
+
+        /**
+         * Home-Url.
+         */
+        String HOME = Configuration.HOME + "/zeugnisArt";
+
+        /**
+         * Parametername for the halbjahrs-id.
+         */
+        String P_ZEUGNIS_ART_ID = "zeugnisArtId";
+
+        /**
+         * Edit-Url.
+         */
+        String EDIT = HOME + "/edit/{" + P_ZEUGNIS_ART_ID + "}";
+
+        /**
+         * Show-Url.
+         */
+        String SHOW = HOME + "/show/{" + P_ZEUGNIS_ART_ID + "}";
+
+        /**
+         * Delete-Url.
+         */
+        String DELETE = HOME + "/delete";
+
+        /** List-URL. */
+        String LIST = HOME + "/list";
+
+        /** Create URL. */
+        String CREATE = HOME + "/create";
+    }
+
+    /**
      * Replace all parameters in the URL with the given values.
      *
      * @param url the URL.

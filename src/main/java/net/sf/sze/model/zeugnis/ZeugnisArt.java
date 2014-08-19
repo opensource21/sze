@@ -5,18 +5,17 @@
 
 package net.sf.sze.model.zeugnis;
 
-import de.ppi.fuwesta.jpa.helper.VersionedModel;
-
-import net.sf.oval.constraint.Size;
-
-import org.apache.commons.lang.builder.CompareToBuilder;
-
 import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+import org.apache.commons.lang.builder.CompareToBuilder;
+
+import de.ppi.fuwesta.jpa.helper.VersionedModel;
+import de.ppi.fuwesta.spring.mvc.formatter.NonEmpty;
 
 /**
  * Beschreibt die Art des Zeugnisses, wie Abschluss-Zeugnis oder nicht,
@@ -31,8 +30,7 @@ public class ZeugnisArt extends VersionedModel implements Serializable,
 
     /** The name. */
     @Column(nullable = false, length = 30)
-
-    @Size(max = 30)
+    @NonEmpty
     private String name;
 
     /** The sortierung. */
@@ -45,27 +43,22 @@ public class ZeugnisArt extends VersionedModel implements Serializable,
 
     /** The abschluss grad. */
     @Column(name = "abschluss_grad", nullable = false, length = 255)
-
     private String abschlussGrad = "";
 
     /** The note als text darstellen. */
     @Column(name = "note_als_text_darstellen", nullable = false)
-
     private Boolean noteAlsTextDarstellen;
 
     /** The platz fuer siegel. */
     @Column(name = "platz_fuer_siegel", nullable = false)
-
     private Boolean platzFuerSiegel;
 
     /** The print versetzungsbemerkung. */
     @Column(name = "print_versetzungsbemerkung", nullable = false)
-
     private Boolean printVersetzungsbemerkung;
 
     /** The aktiv. */
     @Column(nullable = false)
-
     private Boolean aktiv = Boolean.TRUE;
 
     /**
