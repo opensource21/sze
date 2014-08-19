@@ -8,7 +8,6 @@ package net.sf.sze.constraints;
 import net.sf.oval.Validator;
 import net.sf.oval.configuration.annotation.AbstractAnnotationCheck;
 import net.sf.oval.context.OValContext;
-import net.sf.sze.model.zeugnis.Schulfach;
 
 import org.springframework.util.CollectionUtils;
 
@@ -46,7 +45,8 @@ public class StandardBinnenIntersectCheck
     public boolean isSatisfied(Object validatedObject, Object value,
             OValContext context, Validator validator) {
 
-        final Schulfach obj = (Schulfach) validatedObject;
+        final DisjunktKlassenstufenConfigurer obj =
+                (DisjunktKlassenstufenConfigurer) validatedObject;
         return !CollectionUtils.containsAny(obj
                 .convertStufenMitStandardBewertungToList(), obj
                 .convertStufenMitBinnenDifferenzierungToList());

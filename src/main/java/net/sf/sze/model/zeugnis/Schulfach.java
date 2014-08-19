@@ -16,6 +16,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import net.sf.sze.constraints.BinnenAussenIntersect;
+import net.sf.sze.constraints.DisjunktKlassenstufenConfigurer;
 import net.sf.sze.constraints.StandardAussenIntersect;
 import net.sf.sze.constraints.StandardBinnenIntersect;
 import net.sf.sze.util.StringUtil;
@@ -34,7 +35,7 @@ import de.ppi.fuwesta.spring.mvc.formatter.NonEmpty;
         uniqueConstraints = @UniqueConstraint(columnNames = {"typ", "name"},
         name = "UK_SCHULFACH_TYP_NAME"))
 public class Schulfach extends VersionedModel implements Serializable,
-        Comparable<Schulfach> {
+        Comparable<Schulfach>, DisjunktKlassenstufenConfigurer {
 
     /** The name. */
     @Column(nullable = false, length = 30)
@@ -190,6 +191,7 @@ public class Schulfach extends VersionedModel implements Serializable,
      * Konvertiert den String der Klassenstufen in eine Liste.
      * @return den String der Klassenstufen als Liste.
      */
+    @Override
     public List<String> convertStufenMitStandardBewertungToList() {
         return StringUtil.convertStringToList(stufenMitStandardBewertung);
     }
@@ -198,6 +200,7 @@ public class Schulfach extends VersionedModel implements Serializable,
      * Konvertiert den String der Klassenstufen in eine Liste.
      * @return den String der Klassenstufen als Liste.
      */
+    @Override
     public List<String> convertStufenMitBinnenDifferenzierungToList() {
         return StringUtil.convertStringToList(stufenMitBinnenDifferenzierung);
     }
@@ -206,6 +209,7 @@ public class Schulfach extends VersionedModel implements Serializable,
      * Konvertiert den String der Klassenstufen in eine Liste.
      * @return den String der Klassenstufen als Liste.
      */
+    @Override
     public List<String> convertStufenMitAussenDifferenzierungToList() {
         return StringUtil.convertStringToList(stufenMitAussenDifferenzierung);
     }
