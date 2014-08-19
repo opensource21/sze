@@ -9,8 +9,8 @@ import java.util.List;
 
 import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.zeugnis.Bewertung;
-import net.sf.sze.model.zeugnis.Schulfach;
-import net.sf.sze.model.zeugnis.Schulhalbjahr;
+import net.sf.sze.model.zeugnisconfig.Schulfach;
+import net.sf.sze.model.zeugnisconfig.Schulhalbjahr;
 
 /**
  * Service mit Diensten zum Erfassen von Bewertungen.

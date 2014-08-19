@@ -6,7 +6,7 @@ package net.sf.sze.service.impl;
 
 import java.util.Calendar;
 
-import net.sf.sze.model.zeugnis.Halbjahr;
+import net.sf.sze.model.zeugnisconfig.Halbjahr;
 import net.sf.sze.service.api.SchulkalenderService;
 
 import org.springframework.stereotype.Service;

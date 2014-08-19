@@ -6,8 +6,8 @@
 package net.sf.sze.model.zeugnis;
 
 import de.ppi.fuwesta.jpa.helper.VersionedModel;
-
 import net.sf.oval.constraint.Size;
+import net.sf.sze.model.zeugnisconfig.Schulfach;
 
 import org.apache.commons.lang.builder.CompareToBuilder;
 

@@ -17,9 +17,9 @@ import net.sf.sze.dao.api.zeugnis.SchulfachDao;
 import net.sf.sze.dao.api.zeugnis.ZeugnisDao;
 import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.zeugnis.Bewertung;
-import net.sf.sze.model.zeugnis.Schulfach;
-import net.sf.sze.model.zeugnis.Schulhalbjahr;
 import net.sf.sze.model.zeugnis.Zeugnis;
+import net.sf.sze.model.zeugnisconfig.Schulfach;
+import net.sf.sze.model.zeugnisconfig.Schulhalbjahr;
 import net.sf.sze.service.api.BewertungErfassungsService;
 import net.sf.sze.service.api.BewertungWithNeigbors;
 

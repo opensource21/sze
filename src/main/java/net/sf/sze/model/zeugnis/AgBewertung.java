@@ -6,6 +6,7 @@
 package net.sf.sze.model.zeugnis;
 
 import de.ppi.fuwesta.jpa.helper.VersionedModel;
+import net.sf.sze.model.zeugnisconfig.Arbeitsgruppe;
 
 import org.apache.commons.lang.builder.CompareToBuilder;
 

@@ -7,7 +7,7 @@ package net.sf.sze.dao.api.zeugnis;
 
 import java.util.List;
 
-import net.sf.sze.model.zeugnis.ZeugnisArt;
+import net.sf.sze.model.zeugnisconfig.ZeugnisArt;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
 

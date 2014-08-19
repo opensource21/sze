@@ -29,6 +29,11 @@ import net.sf.oval.constraint.Size;
 import net.sf.sze.constraints.ValidVariableText;
 import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.stammdaten.Schueler;
+import net.sf.sze.model.zeugnisconfig.AvSvTyp;
+import net.sf.sze.model.zeugnisconfig.Halbjahr;
+import net.sf.sze.model.zeugnisconfig.Schulhalbjahr;
+import net.sf.sze.model.zeugnisconfig.SoLBewertungsText;
+import net.sf.sze.model.zeugnisconfig.ZeugnisArt;
 import net.sf.sze.util.VariableUtility;
 
 import org.apache.commons.lang.StringUtils;

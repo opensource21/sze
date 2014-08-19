@@ -7,8 +7,8 @@ package net.sf.sze.service.api;
 
 import net.sf.jooreports.templates.DocumentTemplateException;
 import net.sf.sze.model.stammdaten.Klasse;
-import net.sf.sze.model.zeugnis.Schulhalbjahr;
 import net.sf.sze.model.zeugnis.Zeugnis;
+import net.sf.sze.model.zeugnisconfig.Schulhalbjahr;
 import net.sf.sze.service.api.PdfConverter.PDFConversionException;
 import net.sf.sze.util.ResultContainer;
 

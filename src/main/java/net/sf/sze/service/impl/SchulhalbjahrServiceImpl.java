@@ -8,7 +8,7 @@ package net.sf.sze.service.impl;
 import javax.annotation.Resource;
 
 import net.sf.sze.dao.api.zeugnis.SchulhalbjahrDao;
-import net.sf.sze.model.zeugnis.Schulhalbjahr;
+import net.sf.sze.model.zeugnisconfig.Schulhalbjahr;
 import net.sf.sze.service.api.SchulhalbjahrService;
 
 import org.springframework.data.domain.Page;

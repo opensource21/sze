@@ -5,7 +5,7 @@
 
 package net.sf.sze.service.api;
 
-import net.sf.sze.model.zeugnis.Schulhalbjahr;
+import net.sf.sze.model.zeugnisconfig.Schulhalbjahr;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

@@ -5,7 +5,7 @@
 
 package net.sf.sze.service.api;
 
-import net.sf.sze.model.zeugnis.Schulfach;
+import net.sf.sze.model.zeugnisconfig.Schulfach;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

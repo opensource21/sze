@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import net.sf.sze.model.zeugnis.Halbjahr;
+import net.sf.sze.model.zeugnisconfig.Halbjahr;
 import net.sf.sze.service.api.SchulkalenderService;
 
 import org.junit.Test;

@@ -8,8 +8,8 @@ package net.sf.sze.service.api;
 import java.util.List;
 
 import net.sf.sze.model.stammdaten.Klasse;
-import net.sf.sze.model.zeugnis.Schulhalbjahr;
 import net.sf.sze.model.zeugnis.ZeugnisFormular;
+import net.sf.sze.model.zeugnisconfig.Schulhalbjahr;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

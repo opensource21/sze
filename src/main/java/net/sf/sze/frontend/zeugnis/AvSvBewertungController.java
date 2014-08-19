@@ -14,9 +14,9 @@ import net.sf.sze.frontend.base.URL;
 import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.stammdaten.Schueler;
 import net.sf.sze.model.zeugnis.AvSvBewertung;
-import net.sf.sze.model.zeugnis.AvSvNote;
-import net.sf.sze.model.zeugnis.Schulhalbjahr;
 import net.sf.sze.model.zeugnis.Zeugnis;
+import net.sf.sze.model.zeugnisconfig.AvSvNote;
+import net.sf.sze.model.zeugnisconfig.Schulhalbjahr;
 import net.sf.sze.service.api.AvSvBewertungService;
 import net.sf.sze.service.api.ZeugnisErfassungsService;
 

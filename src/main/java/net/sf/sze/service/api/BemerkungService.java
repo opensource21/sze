@@ -8,7 +8,7 @@ package net.sf.sze.service.api;
 import java.util.List;
 
 import net.sf.sze.model.zeugnis.Bemerkung;
-import net.sf.sze.model.zeugnis.BemerkungsBaustein;
+import net.sf.sze.model.zeugnisconfig.BemerkungsBaustein;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

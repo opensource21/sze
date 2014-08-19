@@ -6,7 +6,7 @@
 /**
  *
  */
-package net.sf.sze.model.zeugnis;
+package net.sf.sze.model.zeugnisconfig;
 
 /**
  * Unterscheidung in Arbeits- und in Sozialverhalten.

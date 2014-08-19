@@ -8,7 +8,7 @@ package net.sf.sze.service.impl;
 import javax.annotation.Resource;
 
 import net.sf.sze.dao.api.zeugnis.BemerkungsBausteinDao;
-import net.sf.sze.model.zeugnis.BemerkungsBaustein;
+import net.sf.sze.model.zeugnisconfig.BemerkungsBaustein;
 import net.sf.sze.service.api.BemerkungsBausteinService;
 
 import org.springframework.data.domain.Page;

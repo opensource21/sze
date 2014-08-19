@@ -8,7 +8,7 @@ package net.sf.sze.service.impl;
 import javax.annotation.Resource;
 
 import net.sf.sze.dao.api.zeugnis.ArbeitsUndSozialVerhaltenDao;
-import net.sf.sze.model.zeugnis.ArbeitsUndSozialVerhalten;
+import net.sf.sze.model.zeugnisconfig.ArbeitsUndSozialVerhalten;
 import net.sf.sze.service.api.ArbeitsUndSozialVerhaltenService;
 
 import org.springframework.data.domain.Page;

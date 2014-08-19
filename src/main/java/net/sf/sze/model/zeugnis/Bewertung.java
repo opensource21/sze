@@ -24,6 +24,7 @@ import javax.persistence.UniqueConstraint;
 
 import net.sf.oval.constraint.CheckWith;
 import net.sf.oval.constraint.CheckWithCheck;
+import net.sf.sze.model.zeugnisconfig.Schulfach;
 import net.sf.sze.util.VariableUtility;
 
 import org.apache.commons.lang.StringUtils;

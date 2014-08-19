@@ -6,7 +6,7 @@
 /**
  *
  */
-package net.sf.sze.model.zeugnis;
+package net.sf.sze.model.zeugnisconfig;
 
 /**
  * Schulfächer kann man in verschiedene Gruppen einsortieren. Diese sind hier

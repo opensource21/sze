@@ -6,13 +6,13 @@
 package net.sf.sze.model.zeugnis;
 
 import de.ppi.fuwesta.jpa.helper.VersionedModel;
-
+import net.sf.sze.model.zeugnisconfig.ArbeitsUndSozialVerhalten;
+import net.sf.sze.model.zeugnisconfig.AvSvNote;
 import net.sf.sze.util.VariableUtility;
 
 import org.apache.commons.lang.builder.CompareToBuilder;
 
 import java.io.Serializable;
-
 import java.util.Map;
 
 import javax.persistence.Entity;

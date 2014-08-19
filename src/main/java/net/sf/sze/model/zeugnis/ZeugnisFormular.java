@@ -8,6 +8,7 @@ package net.sf.sze.model.zeugnis;
 import de.ppi.fuwesta.jpa.helper.VersionedModel;
 import de.ppi.fuwesta.oval.validation.Unique;
 import net.sf.sze.model.stammdaten.Klasse;
+import net.sf.sze.model.zeugnisconfig.Schulhalbjahr;
 
 import org.apache.commons.lang.builder.CompareToBuilder;
 

@@ -12,7 +12,7 @@ import javax.annotation.Resource;
 import net.sf.sze.dao.api.zeugnis.BemerkungDao;
 import net.sf.sze.dao.api.zeugnis.BemerkungsBausteinDao;
 import net.sf.sze.model.zeugnis.Bemerkung;
-import net.sf.sze.model.zeugnis.BemerkungsBaustein;
+import net.sf.sze.model.zeugnisconfig.BemerkungsBaustein;
 import net.sf.sze.service.api.BemerkungService;
 import net.sf.sze.util.VariableUtility;
 

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import net.sf.sze.frontend.base.ModelAttributes;
 import net.sf.sze.frontend.base.URL;
-import net.sf.sze.model.zeugnis.ZeugnisArt;
+import net.sf.sze.model.zeugnisconfig.ZeugnisArt;
 import net.sf.sze.service.api.ZeugnisArtService;
 import net.sf.sze.service.api.SchulkalenderService;
 

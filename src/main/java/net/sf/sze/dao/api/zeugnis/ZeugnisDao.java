@@ -7,8 +7,8 @@ package net.sf.sze.dao.api.zeugnis;
 
 import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.stammdaten.Schueler;
-import net.sf.sze.model.zeugnis.Schulhalbjahr;
 import net.sf.sze.model.zeugnis.Zeugnis;
+import net.sf.sze.model.zeugnisconfig.Schulhalbjahr;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
 

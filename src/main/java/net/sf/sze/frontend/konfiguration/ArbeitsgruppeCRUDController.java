@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import net.sf.sze.frontend.base.ModelAttributes;
 import net.sf.sze.frontend.base.URL;
-import net.sf.sze.model.zeugnis.Arbeitsgruppe;
+import net.sf.sze.model.zeugnisconfig.Arbeitsgruppe;
 import net.sf.sze.service.api.ArbeitsgruppeService;
 import net.sf.sze.service.api.SchulkalenderService;
 

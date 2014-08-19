@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import net.sf.sze.frontend.base.ModelAttributes;
 import net.sf.sze.frontend.base.URL;
-import net.sf.sze.model.zeugnis.Schulfach;
-import net.sf.sze.model.zeugnis.Schulfachtyp;
+import net.sf.sze.model.zeugnisconfig.Schulfach;
+import net.sf.sze.model.zeugnisconfig.Schulfachtyp;
 import net.sf.sze.service.api.SchulfachService;
 import net.sf.sze.service.api.SchulkalenderService;
 

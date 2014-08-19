@@ -12,6 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import net.sf.sze.model.zeugnisconfig.Schulamt;
+import net.sf.sze.model.zeugnisconfig.SchulamtsBemerkungsBaustein;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.CompareToBuilder;
 

@@ -14,7 +14,7 @@ import net.sf.sze.dao.api.zeugnis.SchulhalbjahrDao;
 import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.stammdaten.Schueler;
 import net.sf.sze.model.zeugnis.AvSvBewertung;
-import net.sf.sze.model.zeugnis.Schulhalbjahr;
+import net.sf.sze.model.zeugnisconfig.Schulhalbjahr;
 import net.sf.sze.service.api.AvSvBewertungService;
 
 import org.springframework.data.domain.Page;

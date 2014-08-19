@@ -6,10 +6,14 @@
 package net.sf.sze.model.zeugnis;
 
 import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import net.sf.sze.model.zeugnisconfig.BemerkungsBaustein;
+
 import org.apache.commons.lang.StringUtils;
 
 

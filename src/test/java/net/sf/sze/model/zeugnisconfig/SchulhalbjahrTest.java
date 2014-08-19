@@ -3,7 +3,7 @@
 // Licensed under the AGPL - http://www.gnu.org/licenses/agpl-3.0.txt
 // (c) SZE-Development-Team
 
-package net.sf.sze.model.zeugnis;
+package net.sf.sze.model.zeugnisconfig;
 
 import org.junit.Test;
 
@@ -26,7 +26,7 @@ public class SchulhalbjahrTest {
     }
 
     /**
-     * Test method for {@link net.sf.sze.model.zeugnis.Schulhalbjahr#isErstesHalbjahr()}.
+     * Test method for {@link net.sf.sze.model.zeugnisconfig.Schulhalbjahr#isErstesHalbjahr()}.
      */
     @Test
     public void testIsErstesHalbjahrTrue() {
@@ -36,7 +36,7 @@ public class SchulhalbjahrTest {
     }
 
     /**
-     * Test method for {@link net.sf.sze.model.zeugnis.Schulhalbjahr#isErstesHalbjahr()}.
+     * Test method for {@link net.sf.sze.model.zeugnisconfig.Schulhalbjahr#isErstesHalbjahr()}.
      */
     @Test
     public void testIsErstesHalbjahrFalse() {
@@ -46,7 +46,7 @@ public class SchulhalbjahrTest {
     }
 
     /**
-     * Test method for {@link net.sf.sze.model.zeugnis.Schulhalbjahr#toString()}.
+     * Test method for {@link net.sf.sze.model.zeugnisconfig.Schulhalbjahr#toString()}.
      */
     @Test
     public void testToStringErstesHj() {
@@ -56,7 +56,7 @@ public class SchulhalbjahrTest {
     }
 
     /**
-     * Test method for {@link net.sf.sze.model.zeugnis.Schulhalbjahr#toString()}.
+     * Test method for {@link net.sf.sze.model.zeugnisconfig.Schulhalbjahr#toString()}.
      */
     @Test
     public void testToStringBeideHj() {
@@ -66,7 +66,8 @@ public class SchulhalbjahrTest {
     }
 
     /**
-     * Test method for {@link net.sf.sze.model.zeugnis.Schulhalbjahr#createRelativePathName()}.
+     * Test method for
+     * {@link net.sf.sze.model.zeugnisconfig.Schulhalbjahr#createRelativePathName()}.
      */
     @Test
     public void testCreateRelativePathNameErsteJahre() {
@@ -76,7 +77,8 @@ public class SchulhalbjahrTest {
     }
 
     /**
-     * Test method for {@link net.sf.sze.model.zeugnis.Schulhalbjahr#createRelativePathName()}.
+     * Test method for
+     * {@link net.sf.sze.model.zeugnisconfig.Schulhalbjahr#createRelativePathName()}.
      */
     @Test
     public void testCreateRelativePathNameBeideJahre() {
@@ -87,7 +89,7 @@ public class SchulhalbjahrTest {
 
     /**
      * Test method for
-     * {@link net.sf.sze.model.zeugnis.Schulhalbjahr#compareTo(net.sf.sze.model.zeugnis.Schulhalbjahr)}.
+     * {@link net.sf.sze.model.zeugnisconfig.Schulhalbjahr#compareTo(net.sf.sze.model.zeugnisconfig.Schulhalbjahr)}.
      */
     @Test
     public void testCompareTo() {
@@ -104,7 +106,8 @@ public class SchulhalbjahrTest {
     }
 
     /**
-     * Test method for {@link net.sf.sze.model.zeugnis.Schulhalbjahr#toPrintMap(java.util.Map)}.
+     * Test method for
+     * {@link net.sf.sze.model.zeugnisconfig.Schulhalbjahr#toPrintMap(java.util.Map)}.
      */
     @Test
     public void testToPrintMapErsteHalbjahr() {
@@ -119,7 +122,8 @@ public class SchulhalbjahrTest {
     }
 
     /**
-     * Test method for {@link net.sf.sze.model.zeugnis.Schulhalbjahr#toPrintMap(java.util.Map)}.
+     * Test method for
+     * {@link net.sf.sze.model.zeugnisconfig.Schulhalbjahr#toPrintMap(java.util.Map)}.
      */
     @Test
     public void testToPrintMapBeideHalbjahr() {

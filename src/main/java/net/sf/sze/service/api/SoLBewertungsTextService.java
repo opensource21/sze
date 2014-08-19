@@ -5,7 +5,7 @@
 
 package net.sf.sze.service.api;
 
-import net.sf.sze.model.zeugnis.SoLBewertungsText;
+import net.sf.sze.model.zeugnisconfig.SoLBewertungsText;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

@@ -7,9 +7,9 @@ package net.sf.sze.service.api;
 
 import java.util.List;
 
-import net.sf.sze.model.zeugnis.Schulamt;
 import net.sf.sze.model.zeugnis.SchulamtsBemerkung;
-import net.sf.sze.model.zeugnis.SchulamtsBemerkungsBaustein;
+import net.sf.sze.model.zeugnisconfig.Schulamt;
+import net.sf.sze.model.zeugnisconfig.SchulamtsBemerkungsBaustein;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

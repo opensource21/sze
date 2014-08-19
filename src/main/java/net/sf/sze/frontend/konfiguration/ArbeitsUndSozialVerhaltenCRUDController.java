@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import net.sf.sze.frontend.base.ModelAttributes;
 import net.sf.sze.frontend.base.URL;
-import net.sf.sze.model.zeugnis.ArbeitsUndSozialVerhalten;
-import net.sf.sze.model.zeugnis.AvSvTyp;
+import net.sf.sze.model.zeugnisconfig.ArbeitsUndSozialVerhalten;
+import net.sf.sze.model.zeugnisconfig.AvSvTyp;
 import net.sf.sze.service.api.ArbeitsUndSozialVerhaltenService;
 import net.sf.sze.service.api.SchulkalenderService;
 

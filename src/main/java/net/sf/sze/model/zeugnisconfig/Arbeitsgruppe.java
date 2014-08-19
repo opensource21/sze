@@ -3,22 +3,22 @@
 // Licensed under the AGPL - http://www.gnu.org/licenses/agpl-3.0.txt
 // (c) SZE-Development-Team
 
-package net.sf.sze.model.zeugnis;
-
-import de.ppi.fuwesta.jpa.helper.VersionedModel;
-import de.ppi.fuwesta.spring.mvc.formatter.NonEmpty;
-import net.sf.sze.util.StringUtil;
-
-import org.apache.commons.lang.builder.CompareToBuilder;
+package net.sf.sze.model.zeugnisconfig;
 
 import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+import net.sf.sze.util.StringUtil;
+
+import org.apache.commons.lang.builder.CompareToBuilder;
+
+import de.ppi.fuwesta.jpa.helper.VersionedModel;
+import de.ppi.fuwesta.spring.mvc.formatter.NonEmpty;
 
 /**
  * Arbeitsgruppen.
@@ -45,11 +45,6 @@ public class Arbeitsgruppe extends VersionedModel implements Serializable,
     @NonEmpty
     private String klassenstufen;
 
-    // bi-directional many-to-one association to AgBewertung
-
-    /** The ag bewertungs. */
-    @OneToMany(mappedBy = "arbeitsgruppe")
-    private List<AgBewertung> agBewertungs;
 
     /**
      * Gets the klassenstufen.
@@ -105,23 +100,7 @@ public class Arbeitsgruppe extends VersionedModel implements Serializable,
         this.sortierung = sortierung;
     }
 
-    /**
-     * Gets the ag bewertungs.
-     *
-     * @return the ag bewertungs
-     */
-    public List<AgBewertung> getAgBewertungs() {
-        return this.agBewertungs;
-    }
 
-    /**
-     * Sets the ag bewertungs.
-     *
-     * @param agBewertungs the new ag bewertungs
-     */
-    public void setAgBewertungs(final List<AgBewertung> agBewertungs) {
-        this.agBewertungs = agBewertungs;
-    }
 
     // ******************************
 

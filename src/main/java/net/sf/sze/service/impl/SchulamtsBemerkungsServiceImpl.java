@@ -12,9 +12,9 @@ import javax.annotation.Resource;
 import net.sf.sze.dao.api.zeugnis.SchulamtDao;
 import net.sf.sze.dao.api.zeugnis.SchulamtsBemerkungDao;
 import net.sf.sze.dao.api.zeugnis.SchulamtsBemerkungsBausteinDao;
-import net.sf.sze.model.zeugnis.Schulamt;
 import net.sf.sze.model.zeugnis.SchulamtsBemerkung;
-import net.sf.sze.model.zeugnis.SchulamtsBemerkungsBaustein;
+import net.sf.sze.model.zeugnisconfig.Schulamt;
+import net.sf.sze.model.zeugnisconfig.SchulamtsBemerkungsBaustein;
 import net.sf.sze.service.api.SchulamtsBemerkungService;
 import net.sf.sze.util.VariableUtility;
 

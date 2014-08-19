@@ -10,10 +10,10 @@ import javax.annotation.Resource;
 
 import net.sf.sze.frontend.base.URL;
 import net.sf.sze.frontend.base.URL.Common;
-import net.sf.sze.model.zeugnis.Schulamt;
 import net.sf.sze.model.zeugnis.SchulamtsBemerkung;
-import net.sf.sze.model.zeugnis.SchulamtsBemerkungsBaustein;
 import net.sf.sze.model.zeugnis.Zeugnis;
+import net.sf.sze.model.zeugnisconfig.Schulamt;
+import net.sf.sze.model.zeugnisconfig.SchulamtsBemerkungsBaustein;
 import net.sf.sze.service.api.SchulamtsBemerkungService;
 import net.sf.sze.service.api.SchulhalbjahrService;
 import net.sf.sze.service.api.ZeugnisErfassungsService;

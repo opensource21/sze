@@ -7,10 +7,10 @@ package net.sf.sze.service.api;
 
 import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.zeugnis.Bewertung;
-import net.sf.sze.model.zeugnis.Schulhalbjahr;
-import net.sf.sze.model.zeugnis.SoLBewertungsText;
 import net.sf.sze.model.zeugnis.Zeugnis;
-import net.sf.sze.model.zeugnis.ZeugnisArt;
+import net.sf.sze.model.zeugnisconfig.Schulhalbjahr;
+import net.sf.sze.model.zeugnisconfig.SoLBewertungsText;
+import net.sf.sze.model.zeugnisconfig.ZeugnisArt;
 
 import java.util.List;
 

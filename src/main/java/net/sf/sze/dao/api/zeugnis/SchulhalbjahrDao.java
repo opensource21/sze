@@ -5,8 +5,8 @@
 
 package net.sf.sze.dao.api.zeugnis;
 
-import net.sf.sze.model.zeugnis.Halbjahr;
-import net.sf.sze.model.zeugnis.Schulhalbjahr;
+import net.sf.sze.model.zeugnisconfig.Halbjahr;
+import net.sf.sze.model.zeugnisconfig.Schulhalbjahr;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
 
