@@ -11,7 +11,8 @@
        bestimmte Rechte hat.
 
 - Security
--Menü
+- Menü
+- schulfachDetailInfos beim zeugnisFormular
 
 #PRIO 2
 - Der Titel wird generell nicht Dialog-spezifisch gesetzt.

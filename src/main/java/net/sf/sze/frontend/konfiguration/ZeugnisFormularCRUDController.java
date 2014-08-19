@@ -43,7 +43,7 @@ public class ZeugnisFormularCRUDController {
     /**
      * View which is used as form.
      */
-    private static final String SCHULHALBJAHR_FORM = "zeugnisFormular/form";
+    private static final String SCHULHALBJAHR_FORM = "zeugnisFormular/zeugnisFormularform";
 
     /**
      * The Logger for the controller.
@@ -93,7 +93,7 @@ public class ZeugnisFormularCRUDController {
 
         model.addAttribute("pageRequest", pageRequest);
         model.addAttribute("zeugnisFormularList", zeugnisFormularList);
-        return "zeugnisFormular/list";
+        return "zeugnisFormular/zeugnisFormularlist";
     }
 
     /**
