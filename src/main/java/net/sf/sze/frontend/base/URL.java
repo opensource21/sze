@@ -667,6 +667,44 @@ public final class URL {
     }
 
     /**
+     * All URLS for the {@link BemerkungsBaustein}.
+     *
+     */
+    public interface BemerkungsBaustein {
+
+        /**
+         * Home-Url.
+         */
+        String HOME = "/konfiguration/bemerkungsBaustein";
+
+        /**
+         * Parametername for the halbjahrs-id.
+         */
+        String P_BEMERKUNGS_BAUSTEIN_ID = "bemerkungsBausteinId";
+
+        /**
+         * Edit-Url.
+         */
+        String EDIT = HOME + "/edit/{" + P_BEMERKUNGS_BAUSTEIN_ID + "}";
+
+        /**
+         * Show-Url.
+         */
+        String SHOW = HOME + "/show/{" + P_BEMERKUNGS_BAUSTEIN_ID + "}";
+
+        /**
+         * Delete-Url.
+         */
+        String DELETE = HOME + "/delete";
+
+        /** List-URL. */
+        String LIST = HOME + "/list";
+
+        /** Create URL. */
+        String CREATE = HOME + "/create";
+    }
+
+    /**
      * Replace all parameters in the URL with the given values.
      *
      * @param url the URL.
