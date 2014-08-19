@@ -396,7 +396,7 @@ public final class URL {
         /**
          * Home-Url.
          */
-        String HOME = "/konfiguration/schulhalbjahr";
+        String HOME = Configuration.HOME + "/schulhalbjahr";
 
         /**
          * Parametername for the halbjahrs-id.
@@ -434,7 +434,7 @@ public final class URL {
         /**
          * Home-Url.
          */
-        String HOME = "/konfiguration/zeugnisFormular";
+        String HOME = Configuration.HOME + "/zeugnisFormular";
 
         /**
          * Parametername for the halbjahrs-id.
@@ -472,7 +472,7 @@ public final class URL {
         /**
          * Home-Url.
          */
-        String HOME = "/konfiguration/klasse";
+        String HOME = Configuration.HOME + "/klasse";
 
         /**
          * Parametername for the klasse-id.
@@ -516,14 +516,14 @@ public final class URL {
         /**
          * Home-Url.
          */
-        String HOME = "/konfiguration/schueler/";
+        String HOME = Configuration.HOME + "/schueler/";
 
 
 
         /**
          * Home-Url.
          */
-        String BASE = "/konfiguration/schueler/{" + P_AKTIV + ":aktiv|passiv}";
+        String BASE = Configuration.HOME + "/schueler/{" + P_AKTIV + ":aktiv|passiv}";
 
         /**
          * Parametername for the halbjahrs-id.
@@ -561,7 +561,7 @@ public final class URL {
         /**
          * Home-Url.
          */
-        String HOME = "/konfiguration/schulfach";
+        String HOME = Configuration.HOME + "/schulfach";
 
         /**
          * Parametername for the halbjahrs-id.
@@ -599,7 +599,7 @@ public final class URL {
         /**
          * Home-Url.
          */
-        String HOME = "/konfiguration/arbeitsUndSozialVerhalten";
+        String HOME = Configuration.HOME + "/arbeitsUndSozialVerhalten";
 
         /**
          * Parametername for the halbjahrs-id.
@@ -637,7 +637,7 @@ public final class URL {
         /**
          * Home-Url.
          */
-        String HOME = "/konfiguration/arbeitsgruppe";
+        String HOME = Configuration.HOME + "/arbeitsgruppe";
 
         /**
          * Parametername for the halbjahrs-id.
@@ -675,7 +675,7 @@ public final class URL {
         /**
          * Home-Url.
          */
-        String HOME = "/konfiguration/bemerkungsBaustein";
+        String HOME = Configuration.HOME + "/bemerkungsBaustein";
 
         /**
          * Parametername for the halbjahrs-id.
@@ -691,6 +691,44 @@ public final class URL {
          * Show-Url.
          */
         String SHOW = HOME + "/show/{" + P_BEMERKUNGS_BAUSTEIN_ID + "}";
+
+        /**
+         * Delete-Url.
+         */
+        String DELETE = HOME + "/delete";
+
+        /** List-URL. */
+        String LIST = HOME + "/list";
+
+        /** Create URL. */
+        String CREATE = HOME + "/create";
+    }
+
+    /**
+     * All URLS for the {@link Schulamt}.
+     *
+     */
+    public interface Schulamt {
+
+        /**
+         * Home-Url.
+         */
+        String HOME = Configuration.HOME + "/schulamt";
+
+        /**
+         * Parametername for the halbjahrs-id.
+         */
+        String P_SCHULAMT_ID = "schulamtId";
+
+        /**
+         * Edit-Url.
+         */
+        String EDIT = HOME + "/edit/{" + P_SCHULAMT_ID + "}";
+
+        /**
+         * Show-Url.
+         */
+        String SHOW = HOME + "/show/{" + P_SCHULAMT_ID + "}";
 
         /**
          * Delete-Url.

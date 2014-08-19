@@ -5,19 +5,19 @@
 
 package net.sf.sze.model.zeugnis;
 
-import de.ppi.fuwesta.jpa.helper.VersionedModel;
-
-import net.sf.oval.constraint.Size;
-import net.sf.sze.constraints.ValidVariableText;
-
-import org.apache.commons.lang.builder.CompareToBuilder;
-
 import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+import net.sf.sze.constraints.ValidVariableText;
+
+import org.apache.commons.lang.builder.CompareToBuilder;
+
+import de.ppi.fuwesta.jpa.helper.VersionedModel;
+import de.ppi.fuwesta.spring.mvc.formatter.NonEmpty;
 
 /**
  * Schüler können verschieden Ämter inne haben, diese werden hier definiert.
@@ -32,19 +32,16 @@ public class Schulamt extends VersionedModel implements Serializable,
 
     /** The name. */
     @Column(nullable = false, length = 20)
-
-    @Size(max = 20)
+    @NonEmpty
     private String name;
 
     /** The beschreibender satz. */
     @Column(name = "beschreibender_satz", nullable = false, length = 255)
-
     @ValidVariableText
     private String beschreibenderSatz;
 
     /** The aktiv. */
     @Column(nullable = false)
-
     private Boolean aktiv = Boolean.TRUE;
 
     /**
