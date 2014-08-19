@@ -6,13 +6,12 @@
 package net.sf.sze.model.zeugnis;
 
 import de.ppi.fuwesta.jpa.helper.VersionedModel;
-
+import de.ppi.fuwesta.spring.mvc.formatter.NonEmpty;
 import net.sf.sze.util.StringUtil;
 
 import org.apache.commons.lang.builder.CompareToBuilder;
 
 import java.io.Serializable;
-
 import java.util.List;
 
 import javax.persistence.Column;
@@ -34,16 +33,16 @@ public class Arbeitsgruppe extends VersionedModel implements Serializable,
 
     /** The name. */
     @Column(nullable = false, length = 70)
+    @NonEmpty
     private String name;
 
     /** The sortierung. */
     @Column(nullable = false)
-
-    private Long sortierung;
+    private Long sortierung = Long.valueOf(100);
 
     /** The klassenstufen. */
     @Column(nullable = false, length = 255)
-
+    @NonEmpty
     private String klassenstufen;
 
     // bi-directional many-to-one association to AgBewertung

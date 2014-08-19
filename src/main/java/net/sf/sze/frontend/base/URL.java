@@ -629,6 +629,44 @@ public final class URL {
     }
 
     /**
+     * All URLS for the {@link Arbeitsgruppe}.
+     *
+     */
+    public interface Arbeitsgruppe {
+
+        /**
+         * Home-Url.
+         */
+        String HOME = "/konfiguration/arbeitsgruppe";
+
+        /**
+         * Parametername for the halbjahrs-id.
+         */
+        String P_ARBEITSGRUPPE_ID = "arbeitsgruppeId";
+
+        /**
+         * Edit-Url.
+         */
+        String EDIT = HOME + "/edit/{" + P_ARBEITSGRUPPE_ID + "}";
+
+        /**
+         * Show-Url.
+         */
+        String SHOW = HOME + "/show/{" + P_ARBEITSGRUPPE_ID + "}";
+
+        /**
+         * Delete-Url.
+         */
+        String DELETE = HOME + "/delete";
+
+        /** List-URL. */
+        String LIST = HOME + "/list";
+
+        /** Create URL. */
+        String CREATE = HOME + "/create";
+    }
+
+    /**
      * Replace all parameters in the URL with the given values.
      *
      * @param url the URL.

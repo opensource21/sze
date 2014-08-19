@@ -1,7 +1,7 @@
 #PRIO 1
 
 - Admin-Bereich (3 PT?) (Halbjahr, Formular, Klasse, Schüler, Schulfach,
-    AvSv, #AG, Bemerkungsbaustein,
+    AvSv, AG, #Bemerkungsbaustein,
     Schulamt, Schulamtsbemerkunsbaustein, SoLBewertungstext, Zeugnisart)
 
 - Beim Initialiseren von Klasse 1-2 komplett gibt es eine Exception.
@@ -15,6 +15,8 @@
 
 #PRIO 2
 - Der Titel wird generell nicht Dialog-spezifisch gesetzt.
+
+- AGs referenziert AG-Bewertung, Schulfach auch, dass ist nicht sinnvoll.
 
 - Delete-Fragment zu umbauen, dass es mit JS und ohne gut läuft.
 
