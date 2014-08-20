@@ -1,14 +1,14 @@
 /**
  *
  */
-package net.sf.sze.service.impl;
+package net.sf.sze.service.impl.converter;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.File;
 
-import net.sf.sze.service.api.PdfConverter;
 import junit.framework.TestCase;
+import net.sf.sze.service.api.converter.PdfConverter;
 
 /**
  * Testet die Konvertierung der PDFs.

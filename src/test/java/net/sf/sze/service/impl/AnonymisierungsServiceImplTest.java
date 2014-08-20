@@ -37,7 +37,7 @@ public class AnonymisierungsServiceImplTest {
      * Die Log-Instanz.
      */
     private static final Logger LOG = LoggerFactory.getLogger(
-            ZeugnisCreatorServiceImpl.class);
+            AnonymisierungsServiceImplTest.class);
 
     @InjectMocks
     private AnonymisierungsService anonymisierungsService = new AnonymisierungsServiceImpl();

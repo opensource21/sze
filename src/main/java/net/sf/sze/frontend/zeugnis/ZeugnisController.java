@@ -23,7 +23,7 @@ import net.sf.sze.model.zeugnis.BinnenDifferenzierteBewertung;
 import net.sf.sze.model.zeugnis.StandardBewertung;
 import net.sf.sze.model.zeugnis.Zeugnis;
 import net.sf.sze.model.zeugnisconfig.Schulhalbjahr;
-import net.sf.sze.service.api.ZeugnisCreatorService;
+import net.sf.sze.service.api.converter.ZeugnisCreatorService;
 import net.sf.sze.service.api.zeugnis.AgBewertungService;
 import net.sf.sze.service.api.zeugnis.BewertungService;
 import net.sf.sze.service.api.zeugnis.BewertungWithNeigbors;

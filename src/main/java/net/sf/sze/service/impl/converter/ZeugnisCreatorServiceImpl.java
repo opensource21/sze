@@ -3,7 +3,7 @@
 // Licensed under the AGPL - http://www.gnu.org/licenses/agpl-3.0.txt
 // (c) SZE-Development-Team
 
-package net.sf.sze.service.impl;
+package net.sf.sze.service.impl.converter;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -35,9 +35,9 @@ import net.sf.sze.model.zeugnisconfig.Halbjahr;
 import net.sf.sze.model.zeugnisconfig.Schulfach;
 import net.sf.sze.model.zeugnisconfig.Schulfachtyp;
 import net.sf.sze.model.zeugnisconfig.Schulhalbjahr;
-import net.sf.sze.service.api.OO2PdfConverter;
-import net.sf.sze.service.api.PdfConverter;
-import net.sf.sze.service.api.ZeugnisCreatorService;
+import net.sf.sze.service.api.converter.OO2PdfConverter;
+import net.sf.sze.service.api.converter.PdfConverter;
+import net.sf.sze.service.api.converter.ZeugnisCreatorService;
 import net.sf.sze.util.MapPrinter;
 import net.sf.sze.util.ResultContainer;
 import net.sf.sze.util.VariableUtility;

@@ -35,7 +35,6 @@ import net.sf.sze.model.zeugnisconfig.Schulhalbjahr;
 import net.sf.sze.model.zeugnisconfig.ZeugnisArt;
 import net.sf.sze.service.api.stammdaten.SchuelerService;
 import net.sf.sze.service.api.zeugnisconfig.ZeugnisInitialierungsService;
-import net.sf.sze.service.impl.ZeugnisCreatorServiceImpl;
 import net.sf.sze.util.ResultContainer;
 
 import org.slf4j.Logger;
@@ -66,7 +65,7 @@ public class ZeugnisInitialisierungServiceImpl implements ZeugnisInitialierungsS
      * Die Log-Instanz.
      */
     private static final Logger LOG = LoggerFactory.getLogger(
-            ZeugnisCreatorServiceImpl.class);
+            ZeugnisInitialisierungServiceImpl.class);
 
     /** Minimales Schuljahr. */
     @Value("${schuljahre.min}")
