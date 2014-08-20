@@ -23,12 +23,12 @@ import net.sf.sze.model.zeugnis.BinnenDifferenzierteBewertung;
 import net.sf.sze.model.zeugnis.StandardBewertung;
 import net.sf.sze.model.zeugnis.Zeugnis;
 import net.sf.sze.model.zeugnisconfig.Schulhalbjahr;
-import net.sf.sze.service.api.AgBewertungService;
-import net.sf.sze.service.api.BewertungService;
-import net.sf.sze.service.api.BewertungWithNeigbors;
-import net.sf.sze.service.api.SchulhalbjahrService;
-import net.sf.sze.service.api.ZeugnisCreatorService;
-import net.sf.sze.service.api.ZeugnisErfassungsService;
+import net.sf.sze.service.api.converter.ZeugnisCreatorService;
+import net.sf.sze.service.api.zeugnis.AgBewertungService;
+import net.sf.sze.service.api.zeugnis.BewertungService;
+import net.sf.sze.service.api.zeugnis.BewertungWithNeigbors;
+import net.sf.sze.service.api.zeugnis.ZeugnisErfassungsService;
+import net.sf.sze.service.api.zeugnisconfig.SchulhalbjahrService;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;

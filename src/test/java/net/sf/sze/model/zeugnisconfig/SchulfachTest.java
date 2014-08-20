@@ -8,8 +8,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 
-import net.sf.sze.model.zeugnisconfig.Schulfach;
-
 import org.junit.Test;
 
 

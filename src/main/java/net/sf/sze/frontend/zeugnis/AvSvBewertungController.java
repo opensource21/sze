@@ -17,8 +17,8 @@ import net.sf.sze.model.zeugnis.AvSvBewertung;
 import net.sf.sze.model.zeugnis.Zeugnis;
 import net.sf.sze.model.zeugnisconfig.AvSvNote;
 import net.sf.sze.model.zeugnisconfig.Schulhalbjahr;
-import net.sf.sze.service.api.AvSvBewertungService;
-import net.sf.sze.service.api.ZeugnisErfassungsService;
+import net.sf.sze.service.api.zeugnis.AvSvBewertungService;
+import net.sf.sze.service.api.zeugnis.ZeugnisErfassungsService;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

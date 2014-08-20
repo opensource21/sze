@@ -18,10 +18,10 @@ import net.sf.sze.model.zeugnis.BinnenDifferenzierteBewertung;
 import net.sf.sze.model.zeugnis.StandardBewertung;
 import net.sf.sze.model.zeugnisconfig.Schulfach;
 import net.sf.sze.model.zeugnisconfig.Schulhalbjahr;
-import net.sf.sze.service.api.BewertungErfassungsService;
-import net.sf.sze.service.api.BewertungService;
-import net.sf.sze.service.api.BewertungWithNeigbors;
-import net.sf.sze.service.api.SchulhalbjahrService;
+import net.sf.sze.service.api.zeugnis.BewertungErfassungsService;
+import net.sf.sze.service.api.zeugnis.BewertungService;
+import net.sf.sze.service.api.zeugnis.BewertungWithNeigbors;
+import net.sf.sze.service.api.zeugnisconfig.SchulhalbjahrService;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;

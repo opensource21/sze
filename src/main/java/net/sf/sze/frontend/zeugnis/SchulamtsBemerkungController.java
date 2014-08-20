@@ -14,9 +14,9 @@ import net.sf.sze.model.zeugnis.SchulamtsBemerkung;
 import net.sf.sze.model.zeugnis.Zeugnis;
 import net.sf.sze.model.zeugnisconfig.Schulamt;
 import net.sf.sze.model.zeugnisconfig.SchulamtsBemerkungsBaustein;
-import net.sf.sze.service.api.SchulamtsBemerkungService;
-import net.sf.sze.service.api.SchulhalbjahrService;
-import net.sf.sze.service.api.ZeugnisErfassungsService;
+import net.sf.sze.service.api.zeugnis.SchulamtsBemerkungService;
+import net.sf.sze.service.api.zeugnis.ZeugnisErfassungsService;
+import net.sf.sze.service.api.zeugnisconfig.SchulhalbjahrService;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;

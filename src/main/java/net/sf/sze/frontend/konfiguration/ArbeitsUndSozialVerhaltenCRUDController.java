@@ -12,8 +12,8 @@ import net.sf.sze.frontend.base.ModelAttributes;
 import net.sf.sze.frontend.base.URL;
 import net.sf.sze.model.zeugnisconfig.ArbeitsUndSozialVerhalten;
 import net.sf.sze.model.zeugnisconfig.AvSvTyp;
-import net.sf.sze.service.api.ArbeitsUndSozialVerhaltenService;
-import net.sf.sze.service.api.SchulkalenderService;
+import net.sf.sze.service.api.common.SchulkalenderService;
+import net.sf.sze.service.api.zeugnisconfig.ArbeitsUndSozialVerhaltenService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
