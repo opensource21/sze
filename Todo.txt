@@ -13,8 +13,6 @@
 #PRIO 2
 - Der Titel wird generell nicht Dialog-spezifisch gesetzt.
 
-- AGs referenziert AG-Bewertung, Schulfach auch, dass ist nicht sinnvoll.
-
 - Delete-Fragment zu umbauen, dass es mit JS und ohne gut läuft.
 
 - 3Niveau und 2NiveauBewertung
