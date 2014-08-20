@@ -3,13 +3,13 @@
 // Licensed under the AGPL - http://www.gnu.org/licenses/agpl-3.0.txt
 // (c) SZE-Development-Team
 
-package net.sf.sze.service.impl;
+package net.sf.sze.service.impl.zeugnisconfig;
 
 import javax.annotation.Resource;
 
 import net.sf.sze.dao.api.zeugnisconfig.SchulfachDao;
 import net.sf.sze.model.zeugnisconfig.Schulfach;
-import net.sf.sze.service.api.SchulfachService;
+import net.sf.sze.service.api.zeugnisconfig.SchulfachService;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
