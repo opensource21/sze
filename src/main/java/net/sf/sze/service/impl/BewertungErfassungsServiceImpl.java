@@ -13,8 +13,8 @@ import javax.annotation.Resource;
 
 import net.sf.sze.dao.api.stammdaten.KlasseDao;
 import net.sf.sze.dao.api.zeugnis.BewertungDao;
-import net.sf.sze.dao.api.zeugnis.SchulfachDao;
 import net.sf.sze.dao.api.zeugnis.ZeugnisDao;
+import net.sf.sze.dao.api.zeugnisconfig.SchulfachDao;
 import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.zeugnis.Bewertung;
 import net.sf.sze.model.zeugnis.Zeugnis;

@@ -7,7 +7,7 @@ package net.sf.sze.service.impl;
 
 import javax.annotation.Resource;
 
-import net.sf.sze.dao.api.zeugnis.ZeugnisArtDao;
+import net.sf.sze.dao.api.zeugnisconfig.ZeugnisArtDao;
 import net.sf.sze.model.zeugnisconfig.ZeugnisArt;
 import net.sf.sze.service.api.ZeugnisArtService;
 

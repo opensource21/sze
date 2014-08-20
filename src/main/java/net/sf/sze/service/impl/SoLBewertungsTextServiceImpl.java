@@ -7,7 +7,7 @@ package net.sf.sze.service.impl;
 
 import javax.annotation.Resource;
 
-import net.sf.sze.dao.api.zeugnis.SoLBewertungsTextDao;
+import net.sf.sze.dao.api.zeugnisconfig.SoLBewertungsTextDao;
 import net.sf.sze.model.zeugnisconfig.SoLBewertungsText;
 import net.sf.sze.service.api.SoLBewertungsTextService;
 

@@ -7,7 +7,7 @@ package net.sf.sze.service.impl;
 
 import javax.annotation.Resource;
 
-import net.sf.sze.dao.api.zeugnis.SchulamtsBemerkungsBausteinDao;
+import net.sf.sze.dao.api.zeugnisconfig.SchulamtsBemerkungsBausteinDao;
 import net.sf.sze.model.zeugnisconfig.SchulamtsBemerkungsBaustein;
 import net.sf.sze.service.api.SchulamtsBemerkungsBausteinService;
 

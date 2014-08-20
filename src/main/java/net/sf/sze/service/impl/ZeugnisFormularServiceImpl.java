@@ -11,8 +11,8 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import net.sf.sze.dao.api.stammdaten.KlasseDao;
-import net.sf.sze.dao.api.zeugnis.SchulhalbjahrDao;
 import net.sf.sze.dao.api.zeugnis.ZeugnisFormularDao;
+import net.sf.sze.dao.api.zeugnisconfig.SchulhalbjahrDao;
 import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.zeugnis.ZeugnisFormular;
 import net.sf.sze.model.zeugnisconfig.Schulhalbjahr;

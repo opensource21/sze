@@ -10,13 +10,13 @@ import javax.persistence.PersistenceContext;
 
 import net.sf.sze.dao.api.stammdaten.SchuelerDao;
 import net.sf.sze.dao.api.zeugnis.AgBewertungDao;
-import net.sf.sze.dao.api.zeugnis.ArbeitsUndSozialVerhaltenDao;
-import net.sf.sze.dao.api.zeugnis.ArbeitsgruppeDao;
 import net.sf.sze.dao.api.zeugnis.AvSvBewertungDao;
 import net.sf.sze.dao.api.zeugnis.BewertungDao;
-import net.sf.sze.dao.api.zeugnis.SchulfachDao;
-import net.sf.sze.dao.api.zeugnis.ZeugnisArtDao;
 import net.sf.sze.dao.api.zeugnis.ZeugnisDao;
+import net.sf.sze.dao.api.zeugnisconfig.ArbeitsUndSozialVerhaltenDao;
+import net.sf.sze.dao.api.zeugnisconfig.ArbeitsgruppeDao;
+import net.sf.sze.dao.api.zeugnisconfig.SchulfachDao;
+import net.sf.sze.dao.api.zeugnisconfig.ZeugnisArtDao;
 import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.stammdaten.Schueler;
 import net.sf.sze.model.zeugnis.AgBewertung;

@@ -7,7 +7,7 @@ package net.sf.sze.service.impl;
 
 import javax.annotation.Resource;
 
-import net.sf.sze.dao.api.zeugnis.ArbeitsgruppeDao;
+import net.sf.sze.dao.api.zeugnisconfig.ArbeitsgruppeDao;
 import net.sf.sze.model.zeugnisconfig.Arbeitsgruppe;
 import net.sf.sze.service.api.ArbeitsgruppeService;
 
