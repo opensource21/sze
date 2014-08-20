@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import net.sf.sze.frontend.base.ModelAttributes;
 import net.sf.sze.frontend.base.URL;
 import net.sf.sze.model.zeugnisconfig.Arbeitsgruppe;
-import net.sf.sze.service.api.SchulkalenderService;
+import net.sf.sze.service.api.common.SchulkalenderService;
 import net.sf.sze.service.api.zeugnisconfig.ArbeitsgruppeService;
 
 import org.slf4j.Logger;

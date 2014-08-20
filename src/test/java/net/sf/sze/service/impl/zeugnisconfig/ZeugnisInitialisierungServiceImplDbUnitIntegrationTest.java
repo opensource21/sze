@@ -2,7 +2,7 @@
 //
 // Licensed under the AGPL - http://www.gnu.org/licenses/agpl-3.0.txt
 // (c) SZE-Development Team
-package net.sf.sze.service.impl;
+package net.sf.sze.service.impl.zeugnisconfig;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -18,7 +18,6 @@ import net.sf.sze.dbunit.dataset.UpdateZeugnis;
 import net.sf.sze.model.zeugnis.Zeugnis;
 import net.sf.sze.model.zeugnis.ZeugnisFormular;
 import net.sf.sze.service.api.zeugnisconfig.ZeugnisInitialierungsService;
-import net.sf.sze.service.impl.zeugnisconfig.ZeugnisInitialisierungServiceImpl;
 import net.sf.sze.util.ResultContainer;
 
 import org.dbunit.dataset.IDataSet;

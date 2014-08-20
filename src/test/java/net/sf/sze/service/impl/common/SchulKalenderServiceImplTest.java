@@ -2,7 +2,7 @@
 //
 // Licensed under the AGPL - http://www.gnu.org/licenses/agpl-3.0.txt
 // (c) SZE-Development Team
-package net.sf.sze.service.impl;
+package net.sf.sze.service.impl.common;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -11,7 +11,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import net.sf.sze.model.zeugnisconfig.Halbjahr;
-import net.sf.sze.service.api.SchulkalenderService;
+import net.sf.sze.service.api.common.SchulkalenderService;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -95,7 +95,7 @@ public class SchulKalenderServiceImplTest {
 
     /**
      * Test method for
-     * {@link net.sf.sze.service.impl.SchulKalenderServiceImpl#getSchuljahr(java.util.Calendar)}.
+     * {@link net.sf.sze.service.impl.common.SchulKalenderServiceImpl#getSchuljahr(java.util.Calendar)}.
      */
     @Test
     public void testGetSchuljahr() {
@@ -104,7 +104,7 @@ public class SchulKalenderServiceImplTest {
 
     /**
      * Test method for
-     * {@link net.sf.sze.service.impl.SchulKalenderServiceImpl#getHalbjahr(java.util.Calendar)}.
+     * {@link net.sf.sze.service.impl.common.SchulKalenderServiceImpl#getHalbjahr(java.util.Calendar)}.
      */
     @Test
     public void testGetHalbjahr() {
@@ -113,7 +113,7 @@ public class SchulKalenderServiceImplTest {
 
     /**
      * Test method for
-     * {@link net.sf.sze.service.impl.SchulKalenderServiceImpl#getLeavedSchoolDate(java.util.Calendar)}.
+     * {@link net.sf.sze.service.impl.common.SchulKalenderServiceImpl#getLeavedSchoolDate(java.util.Calendar)}.
      */
     @Test
     public void testGetLeavedSchoolDateCalendar() {

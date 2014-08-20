@@ -13,7 +13,7 @@ import javax.annotation.Resource;
 import net.sf.sze.dao.api.stammdaten.SchuelerDao;
 import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.stammdaten.Schueler;
-import net.sf.sze.service.api.SchulkalenderService;
+import net.sf.sze.service.api.common.SchulkalenderService;
 import net.sf.sze.service.api.stammdaten.SchuelerService;
 
 import org.springframework.data.domain.Page;
