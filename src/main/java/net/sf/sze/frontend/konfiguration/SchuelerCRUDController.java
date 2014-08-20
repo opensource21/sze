@@ -12,9 +12,9 @@ import net.sf.sze.frontend.base.ModelAttributes;
 import net.sf.sze.frontend.base.URL;
 import net.sf.sze.model.stammdaten.Geschlecht;
 import net.sf.sze.model.stammdaten.Schueler;
-import net.sf.sze.service.api.KlasseService;
-import net.sf.sze.service.api.SchuelerService;
 import net.sf.sze.service.api.SchulkalenderService;
+import net.sf.sze.service.api.stammdaten.KlasseService;
+import net.sf.sze.service.api.stammdaten.SchuelerService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

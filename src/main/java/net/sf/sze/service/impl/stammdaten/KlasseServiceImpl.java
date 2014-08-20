@@ -3,13 +3,13 @@
 // Licensed under the AGPL - http://www.gnu.org/licenses/agpl-3.0.txt
 // (c) SZE-Development-Team
 
-package net.sf.sze.service.impl;
+package net.sf.sze.service.impl.stammdaten;
 
 import javax.annotation.Resource;
 
 import net.sf.sze.dao.api.stammdaten.KlasseDao;
 import net.sf.sze.model.stammdaten.Klasse;
-import net.sf.sze.service.api.KlasseService;
+import net.sf.sze.service.api.stammdaten.KlasseService;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
