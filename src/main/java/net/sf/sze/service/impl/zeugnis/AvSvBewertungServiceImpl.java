@@ -3,7 +3,7 @@
 // Licensed under the AGPL - http://www.gnu.org/licenses/agpl-3.0.txt
 // (c) SZE-Development-Team
 
-package net.sf.sze.service.impl;
+package net.sf.sze.service.impl.zeugnis;
 
 import javax.annotation.Resource;
 
@@ -15,7 +15,7 @@ import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.stammdaten.Schueler;
 import net.sf.sze.model.zeugnis.AvSvBewertung;
 import net.sf.sze.model.zeugnisconfig.Schulhalbjahr;
-import net.sf.sze.service.api.AvSvBewertungService;
+import net.sf.sze.service.api.zeugnis.AvSvBewertungService;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

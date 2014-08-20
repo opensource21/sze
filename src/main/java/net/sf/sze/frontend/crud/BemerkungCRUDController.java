@@ -9,7 +9,7 @@ import de.ppi.fuwesta.spring.mvc.util.PageWrapper;
 import de.ppi.fuwesta.spring.mvc.util.ResourceNotFoundException;
 import net.sf.sze.frontend.base.URL;
 import net.sf.sze.model.zeugnis.Bemerkung;
-import net.sf.sze.service.api.BemerkungService;
+import net.sf.sze.service.api.zeugnis.BemerkungService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

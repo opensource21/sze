@@ -2,7 +2,7 @@
 //
 // Licensed under the AGPL - http://www.gnu.org/licenses/agpl-3.0.txt
 // (c) SZE-Development Team
-package net.sf.sze.service.impl;
+package net.sf.sze.service.impl.zeugnis;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,8 +20,8 @@ import net.sf.sze.model.zeugnis.Bewertung;
 import net.sf.sze.model.zeugnis.Zeugnis;
 import net.sf.sze.model.zeugnisconfig.Schulfach;
 import net.sf.sze.model.zeugnisconfig.Schulhalbjahr;
-import net.sf.sze.service.api.BewertungErfassungsService;
-import net.sf.sze.service.api.BewertungWithNeigbors;
+import net.sf.sze.service.api.zeugnis.BewertungErfassungsService;
+import net.sf.sze.service.api.zeugnis.BewertungWithNeigbors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -3,7 +3,7 @@
 // Licensed under the AGPL - http://www.gnu.org/licenses/agpl-3.0.txt
 // (c) SZE-Development-Team
 
-package net.sf.sze.service.impl;
+package net.sf.sze.service.impl.zeugnis;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ import net.sf.sze.dao.api.zeugnis.BemerkungDao;
 import net.sf.sze.dao.api.zeugnisconfig.BemerkungsBausteinDao;
 import net.sf.sze.model.zeugnis.Bemerkung;
 import net.sf.sze.model.zeugnisconfig.BemerkungsBaustein;
-import net.sf.sze.service.api.BemerkungService;
+import net.sf.sze.service.api.zeugnis.BemerkungService;
 import net.sf.sze.util.VariableUtility;
 
 import org.springframework.data.domain.Page;

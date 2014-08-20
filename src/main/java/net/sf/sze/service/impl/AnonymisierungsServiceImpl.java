@@ -13,9 +13,9 @@ import net.sf.sze.model.zeugnis.Bemerkung;
 import net.sf.sze.model.zeugnis.SchulamtsBemerkung;
 import net.sf.sze.model.zeugnis.Zeugnis;
 import net.sf.sze.service.api.AnonymisierungsService;
-import net.sf.sze.service.api.BemerkungService;
-import net.sf.sze.service.api.SchulamtsBemerkungService;
-import net.sf.sze.service.api.ZeugnisErfassungsService;
+import net.sf.sze.service.api.zeugnis.BemerkungService;
+import net.sf.sze.service.api.zeugnis.SchulamtsBemerkungService;
+import net.sf.sze.service.api.zeugnis.ZeugnisErfassungsService;
 
 import org.apache.commons.lang.math.RandomUtils;
 import org.apache.commons.lang.time.DateUtils;

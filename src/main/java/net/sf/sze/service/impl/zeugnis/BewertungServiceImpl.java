@@ -3,13 +3,13 @@
 // Licensed under the AGPL - http://www.gnu.org/licenses/agpl-3.0.txt
 // (c) SZE-Development-Team
 
-package net.sf.sze.service.impl;
+package net.sf.sze.service.impl.zeugnis;
 
 import javax.annotation.Resource;
 
 import net.sf.sze.dao.api.zeugnis.BewertungDao;
 import net.sf.sze.model.zeugnis.Bewertung;
-import net.sf.sze.service.api.BewertungService;
+import net.sf.sze.service.api.zeugnis.BewertungService;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

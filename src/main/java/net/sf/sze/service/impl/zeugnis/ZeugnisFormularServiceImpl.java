@@ -3,7 +3,7 @@
 // Licensed under the AGPL - http://www.gnu.org/licenses/agpl-3.0.txt
 // (c) SZE-Development-Team
 
-package net.sf.sze.service.impl;
+package net.sf.sze.service.impl.zeugnis;
 
 import java.util.Calendar;
 import java.util.List;
@@ -16,7 +16,7 @@ import net.sf.sze.dao.api.zeugnisconfig.SchulhalbjahrDao;
 import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.zeugnis.ZeugnisFormular;
 import net.sf.sze.model.zeugnisconfig.Schulhalbjahr;
-import net.sf.sze.service.api.ZeugnisFormularService;
+import net.sf.sze.service.api.zeugnis.ZeugnisFormularService;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
