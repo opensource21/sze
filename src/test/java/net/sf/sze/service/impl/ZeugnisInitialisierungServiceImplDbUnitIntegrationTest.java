@@ -17,7 +17,8 @@ import net.sf.sze.dbunit.dataset.InitZeugnis;
 import net.sf.sze.dbunit.dataset.UpdateZeugnis;
 import net.sf.sze.model.zeugnis.Zeugnis;
 import net.sf.sze.model.zeugnis.ZeugnisFormular;
-import net.sf.sze.service.api.ZeugnisInitialierungsService;
+import net.sf.sze.service.api.zeugnisconfig.ZeugnisInitialierungsService;
+import net.sf.sze.service.impl.zeugnisconfig.ZeugnisInitialisierungServiceImpl;
 import net.sf.sze.util.ResultContainer;
 
 import org.dbunit.dataset.IDataSet;
@@ -49,7 +50,7 @@ public class ZeugnisInitialisierungServiceImplDbUnitIntegrationTest
 
     /**
      * Test method for
-     * {@link net.sf.sze.service.impl.ZeugnisInitialisierungServiceImpl#initZeugnis(net.sf.sze.model.zeugnis.ZeugnisFormular)}.
+     * {@link net.sf.sze.service.impl.zeugnisconfig.ZeugnisInitialisierungServiceImpl#initZeugnis(net.sf.sze.model.zeugnis.ZeugnisFormular)}.
      * @throws Exception Fehler
      */
     @Test
@@ -59,7 +60,7 @@ public class ZeugnisInitialisierungServiceImplDbUnitIntegrationTest
 
     /**
      * Test method for
-     * {@link net.sf.sze.service.impl.ZeugnisInitialisierungServiceImpl#initZeugnis(net.sf.sze.model.zeugnis.ZeugnisFormular)}.
+     * {@link net.sf.sze.service.impl.zeugnisconfig.ZeugnisInitialisierungServiceImpl#initZeugnis(net.sf.sze.model.zeugnis.ZeugnisFormular)}.
      * @throws Exception Fehler
      */
     @Test
@@ -100,7 +101,7 @@ public class ZeugnisInitialisierungServiceImplDbUnitIntegrationTest
 
     /**
      * Test method for
-     * {@link net.sf.sze.service.impl.ZeugnisInitialisierungServiceImpl#initZeugnis(net.sf.sze.model.zeugnis.ZeugnisFormular)}.
+     * {@link net.sf.sze.service.impl.zeugnisconfig.ZeugnisInitialisierungServiceImpl#initZeugnis(net.sf.sze.model.zeugnis.ZeugnisFormular)}.
      * @throws Exception Fehler
      */
     @Test

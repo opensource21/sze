@@ -1,4 +1,4 @@
-package net.sf.sze.service.impl;
+package net.sf.sze.service.impl.zeugnisconfig;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,8 +33,9 @@ import net.sf.sze.model.zeugnisconfig.Schulfach;
 import net.sf.sze.model.zeugnisconfig.Schulfachtyp;
 import net.sf.sze.model.zeugnisconfig.Schulhalbjahr;
 import net.sf.sze.model.zeugnisconfig.ZeugnisArt;
-import net.sf.sze.service.api.ZeugnisInitialierungsService;
 import net.sf.sze.service.api.stammdaten.SchuelerService;
+import net.sf.sze.service.api.zeugnisconfig.ZeugnisInitialierungsService;
+import net.sf.sze.service.impl.ZeugnisCreatorServiceImpl;
 import net.sf.sze.util.ResultContainer;
 
 import org.slf4j.Logger;
