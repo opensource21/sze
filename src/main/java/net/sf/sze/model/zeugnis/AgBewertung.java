@@ -5,11 +5,6 @@
 
 package net.sf.sze.model.zeugnis;
 
-import de.ppi.fuwesta.jpa.helper.VersionedModel;
-import net.sf.sze.model.zeugnisconfig.Arbeitsgruppe;
-
-import org.apache.commons.lang.builder.CompareToBuilder;
-
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -18,6 +13,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import net.sf.sze.model.base.RevisionModel;
+import net.sf.sze.model.zeugnisconfig.Arbeitsgruppe;
+
+import org.apache.commons.lang.builder.CompareToBuilder;
+
 /**
  * Bewertung zur Teilnahme an einer AG. Zur Zeit nur tg oder nicht teilgenommen,
  * aber ich möchte mir die Zukunft nicht verbauen.
@@ -25,7 +25,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "ag_bewertung")
-public class AgBewertung extends VersionedModel implements Serializable,
+public class AgBewertung extends RevisionModel implements Serializable,
         Comparable<AgBewertung> {
 
     /**

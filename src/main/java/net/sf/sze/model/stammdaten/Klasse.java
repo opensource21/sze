@@ -17,18 +17,17 @@ import javax.persistence.Table;
 
 import net.sf.oval.constraint.Range;
 import net.sf.oval.constraint.Size;
+import net.sf.sze.model.base.RevisionModel;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.CompareToBuilder;
-
-import de.ppi.fuwesta.jpa.helper.VersionedModel;
 
 /**
  * Beschreibt eine Schulklasse.
  */
 @Entity
 @Table(name = "klasse")
-public class Klasse extends VersionedModel implements Serializable,
+public class Klasse extends RevisionModel implements Serializable,
         Comparable<Klasse> {
 
     // TODO GUI Zahlenbereich in der GUI einschränken :-/

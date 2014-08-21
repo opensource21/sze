@@ -15,8 +15,6 @@ import javax.persistence.Table;
 import net.sf.sze.model.zeugnisconfig.BemerkungsBaustein;
 
 import org.apache.commons.lang.StringUtils;
-
-
 import org.apache.commons.lang.builder.CompareToBuilder;
 
 /**

@@ -19,11 +19,11 @@ import net.sf.sze.constraints.BinnenAussenIntersect;
 import net.sf.sze.constraints.DisjunktKlassenstufenConfigurer;
 import net.sf.sze.constraints.StandardAussenIntersect;
 import net.sf.sze.constraints.StandardBinnenIntersect;
+import net.sf.sze.model.base.RevisionModel;
 import net.sf.sze.util.StringUtil;
 
 import org.apache.commons.lang.builder.CompareToBuilder;
 
-import de.ppi.fuwesta.jpa.helper.VersionedModel;
 import de.ppi.fuwesta.spring.mvc.formatter.NonEmpty;
 
 /**
@@ -34,7 +34,7 @@ import de.ppi.fuwesta.spring.mvc.formatter.NonEmpty;
 @Table(name = "schulfach",
         uniqueConstraints = @UniqueConstraint(columnNames = {"typ", "name"},
         name = "UK_SCHULFACH_TYP_NAME"))
-public class Schulfach extends VersionedModel implements Serializable,
+public class Schulfach extends RevisionModel implements Serializable,
         Comparable<Schulfach>, DisjunktKlassenstufenConfigurer {
 
     /** The name. */

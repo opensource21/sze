@@ -24,13 +24,12 @@ import javax.persistence.UniqueConstraint;
 
 import net.sf.oval.constraint.CheckWith;
 import net.sf.oval.constraint.CheckWithCheck;
+import net.sf.sze.model.base.RevisionModel;
 import net.sf.sze.model.zeugnisconfig.Schulfach;
 import net.sf.sze.util.VariableUtility;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.CompareToBuilder;
-
-import de.ppi.fuwesta.jpa.helper.VersionedModel;
 
 /**
  * Eine Bewertung ist die Beurteilung zu einem Fach.
@@ -44,7 +43,7 @@ import de.ppi.fuwesta.jpa.helper.VersionedModel;
 @DiscriminatorColumn(name = "class",
         discriminatorType = DiscriminatorType.STRING, length = 255)
 @DiscriminatorValue("net.sf.sze.zeugnis.Bewertung")
-public abstract class Bewertung extends VersionedModel implements Serializable,
+public abstract class Bewertung extends RevisionModel implements Serializable,
         Comparable<Bewertung> {
 
     private static final Map<Long, String> TEXT_MAP = new HashMap<Long,

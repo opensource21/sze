@@ -5,14 +5,7 @@
 
 package net.sf.sze.model.zeugnisconfig;
 
-import de.ppi.fuwesta.jpa.helper.VersionedModel;
-
-import net.sf.sze.util.StringUtil;
-
-import org.apache.commons.lang.builder.CompareToBuilder;
-
 import java.io.Serializable;
-
 import java.util.List;
 
 import javax.persistence.Column;
@@ -22,6 +15,11 @@ import javax.persistence.Enumerated;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import net.sf.sze.model.base.RevisionModel;
+import net.sf.sze.util.StringUtil;
+
+import org.apache.commons.lang.builder.CompareToBuilder;
+
 /**
  * Mögliches Arbeits- bzw Sozialverhalten. Im allgemeinen kurz AvSv genannt.
  *
@@ -30,7 +28,7 @@ import javax.persistence.UniqueConstraint;
 @Table(name = "arbeits_und_sozial_verhalten",
         uniqueConstraints = @UniqueConstraint(columnNames = {"typ", "name"},
         name = "UK_AV_SV_TYP_NAME"))
-public class ArbeitsUndSozialVerhalten extends VersionedModel
+public class ArbeitsUndSozialVerhalten extends RevisionModel
         implements Serializable, Comparable<ArbeitsUndSozialVerhalten> {
 
     /** The name. */

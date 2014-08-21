@@ -5,13 +5,6 @@
 
 package net.sf.sze.model.zeugnis;
 
-import de.ppi.fuwesta.jpa.helper.VersionedModel;
-import net.sf.sze.model.zeugnisconfig.ArbeitsUndSozialVerhalten;
-import net.sf.sze.model.zeugnisconfig.AvSvNote;
-import net.sf.sze.util.VariableUtility;
-
-import org.apache.commons.lang.builder.CompareToBuilder;
-
 import java.io.Serializable;
 import java.util.Map;
 
@@ -22,13 +15,20 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import net.sf.sze.model.base.RevisionModel;
+import net.sf.sze.model.zeugnisconfig.ArbeitsUndSozialVerhalten;
+import net.sf.sze.model.zeugnisconfig.AvSvNote;
+import net.sf.sze.util.VariableUtility;
+
+import org.apache.commons.lang.builder.CompareToBuilder;
+
 /**
  * Bewertung zum Arbeits- und Sozialverhalten.
  *
  */
 @Entity
 @Table(name = "av_sv_bewertung")
-public class AvSvBewertung extends VersionedModel implements Serializable,
+public class AvSvBewertung extends RevisionModel implements Serializable,
         Comparable<AvSvBewertung> {
 
     /** The beurteilung. */
