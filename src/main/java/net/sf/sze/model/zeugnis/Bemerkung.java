@@ -85,4 +85,5 @@ public class Bemerkung extends AbstractBemerkung implements Serializable,
         } else {
             return baustein.getName() + " " + getFixText();
         }
-    }}
+    }
+}
