@@ -32,7 +32,7 @@
         <dropTable tableName="ENCRYPTED_DATA"/>
     </changeSet>
 
-     <changeSet author="niels" id="1350468477768-18s" >
+     <changeSet author="niels" id="1350468477768-18" >
         <comment>Umstellung auf Ordinal bei Enums</comment>
         <sql>update av_sv_bewertung set beurteilung = beurteilung - 1</sql>
         <sql>update arbeits_und_sozial_verhalten set typ = typ - 1</sql>
