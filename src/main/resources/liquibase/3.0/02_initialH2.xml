@@ -2,7 +2,7 @@
 <databaseChangeLog logicalFilePath="/liquibase/3.0/02_initialH2.xml"
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
     <changeSet author="niels (generated)" id="1350468362951-1">
         <createTable tableName="AG_BEWERTUNG">
             <column autoIncrement="true" name="ID" type="BIGINT">
