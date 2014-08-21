@@ -10,7 +10,10 @@
 - Security
 - Menü
 
-- Liquibase: Warum meint er die Ids sein nicht eindeutig.
+
+- Help-Text einfügen!
+
+- Liquibase: Warum meint er die Ids sein nicht eindeutig.-> Migration auch noch mal durchtesten.
 
 #PRIO 2
 - Der Titel wird generell nicht Dialog-spezifisch gesetzt.
@@ -30,8 +33,6 @@
 
 
 #PRIO 3
-- Die Aufteilung auf Services überdenken, Bündelung nach DB nach Controller?
-
 - Beschreibung von Session und URL.
 
 - Bei den Nachrichten zur Initialisierung sollte man evtl. die Klasse mit
@@ -83,11 +84,6 @@
 
 
 #Forschung:
-
-- Scaffolding
-
-- Bei den komplexeren Masken fehlt die Anzeige von Validierungsfehlern! ???
-
 
 
 - http://jackcess.sourceforge.net/
