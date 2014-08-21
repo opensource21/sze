@@ -10,6 +10,8 @@
 - Security
 - Menü
 
+- Liquibase: Warum meint er die Ids sein nicht eindeutig.
+
 #PRIO 2
 - Der Titel wird generell nicht Dialog-spezifisch gesetzt.
 

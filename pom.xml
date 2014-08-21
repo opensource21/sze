@@ -84,19 +84,6 @@
             <scope>compile</scope>
         </dependency>
 
-        <!-- Liquibase -->
-        <dependency>
-            <groupId>org.liquibase</groupId>
-            <artifactId>liquibase-core</artifactId>
-            <version>3.0.1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.liquibase</groupId>
-            <artifactId>liquibase-maven-plugin</artifactId>
-            <version>3.0.1</version>
-        </dependency>
-
         <!-- Reporterstellung -->
         <dependency>
             <groupId>com.lowagie</groupId>
@@ -140,10 +127,10 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-           <groupId>org.assertj</groupId>
-           <artifactId>assertj-core</artifactId>
-           <version>1.4.0</version>
-           <scope>test</scope>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>1.4.0</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.dbunit.datasetbuilder</groupId>
@@ -168,8 +155,8 @@
     </dependencies>
     <build>
         <pluginManagement>
-            <!--This plugin's configuration is used to store Eclipse m2e settings
-                only. It has no influence on the Maven build itself. -->
+            <!--This plugin's configuration is used to store Eclipse m2e
+                settings only. It has no influence on the Maven build itself. -->
             <plugins>
                 <plugin>
                     <groupId>org.eclipse.m2e</groupId>
@@ -201,8 +188,8 @@
         <!-- Files in resources should be added -->
         <resources>
             <resource>
-                <!-- and variables should be replaced. Have in mind that db.properties
-                    are written as UTF-8 but is initial ISO-8859-1 -->
+                <!-- and variables should be replaced. Have in mind that
+                    db.properties are written as UTF-8 but is initial ISO-8859-1 -->
                 <directory>src/main/resources</directory>
                 <includes>
                     <include>*.properties</include>
@@ -288,7 +275,8 @@
                     <archive>
                         <index>true</index>
                         <manifest>
-                            <!-- Implementations- und Spezifikations-Details in MANIFEST.MF schreiben -->
+                            <!-- Implementations- und Spezifikations-Details
+                                in MANIFEST.MF schreiben -->
                             <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
                             <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
                         </manifest>
@@ -306,7 +294,8 @@
                     <archive>
                         <index>true</index>
                         <manifest>
-                            <!-- Implementations- und Spezifikations-Details in MANIFEST.MF schreiben -->
+                            <!-- Implementations- und Spezifikations-Details
+                                in MANIFEST.MF schreiben -->
                             <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
                             <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
                         </manifest>
@@ -367,6 +356,22 @@
                     </dependency>
                 </dependencies>
             </plugin>
+            <plugin>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-maven-plugin</artifactId>
+                <version>3.0.1</version>
+                <configuration>
+                    <changeLogFile>/src/main/resources/liquibase/upgrade3.0.xml</changeLogFile>
+                    <driver>${db.driver}</driver>
+                    <url>${db.url}</url>
+                    <username>${db.username}</username>
+                    <password>${db.password}</password>
+                    <logging>warning</logging>
+                    <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
+                    <outputChangeLogFile>/liquibase-log</outputChangeLogFile>
+                </configuration>
+
+            </plugin>
 
         </plugins>
     </build>
@@ -378,21 +383,21 @@
                 <version>2.3</version>
             </plugin>
             <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-checkstyle-plugin</artifactId>
-              <version>2.11</version>
-              <configuration>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>2.11</version>
+                <configuration>
                     <configLocation>config/checkstyleChecks.xml</configLocation>
                     <propertyExpansion>samedir=${basedir}/config/</propertyExpansion>
                     <excludes>NOTHING_AT_THE_MOMENT</excludes>
-              </configuration>
-              <reportSets>
-                <reportSet>
-                  <reports>
-                    <report>checkstyle</report>
-                  </reports>
-                </reportSet>
-              </reportSets>
+                </configuration>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>checkstyle</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
             </plugin>
         </plugins>
     </reporting>
