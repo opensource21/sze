@@ -43,4 +43,31 @@
         <comment>Vereinheitlichung der Länge vom Freitext bei Bemerkungen</comment>
         <modifyDataType tableName="BEMERKUNG" columnName="FREI_TEXT" newDataType="VARCHAR(600)"/>
     </changeSet>
+    <changeSet author="niels" id="20140821">
+        <createTable tableName="REVISION_LOG">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_REVISIONS_LOG"/>
+            </column>
+            <column name="MODIFICATIONTIME" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="USER" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ACTION" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ENTITY_NAME" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ENTITY_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="COLUMN_NAME" type="VARCHAR(250)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="OLD_VALUE" type="VARCHAR(1000)"/>
+            <column name="NEW_VALUE" type="VARCHAR(1000)"/>
+        </createTable>
+    </changeSet>
 </databaseChangeLog>

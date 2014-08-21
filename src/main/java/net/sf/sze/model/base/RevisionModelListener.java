@@ -103,8 +103,8 @@ public class RevisionModelListener implements InitializingBean {
             if (changes) {
                 RevisionLog revLog = new RevisionLog();
                 revLog.setAction(action);
-                revLog.setColumn(key);
-                revLog.setEntity(entityName);
+                revLog.setColumnName(key);
+                revLog.setEntityName(entityName);
                 revLog.setEntityId(entityId);
                 revLog.setUser(user);
                 revLog.setOldValue("" + oldValue);

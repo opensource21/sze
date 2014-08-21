@@ -54,10 +54,10 @@ public class RevisionLog {
     private Action action;
 
     @Column(nullable = false, length = 50)
-    private String entity;
+    private String entityName;
 
     @Column(nullable = false, length = 250)
-    private String column;
+    private String columnName;
 
     @Column(nullable = false)
     private Long entityId;
@@ -127,29 +127,29 @@ public class RevisionLog {
     /**
      * @return the entity
      */
-    public String getEntity() {
-        return entity;
+    public String getEntityName() {
+        return entityName;
     }
 
     /**
      * @param entity the entity to set
      */
-    public void setEntity(String entity) {
-        this.entity = entity;
+    public void setEntityName(String entity) {
+        this.entityName = entity;
     }
 
     /**
      * @return the column
      */
-    public String getColumn() {
-        return column;
+    public String getColumnName() {
+        return columnName;
     }
 
     /**
      * @param column the column to set
      */
-    public void setColumn(String column) {
-        this.column = column;
+    public void setColumnName(String column) {
+        this.columnName = column;
     }
 
     /**
