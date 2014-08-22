@@ -314,7 +314,6 @@ public class BemerkungController implements ModelAttributes {
                 URL.Session.P_KLASSEN_ID, klassenId,
                 URL.Session.P_SCHUELER_ID, schuelerId));
         model.addAttribute("bemerkungsBausteine", bemerkungsBausteine);
-        model.addAttribute("helpMessageId", "help.bemerkung.edit");
     }
 
 }

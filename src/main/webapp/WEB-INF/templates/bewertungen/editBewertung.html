@@ -17,7 +17,7 @@ nextId
 <script type="text/javascript"
     src="../../../resources/js/thymelaefbs.js?1" th:remove="all"></script>
 </head>
-<body>
+<body th:with="helpMessageId=help.bewertung.edit">
     <div layout:fragment="content">
         <h4>Bearbeite Bewertung im Fach <em th:text="${bewertung?.schulfach}"></em>
         für  <em th:text="${bewertung?.zeugnis?.schueler}"></em>

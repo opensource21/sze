@@ -362,7 +362,6 @@ public class BewertungenController implements ModelAttributes {
                 URL.Session.P_SCHULFACH_ID, schulfachId,
                 URL.BewertungenPath.P_BEWERTUNGS_ID, bewertung.getId()));
         model.addAttribute("type", type);
-        model.addAttribute("helpMessageId", "help.bewertung.edit");
     }
 
 

@@ -18,7 +18,8 @@ deleteUrl
 <script type="text/javascript"
     src="../../../resources/js/thymelaefbs.js?1" th:remove="all"></script>
 </head>
-<body>
+"helpMessageId", "help.schulamtsBemerkung.edit"
+<body th:with="helpMessageId=help.schulamtsBemerkung.edit">
     <div layout:fragment="content">
         <h4>
             Bearbeite die Schulamtsbeschreibung für Schüler <em
