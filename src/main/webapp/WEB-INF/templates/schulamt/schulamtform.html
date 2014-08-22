@@ -13,7 +13,7 @@ tags - a list of selectable tag
 <head >
 
 </head>
-<body>
+<body th:with="helpMessageId=help.schulamt.edit">
     <div layout:fragment="content">
     <h3 th:text="#{schulamt.form.title}"></h3>
     <form class="well form-horizontal" method="post" th:object="${schulamt}">

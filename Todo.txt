@@ -10,9 +10,6 @@
 - Security
 - Menü
 
-
-- Help-Text einfügen!
-
 - Liquibase: Warum meint er die Ids sein nicht eindeutig.-> Migration auch noch mal durchtesten.
 
 #PRIO 2

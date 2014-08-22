@@ -11,7 +11,7 @@ formularlist - Liste aller Formulare.
 <script type="text/javascript"
     src="../../../resources/js/thymelaefbs.js?1" th:remove="all"></script>
 </head>
-<body th:with="formularList=${formularList}">
+<body th:with="formularList=${formularList}, helpMessageId='help.zeugnisKonfiguration.chooseZeugnisFormular'">
     <div layout:fragment="content">
         <div class="infobox" th:unless="${result==null}">
             <div class="alert alert-error" th:unless="${#sets.isEmpty(result.errors)}">
