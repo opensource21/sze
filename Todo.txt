@@ -25,18 +25,12 @@
 
 - Beim Start von OO sollte man die Parameter mit -- anstatt - übergeben. Ist allerdings nur deprecated.
 
-- Schüler die abgemeldet sind sollten in einer anderen Farbe dargestellt werden.
-
-
 
 #PRIO 3
 - Beschreibung von Session und URL.
 
 - Bei den Nachrichten zur Initialisierung sollte man evtl. die Klasse mit
   ausgeben. Entweder als Überschrift (schöner) oder in die Nachricht selbst mit rein (einfacher).
-
-- Es wäre schöner wenn die Help-Messages direkt in der View definiert werden.
-  Das kann man erreichen mit th:with="helpMessageId=willi"
 
 - Umstellung auf #{db....}
 

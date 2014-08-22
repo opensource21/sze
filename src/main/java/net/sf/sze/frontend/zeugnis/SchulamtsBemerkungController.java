@@ -321,7 +321,6 @@ public class SchulamtsBemerkungController {
                 URL.Session.P_SCHUELER_ID, schuelerId));
         model.addAttribute("bemerkungsBausteine", schulamtsBemerkungsBausteine);
         model.addAttribute("schulaemter", schulaemter);
-        model.addAttribute("helpMessageId", "help.schulamtsBemerkung.edit");
     }
 
 }

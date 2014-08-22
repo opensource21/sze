@@ -151,7 +151,6 @@ public class ZeugnisController implements ModelAttributes {
         Collections.sort(klassen);
         model.addAttribute("klassen", klassen);
         model.addAttribute("halbjahre", halbjahre);
-        model.addAttribute("helpMessageId", "help.chooseClass");
         model.addAttribute("urlShowZeugnis", URL.filledURL(URL.Zeugnis.SHOW));
         model.addAttribute("urlShowBewertung", URL.filledURL(URL.Bewertungen.LIST));
         model.addAttribute("urlPrintZeugnis", URL.filledURL(URL.Zeugnis
@@ -473,7 +472,6 @@ public class ZeugnisController implements ModelAttributes {
                 URL.Session.P_SCHUELER_ID, schuelerId,
                 URL.ZeugnisPath.P_BEWERTUNGS_ID, bewertung.getId()));
         model.addAttribute("type", type);
-        model.addAttribute("helpMessageId", "help.bewertung.edit");
     }
 
 
@@ -528,7 +526,6 @@ public class ZeugnisController implements ModelAttributes {
             Long klassenId, Long schuelerId, final Zeugnis zeugnis) {
         model.addAttribute("zeugnis", zeugnis);
         model.addAttribute("zeugnisArten", zeugnisErfassungsService.getAllZeugnisArten(zeugnis));
-        model.addAttribute("helpMessageId", "help.zeugnis.editDetail");
         model.addAttribute("updateUrl", URL.filledURLWithNamedParams(
                 URL.ZeugnisPath.ZEUGNIS_EDIT_DETAIL,
                 URL.Session.P_HALBJAHR_ID, halbjahrId,
