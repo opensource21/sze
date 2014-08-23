@@ -172,14 +172,6 @@ public class Klasse extends VersionedModel implements Serializable,
     }
 
     /**
-     * Berechnet die Klassenstufe in Abhängigkeit zu Heute.
-     * @return die Klassenstufe.
-     */
-    public int calculateKlassenstufe() {
-        return calculateKlassenstufe(calculateSchuljahresEnde());
-    }
-
-    /**
      * Berechnet den Klassennamen in Abhängigkeit zu Heute.
      * @return den Klassennamen.
      */
@@ -187,6 +179,7 @@ public class Klasse extends VersionedModel implements Serializable,
         return calculateKlassenname(calculateSchuljahresEnde());
     }
 
+    //TODO net.sf.sze.service.api.common.SchulkalenderService.getCurrentSchuljahr()
     private int calculateSchuljahresEnde() {
         final Calendar cal = GregorianCalendar.getInstance();
         final int year = cal.get(Calendar.YEAR);

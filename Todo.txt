@@ -1,5 +1,9 @@
 #PRIO 1
 
+- SchulfachDetail-Info
+
+- Ablegen der Datümer beim Schulhalbjahr, so dass es nicht zwingend beim
+  Zeugnisformular stehen muss. NotNull auflösen.
 
 - Beim Initialiseren von Klasse 1-2 komplett gibt es eine Exception.
     -> Das lag daran, dass erst initialisiert wurde und dann der Schüler
@@ -18,6 +22,8 @@
 - Delete-Fragment zu umbauen, dass es mit JS und ohne gut läuft.
 
 - 3Niveau und 2NiveauBewertung
+
+- Automatisches Anlegen von Halbjahren und Formularen.
 
 - Bessere Template Unterstützung. Siehe seu/projects/schule/felderUndPlatzhalter.md
 
