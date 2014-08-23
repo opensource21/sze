@@ -53,9 +53,9 @@ tags - a list of selectable tag
                 th:disabled="${disabled}" />
             <input type="text" bs:field="quelleLeitspruch2"
                 th:disabled="${disabled}" />
-            <!-- schulfachDetailInfos : List Wichtig hier muss man auch neue Anlegen können und damit
-            auf eine weitere Seite kommen. Damit ist der Zeugnisdetailinfo-Controller auch zu erstellen :-(
-            <SchulfachDetailInfo> zeugnis : List<Zeugnis> Hier immer lesend die Zeugnisse zeigen-->
+            <ul bs:field="schulfachDetailInfos" >
+                <li th:each="item : *{schulfachDetailInfos}"  th:text="${item}"></li>
+            </ul>
             <ul bs:field="zeugnis">
                 <li th:each="item : *{zeugnis}"  th:text="${item}"></li>
             </ul>
