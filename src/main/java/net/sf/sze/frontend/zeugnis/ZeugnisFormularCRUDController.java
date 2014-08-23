@@ -3,7 +3,7 @@
 // Licensed under the AGPL - http://www.gnu.org/licenses/agpl-3.0.txt
 // (c) SZE-Development-Team
 
-package net.sf.sze.frontend.konfiguration;
+package net.sf.sze.frontend.zeugnis;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;

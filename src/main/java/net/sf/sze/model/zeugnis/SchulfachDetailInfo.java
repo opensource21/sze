@@ -5,12 +5,6 @@
 
 package net.sf.sze.model.zeugnis;
 
-import de.ppi.fuwesta.jpa.helper.VersionedModel;
-import net.sf.oval.constraint.Size;
-import net.sf.sze.model.zeugnisconfig.Schulfach;
-
-import org.apache.commons.lang.builder.CompareToBuilder;
-
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -19,6 +13,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+import net.sf.sze.model.zeugnisconfig.Schulfach;
+
+import org.apache.commons.lang.builder.CompareToBuilder;
+
+import de.ppi.fuwesta.jpa.helper.VersionedModel;
 
 /**
  * Manche Schulfächer umfassen mehrere Themen, in diesem Fall wird es im Detail
@@ -34,8 +34,6 @@ public class SchulfachDetailInfo extends VersionedModel
 
     /** The detail info. */
     @Column(name = "detail_info", nullable = false, length = 50)
-
-    @Size(max = 50)
     private String detailInfo;
 
     // bi-directional many-to-one association to Schulfach
@@ -43,7 +41,6 @@ public class SchulfachDetailInfo extends VersionedModel
     /** The schulfach. */
     @ManyToOne(optional = false)
     @JoinColumn(name = "schulfach_id", nullable = false)
-
     private Schulfach schulfach;
 
     // bi-directional many-to-one association to ZeugnisFormular
@@ -51,7 +48,6 @@ public class SchulfachDetailInfo extends VersionedModel
     /** The formular. */
     @ManyToOne(optional = false)
     @JoinColumn(name = "formular_id", nullable = false)
-
     private ZeugnisFormular formular;
 
     /**

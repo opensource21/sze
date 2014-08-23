@@ -857,6 +857,44 @@ public final class URL {
     }
 
     /**
+     * All URLS for the {@link net.sf.sze.model.zeugnis.SchulfachDetailInfo}.
+     *
+     */
+    public interface SchulfachDetailInfo {
+
+        /**
+         * Home-Url.
+         */
+        String HOME = Configuration.HOME + "/schulfachDetailInfo";
+
+        /**
+         * Parametername for the schulfachDetailInfo-id.
+         */
+        String P_SCHULFACH_DETAIL_INFO_ID = "schulfachDetailInfoId";
+
+        /**
+         * Edit-Url.
+         */
+        String EDIT = HOME + "/edit/{" + P_SCHULFACH_DETAIL_INFO_ID + "}";
+
+        /**
+         * Show-Url.
+         */
+        String SHOW = HOME + "/show/{" + P_SCHULFACH_DETAIL_INFO_ID + "}";
+
+        /**
+         * Delete-Url.
+         */
+        String DELETE = HOME + "/delete";
+
+        /** List-URL. */
+        String LIST = HOME + "/list";
+
+        /** Create URL. */
+        String CREATE = HOME + "/create";
+    }
+
+    /**
      * Replace all parameters in the URL with the given values.
      *
      * @param url the URL.

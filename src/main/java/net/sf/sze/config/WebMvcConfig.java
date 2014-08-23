@@ -14,6 +14,8 @@ import net.sf.oval.integration.spring.SpringCheckInitializationListener;
 import net.sf.oval.integration.spring.SpringValidator;
 import net.sf.sze.frontend.base.URL;
 import net.sf.sze.frontend.converter.KlasseConverter;
+import net.sf.sze.frontend.converter.SchulfachConverter;
+import net.sf.sze.frontend.converter.ZeugnisFormularConverter;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -212,6 +214,8 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
                 new NonEmptyStringAnnotationFormatterFactory());
         registry.addFormatter(new DateFormatter());
         registry.addConverter(new KlasseConverter());
+        registry.addConverter(new ZeugnisFormularConverter());
+        registry.addConverter(new SchulfachConverter());
         super.addFormatters(registry);
     }
 
