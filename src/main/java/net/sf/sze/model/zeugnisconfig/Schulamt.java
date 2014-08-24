@@ -13,10 +13,10 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import net.sf.sze.constraints.ValidVariableText;
+import net.sf.sze.model.base.RevisionModel;
 
 import org.apache.commons.lang.builder.CompareToBuilder;
 
-import de.ppi.fuwesta.jpa.helper.VersionedModel;
 import de.ppi.fuwesta.spring.mvc.formatter.NonEmpty;
 
 /**
@@ -27,7 +27,7 @@ import de.ppi.fuwesta.spring.mvc.formatter.NonEmpty;
 @Table(name = "schulamt",
         uniqueConstraints = @UniqueConstraint(columnNames = "name",
         name = "UK_SCHULAMT_NAME"))
-public class Schulamt extends VersionedModel implements Serializable,
+public class Schulamt extends RevisionModel implements Serializable,
         Comparable<Schulamt> {
 
     /** The name. */

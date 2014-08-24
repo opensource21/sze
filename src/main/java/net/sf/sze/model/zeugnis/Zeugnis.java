@@ -27,6 +27,7 @@ import net.sf.oval.constraint.CheckWith;
 import net.sf.oval.constraint.CheckWithCheck;
 import net.sf.oval.constraint.Size;
 import net.sf.sze.constraints.ValidVariableText;
+import net.sf.sze.model.base.RevisionModel;
 import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.stammdaten.Schueler;
 import net.sf.sze.model.zeugnisconfig.AvSvTyp;
@@ -39,8 +40,6 @@ import net.sf.sze.util.VariableUtility;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.CompareToBuilder;
 
-import de.ppi.fuwesta.jpa.helper.VersionedModel;
-
 /**
  * Ein Schulzeugnis.
  *
@@ -49,7 +48,7 @@ import de.ppi.fuwesta.jpa.helper.VersionedModel;
 @Table(name = "zeugnis",
         uniqueConstraints = @UniqueConstraint(columnNames = {"schulhalbjahr_id",
         "schueler_id"}, name = "UK_ZEUGNIS_HALBJAHR_SCHUELER"))
-public class Zeugnis extends VersionedModel implements Serializable,
+public class Zeugnis extends RevisionModel implements Serializable,
         Comparable<Zeugnis> {
 
     /* Individuelle Abweichung vom Leitspruch des Formulars. */

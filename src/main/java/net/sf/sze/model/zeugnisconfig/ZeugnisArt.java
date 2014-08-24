@@ -12,9 +12,10 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import net.sf.sze.model.base.RevisionModel;
+
 import org.apache.commons.lang.builder.CompareToBuilder;
 
-import de.ppi.fuwesta.jpa.helper.VersionedModel;
 import de.ppi.fuwesta.spring.mvc.formatter.NonEmpty;
 
 /**
@@ -25,7 +26,7 @@ import de.ppi.fuwesta.spring.mvc.formatter.NonEmpty;
 @Table(name = "zeugnis_art",
         uniqueConstraints = @UniqueConstraint(columnNames = "name",
         name = "UK_ZEUGNIS_ART_NAME"))
-public class ZeugnisArt extends VersionedModel implements Serializable,
+public class ZeugnisArt extends RevisionModel implements Serializable,
         Comparable<ZeugnisArt> {
 
     /** The name. */

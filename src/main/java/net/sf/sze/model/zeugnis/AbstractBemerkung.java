@@ -4,12 +4,6 @@
 // (c) SZE-Development Team
 package net.sf.sze.model.zeugnis;
 
-import net.sf.sze.constraints.ValidVariableText;
-import net.sf.sze.model.stammdaten.Schueler;
-import net.sf.sze.util.VariableUtility;
-
-import org.apache.commons.lang.StringUtils;
-
 import java.io.Serializable;
 import java.util.Date;
 
@@ -18,14 +12,19 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
-import de.ppi.fuwesta.jpa.helper.VersionedModel;
+import net.sf.sze.constraints.ValidVariableText;
+import net.sf.sze.model.base.RevisionModel;
+import net.sf.sze.model.stammdaten.Schueler;
+import net.sf.sze.util.VariableUtility;
+
+import org.apache.commons.lang.StringUtils;
 
 /**
  *Abstrakte Basisklasse für Bemerkungen.
  *
  */
 @MappedSuperclass
-public abstract class AbstractBemerkung extends VersionedModel implements Serializable {
+public abstract class AbstractBemerkung extends RevisionModel implements Serializable {
 
     /** The sortierung. */
     @Column(nullable = false)

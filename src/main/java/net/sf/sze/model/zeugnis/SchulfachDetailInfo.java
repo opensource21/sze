@@ -14,11 +14,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+
+import net.sf.sze.model.base.RevisionModel;
 import net.sf.sze.model.zeugnisconfig.Schulfach;
 
 import org.apache.commons.lang.builder.CompareToBuilder;
-
-import de.ppi.fuwesta.jpa.helper.VersionedModel;
 
 /**
  * Manche Schulfächer umfassen mehrere Themen, in diesem Fall wird es im Detail
@@ -29,7 +29,7 @@ import de.ppi.fuwesta.jpa.helper.VersionedModel;
 @Table(name = "schulfach_detail_info",
         uniqueConstraints = @UniqueConstraint(columnNames = {"formular_id",
         "schulfach_id"}, name = "UK_SCHULFACH_DETAIL_FORMULAR_SCHULFACH"))
-public class SchulfachDetailInfo extends VersionedModel
+public class SchulfachDetailInfo extends RevisionModel
         implements Serializable, Comparable<SchulfachDetailInfo> {
 
     /** The detail info. */

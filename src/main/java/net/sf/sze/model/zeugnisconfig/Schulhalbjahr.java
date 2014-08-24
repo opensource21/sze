@@ -5,11 +5,6 @@
 
 package net.sf.sze.model.zeugnisconfig;
 
-import de.ppi.fuwesta.jpa.helper.VersionedModel;
-import de.ppi.fuwesta.oval.validation.Unique;
-
-import org.apache.commons.lang.builder.CompareToBuilder;
-
 import java.io.Serializable;
 import java.util.Map;
 
@@ -17,6 +12,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+import net.sf.sze.model.base.RevisionModel;
+
+import org.apache.commons.lang.builder.CompareToBuilder;
+
+import de.ppi.fuwesta.oval.validation.Unique;
 
 /**
  * Beschreibt ein Schulhalbjahr.
@@ -26,7 +27,7 @@ import javax.persistence.UniqueConstraint;
 @Table(name = "schulhalbjahr",
         uniqueConstraints = @UniqueConstraint(columnNames = {"jahr",
         "halbjahr"}, name = "UK_SCHULAHLBJAHR_JAHR_HALBJAHR"))
-public class Schulhalbjahr extends VersionedModel implements Serializable,
+public class Schulhalbjahr extends RevisionModel implements Serializable,
         Comparable<Schulhalbjahr> {
 
     /**

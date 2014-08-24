@@ -18,10 +18,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import net.sf.oval.constraint.Past;
+import net.sf.sze.model.base.RevisionModel;
 
 import org.apache.commons.lang.builder.CompareToBuilder;
 
-import de.ppi.fuwesta.jpa.helper.VersionedModel;
 import de.ppi.fuwesta.oval.validation.LaterThan;
 import de.ppi.fuwesta.spring.mvc.formatter.NonEmpty;
 
@@ -31,7 +31,7 @@ import de.ppi.fuwesta.spring.mvc.formatter.NonEmpty;
  */
 @Entity
 @Table(name = "schueler")
-public class Schueler extends VersionedModel implements Serializable,
+public class Schueler extends RevisionModel implements Serializable,
         Comparable<Schueler> {
 
     /** The name. */

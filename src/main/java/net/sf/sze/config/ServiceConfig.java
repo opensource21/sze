@@ -15,7 +15,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  *
  */
 @Configuration
-@ComponentScan(basePackages = {"net.sf.sze.service", "net.sf.sze.jobs"})
+@ComponentScan(basePackages = {"net.sf.sze.service", "net.sf.sze.jobs", "net.sf.sze.model.base"})
 @EnableScheduling
 @PropertySource("classpath:/app.properties")
 public class ServiceConfig {

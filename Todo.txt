@@ -26,7 +26,7 @@
 
 - Bessere Template Unterstützung. Siehe seu/projects/schule/felderUndPlatzhalter.md
 
-- https://github.com/mgonto/jpa-passive-logging-example (Siehe auch http://struberg.wordpress.com/2010/07/31/howto-changelog-with-jpa/)
+- https://github.com/mgonto/jpa-passive-logging-example (Siehe auch http://struberg.wordpress.com/2010/07/31/howto-changelog-with-jpa/)  UPGRADE_LIQUIBASE testen!
 
 - Beim Start von OO sollte man die Parameter mit -- anstatt - übergeben. Ist allerdings nur deprecated.
 
