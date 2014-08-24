@@ -136,18 +136,18 @@ public abstract class AbstractBemerkung extends RevisionModel implements Seriali
      */
     public String createPrintText() {
         return createPrintText(zeugnis.getSchueler(),
-                    zeugnis.getFormular().getNachteilsAusgleichsDatum(),
+                    zeugnis.getFormular().findNachteilsAusgleichsDatum(),
                     zeugnis.getSchulhalbjahr().getSchuljahr());
     }
 
     /**
      * Erzeugt den Text für den Druck.
      * @param schueler der zugehörige Schüler.
-     * @param datum das Zeugnisausgabedatum.
+     * @param nachteilsAusgleichsdatum das Datum des Nachteilsausgleichsdatum.
      * @param schuljahr das aktuelle Schuljahr.
      * @return die Bemerkung.
      */
-    public String createPrintText(final Schueler schueler, final Date datum,
+    public String createPrintText(final Schueler schueler, final Date nachteilsAusgleichsdatum,
             final String schuljahr) {
         String text;
         if (StringUtils.isNotBlank(freiText)) {
@@ -155,7 +155,7 @@ public abstract class AbstractBemerkung extends RevisionModel implements Seriali
         } else {
             text = getFixText();
         }
-        text = VariableUtility.createPrintText(text, schueler, datum,
+        text = VariableUtility.createPrintText(text, schueler, nachteilsAusgleichsdatum,
                 erSieStattNamen, schuljahr);
 
         if (!text.endsWith("\n") && !text.endsWith(" ")) {

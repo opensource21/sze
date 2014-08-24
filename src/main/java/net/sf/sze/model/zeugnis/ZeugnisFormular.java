@@ -195,6 +195,20 @@ public class ZeugnisFormular extends RevisionModel implements Serializable,
     }
 
     /**
+     * Liefert das {@link #nachteilsAusgleichsDatum} entweder vom Formular
+     * oder dem Schulhalbjahr.
+     * @return das {@link #nachteilsAusgleichsDatum} entweder vom Formular
+     * oder dem Schulhalbjahr.
+     */
+    public Date findNachteilsAusgleichsDatum() {
+        if (nachteilsAusgleichsDatum == null && schulhalbjahr != null) {
+            return schulhalbjahr.getNachteilsAusgleichsDatum();
+        } else {
+            return nachteilsAusgleichsDatum;
+        }
+    }
+
+    /**
      * Sets the nachteils ausgleichs datum.
      *
      * @param nachteilsAusgleichsDatum the new nachteils ausgleichs datum
