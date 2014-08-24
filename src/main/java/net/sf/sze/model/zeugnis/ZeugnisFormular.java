@@ -61,19 +61,19 @@ public class ZeugnisFormular extends RevisionModel implements Serializable,
     @Column(length = 300)
     private String leitspruch2;
 
+    /** Defaultfall für diese Klasse kann im Zeugnis überschrieben werden,
+     * wenn leer wird es vom Schulhalbjahr übernommen.. */
+    @Temporal(TemporalType.DATE)
+    private Date ausgabeDatum;
+
+    /** The nachteils ausgleichs datum, wenn leer wird es vom Schulhalbjahr übernommen.. */
+    @Temporal(TemporalType.DATE)
+    private Date nachteilsAusgleichsDatum;
+
+
     /** The quelle leitspruch2. */
     @Column(name = "quelle_leitspruch2", length = 60)
     private String quelleLeitspruch2;
-
-    /** Defaultfall für diese Klasse kann im Zeugnis überschrieben werden. */
-    @Temporal(TemporalType.DATE)
-    @Column(name = "ausgabe_datum", nullable = false)
-    private Date ausgabeDatum;
-
-    /** The nachteils ausgleichs datum. */
-    @Temporal(TemporalType.DATE)
-    @Column(name = "nachteils_ausgleichs_datum", nullable = false)
-    private Date nachteilsAusgleichsDatum;
 
     // bi-directional many-to-one association to SchulfachDetailInfo
 
