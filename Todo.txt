@@ -1,6 +1,5 @@
 #PRIO 1
 
-- SchulfachDetail-Info
 
 - Ablegen der Datümer beim Schulhalbjahr, so dass es nicht zwingend beim
   Zeugnisformular stehen muss. NotNull auflösen.
@@ -33,6 +32,8 @@
 
 
 #PRIO 3
+- SchulfachDetail-Info die combobox besser durchsuchbar machen.
+
 - Beschreibung von Session und URL.
 
 - Bei den Nachrichten zur Initialisierung sollte man evtl. die Klasse mit

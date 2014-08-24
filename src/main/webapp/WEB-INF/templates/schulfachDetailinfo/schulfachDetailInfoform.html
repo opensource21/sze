@@ -22,12 +22,12 @@ formulare - a list of zeugnis-formulare.
         <input id="version" type="hidden" th:value="*{version}" name="version"/>
 
         <input type="text" bs:field="formular" disabled="disabled" th:if="${disabled}"/>
-        <select bs:field="formular" th:unless="${disabled}">
+        <select  class="chzn-select" bs:field="formular" th:unless="${disabled}">
             <option th:each="item : ${formulare}" th:value="${item.id}" th:text="${item}"
                 th:classappend="${item.id==schulfachDetailInfo?.formular?.id}? 'highlight'"></option>
         </select>
         <input type="text" bs:field="schulfach" disabled="disabled" th:if="${disabled}"/>
-        <select bs:field="schulfach" th:unless="${disabled}">
+        <select class="chzn-select" bs:field="schulfach" th:unless="${disabled}">
             <option th:each="fach : ${schulfaecher}" th:value="${fach.id}" th:text="${fach}"
                 th:classappend="${fach.id==schulfachDetailInfo?.schulfach?.id}? 'highlight'"></option>
         </select>

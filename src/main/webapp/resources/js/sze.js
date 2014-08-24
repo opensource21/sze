@@ -139,6 +139,7 @@ $(document).ready(function(){
    sze.confirmDelete();
    sze.addDatepicker();
    sze.initTable()
+   $('.chzn-select').chosen();
 });
 
 
