@@ -37,6 +37,10 @@ tags - a list of selectable tag
         </div>
 
         <input type="checkbox" bs:field="selectable" th:disabled="${disabled}"/>
+        <input type="text" class="datepicker" bs:field="ausgabeDatum"
+                th:disabled="${disabled}" />
+        <input type="text" class="datepicker"
+                bs:field="nachteilsAusgleichsDatum" th:disabled="${disabled}" />
         <button type="submit" th:formaction="@{${saveUrl}}" class="btn" th:unless="${disabled || saveUrl == null}">
             <i class="save"></i>Speichern</button>
         <a th:href="@{|__#{nurl.schulhalbjahr.edit}__|}" class="btn" th:if="${disabled}">
