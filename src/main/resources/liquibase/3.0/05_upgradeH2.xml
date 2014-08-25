@@ -70,4 +70,18 @@
             <column name="NEW_VALUE" type="VARCHAR(1000)"/>
         </createTable>
     </changeSet>
+    <changeSet id="20140825-1" author="niels">
+        <dropNotNullConstraint tableName="ZEUGNIS_FORMULAR"
+            columnName="AUSGABE_DATUM" columnDataType="TIMESTAMP"/>
+    </changeSet>
+    <changeSet id="20140825-2" author="niels">
+        <dropNotNullConstraint tableName="ZEUGNIS_FORMULAR"
+            columnName="NACHTEILS_AUSGLEICHS_DATUM" columnDataType="TIMESTAMP"/>
+    </changeSet>
+    <changeSet id="20140825-3" author="niels">
+        <addColumn tableName="SCHULHALBJAHR">
+            <column name="AUSGABE_DATUM" type="TIMESTAMP"/>
+            <column name="NACHTEILS_AUSGLEICHS_DATUM" type="TIMESTAMP"/>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>
