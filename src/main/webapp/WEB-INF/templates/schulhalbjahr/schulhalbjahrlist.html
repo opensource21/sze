@@ -37,8 +37,8 @@ pageRequest - the parameter of this search.
                         <td th:text="${schulhalbjahr.jahr}">1</td>
                         <td th:text="${schulhalbjahr.halbjahr}">1</td>
                         <td th:text="#{'blt.'+${schulhalbjahr.selectable}}">1</td>
-                        <td th:text="${schulhalbjahr.ausgabeDatum}">1</td>
-                        <td th:text="${schulhalbjahr.nachteilsAusgleichsDatum}">1</td>
+                        <td th:text="${{schulhalbjahr.ausgabeDatum}}">1</td>
+                        <td th:text="${{schulhalbjahr.nachteilsAusgleichsDatum}}">1</td>
                         <td th:with="#{par.schulhalbjahr.schulhalbjahr_id}=${schulhalbjahr.id}">
                             <a class="btn" href="show/1" th:href="@{|__#{nurl.schulhalbjahr.show}__|}" ><i class="imageshow"></i></a>
                             <a class="btn" href="edit/1" th:href="@{|__#{nurl.schulhalbjahr.edit}__|}" ><i class="edit"></i></a>
