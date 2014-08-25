@@ -85,14 +85,14 @@ public final class VariableUtility {
      * Erzeugt den Text für den Druck in dem die Variablen ersetzt werden.
      * @param text der Text
      * @param schueler der Schüler
-     * @param datum das aktuelle Datum
+     * @param nachteilsausgleichsDatum das Datum des Nachteilsausgleichs.
      * @param erSieStattNamenRule true wenn er oder sie statt dem Namen
      * genommen werden soll.
      * @param schuljahr das Schuljahr
      * @return der Text für den Druck.
      */
     public static String createPrintText(final String text, Schueler schueler,
-            final Date datum, final boolean erSieStattNamenRule,
+            final Date nachteilsausgleichsDatum, final boolean erSieStattNamenRule,
             final String schuljahr) {
         if (!text.contains("@")) {
             return text;
@@ -118,10 +118,10 @@ public final class VariableUtility {
                             .getGeschlecht(), erSieStattNamen, false);
                     erSieStattNamen = true;
                 } else if ("datum".equals(token)) {
-                    if (datum != null) {
+                    if (nachteilsausgleichsDatum != null) {
                         final SimpleDateFormat formatter = new SimpleDateFormat(
                                 "dd.MM.yyyy");
-                        replacement = formatter.format(datum);
+                        replacement = formatter.format(nachteilsausgleichsDatum);
                     } else {
                         replacement = "";
                     }

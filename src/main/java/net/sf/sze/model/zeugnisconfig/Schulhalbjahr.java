@@ -6,11 +6,14 @@
 package net.sf.sze.model.zeugnisconfig;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
 import net.sf.sze.model.base.RevisionModel;
@@ -47,6 +50,15 @@ public class Schulhalbjahr extends RevisionModel implements Serializable,
      * Kennzeichen, ob diese Jahr in der Auswahlliste erscheinen soll.
      */
     private boolean selectable = false;
+
+
+    /** Defaultfall für diese Klasse kann im Zeugnisformular überschrieben werden. */
+    @Temporal(TemporalType.DATE)
+    private Date ausgabeDatum;
+
+    /** The nachteils ausgleichs datum kann im Zeugnisformular überschrieben werden. */
+    @Temporal(TemporalType.DATE)
+    private Date nachteilsAusgleichsDatum;
 
     /**
      * Gets the erstes oder 2.
@@ -107,6 +119,46 @@ public class Schulhalbjahr extends RevisionModel implements Serializable,
     }
 
     /**
+     * Gets the defaultfall für dieses Schulhalbjahr kann im Zeugnisformular überschrieben
+     * werden.
+     *
+     * @return the defaultfall für dieses Schulhalbjahr kann im Zeugnisformular überschrieben
+     *         werden
+     */
+    public Date getAusgabeDatum() {
+        return this.ausgabeDatum;
+    }
+
+    /**
+     * Sets the defaultfall dieses Schulhalbjahr kann im Zeugnisformular überschrieben werden.
+     *
+     * @param ausgabeDatum the new defaultfall für diese Klasse kann im Zeugnisformular
+     *            überschrieben werden
+     */
+    public void setAusgabeDatum(final Date ausgabeDatum) {
+        this.ausgabeDatum = ausgabeDatum;
+    }
+
+    /**
+     * Gets the nachteils ausgleichs datum.
+     *
+     * @return the nachteils ausgleichs datum
+     */
+    public Date getNachteilsAusgleichsDatum() {
+        return this.nachteilsAusgleichsDatum;
+    }
+
+    /**
+     * Sets the nachteils ausgleichs datum.
+     *
+     * @param nachteilsAusgleichsDatum the new nachteils ausgleichs datum
+     */
+    public void setNachteilsAusgleichsDatum(
+            final Date nachteilsAusgleichsDatum) {
+        this.nachteilsAusgleichsDatum = nachteilsAusgleichsDatum;
+    }
+
+    /**
      * Kennzeichen ob es das erste Halbjahr ist.
      * @return true wenn es das erste Halbjahr ist.
      */
@@ -157,4 +209,7 @@ public class Schulhalbjahr extends RevisionModel implements Serializable,
     public String getSchuljahr() {
         return (jahr.intValue() - 1) + "/" + jahr.toString().substring(2, 4);
     }
+
+
+
 }

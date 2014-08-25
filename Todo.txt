@@ -1,9 +1,5 @@
 #PRIO 1
 
-
-- Ablegen der Datümer beim Schulhalbjahr, so dass es nicht zwingend beim
-  Zeugnisformular stehen muss. NotNull auflösen.
-
 - Beim Initialiseren von Klasse 1-2 komplett gibt es eine Exception.
     -> Das lag daran, dass erst initialisiert wurde und dann der Schüler
        die Klasse gewechselt hat. Das können wir technisch noch nicht. (Gefixt!)

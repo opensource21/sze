@@ -253,7 +253,7 @@ public class Zeugnis extends RevisionModel implements Serializable,
         return VariableUtility.createPrintText(
                 StringUtils.isNotEmpty(buBewertungsText) ? buBewertungsText
                 : VariableUtility.PLATZHALTER_LEER, schueler, formular
-                .getNachteilsAusgleichsDatum(), false, schulhalbjahr.getSchuljahr());
+                .findNachteilsAusgleichsDatum(), false, schulhalbjahr.getSchuljahr());
     }
 
     /**
@@ -752,12 +752,18 @@ public class Zeugnis extends RevisionModel implements Serializable,
             printMap.put("quelleLeitspruch2", formular.getQuelleLeitspruch2());
         }
 
+        final String keyAusgabeDatum = "ausgabeDatum";
         if (individuellesAusgabeDatum != null) {
-            printMap.put("ausgabeDatum", formatter.format(
+            printMap.put(keyAusgabeDatum, formatter.format(
                     individuellesAusgabeDatum));
-        } else {
-            printMap.put("ausgabeDatum", formatter.format(formular
+        } else if (formular.getAusgabeDatum() != null) {
+            printMap.put(keyAusgabeDatum, formatter.format(formular
                     .getAusgabeDatum()));
+        } else if (formular.getSchulhalbjahr().getAusgabeDatum() != null) {
+            printMap.put(keyAusgabeDatum, formatter.format(formular.getSchulhalbjahr()
+                    .getAusgabeDatum()));
+        } else {
+            printMap.put(keyAusgabeDatum, "??.??.????");
         }
 
         printMap.put("arbeitsgruppen", createArbeitsgruppenSatz());
@@ -803,7 +809,7 @@ public class Zeugnis extends RevisionModel implements Serializable,
         final StringBuffer allgemeineBemerkungen = new StringBuffer("");
         for (AbstractBemerkung aBemerkung : bemerkungen) {
             allgemeineBemerkungen.append(aBemerkung.createPrintText(schueler,
-                    formular.getNachteilsAusgleichsDatum(), (String) printMap
+                    formular.findNachteilsAusgleichsDatum(), (String) printMap
                     .get("shj_jahr")));
         }
 
