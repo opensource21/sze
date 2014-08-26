@@ -15,7 +15,7 @@ import java.lang.annotation.Target;
 
 /**
  * Prüft ob es Schulfächer gibt die Standard- {@link Bewertung} und
- * {@link BinnenDifferenzierteBewertung}en haben sollen.
+ * {@link DreiNiveauBewertung}en haben sollen.
  *
  */
 @Retention(RetentionPolicy.RUNTIME)

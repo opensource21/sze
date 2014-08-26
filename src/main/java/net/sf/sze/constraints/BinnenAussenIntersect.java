@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
 import net.sf.oval.configuration.annotation.Constraint;
 
 /**
- * Prüft ob es Schulfächer gibt die {@link BinnenDifferenzierteBewertung} und
+ * Prüft ob es Schulfächer gibt die {@link DreiNiveauBewertung} und
  * {@link AussenDifferenzierteBewertung}en haben sollen.
  *
  */

@@ -1,4 +1,4 @@
-// BinnenDifferenzierteBewertung.java
+// DreiNiveauBewertung.java
 //
 // Licensed under the AGPL - http://www.gnu.org/licenses/agpl-3.0.txt
 // (c) SZE-Development-Team
@@ -17,8 +17,7 @@ import javax.persistence.Entity;
  */
 @Entity
 @DiscriminatorValue("DreiNiveauBewertung")
-public class BinnenDifferenzierteBewertung extends Bewertung {
-    // NICE sollte DreiNiveauBewertung statt BinnenBewertung heißen.
+public class DreiNiveauBewertung extends Bewertung {
 
     // TODO der NotNull-Constraint gilt nur für diese SubKlasse :-/
     // leistungsniveau(inList:['G','E','Z'], nullable:false)
@@ -27,9 +26,9 @@ public class BinnenDifferenzierteBewertung extends Bewertung {
 
     /**
      *
-     * Initiates an object of type BinnenDifferenzierteBewertung.
+     * Initiates an object of type DreiNiveauBewertung.
      */
-    public BinnenDifferenzierteBewertung() {
+    public DreiNiveauBewertung() {
         super();
         setLeistungsniveau("G");
     }

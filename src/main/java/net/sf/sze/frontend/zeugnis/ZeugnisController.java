@@ -19,7 +19,7 @@ import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.stammdaten.Schueler;
 import net.sf.sze.model.zeugnis.AussenDifferenzierteBewertung;
 import net.sf.sze.model.zeugnis.Bewertung;
-import net.sf.sze.model.zeugnis.BinnenDifferenzierteBewertung;
+import net.sf.sze.model.zeugnis.DreiNiveauBewertung;
 import net.sf.sze.model.zeugnis.StandardBewertung;
 import net.sf.sze.model.zeugnis.Zeugnis;
 import net.sf.sze.model.zeugnisconfig.Schulhalbjahr;
@@ -360,7 +360,7 @@ public class ZeugnisController implements ModelAttributes {
     }
 
     /**
-     * Aktualisiert die {@link BinnenDifferenzierteBewertung}.
+     * Aktualisiert die {@link DreiNiveauBewertung}.
      * @param halbjahrId die Id des Schulhalbjahres
      * @param klassenId die Id der Klasse
      * @param schuelerId die Id des Schülers
@@ -379,7 +379,7 @@ public class ZeugnisController implements ModelAttributes {
             @PathVariable(URL.Session.P_HALBJAHR_ID) Long halbjahrId,
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
-            @ModelAttribute("bewertung") BinnenDifferenzierteBewertung bewertung,
+            @ModelAttribute("bewertung") DreiNiveauBewertung bewertung,
             BindingResult result,
             @RequestParam(Common.P_PREV_ID) Long prevId,
             @RequestParam(Common.P_NEXT_ID) Long nextId,
@@ -448,7 +448,7 @@ public class ZeugnisController implements ModelAttributes {
     private void setEditBewertungModelValues(Long halbjahrId, Long klassenId,
             Long schuelerId, Bewertung bewertung, Long prevId, Long nextId, Model model) {
         final String type;
-        if (bewertung instanceof BinnenDifferenzierteBewertung) {
+        if (bewertung instanceof DreiNiveauBewertung) {
             type = "3niveau";
         } else if (bewertung instanceof AussenDifferenzierteBewertung) {
             type = "2niveau";
