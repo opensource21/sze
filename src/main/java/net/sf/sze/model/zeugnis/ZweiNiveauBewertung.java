@@ -1,4 +1,4 @@
-// AussenDifferenzierteBewertung.java
+// ZweiNiveauBewertung.java
 //
 // Licensed under the AGPL - http://www.gnu.org/licenses/agpl-3.0.txt
 // (c) SZE-Development-Team
@@ -22,8 +22,7 @@ import javax.persistence.Entity;
  */
 @Entity
 @DiscriminatorValue("ZweiNiveauBewertung")
-public class AussenDifferenzierteBewertung extends Bewertung {
-    // NICE sollte ZweiNiveauBewertung statt AussenBewertung heißen.
+public class ZweiNiveauBewertung extends Bewertung {
     // TODO der NotNull-Constraint gilt nur für diese SubKlasse :-/
     // leistungsniveau(inList:['G','E'], nullable:false)
 
@@ -31,9 +30,9 @@ public class AussenDifferenzierteBewertung extends Bewertung {
 
     /**
      *
-     * Initiates an object of type AussenDifferenzierteBewertung.
+     * Initiates an object of type ZweiNiveauBewertung.
      */
-    public AussenDifferenzierteBewertung() {
+    public ZweiNiveauBewertung() {
         super();
         setLeistungsniveau("G");
     }

@@ -17,7 +17,7 @@ import net.sf.sze.frontend.base.URL;
 import net.sf.sze.frontend.base.URL.Common;
 import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.stammdaten.Schueler;
-import net.sf.sze.model.zeugnis.AussenDifferenzierteBewertung;
+import net.sf.sze.model.zeugnis.ZweiNiveauBewertung;
 import net.sf.sze.model.zeugnis.Bewertung;
 import net.sf.sze.model.zeugnis.DreiNiveauBewertung;
 import net.sf.sze.model.zeugnis.StandardBewertung;
@@ -330,7 +330,7 @@ public class ZeugnisController implements ModelAttributes {
     }
 
     /**
-     * Aktualisiert die {@link AussenDifferenzierteBewertung}.
+     * Aktualisiert die {@link ZweiNiveauBewertung}.
      * @param halbjahrId die Id des Schulhalbjahres
      * @param klassenId die Id der Klasse
      * @param schuelerId die Id des Schülers
@@ -352,7 +352,7 @@ public class ZeugnisController implements ModelAttributes {
             @RequestParam(Common.P_PREV_ID) Long prevId,
             @RequestParam(Common.P_NEXT_ID) Long nextId,
             @RequestParam(value = Common.P_ACTION, required = false) String action,
-            @ModelAttribute("bewertung") AussenDifferenzierteBewertung bewertung,
+            @ModelAttribute("bewertung") ZweiNiveauBewertung bewertung,
             BindingResult result, Model model,
             RedirectAttributes redirectAttributes) {
         return updateBewertung(halbjahrId, klassenId, schuelerId, bewertung,
@@ -450,7 +450,7 @@ public class ZeugnisController implements ModelAttributes {
         final String type;
         if (bewertung instanceof DreiNiveauBewertung) {
             type = "3niveau";
-        } else if (bewertung instanceof AussenDifferenzierteBewertung) {
+        } else if (bewertung instanceof ZweiNiveauBewertung) {
             type = "2niveau";
         } else {
             type = "standard";

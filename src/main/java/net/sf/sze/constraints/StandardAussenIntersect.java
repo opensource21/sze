@@ -11,12 +11,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import net.sf.oval.configuration.annotation.Constraint;
-import net.sf.sze.model.zeugnis.AussenDifferenzierteBewertung;
+import net.sf.sze.model.zeugnis.ZweiNiveauBewertung;
 import net.sf.sze.model.zeugnis.Bewertung;
 
 /**
  * Prüft ob es Schulfächer gibt die Standard- {@link Bewertung} und
- * {@link AussenDifferenzierteBewertung}en haben sollen.
+ * {@link ZweiNiveauBewertung}en haben sollen.
  *
  */
 @Retention(RetentionPolicy.RUNTIME)

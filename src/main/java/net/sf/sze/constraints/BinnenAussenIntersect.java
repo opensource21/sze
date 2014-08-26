@@ -14,7 +14,7 @@ import net.sf.oval.configuration.annotation.Constraint;
 
 /**
  * Prüft ob es Schulfächer gibt die {@link DreiNiveauBewertung} und
- * {@link AussenDifferenzierteBewertung}en haben sollen.
+ * {@link ZweiNiveauBewertung}en haben sollen.
  *
  */
 @Retention(RetentionPolicy.RUNTIME)

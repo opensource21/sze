@@ -20,7 +20,7 @@ import net.sf.sze.dao.api.zeugnisconfig.ZeugnisArtDao;
 import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.stammdaten.Schueler;
 import net.sf.sze.model.zeugnis.AgBewertung;
-import net.sf.sze.model.zeugnis.AussenDifferenzierteBewertung;
+import net.sf.sze.model.zeugnis.ZweiNiveauBewertung;
 import net.sf.sze.model.zeugnis.AvSvBewertung;
 import net.sf.sze.model.zeugnis.Bewertung;
 import net.sf.sze.model.zeugnis.DreiNiveauBewertung;
@@ -404,7 +404,7 @@ public class ZeugnisInitialisierungServiceImpl implements ZeugnisInitialierungsS
         } else if (schulfach.convertStufenMitBinnenDifferenzierungToList().contains(klassenStufe)) {
             result = new DreiNiveauBewertung();
         } else if (schulfach.convertStufenMitAussenDifferenzierungToList().contains(klassenStufe)) {
-            result = new AussenDifferenzierteBewertung();
+            result = new ZweiNiveauBewertung();
         } else {
             return null;
         }
