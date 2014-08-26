@@ -54,17 +54,15 @@ public class Schulfach extends RevisionModel implements Serializable,
 
     /** The stufen mit aussen differenzierung. */
     @Column(name = "stufen_mit_aussen_differenzierung", length = 255)
-    // NICE stufenMitZweiNiveaus
     @ZweiDreiNivauIntersect
     @StandardZweiNiveauIntersect
-    private String stufenMitAussenDifferenzierung;
+    private String stufenMitZweiNiveaus;
 
     /** The stufen mit binnen differenzierung. */
     @Column(name = "stufen_mit_binnen_differenzierung", length = 255)
-    // NICE stufenMitDreiNiveaus
     @StandardDreiNiveauIntersect
     @ZweiDreiNivauIntersect
-    private String stufenMitBinnenDifferenzierung;
+    private String stufenMitDreiNiveaus;
 
     /** The stufen mit standard bewertung. */
     @Column(name = "stufen_mit_standard_bewertung", length = 255)
@@ -113,19 +111,19 @@ public class Schulfach extends RevisionModel implements Serializable,
      *
      * @return the stufen mit aussen differenzierung
      */
-    public String getStufenMitAussenDifferenzierung() {
-        return this.stufenMitAussenDifferenzierung;
+    public String getStufenMitZweiNiveaus() {
+        return this.stufenMitZweiNiveaus;
     }
 
     /**
      * Sets the stufen mit aussen differenzierung.
      *
-     * @param stufenMitAussenDifferenzierung the new stufen mit aussen
+     * @param stufenMitZweiNiveaus the new stufen mit aussen
      *            differenzierung
      */
-    public void setStufenMitAussenDifferenzierung(
-            final String stufenMitAussenDifferenzierung) {
-        this.stufenMitAussenDifferenzierung = stufenMitAussenDifferenzierung;
+    public void setStufenMitZweiNiveaus(
+            final String stufenMitZweiNiveaus) {
+        this.stufenMitZweiNiveaus = stufenMitZweiNiveaus;
     }
 
     /**
@@ -133,19 +131,19 @@ public class Schulfach extends RevisionModel implements Serializable,
      *
      * @return the stufen mit binnen differenzierung
      */
-    public String getStufenMitBinnenDifferenzierung() {
-        return this.stufenMitBinnenDifferenzierung;
+    public String getStufenMitDreiNiveaus() {
+        return this.stufenMitDreiNiveaus;
     }
 
     /**
      * Sets the stufen mit binnen differenzierung.
      *
-     * @param stufenMitBinnenDifferenzierung the new stufen mit binnen
+     * @param stufenMitDreiNiveaus the new stufen mit binnen
      *            differenzierung
      */
-    public void setStufenMitBinnenDifferenzierung(
-            final String stufenMitBinnenDifferenzierung) {
-        this.stufenMitBinnenDifferenzierung = stufenMitBinnenDifferenzierung;
+    public void setStufenMitDreiNiveaus(
+            final String stufenMitDreiNiveaus) {
+        this.stufenMitDreiNiveaus = stufenMitDreiNiveaus;
     }
 
     /**
@@ -202,7 +200,7 @@ public class Schulfach extends RevisionModel implements Serializable,
      */
     @Override
     public List<String> convertStufenMitBinnenDifferenzierungToList() {
-        return StringUtil.convertStringToList(stufenMitBinnenDifferenzierung);
+        return StringUtil.convertStringToList(stufenMitDreiNiveaus);
     }
 
     /**
@@ -211,7 +209,7 @@ public class Schulfach extends RevisionModel implements Serializable,
      */
     @Override
     public List<String> convertStufenMitAussenDifferenzierungToList() {
-        return StringUtil.convertStringToList(stufenMitAussenDifferenzierung);
+        return StringUtil.convertStringToList(stufenMitZweiNiveaus);
     }
 
     @Override

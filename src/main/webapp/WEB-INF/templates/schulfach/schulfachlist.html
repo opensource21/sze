@@ -27,8 +27,8 @@ pageRequest - the parameter of this search.
                         <th th:text="#{net.sf.sze.model.zeugnisconfig.Schulfach.sortierung}">Id</th>
                         <th th:text="#{net.sf.sze.model.zeugnisconfig.Schulfach.typ}">Id</th>
                         <th th:text="#{net.sf.sze.model.zeugnisconfig.Schulfach.stufenMitStandardBewertung}">Id</th>
-                        <th th:text="#{net.sf.sze.model.zeugnisconfig.Schulfach.stufenMitAussenDifferenzierung}">Id</th>
-                        <th th:text="#{net.sf.sze.model.zeugnisconfig.Schulfach.stufenMitBinnenDifferenzierung}">Id</th>
+                        <th th:text="#{net.sf.sze.model.zeugnisconfig.Schulfach.stufenMitZweiNiveaus}">Id</th>
+                        <th th:text="#{net.sf.sze.model.zeugnisconfig.Schulfach.stufenMitDreiNiveaus}">Id</th>
                         <th th:text="#{label.actions}">Actions</th>
                     </tr>
                 </thead>
@@ -39,8 +39,8 @@ pageRequest - the parameter of this search.
                         <td th:text="${schulfach.sortierung}">1</td>
                         <td th:text="${schulfach.typ}">1</td>
                         <td th:text="${schulfach.stufenMitStandardBewertung}">1</td>
-                        <td th:text="${schulfach.stufenMitAussenDifferenzierung}">1</td>
-                        <td th:text="${schulfach.stufenMitBinnenDifferenzierung}">1</td>
+                        <td th:text="${schulfach.stufenMitZweiNiveaus}">1</td>
+                        <td th:text="${schulfach.stufenMitDreiNiveaus}">1</td>
                         <td th:with="#{par.schulfach.schulfach_id}=${schulfach.id}">
                             <a class="btn" href="show/1" th:href="@{|__#{nurl.schulfach.show}__|}" ><i class="imageshow"></i></a>
                             <a class="btn" href="edit/1" th:href="@{|__#{nurl.schulfach.edit}__|}" ><i class="edit"></i></a>

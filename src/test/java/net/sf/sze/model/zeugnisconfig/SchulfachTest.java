@@ -41,7 +41,7 @@ public class SchulfachTest {
     @Test
     public void testConvertStufenMitBinnenDifferenzierungToList() {
         //Arrange
-        testee.setStufenMitBinnenDifferenzierung(" 3   5 6 7 8 9 10 11");
+        testee.setStufenMitDreiNiveaus(" 3   5 6 7 8 9 10 11");
         //Act
         final List<String> actual = testee.convertStufenMitBinnenDifferenzierungToList();
         //Assert
@@ -56,7 +56,7 @@ public class SchulfachTest {
     @Test
     public void testConvertStufenMitAussenDifferenzierungToList() {
         //Arrange
-        testee.setStufenMitAussenDifferenzierung(" 3   5 6 7 8 9 10 11");
+        testee.setStufenMitZweiNiveaus(" 3   5 6 7 8 9 10 11");
         //Act
         final List<String> actual = testee.convertStufenMitAussenDifferenzierungToList();
         //Assert
