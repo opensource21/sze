@@ -31,7 +31,7 @@ public @interface StandardZweiNiveauIntersect {
     String value() default "";
 
     /**
-     * The message, default "validation.schulfach.standardIntersectAussen".
+     * The message, default "validation.schulfach.standardIntersectZweiNiveau".
      *
      */
     String message() default StandardZweiNiveauIntersectCheck.MESSAGE;

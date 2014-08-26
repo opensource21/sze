@@ -52,13 +52,13 @@ public class Schulfach extends RevisionModel implements Serializable,
     @Enumerated(EnumType.ORDINAL)
     private Schulfachtyp typ;
 
-    /** The stufen mit aussen differenzierung. */
+    /** The stufen mit Differenzierung auf 2 Niveaus. */
     @Column(name = "stufen_mit_aussen_differenzierung", length = 255)
     @ZweiDreiNivauIntersect
     @StandardZweiNiveauIntersect
     private String stufenMitZweiNiveaus;
 
-    /** The stufen mit binnen differenzierung. */
+    /** The stufen mit Differenzierung auf 3 Niveaus. */
     @Column(name = "stufen_mit_binnen_differenzierung", length = 255)
     @StandardDreiNiveauIntersect
     @ZweiDreiNivauIntersect
@@ -107,42 +107,38 @@ public class Schulfach extends RevisionModel implements Serializable,
     }
 
     /**
-     * Gets the stufen mit aussen differenzierung.
+     * Gets the stufen mit Differenzierung auf 2 Niveaus.
      *
-     * @return the stufen mit aussen differenzierung
+     * @return the stufen mit Differenzierung auf 2 Niveaus.
      */
     public String getStufenMitZweiNiveaus() {
         return this.stufenMitZweiNiveaus;
     }
 
     /**
-     * Sets the stufen mit aussen differenzierung.
+     * Sets the stufen mit Differenzierung auf 2 Niveaus..
      *
-     * @param stufenMitZweiNiveaus the new stufen mit aussen
-     *            differenzierung
+     * @param stufenMitZweiNiveaus the new stufen mit Differenzierung auf 2 Niveaus.
      */
-    public void setStufenMitZweiNiveaus(
-            final String stufenMitZweiNiveaus) {
+    public void setStufenMitZweiNiveaus(final String stufenMitZweiNiveaus) {
         this.stufenMitZweiNiveaus = stufenMitZweiNiveaus;
     }
 
     /**
-     * Gets the stufen mit binnen differenzierung.
+     * Gets the stufen mit Differenzierung auf 3 Niveaus.
      *
-     * @return the stufen mit binnen differenzierung
+     * @return the stufen mit Differenzierung auf 3 Niveaus
      */
     public String getStufenMitDreiNiveaus() {
         return this.stufenMitDreiNiveaus;
     }
 
     /**
-     * Sets the stufen mit binnen differenzierung.
+     * Sets the stufen mit Differenzierung auf 3 Niveaus.
      *
-     * @param stufenMitDreiNiveaus the new stufen mit binnen
-     *            differenzierung
+     * @param stufenMitDreiNiveaus the new stufen mit Differenzierung auf 3 Niveaus.
      */
-    public void setStufenMitDreiNiveaus(
-            final String stufenMitDreiNiveaus) {
+    public void setStufenMitDreiNiveaus(final String stufenMitDreiNiveaus) {
         this.stufenMitDreiNiveaus = stufenMitDreiNiveaus;
     }
 

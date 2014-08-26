@@ -29,7 +29,7 @@ public @interface ZweiDreiNivauIntersect {
     String value() default "";
 
     /**
-     * The message, default "validation.schulfach.binnenIntersectAussen".
+     * The message, default "validation.schulfach.zweiIntersectDreiNiveau".
      *
      */
     String message() default ZweiDreiNivauIntersectCheck.MESSAGE;

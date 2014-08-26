@@ -30,7 +30,7 @@ public @interface StandardDreiNiveauIntersect {
     String value() default "";
 
     /**
-     * The message, default "validation.schulfach.standardIntersectBinnen".
+     * The message, default "validation.schulfach.standardIntersectDreiNiveau".
      *
      */
     String message() default StandardDreiNiveauIntersectCheck.MESSAGE;
