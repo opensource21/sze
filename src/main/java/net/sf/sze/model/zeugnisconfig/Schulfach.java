@@ -15,10 +15,10 @@ import javax.persistence.Enumerated;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import net.sf.sze.constraints.BinnenAussenIntersect;
+import net.sf.sze.constraints.ZweiDreiNivauIntersect;
 import net.sf.sze.constraints.DisjunktKlassenstufenConfigurer;
-import net.sf.sze.constraints.StandardAussenIntersect;
-import net.sf.sze.constraints.StandardBinnenIntersect;
+import net.sf.sze.constraints.StandardZweiNiveauIntersect;
+import net.sf.sze.constraints.StandardDreiNiveauIntersect;
 import net.sf.sze.model.base.RevisionModel;
 import net.sf.sze.util.StringUtil;
 
@@ -55,21 +55,21 @@ public class Schulfach extends RevisionModel implements Serializable,
     /** The stufen mit aussen differenzierung. */
     @Column(name = "stufen_mit_aussen_differenzierung", length = 255)
     // NICE stufenMitZweiNiveaus
-    @BinnenAussenIntersect
-    @StandardAussenIntersect
+    @ZweiDreiNivauIntersect
+    @StandardZweiNiveauIntersect
     private String stufenMitAussenDifferenzierung;
 
     /** The stufen mit binnen differenzierung. */
     @Column(name = "stufen_mit_binnen_differenzierung", length = 255)
     // NICE stufenMitDreiNiveaus
-    @StandardBinnenIntersect
-    @BinnenAussenIntersect
+    @StandardDreiNiveauIntersect
+    @ZweiDreiNivauIntersect
     private String stufenMitBinnenDifferenzierung;
 
     /** The stufen mit standard bewertung. */
     @Column(name = "stufen_mit_standard_bewertung", length = 255)
-    @StandardBinnenIntersect
-    @StandardAussenIntersect
+    @StandardDreiNiveauIntersect
+    @StandardZweiNiveauIntersect
     private String stufenMitStandardBewertung;
 
     /**

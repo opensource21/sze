@@ -1,4 +1,4 @@
-// StandardAussenIntersect.java
+// StandardZweiNiveauIntersect.java
 //
 // Licensed under the AGPL - http://www.gnu.org/licenses/agpl-3.0.txt
 // (c) SZE-Development-Team
@@ -21,8 +21,8 @@ import net.sf.sze.model.zeugnis.Bewertung;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD, ElementType.PARAMETER})
-@Constraint(checkWith = StandardAussenIntersectCheck.class)
-public @interface StandardAussenIntersect {
+@Constraint(checkWith = StandardZweiNiveauIntersectCheck.class)
+public @interface StandardZweiNiveauIntersect {
 
     /**
      * Der Default-Value.
@@ -34,6 +34,6 @@ public @interface StandardAussenIntersect {
      * The message, default "validation.schulfach.standardIntersectAussen".
      *
      */
-    String message() default StandardAussenIntersectCheck.MESSAGE;
+    String message() default StandardZweiNiveauIntersectCheck.MESSAGE;
 
 }

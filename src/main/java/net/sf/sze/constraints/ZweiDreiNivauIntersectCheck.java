@@ -1,4 +1,4 @@
-// BinnenAussenIntersectCheck.java
+// ZweiDreiNivauIntersectCheck.java
 //
 // Licensed under the AGPL - http://www.gnu.org/licenses/agpl-3.0.txt
 // (c) SZE-Development-Team
@@ -15,24 +15,24 @@ import org.springframework.util.CollectionUtils;
  * Stellt sicher, dass die verschiedenen Bewertungstypen überschneidungsfrei sind.
  *
  */
-public class BinnenAussenIntersectCheck
-        extends AbstractAnnotationCheck<BinnenAussenIntersect> {
+public class ZweiDreiNivauIntersectCheck
+        extends AbstractAnnotationCheck<ZweiDreiNivauIntersect> {
 
     /**
      * Der Default-Message-Key.
      */
     public static final String MESSAGE =
-            "validation.schulfach.binnenIntersectAussen";
+            "validation.schulfach.zweiIntersectDreiNiveau";
 
     /**
      * Erzeugt einen neuen Check.
      */
-    public BinnenAussenIntersectCheck() {
+    public ZweiDreiNivauIntersectCheck() {
         setMessage(MESSAGE);
     }
 
     @Override
-    public void configure(BinnenAussenIntersect constraintAnnotation) {
+    public void configure(ZweiDreiNivauIntersect constraintAnnotation) {
         setMessage(constraintAnnotation.message());
     }
 
