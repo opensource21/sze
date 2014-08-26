@@ -20,10 +20,10 @@ import net.sf.sze.dao.api.zeugnisconfig.ZeugnisArtDao;
 import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.stammdaten.Schueler;
 import net.sf.sze.model.zeugnis.AgBewertung;
-import net.sf.sze.model.zeugnis.AussenDifferenzierteBewertung;
+import net.sf.sze.model.zeugnis.ZweiNiveauBewertung;
 import net.sf.sze.model.zeugnis.AvSvBewertung;
 import net.sf.sze.model.zeugnis.Bewertung;
-import net.sf.sze.model.zeugnis.BinnenDifferenzierteBewertung;
+import net.sf.sze.model.zeugnis.DreiNiveauBewertung;
 import net.sf.sze.model.zeugnis.StandardBewertung;
 import net.sf.sze.model.zeugnis.Zeugnis;
 import net.sf.sze.model.zeugnis.ZeugnisFormular;
@@ -401,10 +401,10 @@ public class ZeugnisInitialisierungServiceImpl implements ZeugnisInitialierungsS
         Bewertung result = null;
         if (schulfach.convertStufenMitStandardBewertungToList().contains(klassenStufe)) {
             result = new StandardBewertung();
-        } else if (schulfach.convertStufenMitBinnenDifferenzierungToList().contains(klassenStufe)) {
-            result = new BinnenDifferenzierteBewertung();
-        } else if (schulfach.convertStufenMitAussenDifferenzierungToList().contains(klassenStufe)) {
-            result = new AussenDifferenzierteBewertung();
+        } else if (schulfach.convertStufenMitDreiNiveausToList().contains(klassenStufe)) {
+            result = new DreiNiveauBewertung();
+        } else if (schulfach.convertStufenMitZweiNiveausToList().contains(klassenStufe)) {
+            result = new ZweiNiveauBewertung();
         } else {
             return null;
         }

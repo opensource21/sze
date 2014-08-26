@@ -1,4 +1,4 @@
-// StandardAussenIntersectCheck.java
+// ZweiDreiNivauIntersectCheck.java
 //
 // Licensed under the AGPL - http://www.gnu.org/licenses/agpl-3.0.txt
 // (c) SZE-Development-Team
@@ -15,25 +15,24 @@ import org.springframework.util.CollectionUtils;
  * Stellt sicher, dass die verschiedenen Bewertungstypen überschneidungsfrei sind.
  *
  */
-//NICE sollte ZweiNiveauBewertung statt AussenBewertung heißen.
-public class StandardAussenIntersectCheck
-        extends AbstractAnnotationCheck<StandardAussenIntersect> {
+public class ZweiDreiNivauIntersectCheck
+        extends AbstractAnnotationCheck<ZweiDreiNivauIntersect> {
 
     /**
      * Der Default-Message-Key.
      */
     public static final String MESSAGE =
-            "validation.schulfach.standardIntersectAussen";
+            "validation.schulfach.zweiIntersectDreiNiveau";
 
     /**
      * Erzeugt einen neuen Check.
      */
-    public StandardAussenIntersectCheck() {
+    public ZweiDreiNivauIntersectCheck() {
         setMessage(MESSAGE);
     }
 
     @Override
-    public void configure(StandardAussenIntersect constraintAnnotation) {
+    public void configure(ZweiDreiNivauIntersect constraintAnnotation) {
         setMessage(constraintAnnotation.message());
     }
 
@@ -47,7 +46,7 @@ public class StandardAussenIntersectCheck
 
         DisjunktKlassenstufenConfigurer obj = (DisjunktKlassenstufenConfigurer) validatedObject;
         return !CollectionUtils.containsAny(obj
-                .convertStufenMitStandardBewertungToList(), obj
-                .convertStufenMitAussenDifferenzierungToList());
+                .convertStufenMitDreiNiveausToList(), obj
+                .convertStufenMitZweiNiveausToList());
     }
 }

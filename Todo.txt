@@ -16,8 +16,6 @@
 
 - Delete-Fragment zu umbauen, dass es mit JS und ohne gut läuft.
 
-- 3Niveau und 2NiveauBewertung
-
 - Automatisches Anlegen von Halbjahren und Formularen.
 
 - Bessere Template Unterstützung. Siehe seu/projects/schule/felderUndPlatzhalter.md
@@ -87,6 +85,8 @@ Bootstrap3 http://code.divshot.com/bootstrap3_upgrader/
 Erledigt
 + Umgang mit UniqueKeys diese müssen direkt beim Attribut definiert werden.
 Oder zusätzlich ein @Unique -> Aktuell kein Problem, da nicht durch GUI verletzbar.
+
++ 3Niveau und 2NiveauBewertung
 
 
 + Das Encoding stimmt auf den Seiten nicht, insbesonder bei Kommentaren -> Liegt aber auch daran,

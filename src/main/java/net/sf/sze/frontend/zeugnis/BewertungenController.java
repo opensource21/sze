@@ -12,9 +12,9 @@ import net.sf.sze.frontend.base.ModelAttributes;
 import net.sf.sze.frontend.base.URL;
 import net.sf.sze.frontend.base.URL.Common;
 import net.sf.sze.model.stammdaten.Klasse;
-import net.sf.sze.model.zeugnis.AussenDifferenzierteBewertung;
+import net.sf.sze.model.zeugnis.ZweiNiveauBewertung;
 import net.sf.sze.model.zeugnis.Bewertung;
-import net.sf.sze.model.zeugnis.BinnenDifferenzierteBewertung;
+import net.sf.sze.model.zeugnis.DreiNiveauBewertung;
 import net.sf.sze.model.zeugnis.StandardBewertung;
 import net.sf.sze.model.zeugnisconfig.Schulfach;
 import net.sf.sze.model.zeugnisconfig.Schulhalbjahr;
@@ -222,7 +222,7 @@ public class BewertungenController implements ModelAttributes {
     }
 
     /**
-     * Aktualisiert die {@link AussenDifferenzierteBewertung}.
+     * Aktualisiert die {@link ZweiNiveauBewertung}.
      * @param halbjahrId die Id des Schulhalbjahres
      * @param klassenId die Id der Klasse
      * @param schulfachId die Id des Schulfachs.
@@ -244,7 +244,7 @@ public class BewertungenController implements ModelAttributes {
             @RequestParam(Common.P_PREV_ID) Long prevId,
             @RequestParam(Common.P_NEXT_ID) Long nextId,
             @RequestParam(value = Common.P_ACTION, required = false) String action,
-            @ModelAttribute(BEWERTUNG) AussenDifferenzierteBewertung bewertung,
+            @ModelAttribute(BEWERTUNG) ZweiNiveauBewertung bewertung,
             BindingResult result, Model model,
             RedirectAttributes redirectAttributes) {
         return updateBewertung(halbjahrId, klassenId, schulfachId, bewertung,
@@ -252,7 +252,7 @@ public class BewertungenController implements ModelAttributes {
     }
 
     /**
-     * Aktualisiert die {@link BinnenDifferenzierteBewertung}.
+     * Aktualisiert die {@link DreiNiveauBewertung}.
      * @param halbjahrId die Id des Schulhalbjahres
      * @param klassenId die Id der Klasse
      * @param schulfachId die Id des Schulfachs.
@@ -271,7 +271,7 @@ public class BewertungenController implements ModelAttributes {
             @PathVariable(URL.Session.P_HALBJAHR_ID) Long halbjahrId,
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
             @PathVariable(URL.Session.P_SCHULFACH_ID) Long schulfachId,
-            @ModelAttribute(BEWERTUNG)BinnenDifferenzierteBewertung bewertung,
+            @ModelAttribute(BEWERTUNG)DreiNiveauBewertung bewertung,
             @RequestParam(Common.P_PREV_ID) Long prevId,
             @RequestParam(Common.P_NEXT_ID) Long nextId,
             @RequestParam(value = Common.P_ACTION, required = false) String action,
@@ -338,9 +338,9 @@ public class BewertungenController implements ModelAttributes {
     private void setEditModelValues(Long halbjahrId, Long klassenId,
             Long schulfachId, Bewertung bewertung, Long prevId, Long nextId, Model model) {
         final String type;
-        if (bewertung instanceof BinnenDifferenzierteBewertung) {
+        if (bewertung instanceof DreiNiveauBewertung) {
             type = "3niveau";
-        } else if (bewertung instanceof AussenDifferenzierteBewertung) {
+        } else if (bewertung instanceof ZweiNiveauBewertung) {
             type = "2niveau";
         } else {
             type = "standard";

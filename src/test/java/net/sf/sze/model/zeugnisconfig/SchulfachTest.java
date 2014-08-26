@@ -35,33 +35,33 @@ public class SchulfachTest {
     }
 
     /**
-     * Test method for
-     * {@link net.sf.sze.model.zeugnisconfig.Schulfach#convertStufenMitBinnenDifferenzierungToList()}.
-     */
-    @Test
-    public void testConvertStufenMitBinnenDifferenzierungToList() {
-        //Arrange
-        testee.setStufenMitBinnenDifferenzierung(" 3   5 6 7 8 9 10 11");
-        //Act
-        final List<String> actual = testee.convertStufenMitBinnenDifferenzierungToList();
-        //Assert
-        assertThat(actual).hasSize(8).contains("3", "5", "6", "7" , "8", "9", "10", "11");
-
-    }
+         * Test method for
+         * {@link net.sf.sze.model.zeugnisconfig.Schulfach#convertStufenMitDreiNiveausToList()}.
+         */
+        @Test
+        public void testConvertStufenMitDreiNiveausToList() {
+            //Arrange
+            testee.setStufenMitDreiNiveaus(" 3   5 6 7 8 9 10 11");
+            //Act
+            final List<String> actual = testee.convertStufenMitDreiNiveausToList();
+            //Assert
+            assertThat(actual).hasSize(8).contains("3", "5", "6", "7" , "8", "9", "10", "11");
+    
+        }
 
     /**
-     * Test method for
-     * {@link net.sf.sze.model.zeugnisconfig.Schulfach#convertStufenMitAussenDifferenzierungToList()}.
-     */
-    @Test
-    public void testConvertStufenMitAussenDifferenzierungToList() {
-        //Arrange
-        testee.setStufenMitAussenDifferenzierung(" 3   5 6 7 8 9 10 11");
-        //Act
-        final List<String> actual = testee.convertStufenMitAussenDifferenzierungToList();
-        //Assert
-        assertThat(actual).hasSize(8).contains("3", "5", "6", "7" , "8", "9", "10", "11");
-
-    }
+         * Test method for
+         * {@link net.sf.sze.model.zeugnisconfig.Schulfach#convertStufenMitZweiNiveausToList()}.
+         */
+        @Test
+        public void testConvertStufenMitZweiNiveausToList() {
+            //Arrange
+            testee.setStufenMitZweiNiveaus(" 3   5 6 7 8 9 10 11");
+            //Act
+            final List<String> actual = testee.convertStufenMitZweiNiveausToList();
+            //Assert
+            assertThat(actual).hasSize(8).contains("3", "5", "6", "7" , "8", "9", "10", "11");
+    
+        }
 
 }

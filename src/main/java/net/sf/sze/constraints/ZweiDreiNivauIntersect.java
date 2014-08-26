@@ -1,4 +1,4 @@
-// BinnenAussenIntersect.java
+// ZweiDreiNivauIntersect.java
 //
 // Licensed under the AGPL - http://www.gnu.org/licenses/agpl-3.0.txt
 // (c) SZE-Development-Team
@@ -13,14 +13,14 @@ import java.lang.annotation.Target;
 import net.sf.oval.configuration.annotation.Constraint;
 
 /**
- * Prüft ob es Schulfächer gibt die {@link BinnenDifferenzierteBewertung} und
- * {@link AussenDifferenzierteBewertung}en haben sollen.
+ * Prüft ob es Schulfächer gibt die {@link DreiNiveauBewertung} und
+ * {@link ZweiNiveauBewertung}en haben sollen.
  *
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD, ElementType.PARAMETER})
-@Constraint(checkWith = BinnenAussenIntersectCheck.class)
-public @interface BinnenAussenIntersect {
+@Constraint(checkWith = ZweiDreiNivauIntersectCheck.class)
+public @interface ZweiDreiNivauIntersect {
 
     /**
      * Der Default-Value.
@@ -29,9 +29,9 @@ public @interface BinnenAussenIntersect {
     String value() default "";
 
     /**
-     * The message, default "validation.schulfach.binnenIntersectAussen".
+     * The message, default "validation.schulfach.zweiIntersectDreiNiveau".
      *
      */
-    String message() default BinnenAussenIntersectCheck.MESSAGE;
+    String message() default ZweiDreiNivauIntersectCheck.MESSAGE;
 
 }

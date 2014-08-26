@@ -28,8 +28,8 @@ tags - a list of selectable tag
             <option th:each="typ : ${schulfachtypen}" th:value="${typ.name()}" th:text="${typ}" th:classappend="${typ==schulfach.typ}? 'highlight'"></option>
         </select>
         <input type="text" bs:field="stufenMitStandardBewertung" th:disabled="${disabled}"/>
-        <input type="text" bs:field="stufenMitAussenDifferenzierung" th:disabled="${disabled}"/>
-        <input type="text" bs:field="stufenMitBinnenDifferenzierung" th:disabled="${disabled}"/>
+        <input type="text" bs:field="stufenMitZweiNiveaus" th:disabled="${disabled}"/>
+        <input type="text" bs:field="stufenMitDreiNiveaus" th:disabled="${disabled}"/>
         <button type="submit" th:formaction="@{${saveUrl}}" class="btn" th:unless="${disabled || saveUrl == null}">
             <i class="save"></i>Speichern</button>
         <a th:href="@{|__#{nurl.schulfach.edit}__|}" class="btn" th:if="${disabled}">

@@ -120,10 +120,10 @@ public class BewertungErfassungsServiceImpl implements
         final List<Schulfach> alleSchulfaecher = schulfachDao.findAll();
         final List<Schulfach> relevanteSchulfaecher = new ArrayList<>();
         for (Schulfach schulfach : alleSchulfaecher) {
-            if (schulfach.convertStufenMitAussenDifferenzierungToList()
+            if (schulfach.convertStufenMitZweiNiveausToList()
                     .contains(klassenStufe)) {
                 relevanteSchulfaecher.add(schulfach);
-            } else if (schulfach.convertStufenMitBinnenDifferenzierungToList()
+            } else if (schulfach.convertStufenMitDreiNiveausToList()
                     .contains(klassenStufe)) {
                 relevanteSchulfaecher.add(schulfach);
             } else if (schulfach.convertStufenMitStandardBewertungToList()

@@ -10,15 +10,15 @@ public class SchulfachRowBuilder extends BasicDataRowBuilder {
     public static final String C_ID = "ID";
     public static final String C_NAME = "NAME";
     public static final String C_SORTIERUNG = "SORTIERUNG";
-    public static final String C_STUFEN_MIT_AUSSEN_DIFFERENZIERUNG = "STUFEN_MIT_AUSSEN_DIFFERENZIERUNG";
-    public static final String C_STUFEN_MIT_BINNEN_DIFFERENZIERUNG = "STUFEN_MIT_BINNEN_DIFFERENZIERUNG";
+    public static final String C_STUFEN_MIT_DREI_NIVEAUS = "STUFEN_MIT_DREI_NIVEAUS";
     public static final String C_STUFEN_MIT_STANDARD_BEWERTUNG = "STUFEN_MIT_STANDARD_BEWERTUNG";
+    public static final String C_STUFEN_MIT_ZWEI_NIVEAUS = "STUFEN_MIT_ZWEI_NIVEAUS";
     public static final String C_TYP = "TYP";
     public static final String C_VERSION = "VERSION";
 
     public static final String[] PRIMARY_KEY = {C_ID};
 
-    public static final String[] ALL_COLUMNS = {C_ID, C_NAME, C_SORTIERUNG, C_STUFEN_MIT_AUSSEN_DIFFERENZIERUNG, C_STUFEN_MIT_BINNEN_DIFFERENZIERUNG, C_STUFEN_MIT_STANDARD_BEWERTUNG, C_TYP, C_VERSION};
+    public static final String[] ALL_COLUMNS = {C_ID, C_NAME, C_SORTIERUNG, C_STUFEN_MIT_DREI_NIVEAUS, C_STUFEN_MIT_STANDARD_BEWERTUNG, C_STUFEN_MIT_ZWEI_NIVEAUS, C_TYP, C_VERSION};
 
     public SchulfachRowBuilder(String... identifierColumns) {
         super(TABLE_NAME, identifierColumns);
@@ -60,23 +60,13 @@ public class SchulfachRowBuilder extends BasicDataRowBuilder {
         return this;
     }
 
-    public final SchulfachRowBuilder StufenMitAussenDifferenzierung (String value) {
-        with(C_STUFEN_MIT_AUSSEN_DIFFERENZIERUNG, value);
+    public final SchulfachRowBuilder StufenMitDreiNiveaus (String value) {
+        with(C_STUFEN_MIT_DREI_NIVEAUS, value);
         return this;
     }
 
-    public final SchulfachRowBuilder StufenMitAussenDifferenzierung (IValidator<?> value) {
-        with(C_STUFEN_MIT_AUSSEN_DIFFERENZIERUNG, value);
-        return this;
-    }
-
-    public final SchulfachRowBuilder StufenMitBinnenDifferenzierung (String value) {
-        with(C_STUFEN_MIT_BINNEN_DIFFERENZIERUNG, value);
-        return this;
-    }
-
-    public final SchulfachRowBuilder StufenMitBinnenDifferenzierung (IValidator<?> value) {
-        with(C_STUFEN_MIT_BINNEN_DIFFERENZIERUNG, value);
+    public final SchulfachRowBuilder StufenMitDreiNiveaus (IValidator<?> value) {
+        with(C_STUFEN_MIT_DREI_NIVEAUS, value);
         return this;
     }
 
@@ -87,6 +77,16 @@ public class SchulfachRowBuilder extends BasicDataRowBuilder {
 
     public final SchulfachRowBuilder StufenMitStandardBewertung (IValidator<?> value) {
         with(C_STUFEN_MIT_STANDARD_BEWERTUNG, value);
+        return this;
+    }
+
+    public final SchulfachRowBuilder StufenMitZweiNiveaus (String value) {
+        with(C_STUFEN_MIT_ZWEI_NIVEAUS, value);
+        return this;
+    }
+
+    public final SchulfachRowBuilder StufenMitZweiNiveaus (IValidator<?> value) {
+        with(C_STUFEN_MIT_ZWEI_NIVEAUS, value);
         return this;
     }
 
