@@ -16,7 +16,7 @@ import javax.persistence.Entity;
  *
  */
 @Entity
-@DiscriminatorValue("net.sf.sze.zeugnis.BinnenDifferenzierteBewertung")
+@DiscriminatorValue("DreiNiveauBewertung")
 public class BinnenDifferenzierteBewertung extends Bewertung {
     // NICE sollte DreiNiveauBewertung statt BinnenBewertung heißen.
 

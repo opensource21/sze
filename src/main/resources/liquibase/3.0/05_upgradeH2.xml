@@ -84,4 +84,13 @@
             <column name="NACHTEILS_AUSGLEICHS_DATUM" type="TIMESTAMP"/>
         </addColumn>
     </changeSet>
-</databaseChangeLog>
+     <changeSet author="niels" id="20140826" >
+        <comment>Umstellung auf des Dsikriminators bei den Bewertungen</comment>
+        <sql>update bewertung set class = 'DreiNiveauBewertung'
+            where class = 'net.sf.sze.zeugnis.BinnenDifferenzierteBewertung'</sql>
+        <sql>update bewertung set class = 'ZweiNiveauBewertung'
+            where class = 'net.sf.sze.zeugnis.AussenDifferenzierteBewertung'</sql>
+        <sql>update bewertung set class = 'StandardBewertung'
+            where class = 'net.sf.sze.zeugnis.StandardBewertung'</sql>
+
+    </changeSet></databaseChangeLog>

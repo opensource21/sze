@@ -16,7 +16,7 @@ import javax.persistence.Entity;
  *
  */
 @Entity
-@DiscriminatorValue("net.sf.sze.zeugnis.StandardBewertung")
+@DiscriminatorValue("StandardBewertung")
 public class StandardBewertung extends Bewertung {
     private static final List<String> NIVEAUS = new ArrayList<String>();
 
