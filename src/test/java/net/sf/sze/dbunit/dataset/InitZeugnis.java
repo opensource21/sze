@@ -57,12 +57,12 @@ public class InitZeugnis {
         newSchulamt().Id(1L).Version(0L).Aktiv(Boolean.TRUE).BeschreibenderSatz("@Name@ übte das Amt @des Klassensprechers|der Klassensprecherin@ aus.").Name("Klassensprecher").addTo(b);
         newSchulamtsBemerkungsBaustein().Id(1L).Version(0L).Aktiv(Boolean.TRUE).BeschreibenderSatz("").Name("_LEER_").Sortierung(10L).addTo(b);
         newSchulamtsBemerkungsBaustein().Id(2L).Version(0L).Aktiv(Boolean.TRUE).BeschreibenderSatz("@Name@ zeichnete sich dabei durch große Zuverlässigkeit aus.").Name("Zuverlässigkeit").Sortierung(20L).addTo(b);
-        newSchulfach().Id(1L).Version(0L).Name("Mathematik").Sortierung(101L).StufenMitAussenDifferenzierung("5 6 7 8 9 10").Typ(0).addTo(b);
-        newSchulfach().Id(2L).Version(0L).Name("Deutsch").Sortierung(102L).StufenMitAussenDifferenzierung("5 6 7 8 9 10").StufenMitBinnenDifferenzierung("17").Typ(0).addTo(b);
-        newSchulfach().Id(3L).Version(0L).Name("Englisch").Sortierung(103L).StufenMitAussenDifferenzierung("5 6 7 8 9 10").Typ(0).addTo(b);
-        newSchulfach().Id(4L).Version(0L).Name("Französisch").Sortierung(104L).StufenMitBinnenDifferenzierung("7 8 9 10").Typ(1).addTo(b);
-        newSchulfach().Id(5L).Version(0L).Name("Naturwissenschaften").Sortierung(105L).StufenMitBinnenDifferenzierung("5 6 7 9 10").StufenMitStandardBewertung("17").Typ(1).addTo(b);
-        newSchulfach().Id(6L).Version(0L).Name("Gesellschaftslehre").Sortierung(106L).StufenMitBinnenDifferenzierung("5 6 7 8").StufenMitStandardBewertung("17").Typ(1).addTo(b);
+        newSchulfach().Id(1L).Version(0L).Name("Mathematik").Sortierung(101L).StufenMitZweiNiveaus("5 6 7 8 9 10").Typ(0).addTo(b);
+        newSchulfach().Id(2L).Version(0L).Name("Deutsch").Sortierung(102L).StufenMitZweiNiveaus("5 6 7 8 9 10").StufenMitDreiNiveaus("17").Typ(0).addTo(b);
+        newSchulfach().Id(3L).Version(0L).Name("Englisch").Sortierung(103L).StufenMitZweiNiveaus("5 6 7 8 9 10").Typ(0).addTo(b);
+        newSchulfach().Id(4L).Version(0L).Name("Französisch").Sortierung(104L).StufenMitDreiNiveaus("7 8 9 10").Typ(1).addTo(b);
+        newSchulfach().Id(5L).Version(0L).Name("Naturwissenschaften").Sortierung(105L).StufenMitDreiNiveaus("5 6 7 9 10").StufenMitStandardBewertung("17").Typ(1).addTo(b);
+        newSchulfach().Id(6L).Version(0L).Name("Gesellschaftslehre").Sortierung(106L).StufenMitDreiNiveaus("5 6 7 8").StufenMitStandardBewertung("17").Typ(1).addTo(b);
         newSchulfach().Id(7L).Version(0L).Name("Arbeit/Wirtschaft/Technik").Sortierung(107L).StufenMitStandardBewertung(" 17 8 9 10").Typ(1).addTo(b);
         newSchulfach().Id(8L).Version(0L).Name("Sport").Sortierung(108L).StufenMitStandardBewertung("5 6 17 8 9 10").Typ(1).addTo(b);
         newSchulfach().Id(9L).Version(0L).Name("Musik").Sortierung(109L).StufenMitStandardBewertung("5 6").Typ(1).addTo(b);
