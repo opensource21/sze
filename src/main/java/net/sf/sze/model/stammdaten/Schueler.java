@@ -282,7 +282,7 @@ public class Schueler extends RevisionModel implements Serializable,
 
     @Override
     public String toString() {
-        return name + ", " + vorname;
+        return name + ", " + getRufnameOrVorname();
     }
 
     @Override

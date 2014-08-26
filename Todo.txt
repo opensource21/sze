@@ -12,15 +12,11 @@
 - Liquibase: Warum meint er die Ids sein nicht eindeutig.-> Migration auch noch mal durchtesten.
 
 #PRIO 2
-- Der Titel wird generell nicht Dialog-spezifisch gesetzt.
-
 - Delete-Fragment zu umbauen, dass es mit JS und ohne gut läuft.
 
 - Automatisches Anlegen von Halbjahren und Formularen.
 
 - Bessere Template Unterstützung. Siehe seu/projects/schule/felderUndPlatzhalter.md
-
-- https://github.com/mgonto/jpa-passive-logging-example (Siehe auch http://struberg.wordpress.com/2010/07/31/howto-changelog-with-jpa/)  UPGRADE_LIQUIBASE testen!
 
 - Beim Start von OO sollte man die Parameter mit -- anstatt - übergeben. Ist allerdings nur deprecated.
 
@@ -110,6 +106,7 @@ Oder zusätzlich ein @Unique -> Aktuell kein Problem, da nicht durch GUI verletz
 + Admin-Bereich (3 PT?) (Halbjahr, Formular, Klasse, Schüler, Schulfach,
     AvSv, AG, Bemerkungsbaustein, Schulamt, Schulamtsbemerkunsbaustein,
     SoLBewertungstext, Zeugnisart)
++ https://github.com/mgonto/jpa-passive-logging-example (Siehe auch http://struberg.wordpress.com/2010/07/31/howto-changelog-with-jpa/)  UPGRADE_LIQUIBASE testen!
 
 
 + Owning-Side bei Many-To-One oder One-To-Many: Immer Many. Bei Many-Many die ohne mappedBy

@@ -115,6 +115,9 @@ public class SchulfachDetailInfo extends RevisionModel
 
     @Override
     public String toString() {
+        if (schulfach == null) {
+            return detailInfo;
+        }
         return schulfach.getName() + " " + detailInfo;
     }
 }

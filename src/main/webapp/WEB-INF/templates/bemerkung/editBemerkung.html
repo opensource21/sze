@@ -16,6 +16,7 @@ deleteUrl
     src="../../../resources/js/jquery-1.8.2.js" th:remove="all"></script>
 <script type="text/javascript"
     src="../../../resources/js/thymelaefbs.js?1" th:remove="all"></script>
+    <title th:text="Zeugnis Bemerkung ${bemerkung?.zeugnis?.schueler}"></title>
 </head>
 <body th:with="helpMessageId=help.bemerkung.edit">
     <div layout:fragment="content">

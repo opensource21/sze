@@ -11,6 +11,7 @@ tags - a list of selectable tag
     xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
     layout:decorator="/main">
 <head >
+    <title th:text="#{zeugnisArt.form.title} (${zeugnisArt.name})"></title>
 </head>
 <body th:with="helpMessageId=help.zeugnisArt.edit">
     <div layout:fragment="content">
