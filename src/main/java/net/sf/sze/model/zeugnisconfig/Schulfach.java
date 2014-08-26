@@ -53,19 +53,19 @@ public class Schulfach extends RevisionModel implements Serializable,
     private Schulfachtyp typ;
 
     /** The stufen mit Differenzierung auf 2 Niveaus. */
-    @Column(name = "stufen_mit_aussen_differenzierung", length = 255)
+    @Column(length = 255)
     @ZweiDreiNivauIntersect
     @StandardZweiNiveauIntersect
     private String stufenMitZweiNiveaus;
 
     /** The stufen mit Differenzierung auf 3 Niveaus. */
-    @Column(name = "stufen_mit_binnen_differenzierung", length = 255)
+    @Column(length = 255)
     @StandardDreiNiveauIntersect
     @ZweiDreiNivauIntersect
     private String stufenMitDreiNiveaus;
 
     /** The stufen mit standard bewertung. */
-    @Column(name = "stufen_mit_standard_bewertung", length = 255)
+    @Column(length = 255)
     @StandardDreiNiveauIntersect
     @StandardZweiNiveauIntersect
     private String stufenMitStandardBewertung;

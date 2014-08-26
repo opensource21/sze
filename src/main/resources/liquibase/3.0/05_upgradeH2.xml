@@ -84,7 +84,7 @@
             <column name="NACHTEILS_AUSGLEICHS_DATUM" type="TIMESTAMP"/>
         </addColumn>
     </changeSet>
-     <changeSet author="niels" id="20140826" >
+     <changeSet author="niels" id="20140826-1" >
         <comment>Umstellung auf des Dsikriminators bei den Bewertungen</comment>
         <sql>update bewertung set class = 'DreiNiveauBewertung'
             where class = 'net.sf.sze.zeugnis.BinnenDifferenzierteBewertung'</sql>
@@ -92,5 +92,19 @@
             where class = 'net.sf.sze.zeugnis.AussenDifferenzierteBewertung'</sql>
         <sql>update bewertung set class = 'StandardBewertung'
             where class = 'net.sf.sze.zeugnis.StandardBewertung'</sql>
-
-    </changeSet></databaseChangeLog>
+    </changeSet>
+    <changeSet author="niels" id="20140826-2" >
+        <comment>Umbenennung der Spalte STUFEN_MIT_AUSSEN_DIFFERENZIERUNG</comment>
+        <renameColumn tableName="SCHULFACH"
+            oldColumnName="STUFEN_MIT_AUSSEN_DIFFERENZIERUNG"
+            newColumnName="STUFEN_MIT_ZWEI_NIVEAUS"
+            columnDataType="VARCHAR(255)"/>
+    </changeSet>
+    <changeSet author="niels" id="20140826-3" >
+        <comment>Umbenennung der Spalte STUFEN_MIT_BINNEN_DIFFERENZIERUNG</comment>
+        <renameColumn tableName="SCHULFACH"
+            oldColumnName="STUFEN_MIT_BINNEN_DIFFERENZIERUNG"
+            newColumnName="STUFEN_MIT_DREI_NIVEAUS"
+            columnDataType="VARCHAR(255)"/>
+    </changeSet>
+</databaseChangeLog>
