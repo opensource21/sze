@@ -47,6 +47,6 @@ public class StandardZweiNiveauIntersectCheck
         DisjunktKlassenstufenConfigurer obj = (DisjunktKlassenstufenConfigurer) validatedObject;
         return !CollectionUtils.containsAny(obj
                 .convertStufenMitStandardBewertungToList(), obj
-                .convertStufenMitAussenDifferenzierungToList());
+                .convertStufenMitZweiNiveausToList());
     }
 }

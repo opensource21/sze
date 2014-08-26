@@ -23,12 +23,12 @@ public interface DisjunktKlassenstufenConfigurer {
      * Konvertiert den String der Klassenstufen in eine Liste.
      * @return den String der Klassenstufen als Liste.
      */
-    List<String> convertStufenMitBinnenDifferenzierungToList();
+    List<String> convertStufenMitDreiNiveausToList();
 
     /**
      * Konvertiert den String der Klassenstufen in eine Liste.
      * @return den String der Klassenstufen als Liste.
      */
-    List<String> convertStufenMitAussenDifferenzierungToList();
+    List<String> convertStufenMitZweiNiveausToList();
 
 }

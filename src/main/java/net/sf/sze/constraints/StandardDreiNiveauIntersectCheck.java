@@ -48,7 +48,7 @@ public class StandardDreiNiveauIntersectCheck
                 (DisjunktKlassenstufenConfigurer) validatedObject;
         return !CollectionUtils.containsAny(obj
                 .convertStufenMitStandardBewertungToList(), obj
-                .convertStufenMitBinnenDifferenzierungToList());
+                .convertStufenMitDreiNiveausToList());
 
     }
 }

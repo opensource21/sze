@@ -199,7 +199,7 @@ public class Schulfach extends RevisionModel implements Serializable,
      * @return den String der Klassenstufen als Liste.
      */
     @Override
-    public List<String> convertStufenMitBinnenDifferenzierungToList() {
+    public List<String> convertStufenMitDreiNiveausToList() {
         return StringUtil.convertStringToList(stufenMitDreiNiveaus);
     }
 
@@ -208,7 +208,7 @@ public class Schulfach extends RevisionModel implements Serializable,
      * @return den String der Klassenstufen als Liste.
      */
     @Override
-    public List<String> convertStufenMitAussenDifferenzierungToList() {
+    public List<String> convertStufenMitZweiNiveausToList() {
         return StringUtil.convertStringToList(stufenMitZweiNiveaus);
     }
 

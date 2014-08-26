@@ -401,9 +401,9 @@ public class ZeugnisInitialisierungServiceImpl implements ZeugnisInitialierungsS
         Bewertung result = null;
         if (schulfach.convertStufenMitStandardBewertungToList().contains(klassenStufe)) {
             result = new StandardBewertung();
-        } else if (schulfach.convertStufenMitBinnenDifferenzierungToList().contains(klassenStufe)) {
+        } else if (schulfach.convertStufenMitDreiNiveausToList().contains(klassenStufe)) {
             result = new DreiNiveauBewertung();
-        } else if (schulfach.convertStufenMitAussenDifferenzierungToList().contains(klassenStufe)) {
+        } else if (schulfach.convertStufenMitZweiNiveausToList().contains(klassenStufe)) {
             result = new ZweiNiveauBewertung();
         } else {
             return null;

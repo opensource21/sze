@@ -46,7 +46,7 @@ public class ZweiDreiNivauIntersectCheck
 
         DisjunktKlassenstufenConfigurer obj = (DisjunktKlassenstufenConfigurer) validatedObject;
         return !CollectionUtils.containsAny(obj
-                .convertStufenMitBinnenDifferenzierungToList(), obj
-                .convertStufenMitAussenDifferenzierungToList());
+                .convertStufenMitDreiNiveausToList(), obj
+                .convertStufenMitZweiNiveausToList());
     }
 }
