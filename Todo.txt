@@ -9,7 +9,7 @@
 - Security
 - Menü
 
-- Liquibase: Warum meint er die Ids sein nicht eindeutig.-> Migration auch noch mal durchtesten.
+- Liquibase: Migration auch noch mal durchtesten mit Maven.
 
 #PRIO 2
 - Delete-Fragment zu umbauen, dass es mit JS und ohne gut läuft.

@@ -151,7 +151,6 @@
             <version>1.9.5</version>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
     <build>
         <pluginManagement>
@@ -359,7 +358,7 @@
             <plugin>
                 <groupId>org.liquibase</groupId>
                 <artifactId>liquibase-maven-plugin</artifactId>
-                <version>3.0.1</version>
+                <version>3.2.2</version>
                 <configuration>
                     <changeLogFile>/src/main/resources/liquibase/upgrade3.0.xml</changeLogFile>
                     <driver>${db.driver}</driver>
@@ -369,6 +368,7 @@
                     <logging>warning</logging>
                     <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
                     <outputChangeLogFile>/liquibase-log</outputChangeLogFile>
+                    <outputFileEncoding>UTF-8</outputFileEncoding>
                 </configuration>
 
             </plugin>

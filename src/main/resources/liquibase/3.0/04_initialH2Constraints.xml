@@ -2,7 +2,7 @@
 <databaseChangeLog logicalFilePath="/liquibase/3.0/04_initialH2Constraints.xml"
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
      <changeSet author="niels (generated)" id="1350468362951-28">
         <addPrimaryKey columnNames="GSEC_ROLE_ID, GSEC_PERMISSION_ID" constraintName="PK_GSEC_ROLE_PERMISSIONS" tableName="GSEC_ROLE_PERMISSIONS"/>
     </changeSet>
