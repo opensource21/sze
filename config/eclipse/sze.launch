@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="RunJettyRunWebApp">
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
-<listEntry value="/sze_spring"/>
+<listEntry value="/sze"/>
 </listAttribute>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
 <listEntry value="4"/>
 </listAttribute>
 <stringAttribute key="org.eclipse.jdt.launching.CLASSPATH_PROVIDER" value="RunJettyRunWebAppClassPathProvider"/>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="runjettyrun.Bootstrap"/>
-<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="sze_spring"/>
-<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-javaagent:${project_loc:sze_spring}/config/eclipse/springloaded-1.1.1-dev.jar -noverify"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="sze"/>
+<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-javaagent:${project_loc:sze}/config/eclipse/springloaded-1.1.1-dev.jar -noverify"/>
 <stringAttribute key="run_jetty_run.CONTEXT_ATTR" value="/sze"/>
 <booleanAttribute key="run_jetty_run.ENABLE_JNDI_ATTR" value="false"/>
 <booleanAttribute key="run_jetty_run.ENABLE_NEED_CLIENT_AUTH_ATTR" value="false"/>
