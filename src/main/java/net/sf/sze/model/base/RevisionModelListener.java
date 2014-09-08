@@ -50,7 +50,7 @@ public class RevisionModelListener implements InitializingBean {
     public void postLoad(RevisionModel model) {
         final Map<String, Object> map = new HashMap<String, Object>();
         putValuesToMap(map, "", model);
-        model.loadedValues = map;
+        model.setLoadedValues(map);
     }
 
     /**
@@ -59,7 +59,7 @@ public class RevisionModelListener implements InitializingBean {
      */
     @PostRemove
     public void preRemove(RevisionModel model) {
-        saveChanges(Action.DELETE, model, model.loadedValues, new HashMap<String, Object>());
+        saveChanges(Action.DELETE, model, model.getLoadedValues(), new HashMap<String, Object>());
     }
 
     /**
@@ -81,7 +81,7 @@ public class RevisionModelListener implements InitializingBean {
     public void preUpdate(RevisionModel model) {
         final Map<String, Object> map = new HashMap<String, Object>();
         putValuesToMap(map, "", model);
-        saveChanges(Action.UPDATE, model, model.loadedValues, map);
+        saveChanges(Action.UPDATE, model, model.getLoadedValues(), map);
     }
 
     private void saveChanges(Action action, RevisionModel model,

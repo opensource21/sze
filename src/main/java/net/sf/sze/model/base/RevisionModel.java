@@ -25,7 +25,23 @@ public class RevisionModel extends VersionedModel {
      * Map which stores the original values.
      */
     @Transient
-    transient Map<String, Object> loadedValues;
+    private Map<String, Object> loadedValues;
+
+    /**
+     * Returns the loaded Values.
+     * @return the loadedValues.
+     */
+    Map<String, Object> getLoadedValues() {
+        return loadedValues;
+    }
+
+    /**
+     * Set the loaded values.
+     * @param loadedValues the loadedValues to set.
+     */
+    void setLoadedValues(Map<String, Object> loadedValues) {
+        this.loadedValues = loadedValues;
+    }
 
 
 }
