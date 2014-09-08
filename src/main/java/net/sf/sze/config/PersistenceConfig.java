@@ -131,7 +131,6 @@ public class PersistenceConfig implements TransactionManagementConfigurer {
 
         final HibernateJpaVendorAdapter jpaVendorAdapter =
                 new HibernateJpaVendorAdapter();
-        jpaVendorAdapter.setShowSql(true);
         jpaVendorAdapter.setGenerateDdl(generateDDL);
         jpaVendorAdapter.setDatabasePlatform(hibernateDialect);
         entityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapter);

@@ -21,10 +21,10 @@
             <fileNamePattern>logs/sze.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy
                 class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <!-- or whenever the file size reaches 10MB -->
+                <!-- or whenever the file size reaches 500MB -->
                 <maxFileSize>500MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
-            <!-- keep 10 days' worth of history-->
+            <!-- keep 30 days' worth of history-->
             <maxHistory>30</maxHistory>
             <cleanHistoryOnStart>true</cleanHistoryOnStart>
         </rollingPolicy>
@@ -39,21 +39,47 @@
     </appender>
 
 
+    <appender name="SQLROLLINGFILE"
+        class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/sql.log</file>
+        <append>true</append>
+        <rollingPolicy
+            class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logFile.%d{yyyy-MM-dd}.log
+            </fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy
+                class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- or whenever the file size reaches 500MB -->
+                <maxFileSize>500MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <!-- keep 30 days' worth of history -->
+            <maxHistory>30</maxHistory>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+
+
+        <encoder>
+            <pattern>%d [%thread] %msg %n</pattern>
+        </encoder>
+
+    </appender>
+
+
     <appender name="THYMELEAF"
         class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>logs/thyemleaf.log</file>
-        <append>false</append>
+        <append>true</append>
 
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- daily rollover-->
             <fileNamePattern>logs/thyemleaf.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy
                 class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <!-- or whenever the file size reaches 10MB -->
-                <maxFileSize>500MB</maxFileSize>
+                <!-- or whenever the file size reaches 100MB -->
+                <maxFileSize>100MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
-            <!-- keep 10 days' worth of history-->
-            <maxHistory>30</maxHistory>
+            <!-- keep 5 days' worth of history-->
+            <maxHistory>5</maxHistory>
             <cleanHistoryOnStart>true</cleanHistoryOnStart>
         </rollingPolicy>
 
@@ -91,6 +117,16 @@
 
     <logger name="org.thymeleaf" level="TRACE" additivity="FALSE">
         <appender-ref ref="THYMELEAF" />
+    </logger>
+
+    <logger name="org.hibernate.SQL" additivity="FALSE">
+        <level value="DEBUG" />
+        <appender-ref ref="SQLROLLINGFILE" />
+    </logger>
+
+    <logger name="org.hibernate.type" additivity="FALSE">
+        <level value="TRACE" />
+        <appender-ref ref="SQLROLLINGFILE" />
     </logger>
 
     <root level="DEBUG">
