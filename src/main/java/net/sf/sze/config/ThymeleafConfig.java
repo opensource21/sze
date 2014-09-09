@@ -12,6 +12,7 @@ import org.thymeleaf.spring3.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
 import de.ppi.fuwesta.thymeleaf.bootstrap2.Bootstrap2Dialect;
+import de.ppi.fuwesta.thymeleaf.mail.MailToDialect;
 
 /**
  * Configuration of Thymeleaf.
@@ -59,6 +60,7 @@ public class ThymeleafConfig {
         ste.setTemplateResolver(templateResolver());
         ste.addDialect(new LayoutDialect());
         ste.addDialect(new Bootstrap2Dialect());
+        ste.addDialect(new MailToDialect());
         return ste;
     }
 

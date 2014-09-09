@@ -7,7 +7,6 @@ package net.sf.sze.frontend.base;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -49,5 +48,15 @@ public class HomeController {
         LOG.info("UserId: {}", userId);
         model.addAttribute("userId", userId);
         return "example/editBootstrap";
+    }
+
+
+    /**
+     * Wirft eine Exception.
+     * @return wirft immer eine Exception.
+     */
+    @RequestMapping("/showException")
+    public String showException() {
+        throw new RuntimeException("Die angeforderte Exception.");
     }
 }

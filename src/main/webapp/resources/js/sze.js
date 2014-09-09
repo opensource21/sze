@@ -129,6 +129,37 @@
          } );
      }
 
+
+
+     /**
+      * Toggles the details by onclick.
+      */
+     sze.toggleTechnicalDetails=function(){
+             $('#technicalDetails').slideToggle(
+                             10,
+                             function(){
+                                     if($('#technicalDetails').is(':visible')){
+                                             $('#actionButtonToggleDetails').html('<i class="icon-chevron-up"></i>');
+                                     }else {
+                                             $('#actionButtonToggleDetails').html('<i class="icon-chevron-down"></i>');
+                                     }
+                             })
+     }
+
+     //Private
+     $(function(){
+             /**
+              * Hide details on document-ready.
+              */
+             $('#technicalDetails').hide();
+             /**
+              * Show technical Details on Click.
+              */
+             $('#actionButtonToggleDetails').on("click", function(){
+                     sze.toggleTechnicalDetails();
+             });
+     });
+
 }(window));
 
 
@@ -138,7 +169,8 @@ $(document).ready(function(){
    sze.hideandshow();
    sze.confirmDelete();
    sze.addDatepicker();
-   sze.initTable()
+   sze.initTable();
+   sze.toggleTechnicalDetails();
    $('.chzn-select').chosen();
 });
 
