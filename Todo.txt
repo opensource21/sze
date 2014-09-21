@@ -14,7 +14,7 @@
 #PRIO 2
 - Delete-Fragment zu umbauen, dass es mit JS und ohne gut läuft.
 
-- Automatisches Anlegen von Halbjahren und Formularen.
+- Automatisches Anlegen von Halbjahren und Formularen. (Siehe /sze/doku/initHalbjahr.md)
 
 - Bessere Template Unterstützung. Siehe seu/projects/schule/felderUndPlatzhalter.md
 
