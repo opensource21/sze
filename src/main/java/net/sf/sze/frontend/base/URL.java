@@ -70,6 +70,23 @@ public final class URL {
     }
 
     /**
+     * URLs die die Security betreffen.
+     *
+     */
+    public interface Security {
+
+        /**
+         * Anmelden.
+         */
+        String LOGIN = "/login";
+
+        /**
+         * Abmelden.
+         */
+        String LOGOUT = "/logout";
+    }
+
+    /**
      * Parameter die in verschiedenen View gebraucht werden und ähnlich wie bei
      * einer Session in die URL abgelegt werden.
      *
@@ -353,6 +370,7 @@ public final class URL {
      * All URLS for the Bemerkung.
      *
      */
+    //TOOD Prüfen ob benutzt.
     public interface Bemerkung {
 
         /**

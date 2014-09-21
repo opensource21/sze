@@ -57,7 +57,7 @@ import de.ppi.fuwesta.spring.mvc.util.UrlDefinitionsToMessages;
 @Configuration
 @ComponentScan(basePackages = {"net.sf.sze.frontend",
         "net.sf.oval.integration.spring", "de.ppi.fuwesta.jpa.helper"})
-@Import({RootConfig.class, ThymeleafConfig.class})
+@Import({RootConfig.class, SecurityConfig.class, ThymeleafConfig.class})
 public class WebMvcConfig extends WebMvcConfigurationSupport {
 
     /**

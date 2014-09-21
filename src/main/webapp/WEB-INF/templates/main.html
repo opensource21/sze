@@ -49,7 +49,7 @@ messages - eine Liste mit Meldungen.
 <script type="text/javascript"
     src="../../../../resources/js/sze.js"
     th:src="@{/resources/js/sze.js}"></script>
-<title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE">SZE</title>
+<title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE" th:text="#{app.title}">SZE</title>
 </head>
 <body>
     <div id="header">
