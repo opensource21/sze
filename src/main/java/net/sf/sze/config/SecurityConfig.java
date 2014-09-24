@@ -53,10 +53,10 @@ public class SecurityConfig {
     private void defineSecurityFilter(Map<String, String> filterMap) {
         filterMap.put("/resources/**/*", DefaultFilter.anon.name());
         filterMap.put(URL.Security.LOGOUT, DefaultFilter.logout.name());
-        filterMap.put(URL.Configuration.HOME + "/**/*", AUTHC + ", perms[config:*]");
-        filterMap.put(URL.Zeugnis.HOME + "/**/*", AUTHC + ", perms[zeugnis:ansicht]");
-        filterMap.put(URL.Bewertungen.HOME + "/**/*", AUTHC + ", perms[zeugnis:bewertung]");
-        filterMap.put(URL.Bemerkung.HOME + "/**/*", AUTHC + ", perms[zeugnis:bemerkung]");
+        filterMap.put(URL.Configuration.HOME + "/**", AUTHC + ", perms[config:*]");
+        filterMap.put(URL.Zeugnis.HOME + "/**", AUTHC + ", perms[zeugnis:ansicht]");
+        filterMap.put(URL.Bewertungen.HOME + "/**", AUTHC + ", perms[zeugnis:bewertung]");
+        filterMap.put(URL.Bemerkung.HOME + "/**", AUTHC + ", perms[zeugnis:bemerkung]");
         filterMap.put("/**", AUTHC);
     }
 
