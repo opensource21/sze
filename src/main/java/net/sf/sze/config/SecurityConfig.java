@@ -14,6 +14,7 @@ import org.apache.shiro.realm.text.IniRealm;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
+import org.apache.shiro.web.filter.authz.PermissionsAuthorizationFilter;
 import org.apache.shiro.web.filter.mgt.DefaultFilter;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.context.annotation.Bean;
@@ -27,9 +28,9 @@ import org.springframework.context.annotation.Configuration;
 public class SecurityConfig {
 
     /**
-     * Key for {@link FormAuthenticationFilter}.
+     * Enables or disable the Filter.
      */
-    private static final String AUTHC = "authc";
+    private final boolean enabled = true;
 
     /**
      * Defines the realms.
@@ -51,13 +52,15 @@ public class SecurityConfig {
      *
      */
     private void defineSecurityFilter(Map<String, String> filterMap) {
+        final String authAndPerms = DefaultFilter.authc.name() + ", "
+                + DefaultFilter.perms.name();
         filterMap.put("/resources/**/*", DefaultFilter.anon.name());
         filterMap.put(URL.Security.LOGOUT, DefaultFilter.logout.name());
-        filterMap.put(URL.Configuration.HOME + "/**", AUTHC + ", perms[config:*]");
-        filterMap.put(URL.Zeugnis.HOME + "/**", AUTHC + ", perms[zeugnis:ansicht]");
-        filterMap.put(URL.Bewertungen.HOME + "/**", AUTHC + ", perms[zeugnis:bewertung]");
-        filterMap.put(URL.Bemerkung.HOME + "/**", AUTHC + ", perms[zeugnis:bemerkung]");
-        filterMap.put("/**", AUTHC);
+        filterMap.put(URL.Configuration.HOME + "/**", authAndPerms + "[config:*]");
+        filterMap.put(URL.Zeugnis.HOME + "/**", authAndPerms + "[zeugnis:ansicht]");
+        filterMap.put(URL.Bewertungen.HOME + "/**", authAndPerms + "[zeugnis:bewertung]");
+        filterMap.put(URL.Bemerkung.HOME + "/**", authAndPerms + "[zeugnis:bemerkung]");
+        filterMap.put("/**", DefaultFilter.authc.name());
     }
 
     /**
@@ -72,6 +75,10 @@ public class SecurityConfig {
         result.setLoginUrl(URL.Security.LOGIN);
         result.setSuccessUrl(URL.Zeugnis.START);
         // result.setUnauthorizedUrl(null);
+        result.getFilters().put(DefaultFilter.authc.name(),
+                createCustomFormAuthentficationFilter());
+        result.getFilters().put(DefaultFilter.perms.name(),
+                createCustomPermissionsAuthorizationFilter());
         defineSecurityFilter(result.getFilterChainDefinitionMap());
         return result;
     }
@@ -81,10 +88,20 @@ public class SecurityConfig {
      *
      * @return a well configured {@link FormAuthenticationFilter}.
      */
-    @Bean(name = AUTHC)
-    public Filter createCustomFormAuthentficationFilter() {
+    private Filter createCustomFormAuthentficationFilter() {
         FormAuthenticationFilter authc = new FormAuthenticationFilter();
-        authc.setEnabled(true);
+        authc.setEnabled(enabled);
+        return authc;
+    }
+
+    /**
+     * Creates a well configured {@link FormAuthenticationFilter}.
+     *
+     * @return a well configured {@link FormAuthenticationFilter}.
+     */
+    private Filter createCustomPermissionsAuthorizationFilter() {
+        PermissionsAuthorizationFilter authc = new PermissionsAuthorizationFilter();
+        authc.setEnabled(enabled);
         return authc;
     }
 
