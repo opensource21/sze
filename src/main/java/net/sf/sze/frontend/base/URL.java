@@ -84,6 +84,12 @@ public final class URL {
          * Abmelden.
          */
         String LOGOUT = "/logout";
+
+
+        /**
+         * Not authorized.
+         */
+        String UNAUTHORIZED = "/unauthorized";
     }
 
     /**

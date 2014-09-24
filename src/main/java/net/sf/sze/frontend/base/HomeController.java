@@ -81,4 +81,13 @@ public class HomeController {
         return "login";
     }
 
+    /**
+     * Seite bei mangelnden Rechten.
+     * @return the unquthorized-view-name.
+     */
+    @RequestMapping(URL.Security.UNAUTHORIZED)
+    public String unauthorizedPage() {
+        return "unauthorized";
+    }
+
 }
