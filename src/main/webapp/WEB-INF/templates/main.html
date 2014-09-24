@@ -58,12 +58,9 @@ messages - eine Liste mit Meldungen.
                 th:src="@{/resources/images/sze_logo.jpg}" alt="SZE-Logo" />
         </div>
         <div id="info">
-            Hallo ###!
-            <p>
-                Sie sind eingeloggt in sze Version <i th:text="#{app.version}">3.0.0</i>
-                als: ###Userid### (<a href="auth/logoff"
-                    th:href="@{#{todo}(todo='Rechte Steuerung baunen')}">Abmelden</a>)
-            </p>
+            Hallo Sie sind eingeloggt in sze Version <i th:text="#{app.version}">3.0.0</i>
+                als: <th:block shiro:principal=""/> (<a href="auth/logoff"
+                    th:href="@{#{purl.security.logout}}">Abmelden</a>)
         </div>
     </div>
     <!-- TODO nachfolgendes in Abhängigkeit von der Rollen anzeigen. -->
@@ -78,6 +75,8 @@ messages - eine Liste mit Meldungen.
                     <a href="#" th:with="#{par.session.halbjahr_id}=${#objects.nullSafe(halbjahr_id,0)},
                         #{par.session.klassen_id}=${#objects.nullSafe(klassen_id,0)}"
                         th:href="@{|__#{nurl.zeugnispath.start}__|}">Zeugnisse</a></li>
+                <li>
+                    <a href="auth/logoff" th:href="@{#{purl.security.logout}}">Abmelden</a></li>
             </ul>
         </div>
     </div>
