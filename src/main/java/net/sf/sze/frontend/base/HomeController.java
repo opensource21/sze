@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Simple start-controller.
@@ -59,4 +60,34 @@ public class HomeController {
     public String showException() {
         throw new RuntimeException("Die angeforderte Exception.");
     }
+
+    /**
+     * Show the login-view.
+     *
+     * @param username optional the username
+     * @param password optional the password
+     * @param model the Spring model
+     * @return the login-view-name
+     */
+    //J-
+    @RequestMapping(value = URL.Security.LOGIN, method = { RequestMethod.GET,
+            RequestMethod.POST })
+    public String loginPage(
+            @RequestParam(value = "username", required = false) String username,
+            @RequestParam(value = "password", required = false) String password,
+            Model model) {
+        model.addAttribute("username", username);
+        model.addAttribute("password", password);
+        return "login";
+    }
+
+    /**
+     * Seite bei mangelnden Rechten.
+     * @return the unquthorized-view-name.
+     */
+    @RequestMapping(URL.Security.UNAUTHORIZED)
+    public String unauthorizedPage() {
+        return "unauthorized";
+    }
+
 }

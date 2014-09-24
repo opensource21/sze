@@ -1,20 +1,19 @@
 #PRIO 1
 
+- Liquibase: Migration auch noch mal durchtesten mit Maven.
+
+- Prüfen ob die Zeugnisse gleich erstellt werden.
+
+#PRIO 2
+- Automatisches Anlegen von Halbjahren und Formularen. (Siehe /sze/doku/initHalbjahr.md)
+
+- Delete-Fragment zu umbauen, dass es mit JS und ohne gut läuft.
+
 - Beim Initialiseren von Klasse 1-2 komplett gibt es eine Exception.
     -> Das lag daran, dass erst initialisiert wurde und dann der Schüler
        die Klasse gewechselt hat. Das können wir technisch noch nicht. (Gefixt!)
     -> Man muss die Möglichkeit bekommen Zeugnisse zu löschen, sofern man
        bestimmte Rechte hat.
-
-- Security
-- Menü
-
-- Liquibase: Migration auch noch mal durchtesten mit Maven.
-
-#PRIO 2
-- Delete-Fragment zu umbauen, dass es mit JS und ohne gut läuft.
-
-- Automatisches Anlegen von Halbjahren und Formularen. (Siehe /sze/doku/initHalbjahr.md)
 
 - Bessere Template Unterstützung. Siehe seu/projects/schule/felderUndPlatzhalter.md
 

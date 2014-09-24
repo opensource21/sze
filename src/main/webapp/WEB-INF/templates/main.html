@@ -49,7 +49,7 @@ messages - eine Liste mit Meldungen.
 <script type="text/javascript"
     src="../../../../resources/js/sze.js"
     th:src="@{/resources/js/sze.js}"></script>
-<title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE">SZE</title>
+<title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE" th:text="#{app.title}">SZE</title>
 </head>
 <body>
     <div id="header">
@@ -58,26 +58,28 @@ messages - eine Liste mit Meldungen.
                 th:src="@{/resources/images/sze_logo.jpg}" alt="SZE-Logo" />
         </div>
         <div id="info">
-            Hallo ###!
-            <p>
-                Sie sind eingeloggt in sze Version <i th:text="#{app.version}">3.0.0</i>
-                als: ###Userid### (<a href="auth/logoff"
-                    th:href="@{#{todo}(todo='Rechte Steuerung baunen')}">Abmelden</a>)
-            </p>
+            Hallo Sie sind eingeloggt in sze Version <i th:text="#{app.version}">3.0.0</i>
+                als: <th:block shiro:principal=""/> (<a href="auth/logoff"
+                    th:href="@{#{nurl.security.logout}}">Abmelden</a>)
         </div>
     </div>
     <!-- TODO nachfolgendes in Abhängigkeit von der Rollen anzeigen. -->
     <div class="navbar">
         <div class="navbar-inner">
             <ul class="nav">
-                <li th:class="${#strings.contains(#httpServletRequest.getRequestURI(),'/admin/')?'active':''}">
+                <li shiro:hasPermission="admin:overview"
+                    th:class="${#strings.contains(#httpServletRequest.getRequestURI(),'/admin/')?'active':''}">
                     <a href="#" th:href="@{/admin}">Administration</a></li>
-                <li th:class="${#strings.contains(#httpServletRequest.getRequestURI(),'/konfiguration/')?'active':''}">
+                <li shiro:hasPermission="config:overview"
+                    th:class="${#strings.contains(#httpServletRequest.getRequestURI(),'/konfiguration/')?'active':''}">
                     <a href="#" th:href="@{#{nurl.configuration.main}}">Konfiguration</a></li>
-                <li th:class="${#strings.contains(#httpServletRequest.getRequestURI(),'/zeugnis/') or #strings.contains(#httpServletRequest.getRequestURI(),'/bewertungen/')?'active':''}">
+                <li shiro:hasPermission="zeugnis:overview"
+                    th:class="${#strings.contains(#httpServletRequest.getRequestURI(),'/zeugnis/') or #strings.contains(#httpServletRequest.getRequestURI(),'/bewertungen/')?'active':''}">
                     <a href="#" th:with="#{par.session.halbjahr_id}=${#objects.nullSafe(halbjahr_id,0)},
                         #{par.session.klassen_id}=${#objects.nullSafe(klassen_id,0)}"
                         th:href="@{|__#{nurl.zeugnispath.start}__|}">Zeugnisse</a></li>
+                <li shiro:user="">
+                    <a href="auth/logoff" th:href="@{#{nurl.security.logout}}">Abmelden</a></li>
             </ul>
         </div>
     </div>

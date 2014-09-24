@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html lang="de-DE" xmlns:th="http://www.thymeleaf.org">
+<head >
+    <title th:text="#{app.title} + ' - ' + #{login.title}"></title>
+    <th:block th:include="/main::head"/>
+</head>
+<body >
+    <div class="well">
+    <div class="alert alert-error" th:text="#{login.failed}" th:if="${#httpServletRequest.method == 'POST'}"></div>
+    <form class="form-horizontal" th:action="@{/login}" method="post">
+        <input type="text" bs:name="username" th:value="${username}"/>
+        <input type="password" bs:name="password" th:value="${password}"/>
+        <button type="submit" class="btn">Log in</button>
+    </form>
+    </div>
+</body>
+</html>
