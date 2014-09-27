@@ -938,6 +938,7 @@ public class Zeugnis extends RevisionModel implements Serializable,
             arbeitsgruppenSatz.append(besuchteArbeitsgruppen.get(anzAGs - 2))
                     .append(" und der ").append(besuchteArbeitsgruppen.get(
                     anzAGs - 1)).append(" teilgenommen. ");
+            break;
         default:
             arbeitsgruppenSatz.append(name).append(" hat an der ");
 
