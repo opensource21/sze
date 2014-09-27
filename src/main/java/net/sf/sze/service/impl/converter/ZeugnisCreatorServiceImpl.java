@@ -61,6 +61,11 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
         DisposableBean, ZeugnisCreatorService {
 
     /**
+     * Praefix für historische WP-Einträge.
+     */
+    private static final String WP_PRAEFIX = "wp";
+
+    /**
      * Die Log-Instanz.
      */
     private static final Logger LOG = LoggerFactory.getLogger(
@@ -306,10 +311,10 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
         final boolean noteAlsTextDarstellen = zeugnis.getZeugnisArt()
                 .getNoteAlsTextDarstellen().booleanValue();
         for (int hj = 1; hj < 3; hj++) {
-            for (int i = 0; i < 3; i++) {
-                zeugnisDaten.put("wp" + hj + "_" + i + "_name", VariableUtility
+            for (int i = 1; i < 3; i++) {
+                zeugnisDaten.put(WP_PRAEFIX + hj + "_" + i + "_name", VariableUtility
                         .PLATZHALTER_LEER);
-                zeugnisDaten.put("wp" + hj + "_" + i + "_note", VariableUtility
+                zeugnisDaten.put(WP_PRAEFIX + hj + "_" + i + "_note", VariableUtility
                         .PLATZHALTER_LEER);
             }
         }
@@ -384,9 +389,9 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
             if (bewertung.getRelevant() && (bewertung.getSchulfach().getTyp()
                     == Schulfachtyp.WAHLPFLICHT)) {
                 i++;
-                zeugnisDaten.put("wp" + hj + "_" + i + "_name", bewertung
+                zeugnisDaten.put(WP_PRAEFIX + hj + "_" + i + "_name", bewertung
                         .getSchulfach().getName());
-                zeugnisDaten.put("wp" + hj + "_" + i + "_note", bewertung
+                zeugnisDaten.put(WP_PRAEFIX + hj + "_" + i + "_note", bewertung
                         .createPrintText(noteAlsTextDarstellen));
             }
         }
