@@ -10,16 +10,16 @@ messages - eine Liste mit Meldungen.
 <head th:attr="data-baseurl=@{'/'}">
 <meta charset="UTF-8" />
 <link rel="shortcut icon" href="../../resources/images/sze.ico"
-    type="image/x-icon" th:href="@{/resources/images/sze.ico}" />
+    type="image/x-icon" th:href="@{/resources/images/sze.ico(version=#{app.version})}" />
 <link rel="icon" href="../../resources/images/sze.ico"
-    type="image/x-icon" th:href="@{/resources/images/sze.ico}" />
+    type="image/x-icon" th:href="@{/resources/images/sze.ico(version=#{app.version})}" />
 
 <link rel="stylesheet" href="../../resources/css/bootstrap-ppi.css"
-    th:href="@{/resources/css/bootstrap-ppi.css}" />
+    th:href="@{/resources/css/bootstrap-ppi.css(version=#{app.version})}" />
     <link rel="stylesheet" href="../../resources/css/DT_bootstrap.css"
-    th:href="@{/resources/css/DT_bootstrap.css}" />
+    th:href="@{/resources/css/DT_bootstrap.css(version=#{app.version})}" />
 <link rel="stylesheet" href="../../resources/css/sze.css"
-    th:href="@{/resources/css/sze.css}" />
+    th:href="@{/resources/css/sze.css(version=#{app.version})}" />
 
 
 <link rel="stylesheet"
@@ -36,19 +36,19 @@ messages - eine Liste mit Meldungen.
     th:src="@{/resources/js/jquery-ui-1.9.1.custom.js}"></script>
 <script type="text/javascript"
     src="../../../../resources/js/chosen.jquery.js"
-    th:src="@{/resources/js/chosen.jquery.js}"></script>
+    th:src="@{/resources/js/chosen.jquery.js(version=#{app.version})}"></script>
 <script type="text/javascript"
     src="../../../../resources/js/jquery-ui-timepicker-addon.js"
-    th:src="@{/resources/js/jquery-ui-timepicker-addon.js}"></script>
+    th:src="@{/resources/js/jquery-ui-timepicker-addon.js(version=#{app.version})}"></script>
 <script type="text/javascript"
     src="../../../../resources/js/jquery.dataTables.js"
-    th:src="@{/resources/js/jquery.dataTables.js}"></script>
+    th:src="@{/resources/js/jquery.dataTables.js(version=#{app.version})}"></script>
 <script type="text/javascript"
     src="../../../../resources/js/DT_bootstrap.js"
-    th:src="@{/resources/js/DT_bootstrap.js}"></script>
+    th:src="@{/resources/js/DT_bootstrap.js(version=#{app.version})}"></script>
 <script type="text/javascript"
     src="../../../../resources/js/sze.js"
-    th:src="@{/resources/js/sze.js}"></script>
+    th:src="@{/resources/js/sze.js(version=#{app.version})}"></script>
 <title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE" th:text="#{app.title}">SZE</title>
 </head>
 <body>

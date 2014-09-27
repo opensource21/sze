@@ -17,6 +17,7 @@ import net.sf.sze.frontend.converter.KlasseConverter;
 import net.sf.sze.frontend.converter.SchulfachConverter;
 import net.sf.sze.frontend.converter.ZeugnisFormularConverter;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -91,6 +92,12 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
     /** The Constant RESOURCES_LOCATION. */
     private static final String RESOURCES_LOCATION = RESOURCES_HANDLER + "**";
 
+    /**
+     * Die POM-Versions-Nr.
+     */
+    @Value("${project.version}")
+    private String buildNr;
+
     @Override
     public RequestMappingHandlerMapping requestMappingHandlerMapping() {
         RequestMappingHandlerMapping requestMappingHandlerMapping = super
@@ -130,6 +137,9 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
                 new EntityPropertiesToMessages(
                         "net.sf.sze.model");
         staticMessages.putAll(epm.getProperties());
+        final String version = buildNr.replace("SNAPSHOT",
+                Long.toString(System.currentTimeMillis()));
+        staticMessages.put("app.version", version);
         messageSource.setCommonMessages(staticMessages);
         return messageSource;
     }

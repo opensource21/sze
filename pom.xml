@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.sf.sze</groupId>
     <artifactId>sze_spring</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>3.0.0-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>SZE</name>
     <description>Schulzeugnisersteller</description>
@@ -176,6 +176,7 @@
         </dependency>
     </dependencies>
     <build>
+        <finalName>nsze</finalName>
         <pluginManagement>
             <!--This plugin's configuration is used to store Eclipse m2e
                 settings only. It has no influence on the Maven build itself. -->
