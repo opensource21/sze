@@ -820,7 +820,7 @@ public class Zeugnis extends RevisionModel implements Serializable,
 
         for (SchulamtsBemerkung aBemerkung : schulamtsBemerkungen) {
             schulamtsBemerkungsText.append(aBemerkung.createPrintText(schueler,
-                    null, (String) printMap.get("shj_jahr"))).append(" ");
+                    null, (String) printMap.get("shj_jahr")));
         }
 
         printMap.put("bemerkung_schulamt", schulamtsBemerkungsText.length() > 0
