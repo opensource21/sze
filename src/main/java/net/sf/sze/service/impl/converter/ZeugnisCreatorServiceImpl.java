@@ -481,7 +481,7 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
             } else {
                 final String valueAsString = value.toString();
                 if (valueAsString.length() > 0 && !valueAsString.endsWith(" ")) {
-                    printMap.put(key, value.toString() + " ");
+                    printMap.put(key, valueAsString + " ");
                 }
             }
         }
