@@ -7,6 +7,9 @@ package net.sf.sze.util;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -27,6 +30,8 @@ public class MapPrinter {
     private final String outputName;
 
     private final boolean keysOnly;
+
+    private final List<String> listOfEntries = new ArrayList<>();
 
     /**
      * Initiates an object of type MapPrinter.
@@ -53,7 +58,11 @@ public class MapPrinter {
      */
     public void print(Map<String, Object> map) {
         try (PrintStream output = new PrintStream(new File(outputName))) {
-            printInternal("", map, output);
+            collectEntries("", map);
+            Collections.sort(listOfEntries);
+            for (String entry : listOfEntries) {
+                output.println(entry);
+            }
         } catch (FileNotFoundException e) {
             LOG.error("Fehler beim Schreiben der Map", e);
             throw new RuntimeException("Map konnte nicht geschrieben werden", e);
@@ -61,19 +70,18 @@ public class MapPrinter {
     }
 
     @SuppressWarnings("unchecked")
-    private void printInternal(String prefix, Map<String, ?> map, PrintStream out) {
+    private void collectEntries(String prefix, Map<String, ?> map) {
         for (Map.Entry<String, ?> entry : map.entrySet()) {
             final String key = entry.getKey();
             final Object value = entry.getValue();
             if (value instanceof Map) {
-                printInternal(prefix + key + ".", (Map<String, ?>) value, out);
+                collectEntries(prefix + key + ".", (Map<String, ?>) value);
             } else {
-                out.print(prefix + key);
-                if (keysOnly) {
-                    out.println();
-                } else {
-                    out.println(" -> " + value);
+                StringBuilder entryAsString = new StringBuilder(prefix + key);
+                if (!keysOnly) {
+                    entryAsString.append(" -> " + value.toString().replaceAll("\\n", "#@NL@#"));
                 }
+                listOfEntries.add(entryAsString.toString());
             }
         }
     }

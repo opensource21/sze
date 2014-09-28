@@ -168,7 +168,7 @@ public class Schulhalbjahr extends RevisionModel implements Serializable,
 
     @Override
     public String toString() {
-        return (jahr.intValue() - 1) + "/" + jahr.intValue() % 100 + " " + halbjahr;
+        return (jahr.intValue() - 1) + "/" + jahr.toString().substring(2, 4) + " " + halbjahr;
     }
 
     /**
@@ -176,7 +176,7 @@ public class Schulhalbjahr extends RevisionModel implements Serializable,
      * @return der relative Pfad.
      */
     public String createRelativePathName() {
-        return (jahr.intValue() - 1) + "-" + jahr.intValue() % 100 + "/" + halbjahr
+        return (jahr.intValue() - 1) + "-" + jahr.toString().substring(2, 4) + "/" + halbjahr
                 .createRelativePathName();
     }
 

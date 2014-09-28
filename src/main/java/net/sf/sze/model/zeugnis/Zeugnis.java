@@ -787,6 +787,7 @@ public class Zeugnis extends RevisionModel implements Serializable,
         }
 
         final List<String> schwachAusreichendFaecher = new ArrayList<String>();
+        Collections.sort(bewertungen);
         for (Bewertung bw : bewertungen) {
             bw.toPrintMap(printMap, zeugnisArt.getNoteAlsTextDarstellen()
                     .booleanValue());
@@ -796,6 +797,7 @@ public class Zeugnis extends RevisionModel implements Serializable,
             }
         }
 
+        Collections.sort(avSvBewertungen);
         for (AvSvBewertung avSvBewertung : avSvBewertungen) {
             avSvBewertung.toPrintMap(printMap);
         }
@@ -807,6 +809,8 @@ public class Zeugnis extends RevisionModel implements Serializable,
                 schwachausreichendBemerkung);
 
         final StringBuffer allgemeineBemerkungen = new StringBuffer("");
+        Collections.sort(bemerkungen);
+
         for (AbstractBemerkung aBemerkung : bemerkungen) {
             allgemeineBemerkungen.append(aBemerkung.createPrintText(schueler,
                     formular.findNachteilsAusgleichsDatum(), (String) printMap
@@ -820,7 +824,7 @@ public class Zeugnis extends RevisionModel implements Serializable,
 
         for (SchulamtsBemerkung aBemerkung : schulamtsBemerkungen) {
             schulamtsBemerkungsText.append(aBemerkung.createPrintText(schueler,
-                    null, (String) printMap.get("shj_jahr"))).append(" ");
+                    null, (String) printMap.get("shj_jahr")));
         }
 
         printMap.put("bemerkung_schulamt", schulamtsBemerkungsText.length() > 0
@@ -938,6 +942,7 @@ public class Zeugnis extends RevisionModel implements Serializable,
             arbeitsgruppenSatz.append(besuchteArbeitsgruppen.get(anzAGs - 2))
                     .append(" und der ").append(besuchteArbeitsgruppen.get(
                     anzAGs - 1)).append(" teilgenommen. ");
+            break;
         default:
             arbeitsgruppenSatz.append(name).append(" hat an der ");
 
