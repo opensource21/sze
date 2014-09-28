@@ -2,7 +2,7 @@
 
 - Liquibase: Migration auch noch mal durchtesten mit Maven.
 
-- Prüfen ob die Zeugnisse gleich erstellt werden.
+- Prüfen ob die Zeugnisse gleich erstellt werden. (manuell. Automatisch abgeschlossen)
 
 #PRIO 2
 - Automatisches Anlegen von Halbjahren und Formularen. (Siehe /sze/doku/initHalbjahr.md)
