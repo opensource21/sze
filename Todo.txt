@@ -1,0 +1,113 @@
+#PRIO 1
+
+- Liquibase: Migration auch noch mal durchtesten mit Maven.
+
+- Prüfen ob die Zeugnisse gleich erstellt werden.
+
+#PRIO 2
+- Automatisches Anlegen von Halbjahren und Formularen. (Siehe /sze/doku/initHalbjahr.md)
+
+- Delete-Fragment zu umbauen, dass es mit JS und ohne gut läuft.
+
+- Beim Initialiseren von Klasse 1-2 komplett gibt es eine Exception.
+    -> Das lag daran, dass erst initialisiert wurde und dann der Schüler
+       die Klasse gewechselt hat. Das können wir technisch noch nicht. (Gefixt!)
+    -> Man muss die Möglichkeit bekommen Zeugnisse zu löschen, sofern man
+       bestimmte Rechte hat.
+
+- Bessere Template Unterstützung. Siehe seu/projects/schule/felderUndPlatzhalter.md
+
+- Beim Start von OO sollte man die Parameter mit -- anstatt - übergeben. Ist allerdings nur deprecated.
+
+
+#PRIO 3
+- SchulfachDetail-Info die combobox besser durchsuchbar machen.
+
+- Beschreibung von Session und URL.
+
+- Bei den Nachrichten zur Initialisierung sollte man evtl. die Klasse mit
+  ausgeben. Entweder als Überschrift (schöner) oder in die Nachricht selbst mit rein (einfacher).
+
+- Umstellung auf #{db....}
+
+- Tests für Controller
+
+- Test der Initialisierung bzgl Abgangsdatum!
+
+- Zeugnisformular Klasse und Schulhalbjahr sind zur Zeit geschützt durch
+  disablen der Felder in der Gui. Ein Check wäre robuster und man sieht gleich
+  den Text.
+
+- Aktives Menü eleganter setzen?
+    I'm trying to apply a css class to a menu item based on the current page URL.  So all pages under '/jobs/' should result in my jobs menu item being active.
+
+                <ul class="nav">
+                    <li info:activeforprefix="'/jobs/'">Jobs</li>
+                    <li info:activeforprefix="'/grid/'">Grid</li>
+                    <li info:activeforprefix="'/admin/'">
+                        Administration</li>
+                </ul>
+
+    The implementation of the info:activeforprefix is:
+
+            final String prefix = (String) StandardExpressionProcessor.processExpression(
+                    arguments, templateResolution, attributeValue
+            );
+
+            final Map<String, String> values = new HashMap<String, String>();
+
+            RequestContext requestContext = (RequestContext) arguments.getContext().getVariables().get("springRequestContext");
+            if (requestContext.getRequestUri().startsWith(prefix)) {
+                values.put("class", "active");
+            }
+
+
+- Wenn man eine Unterlist bearbeitet fehlt auch die Validierung. -> Geht mit neustem Fuwesta SpringValidateNestedProperty!
+- Man könnte alle enums auf Konstanten umstellen.
+
+#Fachliche Klärung:
+- Sortierung nach Schulfachname
+- Soll die Klasse immer zum aktuellen Datum oder zum Schuljahr umgesetzt werden.
+
+
+#Forschung:
+
+
+- http://jackcess.sourceforge.net/
+
+Bootstrap3 http://code.divshot.com/bootstrap3_upgrader/
+
+Erledigt
++ Umgang mit UniqueKeys diese müssen direkt beim Attribut definiert werden.
+Oder zusätzlich ein @Unique -> Aktuell kein Problem, da nicht durch GUI verletzbar.
+
++ 3Niveau und 2NiveauBewertung
+
+
++ Das Encoding stimmt auf den Seiten nicht, insbesonder bei Kommentaren -> Liegt aber auch daran,
+    dass das Response-Encoding nicht korrekt gesetzt wird (Gefixt). Bei den Kommentaren ist es sehr merkwürdig,
+    muss man mal im Original analysieren bzw in der Datenbank,
+    ?halbjahrId=15&klassenId=3 Schüler Bleul, Philippe-Yannic
+    Datenbank ist OK Es handelt sich um Deutsche Hochkommata.
+    Wird auch sauber ausgelesen.
+    Lag am Encoding fürs ausliefern.
++ Bei Comboboxen sollte man ein Autosubmit mit JS bauen. Diesmal aber JQuery-Like.
++ Formatter für Bereiche ausschalten! //J-  bzw //J+
++ bs:name ist per Copy&Paste entstanden bei Java und JS Java zu unterschiedlich, JS gefixt.
+
++ Druckaufbreitung (6h) -> Es fehlt noch der Test
++ Gedanken zu den Hilfetexten machen. Ist da ein Filter gut oder macht man das anders besser. -Lieber per Hand
++ Schreiben der Validatoren (1h)
++ th:fragment solle im aktuelle Template schauen können. -> Im Forum gepostet. wird in 2.1 möglich :-))
++ Boolean-Darstellung muss man immer einzeln Programmieren, da wäre eine Erweiterung sinnvoll. -> Ins Forum gestellt. ->
+  Eleganter #{'bool.'+${var}}
+
++ Admin-Bereich (3 PT?) (Halbjahr, Formular, Klasse, Schüler, Schulfach,
+    AvSv, AG, Bemerkungsbaustein, Schulamt, Schulamtsbemerkunsbaustein,
+    SoLBewertungstext, Zeugnisart)
++ https://github.com/mgonto/jpa-passive-logging-example (Siehe auch http://struberg.wordpress.com/2010/07/31/howto-changelog-with-jpa/)  UPGRADE_LIQUIBASE testen!
+
+
++ Owning-Side bei Many-To-One oder One-To-Many: Immer Many. Bei Many-Many die ohne mappedBy
++ Inverse Side: Die One-Side (also da wo One-To steht) oder die mit mappedBy. Hier ist das Speichern und veränden komplexer.
+

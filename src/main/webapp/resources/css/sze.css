@@ -1,0 +1,96 @@
+body {
+    margin: 10px;
+}
+
+select[readonly="readonly"].show, input[readonly="readonly"].show {
+    #background: none repeat scroll 0 0 white;
+    background-color:#F5F5F5;
+    border: 0 solid black;
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0.075) inset;
+    font-size: 1.05em;
+    font-weight: bold;
+    text-align: left;
+}
+
+.highlight {
+    font-weight: bold;
+}
+
+#header {
+    display: table;
+}
+
+#logo {
+    display: table-cell;
+    vertical-align:middle;
+}
+
+#info {
+    display: table-cell;
+    vertical-align:middle;
+}
+
+.infobox {
+    max-height: 200px;
+    overflow: auto;
+    margin-bottom: 18px
+}
+
+i.delete {
+    background: transparent url(../images/skin/database_delete.png) 5px 50% no-repeat;
+    padding-left: 28px;
+}
+
+i.edit {
+    background: transparent url(../images/skin/database_edit.png) 5px 50% no-repeat;
+    padding-left: 28px;
+}
+i.imageshow {
+    background: transparent url(../images/skin/magnifier_left.png) 5px 50% no-repeat;
+    padding-left: 28px;
+}
+i.reload {
+    background: transparent url(../images/skin/reload.png) 5px 50% no-repeat;
+    padding-left: 28px;
+}
+
+
+i.save {
+    background: transparent url(../images/skin/database_save.png) 5px 50% no-repeat;
+    padding-left: 28px;
+}
+
+i.pdf {
+    background: transparent url(../images/skin/document-pdf-text.png) 5px 50% no-repeat;
+    padding-left: 28px;
+}
+
+i.cancel {
+    background: transparent url(../images/skin/cancel.png) 5px 50% no-repeat;
+    padding-left: 28px;
+}
+
+i.saveAndPrevious {
+    background: transparent url(../images/skin/database_save_previous.png) 5px 50% no-repeat;
+    padding-left: 28px;
+}
+
+i.saveAndNext {
+    background: transparent url(../images/skin/database_save_next.png) 5px 50% no-repeat;
+    padding-left: 28px;
+}
+
+i.prev {
+    background: transparent url(../images/skin/arrow-180.png) 5px 50% no-repeat;
+    padding-left: 28px;
+}
+
+i.next {
+    background: transparent url(../images/skin/arrow.png) 5px 50% no-repeat;
+    padding-left: 28px;
+}
+
+
+.table-striped tbody > tr.lastEdited > td {
+    background-color: #F0F244;
+}

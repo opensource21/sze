@@ -1,0 +1,46 @@
+<!-- Parameter:
+schulfachDetailInfo - ein schulfachDetailInfo
+
+disabled - flag if the view should be editable.
+saveUrl - die URL zum speichern.
+schulfaecher - a list of selectable schulfaecher
+formulare - a list of zeugnis-formulare.
+ -->
+<!DOCTYPE HTML>
+<html lang="de-DE" xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+    layout:decorator="/main">
+<head >
+    <title th:text="#{schulfachDetailInfo.form.title} (${schulfachDetailInfo})"></title>
+</head>
+<body >
+    <div layout:fragment="content">
+    <h3 th:text="#{schulfachDetailInfo.form.title}"></h3>
+    <form class="well form-horizontal" method="post" th:object="${schulfachDetailInfo}">
+        <div th:replace="/fragments::error"></div>
+        <input id="id" type="hidden" th:value="*{id}" name="id"/>
+        <input id="version" type="hidden" th:value="*{version}" name="version"/>
+
+        <input type="text" bs:field="formular" disabled="disabled" th:if="${disabled}"/>
+        <select  class="chzn-select" bs:field="formular" th:unless="${disabled}">
+            <option th:each="item : ${formulare}" th:value="${item.id}" th:text="${item}"
+                th:classappend="${item.id==schulfachDetailInfo?.formular?.id}? 'highlight'"></option>
+        </select>
+        <input type="text" bs:field="schulfach" disabled="disabled" th:if="${disabled}"/>
+        <select class="chzn-select" bs:field="schulfach" th:unless="${disabled}">
+            <option th:each="fach : ${schulfaecher}" th:value="${fach.id}" th:text="${fach}"
+                th:classappend="${fach.id==schulfachDetailInfo?.schulfach?.id}? 'highlight'"></option>
+        </select>
+
+        <input type="text" bs:field="detailInfo" th:disabled="${disabled}"/>
+        <button type="submit" th:formaction="@{${saveUrl}}" class="btn" th:unless="${disabled || saveUrl == null}">
+            <i class="save"></i>Speichern</button>
+        <a th:href="@{|__#{nurl.schulfachdetailinfo.edit}__|}" class="btn" th:if="${disabled}">
+            <i class="edit"></i>Bearbeiten</a>
+        <a th:href="@{|__#{nurl.schulfachdetailinfo.list}__|}" class="btn">
+            <i class="cancel"></i>Abbrechen</a>
+        <th:block th:include="/fragments::deletebutton(|__#{nurl.schulfachdetailinfo.delete}__|)"></th:block>
+    </form>
+    </div>
+</body>
+</html>

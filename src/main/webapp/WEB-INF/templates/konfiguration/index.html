@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<!-- PARAMS:
+-->
+<html lang="de-DE" xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+    layout:decorator="/main">
+<head>
+<script type="text/javascript"
+    src="../../../resources/js/jquery-1.8.2.js" th:remove="all"></script>
+<script type="text/javascript"
+    src="../../../resources/js/thymelaefbs.js?1" th:remove="all"></script>
+<title th:text="SchulZeugnisErsteller Konfiguration"></title>
+</head>
+<body>
+    <div layout:fragment="content">
+        <h1>Konfigurationsmöglichkeiten der Anwendung</h1>
+        <h2>Halbjährliche Arbeiten</h2>
+        <ul>
+            <li><a th:href="@{#{nurl.schulhalbjahr.list}}">Halbjahrs-Verwaltung</a></li>
+            <li><a th:href="@{#{nurl.zeugnisformular.list}}">Formular-Verwaltung</a></li>
+            <li><a th:href="@{#{nurl.configuration.init_zeugnisse}}">Zeugnis-Initialisierung</a></li>
+        </ul>
+        <h2>Jährliche Arbeiten</h2>
+        <ul>
+            <li><a th:href="@{#{nurl.klasse.list}}">Klassen-Verwaltung</a></li>
+            <li><a th:href="@{#{nurl.schueler.home}}">Schüler-Verwaltung</a></li>
+        </ul>
+        <h2>Grund-Konfiguration</h2>
+        <ul>
+            <li><a th:href="@{#{nurl.schulfach.list}}">Schulfach-Verwaltung</a></li>
+            <li><a th:href="@{#{nurl.arbeitsundsozialverhalten.list}}">Arbeits- und Sozialverhalten Verwaltung</a></li>
+            <li><a th:href="@{#{nurl.arbeitsgruppe.list}}">Arbeitsgruppen Verwaltung</a></li>
+            <li><a th:href="@{#{nurl.bemerkungsbaustein.list}}">Verwaltung der Bemerkungsbausteine</a></li>
+            <li><a th:href="@{#{nurl.schulamt.list}}">Verwaltung der Schulämter</a></li>
+            <li><a th:href="@{#{nurl.schulamtsbemerkungsbaustein.list}}">Verwaltung der Schulamts-Bemerkungsbausteine</a></li>
+            <li><a th:href="@{#{nurl.solbewertungstext.list}}">Verwaltung der Bemerkungstexte für SoL</a></li>
+            <li><a th:href="@{#{nurl.zeugnisart.list}}">Verwaltung der Zeugnisarten</a></li>
+            <li><a th:href="@{#{nurl.schulfachdetailinfo.list}}">Verwaltung der Schulfachdetailinfos</a></li>
+        </ul>
+    </div>
+</body>
+</html>

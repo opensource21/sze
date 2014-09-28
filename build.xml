@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ======================================================================
+     09.07.2013 12:35:41
+
+     project
+     description
+
+     niels
+     ====================================================================== -->
+<project name="project" default="default">
+    <description>
+            description
+    </description>
+
+    <!-- =================================
+          target: default
+         ================================= -->
+    <target name="default" depends="depends" description="description">
+        <fixcrlf srcdir="${basedir}/src/main/java" includes="**/*"
+                encoding="UTF-8"
+                 eol="crlf"/>
+    </target>
+
+    <!-- - - - - - - - - - - - - - - - - -
+          target: depends
+         - - - - - - - - - - - - - - - - - -->
+    <target name="depends">
+    </target>
+
+</project>

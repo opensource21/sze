@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html lang="de-DE">
+<head>
+<meta charset="UTF-8" />
+<link rel="shortcut icon" href="../../resources/images/sze.ico"
+    type="image/x-icon" th:href="@{/resources/images/sze.ico}" />
+<link rel="icon" href="../../resources/images/sze.ico"
+    type="image/x-icon" th:href="@{/resources/images/sze.ico}" />
+<link rel="stylesheet" href="../../resources/css/bootstrap-ppi.css"
+    th:href="@{/resources/css/bootstrap-ppi.css}" />
+<link rel="stylesheet" href="../../resources/css/sze.css"
+    th:href="@{/resources/css/sze.css}" />
+<title>SZE - Löschen Bestätigen</title>
+</head>
+
+<body>
+    <form class="well form-horizontal" th:action="@{${deleteURL}}" action="post">
+        <div class="control-group">
+        <label class="control-label">Wollen Sie wirklich löschen?</label>
+
+         <input type="hidden" name="id" th:value="${id}"/>
+         </div>
+         <a th:href="@{${cancelURL}}" class="btn">
+            <i class="cancel"></i>Abbrechen</a>
+        <button th:formaction="@{${deleteURL}}" type="submit" formmethod="post" class="btn">
+            <i class="delete"></i>Löschen</button>
+
+    </form>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog logicalFilePath="/liquibase/3.0/05_upgradeH2.xml"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet author="niels (generated)" id="1350468477768-2">
+        <modifyDataType columnName="AUSGABE_DATUM" newDataType="DATE" tableName="ZEUGNIS_FORMULAR"/>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468477768-3">
+        <modifyDataType columnName="NACHTEILS_AUSGLEICHS_DATUM" newDataType="DATE" tableName="ZEUGNIS_FORMULAR"/>
+    </changeSet>
+        <changeSet author="niels (generated)" id="1350468477768-11">
+        <dropIndex indexName="UK_SCHULFACH_TYP_NAME" tableName="SCHULFACH"/>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468477768-12">
+        <createIndex indexName="UK_SCHULFACH_TYP_NAME" tableName="SCHULFACH" unique="true">
+            <column name="TYP"/>
+            <column name="NAME"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468477768-13">
+        <dropIndex indexName="UK_SCHULAHLBJAHR_JAHR_HALBJAHR" tableName="SCHULHALBJAHR"/>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468477768-14">
+        <createIndex indexName="UK_SCHULAHLBJAHR_JAHR_HALBJAHR" tableName="SCHULHALBJAHR" unique="true">
+            <column name="JAHR"/>
+            <column name="HALBJAHR"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468477768-17">
+        <dropTable tableName="ENCRYPTED_DATA"/>
+    </changeSet>
+
+     <changeSet author="niels" id="1350468477768-18" >
+        <comment>Umstellung auf Ordinal bei Enums</comment>
+        <sql>update av_sv_bewertung set beurteilung = beurteilung - 1</sql>
+        <sql>update arbeits_und_sozial_verhalten set typ = typ - 1</sql>
+        <sql>update schulhalbjahr set halbjahr = halbjahr - 1</sql>
+        <sql>update schulfach set typ = typ - 1</sql>
+    </changeSet>
+    <changeSet id="20140125-4" author="niels">
+        <comment>Vereinheitlichung der Länge vom Freitext bei Bemerkungen</comment>
+        <modifyDataType tableName="BEMERKUNG" columnName="FREI_TEXT" newDataType="VARCHAR(600)"/>
+    </changeSet>
+    <changeSet author="niels" id="20140821">
+        <createTable tableName="REVISION_LOG">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_REVISIONS_LOG"/>
+            </column>
+            <column name="MODIFICATIONTIME" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="USER" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ACTION" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ENTITY_NAME" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ENTITY_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="COLUMN_NAME" type="VARCHAR(250)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="OLD_VALUE" type="VARCHAR(1000)"/>
+            <column name="NEW_VALUE" type="VARCHAR(1000)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="20140825-1" author="niels">
+        <dropNotNullConstraint tableName="ZEUGNIS_FORMULAR"
+            columnName="AUSGABE_DATUM" columnDataType="TIMESTAMP"/>
+    </changeSet>
+    <changeSet id="20140825-2" author="niels">
+        <dropNotNullConstraint tableName="ZEUGNIS_FORMULAR"
+            columnName="NACHTEILS_AUSGLEICHS_DATUM" columnDataType="TIMESTAMP"/>
+    </changeSet>
+    <changeSet id="20140825-3" author="niels">
+        <addColumn tableName="SCHULHALBJAHR">
+            <column name="AUSGABE_DATUM" type="TIMESTAMP"/>
+            <column name="NACHTEILS_AUSGLEICHS_DATUM" type="TIMESTAMP"/>
+        </addColumn>
+    </changeSet>
+     <changeSet author="niels" id="20140826-1" >
+        <comment>Umstellung auf des Dsikriminators bei den Bewertungen</comment>
+        <sql>update bewertung set class = 'DreiNiveauBewertung'
+            where class = 'net.sf.sze.zeugnis.BinnenDifferenzierteBewertung'</sql>
+        <sql>update bewertung set class = 'ZweiNiveauBewertung'
+            where class = 'net.sf.sze.zeugnis.AussenDifferenzierteBewertung'</sql>
+        <sql>update bewertung set class = 'StandardBewertung'
+            where class = 'net.sf.sze.zeugnis.StandardBewertung'</sql>
+    </changeSet>
+    <changeSet author="niels" id="20140826-2" >
+        <comment>Umbenennung der Spalte STUFEN_MIT_AUSSEN_DIFFERENZIERUNG</comment>
+        <renameColumn tableName="SCHULFACH"
+            oldColumnName="STUFEN_MIT_AUSSEN_DIFFERENZIERUNG"
+            newColumnName="STUFEN_MIT_ZWEI_NIVEAUS"
+            columnDataType="VARCHAR(255)"/>
+    </changeSet>
+    <changeSet author="niels" id="20140826-3" >
+        <comment>Umbenennung der Spalte STUFEN_MIT_BINNEN_DIFFERENZIERUNG</comment>
+        <renameColumn tableName="SCHULFACH"
+            oldColumnName="STUFEN_MIT_BINNEN_DIFFERENZIERUNG"
+            newColumnName="STUFEN_MIT_DREI_NIVEAUS"
+            columnDataType="VARCHAR(255)"/>
+    </changeSet>
+</databaseChangeLog>

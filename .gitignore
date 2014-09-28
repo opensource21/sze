@@ -1,0 +1,7 @@
+dbs
+target/*
+.svn
+/logs/*
+/target
+/oofiles
+/pdffiles

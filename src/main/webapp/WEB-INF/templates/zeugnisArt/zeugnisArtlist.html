@@ -1,0 +1,85 @@
+<!-- Parameter:
+zeugnisArtList - PageWrapper<ZeugnisArt>
+
+pageRequest - the parameter of this search.
+ -->
+
+<html lang="de-DE" xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+    layout:decorator="/main">
+<head>
+<script type="text/javascript"
+    src="../../../resources/js/jquery-1.8.2.js" th:remove="all"></script>
+<script type="text/javascript"
+    src="../../../resources/js/thymelaefbs.js?1" th:remove="all"></script>
+<script type="text/javascript" ></script>
+    <title th:text="#{zeugnisArt.list.title}"></title>
+</head>
+<body>
+    <div layout:fragment="content" class="container-fluid">
+        <h3 th:text="#{zeugnisArt.list.title}">Liste</h3>
+        <a class="btn" href="/" th:href="@{#{nurl.zeugnisart.create}}" th:text="#{label.action.create}">Create a new entry</a>
+        <div id="data">
+            <span th:if="${#lists.isEmpty(zeugnisArtList)}" th:text="#{label.no_data_found}"></span>
+            <table class="datatable_with_action table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th th:text="#{net.sf.sze.model.zeugnisconfig.ZeugnisArt.name}">name</th>
+                        <th th:text="#{net.sf.sze.model.zeugnisconfig.ZeugnisArt.titel}">titel</th>
+                        <th th:text="#{net.sf.sze.model.zeugnisconfig.ZeugnisArt.abschlussGrad}">abschlussGrad</th>
+                        <th th:text="#{net.sf.sze.model.zeugnisconfig.ZeugnisArt.noteAlsTextDarstellen}">noteAlsTextDarstellen</th>
+                        <th th:text="#{net.sf.sze.model.zeugnisconfig.ZeugnisArt.platzFuerSiegel}">platzFuerSiegel</th>
+                        <th th:text="#{net.sf.sze.model.zeugnisconfig.ZeugnisArt.printVersetzungsbemerkung}">printVersetzungsbemerkung</th>
+                        <th th:text="#{net.sf.sze.model.zeugnisconfig.ZeugnisArt.sortierung}">sortierung</th>
+                        <th th:text="#{net.sf.sze.model.zeugnisconfig.ZeugnisArt.aktiv}">aktiv</th>
+                        <th th:text="#{label.actions}">Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr th:each="zeugnisArt : ${zeugnisArtList.content}">
+                        <td th:text="${zeugnisArt.name}">name</td>
+                        <td th:text="${zeugnisArt.titel}">titel</td>
+                        <td th:text="${zeugnisArt.abschlussGrad}">abschlussGrad</td>
+                        <td th:text="#{'blt.'+${zeugnisArt.noteAlsTextDarstellen}}">noteAlsTextDarstellen</td>
+                        <td th:text="#{'blt.'+${zeugnisArt.platzFuerSiegel}}">platzFuerSiegel</td>
+                        <td th:text="#{'blt.'+${zeugnisArt.printVersetzungsbemerkung}}">printVersetzungsbemerkung</td>
+                        <td th:text="${zeugnisArt.sortierung}">sortierung</td>
+                        <td th:text="#{'blt.'+${zeugnisArt.aktiv}}">1</td>
+                        <td th:with="#{par.zeugnisart.zeugnis_art_id}=${zeugnisArt.id}">
+                            <a class="btn" href="show/1" th:href="@{|__#{nurl.zeugnisart.show}__|}" ><i class="imageshow"></i></a>
+                            <a class="btn" href="edit/1" th:href="@{|__#{nurl.zeugnisart.edit}__|}" ><i class="edit"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="pagination pagination-centered"  th:with="page=${zeugnisArtList}" th:include="fragments::paginationbar" >
+            <ul>
+              <li >
+                <a >&larr; First</a>
+              </li>
+              <li >
+                <a title="Go to previous page">&laquo;</a>
+              </li>
+              <li >
+                <a th:if="${not item.current}" th:href="@{${page.url}(page.page=${item.number},page.size=${page.size})}"><span >1</span></a>
+              </li>
+              <li class="active">
+                <span >2</span>
+              </li>
+              <li >
+                <a ><span >3</span></a>
+              </li>
+              <li >
+                <a title="Go to next page">&raquo;</a>
+              </li>
+              <li >
+                <a >Last &rarr;</a>
+              </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

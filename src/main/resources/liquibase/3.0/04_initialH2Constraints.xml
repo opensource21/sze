@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog logicalFilePath="/liquibase/3.0/04_initialH2Constraints.xml"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+     <changeSet author="niels (generated)" id="1350468362951-28">
+        <addPrimaryKey columnNames="GSEC_ROLE_ID, GSEC_PERMISSION_ID" constraintName="PK_GSEC_ROLE_PERMISSIONS" tableName="GSEC_ROLE_PERMISSIONS"/>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-29">
+        <addPrimaryKey columnNames="GSEC_USER_ID, GSEC_PERMISSION_ID" constraintName="PK_GSEC_USER_PERMISSIONS" tableName="GSEC_USER_PERMISSIONS"/>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-30">
+        <addPrimaryKey columnNames="GSEC_USER_ID, GSEC_ROLE_ID" constraintName="PK_GSEC_USER_ROLES" tableName="GSEC_USER_ROLES"/>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-31">
+        <addForeignKeyConstraint baseColumnNames="ARBEITSGRUPPE_ID" baseTableName="AG_BEWERTUNG" baseTableSchemaName="PUBLIC" constraintName="FK8179BAE25D3CB44D" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="ARBEITSGRUPPE" referencedTableSchemaName="PUBLIC"/>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-32">
+        <addForeignKeyConstraint baseColumnNames="ZEUGNIS_ID" baseTableName="AG_BEWERTUNG" baseTableSchemaName="PUBLIC" constraintName="FK8179BAE22B9F830D" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="ZEUGNIS" referencedTableSchemaName="PUBLIC"/>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-33">
+        <addForeignKeyConstraint baseColumnNames="ARBEITS_UND_SOZIAL_VERHALTEN_ID" baseTableName="AV_SV_BEWERTUNG" baseTableSchemaName="PUBLIC" constraintName="FK705B70A9C9C8476A" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="ARBEITS_UND_SOZIAL_VERHALTEN" referencedTableSchemaName="PUBLIC"/>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-34">
+        <addForeignKeyConstraint baseColumnNames="ZEUGNIS_ID" baseTableName="AV_SV_BEWERTUNG" baseTableSchemaName="PUBLIC" constraintName="FK705B70A92B9F830D" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="ZEUGNIS" referencedTableSchemaName="PUBLIC"/>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-35">
+        <addForeignKeyConstraint baseColumnNames="BAUSTEIN_ID" baseTableName="BEMERKUNG" baseTableSchemaName="PUBLIC" constraintName="FKF6E2C3DAB8F2B6C0" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="BEMERKUNGS_BAUSTEIN" referencedTableSchemaName="PUBLIC"/>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-36">
+        <addForeignKeyConstraint baseColumnNames="ZEUGNIS_ID" baseTableName="BEMERKUNG" baseTableSchemaName="PUBLIC" constraintName="FKF6E2C3DA2B9F830D" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="ZEUGNIS" referencedTableSchemaName="PUBLIC"/>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-37">
+        <addForeignKeyConstraint baseColumnNames="SCHULFACH_ID" baseTableName="BEWERTUNG" baseTableSchemaName="PUBLIC" constraintName="FK7E52BBB13A8A9CD" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="SCHULFACH" referencedTableSchemaName="PUBLIC"/>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-38">
+        <addForeignKeyConstraint baseColumnNames="ZEUGNIS_ID" baseTableName="BEWERTUNG" baseTableSchemaName="PUBLIC" constraintName="FK7E52BBB2B9F830D" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="ZEUGNIS" referencedTableSchemaName="PUBLIC"/>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-39">
+        <addForeignKeyConstraint baseColumnNames="GSEC_PERMISSION_ID" baseTableName="GSEC_ROLE_PERMISSIONS" baseTableSchemaName="PUBLIC" constraintName="FK21C44B5032310171" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="GSEC_PERMISSION" referencedTableSchemaName="PUBLIC"/>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-40">
+        <addForeignKeyConstraint baseColumnNames="GSEC_ROLE_ID" baseTableName="GSEC_ROLE_PERMISSIONS" baseTableSchemaName="PUBLIC" constraintName="FK21C44B50983EC951" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="GSEC_ROLE" referencedTableSchemaName="PUBLIC"/>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-41">
+        <addForeignKeyConstraint baseColumnNames="GSEC_PERMISSION_ID" baseTableName="GSEC_USER_PERMISSIONS" baseTableSchemaName="PUBLIC" constraintName="FK1D7E5F2532310171" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="GSEC_PERMISSION" referencedTableSchemaName="PUBLIC"/>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-42">
+        <addForeignKeyConstraint baseColumnNames="GSEC_USER_ID" baseTableName="GSEC_USER_PERMISSIONS" baseTableSchemaName="PUBLIC" constraintName="FK1D7E5F253D698D31" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="GSEC_USER" referencedTableSchemaName="PUBLIC"/>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-43">
+        <addForeignKeyConstraint baseColumnNames="GSEC_ROLE_ID" baseTableName="GSEC_USER_ROLES" baseTableSchemaName="PUBLIC" constraintName="FK656EC61E983EC951" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="GSEC_ROLE" referencedTableSchemaName="PUBLIC"/>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-44">
+        <addForeignKeyConstraint baseColumnNames="GSEC_USER_ID" baseTableName="GSEC_USER_ROLES" baseTableSchemaName="PUBLIC" constraintName="FK656EC61E3D698D31" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="GSEC_USER" referencedTableSchemaName="PUBLIC"/>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-45">
+        <addForeignKeyConstraint baseColumnNames="KLASSE_ID" baseTableName="SCHUELER" baseTableSchemaName="PUBLIC" constraintName="FKD7485C7140A05D6E" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="KLASSE" referencedTableSchemaName="PUBLIC"/>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-46">
+        <addForeignKeyConstraint baseColumnNames="SCHULAMT_ID" baseTableName="SCHULAMTS_BEMERKUNG" baseTableSchemaName="PUBLIC" constraintName="FK4D63EAB5A6361A47" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="SCHULAMT" referencedTableSchemaName="PUBLIC"/>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-47">
+        <addForeignKeyConstraint baseColumnNames="SCHULAMTS_BAUSTEIN_ID" baseTableName="SCHULAMTS_BEMERKUNG" baseTableSchemaName="PUBLIC" constraintName="FK4D63EAB5E572861B" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="SCHULAMTS_BEMERKUNGS_BAUSTEIN" referencedTableSchemaName="PUBLIC"/>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-48">
+        <addForeignKeyConstraint baseColumnNames="ZEUGNIS_ID" baseTableName="SCHULAMTS_BEMERKUNG" baseTableSchemaName="PUBLIC" constraintName="FK4D63EAB52B9F830D" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="ZEUGNIS" referencedTableSchemaName="PUBLIC"/>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-49">
+        <addForeignKeyConstraint baseColumnNames="FORMULAR_ID" baseTableName="SCHULFACH_DETAIL_INFO" baseTableSchemaName="PUBLIC" constraintName="FK32D11B2CC15FA988" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="ZEUGNIS_FORMULAR" referencedTableSchemaName="PUBLIC"/>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-50">
+        <addForeignKeyConstraint baseColumnNames="SCHULFACH_ID" baseTableName="SCHULFACH_DETAIL_INFO" baseTableSchemaName="PUBLIC" constraintName="FK32D11B2C13A8A9CD" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="SCHULFACH" referencedTableSchemaName="PUBLIC"/>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-51">
+        <addForeignKeyConstraint baseColumnNames="FORMULAR_ID" baseTableName="ZEUGNIS" baseTableSchemaName="PUBLIC" constraintName="FKE8B2EDFBC15FA988" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="ZEUGNIS_FORMULAR" referencedTableSchemaName="PUBLIC"/>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-52">
+        <addForeignKeyConstraint baseColumnNames="KLASSE_ID" baseTableName="ZEUGNIS" baseTableSchemaName="PUBLIC" constraintName="FKE8B2EDFB40A05D6E" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="KLASSE" referencedTableSchemaName="PUBLIC"/>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-53">
+        <addForeignKeyConstraint baseColumnNames="SCHUELER_ID" baseTableName="ZEUGNIS" baseTableSchemaName="PUBLIC" constraintName="FKE8B2EDFB1EDD3CEE" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="SCHUELER" referencedTableSchemaName="PUBLIC"/>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-54">
+        <addForeignKeyConstraint baseColumnNames="SCHULHALBJAHR_ID" baseTableName="ZEUGNIS" baseTableSchemaName="PUBLIC" constraintName="FKE8B2EDFB6105B64D" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="SCHULHALBJAHR" referencedTableSchemaName="PUBLIC"/>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-55">
+        <addForeignKeyConstraint baseColumnNames="SOLBEWERTUNGS_TEXT_ID" baseTableName="ZEUGNIS" baseTableSchemaName="PUBLIC" constraintName="FKE8B2EDFBFCA9C83E" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="SOLBEWERTUNGS_TEXT" referencedTableSchemaName="PUBLIC"/>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-56">
+        <addForeignKeyConstraint baseColumnNames="ZEUGNIS_ART_ID" baseTableName="ZEUGNIS" baseTableSchemaName="PUBLIC" constraintName="FKE8B2EDFB9A8BED90" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="ZEUGNIS_ART" referencedTableSchemaName="PUBLIC"/>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-57">
+        <addForeignKeyConstraint baseColumnNames="KLASSE_ID" baseTableName="ZEUGNIS_FORMULAR" baseTableSchemaName="PUBLIC" constraintName="FK62F9A99040A05D6E" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="KLASSE" referencedTableSchemaName="PUBLIC"/>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-58">
+        <addForeignKeyConstraint baseColumnNames="SCHULHALBJAHR_ID" baseTableName="ZEUGNIS_FORMULAR" baseTableSchemaName="PUBLIC" constraintName="FK62F9A9906105B64D" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="SCHULHALBJAHR" referencedTableSchemaName="PUBLIC"/>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-59">
+        <createIndex indexName="UK_AG_NAME" tableName="ARBEITSGRUPPE" unique="true">
+            <column name="NAME"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-60">
+        <createIndex indexName="UK_AV_SV_TYP_NAME" tableName="ARBEITS_UND_SOZIAL_VERHALTEN" unique="true">
+            <column name="TYP"/>
+            <column name="NAME"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-61">
+        <createIndex indexName="UK_BEM_BAUSTEIN_NAME" tableName="BEMERKUNGS_BAUSTEIN" unique="true">
+            <column name="NAME"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-62">
+        <createIndex indexName="UK_BEWERTUNG_SCHULFACH_ZEUGNIS" tableName="BEWERTUNG" unique="true">
+            <column name="SCHULFACH_ID"/>
+            <column name="ZEUGNIS_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-63">
+        <createIndex indexName="UK_GSEC_PERMISSION_NAME" tableName="GSEC_PERMISSION" unique="true">
+            <column name="NAME"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-64">
+        <createIndex indexName="UK_GSEC_PERMISSION_ATCIONS_TARGET_TYPE" tableName="GSEC_PERMISSION" unique="true">
+            <column name="ACTIONS"/>
+            <column name="TARGET"/>
+            <column name="TYPE"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-65">
+        <createIndex indexName="UK_GSEC_ROLE_NAME" tableName="GSEC_ROLE" unique="true">
+            <column name="NAME"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-66">
+        <createIndex indexName="UK_GSEC_USER_USERNAME" tableName="GSEC_USER" unique="true">
+            <column name="USERNAME"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-67">
+        <createIndex indexName="UK_SCHULAMT_NAME" tableName="SCHULAMT" unique="true">
+            <column name="NAME"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-68">
+        <createIndex indexName="UK_SCHULAMT_BEM_BAUSTEIN_NAME" tableName="SCHULAMTS_BEMERKUNGS_BAUSTEIN" unique="true">
+            <column name="NAME"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-69">
+        <createIndex indexName="UK_SCHULFACH_TYP_NAME" tableName="SCHULFACH" unique="true">
+            <column name="TYP"/>
+            <column name="NAME"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-70">
+        <createIndex indexName="UK_SCHULFACH_DETAIL_FORMULAR_SCHULFACH" tableName="SCHULFACH_DETAIL_INFO" unique="true">
+            <column name="FORMULAR_ID"/>
+            <column name="SCHULFACH_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-71">
+        <createIndex indexName="UK_SCHULAHLBJAHR_JAHR_HALBJAHR" tableName="SCHULHALBJAHR" unique="true">
+            <column name="HALBJAHR"/>
+            <column name="JAHR"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-72">
+        <createIndex indexName="UK_SOLBEWERTUNGS_TEXT_NAME" tableName="SOLBEWERTUNGS_TEXT" unique="true">
+            <column name="NAME"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-73">
+        <createIndex indexName="UK_ZEUGNIS_HALBJAHR_SCHUELER" tableName="ZEUGNIS" unique="true">
+            <column name="SCHULHALBJAHR_ID"/>
+            <column name="SCHUELER_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-74">
+        <createIndex indexName="UK_ZEUGNIS_ART_NAME" tableName="ZEUGNIS_ART" unique="true">
+            <column name="NAME"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="niels (generated)" id="1350468362951-75">
+        <createIndex indexName="UK_ZEUGNIS_FORMULAR_HALBJAHR_KLASSE_BESCHREIBUNG" tableName="ZEUGNIS_FORMULAR" unique="true">
+            <column name="SCHULHALBJAHR_ID"/>
+            <column name="KLASSE_ID"/>
+            <column name="BESCHREIBUNG"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="niels" id="1349769107445-56" dbms="postgresql">
+        <createSequence schemaName="public" sequenceName="hibernate_sequence"/>
+    </changeSet>
+
+</databaseChangeLog>

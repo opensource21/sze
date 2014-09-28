@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE suppressions PUBLIC
+    "-//Puppy Crawl//DTD Suppressions 1.1//EN"
+    "http://www.puppycrawl.com/dtds/suppressions_1_1.dtd">
+
+<suppressions>
+    <!-- You can't use "/" here because it fails. "." can be used for "/" and "\".
+          Another possibility is ".* Test.java" -->
+    <suppress checks="JavadocPackage" files=".*src.test.java.*.java"/>
+    <suppress checks=".*" files=".*.pdf"/>
+    <suppress checks=".*" files=".*src.test.java.*.dbunit.*.java"/>
+</suppressions>
+

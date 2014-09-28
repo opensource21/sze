@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<!-- PARAMS:
+helpMessageId - die MessageId für die Hilfe.
+success - Erfolgsmeldung
+message - ein Nachricht
+messages - eine Liste mit Meldungen.
+ -->
+<html lang="de-DE" xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head th:attr="data-baseurl=@{'/'}">
+<meta charset="UTF-8" />
+<link rel="shortcut icon" href="../../resources/images/sze.ico"
+    type="image/x-icon" th:href="@{/resources/images/sze.ico(version=#{app.version})}" />
+<link rel="icon" href="../../resources/images/sze.ico"
+    type="image/x-icon" th:href="@{/resources/images/sze.ico(version=#{app.version})}" />
+
+<link rel="stylesheet" href="../../resources/css/bootstrap-ppi.css"
+    th:href="@{/resources/css/bootstrap-ppi.css(version=#{app.version})}" />
+    <link rel="stylesheet" href="../../resources/css/DT_bootstrap.css"
+    th:href="@{/resources/css/DT_bootstrap.css(version=#{app.version})}" />
+<link rel="stylesheet" href="../../resources/css/sze.css"
+    th:href="@{/resources/css/sze.css(version=#{app.version})}" />
+
+
+<link rel="stylesheet"
+    href="../../../../resources/css/smoothness/jquery-ui-1.9.1.custom.css"
+    th:href="@{/resources/css/smoothness/jquery-ui-1.9.1.custom.css}" />
+<link rel="stylesheet"
+    href="../../../../resources/css/smoothness/datetimepicker.css"
+    th:href="@{/resources/css/smoothness/datetimepicker.css}" />
+<script type="text/javascript"
+    src="../../../../resources/js/jquery-1.8.2.js"
+    th:src="@{/resources/js/jquery-1.8.2.js}"></script>
+<script type="text/javascript"
+    src="../../../../resources/js/jquery-ui-1.9.1.custom.js"
+    th:src="@{/resources/js/jquery-ui-1.9.1.custom.js}"></script>
+<script type="text/javascript"
+    src="../../../../resources/js/chosen.jquery.js"
+    th:src="@{/resources/js/chosen.jquery.js(version=#{app.version})}"></script>
+<script type="text/javascript"
+    src="../../../../resources/js/jquery-ui-timepicker-addon.js"
+    th:src="@{/resources/js/jquery-ui-timepicker-addon.js(version=#{app.version})}"></script>
+<script type="text/javascript"
+    src="../../../../resources/js/jquery.dataTables.js"
+    th:src="@{/resources/js/jquery.dataTables.js(version=#{app.version})}"></script>
+<script type="text/javascript"
+    src="../../../../resources/js/DT_bootstrap.js"
+    th:src="@{/resources/js/DT_bootstrap.js(version=#{app.version})}"></script>
+<script type="text/javascript"
+    src="../../../../resources/js/sze.js"
+    th:src="@{/resources/js/sze.js(version=#{app.version})}"></script>
+<title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE" th:text="#{app.title}">SZE</title>
+</head>
+<body>
+    <div id="header">
+        <div id="logo">
+            <img src="../../resources/images/sze_logo.jpg"
+                th:src="@{/resources/images/sze_logo.jpg}" alt="SZE-Logo" />
+        </div>
+        <div id="info">
+            Hallo Sie sind eingeloggt in sze Version <i th:text="#{app.version}">3.0.0</i>
+                als: <th:block shiro:principal=""/> (<a href="auth/logoff"
+                    th:href="@{#{nurl.security.logout}}">Abmelden</a>)
+        </div>
+    </div>
+    <!-- TODO nachfolgendes in Abhängigkeit von der Rollen anzeigen. -->
+    <div class="navbar">
+        <div class="navbar-inner">
+            <ul class="nav">
+                <li shiro:hasPermission="admin:overview"
+                    th:class="${#strings.contains(#httpServletRequest.getRequestURI(),'/admin/')?'active':''}">
+                    <a href="#" th:href="@{/admin}">Administration</a></li>
+                <li shiro:hasPermission="config:overview"
+                    th:class="${#strings.contains(#httpServletRequest.getRequestURI(),'/konfiguration/')?'active':''}">
+                    <a href="#" th:href="@{#{nurl.configuration.main}}">Konfiguration</a></li>
+                <li shiro:hasPermission="zeugnis:overview"
+                    th:class="${#strings.contains(#httpServletRequest.getRequestURI(),'/zeugnis/') or #strings.contains(#httpServletRequest.getRequestURI(),'/bewertungen/')?'active':''}">
+                    <a href="#" th:with="#{par.session.halbjahr_id}=${#objects.nullSafe(halbjahr_id,0)},
+                        #{par.session.klassen_id}=${#objects.nullSafe(klassen_id,0)}"
+                        th:href="@{|__#{nurl.zeugnispath.start}__|}">Zeugnisse</a></li>
+                <li shiro:user="">
+                    <a href="auth/logoff" th:href="@{#{nurl.security.logout}}">Abmelden</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class ="row-fluid">
+        <div th:replace="/fragments::info"></div>
+        <div layout:fragment="content" th:remove="tag">Hier wird die
+            eigentlich Seite angezeigt.</div>
+    </div>
+    <div class="alert alert-info"
+        th:unless="${#strings.isEmpty(helpMessageId)}">
+        <b>Erl&auml;uterung:</b> <span th:utext="#{${helpMessageId}}"
+            th:remove="tag">Ein erläuternder Text.</span>
+    </div>
+</body>
+</html>
