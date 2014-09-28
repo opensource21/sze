@@ -589,34 +589,17 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
                 template.setContentWrapper(new SzeContentWrapper());
                 template.createDocument(data, new FileOutputStream(odtFile));
             } catch (final DocumentTemplateException dtE) {
-                logPrintMap(data, "");
+                final String fileName = odtFile.getAbsolutePath() + ".error.txt";
+                final MapPrinter mapPrinter = new MapPrinter(fileName, false);
+                mapPrinter.print(data);
+                LOG.error("Fehler beim parsen des Dokuments. Die Map-Daten stehen in "
+                        + fileName, dtE);
                 throw dtE;
             }
         } catch (final DocumentTemplateException e) {
             throw new ODTConversionException(e);
         } catch (final IOException e) {
             throw new ODTConversionException(e);
-        }
-    }
-
-//  //------------- DEBUG_FUNCTIONS -------------------------------------------
-//
-
-    /**
-     * Loggt die gesamte Daten-Map.
-     * @param printMap die zu druckenden Daten.
-     * @param praefix ein Präfix für die Rekursion.
-     */
-    @SuppressWarnings("unchecked")
-    private void logPrintMap(Map<String, Object> printMap, String praefix) {
-        for (final Map.Entry<String, Object> mapEntry : printMap.entrySet()) {
-            final String key = mapEntry.getKey();
-            final Object value = mapEntry.getValue();
-            if (value instanceof Map) {
-                logPrintMap((Map<String, Object>) value, key + ".");
-            } else {
-                LOG.info(praefix + key + " -> " + value);
-            }
         }
     }
 
