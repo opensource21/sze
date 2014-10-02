@@ -72,16 +72,16 @@
     </changeSet>
     <changeSet id="20140825-1" author="niels">
         <dropNotNullConstraint tableName="ZEUGNIS_FORMULAR"
-            columnName="AUSGABE_DATUM" columnDataType="TIMESTAMP"/>
+            columnName="AUSGABE_DATUM" columnDataType="DATE"/>
     </changeSet>
     <changeSet id="20140825-2" author="niels">
         <dropNotNullConstraint tableName="ZEUGNIS_FORMULAR"
-            columnName="NACHTEILS_AUSGLEICHS_DATUM" columnDataType="TIMESTAMP"/>
+            columnName="NACHTEILS_AUSGLEICHS_DATUM" columnDataType="DATE"/>
     </changeSet>
     <changeSet id="20140825-3" author="niels">
         <addColumn tableName="SCHULHALBJAHR">
-            <column name="AUSGABE_DATUM" type="TIMESTAMP"/>
-            <column name="NACHTEILS_AUSGLEICHS_DATUM" type="TIMESTAMP"/>
+            <column name="AUSGABE_DATUM" type="DATE"/>
+            <column name="NACHTEILS_AUSGLEICHS_DATUM" type="DATE"/>
         </addColumn>
     </changeSet>
      <changeSet author="niels" id="20140826-1" >

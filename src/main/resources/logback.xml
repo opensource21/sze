@@ -115,7 +115,7 @@
 
     <logger name="org.hibernate" level="WARN" />
 
-    <logger name="org.thymeleaf" level="TRACE" additivity="FALSE">
+    <logger name="org.thymeleaf" level="WARN" additivity="FALSE">
         <appender-ref ref="THYMELEAF" />
     </logger>
 
@@ -129,7 +129,7 @@
         <appender-ref ref="SQLROLLINGFILE" />
     </logger>
 
-    <root level="DEBUG">
+    <root level="INFO">
         <appender-ref ref="FILE" />
         <appender-ref ref="STDOUT" />
     </root>

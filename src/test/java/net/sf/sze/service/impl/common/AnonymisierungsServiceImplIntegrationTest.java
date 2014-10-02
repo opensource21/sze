@@ -56,4 +56,13 @@ public class AnonymisierungsServiceImplIntegrationTest extends AbstractSzeDbUnit
         checkResult(Anonymisierung.buildSchuelerResult());
     }
 
+    /**
+     * Methode um einfach anonymsieren zu können.
+     */
+    //@Test
+    public void doAnoynmisierung() {
+        anonymisierungsService.replaceAllNamesWithVariables();
+        anonymisierungsService.anonymisierSchueler();
+    }
+
 }

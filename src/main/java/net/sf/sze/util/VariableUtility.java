@@ -128,9 +128,9 @@ public final class VariableUtility {
                 } else if ("schuljahr".equals(token)) {
                     replacement = schuljahr;
                 } else if ("Vorname".equals(token)) {
-                    replacement = schueler.getVorname();
+                    replacement = schueler.getVorname().trim();
                 } else if ("Nachname".equals(token)) {
-                    replacement = schueler.getName();
+                    replacement = schueler.getName().trim();
                 } else if (token.contains("|")) {
                     replacement = getGenderSpecificText(token, schueler
                             .getGeschlecht());
@@ -185,7 +185,7 @@ public final class VariableUtility {
                 return kleinGeschrieben ? "er" : "Er";
             }
         } else {
-            return rufname;
+            return rufname.trim();
         }
     }
 

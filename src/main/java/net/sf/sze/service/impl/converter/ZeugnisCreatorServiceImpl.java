@@ -61,6 +61,11 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
         DisposableBean, ZeugnisCreatorService {
 
     /**
+     * Praefix für historische WP-Einträge.
+     */
+    private static final String WP_PRAEFIX = "wp";
+
+    /**
      * Die Log-Instanz.
      */
     private static final Logger LOG = LoggerFactory.getLogger(
@@ -306,10 +311,10 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
         final boolean noteAlsTextDarstellen = zeugnis.getZeugnisArt()
                 .getNoteAlsTextDarstellen().booleanValue();
         for (int hj = 1; hj < 3; hj++) {
-            for (int i = 0; i < 3; i++) {
-                zeugnisDaten.put("wp" + hj + "_" + i + "_name", VariableUtility
+            for (int i = 1; i < 3; i++) {
+                zeugnisDaten.put(WP_PRAEFIX + hj + "_" + i + "_name", VariableUtility
                         .PLATZHALTER_LEER);
-                zeugnisDaten.put("wp" + hj + "_" + i + "_note", VariableUtility
+                zeugnisDaten.put(WP_PRAEFIX + hj + "_" + i + "_note", VariableUtility
                         .PLATZHALTER_LEER);
             }
         }
@@ -384,9 +389,9 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
             if (bewertung.getRelevant() && (bewertung.getSchulfach().getTyp()
                     == Schulfachtyp.WAHLPFLICHT)) {
                 i++;
-                zeugnisDaten.put("wp" + hj + "_" + i + "_name", bewertung
+                zeugnisDaten.put(WP_PRAEFIX + hj + "_" + i + "_name", bewertung
                         .getSchulfach().getName());
-                zeugnisDaten.put("wp" + hj + "_" + i + "_note", bewertung
+                zeugnisDaten.put(WP_PRAEFIX + hj + "_" + i + "_note", bewertung
                         .createPrintText(noteAlsTextDarstellen));
             }
         }
@@ -476,7 +481,7 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
             } else {
                 final String valueAsString = value.toString();
                 if (valueAsString.length() > 0 && !valueAsString.endsWith(" ")) {
-                    printMap.put(key, value.toString() + " ");
+                    printMap.put(key, valueAsString + " ");
                 }
             }
         }
@@ -584,34 +589,17 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
                 template.setContentWrapper(new SzeContentWrapper());
                 template.createDocument(data, new FileOutputStream(odtFile));
             } catch (final DocumentTemplateException dtE) {
-                logPrintMap(data, "");
+                final String fileName = odtFile.getAbsolutePath() + ".error.txt";
+                final MapPrinter mapPrinter = new MapPrinter(fileName, false);
+                mapPrinter.print(data);
+                LOG.error("Fehler beim parsen des Dokuments. Die Map-Daten stehen in "
+                        + fileName, dtE);
                 throw dtE;
             }
         } catch (final DocumentTemplateException e) {
             throw new ODTConversionException(e);
         } catch (final IOException e) {
             throw new ODTConversionException(e);
-        }
-    }
-
-//  //------------- DEBUG_FUNCTIONS -------------------------------------------
-//
-
-    /**
-     * Loggt die gesamte Daten-Map.
-     * @param printMap die zu druckenden Daten.
-     * @param praefix ein Präfix für die Rekursion.
-     */
-    @SuppressWarnings("unchecked")
-    private void logPrintMap(Map<String, Object> printMap, String praefix) {
-        for (final Map.Entry<String, Object> mapEntry : printMap.entrySet()) {
-            final String key = mapEntry.getKey();
-            final Object value = mapEntry.getValue();
-            if (value instanceof Map) {
-                logPrintMap((Map<String, Object>) value, key + ".");
-            } else {
-                LOG.info(praefix + key + " -> " + value);
-            }
         }
     }
 
