@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.sf.sze</groupId>
     <artifactId>sze_spring</artifactId>
-    <version>3.0.1</version>
+    <version>3.0.2</version>
     <packaging>war</packaging>
     <name>SZE</name>
     <description>Schulzeugnisersteller</description>
@@ -103,14 +103,6 @@
             <groupId>net.sf.jodreports</groupId>
             <artifactId>jodreports</artifactId>
             <version>2.4.0</version> <!-- War 2.2.2 -->
-        </dependency>
-
-        <!-- Openoffice -->
-        <dependency>
-            <groupId>org.openoffice</groupId>
-            <artifactId>unoil</artifactId>
-            <version>3.2.1</version>
-            <scope>provided</scope>
         </dependency>
 
         <!-- Security -->

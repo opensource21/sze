@@ -21,6 +21,9 @@
 
 
 #PRIO 3
+- PDF-Erstellung mit UNO dürfte zur Zeit nicht funktionieren, zumindest weiss ich
+  nicht wie man das vom Classloading her hinbekommt.
+
 - SchulfachDetail-Info die combobox besser durchsuchbar machen.
 
 - Beschreibung von Session und URL.
