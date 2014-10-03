@@ -1,7 +1,5 @@
 #PRIO 1
 
-- Liquibase: Migration auch noch mal durchtesten mit Maven.
-
 - Prüfen ob die Zeugnisse gleich erstellt werden. (manuell. Automatisch abgeschlossen)
 
 #PRIO 2
