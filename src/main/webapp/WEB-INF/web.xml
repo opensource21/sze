@@ -67,4 +67,9 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
     <!--<end id="servletmapping_DispatcherServlet" /> -->
+    
+    <!-- Session Configuration -->
+    <session-config>
+        <session-timeout>60</session-timeout>
+    </session-config>
 </web-app>
