@@ -46,6 +46,11 @@ public class SchulhalbjahrInit {
         return b.build();
     }
 
+    public static IDataSet buildResultZweitesHalbjahrNoErstesHalbjahr() throws DataSetException {
+        final DataSetBuilder b = new DataSetBuilder();
+        newSchulhalbjahr().Id(gt(0)).Version(0L).Halbjahr(1).Jahr(2014).Selectable(FALSE).addTo(b);
+        return b.build();
+    }
 
 }
 

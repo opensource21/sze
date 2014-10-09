@@ -43,10 +43,34 @@ public class SchulhalbjahrServiceImplDbUnitIntegrationTest extends AbstractSzeDb
      * @throws Exception wenn was schief geht.
      */
     @Test
+    public void testInitErstesHalbjahrSecond() throws Exception {
+        super.cleanlyInsert(SchulhalbjahrInit.buildInitZweitesHalbjahr());
+        schulhalbjahrService.init(createDate(2013, 12, 1));
+        super.checkResult(SchulhalbjahrInit.buildInitZweitesHalbjahr());
+    }
+
+    /**
+     * Test method for
+     * {@link net.sf.sze.service.impl.zeugnisconfig.SchulhalbjahrServiceImpl#init(java.util.Calendar)}.
+     * @throws Exception wenn was schief geht.
+     */
+    @Test
+    public void testInitZweitesHalbjahrNoErstesHalbjahr() throws Exception {
+        super.cleanlyInsert(SchulhalbjahrInit.buildInitErstesHalbjahr());
+        schulhalbjahrService.init(createDate(2014, 5, 1));
+        super.checkResult(SchulhalbjahrInit.buildResultZweitesHalbjahrNoErstesHalbjahr());
+    }
+
+
+    /**
+     * Test method for
+     * {@link net.sf.sze.service.impl.zeugnisconfig.SchulhalbjahrServiceImpl#init(java.util.Calendar)}.
+     * @throws Exception wenn was schief geht.
+     */
+    @Test
     public void testInitZweitesHalbjahr() throws Exception {
         super.cleanlyInsert(SchulhalbjahrInit.buildInitZweitesHalbjahr());
         schulhalbjahrService.init(createDate(2014, 3, 1));
-        super.getSzeDatebase().dumpResult("Result", "schulhalbjahr");
         super.checkResult(SchulhalbjahrInit.buildResultZweitesHalbjahr());
     }
 
