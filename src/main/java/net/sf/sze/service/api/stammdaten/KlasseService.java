@@ -5,6 +5,8 @@
 
 package net.sf.sze.service.api.stammdaten;
 
+import java.util.List;
+
 import net.sf.sze.model.stammdaten.Klasse;
 
 import org.springframework.data.domain.Page;
@@ -51,6 +53,15 @@ public interface KlasseService {
      *
      */
     void delete(Long klasseId);
+
+
+    /**
+     * Liefert zu dem Jahr alle aktiven Klassen, d.h. es werden nur
+     * gültige Jahrgänge akzeptiert.
+     * @param currentJahr das aktuelle Jahr.
+     * @return alle aktiven Klassen.
+     */
+    List<Klasse> getActiveKlassen(int currentJahr);
 
 
 }

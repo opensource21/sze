@@ -7,7 +7,7 @@ Der Algorithmus ist wie folgt:
 Die Schuljahre sind nicht selektierbar.
 
 ### Zeugnisformulare
-Die Vorbelegung erfolgt für jeder Klasse wie folgt,
+Die Vorbelegung erfolgt für jeder Klasse und Schulhalbjahr wie folgt,
 
 - beschreibung:  2004-05/Hj-?/Kl-? oder Schulhalbjahr.createRelativePathName + "/Kl-" Klasse.calculateKlassenname().
 - templateFileName:  LKS
@@ -19,10 +19,12 @@ Die Vorbelegung erfolgt für jeder Klasse wie folgt,
 
 Zur den Algorithmen LK und LKS:
 
-- LK (Letztes zur gleichen Klasse): Suche das mit der höchsten Id zur gleichen KLasse oder zur Klasse, das mit
-dem vorherigem Schulhalbjahr
-- LKS (Letztes zur gleichen Klassenstufe): Ermittle die gleiche Klassenstufe und suche dazu das letzte.
-Ist im 2. Hj. identisch mit LK. Im anderen Fall muss man erst bei der Klasse das Jahr des Jahrgangs runterzählen (suffix ist egal).
+- LK (Letztes zur gleichen Klasse): Suche das mit der höchsten Id zur gleichen KLasse oder 
+zur Klasse, das mit dem vorherigem Schulhalbjahr
+- LKS (Letztes zur gleichen Klassenstufe): Ermittle die gleiche Klassenstufe und 
+suche dazu das letzte.
+Ist im 2. Hj. identisch mit LK. Im anderen Fall muss man erst bei der Klasse das Jahr 
+des Jahrgangs runterzählen (suffix ist egal).
 
 ### Zu beachten:
 Die x-Klassen müssen wieder aufgelöst werden.

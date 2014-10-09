@@ -10,15 +10,14 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import net.sf.sze.dao.api.stammdaten.KlasseDao;
 import net.sf.sze.dao.api.zeugnis.ZeugnisFormularDao;
 import net.sf.sze.dao.api.zeugnisconfig.SchulhalbjahrDao;
 import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.zeugnis.ZeugnisFormular;
 import net.sf.sze.model.zeugnisconfig.Schulhalbjahr;
+import net.sf.sze.service.api.stammdaten.KlasseService;
 import net.sf.sze.service.api.zeugnis.ZeugnisFormularService;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -31,21 +30,14 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class ZeugnisFormularServiceImpl implements ZeugnisFormularService {
 
-    /** Minimales Schuljahr. */
-    @Value("${schuljahre.min}")
-    private int minimalesSchuljahr;
-
-    /** Maximales Schuljahr. */
-    @Value("${schuljahre.max}")
-    private int maximalesSchuljahr;
 
     /** Das Dao für {@link ZeugnisFormular}. */
     @Resource
     private ZeugnisFormularDao zeugnisFormularDao;
 
-    /** Das Dao für {@link Klasse}.*/
+    /** Der Service für {@link Klasse}.*/
     @Resource
-    private KlasseDao klasseDao;
+    private KlasseService klasseService;
 
     /** Das Dao für {@link Schulhalbjahr}.*/
     @Resource
@@ -101,9 +93,7 @@ public class ZeugnisFormularServiceImpl implements ZeugnisFormularService {
         } else {
             currentJahr = Calendar.getInstance().get(Calendar.YEAR);
         }
-        final List<Klasse> klassen = klasseDao
-                .findAllByJahrgangBetweenAndGeschlossen(currentJahr
-                - maximalesSchuljahr, currentJahr - minimalesSchuljahr, false);
+        final List<Klasse> klassen = klasseService.getActiveKlassen(currentJahr);
         if (zeugnisFormular.getKlasse() != null && !klassen.contains(zeugnisFormular.getKlasse())) {
             klassen.add(0, zeugnisFormular.getKlasse());
         }
