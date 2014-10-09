@@ -1,5 +1,8 @@
 #PRIO 1
 
+- Wieso ist das Zeugnisformular nicht unique für Schulhalbjahr und Klasse? Falls
+  das nicht der Fall ist, stimmt @Unique nicht und die Initialisierung ist kaputt.
+
 - Prüfen ob die Zeugnisse gleich erstellt werden. (manuell. Automatisch abgeschlossen)
 
 #PRIO 2

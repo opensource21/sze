@@ -26,4 +26,11 @@ public interface KlasseDao extends PagingAndSortingRepository<Klasse, Long> {
      */
     List<Klasse> findAllByJahrgangBetweenAndGeschlossen(int min, int max,
             boolean closed);
+
+    /**
+     * Findet die erste Klasse der entsprechenden Klassenstufe.
+     * @param jahrgang der Jahrgang.
+     * @return eine Klasse des Jahrgangs.
+     */
+    Klasse findFirstByJahrgang(int jahrgang);
 }

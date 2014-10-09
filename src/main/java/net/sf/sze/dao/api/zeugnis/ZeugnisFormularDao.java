@@ -7,7 +7,10 @@ package net.sf.sze.dao.api.zeugnis;
 
 import java.util.List;
 
+import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.zeugnis.ZeugnisFormular;
+import net.sf.sze.model.zeugnisconfig.Halbjahr;
+import net.sf.sze.model.zeugnisconfig.Schulhalbjahr;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
 
@@ -27,4 +30,15 @@ public interface ZeugnisFormularDao
     List<ZeugnisFormular>
             findAllBySchulhalbjahrSelectableOrderBySchulhalbjahrJahrDescSchulhalbjahrHalbjahrDescKlasseJahrgangDescKlasseSuffixAscBeschreibungDesc(
             boolean selectable);
+
+
+    /**
+     * Findet das ZeugnisFormualar zum {@link Schulhalbjahr} und der {@link Klasse}.
+     * @param schuljahr das Schuljahr.
+     * @param halbjahr das {@link Halbjahr}.
+     * @param klasse die Klasse.
+     * @return das {@link ZeugnisFormular}.
+     */
+    ZeugnisFormular findBySchulhalbjahrJahrAndSchulhalbjahrHalbjahrAndKlasse(
+            int schuljahr, Halbjahr halbjahr, Klasse klasse);
 }

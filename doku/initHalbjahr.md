@@ -11,7 +11,7 @@ Die Vorbelegung erfolgt für jeder Klasse und Schulhalbjahr wie folgt,
 
 - beschreibung:  2004-05/Hj-?/Kl-? oder Schulhalbjahr.createRelativePathName + "/Kl-" Klasse.calculateKlassenname().
 - templateFileName:  LKS
-- leitspruch 1/2 und quelle 1/2: im 2.HJ Übernahme vom 1. Hj. (also LK) im 1Hj leer.
+- leitspruch 1/2 und quelle 1/2: im 2.HJ Übernahme vom 1. Hj. (also LK == LKS) im 1Hj leer.
 - ausgabeDatum:  leer
 - nachteilsAusgleichsDatum: leer
 - schulfachDetailInfos: LKS
@@ -19,11 +19,11 @@ Die Vorbelegung erfolgt für jeder Klasse und Schulhalbjahr wie folgt,
 
 Zur den Algorithmen LK und LKS:
 
-- LK (Letztes zur gleichen Klasse): Suche das mit der höchsten Id zur gleichen KLasse oder 
+- LK (Letztes zur gleichen Klasse): Suche das mit der höchsten Id zur gleichen KLasse oder
 zur Klasse, das mit dem vorherigem Schulhalbjahr
-- LKS (Letztes zur gleichen Klassenstufe): Ermittle die gleiche Klassenstufe und 
+- LKS (Letztes zur gleichen Klassenstufe): Ermittle die gleiche Klassenstufe und
 suche dazu das letzte.
-Ist im 2. Hj. identisch mit LK. Im anderen Fall muss man erst bei der Klasse das Jahr 
+Ist im 2. Hj. identisch mit LK. Im anderen Fall muss man erst bei der Klasse das Jahr
 des Jahrgangs runterzählen (suffix ist egal).
 
 ### Zu beachten:
