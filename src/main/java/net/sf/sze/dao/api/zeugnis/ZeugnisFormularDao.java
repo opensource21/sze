@@ -51,7 +51,7 @@ public interface ZeugnisFormularDao
      * @param klassenstufe der Jahrgang des Klasse.
      * @return das {@link ZeugnisFormular}.
      */
-    ZeugnisFormular
-            findFirstBySchulhalbjahrJahrAndSchulhalbjahrHalbjahrAndKlasseJahrgang(
+    List<ZeugnisFormular>
+            findAllBySchulhalbjahrJahrAndSchulhalbjahrHalbjahrAndKlasseJahrgang(
                     int schuljahr, Halbjahr halbjahr, int klassenstufe);
 }

@@ -23,6 +23,7 @@ import net.sf.sze.service.api.common.SchulkalenderService;
 import net.sf.sze.service.api.stammdaten.KlasseService;
 import net.sf.sze.service.api.zeugnis.ZeugnisFormularService;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -191,10 +192,11 @@ public class ZeugnisFormularServiceImpl implements ZeugnisFormularService {
         formular.setTemplateFileName("UNKNOWN");
         ZeugnisFormular lastZeugnisFormular = null;
         if (Halbjahr.Erstes_Halbjahr.equals(hj)) {
-            lastZeugnisFormular = zeugnisFormularDao.
-                    findFirstBySchulhalbjahrJahrAndSchulhalbjahrHalbjahrAndKlasseJahrgang(
+            final List<ZeugnisFormular> lastZeugnisFormulareList = zeugnisFormularDao.
+                    findAllBySchulhalbjahrJahrAndSchulhalbjahrHalbjahrAndKlasseJahrgang(
                     schuljahr - 1, Halbjahr.Beide_Halbjahre, klasse.getJahrgang() - 1);
-            if (lastZeugnisFormular != null) {
+            if (!CollectionUtils.isEmpty(lastZeugnisFormulareList)) {
+                lastZeugnisFormular = lastZeugnisFormulareList.get(0);
                 formular.setTemplateFileName(lastZeugnisFormular.getTemplateFileName());
             }
         } else if (Halbjahr.Beide_Halbjahre.equals(hj)) {
