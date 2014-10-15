@@ -191,11 +191,9 @@ public class ZeugnisFormularServiceImpl implements ZeugnisFormularService {
         formular.setTemplateFileName("UNKNOWN");
         ZeugnisFormular lastZeugnisFormular = null;
         if (Halbjahr.Erstes_Halbjahr.equals(hj)) {
-            final Klasse klassenStufe = klasseDao.
-                    findFirstByJahrgang(klasse.getJahrgang() - 1);
             lastZeugnisFormular = zeugnisFormularDao.
-                    findBySchulhalbjahrJahrAndSchulhalbjahrHalbjahrAndKlasse(
-                    schuljahr - 1, Halbjahr.Beide_Halbjahre, klassenStufe);
+                    findFirstBySchulhalbjahrJahrAndSchulhalbjahrHalbjahrAndKlasseJahrgang(
+                    schuljahr - 1, Halbjahr.Beide_Halbjahre, klasse.getJahrgang() - 1);
             if (lastZeugnisFormular != null) {
                 formular.setTemplateFileName(lastZeugnisFormular.getTemplateFileName());
             }
