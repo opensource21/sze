@@ -1,0 +1,56 @@
+//ZeugnisFormularInit.java
+//
+// Licensed under the AGPL - http://www.gnu.org/licenses/agpl-3.0.txt
+// (c) SZE-Development Team
+package net.sf.sze.dbunit.dataset;
+
+import static net.sf.sze.dbunit.rowbuilder.KlasseRowBuilder.newKlasse;
+import static net.sf.sze.dbunit.rowbuilder.SchulhalbjahrRowBuilder.newSchulhalbjahr;
+import static net.sf.sze.dbunit.rowbuilder.ZeugnisFormularRowBuilder.newZeugnisFormular;
+
+import java.sql.Date;
+
+import net.sf.sze.service.api.zeugnis.ZeugnisFormularService;
+
+import org.dbunit.dataset.DataSetException;
+import org.dbunit.dataset.IDataSet;
+import org.dbunit.dataset.builder.DataSetBuilder;
+
+
+/**
+ * Testdaten für den {@link ZeugnisFormularService}.
+ *
+ */
+@SuppressWarnings("boxing")
+public class ZeugnisFormularInit {
+
+
+    public static IDataSet buildInitZeugnisFormular1Hj() throws DataSetException {
+        final DataSetBuilder b = createInitZeugnisFormular1HJBuilder();
+        return b.build();
+    }
+
+    private static DataSetBuilder createInitZeugnisFormular1HJBuilder()
+            throws DataSetException {
+        final DataSetBuilder b = new DataSetBuilder();
+        newKlasse().Id(1L).Version(0L).Geschlossen(Boolean.FALSE).Jahrgang(2006).Suffix("c").addTo(b);
+        newKlasse().Id(2L).Version(0L).Geschlossen(Boolean.TRUE).Jahrgang(2007).Suffix("a").addTo(b);
+
+        newSchulhalbjahr().Id(1L).Version(0L).Halbjahr(0).Jahr(2013).Selectable(Boolean.FALSE).addTo(b);
+        newSchulhalbjahr().Id(2L).Version(0L).Halbjahr(1).Jahr(2013).Selectable(Boolean.TRUE).addTo(b);
+
+        newSchulhalbjahr().Id(3L).Version(0L).Halbjahr(0).Jahr(2014).Selectable(Boolean.TRUE).addTo(b);
+
+        newZeugnisFormular().Id(1L).Version(0L).AusgabeDatum(Date.valueOf("2013-01-31")).Beschreibung("2013 erstes Halbjahr").NachteilsAusgleichsDatum(Date.valueOf("2012-09-14")).TemplateFileName("egal1").KlasseId(1L).SchulhalbjahrId(1L).addTo(b);
+        newZeugnisFormular().Id(2L).Version(0L).AusgabeDatum(Date.valueOf("2013-07-01")).Beschreibung("2013 zweites Halbjahr").NachteilsAusgleichsDatum(Date.valueOf("2012-09-14")).TemplateFileName("egal2").KlasseId(1L).SchulhalbjahrId(2L).addTo(b);
+        return b;
+    }
+
+    public static IDataSet buildErgebnisInit1HjDataSet() throws DataSetException {
+        final DataSetBuilder b = createInitZeugnisFormular1HJBuilder();
+        newZeugnisFormular().Id(3L).Version(0L).Beschreibung("2013-14/Hj-1/Kl-8c").TemplateFileName("UNKNOWN").KlasseId(1L).SchulhalbjahrId(3L).addTo(b);
+        return b.build();
+
+    }
+
+}
