@@ -7,6 +7,9 @@ package net.sf.sze.dbunit.dataset;
 import static net.sf.sze.dbunit.rowbuilder.KlasseRowBuilder.newKlasse;
 import static net.sf.sze.dbunit.rowbuilder.SchulhalbjahrRowBuilder.newSchulhalbjahr;
 import static net.sf.sze.dbunit.rowbuilder.ZeugnisFormularRowBuilder.newZeugnisFormular;
+import static net.sf.sze.dbunit.rowbuilder.SchulfachDetailInfoRowBuilder.newSchulfachDetailInfo;
+import static net.sf.sze.dbunit.rowbuilder.SchulfachRowBuilder.newSchulfach;
+import static org.dbunit.validator.Validators.*;
 
 import java.sql.Date;
 
@@ -25,6 +28,10 @@ import org.dbunit.dataset.builder.DataSetBuilder;
 public class ZeugnisFormularInit {
 
 
+    /**
+     * Comment for <code>DETAIL_INFO_COPIED</code>
+     */
+    private static final String DETAIL_INFO_COPIED = "DetailInfo";
     /**
      * Comment for <code>QUELLE_LEITSPRUCH2_COPIED</code>
      */
@@ -64,6 +71,11 @@ public class ZeugnisFormularInit {
 
         newZeugnisFormular().Id(1L).Version(0L).AusgabeDatum(Date.valueOf("2013-01-31")).Beschreibung("2013 erstes Halbjahr").NachteilsAusgleichsDatum(Date.valueOf("2012-09-14")).TemplateFileName("egal1").KlasseId(1L).SchulhalbjahrId(1L).addTo(b);
         newZeugnisFormular().Id(2L).Version(0L).AusgabeDatum(Date.valueOf("2013-07-01")).Beschreibung("2013 zweites Halbjahr").NachteilsAusgleichsDatum(Date.valueOf("2012-09-14")).TemplateFileName(TEMPLATE_FILENAME_COPIED).KlasseId(1L).SchulhalbjahrId(2L).addTo(b);
+
+        newSchulfach().Id(1L).Name("Mathematik").Sortierung(101L).StufenMitZweiNiveaus("5 6 7 8 9 10").Typ(0).addTo(b);
+
+        newSchulfachDetailInfo().Id(1L).Version(0L).FormularId(2L).SchulfachId(1L).DetailInfo(DETAIL_INFO_COPIED);
+
         return b;
     }
 
@@ -72,6 +84,7 @@ public class ZeugnisFormularInit {
         newZeugnisFormular().Id(3L).Version(0L)
                 .Beschreibung("2013-14/Hj-1/Kl-7a").TemplateFileName(TEMPLATE_FILENAME_COPIED)
                 .KlasseId(2L).SchulhalbjahrId(3L).addTo(b);
+        newSchulfachDetailInfo().Id(gt(0)).Version(0L).FormularId(3L).SchulfachId(1L).DetailInfo(DETAIL_INFO_COPIED);
         return b.build();
 
     }
@@ -92,6 +105,8 @@ public class ZeugnisFormularInit {
                 .TemplateFileName(TEMPLATE_FILENAME_COPIED).KlasseId(1L)
                 .SchulhalbjahrId(2L).addTo(b);
 
+        newSchulfachDetailInfo().Id(gt(0)).Version(0L).FormularId(4L).SchulfachId(1L).DetailInfo(DETAIL_INFO_COPIED);
+
         return b.build();
     }
 
@@ -104,7 +119,6 @@ public class ZeugnisFormularInit {
         newSchulhalbjahr().Id(1L).Version(0L).Halbjahr(0).Jahr(2013).Selectable(Boolean.FALSE).addTo(b);
         newSchulhalbjahr().Id(2L).Version(0L).Halbjahr(1).Jahr(2013).Selectable(Boolean.TRUE).addTo(b);
 
-        //TODO Schulfachdetail-Infos ergänzen!!!!
 
         newZeugnisFormular().Id(1L).Version(0L)
                 .AusgabeDatum(Date.valueOf("2013-01-31"))
@@ -117,6 +131,10 @@ public class ZeugnisFormularInit {
                 .QuelleLeitspruch2(QUELLE_LEITSPRUCH2_COPIED)
                 .KlasseId(1L).SchulhalbjahrId(1L)
                 .addTo(b);
+
+        newSchulfach().Id(1L).Name("Mathematik").Sortierung(101L).StufenMitZweiNiveaus("5 6 7 8 9 10").Typ(0).addTo(b);
+
+        newSchulfachDetailInfo().Id(1L).Version(0L).FormularId(1L).SchulfachId(1L).DetailInfo(DETAIL_INFO_COPIED);
 
 
         return b;
