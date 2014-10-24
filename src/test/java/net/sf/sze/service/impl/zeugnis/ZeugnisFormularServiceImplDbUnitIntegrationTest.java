@@ -38,6 +38,19 @@ public class ZeugnisFormularServiceImplDbUnitIntegrationTest extends AbstractSze
         super.checkResult(ZeugnisFormularInit.buildErgebnisInit1HjDataSet());
     }
 
+    /**
+     * Test method for
+     * {@link net.sf.sze.service.impl.zeugnis.ZeugnisFormularServiceImpl#init(java.util.Calendar)}.
+     * @throws Exception wenn was schief geht.
+     */
+    @Test
+    public void testInit2Hj() throws Exception {
+        super.cleanlyInsert(ZeugnisFormularInit.buildInitZeugnisFormular2Hj());
+        zeugnisFormularService.init(createDate(2013, 3, 1));
+        super.checkResult(ZeugnisFormularInit.buildErgebnisInit2HjDataSet());
+        zeugnisFormularService.init(createDate(2013, 4, 1));
+        super.checkResult(ZeugnisFormularInit.buildErgebnisInit2HjDataSet());
+    }
 
     private static Calendar createDate(int year, int month, int day) {
         final Calendar cal = Calendar.getInstance();
