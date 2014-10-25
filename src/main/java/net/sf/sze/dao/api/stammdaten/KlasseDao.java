@@ -26,4 +26,5 @@ public interface KlasseDao extends PagingAndSortingRepository<Klasse, Long> {
      */
     List<Klasse> findAllByJahrgangBetweenAndGeschlossen(int min, int max,
             boolean closed);
+
 }

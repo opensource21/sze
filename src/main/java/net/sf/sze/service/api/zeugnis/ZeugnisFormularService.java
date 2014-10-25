@@ -5,6 +5,7 @@
 
 package net.sf.sze.service.api.zeugnis;
 
+import java.util.Calendar;
 import java.util.List;
 
 import net.sf.sze.model.stammdaten.Klasse;
@@ -76,5 +77,11 @@ public interface ZeugnisFormularService {
      */
     List<Schulhalbjahr> getActiveSchulhalbjahre(ZeugnisFormular zeugnisFormular);
 
+
+    /**
+     * Initialisiert für den gegebenen Tag alle Zeugnisformulare.
+     * @param referenceDay dsa Bezugsdatum.
+     */
+    void init(Calendar referenceDay);
 
 }

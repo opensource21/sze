@@ -19,14 +19,14 @@ import org.springframework.stereotype.Service;
  *
  */
 @Service
-public class PDFCreationJobs {
+public class PDFCreationJob {
 
 
     /**
      * The Logger for the controller.
      */
     private static final Logger LOG = LoggerFactory
-            .getLogger(PDFCreationJobs.class);
+            .getLogger(PDFCreationJob.class);
 
     /**
      * Service der die eigentliche Erstellung übernimmt.

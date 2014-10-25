@@ -5,6 +5,8 @@
 
 package net.sf.sze.service.api.zeugnisconfig;
 
+import java.util.Calendar;
+
 import net.sf.sze.model.zeugnisconfig.Schulhalbjahr;
 
 import org.springframework.data.domain.Page;
@@ -51,6 +53,12 @@ public interface SchulhalbjahrService {
      *
      */
     void delete(Long schulhalbjahrId);
+
+    /**
+     * Initialisiert das Schulhalbjahr zu einem bestimmten Datum.
+     * @param currentDate das Datum zu dem die aktualisierung erfolgen soll.
+     */
+    void init(Calendar currentDate);
 
 
 }
