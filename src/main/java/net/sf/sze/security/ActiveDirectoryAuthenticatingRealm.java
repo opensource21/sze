@@ -8,7 +8,6 @@ import java.util.Properties;
 
 import javax.naming.Context;
 import javax.naming.NamingException;
-import javax.naming.ldap.Control;
 import javax.naming.ldap.InitialLdapContext;
 import javax.naming.ldap.LdapContext;
 
@@ -40,9 +39,6 @@ public class ActiveDirectoryAuthenticatingRealm extends AuthenticatingRealm {
 
     private final Properties settings = new Properties();
 
-    /** Connection Controls. */
-    private Control[] connectionControls = new Control[] { new FastBindConnectionControl() };
-
     /**
      * Initiates an object of type ActiveDirectoryAuthenticatingRealm.
      * @param ldapUrl connectstring for the url like <code>ldap://localhost:389</code>.
@@ -69,14 +65,10 @@ public class ActiveDirectoryAuthenticatingRealm extends AuthenticatingRealm {
         final String password = String.valueOf(upToken.getPassword());
         LdapContext ldapContext = null;
         try {
-            settings.put(Context.SECURITY_PRINCIPAL, username + userSuffix);
-            settings.put(Context.SECURITY_CREDENTIALS, password);
-            ldapContext = new InitialLdapContext(settings, connectionControls);
-
+            ldapContext = new InitialLdapContext(settings, null);
             ldapContext.addToEnvironment(Context.SECURITY_PRINCIPAL, username + userSuffix);
             ldapContext.addToEnvironment(Context.SECURITY_CREDENTIALS, password);
-
-            ldapContext.reconnect(connectionControls);
+            ldapContext.reconnect(null);
             return new SimpleAuthenticationInfo(username, password, getName());
         } catch (final NamingException e) {
             LOG.error("Problem to communicate with the ldap", e);
@@ -90,27 +82,6 @@ public class ActiveDirectoryAuthenticatingRealm extends AuthenticatingRealm {
             }
         }
         return null;
-    }
-
-    /**
-     * Control which allows a fast bind, only for checking user-credentials.
-     *
-     */
-    private static final class FastBindConnectionControl implements Control {
-        @Override
-        public byte[] getEncodedValue() {
-            return null;
-        }
-
-        @Override
-        public String getID() {
-            return "1.2.840.113556.1.4.1781";
-        }
-
-        @Override
-        public boolean isCritical() {
-            return true;
-        }
     }
 
 }
