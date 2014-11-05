@@ -1,8 +1,10 @@
 package net.sf.sze.config;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import javax.servlet.Filter;
 
@@ -30,7 +32,7 @@ import org.springframework.context.annotation.PropertySource;
  *
  */
 @Configuration
-@PropertySource("classpath:/security.properties")
+@PropertySource("classpath:/" + SecurityConfig.SECURITY_CONFIG)
 public class SecurityConfig {
 
     /**
@@ -38,14 +40,18 @@ public class SecurityConfig {
      */
     private final boolean enabled = true;
 
+    /**
+     * Resource which contains the configuration.
+     */
+    static final String SECURITY_CONFIG = "/security.properties";
 
     /** The url to the ldap. */
     @Value("${ldap.url}")
-    private String ldapUrl = "ldap://localhost:50389";
+    private String ldapUrl;
 
     /** The domain used as suffix like githum.com. */
     @Value("${domain}")
-    private String domain = "fsn.local";
+    private String domain;
 
     /**
      * Defines the realms.
@@ -56,9 +62,25 @@ public class SecurityConfig {
         final List<Realm> realms = new ArrayList<Realm>();
         final IniRealm iniRealm = new IniRealm("classpath:userAndRoles.ini");
         iniRealm.setCredentialsMatcher(new PasswordMatcher());
+        setVariables();
         realms.add(new ActiveDirectoryAuthenticatingRealm(ldapUrl, domain));
         realms.add(iniRealm);
         return realms;
+    }
+
+    /**
+     * Workaround, because @Value doesn't work.
+     */
+    private void setVariables() {
+        final Properties props = new Properties();
+        try {
+            props.load(SecurityConfig.class.getClassLoader().getResourceAsStream(SECURITY_CONFIG));
+        } catch (IOException e) {
+            throw new IllegalStateException("Can't load " + SECURITY_CONFIG);
+        }
+        ldapUrl = props.getProperty("ldap.url");
+        domain = props.getProperty("domain");
+
     }
 
     /**
