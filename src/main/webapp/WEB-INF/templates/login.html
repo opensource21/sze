@@ -4,7 +4,7 @@
     <title th:text="#{app.title} + ' - ' + #{login.title}"></title>
     <th:block th:include="/main::head"/>
 </head>
-<body >
+<body>
     <div id="header">
         <div id="logo">
             <img src="../../resources/images/sze_logo.jpg"
@@ -17,8 +17,16 @@
     <form class="form-horizontal" th:action="@{/login}" method="post">
         <input type="text" bs:name="username" th:value="${username}"/>
         <input type="password" bs:name="password" th:value="${password}"/>
-        <button type="submit" class="btn">Log in</button>
+        <div class="control-group">
+            <div class="controls">
+                <button type="submit" class="btn" th:text="#{login.button}">Log in</button>
+            </div>
+        </div>
     </form>
+    </div>
+        <div class="alert alert-info">
+        <b>Erl&auml;uterung:</b> <span th:utext="#{help.login}"
+            th:remove="tag">Ein erläuternder Text.</span>
     </div>
 </body>
 </html>

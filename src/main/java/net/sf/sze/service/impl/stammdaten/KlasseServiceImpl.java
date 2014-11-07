@@ -5,12 +5,15 @@
 
 package net.sf.sze.service.impl.stammdaten;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import net.sf.sze.dao.api.stammdaten.KlasseDao;
 import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.service.api.stammdaten.KlasseService;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -22,6 +25,14 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 @Service
 public class KlasseServiceImpl implements KlasseService {
+
+    /** Minimales Schuljahr. */
+    @Value("${schuljahre.min}")
+    private int minimalesSchuljahr;
+
+    /** Maximales Schuljahr. */
+    @Value("${schuljahre.max}")
+    private int maximalesSchuljahr;
 
 
     /** Das Dao für {@link Klasse}. */
@@ -64,5 +75,15 @@ public class KlasseServiceImpl implements KlasseService {
     public void delete(Long klasseId) {
         final Klasse oldKlasse = klasseDao.findOne(klasseId);
         klasseDao.delete(oldKlasse);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<Klasse> getActiveKlassen(int currentJahr) {
+        return klasseDao
+                .findAllByJahrgangBetweenAndGeschlossen(currentJahr
+                - maximalesSchuljahr, currentJahr - minimalesSchuljahr, false);
     }
 }

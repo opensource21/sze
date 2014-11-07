@@ -28,7 +28,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @PropertySource("classpath:/app.properties")
-public class DatabaseBackup {
+public class DatabaseBackupJob {
 
     @Resource
     private DataSource dataSource;
@@ -40,7 +40,7 @@ public class DatabaseBackup {
      * The Logger for the controller.
      */
     private static final Logger LOG = LoggerFactory
-            .getLogger(DatabaseBackup.class);
+            .getLogger(DatabaseBackupJob.class);
 
 
     /**
