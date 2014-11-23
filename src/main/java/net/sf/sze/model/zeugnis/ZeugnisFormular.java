@@ -34,7 +34,7 @@ import de.ppi.fuwesta.oval.validation.Unique;
 @Entity
 @Table(name = "zeugnis_formular",
         uniqueConstraints = @UniqueConstraint(columnNames = {"schulhalbjahr_id",
-        "klasse_id", "beschreibung"},
+        "klasse_id"},
                 name = "UK_ZEUGNIS_FORMULAR_HALBJAHR_KLASSE_BESCHREIBUNG"))
 public class ZeugnisFormular extends RevisionModel implements Serializable,
         Comparable<ZeugnisFormular> {

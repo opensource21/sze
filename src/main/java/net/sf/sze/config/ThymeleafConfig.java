@@ -5,7 +5,6 @@ import nz.net.ultraq.thymeleaf.LayoutDialect;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.MediaType;
 import org.thymeleaf.spring3.SpringTemplateEngine;
 import org.thymeleaf.spring3.view.ThymeleafViewResolver;
@@ -20,20 +19,19 @@ import de.ppi.fuwesta.thymeleaf.mail.MailToDialect;
  *
  */
 @Configuration
-@PropertySource("classpath:/thymeleaf.properties")
 public class ThymeleafConfig {
 
     /**
-     * The templates will be chached.
+     * Die POM-Versions-Nr.
      */
-    @Value("${thymeleaf.cacheable}")
-    private boolean cacheable;
+    @Value("${project.version}")
+    private String buildNr;
+
 
     /**
      * Encoding of HTTP-Response and of the templates.
      */
-    @Value("${thymeleaf.characterEncoding}")
-    private String characterEncoding;
+    private String characterEncoding = "UTF-8";
 
     /**
      * Configures the Thymeleaf view resolver.
@@ -78,7 +76,7 @@ public class ThymeleafConfig {
         resolver.setPrefix("/WEB-INF/templates/");
         resolver.setSuffix(".html");
         resolver.setTemplateMode("HTML5");
-        resolver.setCacheable(cacheable);
+        resolver.setCacheable(!buildNr.endsWith("-SNAPSHOT"));
         resolver.setCharacterEncoding("UTF-8");
         return resolver;
     }

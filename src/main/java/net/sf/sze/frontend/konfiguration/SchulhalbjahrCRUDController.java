@@ -5,6 +5,8 @@
 
 package net.sf.sze.frontend.konfiguration;
 
+import java.util.Calendar;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -76,6 +78,17 @@ public class SchulhalbjahrCRUDController {
      */
     @Resource
     private Validator validator;
+
+    /**
+     * Erzeugt das aktuelle Schulhalbjahre.
+     * @return String which defines the next page.
+     */
+    @RequestMapping(value = {URL.Schulhalbjahr.CREATE_CURRENT},
+            method = RequestMethod.GET)
+    public String createCurrent() {
+        schulhalbjahrService.init(Calendar.getInstance());
+        return URL.redirect(URL.Schulhalbjahr.LIST);
+    }
 
     /**
      * List all Schulhalbjahrs.
