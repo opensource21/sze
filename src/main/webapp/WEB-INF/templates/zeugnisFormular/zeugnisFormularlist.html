@@ -19,6 +19,7 @@ pageRequest - the parameter of this search.
     <div layout:fragment="content" class="container-fluid">
         <h3 th:text="#{zeugnisFormular.list.title}">Liste</h3>
         <a class="btn" href="/" th:href="@{#{nurl.zeugnisformular.create}}" th:text="#{label.action.create}">Create a new entry</a>
+        <a class="btn" href="/" th:href="@{#{nurl.zeugnisformular.create_current}}" th:text="#{zeugnisFormular.action.create_current}">Create current entries</a>
         <div id="data">
             <span th:if="${#lists.isEmpty(zeugnisFormularList)}" th:text="#{label.no_data_found}"></span>
             <table class="datatable_with_action table table-striped table-hover">
