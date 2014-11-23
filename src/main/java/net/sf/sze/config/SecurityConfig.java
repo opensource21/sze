@@ -95,6 +95,7 @@ public class SecurityConfig {
         filterMap.put("/resources/**/*", DefaultFilter.anon.name());
         filterMap.put(URL.Security.LOGOUT, DefaultFilter.logout.name());
         filterMap.put(URL.Configuration.HOME + "/**", authAndPerms + "[config:*]");
+        filterMap.put(URL.Admin.HOME + "/**", authAndPerms + "[admin:*]");
         filterMap.put(URL.Zeugnis.HOME + "/**", authAndPerms + "[zeugnis:ansicht]");
         filterMap.put(URL.Bewertungen.HOME + "/**", authAndPerms + "[zeugnis:bewertung]");
         filterMap.put(URL.Bemerkung.HOME + "/**", authAndPerms + "[zeugnis:bemerkung]");

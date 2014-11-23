@@ -70,6 +70,34 @@ public final class URL {
     }
 
     /**
+     * Alle Admin-Urls.
+     * Class Admin
+     *
+     */
+    public interface Admin {
+        /**
+         * Zeugnisconfiguration base-url.
+         */
+        String HOME = "/admin";
+
+        /**
+         * Zeugnisconfiguration start-url.
+         */
+        String MAIN = HOME + "/";
+
+        /**
+         * Parameter zum Übergeben der Anymisierung.
+         */
+        String P_ANONYM = "anonym";
+
+
+        /**
+         * Url zum anonymisieren der Zeugnisse.
+         */
+        String ANONYM = HOME + "/anonym";
+    }
+
+    /**
      * URLs die die Security betreffen.
      *
      */
