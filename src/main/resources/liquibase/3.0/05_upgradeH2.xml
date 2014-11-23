@@ -10,7 +10,7 @@
     <changeSet author="niels (generated)" id="1350468477768-3">
         <modifyDataType columnName="NACHTEILS_AUSGLEICHS_DATUM" newDataType="DATE" tableName="ZEUGNIS_FORMULAR"/>
     </changeSet>
-        <changeSet author="niels (generated)" id="1350468477768-11">
+    <changeSet author="niels (generated)" id="1350468477768-11">
         <dropIndex indexName="UK_SCHULFACH_TYP_NAME" tableName="SCHULFACH"/>
     </changeSet>
     <changeSet author="niels (generated)" id="1350468477768-12">
@@ -106,5 +106,17 @@
             oldColumnName="STUFEN_MIT_BINNEN_DIFFERENZIERUNG"
             newColumnName="STUFEN_MIT_DREI_NIVEAUS"
             columnDataType="VARCHAR(255)"/>
+    </changeSet>
+
+    <changeSet author="niels" id="20141123-1">
+        <dropIndex indexName="UK_ZEUGNIS_FORMULAR_HALBJAHR_KLASSE_BESCHREIBUNG"
+            tableName="ZEUGNIS_FORMULAR"/>
+    </changeSet>
+    <changeSet author="niels" id="20141123-2">
+        <createIndex indexName="UK_ZEUGNIS_FORMULAR_HALBJAHR_KLASSE_BESCHREIBUNG"
+                tableName="ZEUGNIS_FORMULAR" unique="true">
+            <column name="SCHULHALBJAHR_ID"/>
+            <column name="KLASSE_ID"/>
+        </createIndex>
     </changeSet>
 </databaseChangeLog>

@@ -75,7 +75,7 @@
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <version>1.3.169</version>
+            <version>1.3.176</version>
         </dependency>
 
         <!-- Thymeleaf -->
