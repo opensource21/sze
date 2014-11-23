@@ -488,6 +488,9 @@ public final class URL {
 
         /** Create URL. */
         String CREATE = HOME + "/create";
+
+        /** Create current zeugnisformulare -url. */
+        String CREATE_CURRENT = HOME + "/createcurrent";
     }
 
     /**

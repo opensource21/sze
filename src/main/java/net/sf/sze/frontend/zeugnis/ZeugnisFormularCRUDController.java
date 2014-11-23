@@ -5,6 +5,8 @@
 
 package net.sf.sze.frontend.zeugnis;
 
+import java.util.Calendar;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -68,6 +70,17 @@ public class ZeugnisFormularCRUDController {
      */
     @Resource
     private Validator validator;
+
+    /**
+     * Erzeugt die aktuellen Zeugnisformulare.
+     * @return String which defines the next page.
+     */
+    @RequestMapping(value = {URL.ZeugnisFormular.CREATE_CURRENT},
+            method = RequestMethod.GET)
+    public String createCurrent() {
+        zeugnisFormularService.init(Calendar.getInstance());
+        return URL.redirect(URL.ZeugnisFormular.LIST);
+    }
 
     /**
      * List all ZeugnisFormulars.
