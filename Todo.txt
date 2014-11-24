@@ -6,6 +6,8 @@
 
 - Delete-Fragment zu umbauen, dass es mit JS und ohne gut läuft.
 
+- Beim create sollte man nicht löschen können.
+
 - Beim Initialiseren von Klasse 1-2 komplett gibt es eine Exception.
     -> Das lag daran, dass erst initialisiert wurde und dann der Schüler
        die Klasse gewechselt hat. Das können wir technisch noch nicht. (Gefixt!)
