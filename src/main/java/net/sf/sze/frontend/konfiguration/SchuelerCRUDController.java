@@ -149,7 +149,9 @@ public class SchuelerCRUDController {
     @RequestMapping(value = URL.Schueler.CREATE, method = RequestMethod.GET)
     public String create(@PathVariable(URL.Schueler.P_AKTIV) String aktiv, Model model) {
         final Schueler schueler = new Schueler();
-        addStandardModelData(schueler, URL.Schueler.CREATE, false, model);
+        addStandardModelData(schueler,
+                URL.filledURLWithNamedParams(URL.Schueler.CREATE, URL.Schueler.P_AKTIV, aktiv) ,
+                false, model);
         return SCHUELER_FORM;
     }
 
@@ -169,7 +171,9 @@ public class SchuelerCRUDController {
         validator.validate(schueler, result);
 
         if (result.hasErrors()) {
-            addStandardModelData(schueler, URL.Schueler.CREATE, false, model);
+            addStandardModelData(schueler,
+                    URL.filledURLWithNamedParams(URL.Schueler.CREATE, URL.Schueler.P_AKTIV, aktiv),
+                    false, model);
             return SCHUELER_FORM;
         }
 
@@ -190,7 +194,8 @@ public class SchuelerCRUDController {
     public String deleteConfirm(@PathVariable(URL.Schueler.P_AKTIV) String aktiv,
             @RequestParam("id") Long id, Model model) {
         LOG.debug("Confirm delete schuelerId: " + id);
-        model.addAttribute("deleteURL", URL.Schueler.DELETE);
+        model.addAttribute("deleteURL", URL.filledURLWithNamedParams(
+                URL.Schueler.DELETE, URL.Schueler.P_AKTIV, aktiv));
         model.addAttribute("id", id);
         model.addAttribute("cancelURL", URL.filledURLWithNamedParams(
                 URL.Schueler.LIST, URL.Schueler.P_AKTIV, aktiv));
@@ -228,7 +233,8 @@ public class SchuelerCRUDController {
         LOG.debug("Show schuelerId: " + schuelerId);
 
         addStandardModelData(schuelerService.read(schuelerId),
-                URL.Schueler.LIST, true, model);
+                URL.filledURLWithNamedParams(URL.Schueler.LIST, URL.Schueler.P_AKTIV, aktiv),
+                true, model);
         return SCHUELER_FORM;
     }
 
