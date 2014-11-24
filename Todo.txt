@@ -1,12 +1,8 @@
 #PRIO 1
 
-- Wieso ist das Zeugnisformular nicht unique für Schulhalbjahr und Klasse? Falls
-  das nicht der Fall ist, stimmt @Unique nicht und die Initialisierung ist kaputt.
-
 - Prüfen ob die Zeugnisse gleich erstellt werden. (manuell. Automatisch abgeschlossen)
 
 #PRIO 2
-- Automatisches Anlegen von Halbjahren und Formularen. (Siehe /sze/doku/initHalbjahr.md)
 
 - Delete-Fragment zu umbauen, dass es mit JS und ohne gut läuft.
 
@@ -110,6 +106,11 @@ Oder zusätzlich ein @Unique -> Aktuell kein Problem, da nicht durch GUI verletz
     AvSv, AG, Bemerkungsbaustein, Schulamt, Schulamtsbemerkunsbaustein,
     SoLBewertungstext, Zeugnisart)
 + https://github.com/mgonto/jpa-passive-logging-example (Siehe auch http://struberg.wordpress.com/2010/07/31/howto-changelog-with-jpa/)  UPGRADE_LIQUIBASE testen!
+
++ Wieso ist das Zeugnisformular nicht unique für Schulhalbjahr und Klasse? Falls
+  das nicht der Fall ist, stimmt @Unique nicht und die Initialisierung ist kaputt.
+
++ Automatisches Anlegen von Halbjahren und Formularen. (Siehe /sze/doku/initHalbjahr.md)
 
 
 + Owning-Side bei Many-To-One oder One-To-Many: Immer Many. Bei Many-Many die ohne mappedBy
