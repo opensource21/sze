@@ -78,6 +78,8 @@ messages - eine Liste mit Meldungen.
                     <a href="#" th:with="#{par.session.halbjahr_id}=${#objects.nullSafe(halbjahr_id,0)},
                         #{par.session.klassen_id}=${#objects.nullSafe(klassen_id,0)}"
                         th:href="@{|__#{nurl.zeugnispath.start}__|}">Zeugnisse</a></li>
+            </ul>
+            <ul class="nav pull-right">
                 <li shiro:user="">
                     <a href="auth/logoff" th:href="@{#{nurl.security.logout}}">Abmelden</a></li>
             </ul>
