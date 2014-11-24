@@ -16,6 +16,7 @@
 
 - Beim Start von OO sollte man die Parameter mit -- anstatt - übergeben. Ist allerdings nur deprecated.
 
+- Sortierung bei den Tabellen sollte mit dem Datum umgehen können.
 
 #PRIO 3
 - PDF-Erstellung mit UNO dürfte zur Zeit nicht funktionieren, zumindest weiss ich
