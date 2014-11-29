@@ -562,8 +562,8 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
             File odtFile) {
         LOG.debug("Erstelle ODT-Datei");
         if (LOG.isDebugEnabled()) {
-            final MapPrinter mapPrinter = new MapPrinter(odtFile.getName()
-                    + ".txt", false);
+            final MapPrinter mapPrinter = new MapPrinter(odtFile.getAbsolutePath()
+                    + ".debug.txt", false);
             mapPrinter.print(data);
         }
         try {
