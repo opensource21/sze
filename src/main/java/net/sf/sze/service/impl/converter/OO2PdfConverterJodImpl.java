@@ -152,7 +152,7 @@ public class OO2PdfConverterJodImpl implements OO2PdfConverter {
         } catch (final Exception e) {
             final ProcessBuilder processBuilder = new ProcessBuilder(
                     ooCommandFile.getAbsolutePath(), invisibleParam,
-                    "-accept = socket,host =127.0.0.1,port =" + ooPort + ";urp;",
+                    "-accept=socket,host=127.0.0.1,port=" + ooPort + ";urp;",
                     "-nofirststartwizard" + environmentUrl);
             try {
                 closeConnection();
