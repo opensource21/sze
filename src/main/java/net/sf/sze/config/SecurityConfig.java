@@ -93,6 +93,8 @@ public class SecurityConfig {
         final String authAndPerms = DefaultFilter.authc.name() + ", "
                 + DefaultFilter.perms.name();
         filterMap.put("/resources/**/*", DefaultFilter.anon.name());
+        filterMap.put("/auth/login", DefaultFilter.anon.name());
+        filterMap.put("/zeugnisMain/index", DefaultFilter.anon.name());
         filterMap.put(URL.Security.LOGOUT, DefaultFilter.logout.name());
         filterMap.put(URL.Configuration.HOME + "/**", authAndPerms + "[config:*]");
         filterMap.put(URL.Admin.HOME + "/**", authAndPerms + "[admin:*]");
