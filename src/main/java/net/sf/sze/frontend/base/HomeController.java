@@ -5,6 +5,11 @@
 
 package net.sf.sze.frontend.base;
 
+
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Controller
 public class HomeController {
+
+    private static final Logger LOG = LoggerFactory.getLogger(HomeController.class);
 
     /**
      * Show the home page.
@@ -65,6 +72,11 @@ public class HomeController {
             Model model) {
         model.addAttribute("username", username);
         model.addAttribute("password", password);
+        final Subject subject = SecurityUtils.getSubject();
+        if (subject != null && subject.isAuthenticated()) {
+            LOG.error("User is authenticated in Login-Method. {}", subject.getPrincipal());
+            return URL.redirect(URL.Zeugnis.START);
+        }
         return "login";
     }
 
