@@ -5,11 +5,13 @@
 
 package net.sf.sze.frontend.base;
 
+
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,11 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class HomeController {
 
-    /**
-     * The Logger for the controller.
-     */
-    private static final Logger LOG = LoggerFactory.getLogger(
-            HomeController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(HomeController.class);
 
     /**
      * Show the home page.
@@ -37,20 +35,6 @@ public class HomeController {
         return URL.redirect(URL.Zeugnis.START);
     }
 
-    /**
-     * Show an edit view for a user.
-     *
-     * @param userId the id of the user.
-     * @param model the model where to safe the data for the view.
-     * @return the logical view name.
-     */
-    @RequestMapping(method = RequestMethod.GET, value = "/example/{userId}")
-    public String editUser(@PathVariable("userId") String userId, Model model) {
-        LOG.info("UserId: {}", userId);
-        model.addAttribute("userId", userId);
-        return "example/editBootstrap";
-    }
-
 
     /**
      * Wirft eine Exception.
@@ -60,6 +44,16 @@ public class HomeController {
     public String showException() {
         throw new RuntimeException("Die angeforderte Exception.");
     }
+
+    /**
+     * Das alte Login wird auf die Start-Seite gemappt.
+     * @return redirect zur Startseite.
+     */
+    @RequestMapping(value = {"auth/login", "zeugnisMain/index"})
+    public String oldLogin() {
+        return URL.redirect(URL.Zeugnis.START);
+    }
+
 
     /**
      * Show the login-view.
@@ -78,6 +72,11 @@ public class HomeController {
             Model model) {
         model.addAttribute("username", username);
         model.addAttribute("password", password);
+        final Subject subject = SecurityUtils.getSubject();
+        if (subject != null && subject.isAuthenticated()) {
+            LOG.error("User is authenticated in Login-Method. {}", subject.getPrincipal());
+            return URL.redirect(URL.Zeugnis.START);
+        }
         return "login";
     }
 

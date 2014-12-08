@@ -119,7 +119,7 @@ public class BewertungenController implements ModelAttributes {
 
         if (CollectionUtils.isEmpty(schulfaecher)) {
             redirectAttributes.addFlashAttribute("message",
-                    "Es wurden keine Schulfächer gefunden.");
+                    "Es wurden keine Bewertungen gefunden.");
             return URL.redirectWithNamedParams(URL.ZeugnisPath.START,
                     URL.Session.P_HALBJAHR_ID, halbjahrId,
                     URL.Session.P_KLASSEN_ID, klassenId);

@@ -70,6 +70,10 @@ public class ActiveDirectoryAuthenticatingRealm extends AuthenticatingRealm {
             ldapContext.addToEnvironment(Context.SECURITY_CREDENTIALS, password);
             ldapContext.reconnect(null);
             return new SimpleAuthenticationInfo(username, password, getName());
+        } catch (javax.naming.AuthenticationException e) {
+            //All other user from other realms will pass this too
+            LOG.warn("Authentication failed for user {}. {}", username,
+                    e.getLocalizedMessage());
         } catch (final NamingException e) {
             LOG.error("Problem to communicate with the ldap", e);
         } finally {

@@ -182,7 +182,7 @@ public class ZeugnisController implements ModelAttributes {
 
         if (CollectionUtils.isEmpty(zeugnisse)) {
             redirectAttributes.addFlashAttribute(MESSAGE,
-                    "Es wurden keine Zeugnisse gefunden");
+                    "Es wurden keine Zeugnisse gefunden.");
             return URL.redirectWithNamedParams(URL.ZeugnisPath.START,
                     URL.Session.P_HALBJAHR_ID, Long.valueOf(halbjahrId),
                     URL.Session.P_KLASSEN_ID, Long.valueOf(klassenId));
@@ -408,7 +408,7 @@ public class ZeugnisController implements ModelAttributes {
         validator.validate(bewertung, result);
 
         if (result.hasErrors()) {
-            LOG.info("Die Bewertung hat Fehler {}", result);
+            LOG.info("Die Bewertung hat Fehler {}.", result);
             setEditBewertungModelValues(halbjahrId, klassenId, schuelerId,
                     bewertung, prevId, nextId, model);
             return BEWERTUNGEN_EDIT_BEWERTUNG_VIEW;
