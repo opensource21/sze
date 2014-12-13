@@ -14,12 +14,13 @@
 
     <div class="well">
     <div class="alert alert-error" th:text="#{login.failed}" th:if="${#httpServletRequest.method == 'POST'}"></div>
-    <form class="form-horizontal" th:action="@{/login}" method="post">
+    <form class="form-horizontal" th:action="@{/resources/html5_error.html}" method="post">
         <input type="text" bs:name="username" th:value="${username}"/>
         <input type="password" bs:name="password" th:value="${password}"/>
         <div class="control-group">
             <div class="controls">
-                <button type="submit" class="btn" th:text="#{login.button}">Log in</button>
+                <button type="submit" class="btn"
+                    th:text="#{login.button}" th:formaction="@{/login}">Log in</button>
             </div>
         </div>
     </form>
