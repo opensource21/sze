@@ -20,6 +20,7 @@ import javax.persistence.Table;
 import net.sf.oval.constraint.Past;
 import net.sf.sze.model.base.RevisionModel;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.CompareToBuilder;
 
 import de.ppi.fuwesta.oval.validation.LaterThan;
@@ -277,7 +278,7 @@ public class Schueler extends RevisionModel implements Serializable,
      * @return falls vorhanden den Rufnamen, sonst den Vornamen.
      */
     public String getRufnameOrVorname() {
-        return (rufname != null) ? rufname : vorname;
+        return StringUtils.isBlank(rufname) ? vorname : rufname;
     }
 
     @Override
