@@ -20,6 +20,8 @@
 
 - Sortierung bei den Tabellen sollte mit dem Datum umgehen können.
 
+- Title sollte gesetzt werden, siehe klasseform.html
+
 #PRIO 3
 - PDF-Erstellung mit UNO dürfte zur Zeit nicht funktionieren, zumindest weiss ich
   nicht wie man das vom Classloading her hinbekommt.

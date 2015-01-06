@@ -11,7 +11,7 @@ tags - a list of selectable tag
     xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
     layout:decorator="/main">
 <head >
-
+<title th:text="#{klasse.form.title}  ${klasse}"></title>
 </head>
 <body th:with="helpMessageId=help.klasse.edit">
     <div layout:fragment="content">
