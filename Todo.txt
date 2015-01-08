@@ -1,6 +1,6 @@
 #PRIO 1
 
-- Prüfen ob die Zeugnisse gleich erstellt werden. (manuell. Automatisch abgeschlossen)
+- Zeugnisinitialisierung Auswahlfeld größer machen.
 
 #PRIO 2
 
@@ -19,6 +19,11 @@
 - Beim Start von OO sollte man die Parameter mit -- anstatt - übergeben. Ist allerdings nur deprecated.
 
 - Sortierung bei den Tabellen sollte mit dem Datum umgehen können.
+
+- Der Suffix der Klasse sollte beim Zeugnis mit gespeichert werden
+    (dies müsste beim Initialisieren aktualisiert werden). Besser aus dem Formular nehmen, da muss man die Änderung auch machen bzw. klären wozu es eigentlich gebraucht wird.
+
+- Title sollte gesetzt werden, siehe klasseform.html
 
 #PRIO 3
 - PDF-Erstellung mit UNO dürfte zur Zeit nicht funktionieren, zumindest weiss ich

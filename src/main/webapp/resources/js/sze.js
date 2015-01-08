@@ -119,7 +119,7 @@
                  "sInfoThousands": "."
              },
              "aLengthMenu": [[5, 10, 15, 25, 50, 100 , -1], [5, 10, 15, 25, 50, 100, "All"]],
-             "iDisplayLength" : 15,
+             "iDisplayLength" : 25,
              "aaSorting":[],
              "aoColumnDefs": [
                    {

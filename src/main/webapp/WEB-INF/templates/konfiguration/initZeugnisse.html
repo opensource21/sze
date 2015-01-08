@@ -27,7 +27,7 @@ formularlist - Liste aller Formulare.
             </div>
         </div>
         <form class="well form-horizontal" th:action="@{#{nurl.configuration.init_zeugnisse}}" th:method="POST">
-            <select class="span3" bs:name="#{par.configuration.formular}" multiple="multiple">
+            <select class="span6" bs:name="#{par.configuration.formular}" multiple="multiple">
                 <option th:each="formular:${formularList}" th:value="${formular.id}"
                     th:text="${formular.toString()}"></option>
             </select>
