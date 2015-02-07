@@ -35,6 +35,7 @@ cancelUrl
 
             <select class="span10 cbhideandshow" data-class-show="span10"
                 bs:field="#{db.Zeugnis.soLBewertungsText}">
+                <option value="" text=""></option>
                 <option th:each="item : ${solBewertungsTexte}" th:value="${item.id}"
                     th:text="${item.name}"></option>
             </select>
