@@ -4,6 +4,17 @@
 
 #PRIO 2
 
+- Der Suffix der Klasse sollte beim Zeugnis mit gespeichert werden
+    (dies müsste beim Initialisieren aktualisiert werden). Besser aus dem Formular nehmen,
+    da muss man die Änderung auch machen bzw. klären wozu es eigentlich gebraucht wird.
+
+- #4 Umgang mit Schülern die Vorzeitig abgehen. Zeugnisse werden generell nicht gelöscht,
+  da das Risiko sehr hoch ist, dabei Schaden anzurichten. Bei der GesamtPDF-Erstellung
+  ist das ungünstig. Man könnte hier alle rausfiltern, für die gilt
+  "individuelles Ausgabedatum < heute". Dann kann man beim Zusammenstellen
+  die Dateien rausfiltern, deren Erstelldatum älter als ein Tag ist.
+
+
 - Delete-Fragment zu umbauen, dass es mit JS und ohne gut läuft.
 
 - Beim create sollte man nicht löschen können.
@@ -20,8 +31,6 @@
 
 - Sortierung bei den Tabellen sollte mit dem Datum umgehen können.
 
-- Der Suffix der Klasse sollte beim Zeugnis mit gespeichert werden
-    (dies müsste beim Initialisieren aktualisiert werden). Besser aus dem Formular nehmen, da muss man die Änderung auch machen bzw. klären wozu es eigentlich gebraucht wird.
 
 - Title sollte gesetzt werden, siehe klasseform.html
 

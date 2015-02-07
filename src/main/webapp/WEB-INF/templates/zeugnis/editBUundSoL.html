@@ -31,9 +31,9 @@ cancelUrl
             <input id="schueler" type="hidden" th:value="*{schueler.id}" name="schueler" />
             <input id="schulhalbjahr" type="hidden" th:value="*{schulhalbjahr.id}" name="schulhalbjahr" />
 
-            <textarea rows="5" class="span4" bs:field="#{db.Zeugnis.buBewertungsText}"/>
+            <textarea rows="5" class="span10" bs:field="#{db.Zeugnis.buBewertungsText}"/>
 
-            <select class="span4 cbhideandshow" data-class-show="span4"
+            <select class="span10 cbhideandshow" data-class-show="span10"
                 bs:field="#{db.Zeugnis.soLBewertungsText}">
                 <option th:each="item : ${solBewertungsTexte}" th:value="${item.id}"
                     th:text="${item.name}"></option>
