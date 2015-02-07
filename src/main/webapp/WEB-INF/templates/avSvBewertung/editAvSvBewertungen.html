@@ -36,8 +36,9 @@ cancelUrl
                 <input type="hidden" th:value="*{avSvBewertungen[__${stat.index}__].arbeitsUndSozialVerhalten.id}" th:name="${'avSvBewertungen['+__${stat.index}__+'].arbeitsUndSozialVerhalten'}"/>
                 <input type="hidden" th:value="*{avSvBewertungen[__${stat.index}__].zeugnis.id}" th:name="${'avSvBewertungen['+__${stat.index}__+'].zeugnis'}"/>
                 <select class="span3" bs:field="${'avSvBewertungen['+__${stat.index}__+'].beurteilung'}" bs:label="${avSvBewertung.arbeitsUndSozialVerhalten.name}">
+                    <option value='' text=""></option>
                     <option th:each="item:${noten}" th:text="${item.toString()}" th:value="${item.name()}"></option>
-                </select>
+                 </select>
             </span>
             <button type="submit" th:formaction="@{${updateUrl}}" class="btn" th:unless="${updateUrl == null}">
                 <i class="save"></i>Speichern</button>
