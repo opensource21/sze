@@ -226,7 +226,7 @@ public class ZeugnisInitialisierungServiceImpl implements ZeugnisInitialierungsS
 
         handleAvSvBewertungen(zeugnis, klassenstufe, changeMessage);
 
-        //TODO Validierung?
+        //NICE Validierung, aber wie? Man kann sich auch auf Programmierung verlassen.
         if (changeMessage.length() > 0) {
             changeMessage.append("</ul>");
             String changeMessageString = changeMessage.toString();

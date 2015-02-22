@@ -1,6 +1,9 @@
 #PRIO 1
 
-- Zeugnisinitialisierung Auswahlfeld größer machen.
+- überlegen, ob man nicht immer einen Schüler verlangt und den in die ZeugnisPath-URL aufnimmt.
+  net.sf.sze.frontend.zeugnis.ZeugnisController.showZeugnis(Long, Long, Model, RedirectAttributes) muss dann den Schüler ermitteln.
+
+
 
 #PRIO 2
 

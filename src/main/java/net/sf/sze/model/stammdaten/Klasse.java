@@ -30,11 +30,6 @@ import org.apache.commons.lang.builder.CompareToBuilder;
 public class Klasse extends RevisionModel implements Serializable,
         Comparable<Klasse> {
 
-    // TODO GUI Zahlenbereich in der GUI einschränken :-/
-//  static constraints = {
-//      jahrgang(range:2000..2020)
-//  }
-
     /**
      * Jahr in dem diese Klasse begonnen wurde.
      */

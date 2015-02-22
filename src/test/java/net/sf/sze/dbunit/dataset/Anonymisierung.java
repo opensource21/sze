@@ -77,7 +77,7 @@ public class Anonymisierung {
     }
 
     @SuppressWarnings("boxing")
-    //TODO um das sauber zu testen bräuchte man sehr viele Validatoren.
+    //NICE Testen um das sauber zu testen bräuchte man sehr viele Validatoren.
     public static IDataSet buildSchuelerResult() throws DataSetException {
 
         final DataSetBuilder b = new DataSetBuilder();
