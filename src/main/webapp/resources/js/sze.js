@@ -118,6 +118,8 @@
                  "sSearch": "Suche:",
                  "sInfoThousands": "."
              },
+             "stateSave": true,
+             "stateDuration": 60 * 5,
              "aLengthMenu": [[5, 10, 15, 25, 50, 100 , -1], [5, 10, 15, 25, 50, 100, "All"]],
              "iDisplayLength" : 25,
              "aaSorting":[],
