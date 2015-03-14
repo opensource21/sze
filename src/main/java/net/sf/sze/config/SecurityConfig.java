@@ -32,7 +32,7 @@ import org.springframework.context.annotation.PropertySource;
  *
  */
 @Configuration
-@PropertySource("classpath:/" + SecurityConfig.SECURITY_CONFIG)
+@PropertySource("classpath:" + SecurityConfig.SECURITY_CONFIG)
 public class SecurityConfig {
 
     /**
@@ -43,7 +43,7 @@ public class SecurityConfig {
     /**
      * Resource which contains the configuration.
      */
-    static final String SECURITY_CONFIG = "/security.properties";
+    static final String SECURITY_CONFIG = "security.properties";
 
     /** The url to the ldap. */
     @Value("${ldap.url}")

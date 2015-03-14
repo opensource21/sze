@@ -31,7 +31,7 @@ import com.jolbox.bonecp.BoneCPDataSource;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = "net.sf.sze.dao")
-@PropertySource("classpath:/db.properties")
+@PropertySource("classpath:db.properties")
 public class PersistenceConfig implements TransactionManagementConfigurer {
 
     /** The jdbc driver class name. */
