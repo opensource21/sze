@@ -1,13 +1,13 @@
 #PRIO 1
 
-- überlegen, ob man nicht immer einen Schüler verlangt und den in die ZeugnisPath-URL aufnimmt.
+- I-0001 überlegen, ob man nicht immer einen Schüler verlangt und den in die ZeugnisPath-URL aufnimmt.
   net.sf.sze.frontend.zeugnis.ZeugnisController.showZeugnis(Long, Long, Model, RedirectAttributes) muss dann den Schüler ermitteln.
 
 
 
 #PRIO 2
 
-- Der Suffix der Klasse sollte beim Zeugnis mit gespeichert werden
+- I-0002 Der Suffix der Klasse sollte beim Zeugnis mit gespeichert werden
     (dies müsste beim Initialisieren aktualisiert werden). Besser aus dem Formular nehmen,
     da muss man die Änderung auch machen bzw. klären wozu es eigentlich gebraucht wird.
 
