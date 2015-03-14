@@ -62,6 +62,10 @@
                     <artifactId>thymeleaf-spring3</artifactId>
                     <groupId>org.thymeleaf</groupId>
                 </exclusion>
+                <exclusion>
+                    <artifactId>hibernate-jpa-2.0-api</artifactId>
+                    <groupId>org.hibernate.javax.persistence</groupId>
+                </exclusion>
             </exclusions>
         </dependency>
         <!-- logging -->
