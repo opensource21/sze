@@ -59,15 +59,6 @@ public class OO2PdfConverterUnoImpl implements OO2PdfConverter {
      * Main-Methode.
      * @param args argumente.
      */
-    public static void main(String[] args) {
-        final File sourceFile = new File(
-                "D:\\sandboxes\\schule_ppi\\sze\\oofiles\\templates\\fsn.odt");
-        final File outputFile = new File(
-                "D:\\sandboxes\\schule_ppi\\sze\\pdffiles\\fsn.pdf");
-        final OO2PdfConverter unoC = new OO2PdfConverterUnoImpl();
-        unoC.convert(sourceFile, outputFile);
-        System.exit(0);
-    }
 
     /*
      *  (non-Javadoc)

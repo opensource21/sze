@@ -5,20 +5,15 @@
 package net.sf.sze;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 /**
  * Server zum Starten von SZE.
  *
  */
-@Configuration
-@EnableAutoConfiguration
-@ComponentScan
+@SpringBootApplication
 public class SzeServer {
-
 
     /**
      * Main-Methode zum Starten des Servers.
@@ -26,7 +21,6 @@ public class SzeServer {
      */
     public static void main(String[] args) {
         SpringApplication.run(SzeServer.class, args);
-
     }
 
 }

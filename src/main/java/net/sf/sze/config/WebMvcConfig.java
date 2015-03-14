@@ -18,6 +18,7 @@ import net.sf.sze.frontend.converter.SchulfachConverter;
 import net.sf.sze.frontend.converter.ZeugnisFormularConverter;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration.WebMvcAutoConfigurationAdapter;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -58,8 +59,8 @@ import de.ppi.fuwesta.spring.mvc.util.UrlDefinitionsToMessages;
 @Configuration
 @ComponentScan(basePackages = {"net.sf.sze.frontend",
         "net.sf.oval.integration.spring", "de.ppi.fuwesta.jpa.helper"})
-@Import({RootConfig.class, SecurityConfig.class, ThymeleafConfig.class})
-public class WebMvcConfig extends WebMvcConfigurationSupport {
+@Import({RootConfig.class, SecurityConfig.class})
+public class WebMvcConfig extends WebMvcAutoConfigurationAdapter {
 
     /**
      * Page size if no other information is given.
@@ -98,14 +99,16 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
     @Value("${project.version}")
     private String buildNr;
 
-    @Override
-    public RequestMappingHandlerMapping requestMappingHandlerMapping() {
-        RequestMappingHandlerMapping requestMappingHandlerMapping = super
-                .requestMappingHandlerMapping();
-        requestMappingHandlerMapping.setUseSuffixPatternMatch(false);
-        requestMappingHandlerMapping.setUseTrailingSlashMatch(true);
-        return requestMappingHandlerMapping;
-    }
+    //TODO klären wie man das setzt.
+//    @Override
+//    public RequestMappingHandlerMapping requestMappingHandlerMapping() {
+//        RequestMappingHandlerMapping requestMappingHandlerMapping = super
+//                .requestMappingHandlerMapping();
+//        requestMappingHandlerMapping.setUseSuffixPatternMatch(false);
+//        requestMappingHandlerMapping.setUseTrailingSlashMatch(true);
+//        return requestMappingHandlerMapping;
+//    }
+
 
     /**
      * Initiates the message resolver.
@@ -171,7 +174,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
      * {@inheritDoc}
      */
     @Override
-    protected void addInterceptors(InterceptorRegistry registry) {
+    public void addInterceptors(InterceptorRegistry registry) {
         registry.addWebRequestInterceptor(openEntityManagerInViewInterceptor());
         super.addInterceptors(registry);
     }
@@ -180,7 +183,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
      * {@inheritDoc}
      */
     @Override
-    protected void addArgumentResolvers(
+    public void addArgumentResolvers(
             List<HandlerMethodArgumentResolver> argumentResolvers) {
         PageableHandlerMethodArgumentResolver resolver =
                 new PageableHandlerMethodArgumentResolver();
@@ -200,7 +203,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
      * {@inheritDoc}
      */
     @Override
-    protected org.springframework.validation.Validator getValidator() {
+    public org.springframework.validation.Validator getValidator() {
         final AnnotationsConfigurer annConfig = new AnnotationsConfigurer();
         annConfig
                 .addCheckInitializationListener(SpringCheckInitializationListener.INSTANCE);
@@ -219,7 +222,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
     }
 
     @Override
-    protected void addFormatters(FormatterRegistry registry) {
+    public void addFormatters(FormatterRegistry registry) {
         registry.addFormatterForFieldAnnotation(
                 new NonEmptyStringAnnotationFormatterFactory());
         registry.addFormatter(new DateFormatter());
@@ -229,15 +232,23 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
         super.addFormatters(registry);
     }
 
+    //TODO prüfen ob die neue Lösung funktioniert.
+//    @Bean
+//    public DomainClassConverter<?> domainClassConverter() {
+//        return new DomainClassConverter<FormattingConversionService>(
+//                mvcConversionService());
+//    }
     /**
      * Register a mapper so that a model entity could be found by id.
      *
+     * @param conversionService conversionService
      * @return a DomainClassConverter.
      */
     @Bean
-    public DomainClassConverter<?> domainClassConverter() {
+    public DomainClassConverter<?> domainClassConverter(
+            FormattingConversionService conversionService) {
         return new DomainClassConverter<FormattingConversionService>(
-                mvcConversionService());
+                conversionService);
     }
 
     /**
