@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
-import org.thymeleaf.spring3.SpringTemplateEngine;
-import org.thymeleaf.spring3.view.ThymeleafViewResolver;
+import org.thymeleaf.spring4.SpringTemplateEngine;
+import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
 import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
