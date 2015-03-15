@@ -16,7 +16,6 @@ import javax.sql.DataSource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -27,7 +26,6 @@ import org.springframework.stereotype.Service;
  *
  */
 @Service
-@PropertySource("classpath:/app.properties")
 public class DatabaseBackupJob {
 
     @Resource
