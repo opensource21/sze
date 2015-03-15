@@ -10,5 +10,5 @@
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="net.sf.sze.SzeServer"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="sze"/>
 <stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.eclipse.m2e.launchconfig.sourcepathProvider"/>
-<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-javaagent:${workspace_loc:/sze/config/springloaded-1.2.3.RELEASE.jar} -noverify"/>
+<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-javaagent:${workspace_loc:/sze/config/eclipse/springloaded-1.2.3.RELEASE.jar} -noverify"/>
 </launchConfiguration>
