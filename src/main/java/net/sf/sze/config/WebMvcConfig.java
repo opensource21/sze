@@ -26,11 +26,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.repository.support.DomainClassConverter;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.format.datetime.DateFormatter;
-import org.springframework.format.support.FormattingConversionService;
 import org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor;
 import org.springframework.web.context.request.WebRequestInterceptor;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -216,19 +214,6 @@ public class WebMvcConfig extends WebMvcAutoConfigurationAdapter {
         registry.addConverter(new ZeugnisFormularConverter());
         registry.addConverter(new SchulfachConverter());
         super.addFormatters(registry);
-    }
-
-    /**
-     * Register a mapper so that a model entity could be found by id.
-     *
-     * @param conversionService conversionService
-     * @return a DomainClassConverter.
-     */
-    @Bean
-    public DomainClassConverter<?> domainClassConverter(
-            FormattingConversionService conversionService) {
-        return new DomainClassConverter<FormattingConversionService>(
-                conversionService);
     }
 
     /**
