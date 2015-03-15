@@ -88,17 +88,6 @@ public class WebMvcConfig extends WebMvcAutoConfigurationAdapter {
     @Value("${project.version:0.0.7}")
     private String buildNr;
 
-    //TODO klären wie man das setzt.
-//    @Override
-//    public RequestMappingHandlerMapping requestMappingHandlerMapping() {
-//        RequestMappingHandlerMapping requestMappingHandlerMapping = super
-//                .requestMappingHandlerMapping();
-//        requestMappingHandlerMapping.setUseSuffixPatternMatch(false);
-//        requestMappingHandlerMapping.setUseTrailingSlashMatch(true);
-//        return requestMappingHandlerMapping;
-//    }
-
-
     /**
      * Initiates the message resolver.
      *

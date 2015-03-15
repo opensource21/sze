@@ -40,7 +40,7 @@ public class KonfigurationController {
      * Zeigt die Übersichtseite für die Konfiguraztion an.
      * @return die anzuzeigende View.
      */
-    @RequestMapping(value = URL.Configuration.MAIN, method = RequestMethod.GET)
+    @RequestMapping(value = URL.Configuration.HOME, method = RequestMethod.GET)
     public String home() {
         return "konfiguration/index";
     }

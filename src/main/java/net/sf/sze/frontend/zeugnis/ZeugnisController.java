@@ -147,7 +147,7 @@ public class ZeugnisController implements ModelAttributes {
         final List<Schulhalbjahr> halbjahre = zeugnisErfassungsService
                 .getActiveSchulhalbjahre();
         if (CollectionUtils.isEmpty(halbjahre)) {
-            return URL.redirect(URL.Configuration.MAIN);
+            return URL.redirect(URL.Configuration.HOME);
         }
 
         final List<Klasse> klassen = zeugnisErfassungsService.getActiveKlassen(
