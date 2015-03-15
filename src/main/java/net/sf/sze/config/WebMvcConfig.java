@@ -54,9 +54,8 @@ import de.ppi.fuwesta.spring.mvc.util.UrlDefinitionsToMessages;
  *
  */
 @Configuration
-@ComponentScan(basePackages = {"net.sf.sze.frontend",
-        "net.sf.oval.integration.spring", "de.ppi.fuwesta.jpa.helper"})
-@Import({RootConfig.class, SecurityConfig.class})
+@ComponentScan(basePackages = {"net.sf.oval.integration.spring", "de.ppi.fuwesta.jpa.helper"})
+@Import(SecurityConfig.class)
 public class WebMvcConfig extends WebMvcAutoConfigurationAdapter {
 
     /**
@@ -87,7 +86,8 @@ public class WebMvcConfig extends WebMvcAutoConfigurationAdapter {
     /**
      * Die POM-Versions-Nr.
      */
-    @Value("${project.version}")
+    //TODO beim Test fehlt die Version
+    @Value("${project.version:0.0.7}")
     private String buildNr;
 
     //TODO klären wie man das setzt.
@@ -218,12 +218,6 @@ public class WebMvcConfig extends WebMvcAutoConfigurationAdapter {
         super.addFormatters(registry);
     }
 
-    //TODO prüfen ob die neue Lösung funktioniert.
-//    @Bean
-//    public DomainClassConverter<?> domainClassConverter() {
-//        return new DomainClassConverter<FormattingConversionService>(
-//                mvcConversionService());
-//    }
     /**
      * Register a mapper so that a model entity could be found by id.
      *
