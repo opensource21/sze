@@ -29,11 +29,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.format.datetime.DateFormatter;
-import org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor;
-import org.springframework.web.context.request.WebRequestInterceptor;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 
 import de.ppi.fuwesta.spring.mvc.bind.ServletBindingService;
 import de.ppi.fuwesta.spring.mvc.formatter.NonEmptyStringAnnotationFormatterFactory;
@@ -123,33 +120,6 @@ public class WebMvcConfig extends WebMvcAutoConfigurationAdapter {
         staticMessages.put("app.version", version);
         messageSource.setCommonMessages(staticMessages);
         return messageSource;
-    }
-
-
-    /**
-     * Create an {@link OpenEntityManagerInViewInterceptor} to follow Open
-     * Session in View Patten. This isn't optimal see
-     * http://heapdump.wordpress.com
-     * /2010/04/04/should-i-use-open-session-in-view/ or
-     * http://java.dzone.com/articles/opensessioninview-antipattern but it's
-     * very common in frameworks like Grails or Play. The reason is that you
-     * doesn't need so much knowledge about JPA and there is no need to write
-     * tons of specific Dao-methods which make eager fetching.
-     *
-     * @return the {@link WebRequestInterceptor}.
-     */
-    @Bean
-    public WebRequestInterceptor openEntityManagerInViewInterceptor() {
-        return new OpenEntityManagerInViewInterceptor();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addWebRequestInterceptor(openEntityManagerInViewInterceptor());
-        super.addInterceptors(registry);
     }
 
     /**

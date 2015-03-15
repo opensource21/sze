@@ -34,7 +34,7 @@ public abstract class AbstractSzeDbUnitTest extends AbstractJUnit4SpringContextT
     /**
      * DB-Schema.
      */
-    @Value("${db.schema}")
+    @Value("${spring.datasource.schema}")
     private String schema;
 
     private SzeDatabase szeDatabase;

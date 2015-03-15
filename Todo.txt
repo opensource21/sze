@@ -54,6 +54,8 @@
   disablen der Felder in der Gui. Ein Check wäre robuster und man sieht gleich
   den Text.
 
+- http://www.operatornew.com/2012/11/automatic-db-migration-for-java-web.html
+
 - Aktives Menü eleganter setzen?
     I'm trying to apply a css class to a menu item based on the current page URL.  So all pages under '/jobs/' should result in my jobs menu item being active.
 
