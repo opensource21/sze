@@ -7,14 +7,14 @@
 <body>
     <div id="header">
         <div id="logo">
-            <img src="../../resources/images/sze_logo.jpg"
-                th:src="@{/resources/images/sze_logo.jpg}" alt="SZE-Logo" />
+            <img src="../static/images/sze_logo.jpg"
+                th:src="@{/images/sze_logo.jpg}" alt="SZE-Logo" />
         </div>
     </div>
 
     <div class="well">
     <div class="alert alert-error" th:text="#{login.failed}" th:if="${#httpServletRequest.method == 'POST'}"></div>
-    <form class="form-horizontal" th:action="@{/resources/html5_error.html}" method="post">
+    <form class="form-horizontal" th:action="@{/html5_error.html}" method="post">
         <input type="text" bs:name="username" th:value="${username}"/>
         <input type="password" bs:name="password" th:value="${password}"/>
         <div class="control-group">

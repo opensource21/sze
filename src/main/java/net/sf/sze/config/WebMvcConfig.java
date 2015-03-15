@@ -87,12 +87,6 @@ public class WebMvcConfig extends WebMvcAutoConfigurationAdapter {
     private static final String MESSAGE_SOURCE_OVAL =
             "classpath:/net/sf/oval/Messages";
 
-    /** The Constant RESOURCES_HANDLER. */
-    private static final String RESOURCES_HANDLER = "/resources/";
-
-    /** The Constant RESOURCES_LOCATION. */
-    private static final String RESOURCES_LOCATION = RESOURCES_HANDLER + "**";
-
     /**
      * Die POM-Versions-Nr.
      */
@@ -147,11 +141,6 @@ public class WebMvcConfig extends WebMvcAutoConfigurationAdapter {
         return messageSource;
     }
 
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler(RESOURCES_HANDLER).addResourceLocations(
-                RESOURCES_LOCATION);
-    }
 
     /**
      * Create an {@link OpenEntityManagerInViewInterceptor} to follow Open

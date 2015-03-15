@@ -92,7 +92,11 @@ public class SecurityConfig {
     private void defineSecurityFilter(Map<String, String> filterMap) {
         final String authAndPerms = DefaultFilter.authc.name() + ", "
                 + DefaultFilter.perms.name();
-        filterMap.put("/resources/**/*", DefaultFilter.anon.name());
+        filterMap.put("/css/**/*", DefaultFilter.anon.name());
+        filterMap.put("/js/**/*", DefaultFilter.anon.name());
+        filterMap.put("/images/**/*", DefaultFilter.anon.name());
+        filterMap.put("/img/**/*", DefaultFilter.anon.name());
+        filterMap.put("/html5_error.html", DefaultFilter.anon.name());
         filterMap.put("/auth/login", DefaultFilter.anon.name());
         filterMap.put("/zeugnisMain/index", DefaultFilter.anon.name());
         filterMap.put(URL.Security.LOGOUT, DefaultFilter.logout.name());

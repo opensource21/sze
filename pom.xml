@@ -215,6 +215,7 @@
                     <include>i18n/*</include>
                     <include>*</include>
                     <include>templates/**/*</include>
+                    <include>static/**/*</include>
                 </includes>
             </resource>
         </resources>
@@ -344,9 +345,9 @@
                     <extraConfigFile>${basedir}/config/wro4j/wro.properties</extraConfigFile>
                     <targetGroups></targetGroups>
                     <!-- <cssDestinationFolder>${project.build.directory}/${project.build.finalName}/style/</cssDestinationFolder> -->
-                    <cssDestinationFolder>${basedir}/src/main/webapp/resources/css</cssDestinationFolder>
+                    <cssDestinationFolder>${basedir}/src/main/resources/static/css</cssDestinationFolder>
                     <jsDestinationFolder>${project.build.directory}/${project.build.finalName}/script/</jsDestinationFolder>
-                    <contextFolder>${basedir}/src/main/webapp/</contextFolder>
+                    <contextFolder>${basedir}/src/main/resources/</contextFolder>
                     <ignoreMissingResources>false</ignoreMissingResources>
                 </configuration>
                 <executions>
