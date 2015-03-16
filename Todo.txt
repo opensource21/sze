@@ -14,6 +14,9 @@
   die Dateien rausfiltern, deren Erstelldatum älter als ein Tag ist.
 
 
+- Error-Seite funktioniert nicht bei fehlerhaften Templates: http://blog.codeleak.pl/2013/04/how-to-custom-error-pages-in-tomcat.html
+  ansonsten error.html sinnvoll überschreiben siehe org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration.WhitelabelErrorViewConfiguration
+
 - Delete-Fragment zu umbauen, dass es mit JS und ohne gut läuft.
 
 - Beim create sollte man nicht löschen können.
