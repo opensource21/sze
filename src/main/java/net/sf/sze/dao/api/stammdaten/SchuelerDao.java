@@ -73,16 +73,4 @@ public interface SchuelerDao extends PagingAndSortingRepository<Schueler,
     @Query("select s " + SCHUELER_WITH_ZEUGNIS)
     List<Schueler> findSchuelerWithZeugnisOrdered(@Param("halbjahrId") long halbjahrId,
             @Param("klassenId") long klassenId);
-
-    /**
-     * Liefert die Id aller Schüler die ein Zeugnis haben sortiert nach Name und Vorname.
-     * @param halbjahrId die Id des Schulhalbjahres
-     * @param klassenId die Id der Klasse.
-     * @return die Liste aller Schüler-Ids.
-     */
-    @Query("select s.id " + SCHUELER_WITH_ZEUGNIS)
-    List<Long>
-            findSchuelerIdsWithZeugnisOrdered(@Param("halbjahrId")Long halbjahrId,
-                    @Param("klassenId") Long klassenId);
-
 }

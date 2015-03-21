@@ -75,14 +75,4 @@ public interface SchuelerService {
      */
     SchuelerList getSchuelerWithZeugnis(long halbjahrId, long klassenId, Long currentSchuelerId);
 
-    /**
-     * Liefert zum Halbjahr und Klasse den ersten Schüler mit Zeugnis.
-     * @param halbjahrId die Halbjahrs-Id.
-     * @param klassenId die Id der Klasse.
-     * @return die Id des Schülers.
-     * @see #getSchuelerWithZeugnis(long, long, Long)
-     */
-    Long getFirstSchuelerIdWithZeugnis(Long halbjahrId, Long klassenId);
-
-
 }

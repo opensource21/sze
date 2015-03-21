@@ -21,7 +21,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.CollectionUtils;
 
 /**
  * Implementation of {@link SchuelerService}.
@@ -103,16 +102,4 @@ public class SchuelerServiceImpl implements SchuelerService {
                 findSchuelerWithZeugnisOrdered(halbjahrId, klassenId);
         return new SchuelerList(schueler, currentSchuelerId);
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Long getFirstSchuelerIdWithZeugnis(Long halbjahrId, Long klassenId) {
-        final List<Long> schuelerIds = schuelerDao.
-                findSchuelerIdsWithZeugnisOrdered(halbjahrId, klassenId);
-        return CollectionUtils.isEmpty(schuelerIds) ? null : schuelerIds.get(0);
-    }
-
-
 }
