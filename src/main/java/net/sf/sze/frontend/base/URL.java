@@ -256,7 +256,7 @@ public final class URL {
         /**
          * Zeige Zeugnis.
          */
-        String SHOW = DETAIL + "/show";
+        String SHOW = HOME + "/show";
 
         /**
          * Breche die Bearbeitung der Bewertung ab.
@@ -1143,8 +1143,9 @@ public final class URL {
      */
     public static String createLinkToZeugnisUrl(Long halbjahrId,
             Long klassenId, Long schuelerId) {
-        return filledURLWithNamedParams(URL.ZeugnisPath.SHOW, Session.P_HALBJAHR_ID, halbjahrId,
-                Session.P_KLASSEN_ID, klassenId, Session.P_SCHUELER_ID, schuelerId);
+        return filledURLWithNamedParams(URL.ZeugnisPath.SHOW + "?" + URL.Session.P_SCHUELER_ID
+                + "=" + schuelerId, URL.Session.P_HALBJAHR_ID, halbjahrId,
+                URL.Session.P_KLASSEN_ID, klassenId);
     }
 }
 // CSON: InterfaceIsType

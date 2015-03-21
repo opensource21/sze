@@ -173,11 +173,11 @@ public class ZeugnisController implements ModelAttributes {
      * @return die logische View
      */
     @RequestMapping(value = URL.ZeugnisPath.SHOW, method = RequestMethod.GET)
-    public String showZeugnisPath(@PathVariable(URL.Session
-            .P_HALBJAHR_ID) long halbjahrId, @PathVariable(URL.Session
-            .P_KLASSEN_ID) long klassenId, @PathVariable(value = URL.Session
-            .P_SCHUELER_ID) Long schuelerId, Model model,
-                    RedirectAttributes redirectAttributes) {
+    public String showZeugnisPath(
+            @PathVariable(URL.Session.P_HALBJAHR_ID) long halbjahrId,
+            @PathVariable(URL.Session.P_KLASSEN_ID) long klassenId,
+            @RequestParam(value = URL.Session.P_SCHUELER_ID, required = false)
+            Long schuelerId, Model model, RedirectAttributes redirectAttributes) {
         LOG.debug("SchülerId =>{}<)", schuelerId);
         final SchuelerList schuelerList = schuelerService.getSchuelerWithZeugnis(
                 halbjahrId, klassenId, schuelerId);
@@ -190,15 +190,16 @@ public class ZeugnisController implements ModelAttributes {
                     URL.Session.P_KLASSEN_ID, Long.valueOf(klassenId));
         }
 
-        final Zeugnis selectedZeugnis = zeugnisErfassungsService.
-                getZeugnis(Long.valueOf(halbjahrId), schuelerId);
-        if (selectedZeugnis == null) {
+        if (schuelerList.getCurrentSchueler() == null) {
             redirectAttributes.addFlashAttribute(MESSAGE,
                     "Der angegebene Schüler hat kein Zeugnis, gehe zum ersten.");
             return URL.redirectWithNamedParams(URL.ZeugnisPath.SHOW,
                     URL.Session.P_HALBJAHR_ID, Long.valueOf(halbjahrId),
                     URL.Session.P_KLASSEN_ID, Long.valueOf(klassenId));
         }
+
+        final Zeugnis selectedZeugnis = zeugnisErfassungsService.
+                getZeugnis(Long.valueOf(halbjahrId), schuelerList.getCurrentSchueler().getId());
 
         Collections.sort(selectedZeugnis.getSchulamtsBemerkungen());
         Collections.sort(selectedZeugnis.getBemerkungen());
@@ -244,19 +245,9 @@ public class ZeugnisController implements ModelAttributes {
             .P_HALBJAHR_ID) Long halbjahrId, @RequestParam(URL.Session
             .P_KLASSEN_ID) Long klassenId, Model model,
             RedirectAttributes redirectAttributes) {
-        final Long currentSchueler = schuelerService.getFirstSchuelerIdWithZeugnis(
-                halbjahrId, klassenId);
-        if (currentSchueler == null) {
-            redirectAttributes.addFlashAttribute(MESSAGE,
-                    "Es wurden kein Schüler mit Zeugniss gefunden.");
-            return URL.redirectWithNamedParams(URL.ZeugnisPath.START,
-                    URL.Session.P_HALBJAHR_ID, halbjahrId,
-                    URL.Session.P_KLASSEN_ID, klassenId);
-        }
         return URL.redirectWithNamedParams(URL.ZeugnisPath.SHOW,
                 URL.Session.P_HALBJAHR_ID, halbjahrId,
-                URL.Session.P_KLASSEN_ID, klassenId,
-                URL.Session.P_SCHUELER_ID, currentSchueler);
+                URL.Session.P_KLASSEN_ID, klassenId);
     }
 
     /**
