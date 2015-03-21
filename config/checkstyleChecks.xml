@@ -91,10 +91,6 @@
             <property name="ignoreAnnotation" value="true" />
         </module>
         <module name="MissingSwitchDefault" />
-        <module name="RedundantThrows">
-            <property name="suppressLoadErrors" value="true" />
-            <property name="allowUnchecked" value="true" />
-        </module>
         <module name="SimplifyBooleanExpression" />
         <module name="SimplifyBooleanReturn" />
         <module name="DesignForExtension">

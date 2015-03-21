@@ -14,12 +14,14 @@ import net.sf.sze.dao.api.stammdaten.SchuelerDao;
 import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.stammdaten.Schueler;
 import net.sf.sze.service.api.common.SchulkalenderService;
+import net.sf.sze.service.api.stammdaten.SchuelerList;
 import net.sf.sze.service.api.stammdaten.SchuelerService;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 /**
  * Implementation of {@link SchuelerService}.
@@ -89,6 +91,24 @@ public class SchuelerServiceImpl implements SchuelerService {
     public void delete(Long schuelerId) {
         final Schueler oldSchueler = schuelerDao.findOne(schuelerId);
         schuelerDao.delete(oldSchueler);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public SchuelerList getSchuelerWithZeugnis(long halbjahrId, long klassenId, Long currentSchuelerId) {
+        final List<Schueler> schueler = null;//TODO schuelerDao.findSchuelerWithZeugnisOrdered(halbjahrId, halbjahrId);
+        return new SchuelerList(schueler, currentSchuelerId);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Long getFirstSchuelerIdWithZeugnis(Long halbjahrId, Long klassenId) {
+        final List<Long> schuelerIds = null;//TODO schuelerDao.findSchuelerIdsWithZeugnisOrdered(halbjahrId, halbjahrId);
+        return CollectionUtils.isEmpty(schuelerIds) ? null : schuelerIds.get(0);
     }
 
 

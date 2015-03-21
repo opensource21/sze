@@ -16,14 +16,15 @@ import net.sf.sze.frontend.base.ModelAttributes;
 import net.sf.sze.frontend.base.URL;
 import net.sf.sze.frontend.base.URL.Common;
 import net.sf.sze.model.stammdaten.Klasse;
-import net.sf.sze.model.stammdaten.Schueler;
-import net.sf.sze.model.zeugnis.ZweiNiveauBewertung;
 import net.sf.sze.model.zeugnis.Bewertung;
 import net.sf.sze.model.zeugnis.DreiNiveauBewertung;
 import net.sf.sze.model.zeugnis.StandardBewertung;
 import net.sf.sze.model.zeugnis.Zeugnis;
+import net.sf.sze.model.zeugnis.ZweiNiveauBewertung;
 import net.sf.sze.model.zeugnisconfig.Schulhalbjahr;
 import net.sf.sze.service.api.converter.ZeugnisCreatorService;
+import net.sf.sze.service.api.stammdaten.SchuelerList;
+import net.sf.sze.service.api.stammdaten.SchuelerService;
 import net.sf.sze.service.api.zeugnis.AgBewertungService;
 import net.sf.sze.service.api.zeugnis.BewertungService;
 import net.sf.sze.service.api.zeugnis.BewertungWithNeigbors;
@@ -110,6 +111,9 @@ public class ZeugnisController implements ModelAttributes {
     @Resource
     private ZeugnisCreatorService zeugnisCreatorService;
 
+    @Resource
+    private SchuelerService schuelerService;
+
 
     /**
      * Der Validator.
@@ -171,50 +175,23 @@ public class ZeugnisController implements ModelAttributes {
     @RequestMapping(value = URL.ZeugnisPath.SHOW, method = RequestMethod.GET)
     public String showZeugnisPath(@PathVariable(URL.Session
             .P_HALBJAHR_ID) long halbjahrId, @PathVariable(URL.Session
-            .P_KLASSEN_ID) long klassenId, @RequestParam(value = URL.Session
-            .P_SCHUELER_ID,
-            required = false) Long schuelerId, Model model,
+            .P_KLASSEN_ID) long klassenId, @PathVariable(value = URL.Session
+            .P_SCHUELER_ID) Long schuelerId, Model model,
                     RedirectAttributes redirectAttributes) {
-        final List<Zeugnis> zeugnisse = zeugnisErfassungsService.getZeugnisse(
-                halbjahrId, klassenId);
-
         LOG.debug("SchülerId =>{}<)", schuelerId);
+        final SchuelerList schuelerList = schuelerService.getSchuelerWithZeugnis(
+                halbjahrId, klassenId, schuelerId);
 
-        if (CollectionUtils.isEmpty(zeugnisse)) {
+        if (schuelerList.isEmpty()) {
             redirectAttributes.addFlashAttribute(MESSAGE,
-                    "Es wurden keine Zeugnisse gefunden.");
+                    "Es wurden keine Schüler mit Zeugnissen gefunden.");
             return URL.redirectWithNamedParams(URL.ZeugnisPath.START,
                     URL.Session.P_HALBJAHR_ID, Long.valueOf(halbjahrId),
                     URL.Session.P_KLASSEN_ID, Long.valueOf(klassenId));
         }
 
-        final List<Schueler> schuelerListe = new ArrayList<Schueler>(zeugnisse
-                .size());
-        Zeugnis selectedZeugnis = null;
-        Long prevSchuelerId = null;
-        Long selectedSchuelerId = schuelerId;
-        Long nextSchuelerId = null;
-        for (Zeugnis zeugnis : zeugnisse) {
-            // Sicherstellen, dass es immer einen selektierten Schüler gibt.
-            if (selectedSchuelerId == null) {
-                selectedSchuelerId = zeugnis.getSchueler().getId();
-            }
-
-            schuelerListe.add(zeugnis.getSchueler());
-
-            if ((selectedZeugnis != null) && (nextSchuelerId == null)) {
-                nextSchuelerId = zeugnis.getSchueler().getId();
-            }
-
-            if (selectedSchuelerId.equals(zeugnis.getSchueler().getId())) {
-                selectedZeugnis = zeugnis;
-            }
-
-            if (selectedZeugnis == null) {
-                prevSchuelerId = zeugnis.getSchueler().getId();
-            }
-        }
-
+        final Zeugnis selectedZeugnis = zeugnisErfassungsService.
+                getZeugnis(Long.valueOf(halbjahrId), schuelerId);
         if (selectedZeugnis == null) {
             redirectAttributes.addFlashAttribute(MESSAGE,
                     "Der angegebene Schüler hat kein Zeugnis, gehe zum ersten.");
@@ -232,10 +209,10 @@ public class ZeugnisController implements ModelAttributes {
                 selectedZeugnis.getBewertungen(), wpBewertungen, otherBewertungen);
 
         LOG.debug("Zeugnis von Schueler {}. ", selectedZeugnis.getSchueler());
-        model.addAttribute("schuelerListe", schuelerListe);
+        model.addAttribute("schuelerListe", schuelerList.getSchuelerList());
         model.addAttribute("zeugnis", selectedZeugnis);
-        model.addAttribute("prevSchuelerId", prevSchuelerId);
-        model.addAttribute("nextSchuelerId", nextSchuelerId);
+        model.addAttribute("prevSchuelerId", schuelerList.getPrevSchueler().getId());
+        model.addAttribute("nextSchuelerId", schuelerList.getNextSchueler().getId());
         model.addAttribute("wpBewertungen", wpBewertungen);
         model.addAttribute("otherBewertungen", otherBewertungen);
         model.addAttribute("urlShowZeugnis", URL.filledURLWithNamedParams(
@@ -246,7 +223,7 @@ public class ZeugnisController implements ModelAttributes {
                 URL.ZeugnisPath.ONE_PDF,
                 URL.Session.P_HALBJAHR_ID, Long.valueOf(halbjahrId),
                 URL.Session.P_KLASSEN_ID, Long.valueOf(klassenId),
-                URL.Session.P_SCHUELER_ID, selectedZeugnis.getSchueler().getId()));
+                URL.Session.P_SCHUELER_ID, schuelerList.getCurrentSchueler().getId()));
         model.addAttribute("arbeitsgruppenSatz", selectedZeugnis
                 .createArbeitsgruppenSatz());
         return "zeugnis/showZeugnis";
@@ -267,9 +244,19 @@ public class ZeugnisController implements ModelAttributes {
             .P_HALBJAHR_ID) Long halbjahrId, @RequestParam(URL.Session
             .P_KLASSEN_ID) Long klassenId, Model model,
             RedirectAttributes redirectAttributes) {
+        final Long currentSchueler = schuelerService.getFirstSchuelerIdWithZeugnis(
+                halbjahrId, klassenId);
+        if (currentSchueler == null) {
+            redirectAttributes.addFlashAttribute(MESSAGE,
+                    "Es wurden kein Schüler mit Zeugniss gefunden.");
+            return URL.redirectWithNamedParams(URL.ZeugnisPath.START,
+                    URL.Session.P_HALBJAHR_ID, halbjahrId,
+                    URL.Session.P_KLASSEN_ID, klassenId);
+        }
         return URL.redirectWithNamedParams(URL.ZeugnisPath.SHOW,
                 URL.Session.P_HALBJAHR_ID, halbjahrId,
-                URL.Session.P_KLASSEN_ID, klassenId);
+                URL.Session.P_KLASSEN_ID, klassenId,
+                URL.Session.P_SCHUELER_ID, currentSchueler);
     }
 
     /**

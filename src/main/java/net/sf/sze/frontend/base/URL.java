@@ -249,14 +249,14 @@ public final class URL {
                 + Session.P_KLASSEN_ID + "}/{" + Session.P_SCHUELER_ID + "}";
 
         /**
-         * Zeugniserfassung base-url.
+         * Zeugniserfassung start zum Auswahl von Jahrgang und Halbjahr.
          */
         String START = HOME + "/start";
 
         /**
          * Zeige Zeugnis.
          */
-        String SHOW = HOME + "/show";
+        String SHOW = DETAIL + "/show";
 
         /**
          * Breche die Bearbeitung der Bewertung ab.
@@ -1143,8 +1143,8 @@ public final class URL {
      */
     public static String createLinkToZeugnisUrl(Long halbjahrId,
             Long klassenId, Long schuelerId) {
-        return filledURL(URL.ZeugnisPath.SHOW + "?" + URL.Session.P_SCHUELER_ID
-                + "=" + schuelerId, halbjahrId, klassenId);
+        return filledURLWithNamedParams(URL.ZeugnisPath.SHOW, Session.P_HALBJAHR_ID, halbjahrId,
+                Session.P_KLASSEN_ID, klassenId, Session.P_SCHUELER_ID, schuelerId);
     }
 }
 // CSON: InterfaceIsType
