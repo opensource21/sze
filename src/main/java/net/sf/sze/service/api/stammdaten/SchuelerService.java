@@ -66,7 +66,7 @@ public interface SchuelerService {
 
     /**
      * Liefert eine geordnete Liste von Schülern, die ein Zeugnis haben in dem
-     * entsprechenden Schuljahr und Halbjahr.
+     * entsprechenden Schuljahr (das Halbjahr muss selektierbar sein) und Halbjahr.
      * @param halbjahrId die Halbjahrs-Id.
      * @param klassenId die Id der Klasse.
      * @param currentSchuelerId Id des aktuellen Schülers oder <code>null</code>,

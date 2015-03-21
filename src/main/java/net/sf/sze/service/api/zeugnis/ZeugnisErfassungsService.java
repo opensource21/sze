@@ -41,16 +41,6 @@ public interface ZeugnisErfassungsService {
     List<ZeugnisArt> getAllZeugnisArten(Zeugnis zeugnis);
 
     /**
-     * Listet alle Zeugnisse zu der Klasse des selektierbaren Schulhalbjahres.
-     *
-     * @param halbjahrId die Id des Schulhalbjahres.
-     * @param klassenId die Id der Klasse.
-     * @return alle Zeugnisse zu der Klasse des Schulhalbjahres.
-     */
-    List<Zeugnis> getZeugnisse(long halbjahrId, long klassenId);
-
-
-    /**
      * Teilt die Bewertungen auf die beiden Listen auf und sortiert diese.
      * @param bewertungen alle Bewertungen.
      * @param wpBewertungen Wahlpflichtbewertungen

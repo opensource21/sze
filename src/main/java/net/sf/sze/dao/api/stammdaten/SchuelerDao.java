@@ -27,6 +27,7 @@ public interface SchuelerDao extends PagingAndSortingRepository<Schueler,
     /** From und Where-Bedinung für Schüler mit Zeugnissen. */
     String SCHUELER_WITH_ZEUGNIS = "from Zeugnis z join z.schueler s "
             + "where z.klasse.id=:klassenId and z.schulhalbjahr.id=:halbjahrId "
+            + "and z.schulhalbjahr.selectable = true "
             + "order by s.name, s.vorname";
 
     /**
@@ -65,7 +66,8 @@ public interface SchuelerDao extends PagingAndSortingRepository<Schueler,
             @Param("stichtag") Date stichtag, Pageable pageable);
 
     /**
-     * Liefert alle Schüler die ein Zeugnis haben sortiert nach Name und Vorname.
+     * Liefert alle Schüler die ein Zeugnis haben sortiert nach Name und Vorname,
+     * das Halbjahr muss selektierbar sein.
      * @param halbjahrId die Id des Schulhalbjahres
      * @param klassenId die Id der Klasse.
      * @return die Liste aller Schüler.
