@@ -137,17 +137,6 @@ public class ZeugnisErfassungsServiceImpl implements ZeugnisErfassungsService {
      * {@inheritDoc}
      */
     @Override
-    public List<Zeugnis> getZeugnisse(long halbjahrId, long klassenId) {
-        final List<Zeugnis> zeugnisse = zeugnisDao
-                .findAllByKlasseIdAndSchulhalbjahrIdAndSchulhalbjahrSelectableIsTrueOrderBySchuelerNameAscSchuelerVornameAsc(
-                klassenId, halbjahrId);
-        return zeugnisse;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public Zeugnis getZeugnis(Long halbjahrId, Long schuelerId) {
         return zeugnisDao.findBySchulhalbjahrIdAndSchuelerId(halbjahrId,
                 schuelerId);

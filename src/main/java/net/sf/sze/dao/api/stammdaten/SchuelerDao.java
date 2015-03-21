@@ -24,6 +24,12 @@ import org.springframework.data.repository.query.Param;
 public interface SchuelerDao extends PagingAndSortingRepository<Schueler,
         Long> {
 
+    /** From und Where-Bedinung für Schüler mit Zeugnissen. */
+    String SCHUELER_WITH_ZEUGNIS = "from Zeugnis z join z.schueler s "
+            + "where z.klasse.id=:klassenId and z.schulhalbjahr.id=:halbjahrId "
+            + "and z.schulhalbjahr.selectable = true "
+            + "order by s.name, s.vorname";
+
     /**
      * Liest alle nicht abgegangenen Schüler zu einer Klasse.
      * @param stichtag Datum bis zu dem die Schüler noch mit ausgewählt werden.
@@ -59,4 +65,14 @@ public interface SchuelerDao extends PagingAndSortingRepository<Schueler,
     Page<Schueler> findAllByAbgangsDatumIsHistory(
             @Param("stichtag") Date stichtag, Pageable pageable);
 
+    /**
+     * Liefert alle Schüler die ein Zeugnis haben sortiert nach Name und Vorname,
+     * das Halbjahr muss selektierbar sein.
+     * @param halbjahrId die Id des Schulhalbjahres
+     * @param klassenId die Id der Klasse.
+     * @return die Liste aller Schüler.
+     */
+    @Query("select s " + SCHUELER_WITH_ZEUGNIS)
+    List<Schueler> findSchuelerWithZeugnisOrdered(@Param("halbjahrId") long halbjahrId,
+            @Param("klassenId") long klassenId);
 }
