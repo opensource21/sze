@@ -53,6 +53,9 @@ public class SchuelerList {
                 }
             }
         }
+        if (selectedSchueler == null) {
+            beforeSelectedSchueler = null;
+        }
         this.prevSchueler = beforeSelectedSchueler;
         this.currentSchueler = selectedSchueler;
         this.nextSchueler = afterSelectedSchueler;

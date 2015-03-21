@@ -83,6 +83,22 @@ public class SchuelerListTest {
     }
 
     /**
+     * Test der SchuelerList, wenn ein nicht vorhandere Schüler gewählt wurde.
+     */
+    @Test
+    public void testSchuelerListWithUnkownCurrentSchueler() {
+        final List<Schueler> schueler = create10Schueler();
+
+        final SchuelerList testee = new SchuelerList(schueler, Long.valueOf(10));
+
+        assertThat(testee.getSchuelerList()).isEqualTo(schueler);
+        assertThat(testee.getPrevSchueler()).isNull();
+        assertThat(testee.getCurrentSchueler()).isNull();
+        assertThat(testee.getNextSchueler()).isNull();
+        assertThat(testee.isEmpty()).isFalse();
+    }
+
+    /**
      * Erzeugt eine Liste mit 10 Schülern.
      * @return eine Liste mit 10 Schülern.
      */
