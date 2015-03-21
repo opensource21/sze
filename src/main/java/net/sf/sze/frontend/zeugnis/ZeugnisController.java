@@ -15,6 +15,7 @@ import javax.annotation.Resource;
 import net.sf.sze.frontend.base.ModelAttributes;
 import net.sf.sze.frontend.base.URL;
 import net.sf.sze.frontend.base.URL.Common;
+import net.sf.sze.frontend.base.URL.Session;
 import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.zeugnis.Bewertung;
 import net.sf.sze.model.zeugnis.DreiNiveauBewertung;
@@ -489,7 +490,10 @@ public class ZeugnisController implements ModelAttributes {
             Model model) {
         final Zeugnis zeugnis = zeugnisErfassungsService.getZeugnis(
                 halbjahrId, schuelerId);
-        fillZeugnisDetailModel(model, halbjahrId, klassenId, schuelerId, zeugnis);
+        final SchuelerList schuelerList = schuelerService.getSchuelerWithZeugnis(
+                halbjahrId.longValue(), klassenId.longValue(), schuelerId);
+        fillZeugnisDetailModel(model, halbjahrId, klassenId, schuelerId, zeugnis,
+                schuelerList.getPrevSchuelerId(), schuelerList.getNextSchuelerId());
         return EDIT_ZEUGNIS_DETAIL_VIEW;
     }
 
@@ -499,9 +503,11 @@ public class ZeugnisController implements ModelAttributes {
      * @param klassenId
      * @param schuelerId
      * @param zeugnis
+     * @param prevId
+     * @param nextId
      */
     private void fillZeugnisDetailModel(Model model, Long halbjahrId,
-            Long klassenId, Long schuelerId, final Zeugnis zeugnis) {
+            Long klassenId, Long schuelerId, final Zeugnis zeugnis, Long prevId, Long nextId) {
         model.addAttribute("zeugnis", zeugnis);
         model.addAttribute("zeugnisArten", zeugnisErfassungsService.getAllZeugnisArten(zeugnis));
         model.addAttribute("updateUrl", URL.filledURLWithNamedParams(
@@ -509,6 +515,8 @@ public class ZeugnisController implements ModelAttributes {
                 URL.Session.P_HALBJAHR_ID, halbjahrId,
                 URL.Session.P_KLASSEN_ID, klassenId,
                 URL.Session.P_SCHUELER_ID, schuelerId));
+        model.addAttribute(Common.P_PREV_ID, prevId);
+        model.addAttribute(Common.P_NEXT_ID, nextId);
         model.addAttribute(CANCEL_URL, URL.createLinkToZeugnisUrl(halbjahrId,
                 klassenId, schuelerId));
     }
@@ -519,6 +527,9 @@ public class ZeugnisController implements ModelAttributes {
      * @param klassenId die Id der Klasse
      * @param schuelerId die Id des Schuelers
      * @param result das Bindingresult.
+     * @param prevId die Id des vorherigen Schülers.
+     * @param nextId die Id der nächsten Schülers.
+     * @param action die als nächstes auszuführende Aktion.
      * @param zeugnis das zu speichernde Zeugnis.
      * @param model das Model
      * @return die logische View
@@ -528,20 +539,37 @@ public class ZeugnisController implements ModelAttributes {
             .P_HALBJAHR_ID) Long halbjahrId,
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
+            @RequestParam(Common.P_PREV_ID) Long prevId,
+            @RequestParam(Common.P_NEXT_ID) Long nextId,
+            @RequestParam(value = Common.P_ACTION, required = false) String action,
             @ModelAttribute("zeugnis") Zeugnis zeugnis,
             BindingResult result, Model model) {
         validator.validate(zeugnis, result);
-
         if (result.hasErrors()) {
             LOG.info("Fehler:" + result.getAllErrors());
             fillZeugnisDetailModel(model, halbjahrId, klassenId, schuelerId,
-                    zeugnis);
+                    zeugnis, prevId, nextId);
             return EDIT_ZEUGNIS_DETAIL_VIEW;
         }
 
         LOG.debug("Update Zeugnis: " + zeugnis);
         zeugnisErfassungsService.save(zeugnis);
-        return URL.createRedirectToZeugnisUrl(halbjahrId, klassenId, schuelerId);
+        String nextUrl;
+        if (StringUtils.equalsIgnoreCase(action, Common.ACTION_PREV)) {
+            nextUrl = URL.redirectWithNamedParams(URL.ZeugnisPath.ZEUGNIS_EDIT_DETAIL,
+                    Session.P_HALBJAHR_ID, halbjahrId,
+                    Session.P_KLASSEN_ID, klassenId,
+                    Session.P_SCHUELER_ID, prevId);
+        } else if (StringUtils.equalsIgnoreCase(action, Common.ACTION_NEXT)) {
+            nextUrl = URL.redirectWithNamedParams(URL.ZeugnisPath.ZEUGNIS_EDIT_DETAIL,
+                    Session.P_HALBJAHR_ID, halbjahrId,
+                    Session.P_KLASSEN_ID, klassenId,
+                    Session.P_SCHUELER_ID, nextId);
+        } else {
+            nextUrl = URL.createRedirectToZeugnisUrl(halbjahrId, klassenId, schuelerId);
+        }
+
+        return nextUrl;
     }
 
 

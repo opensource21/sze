@@ -82,6 +82,28 @@ public class SchuelerList {
         return nextSchueler;
     }
 
+
+    /**
+     * @return the prevSchueler
+     */
+    public Long getPrevSchuelerId() {
+        return prevSchueler == null ? null : prevSchueler.getId();
+    }
+
+    /**
+     * @return the currentSchueler
+     */
+    public Long getCurrentSchuelerId() {
+        return currentSchueler == null ? null : currentSchueler.getId();
+    }
+
+    /**
+     * @return the nextSchueler
+     */
+    public Long getNextSchuelerId() {
+        return nextSchueler == null ? null : nextSchueler.getId();
+    }
+
     /**
      * @return the schuelerList
      */

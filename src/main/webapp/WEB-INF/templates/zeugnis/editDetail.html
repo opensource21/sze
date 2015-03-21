@@ -29,6 +29,8 @@ cancelUrl
             <div th:replace="/fragments::error"></div>
             <input id="id" type="hidden" th:value="*{id}" name="id" />
             <input id="version" type="hidden" th:value="*{version}" name="version" />
+            <input id="prevId" type="hidden" th:value="${prevId}" name="prevId"/>
+            <input id="nextId" type="hidden" th:value="${nextId}" name="nextId"/>
             <input id="buBewertungsText" type="hidden" th:value="*{buBewertungsText}" name="buBewertungsText" />
             <input id="formular" type="hidden" th:value="*{formular.id}" name="formular" />
             <input id="klasse" type="hidden" th:value="*{klasse.id}" name="klasse" />
@@ -75,9 +77,15 @@ cancelUrl
             <textarea rows="5" class="span4" bs:field="#{db.Zeugnis.individuellerLeitspruch2}"/>
             <input type="text" class="span4" bs:field="#{db.Zeugnis.quelleIndividuellerLeitspruch2}"/>
 
-            <button type="submit" th:formaction="@{${updateUrl}}" class="btn" th:unless="${updateUrl == null}">
+            <span class="btn disabled" th:if="${prevId == null}"><i class="saveAndPrevious"></i>Speichern und Zurück</span>
+            <button type="submit" th:formaction="@{${updateUrl}(action=${'prev'})}" class="btn" th:unless="${prevId ==null}">
+                <i class="saveAndPrevious"></i>Speichern und Zurück</button>
+            <button type="submit" th:formaction="@{${updateUrl}}" class="btn">
                 <i class="save"></i>Speichern</button>
             <a th:href="@{${cancelUrl}}" class="btn"> <i class="cancel"></i>Abbrechen</a>
+            <span class="btn disabled" th:if="${nextId == null}"><i class="saveAndNext"></i>Speichern und Weiter</span>
+            <button  type="submit" th:formaction="@{${updateUrl}(action=${'next'})}" class="btn" th:unless="${nextId ==null}">
+                <i class="saveAndNext"></i>Speichern und Weiter</button>
         </form>
     </div>
 </body>

@@ -145,6 +145,32 @@ public class SchuelerListTest {
         assertThat(testee.isEmpty()).isTrue();
     }
 
+    /**
+     * Testet den Zugriff auf die Ids wenn die Schueler Null sind.
+     */
+    @Test
+    public void testGetIdsNull() {
+        final SchuelerList testee = new SchuelerList(null, null);
+
+        assertThat(testee.getPrevSchuelerId()).isNull();
+        assertThat(testee.getCurrentSchuelerId()).isNull();
+        assertThat(testee.getNextSchuelerId()).isNull();
+    }
+
+    /**
+     * Testet den Zugriff auf die Ids wenn die Schueler nicht Null sind.
+     */
+    @Test
+    public void testGetIdsNotNull() {
+        final List<Schueler> schueler = create10Schueler();
+
+        final SchuelerList testee = new SchuelerList(schueler, Long.valueOf(5));
+
+        assertThat(testee.getPrevSchuelerId()).isEqualTo(4);
+        assertThat(testee.getCurrentSchuelerId()).isEqualTo(5);
+        assertThat(testee.getNextSchuelerId()).isEqualTo(6);
+    }
+
 
 
 
