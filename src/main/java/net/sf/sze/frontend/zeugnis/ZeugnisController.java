@@ -211,8 +211,8 @@ public class ZeugnisController implements ModelAttributes {
         LOG.debug("Zeugnis von Schueler {}. ", selectedZeugnis.getSchueler());
         model.addAttribute("schuelerListe", schuelerList.getSchuelerList());
         model.addAttribute("zeugnis", selectedZeugnis);
-        model.addAttribute("prevSchuelerId", schuelerList.getPrevSchueler().getId());
-        model.addAttribute("nextSchuelerId", schuelerList.getNextSchueler().getId());
+        model.addAttribute("prevSchueler", schuelerList.getPrevSchueler());
+        model.addAttribute("nextSchueler", schuelerList.getNextSchueler());
         model.addAttribute("wpBewertungen", wpBewertungen);
         model.addAttribute("otherBewertungen", otherBewertungen);
         model.addAttribute("urlShowZeugnis", URL.filledURLWithNamedParams(

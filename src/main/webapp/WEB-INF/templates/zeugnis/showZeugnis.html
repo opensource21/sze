@@ -32,14 +32,14 @@
                         th:disabled="${not item.isActive()}"></option>
                 </select>
                 <button type="submit" class="btn cbbutton">Aktualisieren</button>
-                <span class="btn disabled" th:if="${prevSchuelerId==null}"><i class="prev"></i>Vorheriger Sch&uuml;ler</span>
-                <a class="btn" th:unless="${prevSchuelerId==null}"
-                    th:href="@{${urlShowZeugnis}(schueler_id=${prevSchuelerId})}">
+                <span class="btn disabled" th:if="${prevSchueler?.id==null}"><i class="prev"></i>Vorheriger Sch&uuml;ler</span>
+                <a class="btn" th:unless="${prevSchueler?.id==null}"
+                    th:href="@{${urlShowZeugnis}(schueler_id=${prevSchueler?.id})}">
                     <i class="prev"></i>Vorheriger Sch&uuml;ler
                 </a>
-                <span class="btn disabled" th:if="${nextSchuelerId==null}"><i class="next"></i>N&auml;chster Sch&uuml;ler</span>
-                <a class="btn" th:unless="${nextSchuelerId==null}"
-                    th:href="@{${urlShowZeugnis}(schueler_id=${nextSchuelerId})}">
+                <span class="btn disabled" th:if="${nextSchueler?.id==null}"><i class="next"></i>N&auml;chster Sch&uuml;ler</span>
+                <a class="btn" th:unless="${nextSchueler?.id==null}"
+                    th:href="@{${urlShowZeugnis}(schueler_id=${nextSchueler?.id})}">
                     <i class="next"></i>N&auml;chster Sch&uuml;ler
                 </a> <a class="btn" th:href="@{${urlPrintZeugnis}}"><i class="pdf"></i>Zeugnis
                     anzeigen</a>

@@ -97,8 +97,10 @@ public class SchuelerServiceImpl implements SchuelerService {
      * {@inheritDoc}
      */
     @Override
-    public SchuelerList getSchuelerWithZeugnis(long halbjahrId, long klassenId, Long currentSchuelerId) {
-        final List<Schueler> schueler = null;//TODO schuelerDao.findSchuelerWithZeugnisOrdered(halbjahrId, halbjahrId);
+    public SchuelerList getSchuelerWithZeugnis(long halbjahrId, long klassenId,
+            Long currentSchuelerId) {
+        final List<Schueler> schueler = schuelerDao.
+                findSchuelerWithZeugnisOrdered(halbjahrId, klassenId);
         return new SchuelerList(schueler, currentSchuelerId);
     }
 
@@ -107,7 +109,8 @@ public class SchuelerServiceImpl implements SchuelerService {
      */
     @Override
     public Long getFirstSchuelerIdWithZeugnis(Long halbjahrId, Long klassenId) {
-        final List<Long> schuelerIds = null;//TODO schuelerDao.findSchuelerIdsWithZeugnisOrdered(halbjahrId, halbjahrId);
+        final List<Long> schuelerIds = schuelerDao.
+                findSchuelerIdsWithZeugnisOrdered(halbjahrId, klassenId);
         return CollectionUtils.isEmpty(schuelerIds) ? null : schuelerIds.get(0);
     }
 
