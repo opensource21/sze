@@ -77,15 +77,7 @@ cancelUrl
             <textarea rows="5" class="span4" bs:field="#{db.Zeugnis.individuellerLeitspruch2}"/>
             <input type="text" class="span4" bs:field="#{db.Zeugnis.quelleIndividuellerLeitspruch2}"/>
 
-            <span class="btn disabled" th:if="${prevId == null}"><i class="saveAndPrevious"></i>Speichern und Zurück</span>
-            <button type="submit" th:formaction="@{${updateUrl}(action=${'prev'})}" class="btn" th:unless="${prevId ==null}">
-                <i class="saveAndPrevious"></i>Speichern und Zurück</button>
-            <button type="submit" th:formaction="@{${updateUrl}}" class="btn">
-                <i class="save"></i>Speichern</button>
-            <a th:href="@{${cancelUrl}}" class="btn"> <i class="cancel"></i>Abbrechen</a>
-            <span class="btn disabled" th:if="${nextId == null}"><i class="saveAndNext"></i>Speichern und Weiter</span>
-            <button  type="submit" th:formaction="@{${updateUrl}(action=${'next'})}" class="btn" th:unless="${nextId ==null}">
-                <i class="saveAndNext"></i>Speichern und Weiter</button>
+            <th:block th:replace="/fragments::prevsavenextButton"></th:block>
         </form>
     </div>
 </body>

@@ -70,5 +70,17 @@
                 <span class="help-inline" th:if="${#fields.hasErrors('__${fId}__')}"
                     th:errors="*{__${fId}__}"></span>
             </div>
-      </div>
+        </div>
+        <div th:fragment="prevsavenextButton" th:remove="tag">
+            <span class="btn disabled" th:if="${prevId == null}"><i class="saveAndPrevious"></i>Speichern und Zurück</span>
+            <button type="submit" th:formaction="@{${updateUrl}(action=${'prev'})}" class="btn" th:unless="${prevId ==null}">
+                <i class="saveAndPrevious"></i>Speichern und Zurück</button>
+            <button type="submit" th:formaction="@{${updateUrl}}" class="btn">
+                <i class="save"></i>Speichern</button>
+            <a th:href="@{${cancelUrl}}" class="btn"> <i class="cancel"></i>Abbrechen</a>
+            <span class="btn disabled" th:if="${nextId == null}"><i class="saveAndNext"></i>Speichern und Weiter</span>
+            <button  type="submit" th:formaction="@{${updateUrl}(action=${'next'})}" class="btn" th:unless="${nextId ==null}">
+                <i class="saveAndNext"></i>Speichern und Weiter</button>
+        </div>
+
   </div>

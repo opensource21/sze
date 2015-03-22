@@ -46,15 +46,7 @@ nextId
                             th:text="${item}"></option>
 
             </select>
-            <input type="text" bs:field="#{db.Bewertung.sonderNote}" bs:label="#{net.sf.sze.model.zeugnis.Bewertung.sonderNote}"/>
-            <input type="checkbox" bs:field="#{db.Bewertung.leistungNurSchwachAusreichend}" bs:label="#{net.sf.sze.model.zeugnis.Bewertung.leistungNurSchwachAusreichend}"/>
-            <input type="checkbox" bs:field="#{db.Bewertung.relevant}" bs:label="#{net.sf.sze.model.zeugnis.Bewertung.relevant}"/>
-            <span class="btn disabled" th:if="${prevId == null}"><i class="saveAndPrevious"></i>Speichern und Zurück</span>
-            <button type="submit"  th:formaction="@{${saveUrl}(action=${'prev'})}" class="btn" th:unless="${prevId == null}"><i class="saveAndPrevious"></i>Speichern und Zurück</button>
-            <button type="submit"  th:formaction="@{${saveUrl}}" class="btn"><i class="save"></i>Speichern</button>
-            <button type="submit"  th:formaction="@{${cancelUrl}}" class="btn"><i class="cancel"></i>Abbrechen</button>
-            <span class="btn disabled" th:if="${nextId == null}"><i class="saveAndNext"></i>Speichern und Weiter</span>
-            <button type="submit"  th:formaction="@{${saveUrl}(action=${'next'})}" class="btn" th:unless="${nextId == null}"><i class="saveAndNext"></i>Speichern und Weiter</button>
+            <th:block th:replace="/fragments::prevsavenextButton"></th:block>
         </form>
     </div>
 </body>
