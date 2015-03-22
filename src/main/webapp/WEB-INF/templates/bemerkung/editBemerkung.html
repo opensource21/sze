@@ -55,16 +55,7 @@ deleteUrl
             <!-- FreiText -->
             <textarea rows="5" bs:field="freiText"
                 class="span4"></textarea>
-            <button type="submit" th:formaction="@{${insertUrl}}" class="btn" th:unless="${insertUrl == null}">
-                <i class="save"></i>Speichern</button>
-            <button type="submit" th:formaction="@{${updateUrl}}" class="btn" th:unless="${updateUrl == null}">
-                <i class="save"></i>Speichern</button>
-            <button type="submit"  th:formaction="@{${cancelUrl}}" class="btn">
-                <i class="cancel"></i>Abbrechen</button>
-            <button type="submit"  th:formaction="@{${insertUrl}(action=${'next'})}" class="btn" th:unless="${insertUrl == null}">
-                <i class="saveAndNext"></i>Speichern und weiteren Anlegen</button>
-            <button type="submit" th:formaction="@{${deleteUrl}}" class="btn" th:unless="${deleteUrl == null}">
-                <i class="delete"></i>Löschen</button>
+            <th:block th:include="/fragments::insertUpdateCancelNextDeleteButtons"></th:block>
         </form>
     </div>
 </body>

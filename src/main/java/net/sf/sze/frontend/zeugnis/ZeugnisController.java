@@ -438,7 +438,7 @@ public class ZeugnisController implements ModelAttributes {
         model.addAttribute("schulhalbjahr", schulhalbjahrService.read(halbjahrId));
         model.addAttribute(Common.P_PREV_ID, prevId);
         model.addAttribute(Common.P_NEXT_ID, nextId);
-        model.addAttribute("saveUrl", URL.filledURLWithNamedParams(
+        model.addAttribute("updateUrl", URL.filledURLWithNamedParams(
                 URL.ZeugnisPath.BEWERTUNG_EDIT,
                 URL.Session.P_HALBJAHR_ID, halbjahrId,
                 URL.Session.P_KLASSEN_ID, klassenId,
@@ -463,7 +463,7 @@ public class ZeugnisController implements ModelAttributes {
      * @param redirectAttributes Fehlermeldungen.
      * @return die logische View
      */
-    @RequestMapping(value = URL.ZeugnisPath.BEWERTUNG_CANCEL, method = RequestMethod.POST)
+    @RequestMapping(value = URL.ZeugnisPath.BEWERTUNG_CANCEL, method = RequestMethod.GET)
     public String cancelEditBewertung(
             @PathVariable(URL.Session.P_HALBJAHR_ID) Long halbjahrId,
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
