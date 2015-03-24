@@ -554,22 +554,8 @@ public class ZeugnisController implements ModelAttributes {
 
         LOG.debug("Update Zeugnis: " + zeugnis);
         zeugnisErfassungsService.save(zeugnis);
-        String nextUrl;
-        if (StringUtils.equalsIgnoreCase(action, Common.ACTION_PREV)) {
-            nextUrl = URL.redirectWithNamedParams(URL.ZeugnisPath.ZEUGNIS_EDIT_DETAIL,
-                    Session.P_HALBJAHR_ID, halbjahrId,
-                    Session.P_KLASSEN_ID, klassenId,
-                    Session.P_SCHUELER_ID, prevId);
-        } else if (StringUtils.equalsIgnoreCase(action, Common.ACTION_NEXT)) {
-            nextUrl = URL.redirectWithNamedParams(URL.ZeugnisPath.ZEUGNIS_EDIT_DETAIL,
-                    Session.P_HALBJAHR_ID, halbjahrId,
-                    Session.P_KLASSEN_ID, klassenId,
-                    Session.P_SCHUELER_ID, nextId);
-        } else {
-            nextUrl = URL.createRedirectToZeugnisUrl(halbjahrId, klassenId, schuelerId);
-        }
-
-        return nextUrl;
+        return  getNextUrl(action, URL.ZeugnisPath.ZEUGNIS_EDIT_DETAIL,
+                halbjahrId, klassenId, schuelerId, prevId, nextId);
     }
 
 
@@ -653,7 +639,10 @@ public class ZeugnisController implements ModelAttributes {
             Model model) {
         final Zeugnis zeugnis = zeugnisErfassungsService.
                 getZeugnis(halbjahrId, schuelerId);
-        fillBuSoLModel(model, halbjahrId, klassenId, schuelerId, zeugnis);
+        final SchuelerList schuelerList = schuelerService.getSchuelerWithZeugnis(
+                halbjahrId.longValue(), klassenId.longValue(), schuelerId);
+        fillBuSoLModel(model, halbjahrId, klassenId, schuelerId, zeugnis,
+                schuelerList.getPrevSchuelerId(), schuelerList.getNextSchuelerId());
         return EDIT_ZEUGNIS_BU_SOL;
     }
 
@@ -663,9 +652,11 @@ public class ZeugnisController implements ModelAttributes {
      * @param klassenId
      * @param schuelerId
      * @param zeugnis
+     * @param prevId
+     * @param nextId
      */
     private void fillBuSoLModel(Model model, Long halbjahrId,
-            Long klassenId, Long schuelerId, final Zeugnis zeugnis) {
+            Long klassenId, Long schuelerId, final Zeugnis zeugnis, Long prevId, Long nextId) {
         model.addAttribute("zeugnis", zeugnis);
         model.addAttribute("solBewertungsTexte", zeugnisErfassungsService.getSoLTexte(zeugnis));
         model.addAttribute("updateUrl", URL.filledURLWithNamedParams(
@@ -673,6 +664,8 @@ public class ZeugnisController implements ModelAttributes {
                 URL.Session.P_HALBJAHR_ID, halbjahrId,
                 URL.Session.P_KLASSEN_ID, klassenId,
                 URL.Session.P_SCHUELER_ID, schuelerId));
+        model.addAttribute(Common.P_PREV_ID, prevId);
+        model.addAttribute(Common.P_NEXT_ID, nextId);
         model.addAttribute(CANCEL_URL, URL.createLinkToZeugnisUrl(halbjahrId,
                 klassenId, schuelerId));
     }
@@ -683,6 +676,9 @@ public class ZeugnisController implements ModelAttributes {
      * @param klassenId die Id der Klasse
      * @param schuelerId die Id des Schuelers
      * @param newZeugnis als Container für die AG-Bewertungen.
+     * @param action String der angibt was zu tun ist.
+     * @param prevId die Id des vorherigen Schülers
+     * @param nextId die Id des nachfolgenden Schülers
      * @param result das Bindingresult.
      * @param model das Model
      * @return die logische View
@@ -692,6 +688,9 @@ public class ZeugnisController implements ModelAttributes {
             @PathVariable(URL.Session.P_HALBJAHR_ID) Long halbjahrId,
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
+            @RequestParam(Common.P_PREV_ID) Long prevId,
+            @RequestParam(Common.P_NEXT_ID) Long nextId,
+            @RequestParam(value = Common.P_ACTION, required = false) String action,
             @ModelAttribute("zeugnis") Zeugnis newZeugnis, BindingResult result,
             Model model) {
         final Zeugnis zeugnis = zeugnisErfassungsService.getZeugnis(
@@ -703,13 +702,47 @@ public class ZeugnisController implements ModelAttributes {
         if (result.hasErrors()) {
             LOG.info("Fehler:" + result.getAllErrors());
             fillBuSoLModel(model, halbjahrId, klassenId, schuelerId,
-                    newZeugnis);
+                    newZeugnis, prevId, nextId);
             return EDIT_ZEUGNIS_BU_SOL;
         }
 
         LOG.debug("Update Zeugnis: " + zeugnis);
         zeugnisErfassungsService.save(zeugnis);
-        return URL.createRedirectToZeugnisUrl(halbjahrId, klassenId, schuelerId);
+        return  getNextUrl(action, URL.ZeugnisPath.ZEUGNIS_EDIT_BU_SOL,
+                halbjahrId, klassenId, schuelerId, prevId, nextId);
+
+    }
+
+    /**
+     * Liefert die nächste URL in Abhängigkeit von der Aktion für URLs,
+     * die nur die Parameter Halbjahr-, Klasse und Schüler-Id benötigen..
+     * @param action die Aktion prev oder next oder <code>null</code>
+     * @param currentUrl die aktuelle URL.
+     * @param halbjahrId die Id des Schulhalbjahres.
+     * @param klassenId die Id der Klasse.
+     * @param schuelerId die Id des Schülers
+     * @param prevId die Id der vorherigen Schülers.
+     * @param nextId die Id des nächsten Schülers.
+     * @return die URL.
+     */
+    private String getNextUrl(String action, final String currentUrl,
+            Long halbjahrId, Long klassenId, Long schuelerId, Long prevId,
+            Long nextId) {
+        final String nextUrl;
+        if (StringUtils.equalsIgnoreCase(action, Common.ACTION_PREV)) {
+            nextUrl = URL.redirectWithNamedParams(currentUrl,
+                    Session.P_HALBJAHR_ID, halbjahrId,
+                    Session.P_KLASSEN_ID, klassenId,
+                    Session.P_SCHUELER_ID, prevId);
+        } else if (StringUtils.equalsIgnoreCase(action, Common.ACTION_NEXT)) {
+            nextUrl = URL.redirectWithNamedParams(currentUrl,
+                    Session.P_HALBJAHR_ID, halbjahrId,
+                    Session.P_KLASSEN_ID, klassenId,
+                    Session.P_SCHUELER_ID, nextId);
+        } else {
+            nextUrl = URL.createRedirectToZeugnisUrl(halbjahrId, klassenId, schuelerId);
+        }
+        return nextUrl;
     }
 
     /**

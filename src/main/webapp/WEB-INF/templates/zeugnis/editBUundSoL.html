@@ -48,9 +48,7 @@ cancelUrl
                     th:each="solText:${solBewertungsTexte}" th:text="${solText.text}"></textarea>
                 </div>
             </div>
-            <button type="submit" th:formaction="@{${updateUrl}}" class="btn" th:unless="${updateUrl == null}">
-                <i class="save"></i>Speichern</button>
-            <a th:href="@{${cancelUrl}}" class="btn"> <i class="cancel"></i>Abbrechen</a>
+            <th:block th:replace="/fragments::prevsavenextButton"></th:block>
         </form>
     </div>
 </body>
