@@ -74,6 +74,8 @@
 
         <!-- Button-Groups -->
         <div th:fragment="prevsavenextButton" th:remove="tag">
+            <input id="prevId" type="hidden" th:value="${prevId}" name="prevId"/>
+            <input id="nextId" type="hidden" th:value="${nextId}" name="nextId"/>
             <span class="btn disabled" th:if="${prevId == null}"><i class="saveAndPrevious"></i>Speichern und Zurück</span>
             <button type="submit" th:formaction="@{${updateUrl}(action=${'prev'})}" class="btn" th:unless="${prevId ==null}">
                 <i class="saveAndPrevious"></i>Speichern und Zurück</button>
