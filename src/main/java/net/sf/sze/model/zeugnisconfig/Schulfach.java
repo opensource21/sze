@@ -226,7 +226,7 @@ public class Schulfach extends RevisionModel implements Serializable,
      * Der technische Name enthält keine Sonderzeichen und ist eindeutig.
      * @return ein eindeutiger Name ohne Sonderzeichen.
      */
-    public String technicalName() {
+    public String getFormularKeyName() {
         return StringUtil.deleteSpecialCharaters(typ.getShortKey() + "_"
                 + name);
     }

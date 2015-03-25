@@ -301,9 +301,9 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
 
         final Iterable<Schulfach> schulfaecher = schulfachDao.findAll();
         for (final Schulfach schulfach : schulfaecher) {
-            zeugnisDaten.put("bw_" + schulfach.technicalName(), VariableUtility
+            zeugnisDaten.put("bw_" + schulfach.getFormularKeyName(), VariableUtility
                     .PLATZHALTER_LEER);
-            zeugnisDaten.put("bw_" + schulfach.technicalName() + "_tg", "");
+            zeugnisDaten.put("bw_" + schulfach.getFormularKeyName() + "_tg", "");
         }
 
         zeugnis.toPrintMap(zeugnisDaten);
@@ -407,8 +407,8 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
         final Map<String, Object> emptyMap = new HashMap<>();
         final Iterable<Schulfach> faecher = schulfachDao.findAll();
         for (final Schulfach schulfach : faecher) {
-            emptyMap.put("bw_" + schulfach.technicalName() + "", "");
-            emptyMap.put("bw_" + schulfach.technicalName() + "_tg", "");
+            emptyMap.put("bw_" + schulfach.getFormularKeyName() + "", "");
+            emptyMap.put("bw_" + schulfach.getFormularKeyName() + "_tg", "");
         }
 
         for (int stufe = minimalesSchuljahr; stufe <= maximalesSchuljahr;
@@ -455,12 +455,12 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
             Map<String, Object> printMap) {
         final Iterable<Schulfach> faecher = schulfachDao.findAll();
         for (final Schulfach schulfach : faecher) {
-            printMap.put("" + schulfach.technicalName() + "_detailInfo", "");
+            printMap.put("" + schulfach.getFormularKeyName() + "_detailInfo", "");
         }
 
         for (final SchulfachDetailInfo detailInfo : zeugnisFormular
                 .getSchulfachDetailInfos()) {
-            printMap.put(detailInfo.getSchulfach().technicalName()
+            printMap.put(detailInfo.getSchulfach().getFormularKeyName()
                     + "_detailInfo", detailInfo.getDetailInfo());
         }
     }
