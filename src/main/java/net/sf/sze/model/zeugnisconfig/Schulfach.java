@@ -50,7 +50,7 @@ public class Schulfach extends RevisionModel implements Serializable,
     /** The typ. */
     @Column(nullable = false)
     @Enumerated(EnumType.ORDINAL)
-    private Schulfachtyp typ;
+    private Schulfachtyp typ = Schulfachtyp.WAHLPFLICHT;
 
     /** The stufen mit Differenzierung auf 2 Niveaus. */
     @Column(length = 255)
