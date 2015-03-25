@@ -12,6 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import net.sf.sze.model.zeugnis.Bewertung;
 import net.sf.sze.model.zeugnis.SchulamtsBemerkung;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -1146,6 +1147,39 @@ public final class URL {
         return filledURLWithNamedParams(URL.ZeugnisPath.SHOW + "?" + URL.Session.P_SCHUELER_ID
                 + "=" + schuelerId, URL.Session.P_HALBJAHR_ID, halbjahrId,
                 URL.Session.P_KLASSEN_ID, klassenId);
+    }
+
+    /**
+     * Liefert die nächste URL in Abhängigkeit von der Aktion für URLs,
+     * die nur die Parameter Halbjahr-, Klasse und Schüler-Id benötigen.
+     * Standardziel ist das Zeugnis..
+     * @param action die Aktion prev oder next oder <code>null</code>
+     * @param currentUrl die aktuelle URL.
+     * @param halbjahrId die Id des Schulhalbjahres.
+     * @param klassenId die Id der Klasse.
+     * @param schuelerId die Id des Schülers
+     * @param prevId die Id der vorherigen Schülers.
+     * @param nextId die Id des nächsten Schülers.
+     * @return die URL.
+     */
+    public static String getPrevNextUrlOrZeugnisUrl(String action, final String currentUrl,
+            Long halbjahrId, Long klassenId, Long schuelerId, Long prevId,
+            Long nextId) {
+        final String nextUrl;
+        if (StringUtils.equalsIgnoreCase(action, Common.ACTION_PREV)) {
+            nextUrl = redirectWithNamedParams(currentUrl,
+                    Session.P_HALBJAHR_ID, halbjahrId,
+                    Session.P_KLASSEN_ID, klassenId,
+                    Session.P_SCHUELER_ID, prevId);
+        } else if (StringUtils.equalsIgnoreCase(action, Common.ACTION_NEXT)) {
+            nextUrl = redirectWithNamedParams(currentUrl,
+                    Session.P_HALBJAHR_ID, halbjahrId,
+                    Session.P_KLASSEN_ID, klassenId,
+                    Session.P_SCHUELER_ID, nextId);
+        } else {
+            nextUrl = createRedirectToZeugnisUrl(halbjahrId, klassenId, schuelerId);
+        }
+        return nextUrl;
     }
 }
 // CSON: InterfaceIsType

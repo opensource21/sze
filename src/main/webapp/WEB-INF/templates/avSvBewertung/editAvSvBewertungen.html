@@ -40,9 +40,7 @@ cancelUrl
                     <option th:each="item:${noten}" th:text="${item.toString()}" th:value="${item.name()}"></option>
                  </select>
             </span>
-            <button type="submit" th:formaction="@{${updateUrl}}" class="btn" th:unless="${updateUrl == null}">
-                <i class="save"></i>Speichern</button>
-            <a th:href="@{${cancelUrl}}" class="btn"> <i class="cancel"></i>Abbrechen</a>
+            <th:block th:replace="/fragments::prevsavenextButton"></th:block>
         </form>
     </div>
 </body>

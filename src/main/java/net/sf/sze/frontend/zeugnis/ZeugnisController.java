@@ -15,7 +15,6 @@ import javax.annotation.Resource;
 import net.sf.sze.frontend.base.ModelAttributes;
 import net.sf.sze.frontend.base.URL;
 import net.sf.sze.frontend.base.URL.Common;
-import net.sf.sze.frontend.base.URL.Session;
 import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.zeugnis.Bewertung;
 import net.sf.sze.model.zeugnis.DreiNiveauBewertung;
@@ -554,7 +553,7 @@ public class ZeugnisController implements ModelAttributes {
 
         LOG.debug("Update Zeugnis: " + zeugnis);
         zeugnisErfassungsService.save(zeugnis);
-        return  getNextUrl(action, URL.ZeugnisPath.ZEUGNIS_EDIT_DETAIL,
+        return  URL.getPrevNextUrlOrZeugnisUrl(action, URL.ZeugnisPath.ZEUGNIS_EDIT_DETAIL,
                 halbjahrId, klassenId, schuelerId, prevId, nextId);
     }
 
@@ -708,41 +707,9 @@ public class ZeugnisController implements ModelAttributes {
 
         LOG.debug("Update Zeugnis: " + zeugnis);
         zeugnisErfassungsService.save(zeugnis);
-        return  getNextUrl(action, URL.ZeugnisPath.ZEUGNIS_EDIT_BU_SOL,
+        return  URL.getPrevNextUrlOrZeugnisUrl(action, URL.ZeugnisPath.ZEUGNIS_EDIT_BU_SOL,
                 halbjahrId, klassenId, schuelerId, prevId, nextId);
 
-    }
-
-    /**
-     * Liefert die nächste URL in Abhängigkeit von der Aktion für URLs,
-     * die nur die Parameter Halbjahr-, Klasse und Schüler-Id benötigen..
-     * @param action die Aktion prev oder next oder <code>null</code>
-     * @param currentUrl die aktuelle URL.
-     * @param halbjahrId die Id des Schulhalbjahres.
-     * @param klassenId die Id der Klasse.
-     * @param schuelerId die Id des Schülers
-     * @param prevId die Id der vorherigen Schülers.
-     * @param nextId die Id des nächsten Schülers.
-     * @return die URL.
-     */
-    private String getNextUrl(String action, final String currentUrl,
-            Long halbjahrId, Long klassenId, Long schuelerId, Long prevId,
-            Long nextId) {
-        final String nextUrl;
-        if (StringUtils.equalsIgnoreCase(action, Common.ACTION_PREV)) {
-            nextUrl = URL.redirectWithNamedParams(currentUrl,
-                    Session.P_HALBJAHR_ID, halbjahrId,
-                    Session.P_KLASSEN_ID, klassenId,
-                    Session.P_SCHUELER_ID, prevId);
-        } else if (StringUtils.equalsIgnoreCase(action, Common.ACTION_NEXT)) {
-            nextUrl = URL.redirectWithNamedParams(currentUrl,
-                    Session.P_HALBJAHR_ID, halbjahrId,
-                    Session.P_KLASSEN_ID, klassenId,
-                    Session.P_SCHUELER_ID, nextId);
-        } else {
-            nextUrl = URL.createRedirectToZeugnisUrl(halbjahrId, klassenId, schuelerId);
-        }
-        return nextUrl;
     }
 
     /**
