@@ -22,7 +22,7 @@ cancelUrl
             Bearbeite Zeugnisdetails für Schüler <em
                 th:text="${zeugnis?.schueler}"></em> (Klasse <span
                 th:remove="tag"
-                th:text="${zeugnis?.formular?.klasse?.calculateKlassenname(zeugnis.formular.schulhalbjahr.jahr)}"></span>
+                th:text="${zeugnis?.formular?.klassenname}"></span>
             im Hj: <span th:remove="tag" th:text="${zeugnis.formular.schulhalbjahr}"></span>)
         </h4>
         <form class="well form-horizontal" method="post" th:object="${zeugnis}">

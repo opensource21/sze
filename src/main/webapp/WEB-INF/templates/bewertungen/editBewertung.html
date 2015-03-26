@@ -22,7 +22,7 @@ nextId
     <div layout:fragment="content">
         <h4>Bearbeite Bewertung im Fach <em th:text="${bewertung?.schulfach}"></em>
         für  <em th:text="${bewertung?.zeugnis?.schueler}"></em>
-        (Klasse <span th:remove="tag" th:text="${bewertung?.zeugnis?.formular?.klasse?.calculateKlassenname(schulhalbjahr.jahr)}"></span>
+        (Klasse <span th:remove="tag" th:text="${bewertung?.zeugnis?.formular?.klassenname}"></span>
          im Hj: <span th:remove="tag" th:text="${schulhalbjahr}"></span>)</h4>
         <form class="well form-horizontal" method="post" th:object="${bewertung}">
             <div th:replace="/fragments::error"></div>
