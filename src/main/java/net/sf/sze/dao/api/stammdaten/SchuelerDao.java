@@ -26,8 +26,8 @@ public interface SchuelerDao extends PagingAndSortingRepository<Schueler,
 
     /** From und Where-Bedinung für Schüler mit Zeugnissen. */
     String SCHUELER_WITH_ZEUGNIS = "from Zeugnis z join z.schueler s "
-            + "where z.klasse.id=:klassenId and z.schulhalbjahr.id=:halbjahrId "
-            + "and z.schulhalbjahr.selectable = true "
+            + "where z.formular.klasse.id=:klassenId and z.formular.schulhalbjahr.id=:halbjahrId "
+            + "and z.formular.schulhalbjahr.selectable = true "
             + "order by s.name, s.vorname";
 
     /**
