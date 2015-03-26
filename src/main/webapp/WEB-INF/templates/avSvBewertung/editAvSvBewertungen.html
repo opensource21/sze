@@ -21,15 +21,14 @@ cancelUrl
             Bearbeite Arbeits- und Sozialverhalten für Schüler <em
                 th:text="${avSvForm?.schueler}"></em> (Klasse <span
                 th:remove="tag"
-                th:text="${avSvForm?.klasse?.calculateKlassenname(avSvForm.schulhalbjahr.jahr)}"></span>
-            im Hj: <span th:remove="tag" th:text="${avSvForm.schulhalbjahr}"></span>)
+                th:text="${avSvForm?.formular?.klassenname}"></span>
+            im Hj: <span th:remove="tag" th:text="${avSvForm?.formular?.schulhalbjahr}"></span>)
         </h4>
         <form class="well form-horizontal" method="post"
             th:object="${avSvForm}">
             <div th:replace="/fragments::error"></div>
-            <input type="hidden" th:value="*{klasse.id}" name="klasse"/>
+            <input type="hidden" th:value="*{formular.id}" name="formular"/>
             <input type="hidden" th:value="*{schueler.id}" name="schueler"/>
-            <input type="hidden" th:value="*{schulhalbjahr.id}" name="schulhalbjahr"/>
             <span th:remove="tag" th:each="avSvBewertung, stat: *{avSvBewertungen}">
                 <input type="hidden" th:value="*{avSvBewertungen[__${stat.index}__].id}" th:name="${'avSvBewertungen['+__${stat.index}__+'].id'}"/>
                 <input type="hidden" th:value="*{avSvBewertungen[__${stat.index}__].version}" th:name="${'avSvBewertungen['+__${stat.index}__+'].version'}"/>
