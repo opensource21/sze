@@ -215,6 +215,14 @@ public class ZeugnisFormular extends RevisionModel implements Serializable,
     }
 
     /**
+     * Liefert die String-Darstellung der Klasse zum dem Suffix und Schuljahr.
+     * @return die String-Darstellung der Klasse.
+     */
+    public String getKlassenname() {
+        return klasse.calculateKlassenname(schulhalbjahr.getJahr(), klassenSuffix);
+    }
+
+    /**
      * Sets the nachteils ausgleichs datum.
      *
      * @param nachteilsAusgleichsDatum the new nachteils ausgleichs datum
@@ -371,8 +379,7 @@ public class ZeugnisFormular extends RevisionModel implements Serializable,
 
         final String klassenStr;
         if (klasse != null && schulhalbjahr != null) {
-            klassenStr = klasse
-                    .calculateKlassenname(schulhalbjahr.getJahr(), klassenSuffix);
+            klassenStr = getKlassenname();
         } else {
             klassenStr = "unbekannt " + klasse + " in " + schulhalbjahr;
         }

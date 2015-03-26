@@ -268,8 +268,7 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
      * @return der relative Pfadname fürs Schulhalbjahr und Klasse.
      */
     private String createRelativePath(ZeugnisFormular formular) {
-        final String klassenname = formular.getKlasse().calculateKlassenname(
-                formular.getSchulhalbjahr().getJahr(), formular.getKlassenSuffix());
+        final String klassenname = formular.getKlassenname();
         return formular.getSchulhalbjahr().createRelativePathName() + "/Kl-" + klassenname;
     }
 
