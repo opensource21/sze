@@ -39,6 +39,7 @@ tags - a list of selectable tag
             </select>
             <input type="text" bs:field="klasse"
                 disabled="disabled" th:if="${disabled or zeugnisFormular?.zeugnis?.size() > 0}"/>
+            <input type="text" bs:field="klassenSuffix" th:disabled="${disabled}" />
             <input type="text" bs:field="templateFileName"
                 th:disabled="${disabled}" />
             <input type="text" class="datepicker" bs:field="ausgabeDatum"
@@ -57,7 +58,9 @@ tags - a list of selectable tag
                 <li th:each="item : *{schulfachDetailInfos}"  th:text="${item}"></li>
             </ul>
             <ul bs:field="zeugnis">
-                <li th:each="item : *{zeugnis}"  th:text="${item}"></li>
+                <li th:each="item : *{zeugnis}" ><a
+                    th:with="#{par.session.halbjahr_id}=${item.schulhalbjahr.id}, #{par.session.klassen_id}=${item.klasse.id}"
+                    th:href="@{|__#{nurl.zeugnispath.show}__|(#{par.session.schueler_id}=${item.schueler.id})}" th:text="${item}"></a></li>
             </ul>
             <button type="submit" th:formaction="@{${saveUrl}}" class="btn"
                 th:unless="${disabled || saveUrl == null}">
