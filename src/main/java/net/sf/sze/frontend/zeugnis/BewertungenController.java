@@ -389,7 +389,7 @@ public class BewertungenController implements ModelAttributes {
      * @param bewertungsId die Id der Bewertung.
      * @return die logische View
      */
-    @RequestMapping(value = URL.BewertungenPath.CANCEL, method = RequestMethod.POST)
+    @RequestMapping(value = URL.BewertungenPath.CANCEL, method = RequestMethod.GET)
     public String cancelEditBewertung(@PathVariable(URL.Session
             .P_HALBJAHR_ID) Long halbjahrId,
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,

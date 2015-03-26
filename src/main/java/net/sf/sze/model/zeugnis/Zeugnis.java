@@ -46,8 +46,8 @@ import org.apache.commons.lang.builder.CompareToBuilder;
  */
 @Entity
 @Table(name = "zeugnis",
-        uniqueConstraints = @UniqueConstraint(columnNames = {"schulhalbjahr_id",
-        "schueler_id"}, name = "UK_ZEUGNIS_HALBJAHR_SCHUELER"))
+        uniqueConstraints = @UniqueConstraint(columnNames = {"formular_id",
+        "schueler_id"}, name = "UK_ZEUGNIS_FORMULAR_SCHUELER"))
 public class Zeugnis extends RevisionModel implements Serializable,
         Comparable<Zeugnis> {
 
@@ -143,23 +143,11 @@ public class Zeugnis extends RevisionModel implements Serializable,
     @OneToMany(mappedBy = "zeugnis")
     private List<SchulamtsBemerkung> schulamtsBemerkungen;
 
-    // bi-directional many-to-one association to Klasse
-    /** The klasse. */
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "klasse_id", nullable = false)
-    private Klasse klasse;
-
     // bi-directional many-to-one association to Schueler
     /** The schueler. */
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "schueler_id", nullable = false)
     private Schueler schueler;
-
-    // bi-directional many-to-one association to Schulhalbjahr
-    /** The schulhalbjahr. */
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "schulhalbjahr_id", nullable = false)
-    private Schulhalbjahr schulhalbjahr;
 
     // bi-directional many-to-one association to SolbewertungsText
     /** The so l bewertungs text. */
@@ -253,7 +241,7 @@ public class Zeugnis extends RevisionModel implements Serializable,
         return VariableUtility.createPrintText(
                 StringUtils.isNotEmpty(buBewertungsText) ? buBewertungsText
                 : VariableUtility.PLATZHALTER_LEER, schueler, formular
-                .findNachteilsAusgleichsDatum(), false, schulhalbjahr.getSchuljahr());
+                .findNachteilsAusgleichsDatum(), false, getSchulhalbjahr().getSchuljahr());
     }
 
     /**
@@ -534,17 +522,9 @@ public class Zeugnis extends RevisionModel implements Serializable,
      * @return the klasse
      */
     public Klasse getKlasse() {
-        return this.klasse;
+        return formular.getKlasse();
     }
 
-    /**
-     * Sets the klasse.
-     *
-     * @param klasse the new klasse
-     */
-    public void setKlasse(final Klasse klasse) {
-        this.klasse = klasse;
-    }
 
     /**
      * Gets the schueler.
@@ -570,17 +550,9 @@ public class Zeugnis extends RevisionModel implements Serializable,
      * @return the schulhalbjahr
      */
     public Schulhalbjahr getSchulhalbjahr() {
-        return this.schulhalbjahr;
+        return formular.getSchulhalbjahr();
     }
 
-    /**
-     * Sets the schulhalbjahr.
-     *
-     * @param schulhalbjahr the new schulhalbjahr
-     */
-    public void setSchulhalbjahr(final Schulhalbjahr schulhalbjahr) {
-        this.schulhalbjahr = schulhalbjahr;
-    }
 
     /**
      * Gets the so l bewertungs text.
@@ -704,7 +676,7 @@ public class Zeugnis extends RevisionModel implements Serializable,
 
     @Override
     public String toString() {
-        return schulhalbjahr + " " + klasse.calculateKlassenname(schulhalbjahr
+        return getSchulhalbjahr() + " " + getKlasse().calculateKlassenname(getSchulhalbjahr()
                 .getJahr(), formular.getKlassenSuffix()) + " " + schueler;
     }
 
@@ -716,11 +688,11 @@ public class Zeugnis extends RevisionModel implements Serializable,
         // Schuler, ergänzen
         schueler.toPrintMap(printMap);
         // Klasse ergänzen
-        printMap.put("klasse", klasse.calculateKlassenname(schulhalbjahr
+        printMap.put("klasse", getKlasse().calculateKlassenname(getSchulhalbjahr()
                 .getJahr(), formular.getKlassenSuffix()));
 
         // schulhalbjahr
-        schulhalbjahr.toPrintMap(printMap);
+        getSchulhalbjahr().toPrintMap(printMap);
 
         // formular
         final SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy",
@@ -865,15 +837,15 @@ public class Zeugnis extends RevisionModel implements Serializable,
      */
     private String buildVersetzungsBemerkung() {
         String versetzungsBemerkung = "";
-        if (schulhalbjahr.getHalbjahr() == Halbjahr.Beide_Halbjahre) {
+        if (getSchulhalbjahr().getHalbjahr() == Halbjahr.Beide_Halbjahre) {
             if (klassenZielWurdeNichtErreicht.booleanValue()) {
                 versetzungsBemerkung = "Das Klassenziel wurde nicht erreicht. ";
             }
 
             if (ruecktAuf.booleanValue() && zeugnisArt
                     .getPrintVersetzungsbemerkung().booleanValue()) {
-                int nextKlassenstufe = klasse.calculateKlassenstufe(
-                        schulhalbjahr.getJahr()) + 1;
+                int nextKlassenstufe = getKlasse().calculateKlassenstufe(
+                        getSchulhalbjahr().getJahr()) + 1;
                 versetzungsBemerkung = versetzungsBemerkung + schueler
                         .getVorname() + " r\u00fcckt auf in Klasse "
                         + nextKlassenstufe + ". ";
@@ -968,9 +940,9 @@ public class Zeugnis extends RevisionModel implements Serializable,
      * Halbjahr eindeutig zuweist
      */
     public int calculateKlasssenstufenHalbjahresIndex() {
-        final int klassenstufe = klasse.calculateKlassenstufe(schulhalbjahr
+        final int klassenstufe = getKlasse().calculateKlassenstufe(getSchulhalbjahr()
                 .getJahr());
-        final int halbjahresId = schulhalbjahr.getHalbjahr().getId();
+        final int halbjahresId = getSchulhalbjahr().getHalbjahr().getId();
         return klassenstufe * 10 + halbjahresId;
     }
 
