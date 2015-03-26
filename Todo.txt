@@ -3,37 +3,14 @@
 
 #PRIO 2
 
-- I-0002 Der Suffix der Klasse sollte beim Zeugnis mit gespeichert werden
-    (dies müsste beim Initialisieren aktualisiert werden). Besser aus dem Formular nehmen,
-    da muss man die Änderung auch machen bzw. klären wozu es eigentlich gebraucht wird.
-
-- #4 Umgang mit Schülern die Vorzeitig abgehen. Zeugnisse werden generell nicht gelöscht,
-  da das Risiko sehr hoch ist, dabei Schaden anzurichten. Bei der GesamtPDF-Erstellung
-  ist das ungünstig. Man könnte hier alle rausfiltern, für die gilt
-  "individuelles Ausgabedatum < heute". Dann kann man beim Zusammenstellen
-  die Dateien rausfiltern, deren Erstelldatum älter als ein Tag ist.
 
 
-- Delete-Fragment zu umbauen, dass es mit JS und ohne gut läuft.
+#PRIO 3
 
 - Beim create sollte man nicht löschen können.
 
-- Beim Initialiseren von Klasse 1-2 komplett gibt es eine Exception.
-    -> Das lag daran, dass erst initialisiert wurde und dann der Schüler
-       die Klasse gewechselt hat. Das können wir technisch noch nicht. (Gefixt!)
-    -> Man muss die Möglichkeit bekommen Zeugnisse zu löschen, sofern man
-       bestimmte Rechte hat.
-
-- Bessere Template Unterstützung. Siehe seu/projects/schule/felderUndPlatzhalter.md
-
-- Beim Start von OO sollte man die Parameter mit -- anstatt - übergeben. Ist allerdings nur deprecated.
-
 - Sortierung bei den Tabellen sollte mit dem Datum umgehen können.
 
-
-- Title sollte gesetzt werden, siehe klasseform.html
-
-#PRIO 3
 - PDF-Erstellung mit UNO dürfte zur Zeit nicht funktionieren, zumindest weiss ich
   nicht wie man das vom Classloading her hinbekommt.
 
@@ -81,13 +58,8 @@
 - Wenn man eine Unterlist bearbeitet fehlt auch die Validierung. -> Geht mit neustem Fuwesta SpringValidateNestedProperty!
 - Man könnte alle enums auf Konstanten umstellen.
 
-#Fachliche Klärung:
-- Sortierung nach Schulfachname
-- Soll die Klasse immer zum aktuellen Datum oder zum Schuljahr umgesetzt werden.
-
 
 #Forschung:
-
 
 - http://jackcess.sourceforge.net/
 
