@@ -2,8 +2,7 @@
 <!-- PARAMS:
 schulfaecher - Liste der relevanten Schulfächer
 bewertungen - alle Bewertungen des Schulfachs,
-klasse _ die Klasse
-schulhalbjahr - das Schulhalbjahr.
+zeugnisFormular _ das Zeugnisformular
 schulfachId - die Id des Schulfachs.
 
  -->
@@ -16,7 +15,7 @@ schulfachId - die Id des Schulfachs.
     src="../../../resources/js/jquery-1.8.2.js" th:remove="all"></script>
 <script type="text/javascript"
     src="../../../resources/js/thymelaefbs.js?1" th:remove="all"></script>
-    <title th:text="Bewertungen Klasse ${klasse?.calculateKlassenname(schulhalbjahr.jahr)}"></title>
+    <title th:text="Bewertungen Klasse ${zeugnisFormular?.klassenname}"></title>
 </head>
 <body>
     <div layout:fragment="content">
@@ -24,7 +23,6 @@ schulfachId - die Id des Schulfachs.
             <form class="form-horizontal" th:id="${formId}" method="get"
                 th:object="${zeugnis}"
                 th:action="@{|__#{nurl.bewertungenpath.list}__|}">
-                <!-- (schulhalbjahr.id, klasse.id, schulfachId) und die URL muss auch her.  -->
                 <select class="cbauto" th:name="#{par.session.schulfach_id}">
                     <option th:each="item : ${schulfaecher}" th:value="${item.id}"
                         th:text="${item.name}" th:selected="${item.id == schulfach_id}"></option>
@@ -32,7 +30,7 @@ schulfachId - die Id des Schulfachs.
                 <button type="submit" class="btn cbbutton">Aktualisieren</button>
             </form>
         </div>
-        <h4>Bewertungen für Klasse <b th:text="${klasse?.calculateKlassenname(schulhalbjahr.jahr)}">${klasse?.calculateKlassenname(schulhalbjahr.jahr)}</b> im Schulhalbjahr <b th:text="${schulhalbjahr}">${schulhalbjahr}</b></h4>
+        <h4>Bewertungen für Klasse <b th:text="${zeugnisFormular?.klassenname}"></b> im Schulhalbjahr <b th:text="${zeugnisFormular?.schulhalbjahr}"></b></h4>
         <div class="row-fluid">
             <span th:text="#{bewertungen.no_data}" th:remove="tag" th:if="${#lists.isEmpty(bewertungen)}"></span>
             <table class="table table-striped table-bordered table-hover table-condensed" th:unless="${#lists.isEmpty(bewertungen)}">

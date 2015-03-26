@@ -11,16 +11,16 @@ import javax.annotation.Resource;
 import net.sf.sze.frontend.base.ModelAttributes;
 import net.sf.sze.frontend.base.URL;
 import net.sf.sze.frontend.base.URL.Common;
-import net.sf.sze.model.stammdaten.Klasse;
-import net.sf.sze.model.zeugnis.ZweiNiveauBewertung;
 import net.sf.sze.model.zeugnis.Bewertung;
 import net.sf.sze.model.zeugnis.DreiNiveauBewertung;
 import net.sf.sze.model.zeugnis.StandardBewertung;
+import net.sf.sze.model.zeugnis.ZeugnisFormular;
+import net.sf.sze.model.zeugnis.ZweiNiveauBewertung;
 import net.sf.sze.model.zeugnisconfig.Schulfach;
-import net.sf.sze.model.zeugnisconfig.Schulhalbjahr;
 import net.sf.sze.service.api.zeugnis.BewertungErfassungsService;
 import net.sf.sze.service.api.zeugnis.BewertungService;
 import net.sf.sze.service.api.zeugnis.BewertungWithNeigbors;
+import net.sf.sze.service.api.zeugnis.ZeugnisFormularService;
 import net.sf.sze.service.api.zeugnisconfig.SchulhalbjahrService;
 
 import org.apache.commons.lang.StringUtils;
@@ -80,6 +80,9 @@ public class BewertungenController implements ModelAttributes {
     @Resource
     private BewertungService bewertungService;
 
+    @Resource
+    private ZeugnisFormularService zeugnisFormularService;
+
     /**
      * Der Validator.
      */
@@ -104,10 +107,9 @@ public class BewertungenController implements ModelAttributes {
             Long schulfachId, Model model,
             RedirectAttributes redirectAttributes) {
 
-        final Klasse klasse = bewertungErfassungsService.getKlasse(klassenId.longValue());
-        final Schulhalbjahr schulhalbjahr = schulhalbjahrService.read(halbjahrId);
-
-        if (!schulhalbjahr.isSelectable()) {
+        final ZeugnisFormular formular = zeugnisFormularService.getZeugnisFormular(
+                halbjahrId.longValue(), klassenId.longValue());
+        if (!formular.getSchulhalbjahr().isSelectable()) {
             redirectAttributes.addFlashAttribute("message",
                     "Das Schulhalbjahr ist nicht mehr selektierbar.");
             return URL.redirectWithNamedParams(URL.ZeugnisPath.START,
@@ -115,7 +117,7 @@ public class BewertungenController implements ModelAttributes {
                     URL.Session.P_KLASSEN_ID, klassenId);
         }
         final List<Schulfach> schulfaecher = bewertungErfassungsService.
-                getActiveSchulfaecherOrderByName(schulhalbjahr, klasse);
+                getActiveSchulfaecherOrderByName(formular);
 
         if (CollectionUtils.isEmpty(schulfaecher)) {
             redirectAttributes.addFlashAttribute("message",
@@ -133,13 +135,12 @@ public class BewertungenController implements ModelAttributes {
         }
 
         final List<Bewertung> bewertungen = bewertungErfassungsService.
-                getSortedBewertungen(schulhalbjahr.getId().longValue(),
-                klasse.getId().longValue(), usedSchulfachId.longValue());
+                getSortedBewertungen(formular,
+                usedSchulfachId.longValue());
 
         model.addAttribute("bewertungen", bewertungen);
         model.addAttribute("schulfaecher", schulfaecher);
-        model.addAttribute("klasse", klasse);
-        model.addAttribute("schulhalbjahr", schulhalbjahr);
+        model.addAttribute("zeugnisFormular", formular);
         model.addAttribute(URL.Session.P_SCHULFACH_ID, usedSchulfachId);
         return "bewertungen/listBewertungen";
 
@@ -180,9 +181,10 @@ public class BewertungenController implements ModelAttributes {
             @PathVariable(URL.Session.P_SCHULFACH_ID) Long schulfachId,
             @PathVariable(value = URL.BewertungenPath.P_BEWERTUNGS_ID)
             Long bewertungsId, Model model) {
-
-        BewertungWithNeigbors bewertungWithNeigbors = bewertungErfassungsService.
-                getBewertungWithNeighbors(halbjahrId, klassenId, schulfachId, bewertungsId);
+        final ZeugnisFormular formular = zeugnisFormularService.getZeugnisFormular(
+                halbjahrId.longValue(), klassenId.longValue());
+        final BewertungWithNeigbors bewertungWithNeigbors = bewertungErfassungsService.
+                getBewertungWithNeighbors(formular, schulfachId, bewertungsId);
         setEditModelValues(halbjahrId, klassenId, schulfachId,
                 bewertungWithNeigbors.getBewertung(),
                 bewertungWithNeigbors.getPrevBewertungsId(),

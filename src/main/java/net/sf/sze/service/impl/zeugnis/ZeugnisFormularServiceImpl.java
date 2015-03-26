@@ -238,4 +238,12 @@ public class ZeugnisFormularServiceImpl implements ZeugnisFormularService {
             LOG.warn("Es konnte keine letztes Zeugnisformular ermittelt werden");
         }
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ZeugnisFormular getZeugnisFormular(long halbjahrId, long klassenId) {
+        return zeugnisFormularDao.findBySchulhalbjahrIdAndKlasseId(halbjahrId, klassenId);
+    }
 }
