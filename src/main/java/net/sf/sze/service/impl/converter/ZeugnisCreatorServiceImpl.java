@@ -253,8 +253,7 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
         final ZeugnisFormular formular = zeugnisFormularDao.
                 findBySchulhalbjahrJahrAndSchulhalbjahrHalbjahrAndKlasse(
                 halbjahr.getJahr(), halbjahr.getHalbjahr(), klasse);
-        final String relativePath = createRelativePath(halbjahr, klasse,
-                formular.getKlassenSuffix());
+        final String relativePath = createRelativePath(formular);
         final File screenDir = new File(pdfScreenOutputBaseDir, relativePath);
         final File printDir = new File(pdfPrintOutputBaseDir, relativePath);
         pdfConverter.concatAll(printDir, "A3_");
@@ -268,10 +267,10 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
      * @param klasse die Klasse.
      * @return der relative Pfadname fürs Schulhalbjahr und Klasse.
      */
-    private String createRelativePath(Schulhalbjahr halbjahr, Klasse klasse, String suffix) {
-        final String klassenname = klasse.calculateKlassenname(halbjahr
-                .getJahr(), suffix);
-        return halbjahr.createRelativePathName() + "/Kl-" + klassenname;
+    private String createRelativePath(ZeugnisFormular formular) {
+        final String klassenname = formular.getKlasse().calculateKlassenname(
+                formular.getSchulhalbjahr().getJahr(), formular.getKlassenSuffix());
+        return formular.getSchulhalbjahr().createRelativePathName() + "/Kl-" + klassenname;
     }
 
     /**
@@ -280,12 +279,12 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
     @Override
     public File createZeugnis(Zeugnis zeugnis) {
         File result;
-        final String relativePath = createRelativePath(zeugnis
-                .getSchulhalbjahr(), zeugnis.getKlasse(), zeugnis.getFormular().getKlassenSuffix());
+        final ZeugnisFormular formular = zeugnis.getFormular();
+        final String relativePath = createRelativePath(formular);
         final Schueler schueler = zeugnis.getSchueler();
         final String baseFileName = (schueler.getName() + "_" + schueler
                 .getVorname()).replaceAll(" ", "");
-        final Schulhalbjahr halbjahr = zeugnis.getSchulhalbjahr();
+        final Schulhalbjahr halbjahr = formular.getSchulhalbjahr();
         final File odtOutputDir = new File(odtOutputBaseDir, relativePath);
         final File zeugnisOdtDatei = new File(odtOutputDir, baseFileName
                 + ".odt");
@@ -330,12 +329,12 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
             }
         }
 
-        if (Halbjahr.Erstes_Halbjahr.equals(zeugnis.getSchulhalbjahr()
+        if (Halbjahr.Erstes_Halbjahr.equals(zeugnis.getFormular().getSchulhalbjahr()
                 .getHalbjahr())) {
             fillWPTabelle(zeugnis, zeugnisDaten, 1, noteAlsTextDarstellen);
         } else {
             final Schulhalbjahr erstesSchulhalbjahr = schulhalbjahrDao
-                    .findByJahrAndHalbjahr(zeugnis.getSchulhalbjahr()
+                    .findByJahrAndHalbjahr(zeugnis.getFormular().getSchulhalbjahr()
                     .getJahr(), Halbjahr.Erstes_Halbjahr);
             final Zeugnis zeugnisErstesHj = zeugnisDao
                     .findBySchuelerAndFormularSchulhalbjahr(zeugnis.getSchueler(),
@@ -442,9 +441,9 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
             }
 
             final int klassenstufe = oldZeugnis.getKlasse()
-                    .calculateKlassenstufe(oldZeugnis.getSchulhalbjahr()
+                    .calculateKlassenstufe(oldZeugnis.getFormular().getSchulhalbjahr()
                     .getJahr());
-            final int halbjahresId = oldZeugnis.getSchulhalbjahr().getHalbjahr()
+            final int halbjahresId = oldZeugnis.getFormular().getSchulhalbjahr().getHalbjahr()
                     .getId();
             final long oldKlassenstufenIndex = oldZeugnis
                     .calculateKlasssenstufenHalbjahresIndex();

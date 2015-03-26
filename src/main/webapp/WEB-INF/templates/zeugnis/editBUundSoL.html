@@ -22,14 +22,14 @@ cancelUrl
             Bearbeite BU-Text und SoL für Schüler <em
                 th:text="${zeugnis?.schueler}"></em> (Klasse <span
                 th:remove="tag"
-                th:text="${zeugnis?.klasse?.calculateKlassenname(zeugnis.schulhalbjahr.jahr)}"></span>
-            im Hj: <span th:remove="tag" th:text="${zeugnis.schulhalbjahr}"></span>)
+                th:text="${zeugnis?.klasse?.calculateKlassenname(zeugnis.formular.schulhalbjahr.jahr)}"></span>
+            im Hj: <span th:remove="tag" th:text="${zeugnis.formular.schulhalbjahr}"></span>)
         </h4>
         <form class="well form-horizontal" method="post" th:object="${zeugnis}">
             <div th:replace="/fragments::error"></div>
             <input id="klasse" type="hidden" th:value="*{klasse.id}" name="klasse" />
             <input id="schueler" type="hidden" th:value="*{schueler.id}" name="schueler" />
-            <input id="schulhalbjahr" type="hidden" th:value="*{schulhalbjahr.id}" name="schulhalbjahr" />
+            <input id="schulhalbjahr" type="hidden" th:value="*{formular.schulhalbjahr.id}" name="schulhalbjahr" />
 
             <textarea rows="5" class="span10" bs:field="#{db.Zeugnis.buBewertungsText}"/>
 

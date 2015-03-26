@@ -85,8 +85,8 @@ public class AvSvBewertungController {
         final SchuelerList schuelerList = schuelerService.getSchuelerWithZeugnis(
                 halbjahrId.longValue(), klassenId.longValue(), schuelerId);
         final AvSvForm avSvForm = new AvSvForm(zeugnis.getAvSvBewertungen(),
-                zeugnis.getSchueler(), zeugnis.getKlasse(),
-                zeugnis.getSchulhalbjahr());
+                zeugnis.getSchueler(), zeugnis.getFormular().getKlasse(),
+                zeugnis.getFormular().getSchulhalbjahr());
         Collections.sort(avSvForm.getAvSvBewertungen());
         fillModel(model, avSvForm, halbjahrId, klassenId, schuelerId,
                 schuelerList.getPrevSchuelerId(), schuelerList.getNextSchuelerId());

@@ -549,7 +549,7 @@ public class Zeugnis extends RevisionModel implements Serializable,
      *
      * @return the schulhalbjahr
      */
-    public Schulhalbjahr getSchulhalbjahr() {
+    private Schulhalbjahr getSchulhalbjahr() {
         return formular.getSchulhalbjahr();
     }
 

@@ -22,8 +22,8 @@ cancelUrl
             Bearbeite Zeugnisdetails für Schüler <em
                 th:text="${zeugnis?.schueler}"></em> (Klasse <span
                 th:remove="tag"
-                th:text="${zeugnis?.klasse?.calculateKlassenname(zeugnis.schulhalbjahr.jahr)}"></span>
-            im Hj: <span th:remove="tag" th:text="${zeugnis.schulhalbjahr}"></span>)
+                th:text="${zeugnis?.klasse?.calculateKlassenname(zeugnis.formular.schulhalbjahr.jahr)}"></span>
+            im Hj: <span th:remove="tag" th:text="${zeugnis.formular.schulhalbjahr}"></span>)
         </h4>
         <form class="well form-horizontal" method="post" th:object="${zeugnis}">
             <div th:replace="/fragments::error"></div>
@@ -35,7 +35,7 @@ cancelUrl
             <input id="schueler" type="hidden" th:value="*{schueler.id}" name="schueler" />
             <input id="soLBewertungsText" type="hidden" th:value="*{soLBewertungsText?.id}" name="soLBewertungsText" />
 
-            <input id="schulhalbjahr" type="hidden" th:value="*{schulhalbjahr.id}" name="schulhalbjahr" />
+            <input id="schulhalbjahr" type="hidden" th:value="*{formular.schulhalbjahr.id}" name="schulhalbjahr" />
 
             <input type="text" class="span1" bs:field="#{db.Zeugnis.anzahlFehltageGesamt}"/>
             <input type="text" class="span1" bs:field="#{db.Zeugnis.anzahlFehltageUnentschuldigt}"/>
@@ -43,7 +43,7 @@ cancelUrl
 
             <div class="control-group">
                 <label class="control-label">Versetzung:</label>
-                <div class="controls controls-row" th:unless="${zeugnis.schulhalbjahr?.isErstesHalbjahr()}">
+                <div class="controls controls-row" th:unless="${zeugnis.formular.schulhalbjahr?.isErstesHalbjahr()}">
                     <label class="checkbox span2">
                         <input type="checkbox" th:field="*{ruecktAuf}" id="ruecktAuf"/>
                         <span th:text="#{net.sf.sze.model.zeugnis.Zeugnis.ruecktAuf}" th:remove="tag"></span>
@@ -53,7 +53,7 @@ cancelUrl
                         <span th:text="#{net.sf.sze.model.zeugnis.Zeugnis.klassenZielWurdeNichtErreicht}" th:remove="tag"></span>
                     </label>
                 </div>
-                <div class="controls controls-row" th:if="${zeugnis.schulhalbjahr?.isErstesHalbjahr()}">
+                <div class="controls controls-row" th:if="${zeugnis.formular.schulhalbjahr?.isErstesHalbjahr()}">
                     <label class="checkbox span2">
                         <input type="checkbox" th:field="*{klassenZielGefaehrdet}" id="klassenZielGefaehrdet"/>
                         <span th:text="#{net.sf.sze.model.zeugnis.Zeugnis.klassenZielGefaehrdet}" th:remove="tag"></span>
