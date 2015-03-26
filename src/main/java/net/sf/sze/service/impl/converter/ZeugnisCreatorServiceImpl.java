@@ -207,7 +207,7 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
         final List<Schulhalbjahr> halbjahre = schulhalbjahrDao
                 .findAllBySelectable(true);
         for (final Schulhalbjahr halbjahr : halbjahre) {
-            final List<Zeugnis> zeugnisse = zeugnisDao.findAllBySchulhalbjahr(
+            final List<Zeugnis> zeugnisse = zeugnisDao.findAllByFormularSchulhalbjahr(
                     halbjahr);
             for (final Zeugnis zeugnis : zeugnisse) {
                 try {
@@ -235,7 +235,7 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
     @Override
     public File createZeugnisse(Schulhalbjahr halbjahr, Klasse klasse) {
         final List<Zeugnis> zeugnisse = zeugnisDao
-                .findAllBySchulhalbjahrAndKlasse(halbjahr, klasse);
+                .findAllByFormularSchulhalbjahrAndFormularKlasse(halbjahr, klasse);
         for (final Zeugnis zeugnis : zeugnisse) {
             createZeugnis(zeugnis);
         }
@@ -338,7 +338,7 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
                     .findByJahrAndHalbjahr(zeugnis.getSchulhalbjahr()
                     .getJahr(), Halbjahr.Erstes_Halbjahr);
             final Zeugnis zeugnisErstesHj = zeugnisDao
-                    .findBySchuelerAndSchulhalbjahr(zeugnis.getSchueler(),
+                    .findBySchuelerAndFormularSchulhalbjahr(zeugnis.getSchueler(),
                     erstesSchulhalbjahr);
             if (zeugnisErstesHj != null) {
                 fillWPTabelle(zeugnisErstesHj, zeugnisDaten, 1,
@@ -430,7 +430,7 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
         }
 
         final List<Zeugnis> oldZeugnisse = zeugnisDao
-                .findAllBySchuelerOrderBySchulhalbjahrAsc(schueler);
+                .findAllBySchuelerOrderByFormularSchulhalbjahrAsc(schueler);
         // Historische Daten für Wahlpflicht
         for (final Zeugnis oldZeugnis : oldZeugnisse) {
             final Map<String, Object> bewertungMap = new HashMap<>();

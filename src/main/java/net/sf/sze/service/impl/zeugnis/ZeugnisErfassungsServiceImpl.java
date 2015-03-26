@@ -138,7 +138,7 @@ public class ZeugnisErfassungsServiceImpl implements ZeugnisErfassungsService {
      */
     @Override
     public Zeugnis getZeugnis(Long halbjahrId, Long schuelerId) {
-        return zeugnisDao.findBySchulhalbjahrIdAndSchuelerId(halbjahrId,
+        return zeugnisDao.findByFormularSchulhalbjahrIdAndSchuelerId(halbjahrId,
                 schuelerId);
     }
 

@@ -184,7 +184,7 @@ public class ZeugnisInitialisierungServiceImpl implements ZeugnisInitialierungsS
         final Schulhalbjahr halbjahr = formular.getSchulhalbjahr();
         final Klasse klasse = schueler.getKlasse();
         LOG.info("Schulhalbjahr: {}, Klasse {}, Schueler{}", halbjahr, klasse, schueler);
-        Zeugnis zeugnis = zeugnisDao.findBySchulhalbjahrIdAndSchuelerId(
+        Zeugnis zeugnis = zeugnisDao.findByFormularSchulhalbjahrIdAndSchuelerId(
                 halbjahr.getId(), schueler.getId());
 
         final int klassenstufeAsInt = klasse.calculateKlassenstufe(halbjahr.getJahr());

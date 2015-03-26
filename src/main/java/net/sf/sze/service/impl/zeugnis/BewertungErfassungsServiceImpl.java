@@ -79,7 +79,7 @@ public class BewertungErfassungsServiceImpl implements
             long schulfachId) {
         LOG.debug("Suche Bewertungn für {}, {} und {}", halbjahrId, klassenId, schulfachId);
         final List<Zeugnis>  zeugnisse = zeugnisDao.
-                findAllByKlasseIdAndSchulhalbjahrIdAndSchulhalbjahrSelectableIsTrueOrderBySchuelerNameAscSchuelerVornameAsc(
+                findAllByFormularKlasseIdAndFormularSchulhalbjahrIdAndFormularSchulhalbjahrSelectableIsTrueOrderBySchuelerNameAscSchuelerVornameAsc(
                 klassenId, halbjahrId);
         //PERFORMANCE: 2 SQLs und eine handisches Suchen ist sicherlich nicht die schnellste Lösung.
         //Der Ansatz mit List<Bewertung>
