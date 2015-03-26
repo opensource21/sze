@@ -44,6 +44,10 @@ nextId
                             th:text="${item}"></option>
 
             </select>
+            <input type="text" bs:field="#{db.Bewertung.sonderNote}" bs:label="#{net.sf.sze.model.zeugnis.Bewertung.sonderNote}"/>
+            <input type="checkbox" bs:field="#{db.Bewertung.leistungNurSchwachAusreichend}" bs:label="#{net.sf.sze.model.zeugnis.Bewertung.leistungNurSchwachAusreichend}"/>
+            <input type="checkbox" bs:field="#{db.Bewertung.relevant}" bs:label="#{net.sf.sze.model.zeugnis.Bewertung.relevant}"/>
+
             <th:block th:replace="/fragments::prevsavenextButton"></th:block>
         </form>
     </div>
