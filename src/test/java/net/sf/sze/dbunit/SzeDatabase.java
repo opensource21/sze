@@ -92,8 +92,7 @@ public class SzeDatabase implements TestRule {
                 SchulhalbjahrRowBuilder.C_JAHR,
                 SchulhalbjahrRowBuilder.C_HALBJAHR });
         tableToUniqueKey.put(ZeugnisRowBuilder.TABLE_NAME, new String[] {
-                ZeugnisRowBuilder.C_FORMULAR_ID, ZeugnisRowBuilder.C_KLASSE_ID,
-                ZeugnisRowBuilder.C_SCHUELER_ID });
+                ZeugnisRowBuilder.C_FORMULAR_ID, ZeugnisRowBuilder.C_SCHUELER_ID });
         tableToUniqueKey.put(ZeugnisFormularRowBuilder.TABLE_NAME,
                 new String[] { ZeugnisFormularRowBuilder.C_SCHULHALBJAHR_ID,
                         ZeugnisFormularRowBuilder.C_KLASSE_ID,
