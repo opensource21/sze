@@ -187,8 +187,9 @@ public class ZeugnisFormularServiceImpl implements ZeugnisFormularService {
         final ZeugnisFormular formular = new ZeugnisFormular();
         formular.setKlasse(klasse);
         formular.setSchulhalbjahr(shj);
+        formular.setKlassenSuffix(klasse.getSuffix());
         formular.setBeschreibung(shj.createRelativePathName() + "/Kl-"
-                + klasse.calculateKlassenname(schuljahr));
+                + klasse.calculateKlassenname(schuljahr, formular.getKlassenSuffix()));
         formular.setTemplateFileName("UNKNOWN");
         ZeugnisFormular lastZeugnisFormular = null;
         if (Halbjahr.Erstes_Halbjahr.equals(hj)) {

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog logicalFilePath="/liquibase/3.0/06_upgrade3.1.xml"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    <changeSet author="niels" id="20150326-1048">
+        <addColumn tableName="ZEUGNIS_FORMULAR">
+            <column name="KLASSEN_SUFFIX" type="VARCHAR(1)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="niels" id="20150326-1100">
+        <comment>Die alten Suffixe kopieren.</comment>
+        <sql>update ZEUGNIS_FORMULAR set KLASSEN_SUFFIX = (select SUFFIX from KLASSE where KLASSE.ID = ZEUGNIS_FORMULAR.KLASSE_ID)</sql>
+    </changeSet>
+    <changeSet author="niels" id="20150326-1110">
+        <addNotNullConstraint
+            columnDataType="VARCHAR(1)"
+            columnName="KLASSEN_SUFFIX"
+            tableName="ZEUGNIS_FORMULAR"/>
+    </changeSet>
+</databaseChangeLog>

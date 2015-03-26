@@ -94,6 +94,12 @@ public class ZeugnisFormular extends RevisionModel implements Serializable,
     @JoinColumn(name = "klasse_id", nullable = false)
     private Klasse klasse;
 
+    /** Der Suffix der Klasse wird initial einmal gesetzt und ist damit
+     * für die Zukunft unveränderlich.
+     */
+    @Column(nullable = false, length = 1)
+    private String klassenSuffix;
+
     // bi-directional many-to-one association to Schulhalbjahr
 
     /** The schulhalbjahr. */
@@ -328,6 +334,20 @@ public class ZeugnisFormular extends RevisionModel implements Serializable,
     }
 
     /**
+     * @return the klassenSuffix
+     */
+    public String getKlassenSuffix() {
+        return klassenSuffix;
+    }
+
+    /**
+     * @param klassenSuffix the klassenSuffix to set
+     */
+    public void setKlassenSuffix(String klassenSuffix) {
+        this.klassenSuffix = klassenSuffix;
+    }
+
+    /**
      * Gets the schulhalbjahr.
      *
      * @return the schulhalbjahr
@@ -352,7 +372,7 @@ public class ZeugnisFormular extends RevisionModel implements Serializable,
         final String klassenStr;
         if (klasse != null && schulhalbjahr != null) {
             klassenStr = klasse
-                    .calculateKlassenname(schulhalbjahr.getJahr());
+                    .calculateKlassenname(schulhalbjahr.getJahr(), klassenSuffix);
         } else {
             klassenStr = "unbekannt " + klasse + " in " + schulhalbjahr;
         }
@@ -364,6 +384,7 @@ public class ZeugnisFormular extends RevisionModel implements Serializable,
         final CompareToBuilder compareBuilder = new CompareToBuilder();
         compareBuilder.append(this.schulhalbjahr, other.schulhalbjahr);
         compareBuilder.append(this.klasse, other.klasse);
+        compareBuilder.append(this.klassenSuffix, other.klassenSuffix);
         compareBuilder.append(this.beschreibung, other.beschreibung);
         return compareBuilder.toComparison();
     }

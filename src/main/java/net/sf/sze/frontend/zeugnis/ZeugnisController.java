@@ -755,7 +755,7 @@ public class ZeugnisController implements ModelAttributes {
         final File zeugnisDatei = zeugnisCreatorService.createZeugnisse(halbjahr, klasse);
         if (zeugnisDatei.exists() && zeugnisDatei.canRead()) {
             return new FileContentView(zeugnisDatei, "Klasse_" + klasse.
-                    calculateKlassenname(halbjahr.getJahr()) + ".pdf");
+                    calculateKlassenname(halbjahr.getJahr(), klasse.getSuffix()) + ".pdf");
         } else {
             redirectAttributes.addFlashAttribute(MESSAGE, "Zeugnis erstellt, aber nicht lesbar.");
             LOG.warn("Kann " + zeugnisDatei.getAbsolutePath() + " nicht lesen. "

@@ -23,6 +23,7 @@ import net.sf.jooreports.templates.DocumentTemplate.ContentWrapper;
 import net.sf.jooreports.templates.DocumentTemplateException;
 import net.sf.jooreports.templates.DocumentTemplateFactory;
 import net.sf.sze.dao.api.zeugnis.ZeugnisDao;
+import net.sf.sze.dao.api.zeugnis.ZeugnisFormularDao;
 import net.sf.sze.dao.api.zeugnisconfig.SchulfachDao;
 import net.sf.sze.dao.api.zeugnisconfig.SchulhalbjahrDao;
 import net.sf.sze.model.stammdaten.Klasse;
@@ -136,6 +137,12 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
     @Resource
     private SchulfachDao schulfachDao;
 
+    /**
+     * Das {@link ZeugnisFormular}-DAO.
+     */
+    @Resource
+    private ZeugnisFormularDao zeugnisFormularDao;
+
     @Override
     public void afterPropertiesSet() {
         LOG.info("PDF-Erstellung aktiv = {}", Boolean.valueOf(createPdf));
@@ -243,7 +250,11 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
      * @return das komplette PDFs fürs Schuljahr und Klasse.
      */
     private File createCompletePdfs(Schulhalbjahr halbjahr, Klasse klasse) {
-        final String relativePath = createRelativePath(halbjahr, klasse);
+        final ZeugnisFormular formular = zeugnisFormularDao.
+                findBySchulhalbjahrJahrAndSchulhalbjahrHalbjahrAndKlasse(
+                halbjahr.getJahr(), halbjahr.getHalbjahr(), klasse);
+        final String relativePath = createRelativePath(halbjahr, klasse,
+                formular.getKlassenSuffix());
         final File screenDir = new File(pdfScreenOutputBaseDir, relativePath);
         final File printDir = new File(pdfPrintOutputBaseDir, relativePath);
         pdfConverter.concatAll(printDir, "A3_");
@@ -257,9 +268,9 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
      * @param klasse die Klasse.
      * @return der relative Pfadname fürs Schulhalbjahr und Klasse.
      */
-    private String createRelativePath(Schulhalbjahr halbjahr, Klasse klasse) {
+    private String createRelativePath(Schulhalbjahr halbjahr, Klasse klasse, String suffix) {
         final String klassenname = klasse.calculateKlassenname(halbjahr
-                .getJahr());
+                .getJahr(), suffix);
         return halbjahr.createRelativePathName() + "/Kl-" + klassenname;
     }
 
@@ -270,7 +281,7 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
     public File createZeugnis(Zeugnis zeugnis) {
         File result;
         final String relativePath = createRelativePath(zeugnis
-                .getSchulhalbjahr(), zeugnis.getKlasse());
+                .getSchulhalbjahr(), zeugnis.getKlasse(), zeugnis.getFormular().getKlassenSuffix());
         final Schueler schueler = zeugnis.getSchueler();
         final String baseFileName = (schueler.getName() + "_" + schueler
                 .getVorname()).replaceAll(" ", "");

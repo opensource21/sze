@@ -705,7 +705,7 @@ public class Zeugnis extends RevisionModel implements Serializable,
     @Override
     public String toString() {
         return schulhalbjahr + " " + klasse.calculateKlassenname(schulhalbjahr
-                .getJahr()) + " " + schueler;
+                .getJahr(), formular.getKlassenSuffix()) + " " + schueler;
     }
 
     /**
@@ -717,7 +717,7 @@ public class Zeugnis extends RevisionModel implements Serializable,
         schueler.toPrintMap(printMap);
         // Klasse ergänzen
         printMap.put("klasse", klasse.calculateKlassenname(schulhalbjahr
-                .getJahr()));
+                .getJahr(), formular.getKlassenSuffix()));
 
         // schulhalbjahr
         schulhalbjahr.toPrintMap(printMap);
