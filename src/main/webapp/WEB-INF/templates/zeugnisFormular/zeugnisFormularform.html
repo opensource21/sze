@@ -59,7 +59,7 @@ tags - a list of selectable tag
             </ul>
             <ul bs:field="zeugnis">
                 <li th:each="item : *{zeugnis}" ><a
-                    th:with="#{par.session.halbjahr_id}=${item.schulhalbjahr.id}, #{par.session.klassen_id}=${item.klasse.id}"
+                    th:with="#{par.session.halbjahr_id}=${item.formular.schulhalbjahr.id}, #{par.session.klassen_id}=${item.formular.klasse.id}"
                     th:href="@{|__#{nurl.zeugnispath.show}__|(#{par.session.schueler_id}=${item.schueler.id})}" th:text="${item}"></a></li>
             </ul>
             <button type="submit" th:formaction="@{${saveUrl}}" class="btn"
