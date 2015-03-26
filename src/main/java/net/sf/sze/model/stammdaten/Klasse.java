@@ -145,6 +145,18 @@ public class Klasse extends RevisionModel implements Serializable,
     /**
      * Berechnet den Klassennamen in Abhängigkeit vom Schuljahr.
      * @param schuljahresEnde das Ende des Schuljahrs
+     * @return den Klassennamen in Abhängigkeit vom Schuljahr.
+     */
+    //TODO diese Methode wird in viele HTML-Templates verwendet ist aber unschön, wegen des Suffix.
+    //Müsste man in das Formular packen und dann damit arbeiten.
+    public String calculateKlassenname(final int schuljahresEnde) {
+        return calculateKlassenname(schuljahresEnde, suffix);
+    }
+
+
+    /**
+     * Berechnet den Klassennamen in Abhängigkeit vom Schuljahr.
+     * @param schuljahresEnde das Ende des Schuljahrs
      * @param specialSuffix spezifischer Suffix der abweichen kann.
      * @return den Klassennamen in Abhängigkeit vom Schuljahr.
      */
