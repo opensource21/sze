@@ -25,7 +25,7 @@
             <form class="form-horizontal" th:id="${formId}" method="get"
                     th:object="${zeugnis}" th:action="@{${urlShowZeugnis}}">
                 Sch&uuml;ler der Klasse <span
-                    th:remove="tag" th:text="${zeugnis.klasse}"></span>
+                    th:remove="tag" th:text="${zeugnis.formular.klasse}"></span>
                 <select class="cbauto" name="schueler_id">
                     <option th:each="item : ${schuelerListe}" th:value="${item.id}"
                         th:text="${item}" th:selected="${item.id == zeugnis.schueler.id}"

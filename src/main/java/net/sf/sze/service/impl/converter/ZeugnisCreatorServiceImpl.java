@@ -212,7 +212,7 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
             for (final Zeugnis zeugnis : zeugnisse) {
                 try {
                     createZeugnis(zeugnis);
-                    klassen.add(zeugnis.getKlasse());
+                    klassen.add(zeugnis.getFormular().getKlasse());
                     result.addMessage(zeugnis + " wurde erstellt.");
                 } catch (final Exception e) {
                     LOG.error("Fehler beim drucken des Zeugnisses " + zeugnis);
@@ -353,7 +353,7 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
         removeNullAndAddBlank(zeugnisDaten);
         addNewlineAndBlocksatzVariables(zeugnisDaten);
         // Hinzufügen einiger Daten die man als Zahl oder Boolean braucht.
-        zeugnisDaten.put("klassenstufe", Integer.valueOf(zeugnis.getKlasse()
+        zeugnisDaten.put("klassenstufe", Integer.valueOf(zeugnis.getFormular().getKlasse()
                 .calculateKlassenstufe(halbjahr.getJahr())));
         zeugnisDaten.put("platzFuerSiegel", zeugnis.getZeugnisArt()
                 .getPlatzFuerSiegel());
@@ -440,7 +440,7 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
                 bw.toPrintMap(bewertungMap, noteAlsTextDarstellen);
             }
 
-            final int klassenstufe = oldZeugnis.getKlasse()
+            final int klassenstufe = oldZeugnis.getFormular().getKlasse()
                     .calculateKlassenstufe(oldZeugnis.getFormular().getSchulhalbjahr()
                     .getJahr());
             final int halbjahresId = oldZeugnis.getFormular().getSchulhalbjahr().getHalbjahr()

@@ -521,7 +521,7 @@ public class Zeugnis extends RevisionModel implements Serializable,
      *
      * @return the klasse
      */
-    public Klasse getKlasse() {
+    private Klasse getKlasse() {
         return formular.getKlasse();
     }
 
