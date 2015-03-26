@@ -54,4 +54,14 @@ public interface ZeugnisFormularDao
     List<ZeugnisFormular>
             findAllBySchulhalbjahrJahrAndSchulhalbjahrHalbjahrAndKlasseJahrgang(
                     int schuljahr, Halbjahr halbjahr, int klassenstufe);
+
+
+    /**
+     * Findet das Zeugnisformular zu dem {@link Schulhalbjahr} und der {@link Klasse}.
+     * @param halbjahrId die Id des Schulhalbjahrs
+     * @param klassenId die Id der Klasse.
+     * @return das Zeugnisformular.
+     */
+    ZeugnisFormular findBySchulhalbjahrIdAndKlasseId(long halbjahrId,
+            long klassenId);
 }

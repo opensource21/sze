@@ -754,8 +754,8 @@ public class ZeugnisController implements ModelAttributes {
             RedirectAttributes redirectAttributes) {
         final File zeugnisDatei = zeugnisCreatorService.createZeugnisse(halbjahr, klasse);
         if (zeugnisDatei.exists() && zeugnisDatei.canRead()) {
-            return new FileContentView(zeugnisDatei, "Klasse_" + klasse.
-                    calculateKlassenname(halbjahr.getJahr()) + ".pdf");
+            return new FileContentView(zeugnisDatei, "Klasse_"
+                    + klasse.calculateKlassenname() + ".pdf");
         } else {
             redirectAttributes.addFlashAttribute(MESSAGE, "Zeugnis erstellt, aber nicht lesbar.");
             LOG.warn("Kann " + zeugnisDatei.getAbsolutePath() + " nicht lesen. "

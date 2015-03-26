@@ -25,7 +25,7 @@ deleteUrl
             Bearbeite die Schulamtsbeschreibung für Schüler <em
                 th:text="${schulamtsBemerkung?.zeugnis?.schueler}"></em> (Klasse <span
                 th:remove="tag"
-                th:text="${schulamtsBemerkung?.zeugnis?.klasse?.calculateKlassenname(schulhalbjahr.jahr)}"></span>
+                th:text="${schulamtsBemerkung?.zeugnis?.formular?.klassenname}"></span>
             im Hj: <span th:remove="tag" th:text="${schulhalbjahr}"></span>)
         </h4>
         <form class="well form-horizontal" method="post"

@@ -12,12 +12,11 @@ import javax.annotation.Resource;
 import net.sf.oval.constraint.AssertValid;
 import net.sf.sze.frontend.base.URL;
 import net.sf.sze.frontend.base.URL.Common;
-import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.stammdaten.Schueler;
 import net.sf.sze.model.zeugnis.AvSvBewertung;
 import net.sf.sze.model.zeugnis.Zeugnis;
+import net.sf.sze.model.zeugnis.ZeugnisFormular;
 import net.sf.sze.model.zeugnisconfig.AvSvNote;
-import net.sf.sze.model.zeugnisconfig.Schulhalbjahr;
 import net.sf.sze.service.api.stammdaten.SchuelerList;
 import net.sf.sze.service.api.stammdaten.SchuelerService;
 import net.sf.sze.service.api.zeugnis.AvSvBewertungService;
@@ -85,8 +84,7 @@ public class AvSvBewertungController {
         final SchuelerList schuelerList = schuelerService.getSchuelerWithZeugnis(
                 halbjahrId.longValue(), klassenId.longValue(), schuelerId);
         final AvSvForm avSvForm = new AvSvForm(zeugnis.getAvSvBewertungen(),
-                zeugnis.getSchueler(), zeugnis.getKlasse(),
-                zeugnis.getSchulhalbjahr());
+                zeugnis.getSchueler(), zeugnis.getFormular());
         Collections.sort(avSvForm.getAvSvBewertungen());
         fillModel(model, avSvForm, halbjahrId, klassenId, schuelerId,
                 schuelerList.getPrevSchuelerId(), schuelerList.getNextSchuelerId());
@@ -160,8 +158,8 @@ public class AvSvBewertungController {
         private List<AvSvBewertung> avSvBewertungen;
 
         private Schueler schueler;
-        private Klasse klasse;
-        private Schulhalbjahr schulhalbjahr;
+        private ZeugnisFormular formular;
+
 
         /**
          * Initiates an object of type AvSvForm.
@@ -175,16 +173,14 @@ public class AvSvBewertungController {
          * Initiates an object of type AvSvForm.
          * @param avSvBewertungen die Bewertungen.
          * @param schueler der Schüler
-         * @param klasse die Klasse.
-         * @param schulhalbjahr das Schulhalbjahr.
+         * @param formular das Zeugnisformular.
          */
         public AvSvForm(List<AvSvBewertung> avSvBewertungen, Schueler schueler,
-                Klasse klasse, Schulhalbjahr schulhalbjahr) {
+                ZeugnisFormular formular) {
             super();
             this.avSvBewertungen = avSvBewertungen;
             this.schueler = schueler;
-            this.klasse = klasse;
-            this.schulhalbjahr = schulhalbjahr;
+            this.formular = formular;
         }
         /**
          * @return the avSvBewertungen
@@ -210,30 +206,23 @@ public class AvSvBewertungController {
         public void setSchueler(Schueler schueler) {
             this.schueler = schueler;
         }
+
+
         /**
-         * @return the klasse
+         * @return the formular
          */
-        public Klasse getKlasse() {
-            return klasse;
+        public ZeugnisFormular getFormular() {
+            return formular;
         }
+
+
         /**
-         * @param klasse the klasse to set
+         * @param formular the formular to set
          */
-        public void setKlasse(Klasse klasse) {
-            this.klasse = klasse;
+        public void setFormular(ZeugnisFormular formular) {
+            this.formular = formular;
         }
-        /**
-         * @return the schulhalbjahr
-         */
-        public Schulhalbjahr getSchulhalbjahr() {
-            return schulhalbjahr;
-        }
-        /**
-         * @param schulhalbjahr the schulhalbjahr to set
-         */
-        public void setSchulhalbjahr(Schulhalbjahr schulhalbjahr) {
-            this.schulhalbjahr = schulhalbjahr;
-        }
+
 
     }
 

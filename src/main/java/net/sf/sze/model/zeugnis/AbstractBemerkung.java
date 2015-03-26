@@ -137,7 +137,7 @@ public abstract class AbstractBemerkung extends RevisionModel implements Seriali
     public String createPrintText() {
         return createPrintText(zeugnis.getSchueler(),
                     zeugnis.getFormular().findNachteilsAusgleichsDatum(),
-                    zeugnis.getSchulhalbjahr().getSchuljahr());
+                    zeugnis.getFormular().getSchulhalbjahr().getSchuljahr());
     }
 
     /**

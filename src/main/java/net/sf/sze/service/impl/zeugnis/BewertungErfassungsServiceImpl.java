@@ -18,8 +18,8 @@ import net.sf.sze.dao.api.zeugnisconfig.SchulfachDao;
 import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.zeugnis.Bewertung;
 import net.sf.sze.model.zeugnis.Zeugnis;
+import net.sf.sze.model.zeugnis.ZeugnisFormular;
 import net.sf.sze.model.zeugnisconfig.Schulfach;
-import net.sf.sze.model.zeugnisconfig.Schulhalbjahr;
 import net.sf.sze.service.api.zeugnis.BewertungErfassungsService;
 import net.sf.sze.service.api.zeugnis.BewertungWithNeigbors;
 
@@ -75,12 +75,11 @@ public class BewertungErfassungsServiceImpl implements
      */
     @SuppressWarnings("boxing")
     @Override
-    public List<Bewertung> getSortedBewertungen(long halbjahrId, long klassenId,
-            long schulfachId) {
-        LOG.debug("Suche Bewertungn für {}, {} und {}", halbjahrId, klassenId, schulfachId);
+    public List<Bewertung> getSortedBewertungen(ZeugnisFormular formular, long schulfachId) {
+        LOG.debug("Suche Bewertungn für {} und {}", formular, schulfachId);
         final List<Zeugnis>  zeugnisse = zeugnisDao.
-                findAllByKlasseIdAndSchulhalbjahrIdAndSchulhalbjahrSelectableIsTrueOrderBySchuelerNameAscSchuelerVornameAsc(
-                klassenId, halbjahrId);
+                findAllByFormularKlasseIdAndFormularSchulhalbjahrIdAndFormularSchulhalbjahrSelectableIsTrueOrderBySchuelerNameAscSchuelerVornameAsc(
+                formular.getKlasse().getId(), formular.getSchulhalbjahr().getId());
         //PERFORMANCE: 2 SQLs und eine handisches Suchen ist sicherlich nicht die schnellste Lösung.
         //Der Ansatz mit List<Bewertung>
         //findAllByZeugnisKlasseIdAndZeugnisSchulhalbjahrIdAndSchulfachIdOrderByZeugnisSchuelerNameAscZeugnisSchuelerVornameAsc(
@@ -100,10 +99,10 @@ public class BewertungErfassungsServiceImpl implements
      * {@inheritDoc}
      */
     @Override
-    public BewertungWithNeigbors getBewertungWithNeighbors(Long halbjahrId,
-            Long klassenId, Long schulfachId, Long bewertungsId) {
-        final List<Bewertung> bewertungen = getSortedBewertungen(halbjahrId.longValue(),
-                klassenId.longValue(), schulfachId.longValue());
+    public BewertungWithNeigbors getBewertungWithNeighbors(ZeugnisFormular formular,
+            Long schulfachId, Long bewertungsId) {
+        final List<Bewertung> bewertungen = getSortedBewertungen(formular,
+                schulfachId.longValue());
         return new BewertungWithNeigbors(bewertungen, bewertungsId);
     }
 
@@ -115,8 +114,9 @@ public class BewertungErfassungsServiceImpl implements
      */
     @Override
     public List<Schulfach>
-            getActiveSchulfaecherOrderByName(Schulhalbjahr hj, Klasse klasse) {
-        final String klassenStufe = String.valueOf(klasse.calculateKlassenstufe(hj.getJahr()));
+            getActiveSchulfaecherOrderByName(ZeugnisFormular formular) {
+        final String klassenStufe = String.valueOf(formular.getKlasse().
+                calculateKlassenstufe(formular.getSchulhalbjahr().getJahr()));
         final List<Schulfach> alleSchulfaecher = schulfachDao.findAll();
         final List<Schulfach> relevanteSchulfaecher = new ArrayList<>();
         for (Schulfach schulfach : alleSchulfaecher) {
