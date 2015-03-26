@@ -18,7 +18,7 @@
         <db.username>szep</db.username>
         <db.password>szep_psw szep_psw</db.password>
         <db.driver>org.h2.Driver</db.driver>
-        <db.url>jdbc:h2:./dbs/dev2;MODE=PostgreSQL;AUTO_SERVER=TRUE;CIPHER=AES</db.url>
+        <db.url>jdbc:h2:./dbs/dev;MODE=PostgreSQL;AUTO_SERVER=TRUE;CIPHER=AES</db.url>
         <db.dialect>org.hibernate.dialect.H2Dialect</db.dialect>
         <db.generateDdl>true</db.generateDdl>
         <db.schema>PUBLIC</db.schema>

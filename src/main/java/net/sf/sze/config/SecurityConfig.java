@@ -38,7 +38,7 @@ public class SecurityConfig {
     /**
      * Enables or disable the Filter.
      */
-    private final boolean enabled = false;
+    private final boolean enabled = true;
 
     /**
      * Resource which contains the configuration.
