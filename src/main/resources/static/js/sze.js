@@ -87,7 +87,7 @@
          $('.datepicker:enabled').datepicker(
              {
                  showOn : "both",
-                 buttonImage : sze.baseurl + 'resources/css/calendar.gif',
+                 buttonImage : sze.baseurl + 'css/calendar.gif',
                  buttonImageOnly : true,
                  dayNamesMin : [ "So", "Mo", "Di", "Mi", "Do", "Fr", "Sa" ],
                  monthNamesShort : [ "Jan", "Feb", "Mrz", "Apr", "Mai",
