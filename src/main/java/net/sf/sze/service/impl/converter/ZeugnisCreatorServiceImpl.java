@@ -52,6 +52,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 /**
  * Service der das eigentliche Erstellen der Zeugnisse übernimmt.
@@ -236,6 +237,9 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
     public File createZeugnisse(Schulhalbjahr halbjahr, Klasse klasse) {
         final List<Zeugnis> zeugnisse = zeugnisDao
                 .findAllByFormularSchulhalbjahrAndFormularKlasse(halbjahr, klasse);
+        if (CollectionUtils.isEmpty(zeugnisse)) {
+            return null;
+        }
         for (final Zeugnis zeugnis : zeugnisse) {
             createZeugnis(zeugnis);
         }

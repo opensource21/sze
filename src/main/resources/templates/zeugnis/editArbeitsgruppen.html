@@ -26,6 +26,7 @@ cancelUrl
         </h4>
         <form class="well form-horizontal" method="post" th:object="${zeugnis}">
             <div th:replace="/fragments::error"></div>
+            <input type="hidden" th:value="*{formular.id}" name="formular"/>
             <span th:remove="tag" th:each="agBewertung, stat: *{agBewertungen}">
                 <input type="hidden" th:value="*{agBewertungen[__${stat.index}__].id}" th:name="${'agBewertungen['+__${stat.index}__+'].id'}"/>
                 <input type="hidden" th:value="*{agBewertungen[__${stat.index}__].version}" th:name="${'agBewertungen['+__${stat.index}__+'].version'}"/>
