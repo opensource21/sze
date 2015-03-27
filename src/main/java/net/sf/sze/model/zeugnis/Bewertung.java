@@ -290,8 +290,8 @@ public abstract class Bewertung extends RevisionModel implements Serializable,
     public void toPrintMap(final Map<String, Object> printMap,
             final boolean noteAlsTextDarstellen) {
         final String result = createPrintText(noteAlsTextDarstellen);
-        printMap.put("bw_" + schulfach.technicalName(), result);
-        printMap.put("bw_" + schulfach.technicalName() + "_tg", relevant
+        printMap.put("bw_" + schulfach.getFormularKeyName(), result);
+        printMap.put("bw_" + schulfach.getFormularKeyName() + "_tg", relevant
                 ? VariableUtility.PLATZHALTER_AUSGEWAEHLT : VariableUtility
                 .PLATZHALTER_LEER);
 

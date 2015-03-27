@@ -9,6 +9,13 @@
           Another possibility is ".* Test.java" -->
     <suppress checks="JavadocPackage" files=".*src.test.java.*.java"/>
     <suppress checks=".*" files=".*.pdf"/>
+    <suppress checks=".*" files=".*.png"/>
+    <suppress checks=".*" files=".*.jpg"/>
+    <suppress checks=".*" files=".*.ico"/>
+    <suppress checks=".*" files=".*.gif"/>
+    <suppress checks=".*" files=".*.js"/>
+    <suppress checks=".*" files=".*.css"/>
+    <suppress checks=".*" files=".*.less"/>
     <suppress checks=".*" files=".*src.test.java.*.dbunit.*.java"/>
 </suppressions>
 

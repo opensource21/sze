@@ -30,11 +30,6 @@ import org.apache.commons.lang.builder.CompareToBuilder;
 public class Klasse extends RevisionModel implements Serializable,
         Comparable<Klasse> {
 
-    // TODO GUI Zahlenbereich in der GUI einschränken :-/
-//  static constraints = {
-//      jahrgang(range:2000..2020)
-//  }
-
     /**
      * Jahr in dem diese Klasse begonnen wurde.
      */
@@ -44,7 +39,6 @@ public class Klasse extends RevisionModel implements Serializable,
 
     /** Ergänzung also 1a. */
     @Column(nullable = false, length = 1)
-
     @Size(max = 1)
     private String suffix;
 
@@ -148,14 +142,16 @@ public class Klasse extends RevisionModel implements Serializable,
         return calculateKlassenname() + " (" + jahrgang + ")";
     }
 
+
     /**
      * Berechnet den Klassennamen in Abhängigkeit vom Schuljahr.
      * @param schuljahresEnde das Ende des Schuljahrs
+     * @param specialSuffix spezifischer Suffix der abweichen kann.
      * @return den Klassennamen in Abhängigkeit vom Schuljahr.
      */
-    public String calculateKlassenname(final int schuljahresEnde) {
-        if (StringUtils.isNotBlank(suffix)) {
-            return calculateKlassenstufe(schuljahresEnde) + suffix;
+    public String calculateKlassenname(final int schuljahresEnde, String specialSuffix) {
+        if (StringUtils.isNotBlank(specialSuffix)) {
+            return calculateKlassenstufe(schuljahresEnde) + specialSuffix;
         } else {
             return String.valueOf(calculateKlassenstufe(schuljahresEnde));
         }
@@ -175,7 +171,7 @@ public class Klasse extends RevisionModel implements Serializable,
      * @return den Klassennamen.
      */
     public String calculateKlassenname() {
-        return calculateKlassenname(calculateSchuljahresEnde());
+        return calculateKlassenname(calculateSchuljahresEnde(), suffix);
     }
 
     //TODO net.sf.sze.service.api.common.SchulkalenderService.getCurrentSchuljahr()

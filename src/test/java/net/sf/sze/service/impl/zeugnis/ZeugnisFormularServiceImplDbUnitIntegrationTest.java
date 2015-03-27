@@ -12,6 +12,7 @@ import net.sf.sze.dbunit.AbstractSzeDbUnitTest;
 import net.sf.sze.dbunit.dataset.ZeugnisFormularInit;
 import net.sf.sze.service.api.zeugnis.ZeugnisFormularService;
 
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 
 
@@ -19,6 +20,7 @@ import org.junit.Test;
  * Testet die Initialisierung von ZeugnisFormularen.
  *
  */
+@FixMethodOrder
 public class ZeugnisFormularServiceImplDbUnitIntegrationTest extends AbstractSzeDbUnitTest {
 
     @Resource

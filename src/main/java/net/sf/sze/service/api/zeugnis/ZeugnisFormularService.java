@@ -77,6 +77,13 @@ public interface ZeugnisFormularService {
      */
     List<Schulhalbjahr> getActiveSchulhalbjahre(ZeugnisFormular zeugnisFormular);
 
+    /**
+     * Findet das Zeugnisformular zu dem {@link Schulhalbjahr} und der {@link Klasse}.
+     * @param halbjahrId die Id des Schulhalbjahrs
+     * @param klassenId die Id der Klasse.
+     * @return das Zeugnisformular.
+     */
+    ZeugnisFormular getZeugnisFormular(long halbjahrId, long klassenId);
 
     /**
      * Initialisiert für den gegebenen Tag alle Zeugnisformulare.

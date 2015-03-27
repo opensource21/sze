@@ -25,14 +25,12 @@ import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 
 /**
  * Config for secure the application.
  *
  */
 @Configuration
-@PropertySource("classpath:/" + SecurityConfig.SECURITY_CONFIG)
 public class SecurityConfig {
 
     /**
@@ -43,7 +41,7 @@ public class SecurityConfig {
     /**
      * Resource which contains the configuration.
      */
-    static final String SECURITY_CONFIG = "/security.properties";
+    static final String SECURITY_CONFIG = "security.properties";
 
     /** The url to the ldap. */
     @Value("${ldap.url}")
@@ -92,7 +90,11 @@ public class SecurityConfig {
     private void defineSecurityFilter(Map<String, String> filterMap) {
         final String authAndPerms = DefaultFilter.authc.name() + ", "
                 + DefaultFilter.perms.name();
-        filterMap.put("/resources/**/*", DefaultFilter.anon.name());
+        filterMap.put("/css/**/*", DefaultFilter.anon.name());
+        filterMap.put("/js/**/*", DefaultFilter.anon.name());
+        filterMap.put("/images/**/*", DefaultFilter.anon.name());
+        filterMap.put("/img/**/*", DefaultFilter.anon.name());
+        filterMap.put("/html5_error.html", DefaultFilter.anon.name());
         filterMap.put("/auth/login", DefaultFilter.anon.name());
         filterMap.put("/zeugnisMain/index", DefaultFilter.anon.name());
         filterMap.put(URL.Security.LOGOUT, DefaultFilter.logout.name());

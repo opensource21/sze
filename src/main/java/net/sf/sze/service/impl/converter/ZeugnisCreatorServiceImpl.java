@@ -23,6 +23,7 @@ import net.sf.jooreports.templates.DocumentTemplate.ContentWrapper;
 import net.sf.jooreports.templates.DocumentTemplateException;
 import net.sf.jooreports.templates.DocumentTemplateFactory;
 import net.sf.sze.dao.api.zeugnis.ZeugnisDao;
+import net.sf.sze.dao.api.zeugnis.ZeugnisFormularDao;
 import net.sf.sze.dao.api.zeugnisconfig.SchulfachDao;
 import net.sf.sze.dao.api.zeugnisconfig.SchulhalbjahrDao;
 import net.sf.sze.model.stammdaten.Klasse;
@@ -51,6 +52,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 /**
  * Service der das eigentliche Erstellen der Zeugnisse übernimmt.
@@ -136,6 +138,12 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
     @Resource
     private SchulfachDao schulfachDao;
 
+    /**
+     * Das {@link ZeugnisFormular}-DAO.
+     */
+    @Resource
+    private ZeugnisFormularDao zeugnisFormularDao;
+
     @Override
     public void afterPropertiesSet() {
         LOG.info("PDF-Erstellung aktiv = {}", Boolean.valueOf(createPdf));
@@ -200,12 +208,12 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
         final List<Schulhalbjahr> halbjahre = schulhalbjahrDao
                 .findAllBySelectable(true);
         for (final Schulhalbjahr halbjahr : halbjahre) {
-            final List<Zeugnis> zeugnisse = zeugnisDao.findAllBySchulhalbjahr(
+            final List<Zeugnis> zeugnisse = zeugnisDao.findAllByFormularSchulhalbjahr(
                     halbjahr);
             for (final Zeugnis zeugnis : zeugnisse) {
                 try {
                     createZeugnis(zeugnis);
-                    klassen.add(zeugnis.getKlasse());
+                    klassen.add(zeugnis.getFormular().getKlasse());
                     result.addMessage(zeugnis + " wurde erstellt.");
                 } catch (final Exception e) {
                     LOG.error("Fehler beim drucken des Zeugnisses " + zeugnis);
@@ -228,7 +236,10 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
     @Override
     public File createZeugnisse(Schulhalbjahr halbjahr, Klasse klasse) {
         final List<Zeugnis> zeugnisse = zeugnisDao
-                .findAllBySchulhalbjahrAndKlasse(halbjahr, klasse);
+                .findAllByFormularSchulhalbjahrAndFormularKlasse(halbjahr, klasse);
+        if (CollectionUtils.isEmpty(zeugnisse)) {
+            return null;
+        }
         for (final Zeugnis zeugnis : zeugnisse) {
             createZeugnis(zeugnis);
         }
@@ -243,7 +254,10 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
      * @return das komplette PDFs fürs Schuljahr und Klasse.
      */
     private File createCompletePdfs(Schulhalbjahr halbjahr, Klasse klasse) {
-        final String relativePath = createRelativePath(halbjahr, klasse);
+        final ZeugnisFormular formular = zeugnisFormularDao.
+                findBySchulhalbjahrJahrAndSchulhalbjahrHalbjahrAndKlasse(
+                halbjahr.getJahr(), halbjahr.getHalbjahr(), klasse);
+        final String relativePath = createRelativePath(formular);
         final File screenDir = new File(pdfScreenOutputBaseDir, relativePath);
         final File printDir = new File(pdfPrintOutputBaseDir, relativePath);
         pdfConverter.concatAll(printDir, "A3_");
@@ -257,10 +271,9 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
      * @param klasse die Klasse.
      * @return der relative Pfadname fürs Schulhalbjahr und Klasse.
      */
-    private String createRelativePath(Schulhalbjahr halbjahr, Klasse klasse) {
-        final String klassenname = klasse.calculateKlassenname(halbjahr
-                .getJahr());
-        return halbjahr.createRelativePathName() + "/Kl-" + klassenname;
+    private String createRelativePath(ZeugnisFormular formular) {
+        final String klassenname = formular.getKlassenname();
+        return formular.getSchulhalbjahr().createRelativePathName() + "/Kl-" + klassenname;
     }
 
     /**
@@ -269,12 +282,12 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
     @Override
     public File createZeugnis(Zeugnis zeugnis) {
         File result;
-        final String relativePath = createRelativePath(zeugnis
-                .getSchulhalbjahr(), zeugnis.getKlasse());
+        final ZeugnisFormular formular = zeugnis.getFormular();
+        final String relativePath = createRelativePath(formular);
         final Schueler schueler = zeugnis.getSchueler();
         final String baseFileName = (schueler.getName() + "_" + schueler
                 .getVorname()).replaceAll(" ", "");
-        final Schulhalbjahr halbjahr = zeugnis.getSchulhalbjahr();
+        final Schulhalbjahr halbjahr = formular.getSchulhalbjahr();
         final File odtOutputDir = new File(odtOutputBaseDir, relativePath);
         final File zeugnisOdtDatei = new File(odtOutputDir, baseFileName
                 + ".odt");
@@ -301,9 +314,9 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
 
         final Iterable<Schulfach> schulfaecher = schulfachDao.findAll();
         for (final Schulfach schulfach : schulfaecher) {
-            zeugnisDaten.put("bw_" + schulfach.technicalName(), VariableUtility
+            zeugnisDaten.put("bw_" + schulfach.getFormularKeyName(), VariableUtility
                     .PLATZHALTER_LEER);
-            zeugnisDaten.put("bw_" + schulfach.technicalName() + "_tg", "");
+            zeugnisDaten.put("bw_" + schulfach.getFormularKeyName() + "_tg", "");
         }
 
         zeugnis.toPrintMap(zeugnisDaten);
@@ -319,15 +332,15 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
             }
         }
 
-        if (Halbjahr.Erstes_Halbjahr.equals(zeugnis.getSchulhalbjahr()
+        if (Halbjahr.Erstes_Halbjahr.equals(zeugnis.getFormular().getSchulhalbjahr()
                 .getHalbjahr())) {
             fillWPTabelle(zeugnis, zeugnisDaten, 1, noteAlsTextDarstellen);
         } else {
             final Schulhalbjahr erstesSchulhalbjahr = schulhalbjahrDao
-                    .findByJahrAndHalbjahr(zeugnis.getSchulhalbjahr()
+                    .findByJahrAndHalbjahr(zeugnis.getFormular().getSchulhalbjahr()
                     .getJahr(), Halbjahr.Erstes_Halbjahr);
             final Zeugnis zeugnisErstesHj = zeugnisDao
-                    .findBySchuelerAndSchulhalbjahr(zeugnis.getSchueler(),
+                    .findBySchuelerAndFormularSchulhalbjahr(zeugnis.getSchueler(),
                     erstesSchulhalbjahr);
             if (zeugnisErstesHj != null) {
                 fillWPTabelle(zeugnisErstesHj, zeugnisDaten, 1,
@@ -343,7 +356,7 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
         removeNullAndAddBlank(zeugnisDaten);
         addNewlineAndBlocksatzVariables(zeugnisDaten);
         // Hinzufügen einiger Daten die man als Zahl oder Boolean braucht.
-        zeugnisDaten.put("klassenstufe", Integer.valueOf(zeugnis.getKlasse()
+        zeugnisDaten.put("klassenstufe", Integer.valueOf(zeugnis.getFormular().getKlasse()
                 .calculateKlassenstufe(halbjahr.getJahr())));
         zeugnisDaten.put("platzFuerSiegel", zeugnis.getZeugnisArt()
                 .getPlatzFuerSiegel());
@@ -407,8 +420,8 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
         final Map<String, Object> emptyMap = new HashMap<>();
         final Iterable<Schulfach> faecher = schulfachDao.findAll();
         for (final Schulfach schulfach : faecher) {
-            emptyMap.put("bw_" + schulfach.technicalName() + "", "");
-            emptyMap.put("bw_" + schulfach.technicalName() + "_tg", "");
+            emptyMap.put("bw_" + schulfach.getFormularKeyName() + "", "");
+            emptyMap.put("bw_" + schulfach.getFormularKeyName() + "_tg", "");
         }
 
         for (int stufe = minimalesSchuljahr; stufe <= maximalesSchuljahr;
@@ -419,7 +432,7 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
         }
 
         final List<Zeugnis> oldZeugnisse = zeugnisDao
-                .findAllBySchuelerOrderBySchulhalbjahrAsc(schueler);
+                .findAllBySchuelerOrderByFormularSchulhalbjahrAsc(schueler);
         // Historische Daten für Wahlpflicht
         for (final Zeugnis oldZeugnis : oldZeugnisse) {
             final Map<String, Object> bewertungMap = new HashMap<>();
@@ -430,10 +443,10 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
                 bw.toPrintMap(bewertungMap, noteAlsTextDarstellen);
             }
 
-            final int klassenstufe = oldZeugnis.getKlasse()
-                    .calculateKlassenstufe(oldZeugnis.getSchulhalbjahr()
+            final int klassenstufe = oldZeugnis.getFormular().getKlasse()
+                    .calculateKlassenstufe(oldZeugnis.getFormular().getSchulhalbjahr()
                     .getJahr());
-            final int halbjahresId = oldZeugnis.getSchulhalbjahr().getHalbjahr()
+            final int halbjahresId = oldZeugnis.getFormular().getSchulhalbjahr().getHalbjahr()
                     .getId();
             final long oldKlassenstufenIndex = oldZeugnis
                     .calculateKlasssenstufenHalbjahresIndex();
@@ -455,12 +468,12 @@ public class ZeugnisCreatorServiceImpl implements InitializingBean,
             Map<String, Object> printMap) {
         final Iterable<Schulfach> faecher = schulfachDao.findAll();
         for (final Schulfach schulfach : faecher) {
-            printMap.put("" + schulfach.technicalName() + "_detailInfo", "");
+            printMap.put("" + schulfach.getFormularKeyName() + "_detailInfo", "");
         }
 
         for (final SchulfachDetailInfo detailInfo : zeugnisFormular
                 .getSchulfachDetailInfos()) {
-            printMap.put(detailInfo.getSchulfach().technicalName()
+            printMap.put(detailInfo.getSchulfach().getFormularKeyName()
                     + "_detailInfo", detailInfo.getDetailInfo());
         }
     }

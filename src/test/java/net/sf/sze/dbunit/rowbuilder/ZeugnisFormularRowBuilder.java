@@ -11,6 +11,7 @@ public class ZeugnisFormularRowBuilder extends BasicDataRowBuilder {
     public static final String C_AUSGABE_DATUM = "AUSGABE_DATUM";
     public static final String C_BESCHREIBUNG = "BESCHREIBUNG";
     public static final String C_ID = "ID";
+    public static final String C_KLASSEN_SUFFIX = "KLASSEN_SUFFIX";
     public static final String C_KLASSE_ID = "KLASSE_ID";
     public static final String C_LEITSPRUCH = "LEITSPRUCH";
     public static final String C_LEITSPRUCH2 = "LEITSPRUCH2";
@@ -23,7 +24,7 @@ public class ZeugnisFormularRowBuilder extends BasicDataRowBuilder {
 
     public static final String[] PRIMARY_KEY = {C_ID};
 
-    public static final String[] ALL_COLUMNS = {C_AUSGABE_DATUM, C_BESCHREIBUNG, C_ID, C_KLASSE_ID, C_LEITSPRUCH, C_LEITSPRUCH2, C_NACHTEILS_AUSGLEICHS_DATUM, C_QUELLE_LEITSPRUCH, C_QUELLE_LEITSPRUCH2, C_SCHULHALBJAHR_ID, C_TEMPLATE_FILE_NAME, C_VERSION};
+    public static final String[] ALL_COLUMNS = {C_AUSGABE_DATUM, C_BESCHREIBUNG, C_ID, C_KLASSEN_SUFFIX, C_KLASSE_ID, C_LEITSPRUCH, C_LEITSPRUCH2, C_NACHTEILS_AUSGLEICHS_DATUM, C_QUELLE_LEITSPRUCH, C_QUELLE_LEITSPRUCH2, C_SCHULHALBJAHR_ID, C_TEMPLATE_FILE_NAME, C_VERSION};
 
     public ZeugnisFormularRowBuilder(String... identifierColumns) {
         super(TABLE_NAME, identifierColumns);
@@ -32,6 +33,7 @@ public class ZeugnisFormularRowBuilder extends BasicDataRowBuilder {
         addDefaultValue(C_SCHULHALBJAHR_ID, new Long("0"));
         addDefaultValue(C_KLASSE_ID, new Long("0"));
         addDefaultValue(C_ID, new Long("0"));
+        addDefaultValue(C_KLASSEN_SUFFIX, "");
         addDefaultValue(C_TEMPLATE_FILE_NAME, "");
         addDefaultValue(C_BESCHREIBUNG, "");
     }
@@ -63,6 +65,16 @@ public class ZeugnisFormularRowBuilder extends BasicDataRowBuilder {
 
     public final ZeugnisFormularRowBuilder Id (IValidator<?> value) {
         with(C_ID, value);
+        return this;
+    }
+
+    public final ZeugnisFormularRowBuilder KlassenSuffix (String value) {
+        with(C_KLASSEN_SUFFIX, value);
+        return this;
+    }
+
+    public final ZeugnisFormularRowBuilder KlassenSuffix (IValidator<?> value) {
+        with(C_KLASSEN_SUFFIX, value);
         return this;
     }
 

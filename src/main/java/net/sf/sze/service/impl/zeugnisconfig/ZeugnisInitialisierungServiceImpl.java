@@ -184,7 +184,7 @@ public class ZeugnisInitialisierungServiceImpl implements ZeugnisInitialierungsS
         final Schulhalbjahr halbjahr = formular.getSchulhalbjahr();
         final Klasse klasse = schueler.getKlasse();
         LOG.info("Schulhalbjahr: {}, Klasse {}, Schueler{}", halbjahr, klasse, schueler);
-        Zeugnis zeugnis = zeugnisDao.findBySchulhalbjahrIdAndSchuelerId(
+        Zeugnis zeugnis = zeugnisDao.findByFormularSchulhalbjahrIdAndSchuelerId(
                 halbjahr.getId(), schueler.getId());
 
         final int klassenstufeAsInt = klasse.calculateKlassenstufe(halbjahr.getJahr());
@@ -204,16 +204,12 @@ public class ZeugnisInitialisierungServiceImpl implements ZeugnisInitialierungsS
             changeMessage.append("Für den Sch\u00fcler ").append(schueler).
                     append(" und das Halbjahr ").append(halbjahr).
                     append(" existiert schon ein Zeugnis.<ul>");
-            zeugnis.setSchulhalbjahr(halbjahr); //Owning
             zeugnis.setFormular(formular); //Owning
-            zeugnis.setKlasse(klasse); //Owning
         } else {
             zeugnis = new Zeugnis();
             zeugnis.setSchueler(schueler); //Owning
-            zeugnis.setSchulhalbjahr(halbjahr); //Owning
             zeugnis.setZeugnisArt(zeugnisArt); //Owning
             zeugnis.setFormular(formular); //Owning
-            zeugnis.setKlasse(klasse); //Owning
             zeugnis.setAgBewertungen(new ArrayList<AgBewertung>());
             zeugnis.setAvSvBewertungen(new ArrayList<AvSvBewertung>());
             zeugnis.setBewertungen(new ArrayList<Bewertung>());
@@ -226,7 +222,7 @@ public class ZeugnisInitialisierungServiceImpl implements ZeugnisInitialierungsS
 
         handleAvSvBewertungen(zeugnis, klassenstufe, changeMessage);
 
-        //TODO Validierung?
+        //NICE Validierung, aber wie? Man kann sich auch auf Programmierung verlassen.
         if (changeMessage.length() > 0) {
             changeMessage.append("</ul>");
             String changeMessageString = changeMessage.toString();

@@ -16,14 +16,15 @@ import net.sf.sze.frontend.base.ModelAttributes;
 import net.sf.sze.frontend.base.URL;
 import net.sf.sze.frontend.base.URL.Common;
 import net.sf.sze.model.stammdaten.Klasse;
-import net.sf.sze.model.stammdaten.Schueler;
-import net.sf.sze.model.zeugnis.ZweiNiveauBewertung;
 import net.sf.sze.model.zeugnis.Bewertung;
 import net.sf.sze.model.zeugnis.DreiNiveauBewertung;
 import net.sf.sze.model.zeugnis.StandardBewertung;
 import net.sf.sze.model.zeugnis.Zeugnis;
+import net.sf.sze.model.zeugnis.ZweiNiveauBewertung;
 import net.sf.sze.model.zeugnisconfig.Schulhalbjahr;
 import net.sf.sze.service.api.converter.ZeugnisCreatorService;
+import net.sf.sze.service.api.stammdaten.SchuelerList;
+import net.sf.sze.service.api.stammdaten.SchuelerService;
 import net.sf.sze.service.api.zeugnis.AgBewertungService;
 import net.sf.sze.service.api.zeugnis.BewertungService;
 import net.sf.sze.service.api.zeugnis.BewertungWithNeigbors;
@@ -110,6 +111,9 @@ public class ZeugnisController implements ModelAttributes {
     @Resource
     private ZeugnisCreatorService zeugnisCreatorService;
 
+    @Resource
+    private SchuelerService schuelerService;
+
 
     /**
      * Der Validator.
@@ -143,7 +147,7 @@ public class ZeugnisController implements ModelAttributes {
         final List<Schulhalbjahr> halbjahre = zeugnisErfassungsService
                 .getActiveSchulhalbjahre();
         if (CollectionUtils.isEmpty(halbjahre)) {
-            return URL.redirect(URL.Configuration.MAIN);
+            return URL.redirect(URL.Configuration.HOME);
         }
 
         final List<Klasse> klassen = zeugnisErfassungsService.getActiveKlassen(
@@ -169,59 +173,33 @@ public class ZeugnisController implements ModelAttributes {
      * @return die logische View
      */
     @RequestMapping(value = URL.ZeugnisPath.SHOW, method = RequestMethod.GET)
-    public String showZeugnisPath(@PathVariable(URL.Session
-            .P_HALBJAHR_ID) long halbjahrId, @PathVariable(URL.Session
-            .P_KLASSEN_ID) long klassenId, @RequestParam(value = URL.Session
-            .P_SCHUELER_ID,
-            required = false) Long schuelerId, Model model,
-                    RedirectAttributes redirectAttributes) {
-        final List<Zeugnis> zeugnisse = zeugnisErfassungsService.getZeugnisse(
-                halbjahrId, klassenId);
-
+    public String showZeugnisPath(
+            @PathVariable(URL.Session.P_HALBJAHR_ID) long halbjahrId,
+            @PathVariable(URL.Session.P_KLASSEN_ID) long klassenId,
+            @RequestParam(value = URL.Session.P_SCHUELER_ID, required = false)
+            Long schuelerId, Model model, RedirectAttributes redirectAttributes) {
         LOG.debug("SchülerId =>{}<)", schuelerId);
+        final SchuelerList schuelerList = schuelerService.getSchuelerWithZeugnis(
+                halbjahrId, klassenId, schuelerId);
 
-        if (CollectionUtils.isEmpty(zeugnisse)) {
+        if (schuelerList.isEmpty()) {
             redirectAttributes.addFlashAttribute(MESSAGE,
-                    "Es wurden keine Zeugnisse gefunden.");
+                    "Es wurden keine Schüler mit Zeugnissen gefunden.");
             return URL.redirectWithNamedParams(URL.ZeugnisPath.START,
                     URL.Session.P_HALBJAHR_ID, Long.valueOf(halbjahrId),
                     URL.Session.P_KLASSEN_ID, Long.valueOf(klassenId));
         }
 
-        final List<Schueler> schuelerListe = new ArrayList<Schueler>(zeugnisse
-                .size());
-        Zeugnis selectedZeugnis = null;
-        Long prevSchuelerId = null;
-        Long selectedSchuelerId = schuelerId;
-        Long nextSchuelerId = null;
-        for (Zeugnis zeugnis : zeugnisse) {
-            // Sicherstellen, dass es immer einen selektierten Schüler gibt.
-            if (selectedSchuelerId == null) {
-                selectedSchuelerId = zeugnis.getSchueler().getId();
-            }
-
-            schuelerListe.add(zeugnis.getSchueler());
-
-            if ((selectedZeugnis != null) && (nextSchuelerId == null)) {
-                nextSchuelerId = zeugnis.getSchueler().getId();
-            }
-
-            if (selectedSchuelerId.equals(zeugnis.getSchueler().getId())) {
-                selectedZeugnis = zeugnis;
-            }
-
-            if (selectedZeugnis == null) {
-                prevSchuelerId = zeugnis.getSchueler().getId();
-            }
-        }
-
-        if (selectedZeugnis == null) {
+        if (schuelerList.getCurrentSchueler() == null) {
             redirectAttributes.addFlashAttribute(MESSAGE,
                     "Der angegebene Schüler hat kein Zeugnis, gehe zum ersten.");
             return URL.redirectWithNamedParams(URL.ZeugnisPath.SHOW,
                     URL.Session.P_HALBJAHR_ID, Long.valueOf(halbjahrId),
                     URL.Session.P_KLASSEN_ID, Long.valueOf(klassenId));
         }
+
+        final Zeugnis selectedZeugnis = zeugnisErfassungsService.
+                getZeugnis(Long.valueOf(halbjahrId), schuelerList.getCurrentSchueler().getId());
 
         Collections.sort(selectedZeugnis.getSchulamtsBemerkungen());
         Collections.sort(selectedZeugnis.getBemerkungen());
@@ -232,10 +210,10 @@ public class ZeugnisController implements ModelAttributes {
                 selectedZeugnis.getBewertungen(), wpBewertungen, otherBewertungen);
 
         LOG.debug("Zeugnis von Schueler {}. ", selectedZeugnis.getSchueler());
-        model.addAttribute("schuelerListe", schuelerListe);
+        model.addAttribute("schuelerListe", schuelerList.getSchuelerList());
         model.addAttribute("zeugnis", selectedZeugnis);
-        model.addAttribute("prevSchuelerId", prevSchuelerId);
-        model.addAttribute("nextSchuelerId", nextSchuelerId);
+        model.addAttribute("prevSchueler", schuelerList.getPrevSchueler());
+        model.addAttribute("nextSchueler", schuelerList.getNextSchueler());
         model.addAttribute("wpBewertungen", wpBewertungen);
         model.addAttribute("otherBewertungen", otherBewertungen);
         model.addAttribute("urlShowZeugnis", URL.filledURLWithNamedParams(
@@ -246,7 +224,7 @@ public class ZeugnisController implements ModelAttributes {
                 URL.ZeugnisPath.ONE_PDF,
                 URL.Session.P_HALBJAHR_ID, Long.valueOf(halbjahrId),
                 URL.Session.P_KLASSEN_ID, Long.valueOf(klassenId),
-                URL.Session.P_SCHUELER_ID, selectedZeugnis.getSchueler().getId()));
+                URL.Session.P_SCHUELER_ID, schuelerList.getCurrentSchueler().getId()));
         model.addAttribute("arbeitsgruppenSatz", selectedZeugnis
                 .createArbeitsgruppenSatz());
         return "zeugnis/showZeugnis";
@@ -459,7 +437,7 @@ public class ZeugnisController implements ModelAttributes {
         model.addAttribute("schulhalbjahr", schulhalbjahrService.read(halbjahrId));
         model.addAttribute(Common.P_PREV_ID, prevId);
         model.addAttribute(Common.P_NEXT_ID, nextId);
-        model.addAttribute("saveUrl", URL.filledURLWithNamedParams(
+        model.addAttribute("updateUrl", URL.filledURLWithNamedParams(
                 URL.ZeugnisPath.BEWERTUNG_EDIT,
                 URL.Session.P_HALBJAHR_ID, halbjahrId,
                 URL.Session.P_KLASSEN_ID, klassenId,
@@ -484,7 +462,7 @@ public class ZeugnisController implements ModelAttributes {
      * @param redirectAttributes Fehlermeldungen.
      * @return die logische View
      */
-    @RequestMapping(value = URL.ZeugnisPath.BEWERTUNG_CANCEL, method = RequestMethod.POST)
+    @RequestMapping(value = URL.ZeugnisPath.BEWERTUNG_CANCEL, method = RequestMethod.GET)
     public String cancelEditBewertung(
             @PathVariable(URL.Session.P_HALBJAHR_ID) Long halbjahrId,
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
@@ -511,7 +489,10 @@ public class ZeugnisController implements ModelAttributes {
             Model model) {
         final Zeugnis zeugnis = zeugnisErfassungsService.getZeugnis(
                 halbjahrId, schuelerId);
-        fillZeugnisDetailModel(model, halbjahrId, klassenId, schuelerId, zeugnis);
+        final SchuelerList schuelerList = schuelerService.getSchuelerWithZeugnis(
+                halbjahrId.longValue(), klassenId.longValue(), schuelerId);
+        fillZeugnisDetailModel(model, halbjahrId, klassenId, schuelerId, zeugnis,
+                schuelerList.getPrevSchuelerId(), schuelerList.getNextSchuelerId());
         return EDIT_ZEUGNIS_DETAIL_VIEW;
     }
 
@@ -521,9 +502,11 @@ public class ZeugnisController implements ModelAttributes {
      * @param klassenId
      * @param schuelerId
      * @param zeugnis
+     * @param prevId
+     * @param nextId
      */
     private void fillZeugnisDetailModel(Model model, Long halbjahrId,
-            Long klassenId, Long schuelerId, final Zeugnis zeugnis) {
+            Long klassenId, Long schuelerId, final Zeugnis zeugnis, Long prevId, Long nextId) {
         model.addAttribute("zeugnis", zeugnis);
         model.addAttribute("zeugnisArten", zeugnisErfassungsService.getAllZeugnisArten(zeugnis));
         model.addAttribute("updateUrl", URL.filledURLWithNamedParams(
@@ -531,6 +514,8 @@ public class ZeugnisController implements ModelAttributes {
                 URL.Session.P_HALBJAHR_ID, halbjahrId,
                 URL.Session.P_KLASSEN_ID, klassenId,
                 URL.Session.P_SCHUELER_ID, schuelerId));
+        model.addAttribute(Common.P_PREV_ID, prevId);
+        model.addAttribute(Common.P_NEXT_ID, nextId);
         model.addAttribute(CANCEL_URL, URL.createLinkToZeugnisUrl(halbjahrId,
                 klassenId, schuelerId));
     }
@@ -541,6 +526,9 @@ public class ZeugnisController implements ModelAttributes {
      * @param klassenId die Id der Klasse
      * @param schuelerId die Id des Schuelers
      * @param result das Bindingresult.
+     * @param prevId die Id des vorherigen Schülers.
+     * @param nextId die Id der nächsten Schülers.
+     * @param action die als nächstes auszuführende Aktion.
      * @param zeugnis das zu speichernde Zeugnis.
      * @param model das Model
      * @return die logische View
@@ -550,20 +538,23 @@ public class ZeugnisController implements ModelAttributes {
             .P_HALBJAHR_ID) Long halbjahrId,
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
+            @RequestParam(Common.P_PREV_ID) Long prevId,
+            @RequestParam(Common.P_NEXT_ID) Long nextId,
+            @RequestParam(value = Common.P_ACTION, required = false) String action,
             @ModelAttribute("zeugnis") Zeugnis zeugnis,
             BindingResult result, Model model) {
         validator.validate(zeugnis, result);
-
         if (result.hasErrors()) {
             LOG.info("Fehler:" + result.getAllErrors());
             fillZeugnisDetailModel(model, halbjahrId, klassenId, schuelerId,
-                    zeugnis);
+                    zeugnis, prevId, nextId);
             return EDIT_ZEUGNIS_DETAIL_VIEW;
         }
 
         LOG.debug("Update Zeugnis: " + zeugnis);
         zeugnisErfassungsService.save(zeugnis);
-        return URL.createRedirectToZeugnisUrl(halbjahrId, klassenId, schuelerId);
+        return  URL.getPrevNextUrlOrZeugnisUrl(action, URL.ZeugnisPath.ZEUGNIS_EDIT_DETAIL,
+                halbjahrId, klassenId, schuelerId, prevId, nextId);
     }
 
 
@@ -647,7 +638,10 @@ public class ZeugnisController implements ModelAttributes {
             Model model) {
         final Zeugnis zeugnis = zeugnisErfassungsService.
                 getZeugnis(halbjahrId, schuelerId);
-        fillBuSoLModel(model, halbjahrId, klassenId, schuelerId, zeugnis);
+        final SchuelerList schuelerList = schuelerService.getSchuelerWithZeugnis(
+                halbjahrId.longValue(), klassenId.longValue(), schuelerId);
+        fillBuSoLModel(model, halbjahrId, klassenId, schuelerId, zeugnis,
+                schuelerList.getPrevSchuelerId(), schuelerList.getNextSchuelerId());
         return EDIT_ZEUGNIS_BU_SOL;
     }
 
@@ -657,9 +651,11 @@ public class ZeugnisController implements ModelAttributes {
      * @param klassenId
      * @param schuelerId
      * @param zeugnis
+     * @param prevId
+     * @param nextId
      */
     private void fillBuSoLModel(Model model, Long halbjahrId,
-            Long klassenId, Long schuelerId, final Zeugnis zeugnis) {
+            Long klassenId, Long schuelerId, final Zeugnis zeugnis, Long prevId, Long nextId) {
         model.addAttribute("zeugnis", zeugnis);
         model.addAttribute("solBewertungsTexte", zeugnisErfassungsService.getSoLTexte(zeugnis));
         model.addAttribute("updateUrl", URL.filledURLWithNamedParams(
@@ -667,6 +663,8 @@ public class ZeugnisController implements ModelAttributes {
                 URL.Session.P_HALBJAHR_ID, halbjahrId,
                 URL.Session.P_KLASSEN_ID, klassenId,
                 URL.Session.P_SCHUELER_ID, schuelerId));
+        model.addAttribute(Common.P_PREV_ID, prevId);
+        model.addAttribute(Common.P_NEXT_ID, nextId);
         model.addAttribute(CANCEL_URL, URL.createLinkToZeugnisUrl(halbjahrId,
                 klassenId, schuelerId));
     }
@@ -677,6 +675,9 @@ public class ZeugnisController implements ModelAttributes {
      * @param klassenId die Id der Klasse
      * @param schuelerId die Id des Schuelers
      * @param newZeugnis als Container für die AG-Bewertungen.
+     * @param action String der angibt was zu tun ist.
+     * @param prevId die Id des vorherigen Schülers
+     * @param nextId die Id des nachfolgenden Schülers
      * @param result das Bindingresult.
      * @param model das Model
      * @return die logische View
@@ -686,6 +687,9 @@ public class ZeugnisController implements ModelAttributes {
             @PathVariable(URL.Session.P_HALBJAHR_ID) Long halbjahrId,
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
+            @RequestParam(Common.P_PREV_ID) Long prevId,
+            @RequestParam(Common.P_NEXT_ID) Long nextId,
+            @RequestParam(value = Common.P_ACTION, required = false) String action,
             @ModelAttribute("zeugnis") Zeugnis newZeugnis, BindingResult result,
             Model model) {
         final Zeugnis zeugnis = zeugnisErfassungsService.getZeugnis(
@@ -697,13 +701,15 @@ public class ZeugnisController implements ModelAttributes {
         if (result.hasErrors()) {
             LOG.info("Fehler:" + result.getAllErrors());
             fillBuSoLModel(model, halbjahrId, klassenId, schuelerId,
-                    newZeugnis);
+                    newZeugnis, prevId, nextId);
             return EDIT_ZEUGNIS_BU_SOL;
         }
 
         LOG.debug("Update Zeugnis: " + zeugnis);
         zeugnisErfassungsService.save(zeugnis);
-        return URL.createRedirectToZeugnisUrl(halbjahrId, klassenId, schuelerId);
+        return  URL.getPrevNextUrlOrZeugnisUrl(action, URL.ZeugnisPath.ZEUGNIS_EDIT_BU_SOL,
+                halbjahrId, klassenId, schuelerId, prevId, nextId);
+
     }
 
     /**
@@ -747,9 +753,11 @@ public class ZeugnisController implements ModelAttributes {
             @RequestParam(URL.Session.P_KLASSEN_ID) Klasse klasse,
             RedirectAttributes redirectAttributes) {
         final File zeugnisDatei = zeugnisCreatorService.createZeugnisse(halbjahr, klasse);
-        if (zeugnisDatei.exists() && zeugnisDatei.canRead()) {
-            return new FileContentView(zeugnisDatei, "Klasse_" + klasse.
-                    calculateKlassenname(halbjahr.getJahr()) + ".pdf");
+        if (zeugnisDatei == null) {
+            redirectAttributes.addFlashAttribute(MESSAGE, "Es sind keine Zeugnisse vorhanden.");
+        } else if (zeugnisDatei.exists() && zeugnisDatei.canRead()) {
+            return new FileContentView(zeugnisDatei, "Klasse_"
+                    + klasse.calculateKlassenname() + ".pdf");
         } else {
             redirectAttributes.addFlashAttribute(MESSAGE, "Zeugnis erstellt, aber nicht lesbar.");
             LOG.warn("Kann " + zeugnisDatei.getAbsolutePath() + " nicht lesen. "

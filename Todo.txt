@@ -1,31 +1,19 @@
 #PRIO 1
 
-- Zeugnisinitialisierung Auswahlfeld größer machen.
 
 #PRIO 2
 
-- Delete-Fragment zu umbauen, dass es mit JS und ohne gut läuft.
+
+
+#PRIO 3
+- Error-Seite funktioniert nicht bei fehlerhaften Templates: http://blog.codeleak.pl/2013/04/how-to-custom-error-pages-in-tomcat.html
+  ansonsten error.html sinnvoll überschreiben siehe org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration.WhitelabelErrorViewConfiguration
+
 
 - Beim create sollte man nicht löschen können.
 
-- Beim Initialiseren von Klasse 1-2 komplett gibt es eine Exception.
-    -> Das lag daran, dass erst initialisiert wurde und dann der Schüler
-       die Klasse gewechselt hat. Das können wir technisch noch nicht. (Gefixt!)
-    -> Man muss die Möglichkeit bekommen Zeugnisse zu löschen, sofern man
-       bestimmte Rechte hat.
-
-- Bessere Template Unterstützung. Siehe seu/projects/schule/felderUndPlatzhalter.md
-
-- Beim Start von OO sollte man die Parameter mit -- anstatt - übergeben. Ist allerdings nur deprecated.
-
 - Sortierung bei den Tabellen sollte mit dem Datum umgehen können.
 
-- Der Suffix der Klasse sollte beim Zeugnis mit gespeichert werden
-    (dies müsste beim Initialisieren aktualisiert werden). Besser aus dem Formular nehmen, da muss man die Änderung auch machen bzw. klären wozu es eigentlich gebraucht wird.
-
-- Title sollte gesetzt werden, siehe klasseform.html
-
-#PRIO 3
 - PDF-Erstellung mit UNO dürfte zur Zeit nicht funktionieren, zumindest weiss ich
   nicht wie man das vom Classloading her hinbekommt.
 
@@ -45,6 +33,8 @@
 - Zeugnisformular Klasse und Schulhalbjahr sind zur Zeit geschützt durch
   disablen der Felder in der Gui. Ein Check wäre robuster und man sieht gleich
   den Text.
+
+- http://www.operatornew.com/2012/11/automatic-db-migration-for-java-web.html
 
 - Aktives Menü eleganter setzen?
     I'm trying to apply a css class to a menu item based on the current page URL.  So all pages under '/jobs/' should result in my jobs menu item being active.
@@ -73,13 +63,8 @@
 - Wenn man eine Unterlist bearbeitet fehlt auch die Validierung. -> Geht mit neustem Fuwesta SpringValidateNestedProperty!
 - Man könnte alle enums auf Konstanten umstellen.
 
-#Fachliche Klärung:
-- Sortierung nach Schulfachname
-- Soll die Klasse immer zum aktuellen Datum oder zum Schuljahr umgesetzt werden.
-
 
 #Forschung:
-
 
 - http://jackcess.sourceforge.net/
 

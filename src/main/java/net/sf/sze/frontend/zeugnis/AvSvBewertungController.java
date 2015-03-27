@@ -11,12 +11,14 @@ import javax.annotation.Resource;
 
 import net.sf.oval.constraint.AssertValid;
 import net.sf.sze.frontend.base.URL;
-import net.sf.sze.model.stammdaten.Klasse;
+import net.sf.sze.frontend.base.URL.Common;
 import net.sf.sze.model.stammdaten.Schueler;
 import net.sf.sze.model.zeugnis.AvSvBewertung;
 import net.sf.sze.model.zeugnis.Zeugnis;
+import net.sf.sze.model.zeugnis.ZeugnisFormular;
 import net.sf.sze.model.zeugnisconfig.AvSvNote;
-import net.sf.sze.model.zeugnisconfig.Schulhalbjahr;
+import net.sf.sze.service.api.stammdaten.SchuelerList;
+import net.sf.sze.service.api.stammdaten.SchuelerService;
 import net.sf.sze.service.api.zeugnis.AvSvBewertungService;
 import net.sf.sze.service.api.zeugnis.ZeugnisErfassungsService;
 
@@ -28,6 +30,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 /**
@@ -49,6 +52,9 @@ public class AvSvBewertungController {
      */
     @Resource
     private AvSvBewertungService avSvBewertungService;
+
+    @Resource
+    private SchuelerService schuelerService;
 
     /**
      * Der Validator.
@@ -75,11 +81,13 @@ public class AvSvBewertungController {
             Model model) {
         final Zeugnis zeugnis = zeugnisErfassungsService.getZeugnis(halbjahrId,
                 schuelerId);
-        AvSvForm avSvForm = new AvSvForm(zeugnis.getAvSvBewertungen(),
-                zeugnis.getSchueler(), zeugnis.getKlasse(),
-                zeugnis.getSchulhalbjahr());
+        final SchuelerList schuelerList = schuelerService.getSchuelerWithZeugnis(
+                halbjahrId.longValue(), klassenId.longValue(), schuelerId);
+        final AvSvForm avSvForm = new AvSvForm(zeugnis.getAvSvBewertungen(),
+                zeugnis.getSchueler(), zeugnis.getFormular());
         Collections.sort(avSvForm.getAvSvBewertungen());
-        fillModel(model, avSvForm, halbjahrId, klassenId, schuelerId);
+        fillModel(model, avSvForm, halbjahrId, klassenId, schuelerId,
+                schuelerList.getPrevSchuelerId(), schuelerList.getNextSchuelerId());
         return EDIT_ZEUGNIS_AV_SV_VIEW;
     }
 
@@ -88,7 +96,7 @@ public class AvSvBewertungController {
      * @param avSvForm
      */
     private void fillModel(Model model, AvSvForm avSvForm, Long halbjahrId,
-            Long klassenId, Long schuelerId) {
+            Long klassenId, Long schuelerId, Long prevId, Long nextId) {
 
         model.addAttribute("avSvForm", avSvForm);
         model.addAttribute("noten", AvSvNote.values());
@@ -97,6 +105,8 @@ public class AvSvBewertungController {
                 URL.Session.P_HALBJAHR_ID, halbjahrId,
                 URL.Session.P_KLASSEN_ID, klassenId,
                 URL.Session.P_SCHUELER_ID, schuelerId));
+        model.addAttribute(Common.P_PREV_ID, prevId);
+        model.addAttribute(Common.P_NEXT_ID, nextId);
         model.addAttribute("cancelUrl", URL.createLinkToZeugnisUrl(halbjahrId,
                 klassenId, schuelerId));
     }
@@ -106,6 +116,9 @@ public class AvSvBewertungController {
      * @param halbjahrId die Id des Schulhalbjahres
      * @param klassenId die Id der Klasse
      * @param schuelerId die Id des Schuelers
+     * @param action String der angibt was zu tun ist.
+     * @param prevId die Id des vorherigen Schülers
+     * @param nextId die Id des nachfolgenden Schülers
      * @param avSvForm Datencontainer für die AvSv-Daten.
      * @param result das Bindingresult.
      * @param model das Model
@@ -116,6 +129,9 @@ public class AvSvBewertungController {
             .P_HALBJAHR_ID) Long halbjahrId,
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
+            @RequestParam(Common.P_PREV_ID) Long prevId,
+            @RequestParam(Common.P_NEXT_ID) Long nextId,
+            @RequestParam(value = Common.P_ACTION, required = false) String action,
             @ModelAttribute("avSvForm") AvSvForm avSvForm,
             BindingResult result, Model model) {
         validator.validate(avSvForm, result);
@@ -123,12 +139,14 @@ public class AvSvBewertungController {
         //man nur einen "Field error in object 'avSvForm' on field 'avSvBewertungen'"
         //Man bräuchte aber avSvBwertungen[0].beurteilung
         if (result.hasErrors()) {
-            fillModel(model, avSvForm, halbjahrId, klassenId, schuelerId);
+            fillModel(model, avSvForm, halbjahrId, klassenId, schuelerId, prevId, nextId);
             return EDIT_ZEUGNIS_AV_SV_VIEW;
         }
 
         avSvBewertungService.save(avSvForm.getAvSvBewertungen());
-        return URL.createRedirectToZeugnisUrl(halbjahrId, klassenId, schuelerId);
+        return URL.getPrevNextUrlOrZeugnisUrl(action,
+                URL.ZeugnisPath.ZEUGNIS_EDIT_AV_SV, halbjahrId,
+                klassenId, schuelerId, prevId, nextId);
     }
 
     /**
@@ -140,8 +158,8 @@ public class AvSvBewertungController {
         private List<AvSvBewertung> avSvBewertungen;
 
         private Schueler schueler;
-        private Klasse klasse;
-        private Schulhalbjahr schulhalbjahr;
+        private ZeugnisFormular formular;
+
 
         /**
          * Initiates an object of type AvSvForm.
@@ -155,16 +173,14 @@ public class AvSvBewertungController {
          * Initiates an object of type AvSvForm.
          * @param avSvBewertungen die Bewertungen.
          * @param schueler der Schüler
-         * @param klasse die Klasse.
-         * @param schulhalbjahr das Schulhalbjahr.
+         * @param formular das Zeugnisformular.
          */
         public AvSvForm(List<AvSvBewertung> avSvBewertungen, Schueler schueler,
-                Klasse klasse, Schulhalbjahr schulhalbjahr) {
+                ZeugnisFormular formular) {
             super();
             this.avSvBewertungen = avSvBewertungen;
             this.schueler = schueler;
-            this.klasse = klasse;
-            this.schulhalbjahr = schulhalbjahr;
+            this.formular = formular;
         }
         /**
          * @return the avSvBewertungen
@@ -190,30 +206,23 @@ public class AvSvBewertungController {
         public void setSchueler(Schueler schueler) {
             this.schueler = schueler;
         }
+
+
         /**
-         * @return the klasse
+         * @return the formular
          */
-        public Klasse getKlasse() {
-            return klasse;
+        public ZeugnisFormular getFormular() {
+            return formular;
         }
+
+
         /**
-         * @param klasse the klasse to set
+         * @param formular the formular to set
          */
-        public void setKlasse(Klasse klasse) {
-            this.klasse = klasse;
+        public void setFormular(ZeugnisFormular formular) {
+            this.formular = formular;
         }
-        /**
-         * @return the schulhalbjahr
-         */
-        public Schulhalbjahr getSchulhalbjahr() {
-            return schulhalbjahr;
-        }
-        /**
-         * @param schulhalbjahr the schulhalbjahr to set
-         */
-        public void setSchulhalbjahr(Schulhalbjahr schulhalbjahr) {
-            this.schulhalbjahr = schulhalbjahr;
-        }
+
 
     }
 

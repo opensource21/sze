@@ -48,6 +48,9 @@ public final class StringUtil {
      * @return der bereinigte Text
      */
     public static String deleteSpecialCharaters(String text) {
+        if (StringUtils.isEmpty(text)) {
+            return text;
+        }
         return text.replaceAll("[ /äöüÄÖÜß+-]", "");
     }
 

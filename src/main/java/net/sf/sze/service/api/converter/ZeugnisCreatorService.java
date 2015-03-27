@@ -34,7 +34,7 @@ public interface ZeugnisCreatorService {
      * Erstellt die Zeugnisse fürs Schulhalbjahr und Klasse.
      * @param halbjahr das Schulhalbjahr.
      * @param klasse die Klasse.
-     * @return die Datei mit den Zeugnissen.
+     * @return die Datei mit den Zeugnissen oder <code>null</code> wenn es keine Zeugnisse gibt.
      * @throws PDFConversionException if there problems with the conversion.
      * @throws ODTConversionException if there problems with the template-engine.
      */

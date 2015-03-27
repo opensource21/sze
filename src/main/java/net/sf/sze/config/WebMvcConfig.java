@@ -18,6 +18,7 @@ import net.sf.sze.frontend.converter.SchulfachConverter;
 import net.sf.sze.frontend.converter.ZeugnisFormularConverter;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration.WebMvcAutoConfigurationAdapter;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -25,19 +26,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.repository.support.DomainClassConverter;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.format.datetime.DateFormatter;
-import org.springframework.format.support.FormattingConversionService;
-import org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor;
-import org.springframework.web.context.request.WebRequestInterceptor;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
-import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 import de.ppi.fuwesta.spring.mvc.bind.ServletBindingService;
 import de.ppi.fuwesta.spring.mvc.formatter.NonEmptyStringAnnotationFormatterFactory;
@@ -56,10 +49,9 @@ import de.ppi.fuwesta.spring.mvc.util.UrlDefinitionsToMessages;
  *
  */
 @Configuration
-@ComponentScan(basePackages = {"net.sf.sze.frontend",
-        "net.sf.oval.integration.spring", "de.ppi.fuwesta.jpa.helper"})
-@Import({RootConfig.class, SecurityConfig.class, ThymeleafConfig.class})
-public class WebMvcConfig extends WebMvcConfigurationSupport {
+@ComponentScan(basePackages = {"net.sf.oval.integration.spring", "de.ppi.fuwesta.jpa.helper"})
+@Import(SecurityConfig.class)
+public class WebMvcConfig extends WebMvcAutoConfigurationAdapter {
 
     /**
      * Page size if no other information is given.
@@ -86,26 +78,12 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
     private static final String MESSAGE_SOURCE_OVAL =
             "classpath:/net/sf/oval/Messages";
 
-    /** The Constant RESOURCES_HANDLER. */
-    private static final String RESOURCES_HANDLER = "/resources/";
-
-    /** The Constant RESOURCES_LOCATION. */
-    private static final String RESOURCES_LOCATION = RESOURCES_HANDLER + "**";
-
     /**
      * Die POM-Versions-Nr.
      */
-    @Value("${project.version}")
+    //TODO beim Test fehlt die Version
+    @Value("${project.version:0.0.7}")
     private String buildNr;
-
-    @Override
-    public RequestMappingHandlerMapping requestMappingHandlerMapping() {
-        RequestMappingHandlerMapping requestMappingHandlerMapping = super
-                .requestMappingHandlerMapping();
-        requestMappingHandlerMapping.setUseSuffixPatternMatch(false);
-        requestMappingHandlerMapping.setUseTrailingSlashMatch(true);
-        return requestMappingHandlerMapping;
-    }
 
     /**
      * Initiates the message resolver.
@@ -144,43 +122,11 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
         return messageSource;
     }
 
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler(RESOURCES_HANDLER).addResourceLocations(
-                RESOURCES_LOCATION);
-    }
-
-    /**
-     * Create an {@link OpenEntityManagerInViewInterceptor} to follow Open
-     * Session in View Patten. This isn't optimal see
-     * http://heapdump.wordpress.com
-     * /2010/04/04/should-i-use-open-session-in-view/ or
-     * http://java.dzone.com/articles/opensessioninview-antipattern but it's
-     * very common in frameworks like Grails or Play. The reason is that you
-     * doesn't need so much knowledge about JPA and there is no need to write
-     * tons of specific Dao-methods which make eager fetching.
-     *
-     * @return the {@link WebRequestInterceptor}.
-     */
-    @Bean
-    public WebRequestInterceptor openEntityManagerInViewInterceptor() {
-        return new OpenEntityManagerInViewInterceptor();
-    }
-
     /**
      * {@inheritDoc}
      */
     @Override
-    protected void addInterceptors(InterceptorRegistry registry) {
-        registry.addWebRequestInterceptor(openEntityManagerInViewInterceptor());
-        super.addInterceptors(registry);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void addArgumentResolvers(
+    public void addArgumentResolvers(
             List<HandlerMethodArgumentResolver> argumentResolvers) {
         PageableHandlerMethodArgumentResolver resolver =
                 new PageableHandlerMethodArgumentResolver();
@@ -200,7 +146,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
      * {@inheritDoc}
      */
     @Override
-    protected org.springframework.validation.Validator getValidator() {
+    public org.springframework.validation.Validator getValidator() {
         final AnnotationsConfigurer annConfig = new AnnotationsConfigurer();
         annConfig
                 .addCheckInitializationListener(SpringCheckInitializationListener.INSTANCE);
@@ -219,7 +165,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
     }
 
     @Override
-    protected void addFormatters(FormatterRegistry registry) {
+    public void addFormatters(FormatterRegistry registry) {
         registry.addFormatterForFieldAnnotation(
                 new NonEmptyStringAnnotationFormatterFactory());
         registry.addFormatter(new DateFormatter());
@@ -227,17 +173,6 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
         registry.addConverter(new ZeugnisFormularConverter());
         registry.addConverter(new SchulfachConverter());
         super.addFormatters(registry);
-    }
-
-    /**
-     * Register a mapper so that a model entity could be found by id.
-     *
-     * @return a DomainClassConverter.
-     */
-    @Bean
-    public DomainClassConverter<?> domainClassConverter() {
-        return new DomainClassConverter<FormattingConversionService>(
-                mvcConversionService());
     }
 
     /**

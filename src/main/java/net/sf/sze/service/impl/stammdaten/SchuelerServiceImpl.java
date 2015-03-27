@@ -14,6 +14,7 @@ import net.sf.sze.dao.api.stammdaten.SchuelerDao;
 import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.stammdaten.Schueler;
 import net.sf.sze.service.api.common.SchulkalenderService;
+import net.sf.sze.service.api.stammdaten.SchuelerList;
 import net.sf.sze.service.api.stammdaten.SchuelerService;
 
 import org.springframework.data.domain.Page;
@@ -91,5 +92,14 @@ public class SchuelerServiceImpl implements SchuelerService {
         schuelerDao.delete(oldSchueler);
     }
 
-
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public SchuelerList getSchuelerWithZeugnis(long halbjahrId, long klassenId,
+            Long currentSchuelerId) {
+        final List<Schueler> schueler = schuelerDao.
+                findSchuelerWithZeugnisOrdered(halbjahrId, klassenId);
+        return new SchuelerList(schueler, currentSchuelerId);
+    }
 }

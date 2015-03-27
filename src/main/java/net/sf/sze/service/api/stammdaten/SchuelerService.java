@@ -64,5 +64,15 @@ public interface SchuelerService {
      */
     void delete(Long schuelerId);
 
+    /**
+     * Liefert eine geordnete Liste von Schülern, die ein Zeugnis haben in dem
+     * entsprechenden Schuljahr (das Halbjahr muss selektierbar sein) und Halbjahr.
+     * @param halbjahrId die Halbjahrs-Id.
+     * @param klassenId die Id der Klasse.
+     * @param currentSchuelerId Id des aktuellen Schülers oder <code>null</code>,
+     *  wenn es keinen gibt.
+     * @return die geordnete Liste der Schüler.
+     */
+    SchuelerList getSchuelerWithZeugnis(long halbjahrId, long klassenId, Long currentSchuelerId);
 
 }
