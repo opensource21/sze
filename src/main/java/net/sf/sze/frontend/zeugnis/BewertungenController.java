@@ -109,6 +109,13 @@ public class BewertungenController implements ModelAttributes {
 
         final ZeugnisFormular formular = zeugnisFormularService.getZeugnisFormular(
                 halbjahrId.longValue(), klassenId.longValue());
+        if (formular == null) {
+            redirectAttributes.addFlashAttribute("message",
+                    "Es wurden keine Bewertungen gefunden.");
+            return URL.redirectWithNamedParams(URL.ZeugnisPath.START,
+                    URL.Session.P_HALBJAHR_ID, halbjahrId,
+                    URL.Session.P_KLASSEN_ID, klassenId);
+        }
         if (!formular.getSchulhalbjahr().isSelectable()) {
             redirectAttributes.addFlashAttribute("message",
                     "Das Schulhalbjahr ist nicht mehr selektierbar.");

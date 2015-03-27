@@ -753,7 +753,9 @@ public class ZeugnisController implements ModelAttributes {
             @RequestParam(URL.Session.P_KLASSEN_ID) Klasse klasse,
             RedirectAttributes redirectAttributes) {
         final File zeugnisDatei = zeugnisCreatorService.createZeugnisse(halbjahr, klasse);
-        if (zeugnisDatei.exists() && zeugnisDatei.canRead()) {
+        if (zeugnisDatei == null) {
+            redirectAttributes.addFlashAttribute(MESSAGE, "Es sind keine Zeugnisse vorhanden.");
+        } else if (zeugnisDatei.exists() && zeugnisDatei.canRead()) {
             return new FileContentView(zeugnisDatei, "Klasse_"
                     + klasse.calculateKlassenname() + ".pdf");
         } else {
