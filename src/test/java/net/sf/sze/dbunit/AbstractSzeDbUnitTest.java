@@ -9,19 +9,23 @@ import java.sql.SQLException;
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 
+import net.sf.sze.SzeServer;
+
 import org.dbunit.dataset.IDataSet;
 import org.junit.AfterClass;
 import org.junit.Rule;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 
 /**
  * Class AbstractSzeDbUnitTest
  *
  */
-@ContextConfiguration(locations = { "/test-config.xml"})
+@SpringApplicationConfiguration(classes = SzeServer.class)
+@WebAppConfiguration
 public abstract class AbstractSzeDbUnitTest extends AbstractJUnit4SpringContextTests {
 
     @Resource
@@ -30,7 +34,7 @@ public abstract class AbstractSzeDbUnitTest extends AbstractJUnit4SpringContextT
     /**
      * DB-Schema.
      */
-    @Value("${db.schema}")
+    @Value("${spring.datasource.schema}")
     private String schema;
 
     private SzeDatabase szeDatabase;

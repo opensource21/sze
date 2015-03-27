@@ -29,7 +29,7 @@ public class DefaultExceptionHandler extends BasicGlobalExceptionHandler {
      *
      */
     public DefaultExceptionHandler() {
-        super("error");
+        super("errorWithMail");
     }
 
     /**
