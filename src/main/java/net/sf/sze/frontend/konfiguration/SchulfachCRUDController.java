@@ -12,7 +12,6 @@ import net.sf.sze.frontend.base.ModelAttributes;
 import net.sf.sze.frontend.base.URL;
 import net.sf.sze.model.zeugnisconfig.Schulfach;
 import net.sf.sze.model.zeugnisconfig.Schulfachtyp;
-import net.sf.sze.service.api.common.SchulkalenderService;
 import net.sf.sze.service.api.zeugnisconfig.SchulfachService;
 
 import org.slf4j.Logger;
@@ -59,11 +58,6 @@ public class SchulfachCRUDController {
     @Resource
     private SchulfachService schulfachService;
 
-    /**
-     * Ein Schulkalenderservice.
-     */
-    @Resource
-    private SchulkalenderService schulkalenderService;
 
     /**
      * Small service which helps to bind requestdata to an object.

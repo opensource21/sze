@@ -92,7 +92,7 @@ public class ZeugnisInitialisierungServiceImplDbUnitIntegrationTest
         final Long zeugnisId2 = zeugnisDao.findByFormularSchulhalbjahrIdAndSchuelerId(
                 schulhalbjahrId, Long.valueOf(2)).getId();
         final IDataSet expected = InitZeugnis.buildInitResult(zeugnisId1, zeugnisId2,
-                zeugnisFormular.getId(), schulhalbjahrId);
+                zeugnisFormular.getId());
         checkResult(expected);
     }
 

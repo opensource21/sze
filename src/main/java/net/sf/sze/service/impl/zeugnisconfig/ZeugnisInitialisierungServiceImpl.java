@@ -8,7 +8,6 @@ import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import net.sf.sze.dao.api.stammdaten.SchuelerDao;
 import net.sf.sze.dao.api.zeugnis.AgBewertungDao;
 import net.sf.sze.dao.api.zeugnis.AvSvBewertungDao;
 import net.sf.sze.dao.api.zeugnis.BewertungDao;
@@ -20,13 +19,13 @@ import net.sf.sze.dao.api.zeugnisconfig.ZeugnisArtDao;
 import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.stammdaten.Schueler;
 import net.sf.sze.model.zeugnis.AgBewertung;
-import net.sf.sze.model.zeugnis.ZweiNiveauBewertung;
 import net.sf.sze.model.zeugnis.AvSvBewertung;
 import net.sf.sze.model.zeugnis.Bewertung;
 import net.sf.sze.model.zeugnis.DreiNiveauBewertung;
 import net.sf.sze.model.zeugnis.StandardBewertung;
 import net.sf.sze.model.zeugnis.Zeugnis;
 import net.sf.sze.model.zeugnis.ZeugnisFormular;
+import net.sf.sze.model.zeugnis.ZweiNiveauBewertung;
 import net.sf.sze.model.zeugnisconfig.ArbeitsUndSozialVerhalten;
 import net.sf.sze.model.zeugnisconfig.Arbeitsgruppe;
 import net.sf.sze.model.zeugnisconfig.Schulfach;
@@ -99,12 +98,6 @@ public class ZeugnisInitialisierungServiceImpl implements ZeugnisInitialierungsS
      */
     @Resource
     private SchulfachDao schulfachDao;
-
-    /**
-     * Dao für die {@link Schueler}.
-     */
-    @Resource
-    private SchuelerDao schuelerDao;
 
     /**
      * Dao für die {@link ZeugnisArt}.

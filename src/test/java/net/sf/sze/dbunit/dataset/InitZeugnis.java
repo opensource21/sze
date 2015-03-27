@@ -81,7 +81,7 @@ public class InitZeugnis {
 
     @SuppressWarnings("boxing")
     public static IDataSet buildInitResult(Long zeugnisId1, Long zeugnisId2,
-            Long formularId, Long halbjahrId) throws DataSetException {
+            Long formularId) throws DataSetException {
         final DataSetBuilder b = new DataSetBuilder();
         newZeugnis().Id(zeugnisId1).Version(0L).AnzahlFehltageGesamt(0).AnzahlFehltageUnentschuldigt(0).AnzahlVerspaetungen(0).BuBewertungsText("").KlassenZielAusgeschlossen(Boolean.FALSE).KlassenZielGefaehrdet(Boolean.FALSE).KlassenZielWurdeNichtErreicht(Boolean.FALSE).RuecktAuf(Boolean.TRUE).FormularId(formularId).SchuelerId(1L).ZeugnisArtId(1L).addTo(b);
         newZeugnis().Id(zeugnisId2).Version(0L).AnzahlFehltageGesamt(0).AnzahlFehltageUnentschuldigt(0).AnzahlVerspaetungen(0).BuBewertungsText("").KlassenZielAusgeschlossen(Boolean.FALSE).KlassenZielGefaehrdet(Boolean.FALSE).KlassenZielWurdeNichtErreicht(Boolean.FALSE).RuecktAuf(Boolean.TRUE).FormularId(formularId).SchuelerId(2L).ZeugnisArtId(1L).addTo(b);

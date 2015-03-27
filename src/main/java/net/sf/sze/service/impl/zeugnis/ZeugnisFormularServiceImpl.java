@@ -10,7 +10,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import net.sf.sze.dao.api.stammdaten.KlasseDao;
 import net.sf.sze.dao.api.zeugnis.SchulfachDetailInfoDao;
 import net.sf.sze.dao.api.zeugnis.ZeugnisFormularDao;
 import net.sf.sze.dao.api.zeugnisconfig.SchulhalbjahrDao;
@@ -47,10 +46,6 @@ public class ZeugnisFormularServiceImpl implements ZeugnisFormularService {
     /** Das Dao für {@link SchulfachDetailInfo}. */
     @Resource
     private SchulfachDetailInfoDao schulfachDetailInfoDao;
-
-    /** Das Dao für {@link Klasse}. */
-    @Resource
-    private KlasseDao klasseDao;
 
     /** Der Service für {@link Klasse}.*/
     @Resource
