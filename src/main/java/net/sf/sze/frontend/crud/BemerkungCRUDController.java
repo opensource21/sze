@@ -79,9 +79,6 @@ public class BemerkungCRUDController {
 
         model.addAttribute("pageRequest", pageRequest);
         model.addAttribute("bemerkungList", bemerkungList);
-        // model.addAttribute("viewUrl", URL.Bemerkung.VIEW);
-        // model.addAttribute("editUrl", URL.Bemerkung.EDIT);
-        // model.addAttribute("deleteUrl", URL.Bemerkung.DELETE);
         return "example/bemerkung/list";
     }
 
@@ -208,8 +205,6 @@ public class BemerkungCRUDController {
         }
 
         model.addAttribute("bemerkung", bemerkung);
-//      model.addAttribute("posts", bemerkungService.getPostingSelectOptions());
-//      model.addAttribute("sexList", Sex.values());
         model.addAttribute("disabled", Boolean.valueOf(disabled));
         model.addAttribute("url", url);
     }
