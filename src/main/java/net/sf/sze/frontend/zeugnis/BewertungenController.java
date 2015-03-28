@@ -157,15 +157,12 @@ public class BewertungenController implements ModelAttributes {
      * Zeigt die Bewertungen der Klasse in dem Halbjahr.
      * @param halbjahrId die Id des Schulhalbjahres
      * @param klassenId die Id der Klasse
-     * @param model das Model
-     * @param redirectAttributes Fehlermeldungen.
      * @return die logische View
      */
     @RequestMapping(value = URL.Bewertungen.LIST, method = RequestMethod.GET)
     public String showBewertungen(@RequestParam(URL.Session
             .P_HALBJAHR_ID) Long halbjahrId, @RequestParam(URL.Session
-            .P_KLASSEN_ID) Long klassenId, Model model,
-            RedirectAttributes redirectAttributes) {
+            .P_KLASSEN_ID) Long klassenId) {
         return URL.redirectWithNamedParams(URL.BewertungenPath.LIST,
                 URL.Session.P_HALBJAHR_ID, halbjahrId,
                 URL.Session.P_KLASSEN_ID, klassenId);

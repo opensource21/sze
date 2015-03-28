@@ -240,7 +240,6 @@ public class BemerkungController implements ModelAttributes {
      * @param schuelerId die Id des Schuelers
      * @param bemerkungsId die Id der Bemerkung
      * @param bemerkung die zu speichernde Bemerkung.
-     * @param action die als nächstes auszuführende Aktion.
      * @param result das Bindingresult.
      * @param model das Model
      * @return die logische View
@@ -252,7 +251,6 @@ public class BemerkungController implements ModelAttributes {
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
             @PathVariable(URL.ZeugnisPath.P_BEMERKUNGS_ID) Long bemerkungsId,
             @ModelAttribute(BEMERKUNG) Bemerkung bemerkung, BindingResult result,
-            @RequestParam(value = URL.Common.P_ACTION, required = false) String action,
              Model model) {
         validator.validate(bemerkung, result);
 

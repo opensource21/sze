@@ -144,6 +144,7 @@ public class ZeugnisController implements ModelAttributes {
     public String chooseClass(@PathVariable(URL.Session
             .P_HALBJAHR_ID) Long halbjahrId, @PathVariable(URL.Session
             .P_KLASSEN_ID) Long klassenId, Model model) {
+        LOG.debug("ChooseClass mit HalbjahrId {} und KlassenId {}", halbjahrId, klassenId);
         final List<Schulhalbjahr> halbjahre = zeugnisErfassungsService
                 .getActiveSchulhalbjahre();
         if (CollectionUtils.isEmpty(halbjahre)) {
@@ -236,15 +237,12 @@ public class ZeugnisController implements ModelAttributes {
      * Zeigt das Zeugnis des ersten Schülers der Klasse in dem Halbjahr.
      * @param halbjahrId die Id des Schulhalbjahres
      * @param klassenId die Id der Klasse
-     * @param model das Model
-     * @param redirectAttributes Fehlermeldungen.
      * @return die logische View
      */
     @RequestMapping(value = URL.Zeugnis.SHOW, method = RequestMethod.GET)
     public String showZeugnis(@RequestParam(URL.Session
             .P_HALBJAHR_ID) Long halbjahrId, @RequestParam(URL.Session
-            .P_KLASSEN_ID) Long klassenId, Model model,
-            RedirectAttributes redirectAttributes) {
+            .P_KLASSEN_ID) Long klassenId) {
         return URL.redirectWithNamedParams(URL.ZeugnisPath.SHOW,
                 URL.Session.P_HALBJAHR_ID, halbjahrId,
                 URL.Session.P_KLASSEN_ID, klassenId);
@@ -605,8 +603,6 @@ public class ZeugnisController implements ModelAttributes {
      * @param klassenId die Id der Klasse
      * @param schuelerId die Id des Schuelers
      * @param newZeugnis als Container für die AG-Bewertungen.
-     * @param result das Bindingresult.
-     * @param model das Model
      * @return die logische View
      */
     @RequestMapping(value = URL.ZeugnisPath.ZEUGNIS_EDIT_AGS, method = RequestMethod.POST)
@@ -614,7 +610,7 @@ public class ZeugnisController implements ModelAttributes {
             .P_HALBJAHR_ID) Long halbjahrId,
             @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
-            Zeugnis newZeugnis, BindingResult result, Model model) {
+            Zeugnis newZeugnis) {
         //Die Validierung ist nicht sinnvoll, da nichts schief gehen kann.
         //Wenn man eine Validierung wollte müsste man sicherstellen, dass auch
         //die Liste validiert wird, was so nicht erfolgt. Ein Form-Object wäre sinnvoll.
