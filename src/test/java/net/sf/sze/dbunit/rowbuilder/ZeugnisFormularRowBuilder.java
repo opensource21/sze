@@ -1,7 +1,6 @@
 package net.sf.sze.dbunit.rowbuilder;
 
 import org.dbunit.dataset.builder.BasicDataRowBuilder;
-import org.dbunit.validator.IValidator;
 import java.sql.Date;
 
 public class ZeugnisFormularRowBuilder extends BasicDataRowBuilder {
@@ -43,27 +42,12 @@ public class ZeugnisFormularRowBuilder extends BasicDataRowBuilder {
         return this;
     }
 
-    public final ZeugnisFormularRowBuilder AusgabeDatum (IValidator<?> value) {
-        with(C_AUSGABE_DATUM, value);
-        return this;
-    }
-
     public final ZeugnisFormularRowBuilder Beschreibung (String value) {
         with(C_BESCHREIBUNG, value);
         return this;
     }
 
-    public final ZeugnisFormularRowBuilder Beschreibung (IValidator<?> value) {
-        with(C_BESCHREIBUNG, value);
-        return this;
-    }
-
-    public final ZeugnisFormularRowBuilder Id (Long value) {
-        with(C_ID, value);
-        return this;
-    }
-
-    public final ZeugnisFormularRowBuilder Id (IValidator<?> value) {
+    public final ZeugnisFormularRowBuilder Id (Number value) {
         with(C_ID, value);
         return this;
     }
@@ -73,17 +57,7 @@ public class ZeugnisFormularRowBuilder extends BasicDataRowBuilder {
         return this;
     }
 
-    public final ZeugnisFormularRowBuilder KlassenSuffix (IValidator<?> value) {
-        with(C_KLASSEN_SUFFIX, value);
-        return this;
-    }
-
-    public final ZeugnisFormularRowBuilder KlasseId (Long value) {
-        with(C_KLASSE_ID, value);
-        return this;
-    }
-
-    public final ZeugnisFormularRowBuilder KlasseId (IValidator<?> value) {
+    public final ZeugnisFormularRowBuilder KlasseId (Number value) {
         with(C_KLASSE_ID, value);
         return this;
     }
@@ -93,17 +67,7 @@ public class ZeugnisFormularRowBuilder extends BasicDataRowBuilder {
         return this;
     }
 
-    public final ZeugnisFormularRowBuilder Leitspruch (IValidator<?> value) {
-        with(C_LEITSPRUCH, value);
-        return this;
-    }
-
     public final ZeugnisFormularRowBuilder Leitspruch2 (String value) {
-        with(C_LEITSPRUCH2, value);
-        return this;
-    }
-
-    public final ZeugnisFormularRowBuilder Leitspruch2 (IValidator<?> value) {
         with(C_LEITSPRUCH2, value);
         return this;
     }
@@ -113,17 +77,7 @@ public class ZeugnisFormularRowBuilder extends BasicDataRowBuilder {
         return this;
     }
 
-    public final ZeugnisFormularRowBuilder NachteilsAusgleichsDatum (IValidator<?> value) {
-        with(C_NACHTEILS_AUSGLEICHS_DATUM, value);
-        return this;
-    }
-
     public final ZeugnisFormularRowBuilder QuelleLeitspruch (String value) {
-        with(C_QUELLE_LEITSPRUCH, value);
-        return this;
-    }
-
-    public final ZeugnisFormularRowBuilder QuelleLeitspruch (IValidator<?> value) {
         with(C_QUELLE_LEITSPRUCH, value);
         return this;
     }
@@ -133,17 +87,7 @@ public class ZeugnisFormularRowBuilder extends BasicDataRowBuilder {
         return this;
     }
 
-    public final ZeugnisFormularRowBuilder QuelleLeitspruch2 (IValidator<?> value) {
-        with(C_QUELLE_LEITSPRUCH2, value);
-        return this;
-    }
-
-    public final ZeugnisFormularRowBuilder SchulhalbjahrId (Long value) {
-        with(C_SCHULHALBJAHR_ID, value);
-        return this;
-    }
-
-    public final ZeugnisFormularRowBuilder SchulhalbjahrId (IValidator<?> value) {
+    public final ZeugnisFormularRowBuilder SchulhalbjahrId (Number value) {
         with(C_SCHULHALBJAHR_ID, value);
         return this;
     }
@@ -153,17 +97,7 @@ public class ZeugnisFormularRowBuilder extends BasicDataRowBuilder {
         return this;
     }
 
-    public final ZeugnisFormularRowBuilder TemplateFileName (IValidator<?> value) {
-        with(C_TEMPLATE_FILE_NAME, value);
-        return this;
-    }
-
-    public final ZeugnisFormularRowBuilder Version (Long value) {
-        with(C_VERSION, value);
-        return this;
-    }
-
-    public final ZeugnisFormularRowBuilder Version (IValidator<?> value) {
+    public final ZeugnisFormularRowBuilder Version (Number value) {
         with(C_VERSION, value);
         return this;
     }

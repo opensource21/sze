@@ -1,7 +1,6 @@
 package net.sf.sze.dbunit.rowbuilder;
 
 import org.dbunit.dataset.builder.BasicDataRowBuilder;
-import org.dbunit.validator.IValidator;
 
 public class SchulfachDetailInfoRowBuilder extends BasicDataRowBuilder {
 
@@ -32,47 +31,22 @@ public class SchulfachDetailInfoRowBuilder extends BasicDataRowBuilder {
         return this;
     }
 
-    public final SchulfachDetailInfoRowBuilder DetailInfo (IValidator<?> value) {
-        with(C_DETAIL_INFO, value);
-        return this;
-    }
-
-    public final SchulfachDetailInfoRowBuilder FormularId (Long value) {
+    public final SchulfachDetailInfoRowBuilder FormularId (Number value) {
         with(C_FORMULAR_ID, value);
         return this;
     }
 
-    public final SchulfachDetailInfoRowBuilder FormularId (IValidator<?> value) {
-        with(C_FORMULAR_ID, value);
-        return this;
-    }
-
-    public final SchulfachDetailInfoRowBuilder Id (Long value) {
+    public final SchulfachDetailInfoRowBuilder Id (Number value) {
         with(C_ID, value);
         return this;
     }
 
-    public final SchulfachDetailInfoRowBuilder Id (IValidator<?> value) {
-        with(C_ID, value);
-        return this;
-    }
-
-    public final SchulfachDetailInfoRowBuilder SchulfachId (Long value) {
+    public final SchulfachDetailInfoRowBuilder SchulfachId (Number value) {
         with(C_SCHULFACH_ID, value);
         return this;
     }
 
-    public final SchulfachDetailInfoRowBuilder SchulfachId (IValidator<?> value) {
-        with(C_SCHULFACH_ID, value);
-        return this;
-    }
-
-    public final SchulfachDetailInfoRowBuilder Version (Long value) {
-        with(C_VERSION, value);
-        return this;
-    }
-
-    public final SchulfachDetailInfoRowBuilder Version (IValidator<?> value) {
+    public final SchulfachDetailInfoRowBuilder Version (Number value) {
         with(C_VERSION, value);
         return this;
     }

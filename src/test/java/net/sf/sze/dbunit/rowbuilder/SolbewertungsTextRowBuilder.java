@@ -1,7 +1,6 @@
 package net.sf.sze.dbunit.rowbuilder;
 
 import org.dbunit.dataset.builder.BasicDataRowBuilder;
-import org.dbunit.validator.IValidator;
 
 public class SolbewertungsTextRowBuilder extends BasicDataRowBuilder {
 
@@ -25,12 +24,7 @@ public class SolbewertungsTextRowBuilder extends BasicDataRowBuilder {
         addDefaultValue(C_ID, new Long("0"));
     }
 
-    public final SolbewertungsTextRowBuilder Id (Long value) {
-        with(C_ID, value);
-        return this;
-    }
-
-    public final SolbewertungsTextRowBuilder Id (IValidator<?> value) {
+    public final SolbewertungsTextRowBuilder Id (Number value) {
         with(C_ID, value);
         return this;
     }
@@ -40,27 +34,12 @@ public class SolbewertungsTextRowBuilder extends BasicDataRowBuilder {
         return this;
     }
 
-    public final SolbewertungsTextRowBuilder Name (IValidator<?> value) {
-        with(C_NAME, value);
-        return this;
-    }
-
     public final SolbewertungsTextRowBuilder Text (String value) {
         with(C_TEXT, value);
         return this;
     }
 
-    public final SolbewertungsTextRowBuilder Text (IValidator<?> value) {
-        with(C_TEXT, value);
-        return this;
-    }
-
-    public final SolbewertungsTextRowBuilder Version (Long value) {
-        with(C_VERSION, value);
-        return this;
-    }
-
-    public final SolbewertungsTextRowBuilder Version (IValidator<?> value) {
+    public final SolbewertungsTextRowBuilder Version (Number value) {
         with(C_VERSION, value);
         return this;
     }

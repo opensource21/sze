@@ -1,7 +1,6 @@
 package net.sf.sze.dbunit.rowbuilder;
 
 import org.dbunit.dataset.builder.BasicDataRowBuilder;
-import org.dbunit.validator.IValidator;
 
 public class BewertungRowBuilder extends BasicDataRowBuilder {
 
@@ -40,17 +39,7 @@ public class BewertungRowBuilder extends BasicDataRowBuilder {
         return this;
     }
 
-    public final BewertungRowBuilder Class (IValidator<?> value) {
-        with(C_CLASS, value);
-        return this;
-    }
-
-    public final BewertungRowBuilder Id (Long value) {
-        with(C_ID, value);
-        return this;
-    }
-
-    public final BewertungRowBuilder Id (IValidator<?> value) {
+    public final BewertungRowBuilder Id (Number value) {
         with(C_ID, value);
         return this;
     }
@@ -60,27 +49,12 @@ public class BewertungRowBuilder extends BasicDataRowBuilder {
         return this;
     }
 
-    public final BewertungRowBuilder Leistungsniveau (IValidator<?> value) {
-        with(C_LEISTUNGSNIVEAU, value);
-        return this;
-    }
-
     public final BewertungRowBuilder LeistungNurSchwachAusreichend (Boolean value) {
         with(C_LEISTUNG_NUR_SCHWACH_AUSREICHEND, value);
         return this;
     }
 
-    public final BewertungRowBuilder LeistungNurSchwachAusreichend (IValidator<?> value) {
-        with(C_LEISTUNG_NUR_SCHWACH_AUSREICHEND, value);
-        return this;
-    }
-
-    public final BewertungRowBuilder Note (Long value) {
-        with(C_NOTE, value);
-        return this;
-    }
-
-    public final BewertungRowBuilder Note (IValidator<?> value) {
+    public final BewertungRowBuilder Note (Number value) {
         with(C_NOTE, value);
         return this;
     }
@@ -90,17 +64,7 @@ public class BewertungRowBuilder extends BasicDataRowBuilder {
         return this;
     }
 
-    public final BewertungRowBuilder Relevant (IValidator<?> value) {
-        with(C_RELEVANT, value);
-        return this;
-    }
-
-    public final BewertungRowBuilder SchulfachId (Long value) {
-        with(C_SCHULFACH_ID, value);
-        return this;
-    }
-
-    public final BewertungRowBuilder SchulfachId (IValidator<?> value) {
+    public final BewertungRowBuilder SchulfachId (Number value) {
         with(C_SCHULFACH_ID, value);
         return this;
     }
@@ -110,27 +74,12 @@ public class BewertungRowBuilder extends BasicDataRowBuilder {
         return this;
     }
 
-    public final BewertungRowBuilder SonderNote (IValidator<?> value) {
-        with(C_SONDER_NOTE, value);
-        return this;
-    }
-
-    public final BewertungRowBuilder Version (Long value) {
+    public final BewertungRowBuilder Version (Number value) {
         with(C_VERSION, value);
         return this;
     }
 
-    public final BewertungRowBuilder Version (IValidator<?> value) {
-        with(C_VERSION, value);
-        return this;
-    }
-
-    public final BewertungRowBuilder ZeugnisId (Long value) {
-        with(C_ZEUGNIS_ID, value);
-        return this;
-    }
-
-    public final BewertungRowBuilder ZeugnisId (IValidator<?> value) {
+    public final BewertungRowBuilder ZeugnisId (Number value) {
         with(C_ZEUGNIS_ID, value);
         return this;
     }

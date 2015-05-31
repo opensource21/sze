@@ -1,7 +1,6 @@
 package net.sf.sze.dbunit.rowbuilder;
 
 import org.dbunit.dataset.builder.BasicDataRowBuilder;
-import org.dbunit.validator.IValidator;
 import java.sql.Timestamp;
 
 public class RevisionLogRowBuilder extends BasicDataRowBuilder {
@@ -39,27 +38,12 @@ public class RevisionLogRowBuilder extends BasicDataRowBuilder {
         return this;
     }
 
-    public final RevisionLogRowBuilder Action (IValidator<?> value) {
-        with(C_ACTION, value);
-        return this;
-    }
-
     public final RevisionLogRowBuilder ColumnName (String value) {
         with(C_COLUMN_NAME, value);
         return this;
     }
 
-    public final RevisionLogRowBuilder ColumnName (IValidator<?> value) {
-        with(C_COLUMN_NAME, value);
-        return this;
-    }
-
-    public final RevisionLogRowBuilder EntityId (Long value) {
-        with(C_ENTITY_ID, value);
-        return this;
-    }
-
-    public final RevisionLogRowBuilder EntityId (IValidator<?> value) {
+    public final RevisionLogRowBuilder EntityId (Number value) {
         with(C_ENTITY_ID, value);
         return this;
     }
@@ -69,17 +53,7 @@ public class RevisionLogRowBuilder extends BasicDataRowBuilder {
         return this;
     }
 
-    public final RevisionLogRowBuilder EntityName (IValidator<?> value) {
-        with(C_ENTITY_NAME, value);
-        return this;
-    }
-
-    public final RevisionLogRowBuilder Id (Long value) {
-        with(C_ID, value);
-        return this;
-    }
-
-    public final RevisionLogRowBuilder Id (IValidator<?> value) {
+    public final RevisionLogRowBuilder Id (Number value) {
         with(C_ID, value);
         return this;
     }
@@ -89,17 +63,7 @@ public class RevisionLogRowBuilder extends BasicDataRowBuilder {
         return this;
     }
 
-    public final RevisionLogRowBuilder Modificationtime (IValidator<?> value) {
-        with(C_MODIFICATIONTIME, value);
-        return this;
-    }
-
     public final RevisionLogRowBuilder NewValue (String value) {
-        with(C_NEW_VALUE, value);
-        return this;
-    }
-
-    public final RevisionLogRowBuilder NewValue (IValidator<?> value) {
         with(C_NEW_VALUE, value);
         return this;
     }
@@ -109,17 +73,7 @@ public class RevisionLogRowBuilder extends BasicDataRowBuilder {
         return this;
     }
 
-    public final RevisionLogRowBuilder OldValue (IValidator<?> value) {
-        with(C_OLD_VALUE, value);
-        return this;
-    }
-
     public final RevisionLogRowBuilder User (String value) {
-        with(C_USER, value);
-        return this;
-    }
-
-    public final RevisionLogRowBuilder User (IValidator<?> value) {
         with(C_USER, value);
         return this;
     }

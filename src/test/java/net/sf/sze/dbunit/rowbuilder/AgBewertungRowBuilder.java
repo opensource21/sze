@@ -1,7 +1,6 @@
 package net.sf.sze.dbunit.rowbuilder;
 
 import org.dbunit.dataset.builder.BasicDataRowBuilder;
-import org.dbunit.validator.IValidator;
 
 public class AgBewertungRowBuilder extends BasicDataRowBuilder {
 
@@ -27,22 +26,12 @@ public class AgBewertungRowBuilder extends BasicDataRowBuilder {
         addDefaultValue(C_ARBEITSGRUPPE_ID, new Long("0"));
     }
 
-    public final AgBewertungRowBuilder ArbeitsgruppeId (Long value) {
+    public final AgBewertungRowBuilder ArbeitsgruppeId (Number value) {
         with(C_ARBEITSGRUPPE_ID, value);
         return this;
     }
 
-    public final AgBewertungRowBuilder ArbeitsgruppeId (IValidator<?> value) {
-        with(C_ARBEITSGRUPPE_ID, value);
-        return this;
-    }
-
-    public final AgBewertungRowBuilder Id (Long value) {
-        with(C_ID, value);
-        return this;
-    }
-
-    public final AgBewertungRowBuilder Id (IValidator<?> value) {
+    public final AgBewertungRowBuilder Id (Number value) {
         with(C_ID, value);
         return this;
     }
@@ -52,27 +41,12 @@ public class AgBewertungRowBuilder extends BasicDataRowBuilder {
         return this;
     }
 
-    public final AgBewertungRowBuilder Teilgenommen (IValidator<?> value) {
-        with(C_TEILGENOMMEN, value);
-        return this;
-    }
-
-    public final AgBewertungRowBuilder Version (Long value) {
+    public final AgBewertungRowBuilder Version (Number value) {
         with(C_VERSION, value);
         return this;
     }
 
-    public final AgBewertungRowBuilder Version (IValidator<?> value) {
-        with(C_VERSION, value);
-        return this;
-    }
-
-    public final AgBewertungRowBuilder ZeugnisId (Long value) {
-        with(C_ZEUGNIS_ID, value);
-        return this;
-    }
-
-    public final AgBewertungRowBuilder ZeugnisId (IValidator<?> value) {
+    public final AgBewertungRowBuilder ZeugnisId (Number value) {
         with(C_ZEUGNIS_ID, value);
         return this;
     }

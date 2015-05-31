@@ -1,7 +1,6 @@
 package net.sf.sze.dbunit.rowbuilder;
 
 import org.dbunit.dataset.builder.BasicDataRowBuilder;
-import org.dbunit.validator.IValidator;
 
 public class ArbeitsUndSozialVerhaltenRowBuilder extends BasicDataRowBuilder {
 
@@ -29,12 +28,7 @@ public class ArbeitsUndSozialVerhaltenRowBuilder extends BasicDataRowBuilder {
         addDefaultValue(C_SORTIERUNG, new Long("0"));
     }
 
-    public final ArbeitsUndSozialVerhaltenRowBuilder Id (Long value) {
-        with(C_ID, value);
-        return this;
-    }
-
-    public final ArbeitsUndSozialVerhaltenRowBuilder Id (IValidator<?> value) {
+    public final ArbeitsUndSozialVerhaltenRowBuilder Id (Number value) {
         with(C_ID, value);
         return this;
     }
@@ -44,47 +38,22 @@ public class ArbeitsUndSozialVerhaltenRowBuilder extends BasicDataRowBuilder {
         return this;
     }
 
-    public final ArbeitsUndSozialVerhaltenRowBuilder Klassenstufen (IValidator<?> value) {
-        with(C_KLASSENSTUFEN, value);
-        return this;
-    }
-
     public final ArbeitsUndSozialVerhaltenRowBuilder Name (String value) {
         with(C_NAME, value);
         return this;
     }
 
-    public final ArbeitsUndSozialVerhaltenRowBuilder Name (IValidator<?> value) {
-        with(C_NAME, value);
-        return this;
-    }
-
-    public final ArbeitsUndSozialVerhaltenRowBuilder Sortierung (Long value) {
+    public final ArbeitsUndSozialVerhaltenRowBuilder Sortierung (Number value) {
         with(C_SORTIERUNG, value);
         return this;
     }
 
-    public final ArbeitsUndSozialVerhaltenRowBuilder Sortierung (IValidator<?> value) {
-        with(C_SORTIERUNG, value);
-        return this;
-    }
-
-    public final ArbeitsUndSozialVerhaltenRowBuilder Typ (Integer value) {
+    public final ArbeitsUndSozialVerhaltenRowBuilder Typ (Number value) {
         with(C_TYP, value);
         return this;
     }
 
-    public final ArbeitsUndSozialVerhaltenRowBuilder Typ (IValidator<?> value) {
-        with(C_TYP, value);
-        return this;
-    }
-
-    public final ArbeitsUndSozialVerhaltenRowBuilder Version (Long value) {
-        with(C_VERSION, value);
-        return this;
-    }
-
-    public final ArbeitsUndSozialVerhaltenRowBuilder Version (IValidator<?> value) {
+    public final ArbeitsUndSozialVerhaltenRowBuilder Version (Number value) {
         with(C_VERSION, value);
         return this;
     }
