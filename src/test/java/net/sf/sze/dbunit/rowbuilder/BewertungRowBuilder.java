@@ -11,6 +11,7 @@ public class BewertungRowBuilder extends BasicDataRowBuilder {
     public static final String C_LEISTUNGSNIVEAU = "LEISTUNGSNIVEAU";
     public static final String C_LEISTUNG_NUR_SCHWACH_AUSREICHEND = "LEISTUNG_NUR_SCHWACH_AUSREICHEND";
     public static final String C_NOTE = "NOTE";
+    public static final String C_PREVIOUS_BEWERTUNG = "PREVIOUS_BEWERTUNG";
     public static final String C_RELEVANT = "RELEVANT";
     public static final String C_SCHULFACH_ID = "SCHULFACH_ID";
     public static final String C_SONDER_NOTE = "SONDER_NOTE";
@@ -19,7 +20,7 @@ public class BewertungRowBuilder extends BasicDataRowBuilder {
 
     public static final String[] PRIMARY_KEY = {C_ID};
 
-    public static final String[] ALL_COLUMNS = {C_CLASS, C_ID, C_LEISTUNGSNIVEAU, C_LEISTUNG_NUR_SCHWACH_AUSREICHEND, C_NOTE, C_RELEVANT, C_SCHULFACH_ID, C_SONDER_NOTE, C_VERSION, C_ZEUGNIS_ID};
+    public static final String[] ALL_COLUMNS = {C_CLASS, C_ID, C_LEISTUNGSNIVEAU, C_LEISTUNG_NUR_SCHWACH_AUSREICHEND, C_NOTE, C_PREVIOUS_BEWERTUNG, C_RELEVANT, C_SCHULFACH_ID, C_SONDER_NOTE, C_VERSION, C_ZEUGNIS_ID};
 
     public BewertungRowBuilder(String... identifierColumns) {
         super(TABLE_NAME, identifierColumns);
@@ -56,6 +57,11 @@ public class BewertungRowBuilder extends BasicDataRowBuilder {
 
     public final BewertungRowBuilder Note (Number value) {
         with(C_NOTE, value);
+        return this;
+    }
+
+    public final BewertungRowBuilder PreviousBewertung (Number value) {
+        with(C_PREVIOUS_BEWERTUNG, value);
         return this;
     }
 
