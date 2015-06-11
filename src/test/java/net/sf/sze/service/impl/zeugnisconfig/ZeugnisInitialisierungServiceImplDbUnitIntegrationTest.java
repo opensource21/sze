@@ -54,7 +54,7 @@ public class ZeugnisInitialisierungServiceImplDbUnitIntegrationTest
      */
     @Test
     public void testInitZeugnisErstesHalbjahr() throws Exception {
-        testInitZeugnis(1);
+        testInitZeugnis(2);
     }
 
     /**
@@ -64,7 +64,7 @@ public class ZeugnisInitialisierungServiceImplDbUnitIntegrationTest
      */
     @Test
     public void testInitZeugnisZweitesHalbjahr() throws Exception {
-        testInitZeugnis(2);
+        testInitZeugnis(3);
     }
 
     /**
@@ -76,6 +76,8 @@ public class ZeugnisInitialisierungServiceImplDbUnitIntegrationTest
         cleanlyInsert(InitZeugnis.buildInitZeugnis());
         final ZeugnisFormular zeugnisFormular = zeugnisFormularDao.findOne(
                 Long.valueOf(formularId));
+        assertThat(zeugnisFormular).as("Zeugnisfomrular mit der Id " + formularId
+                + " kann nicht gefunden werden.").isNotNull();
         //Act
         ResultContainer result = zeugnisInitialierungsService.initZeugnis(zeugnisFormular);
         //Assert
