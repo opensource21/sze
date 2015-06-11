@@ -71,9 +71,10 @@ public class ZeugnisInitialisierungServiceImplDbUnitIntegrationTest
      * @param formularId
      * @throws SQLException
      */
+    //CSOFF: LineLength Ist so übersichtlicher
     private void testInitZeugnis(long formularId) throws Exception {
         //Arrange
-        cleanlyInsert(InitZeugnis.buildInitZeugnis());
+        cleanlyInsert(InitZeugnis.buildInitZeugnis(formularId == 3));
         final ZeugnisFormular zeugnisFormular = zeugnisFormularDao.findOne(
                 Long.valueOf(formularId));
         assertThat(zeugnisFormular).as("Zeugnisfomrular mit der Id " + formularId
@@ -84,7 +85,7 @@ public class ZeugnisInitialisierungServiceImplDbUnitIntegrationTest
         assertThat(result.getErrors()).isEmpty();
         assertThat(result.getMessages()).hasSize(2).contains(
                 "Für den Schüler MUSTERMANN, ERWIN und das Halbjahr "
-                 + zeugnisFormular.getSchulhalbjahr() + " wurde ein Zeugnis anlegt.",
+                        + zeugnisFormular.getSchulhalbjahr() + " wurde ein Zeugnis anlegt.",
                 "Für den Schüler MUSTERFRAU, ERNA und das Halbjahr "
                 + zeugnisFormular.getSchulhalbjahr() + " wurde ein Zeugnis anlegt.");
 
@@ -94,7 +95,7 @@ public class ZeugnisInitialisierungServiceImplDbUnitIntegrationTest
         final Long zeugnisId2 = zeugnisDao.findByFormularSchulhalbjahrIdAndSchuelerId(
                 schulhalbjahrId, Long.valueOf(2)).getId();
         final IDataSet expected = InitZeugnis.buildInitResult(zeugnisId1, zeugnisId2,
-                zeugnisFormular.getId());
+                zeugnisFormular.getId(), formularId == 3);
         checkResult(expected);
     }
 

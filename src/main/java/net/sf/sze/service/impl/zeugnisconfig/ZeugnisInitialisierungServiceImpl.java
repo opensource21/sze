@@ -158,7 +158,7 @@ public class ZeugnisInitialisierungServiceImpl implements ZeugnisInitialierungsS
                         schuelerService.getActiveSchueler(formular.getKlasse());
         final Schulhalbjahr previousSchulhalbjahr;
         final Schulhalbjahr currentSchulhalbjahr = formular.getSchulhalbjahr();
-        if (Halbjahr.Beide_Halbjahre.equals(currentSchulhalbjahr.getSchuljahr())) {
+        if (Halbjahr.Beide_Halbjahre.equals(currentSchulhalbjahr.getHalbjahr())) {
             previousSchulhalbjahr = schulhalbjahrDao.findByJahrAndHalbjahr(
                     currentSchulhalbjahr.getJahr(), Halbjahr.Erstes_Halbjahr);
         } else {
