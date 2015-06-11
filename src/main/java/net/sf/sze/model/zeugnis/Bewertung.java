@@ -19,6 +19,7 @@ import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -101,6 +102,12 @@ public abstract class Bewertung extends RevisionModel implements Serializable,
     @ManyToOne(optional = false)
     @JoinColumn(name = "zeugnis_id", nullable = false)
     private Zeugnis zeugnis;
+
+    /**
+     * Die Bewertung im letzten Zeugnis.
+     */
+    @OneToOne(optional = true)
+    private Bewertung previousBewertung;
 
     /**
      * Gets the leistung nur schwach ausreichend.
@@ -405,5 +412,19 @@ public abstract class Bewertung extends RevisionModel implements Serializable,
      */
     public List<Long> getNoten() {
         return NOTEN;
+    }
+
+    /**
+     * @return the previousBewertung
+     */
+    public Bewertung getPreviousBewertung() {
+        return previousBewertung;
+    }
+
+    /**
+     * @param previousBewertung the previousBewertung to set
+     */
+    public void setPreviousBewertung(Bewertung previousBewertung) {
+        this.previousBewertung = previousBewertung;
     }
 }

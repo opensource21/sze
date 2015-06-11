@@ -15,6 +15,7 @@ import net.sf.sze.dao.api.zeugnis.ZeugnisDao;
 import net.sf.sze.dao.api.zeugnisconfig.ArbeitsUndSozialVerhaltenDao;
 import net.sf.sze.dao.api.zeugnisconfig.ArbeitsgruppeDao;
 import net.sf.sze.dao.api.zeugnisconfig.SchulfachDao;
+import net.sf.sze.dao.api.zeugnisconfig.SchulhalbjahrDao;
 import net.sf.sze.dao.api.zeugnisconfig.ZeugnisArtDao;
 import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.stammdaten.Schueler;
@@ -28,6 +29,7 @@ import net.sf.sze.model.zeugnis.ZeugnisFormular;
 import net.sf.sze.model.zeugnis.ZweiNiveauBewertung;
 import net.sf.sze.model.zeugnisconfig.ArbeitsUndSozialVerhalten;
 import net.sf.sze.model.zeugnisconfig.Arbeitsgruppe;
+import net.sf.sze.model.zeugnisconfig.Halbjahr;
 import net.sf.sze.model.zeugnisconfig.Schulfach;
 import net.sf.sze.model.zeugnisconfig.Schulfachtyp;
 import net.sf.sze.model.zeugnisconfig.Schulhalbjahr;
@@ -136,6 +138,14 @@ public class ZeugnisInitialisierungServiceImpl implements ZeugnisInitialierungsS
     @Resource
     private AvSvBewertungDao avSvBewertungDao;
 
+    /**
+     * Dao für die {@link Schulhalbjahr}.
+     */
+    @Resource
+    private SchulhalbjahrDao schulhalbjahrDao;
+
+
+
 
     /**
      * {@inheritDoc}
@@ -146,6 +156,15 @@ public class ZeugnisInitialisierungServiceImpl implements ZeugnisInitialierungsS
         final List<ZeugnisArt> zeugnisArt = zeugnisArtDao.findAllByAktivTrueOrderBySortierungAsc();
         final List<Schueler> schueler =
                         schuelerService.getActiveSchueler(formular.getKlasse());
+        final Schulhalbjahr previousSchulhalbjahr;
+        final Schulhalbjahr currentSchulhalbjahr = formular.getSchulhalbjahr();
+        if (Halbjahr.Beide_Halbjahre.equals(currentSchulhalbjahr.getSchuljahr())) {
+            previousSchulhalbjahr = schulhalbjahrDao.findByJahrAndHalbjahr(
+                    currentSchulhalbjahr.getJahr(), Halbjahr.Erstes_Halbjahr);
+        } else {
+            previousSchulhalbjahr = schulhalbjahrDao.findByJahrAndHalbjahr(
+                    currentSchulhalbjahr.getJahr() - 1, Halbjahr.Beide_Halbjahre);
+        }
         TransactionTemplate tt = new TransactionTemplate(transactionManager);
 
         for (final Schueler einSchueler : schueler) {
@@ -155,7 +174,8 @@ public class ZeugnisInitialisierungServiceImpl implements ZeugnisInitialierungsS
                             @Override
                             public ResultContainer doInTransaction(TransactionStatus status) {
                                 return initZeugnisForSchueler(
-                                        formular, zeugnisArt.get(0),  einSchueler);
+                                        formular, previousSchulhalbjahr,
+                                        zeugnisArt.get(0),  einSchueler);
                             }
                         })
                 );
@@ -172,6 +192,7 @@ public class ZeugnisInitialisierungServiceImpl implements ZeugnisInitialierungsS
     }
 
     private ResultContainer initZeugnisForSchueler(ZeugnisFormular formular,
+            Schulhalbjahr previousSchulhalbjahr,
             ZeugnisArt zeugnisArt, Schueler schueler) {
         final ResultContainer result = new ResultContainer();
         final Schulhalbjahr halbjahr = formular.getSchulhalbjahr();
@@ -179,7 +200,13 @@ public class ZeugnisInitialisierungServiceImpl implements ZeugnisInitialierungsS
         LOG.info("Schulhalbjahr: {}, Klasse {}, Schueler{}", halbjahr, klasse, schueler);
         Zeugnis zeugnis = zeugnisDao.findByFormularSchulhalbjahrIdAndSchuelerId(
                 halbjahr.getId(), schueler.getId());
-
+        final Zeugnis previousZeugnis;
+        if (previousSchulhalbjahr == null) {
+            previousZeugnis = null;
+        } else {
+            previousZeugnis = zeugnisDao.findByFormularSchulhalbjahrIdAndSchuelerId(
+                previousSchulhalbjahr.getId(), schueler.getId());
+        }
         final int klassenstufeAsInt = klasse.calculateKlassenstufe(halbjahr.getJahr());
         final String klassenstufe = String.valueOf(klassenstufeAsInt);
         if (minimalesSchuljahr > klassenstufeAsInt || maximalesSchuljahr < klassenstufeAsInt) {
@@ -209,7 +236,7 @@ public class ZeugnisInitialisierungServiceImpl implements ZeugnisInitialierungsS
             zeugnisDao.save(zeugnis);
         }
 
-        handleBewertungen(zeugnis, klassenstufe, changeMessage);
+        handleBewertungen(previousZeugnis, zeugnis, klassenstufe, changeMessage);
 
         handleAgBewertungen(zeugnis, klassenstufe, changeMessage);
 
@@ -323,25 +350,25 @@ public class ZeugnisInitialisierungServiceImpl implements ZeugnisInitialierungsS
     }
 
     /**
+     * @param previousZeugnis das Vorgängerzeugnis.
      * @param zeugnis
      * @param klassenstufe
      * @param changeMessage
      */
-    private void handleBewertungen(Zeugnis zeugnis, final String klassenstufe,
-            final StringBuilder changeMessage) {
+    private void handleBewertungen(Zeugnis previousZeugnis, Zeugnis zeugnis,
+            final String klassenstufe, final StringBuilder changeMessage) {
         final List<Schulfach> schulfaecher = schulfachDao.findAll();
         Collections.sort(schulfaecher);
         //Sicherstellen, dass die Liste der Bewertungen gelesen wurde
         zeugnis.getBewertungen().size();
+        if (previousZeugnis != null) {
+            previousZeugnis.getBewertungen().size();
+        }
         for (Schulfach schulfach : schulfaecher) {
-            Bewertung oldBw = null;
-            for (Bewertung oldBewertung : zeugnis.getBewertungen()) {
-                if (schulfach.equals(oldBewertung.getSchulfach())) {
-                    oldBw = oldBewertung;
-                    break;
-                }
-            }
-            final Bewertung newBw = createBewertung(schulfach, klassenstufe, zeugnis);
+            final Bewertung oldBw = getBewertung(zeugnis, schulfach);
+            final Bewertung prevBewertung = getBewertung(previousZeugnis, schulfach);
+            final Bewertung newBw = createBewertung(schulfach, klassenstufe,
+                    zeugnis, prevBewertung);
             if (oldBw != null) {
                 //Pruefen, ob der Typ richtig ist.
                 if (newBw == null) {
@@ -386,7 +413,28 @@ public class ZeugnisInitialisierungServiceImpl implements ZeugnisInitialierungsS
         }
     }
 
-    private Bewertung createBewertung(Schulfach schulfach, String klassenStufe, Zeugnis zeugnis) {
+    /**
+     * Findet die zum Schulfach passende Bewertung im Zeugnis.
+     * @param zeugnis das Zeugnis
+     * @param schulfach das Schulfach.
+     * @return die passende Bewertung oder null;
+     */
+    private Bewertung getBewertung(Zeugnis zeugnis, Schulfach schulfach) {
+        if (zeugnis == null) {
+            return null;
+        }
+        Bewertung oldBw = null;
+        for (Bewertung oldBewertung : zeugnis.getBewertungen()) {
+            if (schulfach.equals(oldBewertung.getSchulfach())) {
+                oldBw = oldBewertung;
+                break;
+            }
+        }
+        return oldBw;
+    }
+
+    private Bewertung createBewertung(Schulfach schulfach, String klassenStufe,
+            Zeugnis zeugnis, Bewertung previousBewertung) {
         Bewertung result = null;
         if (schulfach.convertStufenMitStandardBewertungToList().contains(klassenStufe)) {
             result = new StandardBewertung();
@@ -397,6 +445,7 @@ public class ZeugnisInitialisierungServiceImpl implements ZeugnisInitialierungsS
         } else {
             return null;
         }
+        result.setPreviousBewertung(previousBewertung);
         result.setSchulfach(schulfach);
         result.setZeugnis(zeugnis);
         result.setRelevant(!Schulfachtyp.WAHLPFLICHT.equals(schulfach.getTyp()));
