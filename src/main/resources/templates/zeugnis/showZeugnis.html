@@ -64,7 +64,11 @@
                                 <a th:href="${url}" th:text="${bewertungInstance.schulfach}"></a>
                             </td>
                             <td>
-                                <a th:href="${url}" th:text="${bewertungInstance.notenDarstellung()}"></a>
+                                <small th:class="|${bewertungInstance.notenabstand &gt; 1 ? 'notebesser' : ''}
+                                                  ${bewertungInstance.notenabstand &lt; -1 ? 'noteschlechter' : ''}|"
+                                    th:utext="${bewertungInstance.previousBewertung?.notenDarstellung()}"
+                                    th:unless="${#strings.isEmpty(bewertungInstance.previousBewertung?.notenDarstellung())}"></small>
+                                <a class="notegleich" th:href="${url}" th:text="${bewertungInstance.notenDarstellung()}"></a>
                             </td>
                             </tr>
                         </div>

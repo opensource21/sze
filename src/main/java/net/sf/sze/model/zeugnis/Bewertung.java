@@ -427,4 +427,18 @@ public abstract class Bewertung extends RevisionModel implements Serializable,
     public void setPreviousBewertung(Bewertung previousBewertung) {
         this.previousBewertung = previousBewertung;
     }
+
+    /**
+     * Berechnet den Notenabstand zwischen dieser under vorherigen Bewertung,
+     * wobei negative Entwicklungen zu negativen Werten führen.
+     *
+     * @return der Abstand zwischen den Noten.
+     */
+    public int getNotenabstand() {
+        if (previousBewertung == null || previousBewertung.getNote() == null
+                || note == null) {
+            return 0;
+        }
+        return previousBewertung.getNote().intValue() - note.intValue();
+    }
 }
