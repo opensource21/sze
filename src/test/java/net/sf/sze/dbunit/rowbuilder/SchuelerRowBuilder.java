@@ -1,7 +1,6 @@
 package net.sf.sze.dbunit.rowbuilder;
 
 import org.dbunit.dataset.builder.BasicDataRowBuilder;
-import org.dbunit.validator.IValidator;
 import java.sql.Timestamp;
 
 public class SchuelerRowBuilder extends BasicDataRowBuilder {
@@ -43,17 +42,7 @@ public class SchuelerRowBuilder extends BasicDataRowBuilder {
         return this;
     }
 
-    public final SchuelerRowBuilder AbgangsDatum (IValidator<?> value) {
-        with(C_ABGANGS_DATUM, value);
-        return this;
-    }
-
     public final SchuelerRowBuilder AufnahmeDatum (Timestamp value) {
-        with(C_AUFNAHME_DATUM, value);
-        return this;
-    }
-
-    public final SchuelerRowBuilder AufnahmeDatum (IValidator<?> value) {
         with(C_AUFNAHME_DATUM, value);
         return this;
     }
@@ -63,17 +52,7 @@ public class SchuelerRowBuilder extends BasicDataRowBuilder {
         return this;
     }
 
-    public final SchuelerRowBuilder Geburtsort (IValidator<?> value) {
-        with(C_GEBURTSORT, value);
-        return this;
-    }
-
     public final SchuelerRowBuilder Geburtstag (Timestamp value) {
-        with(C_GEBURTSTAG, value);
-        return this;
-    }
-
-    public final SchuelerRowBuilder Geburtstag (IValidator<?> value) {
         with(C_GEBURTSTAG, value);
         return this;
     }
@@ -83,27 +62,12 @@ public class SchuelerRowBuilder extends BasicDataRowBuilder {
         return this;
     }
 
-    public final SchuelerRowBuilder Geschlecht (IValidator<?> value) {
-        with(C_GESCHLECHT, value);
-        return this;
-    }
-
-    public final SchuelerRowBuilder Id (Long value) {
+    public final SchuelerRowBuilder Id (Number value) {
         with(C_ID, value);
         return this;
     }
 
-    public final SchuelerRowBuilder Id (IValidator<?> value) {
-        with(C_ID, value);
-        return this;
-    }
-
-    public final SchuelerRowBuilder KlasseId (Long value) {
-        with(C_KLASSE_ID, value);
-        return this;
-    }
-
-    public final SchuelerRowBuilder KlasseId (IValidator<?> value) {
+    public final SchuelerRowBuilder KlasseId (Number value) {
         with(C_KLASSE_ID, value);
         return this;
     }
@@ -113,17 +77,7 @@ public class SchuelerRowBuilder extends BasicDataRowBuilder {
         return this;
     }
 
-    public final SchuelerRowBuilder Name (IValidator<?> value) {
-        with(C_NAME, value);
-        return this;
-    }
-
-    public final SchuelerRowBuilder Nummer (Long value) {
-        with(C_NUMMER, value);
-        return this;
-    }
-
-    public final SchuelerRowBuilder Nummer (IValidator<?> value) {
+    public final SchuelerRowBuilder Nummer (Number value) {
         with(C_NUMMER, value);
         return this;
     }
@@ -133,27 +87,12 @@ public class SchuelerRowBuilder extends BasicDataRowBuilder {
         return this;
     }
 
-    public final SchuelerRowBuilder Rufname (IValidator<?> value) {
-        with(C_RUFNAME, value);
-        return this;
-    }
-
-    public final SchuelerRowBuilder Version (Long value) {
-        with(C_VERSION, value);
-        return this;
-    }
-
-    public final SchuelerRowBuilder Version (IValidator<?> value) {
+    public final SchuelerRowBuilder Version (Number value) {
         with(C_VERSION, value);
         return this;
     }
 
     public final SchuelerRowBuilder Vorname (String value) {
-        with(C_VORNAME, value);
-        return this;
-    }
-
-    public final SchuelerRowBuilder Vorname (IValidator<?> value) {
         with(C_VORNAME, value);
         return this;
     }

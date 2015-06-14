@@ -225,6 +225,18 @@ public class SzeDatabase implements TestRule {
     }
 
     /**
+     * Print all tablenames of the database.
+     */
+    void printTableNames() {
+        try {
+            SzeDataSet.printTableNames(databaseTester.getConnection());
+        } catch (Exception e) {
+            throw new IllegalStateException("error getting connection", e);
+        }
+    }
+
+
+    /**
      * {@inheritDoc}
      */
     @Override

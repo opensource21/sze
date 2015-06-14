@@ -1,7 +1,6 @@
 package net.sf.sze.dbunit.rowbuilder;
 
 import org.dbunit.dataset.builder.BasicDataRowBuilder;
-import org.dbunit.validator.IValidator;
 
 public class KlasseRowBuilder extends BasicDataRowBuilder {
 
@@ -32,27 +31,12 @@ public class KlasseRowBuilder extends BasicDataRowBuilder {
         return this;
     }
 
-    public final KlasseRowBuilder Geschlossen (IValidator<?> value) {
-        with(C_GESCHLOSSEN, value);
-        return this;
-    }
-
-    public final KlasseRowBuilder Id (Long value) {
+    public final KlasseRowBuilder Id (Number value) {
         with(C_ID, value);
         return this;
     }
 
-    public final KlasseRowBuilder Id (IValidator<?> value) {
-        with(C_ID, value);
-        return this;
-    }
-
-    public final KlasseRowBuilder Jahrgang (Integer value) {
-        with(C_JAHRGANG, value);
-        return this;
-    }
-
-    public final KlasseRowBuilder Jahrgang (IValidator<?> value) {
+    public final KlasseRowBuilder Jahrgang (Number value) {
         with(C_JAHRGANG, value);
         return this;
     }
@@ -62,17 +46,7 @@ public class KlasseRowBuilder extends BasicDataRowBuilder {
         return this;
     }
 
-    public final KlasseRowBuilder Suffix (IValidator<?> value) {
-        with(C_SUFFIX, value);
-        return this;
-    }
-
-    public final KlasseRowBuilder Version (Long value) {
-        with(C_VERSION, value);
-        return this;
-    }
-
-    public final KlasseRowBuilder Version (IValidator<?> value) {
+    public final KlasseRowBuilder Version (Number value) {
         with(C_VERSION, value);
         return this;
     }

@@ -7,15 +7,10 @@ package net.sf.sze.service.impl.zeugnis;
 
 import javax.annotation.Resource;
 
-import net.sf.sze.dao.api.stammdaten.KlasseDao;
 import net.sf.sze.dao.api.zeugnis.SchulfachDetailInfoDao;
-import net.sf.sze.dao.api.zeugnisconfig.SchulhalbjahrDao;
-import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.zeugnis.SchulfachDetailInfo;
-import net.sf.sze.model.zeugnisconfig.Schulhalbjahr;
 import net.sf.sze.service.api.zeugnis.SchulfachDetailInfoService;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -28,27 +23,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class SchulfachDetailInfoServiceImpl implements SchulfachDetailInfoService {
 
-    /** Minimales Schuljahr. */
-    @Value("${schuljahre.min}")
-    private int minimalesSchuljahr;
-
-    /** Maximales Schuljahr. */
-    @Value("${schuljahre.max}")
-    private int maximalesSchuljahr;
-
     /** Das Dao für {@link SchulfachDetailInfo}. */
     @Resource
     private SchulfachDetailInfoDao schulfachDetailInfoDao;
-
-    /** Das Dao für {@link Klasse}.*/
-    @Resource
-    private KlasseDao klasseDao;
-
-    /** Das Dao für {@link Schulhalbjahr}.*/
-    @Resource
-    private SchulhalbjahrDao schulhalbjahrDao;
-
-
 
     /**
      * {@inheritDoc}

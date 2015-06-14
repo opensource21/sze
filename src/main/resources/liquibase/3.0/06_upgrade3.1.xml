@@ -33,4 +33,15 @@
             <column name="SCHUELER_ID"/>
         </createIndex>
     </changeSet>
+    <changeSet author="niels" id="20150611-1545-1">
+        <addColumn tableName="BEWERTUNG">
+            <column name="PREVIOUS_BEWERTUNG" type="BIGINT"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="niels" id="20150611-1545-2">
+        <addForeignKeyConstraint baseColumnNames="PREVIOUS_BEWERTUNG" baseTableName="BEWERTUNG" baseTableSchemaName="PUBLIC" constraintName="FK_BEW_PREVIOUS_BW"
+            deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
+            referencedColumnNames="ID" referencedTableName="BEWERTUNG" referencedTableSchemaName="PUBLIC"/>
+    </changeSet>
+
 </databaseChangeLog>

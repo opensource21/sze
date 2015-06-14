@@ -1,7 +1,6 @@
 package net.sf.sze.dbunit.rowbuilder;
 
 import org.dbunit.dataset.builder.BasicDataRowBuilder;
-import org.dbunit.validator.IValidator;
 
 public class BemerkungsBausteinRowBuilder extends BasicDataRowBuilder {
 
@@ -32,17 +31,7 @@ public class BemerkungsBausteinRowBuilder extends BasicDataRowBuilder {
         return this;
     }
 
-    public final BemerkungsBausteinRowBuilder Aktiv (IValidator<?> value) {
-        with(C_AKTIV, value);
-        return this;
-    }
-
-    public final BemerkungsBausteinRowBuilder Id (Long value) {
-        with(C_ID, value);
-        return this;
-    }
-
-    public final BemerkungsBausteinRowBuilder Id (IValidator<?> value) {
+    public final BemerkungsBausteinRowBuilder Id (Number value) {
         with(C_ID, value);
         return this;
     }
@@ -52,27 +41,12 @@ public class BemerkungsBausteinRowBuilder extends BasicDataRowBuilder {
         return this;
     }
 
-    public final BemerkungsBausteinRowBuilder Name (IValidator<?> value) {
-        with(C_NAME, value);
-        return this;
-    }
-
     public final BemerkungsBausteinRowBuilder Text (String value) {
         with(C_TEXT, value);
         return this;
     }
 
-    public final BemerkungsBausteinRowBuilder Text (IValidator<?> value) {
-        with(C_TEXT, value);
-        return this;
-    }
-
-    public final BemerkungsBausteinRowBuilder Version (Long value) {
-        with(C_VERSION, value);
-        return this;
-    }
-
-    public final BemerkungsBausteinRowBuilder Version (IValidator<?> value) {
+    public final BemerkungsBausteinRowBuilder Version (Number value) {
         with(C_VERSION, value);
         return this;
     }

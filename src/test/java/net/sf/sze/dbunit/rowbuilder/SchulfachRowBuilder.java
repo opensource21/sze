@@ -1,7 +1,6 @@
 package net.sf.sze.dbunit.rowbuilder;
 
 import org.dbunit.dataset.builder.BasicDataRowBuilder;
-import org.dbunit.validator.IValidator;
 
 public class SchulfachRowBuilder extends BasicDataRowBuilder {
 
@@ -30,12 +29,7 @@ public class SchulfachRowBuilder extends BasicDataRowBuilder {
         addDefaultValue(C_SORTIERUNG, new Long("0"));
     }
 
-    public final SchulfachRowBuilder Id (Long value) {
-        with(C_ID, value);
-        return this;
-    }
-
-    public final SchulfachRowBuilder Id (IValidator<?> value) {
+    public final SchulfachRowBuilder Id (Number value) {
         with(C_ID, value);
         return this;
     }
@@ -45,17 +39,7 @@ public class SchulfachRowBuilder extends BasicDataRowBuilder {
         return this;
     }
 
-    public final SchulfachRowBuilder Name (IValidator<?> value) {
-        with(C_NAME, value);
-        return this;
-    }
-
-    public final SchulfachRowBuilder Sortierung (Long value) {
-        with(C_SORTIERUNG, value);
-        return this;
-    }
-
-    public final SchulfachRowBuilder Sortierung (IValidator<?> value) {
+    public final SchulfachRowBuilder Sortierung (Number value) {
         with(C_SORTIERUNG, value);
         return this;
     }
@@ -65,17 +49,7 @@ public class SchulfachRowBuilder extends BasicDataRowBuilder {
         return this;
     }
 
-    public final SchulfachRowBuilder StufenMitDreiNiveaus (IValidator<?> value) {
-        with(C_STUFEN_MIT_DREI_NIVEAUS, value);
-        return this;
-    }
-
     public final SchulfachRowBuilder StufenMitStandardBewertung (String value) {
-        with(C_STUFEN_MIT_STANDARD_BEWERTUNG, value);
-        return this;
-    }
-
-    public final SchulfachRowBuilder StufenMitStandardBewertung (IValidator<?> value) {
         with(C_STUFEN_MIT_STANDARD_BEWERTUNG, value);
         return this;
     }
@@ -85,27 +59,12 @@ public class SchulfachRowBuilder extends BasicDataRowBuilder {
         return this;
     }
 
-    public final SchulfachRowBuilder StufenMitZweiNiveaus (IValidator<?> value) {
-        with(C_STUFEN_MIT_ZWEI_NIVEAUS, value);
-        return this;
-    }
-
-    public final SchulfachRowBuilder Typ (Integer value) {
+    public final SchulfachRowBuilder Typ (Number value) {
         with(C_TYP, value);
         return this;
     }
 
-    public final SchulfachRowBuilder Typ (IValidator<?> value) {
-        with(C_TYP, value);
-        return this;
-    }
-
-    public final SchulfachRowBuilder Version (Long value) {
-        with(C_VERSION, value);
-        return this;
-    }
-
-    public final SchulfachRowBuilder Version (IValidator<?> value) {
+    public final SchulfachRowBuilder Version (Number value) {
         with(C_VERSION, value);
         return this;
     }

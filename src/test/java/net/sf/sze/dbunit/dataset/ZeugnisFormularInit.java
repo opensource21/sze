@@ -81,7 +81,7 @@ public class ZeugnisFormularInit {
 
     public static IDataSet buildErgebnisInit1HjDataSet() throws DataSetException {
         final DataSetBuilder b = createInitZeugnisFormular1HJBuilder();
-        newZeugnisFormular().Id(3L).Version(0L)
+        newZeugnisFormular().Id(gt(2L)).Version(0L)
                 .Beschreibung("2013-14/Hj-1/Kl-7a").TemplateFileName(TEMPLATE_FILENAME_COPIED)
                 .KlasseId(2L).KlassenSuffix("a").SchulhalbjahrId(3L).addTo(b);
         newSchulfachDetailInfo().Id(gt(0)).Version(0L).FormularId(3L).SchulfachId(1L).DetailInfo(DETAIL_INFO_COPIED);
@@ -97,7 +97,7 @@ public class ZeugnisFormularInit {
     public static IDataSet buildErgebnisInit2HjDataSet() throws DataSetException {
         final DataSetBuilder b = createInitZeugnisFormular2HJBuilder();
 
-        newZeugnisFormular().Id(4L).Version(0L)
+        newZeugnisFormular().Id(gt(3L)).Version(0L)
                 .Beschreibung("2012-13/Hj-2/Kl-7c")
                 .Leitspruch(LEITSPRUCH1_COPIED).Leitspruch2(LEITSPRUCH2_COPIED)
                 .QuelleLeitspruch(QUELLE_LEITSPRUCH1_COPIED)

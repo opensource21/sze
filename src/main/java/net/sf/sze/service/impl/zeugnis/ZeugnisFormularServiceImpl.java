@@ -10,7 +10,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import net.sf.sze.dao.api.stammdaten.KlasseDao;
 import net.sf.sze.dao.api.zeugnis.SchulfachDetailInfoDao;
 import net.sf.sze.dao.api.zeugnis.ZeugnisFormularDao;
 import net.sf.sze.dao.api.zeugnisconfig.SchulhalbjahrDao;
@@ -47,10 +46,6 @@ public class ZeugnisFormularServiceImpl implements ZeugnisFormularService {
     /** Das Dao für {@link SchulfachDetailInfo}. */
     @Resource
     private SchulfachDetailInfoDao schulfachDetailInfoDao;
-
-    /** Das Dao für {@link Klasse}. */
-    @Resource
-    private KlasseDao klasseDao;
 
     /** Der Service für {@link Klasse}.*/
     @Resource
@@ -182,8 +177,6 @@ public class ZeugnisFormularServiceImpl implements ZeugnisFormularService {
      * @param klasse die Klasse.
      */
     private void createNewFormular(final Schulhalbjahr shj, Klasse klasse) {
-        final Halbjahr hj = shj.getHalbjahr();
-        final int schuljahr = shj.getJahr();
         final ZeugnisFormular formular = new ZeugnisFormular();
         formular.setKlasse(klasse);
         formular.setSchulhalbjahr(shj);
@@ -191,31 +184,53 @@ public class ZeugnisFormularServiceImpl implements ZeugnisFormularService {
         formular.setBeschreibung(shj.createRelativePathName() + "/Kl-"
                 + formular.getKlassenname());
         formular.setTemplateFileName("UNKNOWN");
-        ZeugnisFormular lastZeugnisFormular = null;
-        if (Halbjahr.Erstes_Halbjahr.equals(hj)) {
-            final List<ZeugnisFormular> lastZeugnisFormulareList = zeugnisFormularDao.
-                    findAllBySchulhalbjahrJahrAndSchulhalbjahrHalbjahrAndKlasseJahrgang(
-                    schuljahr - 1, Halbjahr.Beide_Halbjahre, klasse.getJahrgang() - 1);
-            if (!CollectionUtils.isEmpty(lastZeugnisFormulareList)) {
-                lastZeugnisFormular = lastZeugnisFormulareList.get(0);
+        final ZeugnisFormular lastZeugnisFormular = getLastZeugnisFormular(shj , klasse);
+        if (lastZeugnisFormular != null) {
+            switch (shj.getHalbjahr()) {
+            case Erstes_Halbjahr:
                 formular.setTemplateFileName(lastZeugnisFormular.getTemplateFileName());
-            }
-        } else if (Halbjahr.Beide_Halbjahre.equals(hj)) {
-            lastZeugnisFormular = zeugnisFormularDao.
-                    findBySchulhalbjahrJahrAndSchulhalbjahrHalbjahrAndKlasse(
-                    schuljahr, Halbjahr.Erstes_Halbjahr, klasse);
-            if (lastZeugnisFormular != null) {
+                break;
+            case Beide_Halbjahre:
                 formular.setLeitspruch(lastZeugnisFormular.getLeitspruch());
                 formular.setLeitspruch2(lastZeugnisFormular.getLeitspruch2());
                 formular.setQuelleLeitspruch(lastZeugnisFormular.getQuelleLeitspruch());
                 formular.setQuelleLeitspruch2(lastZeugnisFormular.getQuelleLeitspruch2());
                 formular.setTemplateFileName(lastZeugnisFormular.getTemplateFileName());
+                break;
+            default:
+                throw new IllegalStateException("Unültiges Halbjahr " + shj);
             }
-        } else {
-            throw new IllegalStateException("Unültiges hj " + hj);
         }
         zeugnisFormularDao.save(formular);
         copySchulfachDetailInfo(lastZeugnisFormular, formular);
+    }
+
+    /**
+     *
+     * {@inheritDoc}
+     */
+    @Override
+    public ZeugnisFormular getLastZeugnisFormular(final Schulhalbjahr shj, Klasse klasse) {
+        final Halbjahr currentHalbjahr = shj.getHalbjahr();
+        final int currentSchuljahr = shj.getJahr();
+        final ZeugnisFormular lastZeugnisFormular;
+        if (Halbjahr.Erstes_Halbjahr.equals(currentHalbjahr)) {
+            final List<ZeugnisFormular> lastZeugnisFormulareList = zeugnisFormularDao.
+                    findAllBySchulhalbjahrJahrAndSchulhalbjahrHalbjahrAndKlasseJahrgang(
+                    currentSchuljahr - 1, Halbjahr.Beide_Halbjahre, klasse.getJahrgang() - 1);
+            if (!CollectionUtils.isEmpty(lastZeugnisFormulareList)) {
+                lastZeugnisFormular = lastZeugnisFormulareList.get(0);
+            } else {
+                lastZeugnisFormular = null;
+            }
+        } else if (Halbjahr.Beide_Halbjahre.equals(currentHalbjahr)) {
+            lastZeugnisFormular = zeugnisFormularDao.
+                    findBySchulhalbjahrJahrAndSchulhalbjahrHalbjahrAndKlasse(
+                    currentSchuljahr, Halbjahr.Erstes_Halbjahr, klasse);
+        } else {
+            throw new IllegalStateException("Unültiges Halbjahr " + currentHalbjahr);
+        }
+        return lastZeugnisFormular;
     }
 
     /**

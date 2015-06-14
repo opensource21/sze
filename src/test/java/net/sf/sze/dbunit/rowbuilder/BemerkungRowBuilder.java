@@ -1,7 +1,6 @@
 package net.sf.sze.dbunit.rowbuilder;
 
 import org.dbunit.dataset.builder.BasicDataRowBuilder;
-import org.dbunit.validator.IValidator;
 
 public class BemerkungRowBuilder extends BasicDataRowBuilder {
 
@@ -30,12 +29,7 @@ public class BemerkungRowBuilder extends BasicDataRowBuilder {
         addDefaultValue(C_BAUSTEIN_ID, new Long("0"));
     }
 
-    public final BemerkungRowBuilder BausteinId (Long value) {
-        with(C_BAUSTEIN_ID, value);
-        return this;
-    }
-
-    public final BemerkungRowBuilder BausteinId (IValidator<?> value) {
+    public final BemerkungRowBuilder BausteinId (Number value) {
         with(C_BAUSTEIN_ID, value);
         return this;
     }
@@ -45,57 +39,27 @@ public class BemerkungRowBuilder extends BasicDataRowBuilder {
         return this;
     }
 
-    public final BemerkungRowBuilder ErSieStattNamen (IValidator<?> value) {
-        with(C_ER_SIE_STATT_NAMEN, value);
-        return this;
-    }
-
     public final BemerkungRowBuilder FreiText (String value) {
         with(C_FREI_TEXT, value);
         return this;
     }
 
-    public final BemerkungRowBuilder FreiText (IValidator<?> value) {
-        with(C_FREI_TEXT, value);
-        return this;
-    }
-
-    public final BemerkungRowBuilder Id (Long value) {
+    public final BemerkungRowBuilder Id (Number value) {
         with(C_ID, value);
         return this;
     }
 
-    public final BemerkungRowBuilder Id (IValidator<?> value) {
-        with(C_ID, value);
-        return this;
-    }
-
-    public final BemerkungRowBuilder Sortierung (Long value) {
+    public final BemerkungRowBuilder Sortierung (Number value) {
         with(C_SORTIERUNG, value);
         return this;
     }
 
-    public final BemerkungRowBuilder Sortierung (IValidator<?> value) {
-        with(C_SORTIERUNG, value);
-        return this;
-    }
-
-    public final BemerkungRowBuilder Version (Long value) {
+    public final BemerkungRowBuilder Version (Number value) {
         with(C_VERSION, value);
         return this;
     }
 
-    public final BemerkungRowBuilder Version (IValidator<?> value) {
-        with(C_VERSION, value);
-        return this;
-    }
-
-    public final BemerkungRowBuilder ZeugnisId (Long value) {
-        with(C_ZEUGNIS_ID, value);
-        return this;
-    }
-
-    public final BemerkungRowBuilder ZeugnisId (IValidator<?> value) {
+    public final BemerkungRowBuilder ZeugnisId (Number value) {
         with(C_ZEUGNIS_ID, value);
         return this;
     }

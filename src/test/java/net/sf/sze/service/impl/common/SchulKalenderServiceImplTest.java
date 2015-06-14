@@ -84,7 +84,8 @@ public class SchulKalenderServiceImplTest {
      * @param schuljahr das Schulhalbjahr.
      * @param halbjahr das Halbjahr.
      */
-    public SchulKalenderServiceImplTest(String name, Calendar refernceDay, int schuljahr,
+    public SchulKalenderServiceImplTest(@SuppressWarnings("unused") String name,
+            Calendar refernceDay, int schuljahr,
             Halbjahr halbjahr, Calendar abgangsstichtag) {
         super();
         this.refernceDay = refernceDay;

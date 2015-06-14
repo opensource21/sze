@@ -1,7 +1,6 @@
 package net.sf.sze.dbunit.rowbuilder;
 
 import org.dbunit.dataset.builder.BasicDataRowBuilder;
-import org.dbunit.validator.IValidator;
 
 public class AvSvBewertungRowBuilder extends BasicDataRowBuilder {
 
@@ -26,52 +25,27 @@ public class AvSvBewertungRowBuilder extends BasicDataRowBuilder {
         addDefaultValue(C_ARBEITS_UND_SOZIAL_VERHALTEN_ID, new Long("0"));
     }
 
-    public final AvSvBewertungRowBuilder ArbeitsUndSozialVerhaltenId (Long value) {
+    public final AvSvBewertungRowBuilder ArbeitsUndSozialVerhaltenId (Number value) {
         with(C_ARBEITS_UND_SOZIAL_VERHALTEN_ID, value);
         return this;
     }
 
-    public final AvSvBewertungRowBuilder ArbeitsUndSozialVerhaltenId (IValidator<?> value) {
-        with(C_ARBEITS_UND_SOZIAL_VERHALTEN_ID, value);
-        return this;
-    }
-
-    public final AvSvBewertungRowBuilder Beurteilung (Integer value) {
+    public final AvSvBewertungRowBuilder Beurteilung (Number value) {
         with(C_BEURTEILUNG, value);
         return this;
     }
 
-    public final AvSvBewertungRowBuilder Beurteilung (IValidator<?> value) {
-        with(C_BEURTEILUNG, value);
-        return this;
-    }
-
-    public final AvSvBewertungRowBuilder Id (Long value) {
+    public final AvSvBewertungRowBuilder Id (Number value) {
         with(C_ID, value);
         return this;
     }
 
-    public final AvSvBewertungRowBuilder Id (IValidator<?> value) {
-        with(C_ID, value);
-        return this;
-    }
-
-    public final AvSvBewertungRowBuilder Version (Long value) {
+    public final AvSvBewertungRowBuilder Version (Number value) {
         with(C_VERSION, value);
         return this;
     }
 
-    public final AvSvBewertungRowBuilder Version (IValidator<?> value) {
-        with(C_VERSION, value);
-        return this;
-    }
-
-    public final AvSvBewertungRowBuilder ZeugnisId (Long value) {
-        with(C_ZEUGNIS_ID, value);
-        return this;
-    }
-
-    public final AvSvBewertungRowBuilder ZeugnisId (IValidator<?> value) {
+    public final AvSvBewertungRowBuilder ZeugnisId (Number value) {
         with(C_ZEUGNIS_ID, value);
         return this;
     }

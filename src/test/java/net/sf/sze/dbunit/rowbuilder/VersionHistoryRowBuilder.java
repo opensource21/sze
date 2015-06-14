@@ -1,7 +1,6 @@
 package net.sf.sze.dbunit.rowbuilder;
 
 import org.dbunit.dataset.builder.BasicDataRowBuilder;
-import org.dbunit.validator.IValidator;
 import java.sql.Timestamp;
 
 public class VersionHistoryRowBuilder extends BasicDataRowBuilder {
@@ -31,17 +30,7 @@ public class VersionHistoryRowBuilder extends BasicDataRowBuilder {
         return this;
     }
 
-    public final VersionHistoryRowBuilder AppVersion (IValidator<?> value) {
-        with(C_APP_VERSION, value);
-        return this;
-    }
-
-    public final VersionHistoryRowBuilder Id (Long value) {
-        with(C_ID, value);
-        return this;
-    }
-
-    public final VersionHistoryRowBuilder Id (IValidator<?> value) {
+    public final VersionHistoryRowBuilder Id (Number value) {
         with(C_ID, value);
         return this;
     }
@@ -51,17 +40,7 @@ public class VersionHistoryRowBuilder extends BasicDataRowBuilder {
         return this;
     }
 
-    public final VersionHistoryRowBuilder InstallDate (IValidator<?> value) {
-        with(C_INSTALL_DATE, value);
-        return this;
-    }
-
-    public final VersionHistoryRowBuilder Version (Long value) {
-        with(C_VERSION, value);
-        return this;
-    }
-
-    public final VersionHistoryRowBuilder Version (IValidator<?> value) {
+    public final VersionHistoryRowBuilder Version (Number value) {
         with(C_VERSION, value);
         return this;
     }

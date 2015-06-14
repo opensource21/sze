@@ -12,7 +12,6 @@ import net.sf.sze.frontend.base.ModelAttributes;
 import net.sf.sze.frontend.base.URL;
 import net.sf.sze.model.stammdaten.Geschlecht;
 import net.sf.sze.model.stammdaten.Schueler;
-import net.sf.sze.service.api.common.SchulkalenderService;
 import net.sf.sze.service.api.stammdaten.KlasseService;
 import net.sf.sze.service.api.stammdaten.SchuelerService;
 
@@ -80,12 +79,6 @@ public class SchuelerCRUDController {
      */
     @Resource
     private KlasseService klasseService;
-
-    /**
-     * Ein Schulkalenderservice.
-     */
-    @Resource
-    private SchulkalenderService schulkalenderService;
 
     /**
      * Small service which helps to bind requestdata to an object.

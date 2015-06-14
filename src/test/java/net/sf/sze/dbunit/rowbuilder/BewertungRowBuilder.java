@@ -1,7 +1,6 @@
 package net.sf.sze.dbunit.rowbuilder;
 
 import org.dbunit.dataset.builder.BasicDataRowBuilder;
-import org.dbunit.validator.IValidator;
 
 public class BewertungRowBuilder extends BasicDataRowBuilder {
 
@@ -12,6 +11,7 @@ public class BewertungRowBuilder extends BasicDataRowBuilder {
     public static final String C_LEISTUNGSNIVEAU = "LEISTUNGSNIVEAU";
     public static final String C_LEISTUNG_NUR_SCHWACH_AUSREICHEND = "LEISTUNG_NUR_SCHWACH_AUSREICHEND";
     public static final String C_NOTE = "NOTE";
+    public static final String C_PREVIOUS_BEWERTUNG = "PREVIOUS_BEWERTUNG";
     public static final String C_RELEVANT = "RELEVANT";
     public static final String C_SCHULFACH_ID = "SCHULFACH_ID";
     public static final String C_SONDER_NOTE = "SONDER_NOTE";
@@ -20,7 +20,7 @@ public class BewertungRowBuilder extends BasicDataRowBuilder {
 
     public static final String[] PRIMARY_KEY = {C_ID};
 
-    public static final String[] ALL_COLUMNS = {C_CLASS, C_ID, C_LEISTUNGSNIVEAU, C_LEISTUNG_NUR_SCHWACH_AUSREICHEND, C_NOTE, C_RELEVANT, C_SCHULFACH_ID, C_SONDER_NOTE, C_VERSION, C_ZEUGNIS_ID};
+    public static final String[] ALL_COLUMNS = {C_CLASS, C_ID, C_LEISTUNGSNIVEAU, C_LEISTUNG_NUR_SCHWACH_AUSREICHEND, C_NOTE, C_PREVIOUS_BEWERTUNG, C_RELEVANT, C_SCHULFACH_ID, C_SONDER_NOTE, C_VERSION, C_ZEUGNIS_ID};
 
     public BewertungRowBuilder(String... identifierColumns) {
         super(TABLE_NAME, identifierColumns);
@@ -40,17 +40,7 @@ public class BewertungRowBuilder extends BasicDataRowBuilder {
         return this;
     }
 
-    public final BewertungRowBuilder Class (IValidator<?> value) {
-        with(C_CLASS, value);
-        return this;
-    }
-
-    public final BewertungRowBuilder Id (Long value) {
-        with(C_ID, value);
-        return this;
-    }
-
-    public final BewertungRowBuilder Id (IValidator<?> value) {
+    public final BewertungRowBuilder Id (Number value) {
         with(C_ID, value);
         return this;
     }
@@ -60,28 +50,18 @@ public class BewertungRowBuilder extends BasicDataRowBuilder {
         return this;
     }
 
-    public final BewertungRowBuilder Leistungsniveau (IValidator<?> value) {
-        with(C_LEISTUNGSNIVEAU, value);
-        return this;
-    }
-
     public final BewertungRowBuilder LeistungNurSchwachAusreichend (Boolean value) {
         with(C_LEISTUNG_NUR_SCHWACH_AUSREICHEND, value);
         return this;
     }
 
-    public final BewertungRowBuilder LeistungNurSchwachAusreichend (IValidator<?> value) {
-        with(C_LEISTUNG_NUR_SCHWACH_AUSREICHEND, value);
-        return this;
-    }
-
-    public final BewertungRowBuilder Note (Long value) {
+    public final BewertungRowBuilder Note (Number value) {
         with(C_NOTE, value);
         return this;
     }
 
-    public final BewertungRowBuilder Note (IValidator<?> value) {
-        with(C_NOTE, value);
+    public final BewertungRowBuilder PreviousBewertung (Number value) {
+        with(C_PREVIOUS_BEWERTUNG, value);
         return this;
     }
 
@@ -90,17 +70,7 @@ public class BewertungRowBuilder extends BasicDataRowBuilder {
         return this;
     }
 
-    public final BewertungRowBuilder Relevant (IValidator<?> value) {
-        with(C_RELEVANT, value);
-        return this;
-    }
-
-    public final BewertungRowBuilder SchulfachId (Long value) {
-        with(C_SCHULFACH_ID, value);
-        return this;
-    }
-
-    public final BewertungRowBuilder SchulfachId (IValidator<?> value) {
+    public final BewertungRowBuilder SchulfachId (Number value) {
         with(C_SCHULFACH_ID, value);
         return this;
     }
@@ -110,27 +80,12 @@ public class BewertungRowBuilder extends BasicDataRowBuilder {
         return this;
     }
 
-    public final BewertungRowBuilder SonderNote (IValidator<?> value) {
-        with(C_SONDER_NOTE, value);
-        return this;
-    }
-
-    public final BewertungRowBuilder Version (Long value) {
+    public final BewertungRowBuilder Version (Number value) {
         with(C_VERSION, value);
         return this;
     }
 
-    public final BewertungRowBuilder Version (IValidator<?> value) {
-        with(C_VERSION, value);
-        return this;
-    }
-
-    public final BewertungRowBuilder ZeugnisId (Long value) {
-        with(C_ZEUGNIS_ID, value);
-        return this;
-    }
-
-    public final BewertungRowBuilder ZeugnisId (IValidator<?> value) {
+    public final BewertungRowBuilder ZeugnisId (Number value) {
         with(C_ZEUGNIS_ID, value);
         return this;
     }

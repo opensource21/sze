@@ -1,7 +1,6 @@
 package net.sf.sze.dbunit.rowbuilder;
 
 import org.dbunit.dataset.builder.BasicDataRowBuilder;
-import org.dbunit.validator.IValidator;
 
 public class SchulamtRowBuilder extends BasicDataRowBuilder {
 
@@ -32,27 +31,12 @@ public class SchulamtRowBuilder extends BasicDataRowBuilder {
         return this;
     }
 
-    public final SchulamtRowBuilder Aktiv (IValidator<?> value) {
-        with(C_AKTIV, value);
-        return this;
-    }
-
     public final SchulamtRowBuilder BeschreibenderSatz (String value) {
         with(C_BESCHREIBENDER_SATZ, value);
         return this;
     }
 
-    public final SchulamtRowBuilder BeschreibenderSatz (IValidator<?> value) {
-        with(C_BESCHREIBENDER_SATZ, value);
-        return this;
-    }
-
-    public final SchulamtRowBuilder Id (Long value) {
-        with(C_ID, value);
-        return this;
-    }
-
-    public final SchulamtRowBuilder Id (IValidator<?> value) {
+    public final SchulamtRowBuilder Id (Number value) {
         with(C_ID, value);
         return this;
     }
@@ -62,17 +46,7 @@ public class SchulamtRowBuilder extends BasicDataRowBuilder {
         return this;
     }
 
-    public final SchulamtRowBuilder Name (IValidator<?> value) {
-        with(C_NAME, value);
-        return this;
-    }
-
-    public final SchulamtRowBuilder Version (Long value) {
-        with(C_VERSION, value);
-        return this;
-    }
-
-    public final SchulamtRowBuilder Version (IValidator<?> value) {
+    public final SchulamtRowBuilder Version (Number value) {
         with(C_VERSION, value);
         return this;
     }

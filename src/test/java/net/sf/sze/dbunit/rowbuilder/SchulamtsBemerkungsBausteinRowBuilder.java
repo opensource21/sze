@@ -1,7 +1,6 @@
 package net.sf.sze.dbunit.rowbuilder;
 
 import org.dbunit.dataset.builder.BasicDataRowBuilder;
-import org.dbunit.validator.IValidator;
 
 public class SchulamtsBemerkungsBausteinRowBuilder extends BasicDataRowBuilder {
 
@@ -34,27 +33,12 @@ public class SchulamtsBemerkungsBausteinRowBuilder extends BasicDataRowBuilder {
         return this;
     }
 
-    public final SchulamtsBemerkungsBausteinRowBuilder Aktiv (IValidator<?> value) {
-        with(C_AKTIV, value);
-        return this;
-    }
-
     public final SchulamtsBemerkungsBausteinRowBuilder BeschreibenderSatz (String value) {
         with(C_BESCHREIBENDER_SATZ, value);
         return this;
     }
 
-    public final SchulamtsBemerkungsBausteinRowBuilder BeschreibenderSatz (IValidator<?> value) {
-        with(C_BESCHREIBENDER_SATZ, value);
-        return this;
-    }
-
-    public final SchulamtsBemerkungsBausteinRowBuilder Id (Long value) {
-        with(C_ID, value);
-        return this;
-    }
-
-    public final SchulamtsBemerkungsBausteinRowBuilder Id (IValidator<?> value) {
+    public final SchulamtsBemerkungsBausteinRowBuilder Id (Number value) {
         with(C_ID, value);
         return this;
     }
@@ -64,27 +48,12 @@ public class SchulamtsBemerkungsBausteinRowBuilder extends BasicDataRowBuilder {
         return this;
     }
 
-    public final SchulamtsBemerkungsBausteinRowBuilder Name (IValidator<?> value) {
-        with(C_NAME, value);
-        return this;
-    }
-
-    public final SchulamtsBemerkungsBausteinRowBuilder Sortierung (Long value) {
+    public final SchulamtsBemerkungsBausteinRowBuilder Sortierung (Number value) {
         with(C_SORTIERUNG, value);
         return this;
     }
 
-    public final SchulamtsBemerkungsBausteinRowBuilder Sortierung (IValidator<?> value) {
-        with(C_SORTIERUNG, value);
-        return this;
-    }
-
-    public final SchulamtsBemerkungsBausteinRowBuilder Version (Long value) {
-        with(C_VERSION, value);
-        return this;
-    }
-
-    public final SchulamtsBemerkungsBausteinRowBuilder Version (IValidator<?> value) {
+    public final SchulamtsBemerkungsBausteinRowBuilder Version (Number value) {
         with(C_VERSION, value);
         return this;
     }

@@ -1,7 +1,6 @@
 package net.sf.sze.dbunit.rowbuilder;
 
 import org.dbunit.dataset.builder.BasicDataRowBuilder;
-import org.dbunit.validator.IValidator;
 
 public class ArbeitsgruppeRowBuilder extends BasicDataRowBuilder {
 
@@ -27,12 +26,7 @@ public class ArbeitsgruppeRowBuilder extends BasicDataRowBuilder {
         addDefaultValue(C_SORTIERUNG, new Long("0"));
     }
 
-    public final ArbeitsgruppeRowBuilder Id (Long value) {
-        with(C_ID, value);
-        return this;
-    }
-
-    public final ArbeitsgruppeRowBuilder Id (IValidator<?> value) {
+    public final ArbeitsgruppeRowBuilder Id (Number value) {
         with(C_ID, value);
         return this;
     }
@@ -42,37 +36,17 @@ public class ArbeitsgruppeRowBuilder extends BasicDataRowBuilder {
         return this;
     }
 
-    public final ArbeitsgruppeRowBuilder Klassenstufen (IValidator<?> value) {
-        with(C_KLASSENSTUFEN, value);
-        return this;
-    }
-
     public final ArbeitsgruppeRowBuilder Name (String value) {
         with(C_NAME, value);
         return this;
     }
 
-    public final ArbeitsgruppeRowBuilder Name (IValidator<?> value) {
-        with(C_NAME, value);
-        return this;
-    }
-
-    public final ArbeitsgruppeRowBuilder Sortierung (Long value) {
+    public final ArbeitsgruppeRowBuilder Sortierung (Number value) {
         with(C_SORTIERUNG, value);
         return this;
     }
 
-    public final ArbeitsgruppeRowBuilder Sortierung (IValidator<?> value) {
-        with(C_SORTIERUNG, value);
-        return this;
-    }
-
-    public final ArbeitsgruppeRowBuilder Version (Long value) {
-        with(C_VERSION, value);
-        return this;
-    }
-
-    public final ArbeitsgruppeRowBuilder Version (IValidator<?> value) {
+    public final ArbeitsgruppeRowBuilder Version (Number value) {
         with(C_VERSION, value);
         return this;
     }

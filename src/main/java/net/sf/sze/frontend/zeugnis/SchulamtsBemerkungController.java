@@ -233,7 +233,6 @@ public class SchulamtsBemerkungController {
      * @param schulamtsBemerkungsId die Id der Bemerkung
      * @param schulamtsBemerkung die SchulamtsBemerkung
      * @param result das Bindingresult.
-     * @param action die als nächstes auszuführende Aktion.
      * @param model das Model
      * @return die logische View
      */
@@ -244,8 +243,6 @@ public class SchulamtsBemerkungController {
             @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
             @PathVariable(URL.ZeugnisPath.P_SCHULAMTS_BEMERKUNGS_ID) Long schulamtsBemerkungsId,
             SchulamtsBemerkung schulamtsBemerkung, BindingResult result,
-            @RequestParam(value = URL.Common.P_ACTION, required = false)
-            String action,
             Model model) {
         validator.validate(schulamtsBemerkung, result);
 

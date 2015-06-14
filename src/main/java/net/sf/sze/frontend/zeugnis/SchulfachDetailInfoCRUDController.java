@@ -128,7 +128,6 @@ public class SchulfachDetailInfoCRUDController {
     @RequestMapping(value = URL.SchulfachDetailInfo.CREATE, method = RequestMethod.GET)
     public String create(Model model) {
         final SchulfachDetailInfo schulfachDetailInfo = new SchulfachDetailInfo();
-//        schulfachDetailInfo.setSchulhalbjahr(schulfachDetailInfoService.getNewestSchulhalbjahr());
         addStandardModelData(schulfachDetailInfo, URL.SchulfachDetailInfo.CREATE, false,
                     model);
         return SCHULHALBJAHR_FORM;

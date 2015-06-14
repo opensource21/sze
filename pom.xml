@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.sf.sze</groupId>
     <artifactId>sze_spring</artifactId>
-    <version>3.2.0</version>
+    <version>3.3.0</version>
     <packaging>war</packaging>
     <name>SZE</name>
     <description>Schulzeugnisersteller</description>
@@ -137,13 +137,13 @@
         <dependency>
             <groupId>org.dbunit.datasetbuilder</groupId>
             <artifactId>dbunit-datasetbuilder</artifactId>
-            <version>1.2</version>
+            <version>1.3</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.dbunit.validation</groupId>
             <artifactId>dbunit-validation</artifactId>
-            <version>0.1</version>
+            <version>0.3</version>
             <scope>test</scope>
         </dependency>
 
@@ -373,7 +373,19 @@
                 </configuration>
 
             </plugin>
-
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.7.4.201502262128</version>
+                <executions>
+                    <execution>
+                        <id>default-prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
     <reporting>

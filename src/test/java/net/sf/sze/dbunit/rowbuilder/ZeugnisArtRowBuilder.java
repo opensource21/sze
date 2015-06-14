@@ -1,7 +1,6 @@
 package net.sf.sze.dbunit.rowbuilder;
 
 import org.dbunit.dataset.builder.BasicDataRowBuilder;
-import org.dbunit.validator.IValidator;
 
 public class ZeugnisArtRowBuilder extends BasicDataRowBuilder {
 
@@ -42,27 +41,12 @@ public class ZeugnisArtRowBuilder extends BasicDataRowBuilder {
         return this;
     }
 
-    public final ZeugnisArtRowBuilder AbschlussGrad (IValidator<?> value) {
-        with(C_ABSCHLUSS_GRAD, value);
-        return this;
-    }
-
     public final ZeugnisArtRowBuilder Aktiv (Boolean value) {
         with(C_AKTIV, value);
         return this;
     }
 
-    public final ZeugnisArtRowBuilder Aktiv (IValidator<?> value) {
-        with(C_AKTIV, value);
-        return this;
-    }
-
-    public final ZeugnisArtRowBuilder Id (Long value) {
-        with(C_ID, value);
-        return this;
-    }
-
-    public final ZeugnisArtRowBuilder Id (IValidator<?> value) {
+    public final ZeugnisArtRowBuilder Id (Number value) {
         with(C_ID, value);
         return this;
     }
@@ -72,17 +56,7 @@ public class ZeugnisArtRowBuilder extends BasicDataRowBuilder {
         return this;
     }
 
-    public final ZeugnisArtRowBuilder Name (IValidator<?> value) {
-        with(C_NAME, value);
-        return this;
-    }
-
     public final ZeugnisArtRowBuilder NoteAlsTextDarstellen (Boolean value) {
-        with(C_NOTE_ALS_TEXT_DARSTELLEN, value);
-        return this;
-    }
-
-    public final ZeugnisArtRowBuilder NoteAlsTextDarstellen (IValidator<?> value) {
         with(C_NOTE_ALS_TEXT_DARSTELLEN, value);
         return this;
     }
@@ -92,27 +66,12 @@ public class ZeugnisArtRowBuilder extends BasicDataRowBuilder {
         return this;
     }
 
-    public final ZeugnisArtRowBuilder PlatzFuerSiegel (IValidator<?> value) {
-        with(C_PLATZ_FUER_SIEGEL, value);
-        return this;
-    }
-
     public final ZeugnisArtRowBuilder PrintVersetzungsbemerkung (Boolean value) {
         with(C_PRINT_VERSETZUNGSBEMERKUNG, value);
         return this;
     }
 
-    public final ZeugnisArtRowBuilder PrintVersetzungsbemerkung (IValidator<?> value) {
-        with(C_PRINT_VERSETZUNGSBEMERKUNG, value);
-        return this;
-    }
-
-    public final ZeugnisArtRowBuilder Sortierung (Long value) {
-        with(C_SORTIERUNG, value);
-        return this;
-    }
-
-    public final ZeugnisArtRowBuilder Sortierung (IValidator<?> value) {
+    public final ZeugnisArtRowBuilder Sortierung (Number value) {
         with(C_SORTIERUNG, value);
         return this;
     }
@@ -122,17 +81,7 @@ public class ZeugnisArtRowBuilder extends BasicDataRowBuilder {
         return this;
     }
 
-    public final ZeugnisArtRowBuilder Titel (IValidator<?> value) {
-        with(C_TITEL, value);
-        return this;
-    }
-
-    public final ZeugnisArtRowBuilder Version (Long value) {
-        with(C_VERSION, value);
-        return this;
-    }
-
-    public final ZeugnisArtRowBuilder Version (IValidator<?> value) {
+    public final ZeugnisArtRowBuilder Version (Number value) {
         with(C_VERSION, value);
         return this;
     }

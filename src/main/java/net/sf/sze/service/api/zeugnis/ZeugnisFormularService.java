@@ -91,4 +91,12 @@ public interface ZeugnisFormularService {
      */
     void init(Calendar referenceDay);
 
+    /**
+     * Findet das letzte Zeugnisformular für das aktuelle Schulhalbjahr und die Klasse.
+     * @param shj das aktuelle Schulhalbjahr
+     * @param klasse die Klasse.
+     * @return das letzte Zeugnisformular, wenn es eins gibt.
+     */
+    ZeugnisFormular getLastZeugnisFormular(final Schulhalbjahr shj, Klasse klasse);
+
 }
