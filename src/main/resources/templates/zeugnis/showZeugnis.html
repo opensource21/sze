@@ -69,7 +69,7 @@
                                     th:text="${bewertungInstance.previousBewertung?.notenDarstellung()}"
                                     th:unless="${#strings.isEmpty(bewertungInstance.previousBewertung?.notenDarstellung())}"
                                     th:if="${bewertungInstance.notenabstand &gt; 1 || bewertungInstance.notenabstand &lt; -1}"></small>
-                                <a class="notegleich" th:href="${url}" th:text="${bewertungInstance.notenDarstellung()}"></a>
+                                <a th:href="${url}" th:text="${bewertungInstance.notenDarstellung()}"></a>
                             </td>
                             </tr>
                         </div>

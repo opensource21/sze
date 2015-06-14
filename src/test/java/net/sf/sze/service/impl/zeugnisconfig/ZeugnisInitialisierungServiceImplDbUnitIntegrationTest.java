@@ -85,7 +85,7 @@ public class ZeugnisInitialisierungServiceImplDbUnitIntegrationTest
         assertThat(result.getErrors()).isEmpty();
         assertThat(result.getMessages()).hasSize(2).contains(
                 "Für den Schüler MUSTERMANN, ERWIN und das Halbjahr "
-                        + zeugnisFormular.getSchulhalbjahr() + " wurde ein Zeugnis anlegt.",
+                 + zeugnisFormular.getSchulhalbjahr() + " wurde ein Zeugnis anlegt.",
                 "Für den Schüler MUSTERFRAU, ERNA und das Halbjahr "
                 + zeugnisFormular.getSchulhalbjahr() + " wurde ein Zeugnis anlegt.");
 
