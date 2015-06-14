@@ -24,10 +24,10 @@ import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.builder.DataSetBuilder;
 import org.dbunit.validator.GreaterThan;
 
+@SuppressWarnings("boxing")
 public class InitZeugnis {
 
-    @SuppressWarnings("boxing")
-    public static IDataSet buildInitZeugnis() throws DataSetException {
+    public static IDataSet buildInitZeugnis(boolean addZeugnisseToFormular2) throws DataSetException {
         final DataSetBuilder b = new DataSetBuilder();
         newArbeitsgruppe().Id(1L).Version(0L).Klassenstufen("3 4 5 6 8 9 10").Name("AG Ballspiele").Sortierung(10L).addTo(b);
         newArbeitsgruppe().Id(2L).Version(0L).Klassenstufen("7 8 9 10").Name("AG Theater").Sortierung(12L).addTo(b);
@@ -55,8 +55,10 @@ public class InitZeugnis {
         newSchueler().Id(2L).Version(0L).Geburtsort("Kiel").Geburtstag(Timestamp.valueOf("2000-03-15 00:00:00.0")).Geschlecht("w").Name("MUSTERFRAU").Vorname("ERNA").KlasseId(1L).addTo(b);
 
         newSchulamt().Id(1L).Version(0L).Aktiv(Boolean.TRUE).BeschreibenderSatz("@Name@ übte das Amt @des Klassensprechers|der Klassensprecherin@ aus.").Name("Klassensprecher").addTo(b);
+
         newSchulamtsBemerkungsBaustein().Id(1L).Version(0L).Aktiv(Boolean.TRUE).BeschreibenderSatz("").Name("_LEER_").Sortierung(10L).addTo(b);
         newSchulamtsBemerkungsBaustein().Id(2L).Version(0L).Aktiv(Boolean.TRUE).BeschreibenderSatz("@Name@ zeichnete sich dabei durch große Zuverlässigkeit aus.").Name("Zuverlässigkeit").Sortierung(20L).addTo(b);
+
         newSchulfach().Id(1L).Version(0L).Name("Mathematik").Sortierung(101L).StufenMitZweiNiveaus("5 6 7 8 9 10").Typ(0).addTo(b);
         newSchulfach().Id(2L).Version(0L).Name("Deutsch").Sortierung(102L).StufenMitZweiNiveaus("5 6 7 8 9 10").StufenMitDreiNiveaus("17").Typ(0).addTo(b);
         newSchulfach().Id(3L).Version(0L).Name("Englisch").Sortierung(103L).StufenMitZweiNiveaus("5 6 7 8 9 10").Typ(0).addTo(b);
@@ -70,19 +72,57 @@ public class InitZeugnis {
         newSchulfach().Id(11L).Version(0L).Name("Kunst").Sortierung(111L).StufenMitStandardBewertung("5 6 7 8 9 10").Typ(2).addTo(b);
         newSchulfach().Id(12L).Version(0L).Name("EDV").Sortierung(112L).StufenMitStandardBewertung("7").Typ(2).addTo(b);
         newSchulfach().Id(13L).Version(0L).Name("Textiles Werken").Sortierung(114L).StufenMitStandardBewertung("5 6").Typ(2).addTo(b);
-        newSchulhalbjahr().Id(1L).Version(0L).Halbjahr(0).Jahr(2013).Selectable(Boolean.TRUE).addTo(b);
-        newSchulhalbjahr().Id(2L).Version(0L).Halbjahr(1).Jahr(2013).Selectable(Boolean.TRUE).addTo(b);
+
+        newSchulhalbjahr().Id(1L).Version(0L).Halbjahr(1).Jahr(2012).Selectable(Boolean.FALSE).addTo(b);
+        newSchulhalbjahr().Id(2L).Version(0L).Halbjahr(0).Jahr(2013).Selectable(Boolean.TRUE).addTo(b);
+        newSchulhalbjahr().Id(3L).Version(0L).Halbjahr(1).Jahr(2013).Selectable(Boolean.TRUE).addTo(b);
+
         newZeugnisArt().Id(1L).Version(0L).AbschlussGrad("").Aktiv(Boolean.TRUE).Name("Standard-Zeugnis").NoteAlsTextDarstellen(Boolean.FALSE).PlatzFuerSiegel(Boolean.FALSE).PrintVersetzungsbemerkung(Boolean.TRUE).Sortierung(10L).Titel("Zeugnis").addTo(b);
-        newZeugnisFormular().Id(1L).Version(0L).AusgabeDatum(Date.valueOf("2013-01-31")).Beschreibung("2013 erstes Halbjahr").NachteilsAusgleichsDatum(Date.valueOf("2012-09-14")).TemplateFileName("egal").KlasseId(1L).SchulhalbjahrId(1L).addTo(b);
-        newZeugnisFormular().Id(2L).Version(0L).AusgabeDatum(Date.valueOf("2013-07-01")).Beschreibung("2013 zweites Halbjahr").NachteilsAusgleichsDatum(Date.valueOf("2012-09-14")).TemplateFileName("egal").KlasseId(1L).SchulhalbjahrId(2L).addTo(b);
+
+        newZeugnisFormular().Id(1L).Version(0L).AusgabeDatum(Date.valueOf("2012-07-01")).Beschreibung("2012 zweites Halbjahr").NachteilsAusgleichsDatum(Date.valueOf("2012-09-14")).TemplateFileName("egal").KlasseId(1L).SchulhalbjahrId(1L).addTo(b);
+        newZeugnisFormular().Id(2L).Version(0L).AusgabeDatum(Date.valueOf("2013-01-31")).Beschreibung("2013 erstes Halbjahr").NachteilsAusgleichsDatum(Date.valueOf("2012-09-14")).TemplateFileName("egal").KlasseId(1L).SchulhalbjahrId(2L).addTo(b);
+        newZeugnisFormular().Id(3L).Version(0L).AusgabeDatum(Date.valueOf("2013-07-01")).Beschreibung("2013 zweites Halbjahr").NachteilsAusgleichsDatum(Date.valueOf("2012-09-14")).TemplateFileName("egal").KlasseId(1L).SchulhalbjahrId(3L).addTo(b);
+
+
+        addZeugnis(b, addZeugnisseToFormular2);
 
         return b.build();
     }
 
-    @SuppressWarnings("boxing")
+    private static void addZeugnis(final DataSetBuilder b, boolean addZeugnisseToFormular2)
+            throws DataSetException {
+        Long prevId = addZeugnisseToFormular2 ? 2L : 1L;
+        newZeugnis().Id(1L).Version(0L).AnzahlFehltageGesamt(0)
+                .AnzahlFehltageUnentschuldigt(0).AnzahlVerspaetungen(0)
+                .BuBewertungsText("").KlassenZielAusgeschlossen(Boolean.FALSE)
+                .KlassenZielGefaehrdet(Boolean.FALSE)
+                .KlassenZielWurdeNichtErreicht(Boolean.FALSE)
+                .RuecktAuf(Boolean.TRUE).FormularId(1L).SchuelerId(1L)
+                .ZeugnisArtId(1L).addTo(b);
+        newBewertung().Class("ZweiNiveauBewertung").Id(prevId).Version(0L)
+                .LeistungNurSchwachAusreichend(Boolean.FALSE).Note(1L)
+                .Leistungsniveau("G").Relevant(Boolean.TRUE).SonderNote("")
+                .SchulfachId(1L).ZeugnisId(1L).addTo(b);
+        if (addZeugnisseToFormular2) {
+            newZeugnis().Id(2L).Version(0L).AnzahlFehltageGesamt(0)
+                    .AnzahlFehltageUnentschuldigt(0).AnzahlVerspaetungen(0)
+                    .BuBewertungsText("")
+                    .KlassenZielAusgeschlossen(Boolean.FALSE)
+                    .KlassenZielGefaehrdet(Boolean.FALSE)
+                    .KlassenZielWurdeNichtErreicht(Boolean.FALSE)
+                    .RuecktAuf(Boolean.TRUE).FormularId(2L).SchuelerId(1L)
+                    .ZeugnisArtId(1L).addTo(b);
+            newBewertung().Class("ZweiNiveauBewertung").Id(1L).Version(0L)
+                    .LeistungNurSchwachAusreichend(Boolean.FALSE)
+                    .Leistungsniveau("G").Relevant(Boolean.TRUE).SonderNote("")
+                    .SchulfachId(1L).ZeugnisId(2L).addTo(b);
+        }
+    }
+
     public static IDataSet buildInitResult(Long zeugnisId1, Long zeugnisId2,
-            Long formularId) throws DataSetException {
+            Long formularId, boolean addZeugnisseToFormular2) throws DataSetException {
         final DataSetBuilder b = new DataSetBuilder();
+        addZeugnis(b, addZeugnisseToFormular2);
         newZeugnis().Id(zeugnisId1).Version(0L).AnzahlFehltageGesamt(0).AnzahlFehltageUnentschuldigt(0).AnzahlVerspaetungen(0).BuBewertungsText("").KlassenZielAusgeschlossen(Boolean.FALSE).KlassenZielGefaehrdet(Boolean.FALSE).KlassenZielWurdeNichtErreicht(Boolean.FALSE).RuecktAuf(Boolean.TRUE).FormularId(formularId).SchuelerId(1L).ZeugnisArtId(1L).addTo(b);
         newZeugnis().Id(zeugnisId2).Version(0L).AnzahlFehltageGesamt(0).AnzahlFehltageUnentschuldigt(0).AnzahlVerspaetungen(0).BuBewertungsText("").KlassenZielAusgeschlossen(Boolean.FALSE).KlassenZielGefaehrdet(Boolean.FALSE).KlassenZielWurdeNichtErreicht(Boolean.FALSE).RuecktAuf(Boolean.TRUE).FormularId(formularId).SchuelerId(2L).ZeugnisArtId(1L).addTo(b);
         newAgBewertung().Id(new GreaterThan(0)).Version(0L).Teilgenommen(Boolean.FALSE).ArbeitsgruppeId(2L).ZeugnisId(zeugnisId1).addTo(b);
@@ -93,7 +133,7 @@ public class InitZeugnis {
         newAvSvBewertung().Id(new GreaterThan(0)).Version(0L).ArbeitsUndSozialVerhaltenId(10L).ZeugnisId(zeugnisId1).addTo(b);
         newAvSvBewertung().Id(new GreaterThan(0)).Version(0L).ArbeitsUndSozialVerhaltenId(1L).ZeugnisId(zeugnisId2).addTo(b);
         newAvSvBewertung().Id(new GreaterThan(0)).Version(0L).ArbeitsUndSozialVerhaltenId(10L).ZeugnisId(zeugnisId2).addTo(b);
-        newBewertung().Class("ZweiNiveauBewertung").Id(new GreaterThan(0)).Version(0L).LeistungNurSchwachAusreichend(Boolean.FALSE).Leistungsniveau("G").Relevant(Boolean.TRUE).SonderNote("").SchulfachId(1L).ZeugnisId(zeugnisId1).addTo(b);
+        newBewertung().Class("ZweiNiveauBewertung").Id(new GreaterThan(0)).Version(0L).LeistungNurSchwachAusreichend(Boolean.FALSE).Leistungsniveau("G").Relevant(Boolean.TRUE).SonderNote("").SchulfachId(1L).ZeugnisId(zeugnisId1).PreviousBewertung(1L).addTo(b);
         newBewertung().Class("ZweiNiveauBewertung").Id(new GreaterThan(0)).Version(0L).LeistungNurSchwachAusreichend(Boolean.FALSE).Leistungsniveau("G").Relevant(Boolean.TRUE).SonderNote("").SchulfachId(2L).ZeugnisId(zeugnisId1).addTo(b);
         newBewertung().Class("ZweiNiveauBewertung").Id(new GreaterThan(0)).Version(0L).LeistungNurSchwachAusreichend(Boolean.FALSE).Leistungsniveau("G").Relevant(Boolean.TRUE).SonderNote("").SchulfachId(3L).ZeugnisId(zeugnisId1).addTo(b);
         newBewertung().Class("DreiNiveauBewertung").Id(new GreaterThan(0)).Version(0L).LeistungNurSchwachAusreichend(Boolean.FALSE).Leistungsniveau("G").Relevant(Boolean.TRUE).SonderNote("").SchulfachId(4L).ZeugnisId(zeugnisId1).addTo(b);
