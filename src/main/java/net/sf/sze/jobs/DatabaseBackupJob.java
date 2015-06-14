@@ -46,7 +46,7 @@ public class DatabaseBackupJob {
      */
     @Scheduled(cron = "${cron.dbBackup}")//
     public void backupH2Database() {
-        if (env.getProperty("db.driver").equals("org.h2.Driver")) {
+        if (env.getProperty("spring.datasource.driver-class-name").equals("org.h2.Driver")) {
             final String backupDir = env.getProperty("backupDir", "databases/backup");
              final DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss");
              final File backupFile = new File(backupDir, "sze_"

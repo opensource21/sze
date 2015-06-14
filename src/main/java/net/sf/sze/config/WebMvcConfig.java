@@ -29,6 +29,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.format.datetime.DateFormatter;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 
@@ -51,6 +52,7 @@ import de.ppi.fuwesta.spring.mvc.util.UrlDefinitionsToMessages;
 @Configuration
 @ComponentScan(basePackages = {"net.sf.oval.integration.spring", "de.ppi.fuwesta.jpa.helper"})
 @Import(SecurityConfig.class)
+@EnableScheduling
 public class WebMvcConfig extends WebMvcAutoConfigurationAdapter {
 
     /**
