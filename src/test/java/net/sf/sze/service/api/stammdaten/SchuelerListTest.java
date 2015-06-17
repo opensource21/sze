@@ -3,6 +3,7 @@ package net.sf.sze.service.api.stammdaten;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import net.sf.sze.model.stammdaten.Schueler;
@@ -17,6 +18,11 @@ import org.junit.Test;
  */
 public class SchuelerListTest {
 
+
+    /**
+     * Ein Tag in Millisekunden.
+     */
+    private static final long ONE_DAY = 24 * 60 * 60 * 1000L;
 
     /**
      * Test der SchuelerList, wenn kein aktueller Schüler existiert.
@@ -171,7 +177,75 @@ public class SchuelerListTest {
         assertThat(testee.getNextSchuelerId()).isEqualTo(6);
     }
 
+    /**
+     * Test der SchuelerList, wenn der erste Schüler inaktiv ist und der
+     * zweite der aktueller Schüler ist.
+     */
+    @Test
+    public void testSchuelerListNoCurrentSchuelerFirstInaktiv() {
+        final List<Schueler> schueler = create10Schueler();
+        schueler.get(0).setAbgangsDatum(new Date(System.currentTimeMillis() - ONE_DAY));
 
+        final SchuelerList testee = new SchuelerList(schueler, null);
+
+        assertThat(testee.getSchuelerList()).isEqualTo(schueler);
+        assertThat(testee.getPrevSchueler()).isNull();
+        assertThat(testee.getCurrentSchueler()).isEqualTo(schueler.get(1));
+        assertThat(testee.getNextSchueler()).isEqualTo(schueler.get(2));
+        assertThat(testee.isEmpty()).isFalse();
+    }
+
+    /**
+     * Test der SchuelerList, wenn der erste Schüler inaktiv ist und der
+     * zweite der aktueller Schüler ist.
+     */
+    @Test
+    public void testSchuelerListSecondCurrentSchuelerFirstInaktiv() {
+        final List<Schueler> schueler = create10Schueler();
+        schueler.get(0).setAbgangsDatum(new Date(System.currentTimeMillis() - ONE_DAY));
+
+        final SchuelerList testee = new SchuelerList(schueler, Long.valueOf(1));
+
+        assertThat(testee.getSchuelerList()).isEqualTo(schueler);
+        assertThat(testee.getPrevSchueler()).isNull();
+        assertThat(testee.getCurrentSchueler()).isEqualTo(schueler.get(1));
+        assertThat(testee.getNextSchueler()).isEqualTo(schueler.get(2));
+        assertThat(testee.isEmpty()).isFalse();
+    }
+
+    /**
+     * Test der SchuelerList, wenn der letzte Schüler aktueller Schüler ist.
+     */
+    @Test
+    public void testSchuelerListOneBeforeLastCurrentSchuelerLastInaktiv() {
+        final List<Schueler> schueler = create10Schueler();
+        schueler.get(9).setAbgangsDatum(new Date(System.currentTimeMillis() - ONE_DAY));
+
+        final SchuelerList testee = new SchuelerList(schueler, Long.valueOf(8));
+
+        assertThat(testee.getSchuelerList()).isEqualTo(schueler);
+        assertThat(testee.getPrevSchueler()).isEqualTo(schueler.get(7));
+        assertThat(testee.getCurrentSchueler()).isEqualTo(schueler.get(8));
+        assertThat(testee.getNextSchueler()).isNull();
+        assertThat(testee.isEmpty()).isFalse();
+    }
+
+    /**
+     * Test der SchuelerList, wenn der fünfte Schüler aktueller Schüler ist.
+     */
+    @Test
+    public void testSchuelerListWithCurrentSchuelerInaktiv() {
+        final List<Schueler> schueler = create10Schueler();
+        schueler.get(5).setAbgangsDatum(new Date(System.currentTimeMillis() - ONE_DAY));
+
+        final SchuelerList testee = new SchuelerList(schueler, Long.valueOf(5));
+
+        assertThat(testee.getSchuelerList()).isEqualTo(schueler);
+        assertThat(testee.getPrevSchueler()).isEqualTo(schueler.get(4));
+        assertThat(testee.getCurrentSchueler()).isEqualTo(schueler.get(5));
+        assertThat(testee.getNextSchueler()).isEqualTo(schueler.get(6));
+        assertThat(testee.isEmpty()).isFalse();
+    }
 
 
 }

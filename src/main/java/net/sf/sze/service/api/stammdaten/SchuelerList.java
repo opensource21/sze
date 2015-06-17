@@ -39,16 +39,19 @@ public class SchuelerList {
         Schueler afterSelectedSchueler = null;
         if (schuelerList != null) {
             for (Schueler schueler : schuelerList) {
-                if (selectedSchueler != null && afterSelectedSchueler == null) {
+                if (selectedSchueler != null && afterSelectedSchueler == null
+                        && schueler.isActive()) {
                     afterSelectedSchueler = schueler;
                 }
                 // Sicherstellen, dass es immer einen selektierten Schüler gibt.
                 if (currentSchuelerId == null && selectedSchueler == null) {
-                    selectedSchueler = schueler;
+                    if (schueler.isActive()) {
+                        selectedSchueler = schueler;
+                    }
                 } else if (schueler.getId().equals(currentSchuelerId)) {
                     selectedSchueler = schueler;
                 }
-                if (selectedSchueler == null) {
+                if (selectedSchueler == null && schueler.isActive()) {
                     beforeSelectedSchueler = schueler;
                 }
             }
