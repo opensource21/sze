@@ -111,3 +111,10 @@ small.notebesser {
     vertical-align:text-top;
     margin-right: 5px;
 }
+
+
+option.disabled {
+    color: grey;
+    font-style: italic;
+    text-decoration: line-through;
+}

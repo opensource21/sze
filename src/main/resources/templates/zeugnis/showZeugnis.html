@@ -29,7 +29,7 @@
                 <select class="cbauto" name="schueler_id">
                     <option th:each="item : ${schuelerListe}" th:value="${item.id}"
                         th:text="${item}" th:selected="${item.id == zeugnis.schueler.id}"
-                        th:disabled="${not item.isActive()}"></option>
+                        th:classappend="${item.isActive()?'':'disabled'}"></option>
                 </select>
                 <button type="submit" class="btn cbbutton">Aktualisieren</button>
                 <span class="btn disabled" th:if="${prevSchueler?.id==null}"><i class="prev"></i>Vorheriger Sch&uuml;ler</span>
