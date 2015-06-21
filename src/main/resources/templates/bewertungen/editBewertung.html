@@ -29,7 +29,7 @@ nextId
             <input id="type" type="hidden" th:value="${type}" name="type"/>
 
             <input id="id" type="hidden" th:value="*{id}" name="id"/>
-            <input id="previousBewertung" type="hidden" th:value="*{previousBewertung.id}" name="previousBewertung"/>
+            <input id="previousBewertung" type="hidden" th:value="*{previousBewertung?.id}" name="previousBewertung"/>
             <input id="version" type="hidden" th:value="*{version}" name="version"/>
             <input id="schulfach" type="hidden" th:value="*{schulfach.id}" name="schulfach"/>
             <input id="zeugnis" type="hidden" th:value="*{zeugnis.id}" name="zeugnis"/>
