@@ -39,7 +39,14 @@ nextId
                             th:text="${item}"></option>
 
             </select>
-            <select bs:field="#{db.Bewertung.note}" bs:label="#{net.sf.sze.model.zeugnis.Bewertung.note}" th:unless="${#lists.isEmpty(bewertung.noten)}">
+            <select shiro:lacksPermission="bewertung:seeLastNote" bs:field="#{db.Bewertung.note}" bs:label="#{net.sf.sze.model.zeugnis.Bewertung.note}" th:unless="${#lists.isEmpty(bewertung.noten)}">
+                <option value=""></option>
+                <option th:each="item : ${bewertung.noten}" th:value="${item}"
+                            th:text="${item}"></option>
+
+            </select>
+            <select shiro:hasPermission="bewertung:seeLastNote" bs:field="#{db.Bewertung.note}" bs:label="#{net.sf.sze.model.zeugnis.Bewertung.note} + ' (' +
+                    ${bewertung.previousBewertung?.notenDarstellung()} + ')'" th:unless="${#lists.isEmpty(bewertung.noten)}">
                 <option value=""></option>
                 <option th:each="item : ${bewertung.noten}" th:value="${item}"
                             th:text="${item}"></option>
