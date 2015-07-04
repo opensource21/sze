@@ -103,6 +103,7 @@ public class SecurityConfig {
         filterMap.put(URL.Zeugnis.HOME + "/**", authAndPerms + "[zeugnis:ansicht]");
         filterMap.put(URL.Bewertungen.HOME + "/**", authAndPerms + "[zeugnis:bewertung]");
         filterMap.put(URL.Bemerkung.HOME + "/**", authAndPerms + "[zeugnis:bemerkung]");
+        filterMap.put(URL.H2CONSOLE + "/**", authAndPerms + "[admin:h2console]");
         filterMap.put("/**", DefaultFilter.authc.name());
     }
 

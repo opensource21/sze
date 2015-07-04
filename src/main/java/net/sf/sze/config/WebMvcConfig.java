@@ -5,7 +5,9 @@
 
 package net.sf.sze.config;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import net.sf.oval.Validator;
@@ -17,8 +19,10 @@ import net.sf.sze.frontend.converter.KlasseConverter;
 import net.sf.sze.frontend.converter.SchulfachConverter;
 import net.sf.sze.frontend.converter.ZeugnisFormularConverter;
 
+import org.h2.server.web.WebServlet;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration.WebMvcAutoConfigurationAdapter;
+import org.springframework.boot.context.embedded.ServletRegistrationBean;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -185,5 +189,20 @@ public class WebMvcConfig extends WebMvcAutoConfigurationAdapter {
     @Bean
     public ServletBindingService servletBindingService() {
         return new ServletBindingService();
+    }
+
+    /**
+     * Servlet-Registrierung für die H2-Console.
+     * @return das Registrierungsbean.
+     */
+    @Bean
+    public ServletRegistrationBean h2servletRegistration() {
+        final ServletRegistrationBean registration =
+                new ServletRegistrationBean(new WebServlet());
+        final Map<String, String> config = new HashMap<>();
+        config.put("-webAllowOthers", "");
+        registration.setInitParameters(config);
+        registration.addUrlMappings(URL.H2CONSOLE + "/*");
+        return registration;
     }
 }
