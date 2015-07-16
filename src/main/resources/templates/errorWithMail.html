@@ -28,7 +28,7 @@
         <a mail:to="opensource21@gmail.com"
             mail:subject="#{error.subject(${{time}}, ${exceptionId})}"
             mail:body="#{error.mailbody}+${'$NL$' + url + '$NL$' + exception + '$NL$' + #strings.listJoin(stacktrace,'$NL$')}"><i class="icon-envelope"></i>EMAIL</a>
-        und anschließend zum <a href="/" th:href="@{/}"><i class="icon-home"></i>Start</a>.
+        melden und zum <a href="/" th:href="@{/}"><i class="icon-home"></i>Start</a> zurückgehen.
     </div>
     <h4 id="technicalDetailTitle">
         <span th:text="#{error.technical.title}" th:remove="tag"></span>
