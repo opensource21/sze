@@ -45,7 +45,7 @@
                 button.click();
             });
             button.hide();
-        })
+        });
      };
 
      /**
@@ -54,8 +54,8 @@
      sze.hideandshow = function () {
         $('.cbhideandshow').each(function(index ) {
             var combobox = $(this);
-            var id = combobox.attr("id")
-            var showClass = combobox.attr("data-class-show")
+            var id = combobox.attr("id");
+            var showClass = combobox.attr("data-class-show");
             var oldValue = combobox.val();
             $('#'+id + oldValue).removeClass("hide").addClass(showClass);
             combobox.change(function() {
@@ -63,7 +63,7 @@
                 oldValue = combobox.val();
                 $('#'+id + oldValue).removeClass("hide").addClass(showClass);
             });
-        })
+        });
      };
 
      /**
@@ -72,13 +72,13 @@
       */
      sze.confirmDelete = function () {
          $('button .delete').each(function(index) {
-             var myBtn = $(this).parent().get(0)
+             var myBtn = $(this).parent().get(0);
              myBtn.addEventListener('click',function(event) {
                if(!confirm('Wollen Sie wirklich löschen?'))
-                    event.preventDefault();;
-             })
-         })
-     }
+                    event.preventDefault();
+             });
+         });
+     };
 
      /**
       * Ergänzt den Datepicker.
@@ -103,7 +103,7 @@
                  minuteGrid : 10,
                  secondGrid : 10
              });
-         }
+         };
 
      /**
       * Initialisiert eine JQuery-Table mit Action-Spalte als letzte Spalte..
@@ -131,7 +131,7 @@
                    }
                  ]
          } );
-     }
+     };
 
 
 
@@ -147,8 +147,8 @@
                                      }else {
                                              $('#actionButtonToggleDetails').html('<i class="icon-chevron-down"></i>');
                                      }
-                             })
-     }
+                             });
+     };
 
      //Private
      $(function(){
