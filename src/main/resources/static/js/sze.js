@@ -49,19 +49,19 @@
      };
 
      /**
-      * Diese Funktion dient dazu passend zur Combobox-Auswahl betsimmte Werte anzuzeigen.
+      * Diese Funktion dient dazu passend zur Combobox-Auswahl bestimmte Werte anzuzeigen.
       */
      sze.hideandshow = function () {
-        $('.cbhideandshow').each(function(index ) {
+        $('.cbhideandshow').each(function(index) {
             var combobox = $(this);
             var id = combobox.attr("id");
             var showClass = combobox.attr("data-class-show");
             var oldValue = combobox.val();
-            $('#'+id + oldValue).removeClass("hide").addClass(showClass);
+            $('#' + id + oldValue).removeClass("hide").addClass(showClass);
             combobox.change(function() {
-                $('#'+id + oldValue).addClass("hide").removeClass(showClass);
+                $('#' + id + oldValue).addClass("hide").removeClass(showClass);
                 oldValue = combobox.val();
-                $('#'+id + oldValue).removeClass("hide").addClass(showClass);
+                $('#' + id + oldValue).removeClass("hide").addClass(showClass);
             });
         });
      };
@@ -139,15 +139,15 @@
       * Toggles the details by onclick.
       */
      sze.toggleTechnicalDetails=function(){
-             $('#technicalDetails').slideToggle(
-                             10,
-                             function(){
-                                     if($('#technicalDetails').is(':visible')){
-                                             $('#actionButtonToggleDetails').html('<i class="icon-chevron-up"></i>');
-                                     }else {
-                                             $('#actionButtonToggleDetails').html('<i class="icon-chevron-down"></i>');
-                                     }
-                             });
+         $('#technicalDetails').slideToggle(
+                 10,
+                 function(){
+                     if($('#technicalDetails').is(':visible')) {
+                         $('#actionButtonToggleDetails').html('<i class="icon-chevron-up"></i>');
+                     } else {
+                         $('#actionButtonToggleDetails').html('<i class="icon-chevron-down"></i>');
+                     }
+                  });
      };
 
      //Private
