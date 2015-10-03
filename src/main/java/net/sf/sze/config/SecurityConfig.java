@@ -1,16 +1,15 @@
 package net.sf.sze.config;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 import javax.servlet.Filter;
 
 import net.sf.sze.frontend.base.URL;
 import net.sf.sze.security.ActiveDirectoryAuthenticatingRealm;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authc.credential.PasswordMatcher;
 import org.apache.shiro.authc.pam.FirstSuccessfulStrategy;
 import org.apache.shiro.authc.pam.ModularRealmAuthenticator;
@@ -22,6 +21,7 @@ import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.apache.shiro.web.filter.authz.PermissionsAuthorizationFilter;
 import org.apache.shiro.web.filter.mgt.DefaultFilter;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -39,47 +39,24 @@ public class SecurityConfig {
     private final boolean enabled = true;
 
     /**
-     * Resource which contains the configuration.
-     */
-    static final String SECURITY_CONFIG = "security.properties";
-
-    /** The url to the ldap. */
-    @Value("${ldap.url}")
-    private String ldapUrl;
-
-    /** The domain used as suffix like githum.com. */
-    @Value("${domain}")
-    private String domain;
-
-    /**
      * Defines the realms.
+     *
+     * @param ldapUrl the url to the Ldap-Server
+     * @param ldapDomain the domain of the Ldap-Server
      *
      * @return a list of {@link Realm}.
      */
-    private List<Realm> defineRealms() {
+    private List<Realm> defineRealms(String ldapUrl, String ldapDomain) {
         final List<Realm> realms = new ArrayList<Realm>();
         final IniRealm iniRealm = new IniRealm("classpath:userAndRoles.ini");
         iniRealm.setCredentialsMatcher(new PasswordMatcher());
-        setVariables();
-        realms.add(new ActiveDirectoryAuthenticatingRealm(ldapUrl, domain));
+        if (StringUtils.isNotEmpty(ldapUrl) && StringUtils.isNotEmpty(ldapDomain)) {
+            realms.add(new ActiveDirectoryAuthenticatingRealm(ldapUrl, ldapDomain));
+        }
         realms.add(iniRealm);
         return realms;
     }
 
-    /**
-     * Workaround, because @Value doesn't work.
-     */
-    private void setVariables() {
-        final Properties props = new Properties();
-        try {
-            props.load(SecurityConfig.class.getClassLoader().getResourceAsStream(SECURITY_CONFIG));
-        } catch (IOException e) {
-            throw new IllegalStateException("Can't load " + SECURITY_CONFIG);
-        }
-        ldapUrl = props.getProperty("ldap.url");
-        domain = props.getProperty("domain");
-
-    }
 
     /**
      * Map urls to specific filters.
@@ -109,13 +86,17 @@ public class SecurityConfig {
 
     /**
      * Init the shiro-filter bean.
+     * @param ldapUrl the url to the Ldap-Server
+     * @param ldapDomain the domain of the Ldap-Server
      *
      * @return the shiro-filter bean.
      */
     @Bean
-    public ShiroFilterFactoryBean shiroFilter() {
+    @Autowired
+    public ShiroFilterFactoryBean shiroFilter(@Value("${ldap.url}") String ldapUrl,
+            @Value("${ldap.domain}") String ldapDomain) {
         final ShiroFilterFactoryBean result = new ShiroFilterFactoryBean();
-        result.setSecurityManager(securityManager());
+        result.setSecurityManager(securityManager(ldapUrl, ldapDomain));
         result.setLoginUrl(URL.Security.LOGIN);
         result.setSuccessUrl(URL.Zeugnis.START);
         result.setUnauthorizedUrl(URL.Security.UNAUTHORIZED);
@@ -161,16 +142,19 @@ public class SecurityConfig {
 
     /**
      * Init the security-manager which holds the realms.
+     * @param ldapUrl the url to the Ldap-Server
+     * @param ldapDomain the domain of the Ldap-Server
      *
      * @return the security-manager.
      */
-    private org.apache.shiro.mgt.SecurityManager securityManager() {
+    private org.apache.shiro.mgt.SecurityManager securityManager(String ldapUrl,
+            String ldapDomain) {
         final DefaultWebSecurityManager securityManager =
                 new DefaultWebSecurityManager();
         final ModularRealmAuthenticator mra = new ModularRealmAuthenticator();
         mra.setAuthenticationStrategy(new FirstSuccessfulStrategy());
         securityManager.setAuthenticator(mra);
-        securityManager.setRealms(defineRealms());
+        securityManager.setRealms(defineRealms(ldapUrl, ldapDomain));
         return securityManager;
     }
 
