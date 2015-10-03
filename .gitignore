@@ -7,3 +7,5 @@ target/*
 /pdffiles
 /application.properties
 /userAndRoles.ini
+/application.pid
+/application.port
