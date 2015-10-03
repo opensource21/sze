@@ -43,12 +43,15 @@ public class SecurityConfig {
      *
      * @param ldapUrl the url to the Ldap-Server
      * @param ldapDomain the domain of the Ldap-Server
+     * @param userAndRoleConfig location of the userAndRoleConfig (classpath:, file:)
+     *
+     * @see IniRealm#IniRealm(String).
      *
      * @return a list of {@link Realm}.
      */
-    private List<Realm> defineRealms(String ldapUrl, String ldapDomain) {
+    private List<Realm> defineRealms(String ldapUrl, String ldapDomain, String userAndRoleConfig) {
         final List<Realm> realms = new ArrayList<Realm>();
-        final IniRealm iniRealm = new IniRealm("classpath:userAndRoles.ini");
+        final IniRealm iniRealm = new IniRealm(userAndRoleConfig);
         iniRealm.setCredentialsMatcher(new PasswordMatcher());
         if (StringUtils.isNotEmpty(ldapUrl) && StringUtils.isNotEmpty(ldapDomain)) {
             realms.add(new ActiveDirectoryAuthenticatingRealm(ldapUrl, ldapDomain));
@@ -88,15 +91,17 @@ public class SecurityConfig {
      * Init the shiro-filter bean.
      * @param ldapUrl the url to the Ldap-Server
      * @param ldapDomain the domain of the Ldap-Server
+     * @param userAndRoleConfig location of the userAndRoleConfig (classpath:, file:)
      *
      * @return the shiro-filter bean.
      */
     @Bean
     @Autowired
-    public ShiroFilterFactoryBean shiroFilter(@Value("${ldap.url}") String ldapUrl,
-            @Value("${ldap.domain}") String ldapDomain) {
+    public ShiroFilterFactoryBean shiroFilter(@Value("${shiro.ldap.url}") String ldapUrl,
+            @Value("${shiro.ldap.domain}") String ldapDomain,
+            @Value("${shiro.userAndRole}") String userAndRoleConfig) {
         final ShiroFilterFactoryBean result = new ShiroFilterFactoryBean();
-        result.setSecurityManager(securityManager(ldapUrl, ldapDomain));
+        result.setSecurityManager(securityManager(ldapUrl, ldapDomain, userAndRoleConfig));
         result.setLoginUrl(URL.Security.LOGIN);
         result.setSuccessUrl(URL.Zeugnis.START);
         result.setUnauthorizedUrl(URL.Security.UNAUTHORIZED);
@@ -144,17 +149,18 @@ public class SecurityConfig {
      * Init the security-manager which holds the realms.
      * @param ldapUrl the url to the Ldap-Server
      * @param ldapDomain the domain of the Ldap-Server
+     * @param userAndRoleConfig location of the userAndRoleConfig (classpath:, file:)
      *
      * @return the security-manager.
      */
     private org.apache.shiro.mgt.SecurityManager securityManager(String ldapUrl,
-            String ldapDomain) {
+            String ldapDomain, String userAndRoleConfig) {
         final DefaultWebSecurityManager securityManager =
                 new DefaultWebSecurityManager();
         final ModularRealmAuthenticator mra = new ModularRealmAuthenticator();
         mra.setAuthenticationStrategy(new FirstSuccessfulStrategy());
         securityManager.setAuthenticator(mra);
-        securityManager.setRealms(defineRealms(ldapUrl, ldapDomain));
+        securityManager.setRealms(defineRealms(ldapUrl, ldapDomain, userAndRoleConfig));
         return securityManager;
     }
 

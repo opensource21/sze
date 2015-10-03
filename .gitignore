@@ -5,3 +5,5 @@ target/*
 /target
 /oofiles
 /pdffiles
+/application.properties
+/userAndRoles.ini
