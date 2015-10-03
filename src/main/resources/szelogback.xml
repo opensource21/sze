@@ -20,7 +20,7 @@
 
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- daily rollover-->
-            <fileNamePattern>logs/sze.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <fileNamePattern>logs/sze.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy
                 class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <!-- or whenever the file size reaches 500MB -->
@@ -47,7 +47,7 @@
         <append>true</append>
         <rollingPolicy
             class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>logs/sql.%d{yyyy-MM-dd}.log
+            <fileNamePattern>logs/sql.%d{yyyy-MM-dd}.log.gz
             </fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy
                 class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
@@ -74,7 +74,7 @@
 
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- daily rollover-->
-            <fileNamePattern>logs/thyemleaf.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <fileNamePattern>logs/thyemleaf.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy
                 class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <!-- or whenever the file size reaches 100MB -->
