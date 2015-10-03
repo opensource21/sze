@@ -45,25 +45,25 @@
                 button.click();
             });
             button.hide();
-        })
+        });
      };
 
      /**
-      * Diese Funktion dient dazu passend zur Combobox-Auswahl betsimmte Werte anzuzeigen.
+      * Diese Funktion dient dazu passend zur Combobox-Auswahl bestimmte Werte anzuzeigen.
       */
      sze.hideandshow = function () {
-        $('.cbhideandshow').each(function(index ) {
+        $('.cbhideandshow').each(function(index) {
             var combobox = $(this);
-            var id = combobox.attr("id")
-            var showClass = combobox.attr("data-class-show")
+            var id = combobox.attr("id");
+            var showClass = combobox.attr("data-class-show");
             var oldValue = combobox.val();
-            $('#'+id + oldValue).removeClass("hide").addClass(showClass);
+            $('#' + id + oldValue).removeClass("hide").addClass(showClass);
             combobox.change(function() {
-                $('#'+id + oldValue).addClass("hide").removeClass(showClass);
+                $('#' + id + oldValue).addClass("hide").removeClass(showClass);
                 oldValue = combobox.val();
-                $('#'+id + oldValue).removeClass("hide").addClass(showClass);
+                $('#' + id + oldValue).removeClass("hide").addClass(showClass);
             });
-        })
+        });
      };
 
      /**
@@ -72,13 +72,13 @@
       */
      sze.confirmDelete = function () {
          $('button .delete').each(function(index) {
-             var myBtn = $(this).parent().get(0)
+             var myBtn = $(this).parent().get(0);
              myBtn.addEventListener('click',function(event) {
                if(!confirm('Wollen Sie wirklich löschen?'))
-                    event.preventDefault();;
-             })
-         })
-     }
+                    event.preventDefault();
+             });
+         });
+     };
 
      /**
       * Ergänzt den Datepicker.
@@ -103,7 +103,7 @@
                  minuteGrid : 10,
                  secondGrid : 10
              });
-         }
+         };
 
      /**
       * Initialisiert eine JQuery-Table mit Action-Spalte als letzte Spalte..
@@ -131,7 +131,7 @@
                    }
                  ]
          } );
-     }
+     };
 
 
 
@@ -139,16 +139,16 @@
       * Toggles the details by onclick.
       */
      sze.toggleTechnicalDetails=function(){
-             $('#technicalDetails').slideToggle(
-                             10,
-                             function(){
-                                     if($('#technicalDetails').is(':visible')){
-                                             $('#actionButtonToggleDetails').html('<i class="icon-chevron-up"></i>');
-                                     }else {
-                                             $('#actionButtonToggleDetails').html('<i class="icon-chevron-down"></i>');
-                                     }
-                             })
-     }
+         $('#technicalDetails').slideToggle(
+                 10,
+                 function(){
+                     if($('#technicalDetails').is(':visible')) {
+                         $('#actionButtonToggleDetails').html('<i class="icon-chevron-up"></i>');
+                     } else {
+                         $('#actionButtonToggleDetails').html('<i class="icon-chevron-down"></i>');
+                     }
+                  });
+     };
 
      //Private
      $(function(){

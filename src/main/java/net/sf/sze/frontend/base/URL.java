@@ -43,6 +43,11 @@ public final class URL {
     public static final String TODO = "/todo";
 
     /**
+     * Die Konsole für die H2-Konsole.
+     */
+    public static final String H2CONSOLE = "/h2console";
+
+    /**
      * All URLs for the configuration of a zeugnis.
      */
     public interface Configuration {

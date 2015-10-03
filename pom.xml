@@ -3,14 +3,17 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.sf.sze</groupId>
     <artifactId>sze_spring</artifactId>
-    <version>3.3.4</version>
-    <packaging>war</packaging>
+    <version>3.3.5</version>
+    <packaging>jar</packaging>
     <name>SZE</name>
     <description>Schulzeugnisersteller</description>
     <properties>
         <java.version>1.7</java.version>
-        <junit.version>4.12</junit.version>
         <shiro.version>1.2.3</shiro.version>
+
+        <!-- Überschreibe Spring Boot Versionen -->
+        <h2.version>1.3.176</h2.version>
+
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
@@ -22,11 +25,12 @@
         <db.generateDdl>true</db.generateDdl>
         <db.schema>PUBLIC</db.schema>
         <db.hbm2ddl.auto>validate</db.hbm2ddl.auto>
+
     </properties>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.2.2.RELEASE</version>
+        <version>1.2.6.RELEASE</version>
     </parent>
     <dependencies>
         <dependency>
@@ -47,6 +51,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
         <!-- Add tomcat only if I want to run directly -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -60,18 +68,10 @@
         </dependency>
         <!-- logging -->
 
-        <!-- Necessary because the WebMvcConfigurationSupport reference it -->
         <!-- DBDependencies -->
-        <dependency>
-            <groupId>com.jolbox</groupId>
-            <artifactId>bonecp</artifactId>
-            <version>0.8.0.RELEASE</version>
-        </dependency>
-
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <version>1.3.176</version>
         </dependency>
 
 
@@ -119,7 +119,6 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -203,6 +202,8 @@
                 <filtering>false</filtering>
                 <includes>
                     <include>i18n/*</include>
+                    <include>META-INF/*</include>
+                    <include>config/*</include>
                     <include>*</include>
                     <include>templates/**/*</include>
                     <include>static/**/*</include>
@@ -305,6 +306,10 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>pl.project13.maven</groupId>
+                <artifactId>git-commit-id-plugin</artifactId>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
