@@ -4,7 +4,7 @@
     <groupId>net.sf.sze</groupId>
     <artifactId>sze_spring</artifactId>
     <version>3.3.4</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>SZE</name>
     <description>Schulzeugnisersteller</description>
     <properties>
@@ -30,7 +30,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.2.2.RELEASE</version>
+        <version>1.2.6.RELEASE</version>
     </parent>
     <dependencies>
         <dependency>
@@ -203,6 +203,7 @@
                 <includes>
                     <include>i18n/*</include>
                     <include>META-INF/*</include>
+                    <include>config/*</include>
                     <include>*</include>
                     <include>templates/**/*</include>
                     <include>static/**/*</include>
