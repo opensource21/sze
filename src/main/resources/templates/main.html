@@ -86,7 +86,7 @@ messages - eine Liste mit Meldungen.
         </div>
     </div>
     <div class ="row-fluid">
-        <div th:replace="/fragments::info"></div>
+        <div th:replace="fragments::info"></div>
         <div layout:fragment="content" th:remove="tag">Hier wird die
             eigentlich Seite angezeigt.</div>
     </div>

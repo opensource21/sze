@@ -9,7 +9,7 @@ deleteUrl
 
 <html lang="de-DE" xmlns:th="http://www.thymeleaf.org"
     xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
-    layout:decorator="/main">
+    layout:decorator="main">
 <head>
 <script type="text/javascript"
     src="../../static/js/jquery-1.8.2.js" th:remove="all"></script>
@@ -28,7 +28,7 @@ deleteUrl
         </h4>
         <form class="well form-horizontal" method="post"
                 th:object="${bemerkung}">
-            <div th:replace="/fragments::error"></div>
+            <div th:replace="fragments::error"></div>
             <!-- Baustein -->
             <input type="text" bs:field="#{db.Bemerkung.baustein}"
                 class="span4 show" readonly="readonly">
