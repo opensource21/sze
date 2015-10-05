@@ -371,14 +371,14 @@
             <plugin>
                 <groupId>org.liquibase</groupId>
                 <artifactId>liquibase-maven-plugin</artifactId>
-                <version>3.2.2</version>
+                <version>3.3.5</version>
                 <configuration>
-                    <changeLogFile>/src/main/resources/liquibase/upgrade3.0.xml</changeLogFile>
+                    <changeLogFile>target/classes/liquibase/upgrade3.0.xml</changeLogFile>
                     <driver>${db.driver}</driver>
                     <url>${db.url}</url>
                     <username>${db.username}</username>
                     <password>${db.password}</password>
-                    <logging>warning</logging>
+                    <logging>debug</logging>
                     <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
                     <outputChangeLogFile>/liquibase-log</outputChangeLogFile>
                     <outputFileEncoding>UTF-8</outputFileEncoding>
