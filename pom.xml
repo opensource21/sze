@@ -369,23 +369,6 @@
                 </dependencies>
             </plugin>
             <plugin>
-                <groupId>org.liquibase</groupId>
-                <artifactId>liquibase-maven-plugin</artifactId>
-                <version>3.3.5</version>
-                <configuration>
-                    <changeLogFile>target/classes/liquibase/upgrade3.0.xml</changeLogFile>
-                    <driver>${db.driver}</driver>
-                    <url>${db.url}</url>
-                    <username>${db.username}</username>
-                    <password>${db.password}</password>
-                    <logging>debug</logging>
-                    <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
-                    <outputChangeLogFile>/liquibase-log</outputChangeLogFile>
-                    <outputFileEncoding>UTF-8</outputFileEncoding>
-                </configuration>
-
-            </plugin>
-            <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.7.4.201502262128</version>
