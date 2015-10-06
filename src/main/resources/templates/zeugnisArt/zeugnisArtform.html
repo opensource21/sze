@@ -9,7 +9,7 @@ tags - a list of selectable tag
 <!DOCTYPE HTML>
 <html lang="de-DE" xmlns:th="http://www.thymeleaf.org"
     xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
-    layout:decorator="/main">
+    layout:decorator="main">
 <head >
     <title th:text="|#{zeugnisArt.form.title} (${zeugnisArt.name})|"></title>
 </head>
@@ -17,7 +17,7 @@ tags - a list of selectable tag
     <div layout:fragment="content">
     <h3 th:text="#{zeugnisArt.form.title}"></h3>
     <form class="well form-horizontal" method="post" th:object="${zeugnisArt}">
-        <div th:replace="/fragments::error"></div>
+        <div th:replace="fragments::error"></div>
 
         <input id="id" type="hidden" th:value="*{id}" name="id"/>
         <input id="version" type="hidden" th:value="*{version}" name="version"/>
@@ -36,7 +36,7 @@ tags - a list of selectable tag
             <i class="edit"></i>Bearbeiten</a>
         <a th:href="@{#{nurl.zeugnisart.list}}" class="btn">
             <i class="cancel"></i>Abbrechen</a>
-        <th:block th:include="/fragments::deletebutton(#{nurl.zeugnisart.delete})"></th:block>
+        <th:block th:include="fragments::deletebutton(#{nurl.zeugnisart.delete})"></th:block>
     </form>
 
 

@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.sf.sze</groupId>
     <artifactId>sze_spring</artifactId>
-    <version>3.3.5</version>
+    <version>3.4.0</version>
     <packaging>jar</packaging>
     <name>SZE</name>
     <description>Schulzeugnisersteller</description>
@@ -70,6 +70,10 @@
 
         <!-- DBDependencies -->
         <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
         </dependency>
@@ -115,6 +119,8 @@
             <artifactId>thymeleaf-extras-shiro</artifactId>
             <version>1.1.0</version>
         </dependency>
+
+
         <!-- Test Dependencies -->
         <dependency>
             <groupId>junit</groupId>
@@ -204,6 +210,7 @@
                     <include>i18n/*</include>
                     <include>META-INF/*</include>
                     <include>config/*</include>
+                    <include>liquibase/**/*</include>
                     <include>*</include>
                     <include>templates/**/*</include>
                     <include>static/**/*</include>
@@ -360,23 +367,6 @@
                         </exclusions>
                     </dependency>
                 </dependencies>
-            </plugin>
-            <plugin>
-                <groupId>org.liquibase</groupId>
-                <artifactId>liquibase-maven-plugin</artifactId>
-                <version>3.2.2</version>
-                <configuration>
-                    <changeLogFile>/src/main/resources/liquibase/upgrade3.0.xml</changeLogFile>
-                    <driver>${db.driver}</driver>
-                    <url>${db.url}</url>
-                    <username>${db.username}</username>
-                    <password>${db.password}</password>
-                    <logging>warning</logging>
-                    <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
-                    <outputChangeLogFile>/liquibase-log</outputChangeLogFile>
-                    <outputFileEncoding>UTF-8</outputFileEncoding>
-                </configuration>
-
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>

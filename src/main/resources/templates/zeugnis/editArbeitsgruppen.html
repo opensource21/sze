@@ -7,7 +7,7 @@ cancelUrl
 
 <html lang="de-DE" xmlns:th="http://www.thymeleaf.org"
     xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
-    layout:decorator="/main">
+    layout:decorator="main">
 <head>
 <script type="text/javascript"
     src="../../static/js/jquery-1.8.2.js" th:remove="all"></script>
@@ -25,7 +25,7 @@ cancelUrl
             im Hj: <span th:remove="tag" th:text="${zeugnis.formular.schulhalbjahr}"></span>)
         </h4>
         <form class="well form-horizontal" method="post" th:object="${zeugnis}">
-            <div th:replace="/fragments::error"></div>
+            <div th:replace="fragments::error"></div>
             <input type="hidden" th:value="*{formular.id}" name="formular"/>
             <span th:remove="tag" th:each="agBewertung, stat: *{agBewertungen}">
                 <input type="hidden" th:value="*{agBewertungen[__${stat.index}__].id}" th:name="${'agBewertungen['+__${stat.index}__+'].id'}"/>
