@@ -5,7 +5,6 @@
 
 package net.sf.sze.frontend.zeugnis;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -22,7 +21,6 @@ import net.sf.sze.model.zeugnis.StandardBewertung;
 import net.sf.sze.model.zeugnis.Zeugnis;
 import net.sf.sze.model.zeugnis.ZweiNiveauBewertung;
 import net.sf.sze.model.zeugnisconfig.Schulhalbjahr;
-import net.sf.sze.service.api.converter.ZeugnisCreatorService;
 import net.sf.sze.service.api.stammdaten.SchuelerList;
 import net.sf.sze.service.api.stammdaten.SchuelerService;
 import net.sf.sze.service.api.zeugnis.AgBewertungService;
@@ -44,11 +42,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.view.RedirectView;
-
-import de.ppi.fuwesta.spring.mvc.view.FileContentView;
 
 /**
  * Haupt-Controlller für die Zeugniserfassung.
@@ -107,9 +101,6 @@ public class ZeugnisController implements ModelAttributes {
      */
     @Resource
     private AgBewertungService agBewertungService;
-
-    @Resource
-    private ZeugnisCreatorService zeugnisCreatorService;
 
     @Resource
     private SchuelerService schuelerService;
@@ -706,63 +697,5 @@ public class ZeugnisController implements ModelAttributes {
         return  URL.getPrevNextUrlOrZeugnisUrl(action, URL.ZeugnisPath.ZEUGNIS_EDIT_BU_SOL,
                 halbjahrId, klassenId, schuelerId, prevId, nextId);
 
-    }
-
-    /**
-     * Erstellt das PDF für einen Schüler.
-     * @param halbjahrId die Id des Schulhalbjahres
-     * @param klassenId die Id der Klasse
-     * @param schuelerId die Id des Schuelers
-     * @param redirectAttributes die Meldungen.
-     * @return die logische View
-     */
-    @RequestMapping(value = URL.ZeugnisPath.ONE_PDF, method = RequestMethod.GET)
-    public View createPDF(@PathVariable(URL.Session
-            .P_HALBJAHR_ID) Long halbjahrId,
-            @PathVariable(URL.Session.P_KLASSEN_ID) Long klassenId,
-            @PathVariable(URL.Session.P_SCHUELER_ID) Long schuelerId,
-            RedirectAttributes redirectAttributes) {
-        final File zeugnisDatei = zeugnisCreatorService.createZeugnis(
-                zeugnisErfassungsService.getZeugnis(halbjahrId, schuelerId));
-        if (zeugnisDatei.exists() && zeugnisDatei.canRead()) {
-            return new FileContentView(zeugnisDatei);
-        } else {
-            redirectAttributes.addFlashAttribute(MESSAGE, "Zeugnis erstellt, aber nicht lesbar.");
-            LOG.warn("Kann " + zeugnisDatei.getAbsolutePath() + " nicht lesen. "
-                    + "Exists: " + zeugnisDatei.exists() + ", canRead: "
-                    + zeugnisDatei.canRead());
-        }
-        return new RedirectView(URL.createLinkToZeugnisUrl(halbjahrId, klassenId,
-                schuelerId), true);
-    }
-
-    /**
-     * Erstellt das PDF für eine Klasse.
-     * @param halbjahr das Schulhalbjahr.
-     * @param klasse die Klasse
-     * @param redirectAttributes die Meldungen.
-     * @return die logische View
-     */
-    @RequestMapping(value = URL.Zeugnis.ALL_PDFS, method = RequestMethod.GET)
-    public View createAllPDFS(@RequestParam(URL.Session
-            .P_HALBJAHR_ID) Schulhalbjahr halbjahr,
-            @RequestParam(URL.Session.P_KLASSEN_ID) Klasse klasse,
-            RedirectAttributes redirectAttributes) {
-        final File zeugnisDatei = zeugnisCreatorService.createZeugnisse(halbjahr, klasse);
-        if (zeugnisDatei == null) {
-            redirectAttributes.addFlashAttribute(MESSAGE, "Es sind keine Zeugnisse vorhanden.");
-        } else if (zeugnisDatei.exists() && zeugnisDatei.canRead()) {
-            return new FileContentView(zeugnisDatei, "Klasse_"
-                    + klasse.calculateKlassenname() + ".pdf");
-        } else {
-            redirectAttributes.addFlashAttribute(MESSAGE, "Zeugnis erstellt, aber nicht lesbar.");
-            LOG.warn("Kann " + zeugnisDatei.getAbsolutePath() + " nicht lesen. "
-                    + "Exists: " + zeugnisDatei.exists() + ", canRead: "
-                    + zeugnisDatei.canRead());
-        }
-        return new RedirectView(URL.filledURLWithNamedParams(
-                URL.ZeugnisPath.START,
-                URL.Session.P_HALBJAHR_ID, halbjahr.getId(),
-                URL.Session.P_KLASSEN_ID, klasse.getId()), true);
     }
 }
