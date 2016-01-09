@@ -60,15 +60,6 @@ public abstract class AbstractSzeDbUnitTest extends AbstractJUnit4SpringContextT
     }
 
 
-    /**
-     * @throws Exception
-     * @see net.sf.sze.dbunit.SzeDatabase#generateRowBuilder()
-     */
-    public void generateRowBuilder() throws Exception {
-        szeDatabase.generateRowBuilder();
-    }
-
-
     @Rule
     public SzeDatabase getSzeDatebase() throws SQLException {
         if (szeDatabase == null) {

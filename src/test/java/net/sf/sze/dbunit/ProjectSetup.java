@@ -24,7 +24,6 @@ public class ProjectSetup extends AbstractSzeDbUnitTest {
     /**
      * @see de.ppi.samples.fuwesta.dbunit.FuWeStaSampleDatabase#generateRowBuilder()
      */
-    @Override
     @Test
     @Ignore("Only for project-setup")
     public void generateRowBuilder() throws Exception {
