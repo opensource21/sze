@@ -61,7 +61,7 @@ public abstract class AbstractSzeDbUnitTest extends AbstractJUnit4SpringContextT
 
 
     @Rule
-    public SzeDatabase getSzeDatebase() throws SQLException {
+    public SzeDatabase getSzeDatabase() throws SQLException {
         if (szeDatabase == null) {
             szeDatabase = new SzeDatabase(dataSource.getConnection(), schema);
         }
