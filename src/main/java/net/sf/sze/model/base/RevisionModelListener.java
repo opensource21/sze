@@ -19,6 +19,7 @@ import javax.persistence.Transient;
 
 import net.sf.sze.model.base.RevisionLog.Action;
 
+import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -86,7 +87,12 @@ public class RevisionModelListener implements InitializingBean {
 
     private void saveChanges(Action action, RevisionModel model,
             Map<String, Object> oldValues, Map<String, Object> newValues) {
-        final String user = "niels";
+        String user = "unkown";
+        try {
+            user = "" + SecurityUtils.getSubject().getPrincipal();
+        } catch (Exception e) {
+            LOG.warn("Security-User konnte nicht ermittelt werden.", e);
+        }
         final String entityName = model.getClass().getSimpleName();
         final Long entityId = model.getId();
         for (Entry<String, Object> keyValue : oldValues.entrySet()) {
