@@ -14,7 +14,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-
 import net.sf.sze.model.base.RevisionModel;
 import net.sf.sze.model.zeugnisconfig.Schulfach;
 

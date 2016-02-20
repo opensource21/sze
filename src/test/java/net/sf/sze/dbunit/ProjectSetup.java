@@ -18,17 +18,16 @@ public class ProjectSetup extends AbstractSzeDbUnitTest {
     @Test
     @Ignore("Only for project-setup")
     public void printTableNames() throws Exception {
-        getSzeDatebase().printTableNames();
+        getSzeDatabase().printTableNames();
     }
 
     /**
      * @see de.ppi.samples.fuwesta.dbunit.FuWeStaSampleDatabase#generateRowBuilder()
      */
-    @Override
     @Test
     @Ignore("Only for project-setup")
     public void generateRowBuilder() throws Exception {
-        getSzeDatebase().generateRowBuilder();
+        getSzeDatabase().generateRowBuilder();
     }
 
     /**
@@ -37,7 +36,7 @@ public class ProjectSetup extends AbstractSzeDbUnitTest {
     @Test
     @Ignore("Only for project-setup")
     public void dumpData() throws Exception {
-        getSzeDatebase().dumpResult("Dump");
+        getSzeDatabase().dumpResult("Dump");
     }
 
 }

@@ -95,6 +95,9 @@ public class ZeugnisFormularServiceImpl implements ZeugnisFormularService {
     @Transactional(readOnly = false)
     public void delete(Long zeugnisFormularId) {
         final ZeugnisFormular oldZeugnisFormular = zeugnisFormularDao.findOne(zeugnisFormularId);
+        for (SchulfachDetailInfo detailInfo : oldZeugnisFormular.getSchulfachDetailInfos()) {
+            schulfachDetailInfoDao.delete(detailInfo);
+        }
         zeugnisFormularDao.delete(oldZeugnisFormular);
     }
 
