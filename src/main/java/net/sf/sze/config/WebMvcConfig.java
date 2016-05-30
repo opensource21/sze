@@ -174,7 +174,7 @@ public class WebMvcConfig extends WebMvcAutoConfigurationAdapter {
     public void addFormatters(FormatterRegistry registry) {
         registry.addFormatterForFieldAnnotation(
                 new NonEmptyStringAnnotationFormatterFactory());
-        registry.addFormatter(new DateFormatter());
+        registry.addFormatter(new DateFormatter("dd.MM.yyyy"));
         registry.addConverter(new KlasseConverter());
         registry.addConverter(new ZeugnisFormularConverter());
         registry.addConverter(new SchulfachConverter());
