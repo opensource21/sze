@@ -88,7 +88,7 @@ public class WebMvcConfig extends WebMvcAutoConfigurationAdapter {
      * Die POM-Versions-Nr.
      */
     //TODO beim Test fehlt die Version
-    @Value("${project.version:0.0.7}")
+    @Value("${appproject.version:0.0.7}")
     private String buildNr;
 
     /**
