@@ -68,7 +68,7 @@ public class OO2PdfConverterJodImpl implements OO2PdfConverter {
         StringBuffer envUrl = null;
         if (userEnv != null) {
             try {
-                envUrl = new StringBuffer(" -env:UserInstallation = file:///");
+                envUrl = new StringBuffer(" --env:UserInstallation = file:///");
                 envUrl.append(userEnv.getCanonicalPath().replace('\\', '/'));
             } catch (final IOException e) {
                 log.error("Kann nicht die Umgebung setzen.", e);
@@ -152,8 +152,8 @@ public class OO2PdfConverterJodImpl implements OO2PdfConverter {
         } catch (final Exception e) {
             final ProcessBuilder processBuilder = new ProcessBuilder(
                     ooCommandFile.getAbsolutePath(), invisibleParam,
-                    "-accept=socket,host=127.0.0.1,port=" + ooPort + ";urp;",
-                    "-nofirststartwizard" + environmentUrl);
+                    "--accept=socket,host=127.0.0.1,port=" + ooPort + ";urp;",
+                    "--nofirststartwizard" + environmentUrl);
             try {
                 closeConnection();
                 log.info("Starte OO-Prozess. Init =" + init);
