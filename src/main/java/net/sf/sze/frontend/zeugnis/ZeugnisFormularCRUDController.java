@@ -5,7 +5,9 @@
 
 package net.sf.sze.frontend.zeugnis;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -41,6 +43,11 @@ import de.ppi.fuwesta.spring.mvc.util.ResourceNotFoundException;
  */
 @Controller()
 public class ZeugnisFormularCRUDController {
+
+    /**
+     * Maximale Anzahl an anzuzeigenden Templates.
+     */
+    private static final int MAX_NR_OF_TEMPLATES = 10;
 
     /**
      * View which is used as form.
@@ -226,12 +233,21 @@ public class ZeugnisFormularCRUDController {
         if (zeugnisFormular == null) {
             throw new ResourceNotFoundException();
         }
+
+        final List<String> templates = new ArrayList<>();
+        final String currentFileName = zeugnisFormular.getTemplateFileName();
+        final List<String> fileNames = zeugnisFormularService.getFileNames();
+        final int currentPos = fileNames.indexOf(currentFileName);
+        final int maxNrOfTemplates = Math.min(MAX_NR_OF_TEMPLATES, fileNames.size());
+        templates.addAll(fileNames.subList(0, maxNrOfTemplates));
+        model.addAttribute("unkownTemplate", Boolean.valueOf(currentPos == -1));
         model.addAttribute("klassenListe", zeugnisFormularService.
                 getActiveClasses(zeugnisFormular));
         model.addAttribute("schulhalbjahre", zeugnisFormularService.
                 getActiveSchulhalbjahre(zeugnisFormular));
         model.addAttribute("zeugnisFormular", zeugnisFormular);
         model.addAttribute("disabled", Boolean.valueOf(disabled));
+        model.addAttribute("templates", templates);
         model.addAttribute("saveUrl", saveUrl);
     }
 
