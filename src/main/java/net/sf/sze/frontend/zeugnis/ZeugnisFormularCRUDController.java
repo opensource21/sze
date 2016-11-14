@@ -5,7 +5,9 @@
 
 package net.sf.sze.frontend.zeugnis;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -226,12 +228,20 @@ public class ZeugnisFormularCRUDController {
         if (zeugnisFormular == null) {
             throw new ResourceNotFoundException();
         }
+
+        final List<String> templates = new ArrayList<>();
+        templates.add(zeugnisFormular.getTemplateFileName());
+        final List<String> fileNames = zeugnisFormularService.getFileNames();
+        final int maxNrOfTemplates = Math.min(10, fileNames.size());
+        templates.addAll(fileNames.subList(0, maxNrOfTemplates));
+
         model.addAttribute("klassenListe", zeugnisFormularService.
                 getActiveClasses(zeugnisFormular));
         model.addAttribute("schulhalbjahre", zeugnisFormularService.
                 getActiveSchulhalbjahre(zeugnisFormular));
         model.addAttribute("zeugnisFormular", zeugnisFormular);
         model.addAttribute("disabled", Boolean.valueOf(disabled));
+        model.addAttribute("templates", templates);
         model.addAttribute("saveUrl", saveUrl);
     }
 

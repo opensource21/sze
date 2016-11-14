@@ -5,10 +5,23 @@
 
 package net.sf.sze.service.impl.zeugnis;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.annotation.Resource;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import net.sf.sze.dao.api.zeugnis.SchulfachDetailInfoDao;
 import net.sf.sze.dao.api.zeugnis.ZeugnisFormularDao;
@@ -21,14 +34,6 @@ import net.sf.sze.model.zeugnisconfig.Schulhalbjahr;
 import net.sf.sze.service.api.common.SchulkalenderService;
 import net.sf.sze.service.api.stammdaten.KlasseService;
 import net.sf.sze.service.api.zeugnis.ZeugnisFormularService;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.CollectionUtils;
 
 /**
  * Implementation of {@link ZeugnisFormularService}.
@@ -61,6 +66,8 @@ public class ZeugnisFormularServiceImpl implements ZeugnisFormularService {
     @Resource
     private SchulkalenderService schulkalenderService;
 
+    @Value("${templateDir}")
+    private String templateDirName;
 
     /**
      * {@inheritDoc}
@@ -263,5 +270,26 @@ public class ZeugnisFormularServiceImpl implements ZeugnisFormularService {
     @Override
     public ZeugnisFormular getZeugnisFormular(long halbjahrId, long klassenId) {
         return zeugnisFormularDao.findBySchulhalbjahrIdAndKlasseId(halbjahrId, klassenId);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<String> getFileNames() {
+        final File templateDir = new File(this.templateDirName);
+        File[] files = templateDir.listFiles();
+        // Zeitlich rückwärtssortiert.
+        Arrays.sort(files, new Comparator<File>(){
+            @Override
+            public int compare(File f1, File f2)
+            {
+                return Long.valueOf(f2.lastModified()).compareTo(Long.valueOf(f1.lastModified()));
+            } });
+        final List<String> result = new ArrayList<>();
+        for (File filename : files) {
+            result.add(filename.getName());
+        }
+        return result;
     }
 }

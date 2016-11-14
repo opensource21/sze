@@ -1,5 +1,6 @@
 <!-- Parameter:
 zeugnisFormular - ein zeugnisFormular
+templates - Liste möglicher Formulare.
 
 disabled - flag if the view should be editable.
 saveUrl - die URL zum speichern.
@@ -40,8 +41,11 @@ tags - a list of selectable tag
             <input type="text" bs:field="klasse"
                 disabled="disabled" th:if="${disabled or zeugnisFormular?.zeugnis?.size() > 0}"/>
             <input type="text" bs:field="klassenSuffix" th:disabled="${disabled}" />
-            <input type="text" bs:field="templateFileName"
-                th:disabled="${disabled}" />
+            <input type="text" list="templates" bs:field="templateFileName"
+                th:disabled="${disabled}" th:class="err"/>
+            <datalist id="templates">
+                <option th:each="filename : ${templates}" th:value="${filename}"/>
+            </datalist>
             <input type="text" class="datepicker" bs:field="ausgabeDatum"
                 th:disabled="${disabled}" />
             <input type="text" class="datepicker"
