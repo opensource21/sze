@@ -42,7 +42,7 @@ tags - a list of selectable tag
                 disabled="disabled" th:if="${disabled or zeugnisFormular?.zeugnis?.size() > 0}"/>
             <input type="text" bs:field="klassenSuffix" th:disabled="${disabled}" />
             <input type="text" list="templates" bs:field="templateFileName"
-                th:disabled="${disabled}" th:class="err"/>
+                th:disabled="${disabled}" th:style="${unkownTemplate}? 'color:blue; background:red'"/>
             <datalist id="templates">
                 <option th:each="filename : ${templates}" th:value="${filename}"/>
             </datalist>
