@@ -64,7 +64,7 @@ public class DependencyTest {
     public void layer() {
         assertThat(
                 classpath().including("net.sf.sze.**")
-                        .withSlicing(DAO_LAYER, "net.sf.sze.(*).**")
+                        .withSlicing("net.sf.sze.(*).**")
                         .allowDirect(anyOf(FRONTEND_LAYER, JOBS_PACKAGE), SERVICE_LAYER, DAO_LAYER)
                         .allowDirect(anyOf(FRONTEND_LAYER, SERVICE_LAYER, DAO_LAYER), anyOf(MODEL_PACKAGE, UTIL_PACKAGE))
                         // Das VariableUtility sollte nicht von Model benutzt werden.
