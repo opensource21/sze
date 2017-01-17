@@ -19,6 +19,8 @@ import javax.persistence.Table;
 
 import net.sf.oval.constraint.Past;
 import net.sf.sze.model.base.RevisionModel;
+import net.sf.sze.util.Geschlecht;
+import net.sf.sze.util.PersonenDaten;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.CompareToBuilder;
@@ -33,7 +35,7 @@ import de.ppi.fuwesta.spring.mvc.formatter.NonEmpty;
 @Entity
 @Table(name = "schueler")
 public class Schueler extends RevisionModel implements Serializable,
-        Comparable<Schueler> {
+        Comparable<Schueler>, PersonenDaten {
 
     /** The name. */
     @Column(nullable = false, length = 40)
@@ -154,10 +156,9 @@ public class Schueler extends RevisionModel implements Serializable,
     }
 
     /**
-     * Gets the geschlecht.
-     *
-     * @return the geschlecht
+     * {@inheritDoc}
      */
+    @Override
     public Geschlecht getGeschlecht() {
         return Geschlecht.getType(this.geschlecht);
     }
@@ -172,10 +173,9 @@ public class Schueler extends RevisionModel implements Serializable,
     }
 
     /**
-     * Gets the name.
-     *
-     * @return the name
+     * {@inheritDoc}
      */
+    @Override
     public String getName() {
         return this.name;
     }
@@ -208,10 +208,9 @@ public class Schueler extends RevisionModel implements Serializable,
     }
 
     /**
-     * Gets the rufname.
-     *
-     * @return the rufname
+     * {@inheritDoc}
      */
+    @Override
     public String getRufname() {
         return this.rufname;
     }
@@ -226,10 +225,9 @@ public class Schueler extends RevisionModel implements Serializable,
     }
 
     /**
-     * Gets the vorname.
-     *
-     * @return the vorname
+     * {@inheritDoc}
      */
+    @Override
     public String getVorname() {
         return this.vorname;
     }
@@ -274,9 +272,9 @@ public class Schueler extends RevisionModel implements Serializable,
 
 
     /**
-     * Liefert falls vorhanden den Rufnamen, sonst den Vornamen.
-     * @return falls vorhanden den Rufnamen, sonst den Vornamen.
+     * {@inheritDoc}
      */
+    @Override
     public String getRufnameOrVorname() {
         return StringUtils.isBlank(rufname) ? vorname : rufname;
     }
