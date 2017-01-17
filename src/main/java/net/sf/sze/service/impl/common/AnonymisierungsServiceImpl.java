@@ -7,7 +7,6 @@ package net.sf.sze.service.impl.common;
 import javax.annotation.Resource;
 
 import net.sf.sze.dao.api.stammdaten.SchuelerDao;
-import net.sf.sze.model.stammdaten.Geschlecht;
 import net.sf.sze.model.stammdaten.Schueler;
 import net.sf.sze.model.zeugnis.Bemerkung;
 import net.sf.sze.model.zeugnis.SchulamtsBemerkung;
@@ -16,6 +15,7 @@ import net.sf.sze.service.api.common.AnonymisierungsService;
 import net.sf.sze.service.api.zeugnis.BemerkungService;
 import net.sf.sze.service.api.zeugnis.SchulamtsBemerkungService;
 import net.sf.sze.service.api.zeugnis.ZeugnisErfassungsService;
+import net.sf.sze.util.Geschlecht;
 
 import org.apache.commons.lang.math.RandomUtils;
 import org.apache.commons.lang.time.DateUtils;

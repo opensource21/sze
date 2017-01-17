@@ -13,9 +13,9 @@ import java.util.Date;
 import java.util.List;
 
 import net.sf.sze.dao.api.stammdaten.SchuelerDao;
-import net.sf.sze.model.stammdaten.Geschlecht;
 import net.sf.sze.model.stammdaten.Schueler;
 import net.sf.sze.service.api.common.AnonymisierungsService;
+import net.sf.sze.util.Geschlecht;
 
 import org.junit.Before;
 import org.junit.Test;
