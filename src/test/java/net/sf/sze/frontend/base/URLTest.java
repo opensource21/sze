@@ -3,16 +3,14 @@
 // Licensed under the AGPL - http://www.gnu.org/licenses/agpl-3.0.txt
 // (c) SZE-Development-Team
 
-package net.sf.sze.model.zeugnis;
-
-import net.sf.sze.frontend.base.URL;
-
-import org.junit.Test;
+package net.sf.sze.frontend.base;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import org.junit.Test;
 
 /**
  * Test the Class {@link URL}.
