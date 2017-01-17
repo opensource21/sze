@@ -4,16 +4,17 @@
 // (c) SZE-Development Team
 package degraph;
 
-import static org.junit.Assert.*;
-import de.schauderhaft.degraph.configuration.NamedPattern;
-import static de.schauderhaft.degraph.check.JCheck.*;
 import static de.schauderhaft.degraph.check.Check.classpath;
-import static de.schauderhaft.degraph.check.JLayer.*;
-import static org.hamcrest.core.Is.*;
+import static de.schauderhaft.degraph.check.JCheck.customClasspath;
+import static de.schauderhaft.degraph.check.JCheck.violationFree;
+import static de.schauderhaft.degraph.check.JLayer.anyOf;
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import de.schauderhaft.degraph.check.ConstraintBuilder;
+import de.schauderhaft.degraph.check.JLayer;
 
 /**
  * Testet verschiedene Abhängigkeiten innerhalb der Anwendung.
@@ -52,6 +53,22 @@ public class DependencyTest {
     private static final String FRONTEND_LAYER = "frontend";
 
     /**
+     * Layer für die Constraints.
+     */
+    private static final String CONSTRAINTS_LAYER = "constraints";
+
+    /**
+     * Layer für die Configuration.
+     */
+    private static final String CONFIG_PACKAGE = "config";
+
+    /**
+     * Layer für die Security.
+     */
+    private static final String SECURITY_PACKAGE = "security";
+    // TODO es fehlt noch CONSTRAINTS, CONFIG!!!
+
+    /**
      * Stellt sicher, dass es keine Package-Zyklen gibt. Braucht leider eine
      * Minute :-(
      */
@@ -62,15 +79,17 @@ public class DependencyTest {
 
     @Test
     public void layer() {
-        assertThat(
-                classpath().including("net.sf.sze.**")
-                        .withSlicing("net.sf.sze.(*).**")
-                        .allowDirect(anyOf(FRONTEND_LAYER, JOBS_PACKAGE), SERVICE_LAYER, DAO_LAYER)
-                        .allowDirect(anyOf(FRONTEND_LAYER, SERVICE_LAYER, DAO_LAYER), anyOf(MODEL_PACKAGE, UTIL_PACKAGE))
-                        // Das VariableUtility sollte nicht von Model benutzt werden.
-                        .allowDirect(MODEL_PACKAGE, UTIL_PACKAGE)
-                        .allowDirect(UTIL_PACKAGE, MODEL_PACKAGE),
-                is(violationFree()));
+        ConstraintBuilder testObject =
+                // Ich nehme mal nicht den gesamten Pfad. classpath()
+                customClasspath("./target/classes")
+                .printOnFailure("degraphError.graphml")
+                .including("net.sf.sze.**")
+                // Util darf von allen Referenziert werden.
+                .excluding("net.sf.sze.util.**")
+                .withSlicing("sze", "net.sf.sze.(*).**")
+                .allowDirect(JLayer.oneOf(FRONTEND_LAYER, JOBS_PACKAGE),
+                        anyOf(SERVICE_LAYER, DAO_LAYER, MODEL_PACKAGE),
+                        anyOf(CONSTRAINTS_LAYER, UTIL_PACKAGE));
+        assertThat(testObject, is(violationFree()));
     }
-
 }
