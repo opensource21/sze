@@ -5,9 +5,6 @@
 
 package net.sf.sze.util;
 
-import net.sf.sze.model.stammdaten.Geschlecht;
-import net.sf.sze.model.stammdaten.Schueler;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -84,21 +81,21 @@ public final class VariableUtility {
     /**
      * Erzeugt den Text für den Druck in dem die Variablen ersetzt werden.
      * @param text der Text
-     * @param schueler der Schüler
+     * @param personenDaten Eigenschaften einer Person.
      * @param nachteilsausgleichsDatum das Datum des Nachteilsausgleichs.
      * @param erSieStattNamenRule true wenn er oder sie statt dem Namen
      * genommen werden soll.
      * @param schuljahr das Schuljahr
      * @return der Text für den Druck.
      */
-    public static String createPrintText(final String text, Schueler schueler,
+    public static String createPrintText(final String text, PersonenDaten personenDaten,
             final Date nachteilsausgleichsDatum, final boolean erSieStattNamenRule,
             final String schuljahr) {
         if (!text.contains("@")) {
             return text;
         }
 
-        final String rufnameNotNull = schueler.getRufnameOrVorname();
+        final String rufnameNotNull = personenDaten.getRufnameOrVorname();
         final StringBuffer printText = new StringBuffer();
         boolean erSieStattNamen = erSieStattNamenRule;
         // Der Präfix muss davor, damit der erste Token nie eine Variable ist.
@@ -110,11 +107,11 @@ public final class VariableUtility {
                 if ("NAME".equals(token)) {
                     replacement = rufnameNotNull;
                 } else if ("name".equals(token)) {
-                    replacement = buildName(rufnameNotNull, schueler
+                    replacement = buildName(rufnameNotNull, personenDaten
                             .getGeschlecht(), erSieStattNamen, true);
                     erSieStattNamen = true;
                 } else if ("Name".equals(token)) {
-                    replacement = buildName(rufnameNotNull, schueler
+                    replacement = buildName(rufnameNotNull, personenDaten
                             .getGeschlecht(), erSieStattNamen, false);
                     erSieStattNamen = true;
                 } else if ("datum".equals(token)) {
@@ -128,11 +125,11 @@ public final class VariableUtility {
                 } else if ("schuljahr".equals(token)) {
                     replacement = schuljahr;
                 } else if ("Vorname".equals(token)) {
-                    replacement = schueler.getVorname().trim();
+                    replacement = personenDaten.getVorname().trim();
                 } else if ("Nachname".equals(token)) {
-                    replacement = schueler.getName().trim();
+                    replacement = personenDaten.getName().trim();
                 } else if (token.contains("|")) {
-                    replacement = getGenderSpecificText(token, schueler
+                    replacement = getGenderSpecificText(token, personenDaten
                             .getGeschlecht());
                 } else if ("AT".equals(token)) {
                     replacement = "@";
@@ -197,16 +194,17 @@ public final class VariableUtility {
      * <li> Nachname -  den Nachnamen. </li>
      * </ul>
      * @param text der urspüngliche Text
-     * @param schueler das Schüler-Objekt
+     * @param personenDaten Eigenschaften einer Person.
      * @return den Text mit den Variablen.
      */
-    public static String insertVariables(String text, Schueler schueler) {
+    public static String insertVariables(String text, PersonenDaten personenDaten) {
         String result = text;
-        if (!schueler.getRufnameOrVorname().equals(schueler.getVorname())) {
-            result = StringUtils.replace(result, schueler.getVorname(), "@Vorname@");
+        //TODO die IF Bedingung sieht falsch aus.
+        if (!personenDaten.getRufnameOrVorname().equals(personenDaten.getVorname())) {
+            result = StringUtils.replace(result, personenDaten.getVorname(), "@Vorname@");
         }
-        result = StringUtils.replace(result, schueler.getName(), "@Nachname@");
-        result = StringUtils.replace(result, schueler.getRufnameOrVorname(), "@NAME@");
+        result = StringUtils.replace(result, personenDaten.getName(), "@Nachname@");
+        result = StringUtils.replace(result, personenDaten.getRufnameOrVorname(), "@NAME@");
         return result;
     }
 }
