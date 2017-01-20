@@ -35,11 +35,16 @@ import de.schauderhaft.degraph.check.JLayer;
  */
 public class DependencyTest {
 
-   /**
+/**
      * Rule um den Testnamen zu bekommen.
      */
     @Rule
     public TestName name = new TestName();
+
+    /**
+     * Basispackage für alle Klassen.
+     */
+    private static final String SZE_BASE_PACKAGE = "net.sf.sze.";
 
     /**
      * Classpath für alle Produktiven-Klassen.
@@ -137,7 +142,7 @@ public class DependencyTest {
         assertThat(
                 classpath().noJars().filterClasspath(TEST_CLASS_FILTER).
                 printOnFailure(errorFilename).
-                including("net.sf.sze.**"), is(violationFree()));
+                including(SZE_BASE_PACKAGE + "**"), is(violationFree()));
     }
 
 
@@ -149,8 +154,8 @@ public class DependencyTest {
         ConstraintBuilder testObject =
                 customClasspath(PRODUCTION_CLASSES).
                 printOnFailure(errorFilename).
-                including("net.sf.sze.**").
-                withSlicing("sze", "net.sf.sze.(*).**").
+                including(SZE_BASE_PACKAGE + "**").
+                withSlicing("sze", SZE_BASE_PACKAGE + "(*).**").
                 allow(CONFIG_PACKAGE, SECURITY_PACKAGE,
                        JLayer.oneOf(FRONTEND_LAYER, JOBS_PACKAGE),
                        SERVICE_LAYER, DAO_LAYER, MODEL_PACKAGE,
@@ -166,13 +171,13 @@ public class DependencyTest {
         ConstraintBuilder testObject =
                 customClasspath(PRODUCTION_CLASSES).
                 printOnFailure(errorFilename).
-                including("net.sf.sze." + FRONTEND_LAYER + ".**").
-                including("net.sf.sze." + SERVICE_LAYER + ".**").
-                including("net.sf.sze." + JOBS_PACKAGE + ".**").
-                including("net.sf.sze." + DAO_LAYER + ".**").
+                including(SZE_BASE_PACKAGE + FRONTEND_LAYER + ".**").
+                including(SZE_BASE_PACKAGE + SERVICE_LAYER + ".**").
+                including(SZE_BASE_PACKAGE + JOBS_PACKAGE + ".**").
+                including(SZE_BASE_PACKAGE + DAO_LAYER + ".**").
                  // TODO Hier habe ich noch einen direkten Zugriff auf DAO - aua!
                 excluding("net.sf.sze.frontend.konfiguration.KonfigurationController").
-                withSlicing("sze", "net.sf.sze.(*).**").
+                withSlicing("sze", SZE_BASE_PACKAGE + "(*).**").
                 allowDirect(JLayer.oneOf(FRONTEND_LAYER, JOBS_PACKAGE),
                         SERVICE_LAYER, DAO_LAYER);
         assertThat(testObject, is(violationFree()));
