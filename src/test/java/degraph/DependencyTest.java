@@ -115,12 +115,12 @@ public class DependencyTest {
      */
     @Before
     public void setUp() {
+        errorFilename = name.getMethodName() + "Error.graphml";
         final Package runtimePackage = Runtime.class.getPackage();
         final boolean oracleJDK = runtimePackage.getImplementationVendor().contains("Oracle");
         final boolean java7 = runtimePackage.getImplementationVersion().startsWith("1.7.0");
         // Oracle JDK 1.7 verursacht unter Travis ein OutOfMemory.
         Assume.assumeFalse(oracleJDK && java7);
-        errorFilename = name.getMethodName() + "Error.graphml";
     }
 
     /**
