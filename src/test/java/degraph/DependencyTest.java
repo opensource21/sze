@@ -66,7 +66,6 @@ public class DependencyTest {
      * Layer für die Security.
      */
     private static final String SECURITY_PACKAGE = "security";
-    // TODO es fehlt noch CONSTRAINTS, CONFIG!!!
 
     /**
      * Stellt sicher, dass es keine Package-Zyklen gibt. Braucht leider eine
@@ -74,9 +73,13 @@ public class DependencyTest {
      */
     @Test
     public void cycleFree() {
-        assertThat(classpath().including("net.sf.sze.**"), is(violationFree()));
+        assertThat(customClasspath("./target/classes").
+                including("net.sf.sze.**"), is(violationFree()));
     }
 
+    /**
+     * Prüft, die Zugriffe zwischen den Schichten.
+     */
     @Test
     public void layer() {
         ConstraintBuilder testObject =
