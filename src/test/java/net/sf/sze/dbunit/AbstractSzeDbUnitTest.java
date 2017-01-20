@@ -4,6 +4,9 @@
 // (c) SZE-Development Team
 package net.sf.sze.dbunit;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import java.sql.SQLException;
 
 import javax.annotation.Resource;
@@ -11,9 +14,15 @@ import javax.sql.DataSource;
 
 import net.sf.sze.SzeServer;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.subject.Subject;
+import org.apache.shiro.util.ThreadContext;
 import org.dbunit.dataset.IDataSet;
 import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.Rule;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
@@ -39,6 +48,15 @@ public abstract class AbstractSzeDbUnitTest extends AbstractJUnit4SpringContextT
 
     private SzeDatabase szeDatabase;
 
+
+    @Before
+    public void setUpSecurity() {
+        SecurityManager securityManger = mock(SecurityManager.class, Mockito.RETURNS_DEEP_STUBS);
+//        securityManger.
+        ThreadContext.bind(securityManger);
+        Subject subject = SecurityUtils.getSubject();
+        when(subject.getPrincipal()).thenReturn("JUnitTest");
+    }
 
     /**
      * @param dataSet
