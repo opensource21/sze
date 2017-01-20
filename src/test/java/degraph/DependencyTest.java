@@ -11,7 +11,6 @@ import static de.schauderhaft.degraph.check.JCheck.violationFree;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -25,6 +24,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
 
+import scala.Function1;
+import scala.runtime.AbstractFunction1;
 import de.schauderhaft.degraph.check.ConstraintBuilder;
 import de.schauderhaft.degraph.check.JLayer;
 
@@ -34,11 +35,16 @@ import de.schauderhaft.degraph.check.JLayer;
  */
 public class DependencyTest {
 
-    /**
+   /**
      * Rule um den Testnamen zu bekommen.
      */
     @Rule
     public TestName name = new TestName();
+
+    /**
+     * Classpath für alle Produktiven-Klassen.
+     */
+    private static final String PRODUCTION_CLASSES = "./target/classes";
 
     /**
      * Das UTIL-Package.
@@ -87,11 +93,29 @@ public class DependencyTest {
 
     private String errorFilename;
 
+    /**
+     * Filter als Scala-Funktion, welche alle Test-Klassen rausnimmt.
+     */
+    private static final Function1<String, Object> TEST_CLASS_FILTER =
+            new AbstractFunction1<String, Object>() {
+                @Override
+                public Object apply(String directoryOrJarName) {
+                    return Boolean.valueOf(!directoryOrJarName.contains("test-classes"));
+                }
+            };
+
+    /**
+     * Legt den Namen für die Fehlerdatei fest.
+     */
     @Before
     public void setUp() {
         errorFilename = name.getMethodName() + "Error.graphml";
     }
 
+    /**
+     * Ändert die Farbe ROT in BLAU.
+     * @throws IOException wenn die Datei nicht gelesen oder geschrieben werden kann.
+     */
     @After
     public void fixForRedBlindPeople() throws IOException {
         final Path errorFile = Paths.get(errorFilename);
@@ -111,8 +135,7 @@ public class DependencyTest {
     @Test
     public void cycleFree() {
         assertThat(
-                //customClasspath("./target/classes").
-                classpath().
+                classpath().noJars().filterClasspath(TEST_CLASS_FILTER).
                 printOnFailure(errorFilename).
                 including("net.sf.sze.**"), is(violationFree()));
     }
@@ -124,7 +147,7 @@ public class DependencyTest {
     @Test
     public void layer() {
         ConstraintBuilder testObject =
-                customClasspath("./target/classes").
+                customClasspath(PRODUCTION_CLASSES).
                 printOnFailure(errorFilename).
                 including("net.sf.sze.**").
                 withSlicing("sze", "net.sf.sze.(*).**").
@@ -141,7 +164,7 @@ public class DependencyTest {
     @Test
     public void layerDirect() {
         ConstraintBuilder testObject =
-                customClasspath("./target/classes").
+                customClasspath(PRODUCTION_CLASSES).
                 printOnFailure(errorFilename).
                 including("net.sf.sze." + FRONTEND_LAYER + ".**").
                 including("net.sf.sze." + SERVICE_LAYER + ".**").
