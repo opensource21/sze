@@ -19,6 +19,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.junit.After;
+import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -114,6 +115,12 @@ public class DependencyTest {
      */
     @Before
     public void setUp() {
+        final boolean travis = Boolean.parseBoolean(System.getenv("TRAVIS"));
+        final Package runtimePackage = Runtime.class.getPackage();
+        final boolean oracleJDK = runtimePackage.getImplementationVendor().contains("Oracle");
+        final boolean java7 = runtimePackage.getImplementationVersion().startsWith("1.7.0");
+        // Oracle JDK 1.7 verursacht unter Travis ein OutOfMemory.
+        Assume.assumeFalse(travis && oracleJDK && java7);
         errorFilename = name.getMethodName() + "Error.graphml";
     }
 
@@ -175,8 +182,6 @@ public class DependencyTest {
                 including(SZE_BASE_PACKAGE + SERVICE_LAYER + ".**").
                 including(SZE_BASE_PACKAGE + JOBS_PACKAGE + ".**").
                 including(SZE_BASE_PACKAGE + DAO_LAYER + ".**").
-                 // TODO Hier habe ich noch einen direkten Zugriff auf DAO - aua!
-                excluding("net.sf.sze.frontend.konfiguration.KonfigurationController").
                 withSlicing("sze", SZE_BASE_PACKAGE + "(*).**").
                 allowDirect(JLayer.oneOf(FRONTEND_LAYER, JOBS_PACKAGE),
                         SERVICE_LAYER, DAO_LAYER);
