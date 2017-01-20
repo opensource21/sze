@@ -19,6 +19,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.junit.After;
+import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -114,8 +115,11 @@ public class DependencyTest {
      */
     @Before
     public void setUp() {
-        System.out.println("###jdk### " + Runtime.class.getPackage().getImplementationVendor());
-        System.out.println("###jdk### " + Runtime.class.getPackage().getImplementationVersion());
+        final Package runtimePackage = Runtime.class.getPackage();
+        final boolean oracleJDK = runtimePackage.getImplementationVendor().contains("Oracle");
+        final boolean java7 = runtimePackage.getImplementationVersion().startsWith("1.7.0");
+        // Oracle JDK 1.7 verursacht unter Travis ein OutOfMemory.
+        Assume.assumeFalse(oracleJDK && java7);
         errorFilename = name.getMethodName() + "Error.graphml";
     }
 
