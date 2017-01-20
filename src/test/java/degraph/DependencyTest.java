@@ -5,13 +5,25 @@
 package degraph;
 
 import static de.schauderhaft.degraph.check.Check.classpath;
+//import static de.schauderhaft.degraph.check.JLayer.anyOf;
 import static de.schauderhaft.degraph.check.JCheck.customClasspath;
 import static de.schauderhaft.degraph.check.JCheck.violationFree;
-import static de.schauderhaft.degraph.check.JLayer.anyOf;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TestName;
 
 import de.schauderhaft.degraph.check.ConstraintBuilder;
 import de.schauderhaft.degraph.check.JLayer;
@@ -21,6 +33,12 @@ import de.schauderhaft.degraph.check.JLayer;
  *
  */
 public class DependencyTest {
+
+    /**
+     * Rule um den Testnamen zu bekommen.
+     */
+    @Rule
+    public TestName name = new TestName();
 
     /**
      * Das UTIL-Package.
@@ -67,15 +85,38 @@ public class DependencyTest {
      */
     private static final String SECURITY_PACKAGE = "security";
 
+    private String errorFilename;
+
+    @Before
+    public void setUp() {
+        errorFilename = name.getMethodName() + "Error.graphml";
+    }
+
+    @After
+    public void fixForRedBlindPeople() throws IOException {
+        final Path errorFile = Paths.get(errorFilename);
+        if (Files.exists(errorFile)) {
+            final Charset charset = StandardCharsets.UTF_8;
+            String content = new String(Files.readAllBytes(errorFile), charset);
+            content = content.replaceAll("#FF0000", "#0101FF");
+            Files.write(errorFile, content.getBytes(charset));
+        }
+    }
+
+
     /**
      * Stellt sicher, dass es keine Package-Zyklen gibt. Braucht leider eine
      * Minute :-(
      */
     @Test
     public void cycleFree() {
-        assertThat(customClasspath("./target/classes").
+        assertThat(
+                //customClasspath("./target/classes").
+                classpath().
+                printOnFailure(errorFilename).
                 including("net.sf.sze.**"), is(violationFree()));
     }
+
 
     /**
      * Prüft, die Zugriffe zwischen den Schichten.
@@ -83,35 +124,33 @@ public class DependencyTest {
     @Test
     public void layer() {
         ConstraintBuilder testObject =
-                // Ich nehme mal nicht den gesamten Pfad. classpath()
-                customClasspath("./target/classes")
-                .printOnFailure("degraphError.graphml")
-                .including("net.sf.sze.**")
-                // Util darf von allen Referenziert werden.
-                .excluding("net.sf.sze.util.**")
-                .withSlicing("sze", "net.sf.sze.(*).**")
-                .allowDirect(JLayer.oneOf(FRONTEND_LAYER, JOBS_PACKAGE),
-                        anyOf(SERVICE_LAYER, DAO_LAYER, MODEL_PACKAGE),
-                        anyOf(CONSTRAINTS_LAYER, UTIL_PACKAGE));
+                customClasspath("./target/classes").
+                printOnFailure(errorFilename).
+                including("net.sf.sze.**").
+                withSlicing("sze", "net.sf.sze.(*).**").
+                allow(CONFIG_PACKAGE, SECURITY_PACKAGE,
+                       JLayer.oneOf(FRONTEND_LAYER, JOBS_PACKAGE),
+                       SERVICE_LAYER, DAO_LAYER, MODEL_PACKAGE,
+                       CONSTRAINTS_LAYER, UTIL_PACKAGE);
         assertThat(testObject, is(violationFree()));
     }
 
     /**
-     * Prüft, die Zugriffe zwischen den Schichten.
+     * Prüft, die Zugriffe zwischen den Schichten JOBS/Frontend -> Service -> DAO.
      */
     @Test
     public void layerDirect() {
         ConstraintBuilder testObject =
-                customClasspath("./target/classes")
-                .printOnFailure("layerDirectError.graphml")
-                .including("net.sf.sze." + FRONTEND_LAYER + ".**")
-                .including("net.sf.sze." + SERVICE_LAYER + ".**")
-                .including("net.sf.sze." + JOBS_PACKAGE + ".**")
-                .including("net.sf.sze." + DAO_LAYER + ".**")
+                customClasspath("./target/classes").
+                printOnFailure(errorFilename).
+                including("net.sf.sze." + FRONTEND_LAYER + ".**").
+                including("net.sf.sze." + SERVICE_LAYER + ".**").
+                including("net.sf.sze." + JOBS_PACKAGE + ".**").
+                including("net.sf.sze." + DAO_LAYER + ".**").
                  // TODO Hier habe ich noch einen direkten Zugriff auf DAO - aua!
-                .excluding("net.sf.sze.frontend.konfiguration.KonfigurationController")
-                .withSlicing("sze", "net.sf.sze.(*).**")
-                .allowDirect(JLayer.oneOf(FRONTEND_LAYER, JOBS_PACKAGE),
+                excluding("net.sf.sze.frontend.konfiguration.KonfigurationController").
+                withSlicing("sze", "net.sf.sze.(*).**").
+                allowDirect(JLayer.oneOf(FRONTEND_LAYER, JOBS_PACKAGE),
                         SERVICE_LAYER, DAO_LAYER);
         assertThat(testObject, is(violationFree()));
     }
