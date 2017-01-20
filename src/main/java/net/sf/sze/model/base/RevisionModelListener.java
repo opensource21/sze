@@ -20,6 +20,7 @@ import javax.persistence.Transient;
 import net.sf.sze.model.base.RevisionLog.Action;
 
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -89,7 +90,12 @@ public class RevisionModelListener implements InitializingBean {
             Map<String, Object> oldValues, Map<String, Object> newValues) {
         String user = "unkown";
         try {
-            user = "" + SecurityUtils.getSubject().getPrincipal();
+            final Subject subject = SecurityUtils.getSubject();
+            user = "" + subject.getPrincipal();
+            if (user.length() > 20) {
+                // Shorten and add elipses.
+                user = user.substring(0, 19) +  "\u2026";
+            }
         } catch (Exception e) {
             LOG.warn("Security-User konnte nicht ermittelt werden.", e);
         }
