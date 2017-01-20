@@ -114,6 +114,8 @@ public class DependencyTest {
      */
     @Before
     public void setUp() {
+        System.out.println("###jdk### " + Runtime.class.getPackage().getImplementationVendor());
+        System.out.println("###jdk### " + Runtime.class.getPackage().getImplementationVersion());
         errorFilename = name.getMethodName() + "Error.graphml";
     }
 
