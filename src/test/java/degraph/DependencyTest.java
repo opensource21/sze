@@ -95,4 +95,24 @@ public class DependencyTest {
                         anyOf(CONSTRAINTS_LAYER, UTIL_PACKAGE));
         assertThat(testObject, is(violationFree()));
     }
+
+    /**
+     * Prüft, die Zugriffe zwischen den Schichten.
+     */
+    @Test
+    public void layerDirect() {
+        ConstraintBuilder testObject =
+                customClasspath("./target/classes")
+                .printOnFailure("layerDirectError.graphml")
+                .including("net.sf.sze." + FRONTEND_LAYER + ".**")
+                .including("net.sf.sze." + SERVICE_LAYER + ".**")
+                .including("net.sf.sze." + JOBS_PACKAGE + ".**")
+                .including("net.sf.sze." + DAO_LAYER + ".**")
+                 // TODO Hier habe ich noch einen direkten Zugriff auf DAO - aua!
+                .excluding("net.sf.sze.frontend.konfiguration.KonfigurationController")
+                .withSlicing("sze", "net.sf.sze.(*).**")
+                .allowDirect(JLayer.oneOf(FRONTEND_LAYER, JOBS_PACKAGE),
+                        SERVICE_LAYER, DAO_LAYER);
+        assertThat(testObject, is(violationFree()));
+    }
 }
