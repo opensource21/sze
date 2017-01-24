@@ -187,4 +187,26 @@ public class DependencyTest {
                         SERVICE_LAYER, DAO_LAYER);
         assertThat(testObject, is(violationFree()));
     }
+
+    /**
+     * Prüft, die Zugriffe zwischen den fachlichen Schichten.
+     */
+    @Test
+    public void functionalSlices() {
+        ConstraintBuilder testObject =
+                customClasspath(PRODUCTION_CLASSES).
+                printOnFailure(errorFilename).
+                including(SZE_BASE_PACKAGE + "**").
+                excluding(SZE_BASE_PACKAGE + CONFIG_PACKAGE + ".**").
+                excluding(SZE_BASE_PACKAGE + JOBS_PACKAGE + ".**").
+                excluding(SZE_BASE_PACKAGE + CONSTRAINTS_LAYER + ".**").
+                excluding(SZE_BASE_PACKAGE + SECURITY_PACKAGE + ".**").
+                excluding(SZE_BASE_PACKAGE + UTIL_PACKAGE + ".**").
+                withSlicing("dao", SZE_BASE_PACKAGE + "dao.api.(*).**").
+                withSlicing("frontend", SZE_BASE_PACKAGE + "frontend.(*).**").
+                withSlicing("model", SZE_BASE_PACKAGE + "model.(*).**").
+                withSlicing("service", SZE_BASE_PACKAGE + "service.*.(*).**").
+                allow("admin", "zeugnis", "zeugnisconfig", "stammdaten", "common");
+        assertThat(testObject, is(violationFree()));
+    }
 }
