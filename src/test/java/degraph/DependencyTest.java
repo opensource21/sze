@@ -17,6 +17,11 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.junit.After;
 import org.junit.Assume;
@@ -116,9 +121,14 @@ public class DependencyTest {
     @Before
     public void setUp() {
         errorFilename = name.getMethodName() + "Error.graphml";
+        System.out.println("===== ENV VARIABLES =====");
+        dumpVars(System.getenv());
+        System.out.println("===== PROPERTIES =====");
+        dumpVars(new HashMap(System.getProperties()));
+
         final Package runtimePackage = Runtime.class.getPackage();
         final boolean oracleJDK = runtimePackage.getImplementationVendor().contains("Oracle");
-        final boolean java7 = runtimePackage.getImplementationVersion().startsWith("1.7.0");
+        final boolean java7 = runtimePackage.getImplementationVersion().startsWith("1.7.0_76");
         // Oracle JDK 1.7 verursacht unter Travis ein OutOfMemory.
         Assume.assumeFalse(oracleJDK && java7);
     }
@@ -181,11 +191,17 @@ public class DependencyTest {
                 including(SZE_BASE_PACKAGE + SERVICE_LAYER + ".**").
                 including(SZE_BASE_PACKAGE + JOBS_PACKAGE + ".**").
                 including(SZE_BASE_PACKAGE + DAO_LAYER + ".**").
-                 // TODO Hier habe ich noch einen direkten Zugriff auf DAO - aua!
-                excluding("net.sf.sze.frontend.konfiguration.KonfigurationController").
                 withSlicing("sze", SZE_BASE_PACKAGE + "(*).**").
                 allowDirect(JLayer.oneOf(FRONTEND_LAYER, JOBS_PACKAGE),
                         SERVICE_LAYER, DAO_LAYER);
         assertThat(testObject, is(violationFree()));
     }
+
+    private static void dumpVars(Map<String, ?> m) {
+        List<String> keys = new ArrayList<String>(m.keySet());
+        Collections.sort(keys);
+        for (String k : keys) {
+          System.out.println(k + " : " + m.get(k));
+        }
+      }
 }
