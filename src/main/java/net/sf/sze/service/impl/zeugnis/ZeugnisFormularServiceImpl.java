@@ -280,16 +280,25 @@ public class ZeugnisFormularServiceImpl implements ZeugnisFormularService {
         final File templateDir = new File(this.templateDirName);
         File[] files = templateDir.listFiles();
         // Zeitlich rückwärtssortiert.
-        Arrays.sort(files, new Comparator<File>(){
+        Arrays.sort(files, new Comparator<File>() {
             @Override
-            public int compare(File f1, File f2)
-            {
+            public int compare(File f1, File f2) {
                 return Long.valueOf(f2.lastModified()).compareTo(Long.valueOf(f1.lastModified()));
-            } });
+            }
+        });
         final List<String> result = new ArrayList<>();
         for (File filename : files) {
             result.add(filename.getName());
         }
         return result;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<ZeugnisFormular> getActiveZeugnisFormulare() {
+        return zeugnisFormularDao.
+        findAllBySchulhalbjahrSelectableOrderBySchulhalbjahrJahrDescSchulhalbjahrHalbjahrDescKlasseJahrgangDescKlasseSuffixAscBeschreibungDesc(true);
     }
 }

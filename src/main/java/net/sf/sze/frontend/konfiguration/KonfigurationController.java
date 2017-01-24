@@ -8,9 +8,9 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import net.sf.sze.dao.api.zeugnis.ZeugnisFormularDao;
 import net.sf.sze.frontend.base.URL;
 import net.sf.sze.model.zeugnis.ZeugnisFormular;
+import net.sf.sze.service.api.zeugnis.ZeugnisFormularService;
 import net.sf.sze.service.api.zeugnisconfig.ZeugnisInitialierungsService;
 import net.sf.sze.util.ResultContainer;
 
@@ -34,7 +34,7 @@ public class KonfigurationController {
     private ZeugnisInitialierungsService zeugnisInitialierungsService;
 
     @Resource
-    private ZeugnisFormularDao zeugnisFormularDao;
+    private ZeugnisFormularService zeugnisFormularService;
 
     /**
      * Zeigt die Übersichtseite für die Konfiguraztion an.
@@ -53,8 +53,7 @@ public class KonfigurationController {
      */
     @RequestMapping(value = URL.Configuration.INIT_ZEUGNISSE, method = RequestMethod.GET)
     public String initializeZeugnisse(Model model) {
-        final List<ZeugnisFormular> formulare = zeugnisFormularDao.
-                findAllBySchulhalbjahrSelectableOrderBySchulhalbjahrJahrDescSchulhalbjahrHalbjahrDescKlasseJahrgangDescKlasseSuffixAscBeschreibungDesc(true);
+        final List<ZeugnisFormular> formulare = zeugnisFormularService.getActiveZeugnisFormulare();
         model.addAttribute("formularList", formulare);
         return "konfiguration/initZeugnisse";
     }
