@@ -99,4 +99,12 @@ public interface ZeugnisFormularService {
      */
     ZeugnisFormular getLastZeugnisFormular(final Schulhalbjahr shj, Klasse klasse);
 
+
+    /**
+     * Liefert alle Zeugnisformular zu aktiven Schulhalbjahren, sortiert nach Zeit und Klasse,
+     * wobei die neuesten und niedrigsten Klassen zu erst kommen.
+     * @return die Liste mit den Formularen.
+     */
+    List<ZeugnisFormular> getActiveZeugnisFormulare();
+
 }
