@@ -264,4 +264,13 @@ public class ZeugnisFormularServiceImpl implements ZeugnisFormularService {
     public ZeugnisFormular getZeugnisFormular(long halbjahrId, long klassenId) {
         return zeugnisFormularDao.findBySchulhalbjahrIdAndKlasseId(halbjahrId, klassenId);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<ZeugnisFormular> getActiveZeugnisFormulare() {
+        return zeugnisFormularDao.
+        findAllBySchulhalbjahrSelectableOrderBySchulhalbjahrJahrDescSchulhalbjahrHalbjahrDescKlasseJahrgangDescKlasseSuffixAscBeschreibungDesc(true);
+    }
 }
