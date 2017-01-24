@@ -2,13 +2,13 @@
 //
 // Licensed under the AGPL - http://www.gnu.org/licenses/agpl-3.0.txt
 // (c) SZE-Development Team
-package net.sf.sze.service.impl.common;
+package net.sf.sze.service.impl.admin;
 
 import javax.annotation.Resource;
 
 import net.sf.sze.dbunit.AbstractSzeDbUnitTest;
 import net.sf.sze.dbunit.dataset.Anonymisierung;
-import net.sf.sze.service.api.common.AnonymisierungsService;
+import net.sf.sze.service.api.admin.AnonymisierungsService;
 
 import org.dbunit.dataset.IDataSet;
 import org.junit.Test;
@@ -27,7 +27,7 @@ public class AnonymisierungsServiceImplIntegrationTest extends AbstractSzeDbUnit
 
     /**
      * Test method for
-     * {@link net.sf.sze.service.impl.common.AnonymisierungsServiceImpl#replaceAllNamesWithVariables()}.
+     * {@link net.sf.sze.service.impl.admin.AnonymisierungsServiceImpl#replaceAllNamesWithVariables()}.
      * @throws Exception wenn was schief geht.
      */
     @Test
@@ -43,7 +43,7 @@ public class AnonymisierungsServiceImplIntegrationTest extends AbstractSzeDbUnit
 
     /**
      * Test method for
-     * {@link net.sf.sze.service.impl.common.AnonymisierungsServiceImpl#anonymisierSchueler()}.
+     * {@link net.sf.sze.service.impl.admin.AnonymisierungsServiceImpl#anonymisierSchueler()}.
      * @throws Exception wenn was schief geht.
      */
     @Test
