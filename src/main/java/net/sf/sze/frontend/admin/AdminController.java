@@ -7,7 +7,7 @@ package net.sf.sze.frontend.admin;
 import javax.annotation.Resource;
 
 import net.sf.sze.frontend.base.URL;
-import net.sf.sze.service.api.common.AnonymisierungsService;
+import net.sf.sze.service.api.admin.AnonymisierungsService;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

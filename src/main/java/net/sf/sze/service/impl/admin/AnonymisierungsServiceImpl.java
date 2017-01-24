@@ -2,7 +2,7 @@
 //
 // Licensed under the AGPL - http://www.gnu.org/licenses/agpl-3.0.txt
 // (c) SZE-Development Team
-package net.sf.sze.service.impl.common;
+package net.sf.sze.service.impl.admin;
 
 import javax.annotation.Resource;
 
@@ -11,7 +11,7 @@ import net.sf.sze.model.stammdaten.Schueler;
 import net.sf.sze.model.zeugnis.Bemerkung;
 import net.sf.sze.model.zeugnis.SchulamtsBemerkung;
 import net.sf.sze.model.zeugnis.Zeugnis;
-import net.sf.sze.service.api.common.AnonymisierungsService;
+import net.sf.sze.service.api.admin.AnonymisierungsService;
 import net.sf.sze.service.api.zeugnis.BemerkungService;
 import net.sf.sze.service.api.zeugnis.SchulamtsBemerkungService;
 import net.sf.sze.service.api.zeugnis.ZeugnisErfassungsService;
