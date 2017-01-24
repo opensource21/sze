@@ -17,11 +17,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import org.junit.After;
 import org.junit.Assume;
@@ -121,16 +116,12 @@ public class DependencyTest {
     @Before
     public void setUp() {
         errorFilename = name.getMethodName() + "Error.graphml";
-        System.out.println("===== ENV VARIABLES =====");
-        dumpVars(System.getenv());
-        System.out.println("===== PROPERTIES =====");
-        dumpVars(new HashMap(System.getProperties()));
-
+        final boolean travis = Boolean.parseBoolean(System.getenv("TRAVIS"));
         final Package runtimePackage = Runtime.class.getPackage();
         final boolean oracleJDK = runtimePackage.getImplementationVendor().contains("Oracle");
-        final boolean java7 = runtimePackage.getImplementationVersion().startsWith("1.7.0_76");
+        final boolean java7 = runtimePackage.getImplementationVersion().startsWith("1.7.0");
         // Oracle JDK 1.7 verursacht unter Travis ein OutOfMemory.
-        Assume.assumeFalse(oracleJDK && java7);
+        Assume.assumeFalse(travis && oracleJDK && java7);
     }
 
     /**
@@ -196,12 +187,4 @@ public class DependencyTest {
                         SERVICE_LAYER, DAO_LAYER);
         assertThat(testObject, is(violationFree()));
     }
-
-    private static void dumpVars(Map<String, ?> m) {
-        List<String> keys = new ArrayList<String>(m.keySet());
-        Collections.sort(keys);
-        for (String k : keys) {
-          System.out.println(k + " : " + m.get(k));
-        }
-      }
 }
