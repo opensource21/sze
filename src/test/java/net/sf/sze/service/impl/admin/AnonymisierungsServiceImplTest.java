@@ -2,7 +2,7 @@
 //
 // Licensed under the AGPL - http://www.gnu.org/licenses/agpl-3.0.txt
 // (c) SZE-Development Team
-package net.sf.sze.service.impl.common;
+package net.sf.sze.service.impl.admin;
 
 import static org.mockito.Matchers.argThat;
 import static org.mockito.Mockito.verify;
@@ -14,7 +14,7 @@ import java.util.List;
 
 import net.sf.sze.dao.api.stammdaten.SchuelerDao;
 import net.sf.sze.model.stammdaten.Schueler;
-import net.sf.sze.service.api.common.AnonymisierungsService;
+import net.sf.sze.service.api.admin.AnonymisierungsService;
 import net.sf.sze.util.Geschlecht;
 
 import org.junit.Before;
@@ -56,7 +56,7 @@ public class AnonymisierungsServiceImplTest {
 
     /**
      * Test method for
-     * {@link net.sf.sze.service.impl.common.AnonymisierungsServiceImpl#anonymisierSchueler()}.
+     * {@link net.sf.sze.service.impl.admin.AnonymisierungsServiceImpl#anonymisierSchueler()}.
      */
     @Test
     public void testAnonymisierSchuelerMinimalMaenlich() {
@@ -85,7 +85,7 @@ public class AnonymisierungsServiceImplTest {
 
     /**
      * Test method for
-     * {@link net.sf.sze.service.impl.common.AnonymisierungsServiceImpl#anonymisierSchueler()}.
+     * {@link net.sf.sze.service.impl.admin.AnonymisierungsServiceImpl#anonymisierSchueler()}.
      */
     @Test
     public void testAnonymisierSchuelerFullWeiblich() {
