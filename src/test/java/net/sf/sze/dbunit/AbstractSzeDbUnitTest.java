@@ -24,17 +24,16 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
-import org.springframework.test.context.web.WebAppConfiguration;
 
 
 /**
  * Class AbstractSzeDbUnitTest
  *
  */
-@SpringApplicationConfiguration(classes = SzeServer.class)
-@WebAppConfiguration
+@SpringBootTest(classes = SzeServer.class, webEnvironment=WebEnvironment.RANDOM_PORT)
 public abstract class AbstractSzeDbUnitTest extends AbstractJUnit4SpringContextTests {
 
     @Resource
