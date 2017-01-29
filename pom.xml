@@ -28,12 +28,12 @@
 
     </properties>
     <licenses>
-      <license>
-        <name>GNU AFFERO GENERAL PUBLIC LICENSE</name>
-        <url>http://www.gnu.org/licenses/agpl.txt</url>
-        <distribution>manual</distribution>
-        <comments>Fair use license</comments>
-      </license>
+        <license>
+            <name>GNU AFFERO GENERAL PUBLIC LICENSE</name>
+            <url>http://www.gnu.org/licenses/agpl.txt</url>
+            <distribution>manual</distribution>
+            <comments>Fair use license</comments>
+        </license>
     </licenses>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -72,7 +72,18 @@
         <dependency>
             <groupId>de.ppi.oss</groupId>
             <artifactId>fuwesta-core</artifactId>
-            <version>1.0</version>
+            <version>1.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>de.ppi.oss</groupId>
+            <artifactId>thymeleaf-bootstrap2</artifactId>
+            <version>0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>de.ppi.oss</groupId>
+            <artifactId>thymeleaf-mailto</artifactId>
+            <version>0.1</version>
         </dependency>
         <!-- logging -->
 
