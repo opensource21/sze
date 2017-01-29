@@ -2,8 +2,8 @@ package net.sf.sze.model.base;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import javax.persistence.Embedded;
 import javax.persistence.EntityManager;
@@ -69,7 +69,7 @@ public class RevisionModelListener implements InitializingBean {
      * @param model the model.
      */
     @PostPersist
-    public void prePersist(RevisionModel model) {
+    public void postPersist(RevisionModel model) {
         final Map<String, Object> map = new HashMap<String, Object>();
         putValuesToMap(map, "", model);
         saveChanges(Action.CREATE, model, new HashMap<String, Object>(), map);
@@ -101,9 +101,11 @@ public class RevisionModelListener implements InitializingBean {
         }
         final String entityName = model.getClass().getSimpleName();
         final Long entityId = model.getId();
-        for (Entry<String, Object> keyValue : oldValues.entrySet()) {
-            final String key = keyValue.getKey();
-            final Object oldValue = keyValue.getValue();
+        final HashSet<String> keyValues = new HashSet<String>();
+        keyValues.addAll(oldValues.keySet());
+        keyValues.addAll(newValues.keySet());
+        for (String key : keyValues) {
+            final Object oldValue = oldValues.get(key);
             final Object newValue = newValues.get(key);
             boolean changes = false;
             if (oldValue == null) {
