@@ -8,7 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.SessionTrackingMode;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.context.web.SpringBootServletInitializer;
+import org.springframework.boot.web.support.SpringBootServletInitializer;
 
 /**
  * Servlet-Initialiazer if we run in a war - file.
