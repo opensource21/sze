@@ -1,0 +1,16 @@
+[[package:Default]]
+[role=group,includesConstraints="package:Cycles"]
+== Package Rules
+
+Cyclic dependencies between packages must be avoided to keep the possibility of later refactorings and restructurings.
+
+[[package:Cycles]]
+.There must be no cyclic dependencies between packages.
+[source,cypher,role=constraint,requiresConcepts="dependency:Package"]
+----
+MATCH
+  (p1:Package)-[:DEPENDS_ON]->(p2:Package),
+  cycle=shortestPath((p2)-[:DEPENDS_ON*]->(p1))
+RETURN
+  p1 as PackageInCycle, nodes(cycle) as Cycle
+----
