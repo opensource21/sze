@@ -3,13 +3,13 @@
 // Licensed under the AGPL - http://www.gnu.org/licenses/agpl-3.0.txt
 // (c) SZE-Development-Team
 
-package net.sf.sze.service.api.converter;
+package net.sf.sze.service.api.document;
 
 import net.sf.jooreports.templates.DocumentTemplateException;
 import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.zeugnis.Zeugnis;
 import net.sf.sze.model.zeugnisconfig.Schulhalbjahr;
-import net.sf.sze.service.api.converter.PdfConverter.PDFConversionException;
+import net.sf.sze.service.api.document.PdfConverter.PDFConversionException;
 import net.sf.sze.util.ResultContainer;
 
 import java.io.File;
