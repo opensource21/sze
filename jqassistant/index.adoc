@@ -1,0 +1,20 @@
+:numbered:              // Number all section headers
+:sectnumlevels: 5       // Number up to section level 5
+:toclevels: 2           // Table of content should have only two levels
+
+= Coding Rules
+
+This document describes coding rules for the `SZE` project.
+
+== CI Build ==
+
+The following rule groups are executed during a build:
+
+[[default]]
+[role=group,includesGroups="package:Default,test:Default"]
+- <<package:Default>>
+- <<test:Default>>
+
+include::package.adoc[]
+include::test.adoc[]
+
