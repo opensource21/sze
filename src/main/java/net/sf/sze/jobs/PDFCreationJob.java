@@ -6,7 +6,7 @@ package net.sf.sze.jobs;
 
 import javax.annotation.Resource;
 
-import net.sf.sze.service.api.converter.ZeugnisCreatorService;
+import net.sf.sze.service.api.document.ZeugnisCreatorService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

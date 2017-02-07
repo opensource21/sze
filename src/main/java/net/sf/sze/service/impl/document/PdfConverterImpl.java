@@ -6,7 +6,7 @@
 /**
  *
  */
-package net.sf.sze.service.impl.converter;
+package net.sf.sze.service.impl.document;
 
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
@@ -23,8 +23,8 @@ import com.lowagie.text.pdf.PdfString;
 import com.lowagie.text.pdf.PdfTemplate;
 import com.lowagie.text.pdf.PdfWriter;
 
-import net.sf.sze.service.api.converter.OO2PdfConverter;
-import net.sf.sze.service.api.converter.PdfConverter;
+import net.sf.sze.service.api.document.OO2PdfConverter;
+import net.sf.sze.service.api.document.PdfConverter;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
