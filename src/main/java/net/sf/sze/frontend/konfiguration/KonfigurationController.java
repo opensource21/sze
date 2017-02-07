@@ -11,7 +11,7 @@ import javax.annotation.Resource;
 import net.sf.sze.frontend.base.URL;
 import net.sf.sze.model.zeugnis.ZeugnisFormular;
 import net.sf.sze.service.api.zeugnis.ZeugnisFormularService;
-import net.sf.sze.service.api.zeugnisconfig.ZeugnisInitialierungsService;
+import net.sf.sze.service.api.zeugnis.ZeugnisInitialierungsService;
 import net.sf.sze.util.ResultContainer;
 
 import org.springframework.stereotype.Controller;
