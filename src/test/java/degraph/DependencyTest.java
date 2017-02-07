@@ -21,6 +21,7 @@ import java.nio.file.Paths;
 import org.junit.After;
 import org.junit.Assume;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
@@ -29,6 +30,7 @@ import scala.Function1;
 import scala.runtime.AbstractFunction1;
 import de.schauderhaft.degraph.check.ConstraintBuilder;
 import de.schauderhaft.degraph.check.JLayer;
+import de.schauderhaft.degraph.configuration.NamedPattern;
 
 /**
  * Testet verschiedene Abhängigkeiten innerhalb der Anwendung.
@@ -209,6 +211,44 @@ public class DependencyTest {
                         SZE_BASE_PACKAGE + "service.*.(*).**").
                 allow("admin", "converter", "document", "zeugnis",
                         "zeugnisconfig", "stammdaten", "calendar");
+        assertThat(testObject, is(violationFree()));
+    }
+
+    /**
+     * Implementierungen in IMPL werden durch Spring instantiiert und sollten
+     * nicht direkt aufgerufen werden.
+     */
+    @Test
+    @Ignore("WIP")
+    public void noImplReferences() {
+        ConstraintBuilder testObject =
+                customClasspath(PRODUCTION_CLASSES).
+                printOnFailure(errorFilename).
+                including(SZE_BASE_PACKAGE + "**").
+                excluding("**.package-info").
+                withSlicing("impl", SZE_BASE_PACKAGE + ".**.(impl).**",
+                        new NamedPattern(SZE_BASE_PACKAGE + ".*.**", "other")).
+                allow("other", "impl");
+        assertThat(testObject, is(violationFree()));
+    }
+
+    /**
+     * Normale Klassen dürfen nicht test referenzieren.
+     */
+    @Test
+    @Ignore("WIP")
+    public void noTestReferences() {
+        ConstraintBuilder testObject =
+                classpath().noJars().
+                printOnFailure(errorFilename).
+                including(SZE_BASE_PACKAGE + "**").
+                excluding("**.package-info").
+                excluding("net.sf.sze.model.stammdaten.Schueler").
+                withSlicing(
+                        "mainVsTest",
+                        SZE_BASE_PACKAGE + ".**(Test)",
+                        new NamedPattern(SZE_BASE_PACKAGE + ".*.**", "main")).
+                allow("main", "Test");
         assertThat(testObject, is(violationFree()));
     }
 }
