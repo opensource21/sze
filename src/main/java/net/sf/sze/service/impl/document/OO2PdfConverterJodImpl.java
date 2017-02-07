@@ -6,14 +6,14 @@
 /**
  *
  */
-package net.sf.sze.service.impl.converter;
+package net.sf.sze.service.impl.document;
 
 import com.artofsolving.jodconverter.DocumentConverter;
 import com.artofsolving.jodconverter.openoffice.connection.OpenOfficeConnection;
 import com.artofsolving.jodconverter.openoffice.connection.SocketOpenOfficeConnection;
 import com.artofsolving.jodconverter.openoffice.converter.OpenOfficeDocumentConverter;
 
-import net.sf.sze.service.api.converter.OO2PdfConverter;
+import net.sf.sze.service.api.document.OO2PdfConverter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
