@@ -3,7 +3,7 @@
 // Licensed under the AGPL - http://www.gnu.org/licenses/agpl-3.0.txt
 // (c) SZE-Development-Team
 
-package net.sf.sze.model.zeugnisconfig;
+package net.sf.sze.model.calendar;
 
 /**
  * Aufzählungsklasse für Halbjahre.

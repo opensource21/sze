@@ -26,12 +26,12 @@ import org.springframework.util.CollectionUtils;
 import net.sf.sze.dao.api.zeugnis.SchulfachDetailInfoDao;
 import net.sf.sze.dao.api.zeugnis.ZeugnisFormularDao;
 import net.sf.sze.dao.api.zeugnisconfig.SchulhalbjahrDao;
+import net.sf.sze.model.calendar.Halbjahr;
 import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.zeugnis.SchulfachDetailInfo;
 import net.sf.sze.model.zeugnis.ZeugnisFormular;
-import net.sf.sze.model.zeugnisconfig.Halbjahr;
 import net.sf.sze.model.zeugnisconfig.Schulhalbjahr;
-import net.sf.sze.service.api.common.SchulkalenderService;
+import net.sf.sze.service.api.calendar.SchulkalenderService;
 import net.sf.sze.service.api.stammdaten.KlasseService;
 import net.sf.sze.service.api.zeugnis.ZeugnisFormularService;
 
