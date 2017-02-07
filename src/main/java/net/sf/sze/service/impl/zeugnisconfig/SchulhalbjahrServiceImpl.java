@@ -10,9 +10,9 @@ import java.util.Calendar;
 import javax.annotation.Resource;
 
 import net.sf.sze.dao.api.zeugnisconfig.SchulhalbjahrDao;
-import net.sf.sze.model.zeugnisconfig.Halbjahr;
+import net.sf.sze.model.calendar.Halbjahr;
 import net.sf.sze.model.zeugnisconfig.Schulhalbjahr;
-import net.sf.sze.service.api.common.SchulkalenderService;
+import net.sf.sze.service.api.calendar.SchulkalenderService;
 import net.sf.sze.service.api.zeugnisconfig.SchulhalbjahrService;
 
 import org.slf4j.Logger;

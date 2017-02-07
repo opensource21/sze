@@ -5,6 +5,8 @@
 
 package net.sf.sze.model.zeugnisconfig;
 
+import net.sf.sze.model.calendar.Halbjahr;
+
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

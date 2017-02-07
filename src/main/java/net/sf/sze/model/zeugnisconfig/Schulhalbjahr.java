@@ -17,6 +17,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
 import net.sf.sze.model.base.RevisionModel;
+import net.sf.sze.model.calendar.Halbjahr;
 
 import org.apache.commons.lang.builder.CompareToBuilder;
 
