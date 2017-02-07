@@ -3,7 +3,7 @@
 // Licensed under the AGPL - http://www.gnu.org/licenses/agpl-3.0.txt
 // (c) SZE-Development-Team
 
-package net.sf.sze.frontend.zeugnis;
+package net.sf.sze.frontend.document;
 
 import java.io.File;
 
@@ -14,7 +14,7 @@ import net.sf.sze.frontend.base.ModelAttributes;
 import net.sf.sze.frontend.base.URL;
 import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.zeugnisconfig.Schulhalbjahr;
-import net.sf.sze.service.api.converter.ZeugnisCreatorService;
+import net.sf.sze.service.api.document.ZeugnisCreatorService;
 import net.sf.sze.service.api.zeugnis.ZeugnisErfassungsService;
 
 import org.apache.shiro.SecurityUtils;

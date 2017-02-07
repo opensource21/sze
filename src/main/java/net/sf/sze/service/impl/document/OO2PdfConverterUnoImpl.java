@@ -6,9 +6,9 @@
 /**
  *
  */
-package net.sf.sze.service.impl.converter;
+package net.sf.sze.service.impl.document;
 
-import net.sf.sze.service.api.converter.OO2PdfConverter;
+import net.sf.sze.service.api.document.OO2PdfConverter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
