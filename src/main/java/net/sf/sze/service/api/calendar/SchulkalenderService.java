@@ -2,11 +2,11 @@
 //
 // Licensed under the AGPL - http://www.gnu.org/licenses/agpl-3.0.txt
 // (c) SZE-Development Team
-package net.sf.sze.service.api.common;
+package net.sf.sze.service.api.calendar;
 
 import java.util.Calendar;
 
-import net.sf.sze.model.zeugnisconfig.Halbjahr;
+import net.sf.sze.model.calendar.Halbjahr;
 
 
 /**
