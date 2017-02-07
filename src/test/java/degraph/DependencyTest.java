@@ -202,16 +202,13 @@ public class DependencyTest {
                 excluding(SZE_BASE_PACKAGE + CONSTRAINTS_LAYER + ".**").
                 excluding(SZE_BASE_PACKAGE + SECURITY_PACKAGE + ".**").
                 excluding(SZE_BASE_PACKAGE + UTIL_PACKAGE + ".**").
-//                excluding(SZE_BASE_PACKAGE + FRONTEND_LAYER + ".**").
-//                excluding(SZE_BASE_PACKAGE + SERVICE_LAYER + ".**").
-//                excluding(SZE_BASE_PACKAGE + MODEL_PACKAGE + ".**").
-                //excluding("net.sf.sze.service.api.common.SchulkalenderService").
-                //excluding("net.sf.sze.service.impl.common.SchulKalenderServiceImpl").
+                excluding("**.package-info").
                 withSlicing("functional", SZE_BASE_PACKAGE + "dao.api.(*).**",
                         SZE_BASE_PACKAGE + "frontend.(*).**",
                         SZE_BASE_PACKAGE + "model.(*).**",
                         SZE_BASE_PACKAGE + "service.*.(*).**").
-                allow("admin", "zeugnis", "zeugnisconfig", "stammdaten", "common");
+                allow("admin", "converter", "document", "zeugnis",
+                        "zeugnisconfig", "stammdaten", "calendar");
         assertThat(testObject, is(violationFree()));
     }
 }
