@@ -1,5 +1,5 @@
 [[structure:Default]]
-[role=group,includesConstraints="structure:RootPackage,structure:FrontendDependency,structure:JobsDependency,structure:ServiceDependency"]
+[role=group,includesConstraints="structure:RootPackage,structure:FrontendDependency,structure:JobsDependency,structure:ServiceDependency",includesConcepts="structure:SliceDependency.graphml"]
 == Structural Rules
 
 The package `net.sf.sze` is used as the root package of the application.
@@ -44,6 +44,30 @@ SET
   slice:Slice
 RETURN
   slice as Slice
+----
+
+[[structure:SliceDependency.graphml]]
+.Creates a GraphML report about slices and their dependencies.
+[source,cypher,role=concept,requiresConcepts="structure:Slice"]
+----
+MATCH
+  (slice1:Slice)-[:CONTAINS*]->(t1:Type),
+  (slice2:Slice)-[:CONTAINS*]->(t2:Type),
+  (t1)-[d:DEPENDS_ON]->(t2)
+WHERE
+   slice1 <> slice2
+WITH
+  slice1, slice2, count(d) as weight
+RETURN
+  slice1 as Slice1, slice2 as Slice2, {
+    role :     "relationship",
+    type :     "DEPENDS_ON",
+    startNode: slice1,
+    endNode:   slice2,
+    properties: {
+      weight: weight
+    }
+  } as Dependency
 ----
 
 [[structure:FrontendDependency]]
