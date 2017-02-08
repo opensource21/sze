@@ -407,12 +407,14 @@
                                 <group>default</group>
                             </groups>
                             -->
-                            <reportProperties>
-                                <graphml.report.directory>${project.build.directory}/graphml</graphml.report.directory>
-                            </reportProperties>
                         </configuration>
                     </execution>
                 </executions>
+                <configuration>
+                    <reportProperties>
+                        <graphml.report.directory>${project.build.directory}/graphml</graphml.report.directory>
+                    </reportProperties>
+                </configuration>
                 <dependencies>
                     <dependency>
                         <groupId>com.buschmais.jqassistant.plugin</groupId>
