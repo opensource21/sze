@@ -1,0 +1,118 @@
+[[structure:Default]]
+[role=group,includesConstraints="structure:RootPackage,structure:FrontendDependency,structure:JobsDependency,structure:ServiceDependency"]
+== Structural Rules
+
+The package `net.sf.sze` is used as the root package of the application.
+
+[[structure:RootPackage]]
+.Labels the package `net.sf.sze` as `Root`.
+[source,cypher,role=concept]
+----
+MATCH
+  (root:Package)
+WHERE
+  root.fqn = "net.sf.sze"
+SET
+  root:Root
+RETURN
+  root as RootPackage
+----
+
+[[structure:RootPackage]]
+.All Java types must be located within the root package or a sub-package thereof.
+[source,cypher,role=constraint,requiresConcepts="structure:RootPackage,maven:InternalFile"]
+----
+MATCH
+  (type:Type:Internal)
+WHERE NOT
+  (:Package:Root)-[:CONTAINS*]->(type)
+RETURN
+  type as TypeOutsideRootPackage
+----
+
+All packages which are directly contained in the root package are technical slices.
+
+[[structure:Slice]]
+.Adds the label `Slice` to all packages contained in the root package (of all non-test artifacts).
+[source,cypher,role=concept,requiresConcepts="structure:RootPackage"]
+----
+MATCH
+  (artifact:Artifact)-[:CONTAINS]->(root:Package:Root)-[:CONTAINS]->(slice:Package)
+WHERE
+   artifact.type <> "test-jar"
+SET
+  slice:Slice
+RETURN
+  slice as Slice
+----
+
+[[structure:FrontendDependency]]
+.Java types in the `frontend` slice can only have dependencies to the slices `service` and `model`.
+[source,cypher,role=constraint,requiresConcepts="structure:Slice"]
+----
+MATCH
+  (slice:Slice{name:"frontend"})-[:CONTAINS*]->(t1:Type),
+  (other:Slice)-[:CONTAINS*]->(t2:Type),
+  (t1)-[:DEPENDS_ON]->(t2)
+WHERE
+  slice <> other
+  and not other.name in [
+    "service",
+    "model",
+    "util"]
+RETURN
+  other as InvalidSliceDependency, t1 as Dependent, collect(t2) as InvalidDependencies
+----
+
+[[structure:JobsDependency]]
+.Java types in the `jobs` slice can only have dependencies to the slices `service` and `model`.
+[source,cypher,role=constraint,requiresConcepts="structure:Slice"]
+----
+MATCH
+  (slice:Slice{name:"jobs"})-[:CONTAINS*]->(t1:Type),
+  (other:Slice)-[:CONTAINS*]->(t2:Type),
+  (t1)-[:DEPENDS_ON]->(t2)
+WHERE
+  slice <> other
+  and not other.name in [
+    "service",
+    "model",
+    "util"]
+RETURN
+  other as InvalidSliceDependency, t1 as Dependent, collect(t2) as InvalidDependencies
+----
+
+[[structure:ServiceDependency]]
+.Java types in the `service` slice can only have dependencies to the slices `dao` and `model`.
+[source,cypher,role=constraint,requiresConcepts="structure:Slice"]
+----
+MATCH
+  (slice:Slice{name:"service"})-[:CONTAINS*]->(t1:Type),
+  (other:Slice)-[:CONTAINS*]->(t2:Type),
+  (t1)-[:DEPENDS_ON]->(t2)
+WHERE
+  slice <> other
+  and not other.name in [
+    "dao",
+    "model",
+    "util"]
+RETURN
+  other as InvalidSliceDependency, t1 as Dependent, collect(t2) as InvalidDependencies
+----
+
+[[structure:DaoDependency]]
+.Java types in the `dao` slice can only have dependencies to the slice `model`.
+[source,cypher,role=constraint,requiresConcepts="structure:Slice"]
+----
+MATCH
+  (slice:Slice{name:"dao"})-[:CONTAINS*]->(t1:Type),
+  (other:Slice)-[:CONTAINS*]->(t2:Type),
+  (t1)-[:DEPENDS_ON]->(t2)
+WHERE
+  slice <> other
+  and not other.name in [
+    "model"]
+RETURN
+  other as InvalidSliceDependency, t1 as Dependent, collect(t2) as InvalidDependencies
+----
+
