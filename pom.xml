@@ -13,6 +13,7 @@
 
         <!-- Überschreibe Spring Boot Versionen -->
         <h2.version>1.3.176</h2.version>
+        <jqassistant.version>1.2.0</jqassistant.version>
         <thymeleaf-layout-dialect.version>1.2.9</thymeleaf-layout-dialect.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -388,6 +389,44 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.buschmais.jqassistant</groupId>
+                <artifactId>jqassistant-maven-plugin</artifactId>
+                <version>${jqassistant.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>scan</goal>
+                            <goal>analyze</goal>
+                        </goals>
+                        <configuration>
+                            <failOnViolations>true</failOnViolations>
+                            <!--
+                            <groups>
+                                <group>default</group>
+                            </groups>
+                            -->
+                        </configuration>
+                    </execution>
+                </executions>
+                <configuration>
+                    <reportProperties>
+                        <graphml.report.directory>${project.build.directory}/graphml</graphml.report.directory>
+                    </reportProperties>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.buschmais.jqassistant.plugin</groupId>
+                        <artifactId>jpa2</artifactId>
+                        <version>1.2</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>com.buschmais.jqassistant.plugin</groupId>
+                        <artifactId>graphml</artifactId>
+                        <version>1.2</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>

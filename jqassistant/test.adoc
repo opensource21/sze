@@ -1,0 +1,19 @@
+[[test:Default]]
+[role=group,includesConstraints="test:UnitTestClassName"]
+== Test Rules
+
+Maven Surefire is used to execute JUnit test.
+The default naming pattern is `*Test.java`.
+Therefore the names all classes containing unit tests must have the suffix `Test`.
+
+[[test:UnitTestClassName]]
+.All JUnit unit test classes must have a name with suffix "Test".
+[source,cypher,role=constraint,requiresConcepts="junit4:TestClass"]
+----
+MATCH
+  (t:Junit4:Test:Class)
+WHERE NOT
+  t.name ends with "Test"
+RETURN
+  t AS InvalidTestClass
+----

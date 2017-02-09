@@ -1,0 +1,18 @@
+[[maven:Default]]
+[role=group]
+== Maven Rules
+
+The package `net.sf.sze` is used as the root package of the application.
+
+[[maven:InternalFile]]
+.Labels all files (including Java) types which are packaged into artifacts created by the Maven project as `Internal`.
+[source,cypher,role=concept]
+----
+MATCH
+  (project:Maven:Project)-[:CREATES]->(:Artifact)-[:CONTAINS]->(file:File)
+SET
+  file:Internal
+RETURN
+  file as Internal
+----
+
