@@ -60,12 +60,13 @@ Cyclic dependencies between layer must be avoided to keep the possibility of lat
 ----
 MATCH
   (L1:Layer)-[sr:LAYER_USE]->(L2:Layer),
-  cycle=((L2)-[:LAYER_USE*]->(L1))
+  cycle=SHORTESTPATH((L2)-[:LAYER_USE*]->(L1))
 RETURN
   REDUCE(result = L1.name, rel in sr + RELATIONSHIPS(cycle)|
     result + " - " + rel.count + ", [" +
-    REDUCE( tr ="", dep in rel.dependencies | tr + dep) +
-    "] -> " + endNode(rel).name + "\n")
+    // Max 5 Dependencies are enough
+    REDUCE( tr ="", dep in rel.dependencies[0..5] | tr + dep + "\n") +
+    "] -> " + endNode(rel).name)
   AS Cycle
 ----
 
