@@ -5,6 +5,7 @@
 Maven Surefire is used to execute JUnit test.
 The default naming pattern is `*Test.java`.
 Therefore the names all classes containing unit tests must have the suffix `Test`.
+ProjectSetup is more a helper to generate test-file, so it's OK.
 
 [[test:UnitTestClassName]]
 .All JUnit unit test classes must have a name with suffix "Test".
@@ -12,8 +13,10 @@ Therefore the names all classes containing unit tests must have the suffix `Test
 ----
 MATCH
   (t:Junit4:Test:Class)
-WHERE NOT
-  t.name ends with "Test"
+WHERE
+    NOT t.name ends with "Test"
+  AND
+    NOT t.name = "ProjectSetup"
 RETURN
   t AS InvalidTestClass
 ----
