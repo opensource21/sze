@@ -62,6 +62,6 @@ MATCH
   (L1:Layer)-[:LAYER_USE]->(L2:Layer),
   cycle=shortestPath((L2)-[:LAYER_USE*]->(L1))
 RETURN
-  L1.name as LayerInCycle, nodes(cycle) as Cycle
+  L1.name as LayerInCycle, RELATIONSHIPS(cycle)
 ----
 
