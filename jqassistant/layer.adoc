@@ -1,0 +1,67 @@
+[[layer:Default]]
+[role=group,includesConstraints="layer:Cycles", includesConcepts="layer:LayerDependency.graphml"]
+== Layer Rules
+
+All packages which are directly contained in the root package are technical layers.
+
+[[layer:Layer]]
+.Adds the label `Layer` to all packages contained in the root package (of all non-test artifacts).
+[source,cypher,role=concept,requiresConcepts="structure:RootPackage"]
+----
+MATCH
+  (artifact:Artifact)-[:CONTAINS]->(root:Package:Root)-[:CONTAINS]->(layer:Package)
+WHERE
+   artifact.type <> "test-jar"
+SET
+  layer:Layer
+RETURN
+  layer as Layer
+----
+
+[[layer:LayerRelations]]
+.Adds the relation `LAYER_USE` to all Layers.
+[source,cypher,role=concept,requiresConcepts="layer:Layer"]
+----
+MATCH
+    (L1:Layer)-[:CONTAINS*]->(t1:Type),
+    (L2:Layer)-[:CONTAINS*]->(t2:Type),
+    (t1)-[:DEPENDS_ON]->(t2)
+WHERE
+    L1.fqn <> L2.fqn
+WITH L1,L2,count(*) as times, collect(distinct t1.fqn + "->" + t2.fqn) as dependencies
+CREATE (L1)-[:LAYER_USE {count:times, dependencies:dependencies}]->(L2)
+RETURN L1, L2
+----
+
+[[layer:LayerDependency.graphml]]
+.Creates a GraphML report about layers and their dependencies.
+[source,cypher,role=concept,requiresConcepts="layer:Layer"]
+----
+MATCH
+  (user:Layer)-[use:LAYER_USE]->(used:Layer)
+RETURN
+  user as User, used as Used, {
+    role :     "relationship",
+    type :     "USE",
+    startNode: user,
+    endNode:   used,
+    properties: {
+      weight: use.times
+    }
+  } as Dependency
+----
+
+
+Cyclic dependencies between layer must be avoided to keep the possibility of later refactorings and restructurings.
+
+[[layer:Cycles]]
+.There must be no cyclic dependencies between packages.
+[source,cypher,role=constraint,requiresConcepts="layer:LayerRelations"]
+----
+MATCH
+  (L1:Layer)-[:LAYER_USE]->(L2:Layer),
+  cycle=shortestPath((L2)-[:LAYER_USE*]->(L1))
+RETURN
+  L1.name as LayerInCycle, nodes(cycle) as Cycle
+----
+
