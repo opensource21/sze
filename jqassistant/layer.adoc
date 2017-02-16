@@ -55,13 +55,17 @@ RETURN
 Cyclic dependencies between layer must be avoided to keep the possibility of later refactorings and restructurings.
 
 [[layer:Cycles]]
-.There must be no cyclic dependencies between packages.
+.There must be no cyclic dependencies between layers.
 [source,cypher,role=constraint,requiresConcepts="layer:LayerRelations"]
 ----
 MATCH
-  (L1:Layer)-[:LAYER_USE]->(L2:Layer),
-  cycle=shortestPath((L2)-[:LAYER_USE*]->(L1))
+  (L1:Layer)-[sr:LAYER_USE]->(L2:Layer),
+  cycle=((L2)-[:LAYER_USE*]->(L1))
 RETURN
-  L1.name as LayerInCycle, RELATIONSHIPS(cycle)
+  REDUCE(result = L1.name, rel in sr + RELATIONSHIPS(cycle)|
+    result + " - " + rel.count + ", [" +
+    REDUCE( tr ="", dep in rel.dependencies | tr + dep) +
+    "] -> " + endNode(rel).name + "\n")
+  AS Cycle
 ----
 
