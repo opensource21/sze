@@ -1,5 +1,5 @@
 [[layer:Default]]
-[role=group,includesConstraints="layer:Cycles", includesConcepts="layer:LayerDependency.graphml, layer:WantedRelations, layer:ExistingRelations"]
+[role=group,includesConstraints="layer:Cycles, layer:ForbiddenRelations", includesConcepts="layer:LayerDependency.graphml, layer:WantedRelations, layer:ExistingRelations"]
 == Layer Rules
 
 All packages which are directly contained in the root package are technical layers.
@@ -19,7 +19,7 @@ RETURN
 ----
 
 [[layer:ExistingRelations]]
-.Adds the relation `LAYER_USE` to all Layers.
+.Adds the relation `LAYER_USE` for all Layers which contains classes which depends on each other. Add the information `allowed`, `count` (nr of dependencies), `dependencies`.
 [source,cypher,role=concept,requiresConcepts="layer:Layer"]
 ----
 MATCH
@@ -37,7 +37,7 @@ RETURN L1, L2
 ----
 
 [[layer:WantedRelations]]
-.Update wanted relation `LAYER_USE` to all Layers.
+.Adds wanted relation `LAYER_USE` to all Layers with information `allowed` to `true`.
 [source,cypher,role=concept,requiresConcepts="layer:Layer"]
 ----
 MATCH
@@ -94,11 +94,21 @@ RETURN
     startNode: user,
     endNode:   used,
     properties: {
-      weight: use.times
+      weight: SIZE(use.dependencies)
     }
   } as Dependency
 ----
 
+
+[[layer:ForbiddenRelations]]
+.Find all unwanted relations.
+[source,cypher,role=constraint,requiresConcepts="layer:ExistingRelations, layer:WantedRelations"]
+----
+MATCH
+  (from:Layer)-[rel:LAYER_USE{allowed:false}]->(to:Layer)
+RETURN
+  from.name AS From, to.name AS To, REDUCE( tr ="", dep in rel.dependencies[0..5] | tr + dep + "\n") AS ForbiddenDependenciesMax5
+----
 
 Cyclic dependencies between layer must be avoided to keep the possibility of later refactorings and restructurings.
 
