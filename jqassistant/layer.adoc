@@ -1,5 +1,5 @@
 [[layer:Default]]
-[role=group,includesConstraints="layer:Cycles", includesConcepts="layer:LayerDependency.graphml"]
+[role=group,includesConstraints="layer:Cycles", includesConcepts="layer:LayerDependency.graphml, layer:WantedRelations, layer:ExistingRelations"]
 == Layer Rules
 
 All packages which are directly contained in the root package are technical layers.
@@ -18,7 +18,7 @@ RETURN
   layer as Layer
 ----
 
-[[layer:LayerRelations]]
+[[layer:ExistingRelations]]
 .Adds the relation `LAYER_USE` to all Layers.
 [source,cypher,role=concept,requiresConcepts="layer:Layer"]
 ----
@@ -29,9 +29,57 @@ MATCH
 WHERE
     L1.fqn <> L2.fqn
 WITH L1,L2,count(*) as times, collect(distinct t1.fqn + "->" + t2.fqn) as dependencies
-CREATE (L1)-[:LAYER_USE {count:times, dependencies:dependencies}]->(L2)
+MERGE (L1)-[lu:LAYER_USE]->(L2)
+ON CREATE SET lu.allowed = FALSE
+SET lu.count = times
+SET lu.dependencies=dependencies
 RETURN L1, L2
 ----
+
+[[layer:WantedRelations]]
+.Update wanted relation `LAYER_USE` to all Layers.
+[source,cypher,role=concept,requiresConcepts="layer:Layer"]
+----
+MATCH
+ (config:Layer{name:"config"}),
+ (constraints:Layer{name:"constraints"}),
+ (dao:Layer{name:"dao"}),
+ (frontend:Layer{name:"frontend"}),
+ (jobs:Layer{name:"jobs"}),
+ (model:Layer{name:"model"}),
+ (security:Layer{name:"security"}),
+ (service:Layer{name:"service"}),
+ (util:Layer{name:"util"})
+MERGE
+ (constraints)-[cu:LAYER_USE{allowed:true}]->(util)
+MERGE
+ (config)-[:LAYER_USE{allowed:true}]->(security)
+MERGE
+ (config)-[:LAYER_USE{allowed:true}]->(frontend)
+MERGE
+ (jobs)-[:LAYER_USE{allowed:true}]->(service)
+MERGE
+ (dao)-[:LAYER_USE{allowed:true}]->(model)
+MERGE
+ (model)-[:LAYER_USE{allowed:true}]->(util)
+MERGE
+ (model)-[:LAYER_USE{allowed:true}]->(constraints)
+MERGE
+ (frontend)-[:LAYER_USE{allowed:true}]->(service)
+MERGE
+ (frontend)-[:LAYER_USE{allowed:true}]->(model)
+MERGE
+ (frontend)-[:LAYER_USE{allowed:true}]->(util)
+MERGE
+ (service)-[:LAYER_USE{allowed:true}]->(dao)
+MERGE
+ (service)-[:LAYER_USE{allowed:true}]->(model)
+MERGE
+ (service)-[:LAYER_USE{allowed:true}]->(util)
+RETURN
+ *
+----
+
 
 [[layer:LayerDependency.graphml]]
 .Creates a GraphML report about layers and their dependencies.
@@ -56,7 +104,7 @@ Cyclic dependencies between layer must be avoided to keep the possibility of lat
 
 [[layer:Cycles]]
 .There must be no cyclic dependencies between layers.
-[source,cypher,role=constraint,requiresConcepts="layer:LayerRelations"]
+[source,cypher,role=constraint,requiresConcepts="layer:ExistingRelations"]
 ----
 MATCH
   (L1:Layer)-[sr:LAYER_USE]->(L2:Layer),
