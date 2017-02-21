@@ -20,7 +20,7 @@ RETURN
 
 [[layer:ExistingRelations]]
 .Adds the relation `LAYER_USE` for all Layers which contains classes which depends on each other. Add the information `allowed`, `count` (nr of dependencies), `dependencies`.
-[source,cypher,role=concept,requiresConcepts="layer:Layer"]
+[source,cypher,role=concept,requiresConcepts="layer:WantedRelations"]
 ----
 MATCH
     (L1:Layer)-[:CONTAINS*]->(t1:Type),
@@ -51,7 +51,7 @@ MATCH
  (service:Layer{name:"service"}),
  (util:Layer{name:"util"})
 MERGE
- (constraints)-[cu:LAYER_USE{allowed:true}]->(util)
+ (constraints)-[:LAYER_USE{allowed:true}]->(util)
 MERGE
  (config)-[:LAYER_USE{allowed:true}]->(security)
 MERGE
@@ -114,7 +114,7 @@ Cyclic dependencies between layer must be avoided to keep the possibility of lat
 
 [[layer:Cycles]]
 .There must be no cyclic dependencies between layers.
-[source,cypher,role=constraint,requiresConcepts="layer:ExistingRelations"]
+[source,cypher,role=constraint,requiresConcepts="layer:ExistingRelations, layer:WantedRelations"]
 ----
 MATCH
   (L1:Layer)-[sr:LAYER_USE]->(L2:Layer),
