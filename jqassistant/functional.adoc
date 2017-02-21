@@ -1,5 +1,5 @@
 [[functional:Default]]
-[role=group,includesConstraints="", includesConcepts="functional:Slice, functional:SliceDependency.graphml"]
+[role=group,includesConstraints="functional:Cycles", includesConcepts="functional:Slice, functional:SliceDependency.graphml, functional:ExistingRelations"]
 == Functional Slices Rules
 
 The program is splittet into the following slices
@@ -35,6 +35,41 @@ RETURN
   sn
 ----
 
+[[functional:ExistingRelations]]
+.Adds the relation `SLICE_USE` for all Slices which contains classes which depends on each other. Add the information `allowed`, `count` (nr of dependencies), `dependencies`.
+[source,cypher,role=concept,requiresConcepts="functional:Slice"]
+----
+MATCH
+    (L1:Slice)-[]->()-[:CONTAINS*]->(t1:Type),
+    (L2:Slice)-[]->()-[:CONTAINS*]->(t2:Type),
+    (t1)-[:DEPENDS_ON]->(t2)
+WHERE L1.name <> L2.name
+WITH L1,L2,count(*) as times, collect(distinct t1.fqn + "->" + t2.fqn) as dependencies
+MERGE (L1)-[su:SLICE_USE]->(L2)
+ON CREATE SET su.allowed = FALSE
+SET su.count = times
+SET su.dependencies=dependencies
+RETURN L1, L2
+----
+
+
+Cyclic dependencies between slices must be avoided to keep the possibility of later refactorings and restructurings.
+
+[[functional:Cycles]]
+.There must be no cyclic dependencies between slices.
+[source,cypher,role=constraint,requiresConcepts="functional:ExistingRelations"]
+----
+MATCH
+  (L1:Slice)-[sr:SLICE_USE]->(L2:Slice),
+  cycle=SHORTESTPATH((L2)-[:SLICE_USE*]->(L1))
+RETURN
+  REDUCE(result = L1.name, rel in sr + RELATIONSHIPS(cycle)|
+    result + " - " + rel.count + ", [" +
+    // Max 5 Dependencies are enough
+    REDUCE( tr ="", dep in rel.dependencies[0..5] | tr + dep + "\n") +
+    "] -> " + endNode(rel).name)
+  AS Cycle
+----
 
 [[functional:SliceDependency.graphml]]
 .Creates a GraphML report about slices and their dependencies.
@@ -59,5 +94,4 @@ RETURN
     }
   } as Dependency
 ----
-
 
