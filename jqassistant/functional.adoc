@@ -1,0 +1,63 @@
+[[functional:Default]]
+[role=group,includesConstraints="", includesConcepts="functional:Slice, functional:SliceDependency.graphml"]
+== Functional Slices Rules
+
+The program is splittet into the following slices
+- "admin"
+- "converter"
+- "document"
+- "zeugnis",
+- "zeugnisconfig"
+- "stammdaten"
+- "calendar"
+Which could be referenced from top to bottom.
+
+[[functional:Slice]]
+.Create the node `Slice`.
+[source,cypher,role=concept,requiresConcepts="structure:RootPackage"]
+----
+MATCH (artifact:Artifact)
+WHERE
+   artifact.type <> "test-jar"
+MATCH
+  (artifact:Artifact)-[:CONTAINS]->(root:Package{fqn:"net.sf.sze.dao.api"})-[:CONTAINS]->(slice:Package)
+WITH COLLECT(slice) AS rows1
+MATCH
+  (artifact:Artifact)-[:CONTAINS]->(root:Package{fqn:"net.sf.sze.frontend"})-[:CONTAINS]->(slice:Package)
+WITH rows1 + COLLECT(slice) AS rows2
+MATCH
+  (artifact:Artifact)-[:CONTAINS]->(root:Package{fqn:"net.sf.sze.service"})-[:CONTAINS *2..2]->(slice:Package)
+WITH rows2 + COLLECT(slice) AS rows3
+UNWIND rows3 AS slice
+MERGE (sn:Slice{name:slice.name})
+MERGE (sn)-[:SLICE_CONTAINS]-> (slice)
+RETURN
+  sn
+----
+
+
+[[functional:SliceDependency.graphml]]
+.Creates a GraphML report about slices and their dependencies.
+[source,cypher,role=concept,requiresConcepts="functional:Slice"]
+----
+MATCH
+  (slice1:Slice)-[:SLICE_CONTAINS]->()-[:CONTAINS*]->(t1:Type),
+  (slice2:Slice)-[:SLICE_CONTAINS]->()-[:CONTAINS*]->(t2:Type),
+  (t1)-[d:DEPENDS_ON]->(t2)
+WHERE
+   slice1 <> slice2
+WITH
+  slice1, slice2, count(d) as weight
+RETURN
+  slice1 as Slice1, slice2 as Slice2, {
+    role :     "relationship",
+    type :     "DEPENDS_ON",
+    startNode: slice1,
+    endNode:   slice2,
+    properties: {
+      weight: weight
+    }
+  } as Dependency
+----
+
+
