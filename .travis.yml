@@ -1,5 +1,8 @@
 language: java
 
+before_install:
+    export MAVEN_OPTS=-Xmx1024M -XX:MaxPermSize=512m
+
 sudo: false
 
 jdk:
