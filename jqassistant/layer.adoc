@@ -82,8 +82,8 @@ RETURN
 
 
 [[layer:LayerDependency.graphml]]
-.Creates a GraphML report about layers and their dependencies.
-[source,cypher,role=concept,requiresConcepts="layer:Layer"]
+.Creates a GraphML report about layers and their existing dependencies.
+[source,cypher,role=concept,requiresConcepts="layer:ExistingRelations"]
 ----
 MATCH
   (user:Layer)-[use:LAYER_USE]->(used:Layer)
