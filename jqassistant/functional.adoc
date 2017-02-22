@@ -29,7 +29,7 @@ MATCH
   (artifact:Artifact)-[:CONTAINS]->(root:Package{fqn:"net.sf.sze.service"})-[:CONTAINS *2..2]->(slice:Package)
 WITH rows2 + COLLECT(slice) AS rows3
 UNWIND rows3 AS slice
-MERGE (sn:Slice{name:slice.name})
+MERGE (sn:Artifact:Slice{name:slice.name, fqn:slice.name})
 MERGE (sn)-[:SLICE_CONTAINS]-> (slice)
 RETURN
   sn
