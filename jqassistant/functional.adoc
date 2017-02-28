@@ -4,12 +4,14 @@
 
 The program is splittet into the following slices
 - "admin"
-- "converter"
+- "konfiguration"
 - "document"
+- "crud"
 - "zeugnis",
 - "zeugnisconfig"
 - "stammdaten"
 - "calendar"
+- "base"
 Which could be referenced from top to bottom.
 
 [[functional:Slice]]
