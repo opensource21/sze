@@ -37,11 +37,11 @@ RETURN
 
 [[functional:ExistingRelations]]
 .Adds the relation `SLICE_USE` for all Slices which contains classes which depends on each other. Add the information `allowed`, `count` (nr of dependencies), `dependencies`.
-[source,cypher,role=concept,requiresConcepts="functional:Slice"]
+[source,cypher,role=concept,requiresConcepts="functional:Slice, maven:InternalFile"]
 ----
 MATCH
-    (L1:Slice)-[]->()-[:CONTAINS*]->(t1:Type),
-    (L2:Slice)-[]->()-[:CONTAINS*]->(t2:Type),
+    (L1:Slice)-[:SLICE_CONTAINS]->(:Package:Internal)-[:CONTAINS*]->(t1:Type:Internal),
+    (L2:Slice)-[:SLICE_CONTAINS]->(:Package:Internal)-[:CONTAINS*]->(t2:Type:Internal),
     (t1)-[:DEPENDS_ON]->(t2)
 WHERE L1.name <> L2.name
 WITH L1,L2,count(*) as times, collect(distinct t1.fqn + "->" + t2.fqn) as dependencies
