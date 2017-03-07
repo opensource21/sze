@@ -11,10 +11,11 @@ This document describes coding rules for the `SZE` project.
 The following rule groups are executed during a build:
 
 [[default]]
-[role=group,includesGroups="functional:Default,layer:Default,structure:Default,package:Default,maven:Default,test:Default"]
+[role=group,includesGroups="functional:Default,layer:Default,structure:Default,spring:Default,package:Default,maven:Default,test:Default"]
 - <<structure:Default>>
 - <<layer:Default>>
 - <<functional:Default>>
+- <<spring:Default>>
 - <<package:Default>>
 - <<maven:Default>>
 - <<test:Default>>
@@ -22,6 +23,7 @@ The following rule groups are executed during a build:
 include::structure.adoc[]
 include::layer.adoc[]
 include::functional.adoc[]
+include::spring.adoc[]
 include::package.adoc[]
 include::maven.adoc[]
 include::test.adoc[]

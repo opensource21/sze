@@ -1,0 +1,21 @@
+[[spring:Default]]
+[role=group,includesConstraints="spring:ServiceImpl", includesConcepts=""]
+== Sprint Rules
+
+All Spring-Beans shouldn't be referenced and repositories should only be part of dao-layer
+
+[[spring:ServiceImpl]]
+.Check that classes of service.impl are not referred by any class.
+[source,cypher,role=constraint,requiresConcepts="structure:RootPackage"]
+----
+MATCH (use:Type)-[:DEPENDS_ON]->(used:Type)<-[:CONTAINS*]- (serviceImpl:Package{fqn:"net.sf.sze.service.impl"})
+WHERE use <> used
+AND NOT use.name CONTAINS "$"
+AND NOT used.name CONTAINS "$"
+// Die PDF-Konverter werden nicht von Spring verwaltet.
+AND NOT used.name CONTAINS "OO2PdfConverter"
+RETURN use.fqn AS FORBIDDEN_USER, used.fqn AS FORBIDDEN_USED
+----
+
+
+
