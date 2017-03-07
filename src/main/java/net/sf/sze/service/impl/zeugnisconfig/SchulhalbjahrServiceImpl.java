@@ -29,7 +29,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class SchulhalbjahrServiceImpl implements SchulhalbjahrService {
 
-    private static final Logger LOG = LoggerFactory.getLogger(SchulamtServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(SchulhalbjahrServiceImpl.class);
 
     /** Das Dao für {@link Schulhalbjahr}. */
     @Resource
