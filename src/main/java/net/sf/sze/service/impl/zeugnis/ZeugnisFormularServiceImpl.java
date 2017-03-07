@@ -37,7 +37,7 @@ import org.springframework.util.CollectionUtils;
 @Service
 public class ZeugnisFormularServiceImpl implements ZeugnisFormularService {
 
-    private static final Logger LOG = LoggerFactory.getLogger(ZeugnisErfassungsServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ZeugnisFormularServiceImpl.class);
 
     /** Das Dao für {@link ZeugnisFormular}. */
     @Resource
