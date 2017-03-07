@@ -1,5 +1,5 @@
 [[functional:Default]]
-[role=group,includesConstraints="functional:Cycles", includesConcepts="functional:Slice, functional:SliceDependency.graphml, functional:ExistingRelations"]
+[role=group,includesConstraints="functional:Cycles, functional:ForbiddenRelations", includesConcepts="functional:Slice, functional:SliceDependency.graphml, functional:ExistingRelations"]
 == Functional Slices Rules
 
 The program is splittet into the following slices
@@ -39,7 +39,7 @@ RETURN
 
 [[functional:ExistingRelations]]
 .Adds the relation `SLICE_USE` for all Slices which contains classes which depends on each other. Add the information `allowed`, `count` (nr of dependencies), `dependencies`.
-[source,cypher,role=concept,requiresConcepts="functional:Slice, maven:InternalFile"]
+[source,cypher,role=concept,requiresConcepts="functional:WantedRelations, maven:InternalFile"]
 ----
 MATCH
     (L1:Slice)-[:SLICE_CONTAINS]->(:Package:Internal)-[:CONTAINS*]->(t1:Type:Internal),
@@ -54,6 +54,61 @@ SET su.dependencies=dependencies
 RETURN L1, L2
 ----
 
+[[functional:WantedRelations]]
+.Adds wanted relation `SLICE_USE` to all Slicees with information `allowed` to `true`.
+[source,cypher,role=concept,requiresConcepts="functional:Slice"]
+----
+MATCH
+    (admin:Slice{name:"admin"}),
+    (konfiguration:Slice{name:"konfiguration"}),
+    (document:Slice{name:"document"}),
+    (crud:Slice{name:"crud"}),
+    (zeugnis:Slice{name:"zeugnis"}),
+    (zeugnisconfig:Slice{name:"zeugnisconfig"}),
+    (stammdaten:Slice{name:"stammdaten"}),
+    (use:Slice),
+    (calendar:Slice{name:"calendar"}),
+    (base:Slice{name:"base"})
+WHERE use.name <> "calendar" AND use.name <> "base"
+MERGE
+  (admin)-[:SLICE_USE{allowed:true}]->(zeugnis)
+MERGE
+  (admin)-[:SLICE_USE{allowed:true}]->(stammdaten)
+MERGE
+  (konfiguration)-[:SLICE_USE{allowed:true}]->(zeugnis)
+MERGE
+  (konfiguration)-[:SLICE_USE{allowed:true}]->(zeugnisconfig)
+MERGE
+  (konfiguration)-[:SLICE_USE{allowed:true}]->(stammdaten)
+MERGE
+  (crud)-[:SLICE_USE{allowed:true}]->(zeugnis)
+MERGE
+  (document)-[:SLICE_USE{allowed:true}]->(zeugnis)
+MERGE
+  (document)-[:SLICE_USE{allowed:true}]->(zeugnisconfig)
+MERGE
+  (zeugnis)-[:SLICE_USE{allowed:true}]->(zeugnisconfig)
+MERGE
+  (zeugnis)-[:SLICE_USE{allowed:true}]->(stammdaten)
+MERGE
+  (use)-[:SLICE_USE{allowed:true}]->(calendar)
+MERGE
+  (use)-[:SLICE_USE{allowed:true}]->(base)
+RETURN
+ *
+
+----
+
+
+[[functional:ForbiddenRelations]]
+.Find all unwanted relations.
+[source,cypher,role=constraint,requiresConcepts="functional:ExistingRelations, functional:WantedRelations"]
+----
+MATCH
+  (from:Slice)-[rel:SLICE_USE{allowed:false}]->(to:Slice)
+RETURN
+  from.name AS From, to.name AS To, REDUCE( tr ="", dep in rel.dependencies[0..5] | tr + dep + "\n") AS ForbiddenDependenciesMax5
+----
 
 Cyclic dependencies between slices must be avoided to keep the possibility of later refactorings and restructurings.
 
