@@ -23,7 +23,7 @@ import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import de.ppi.fuwesta.jpa.helper.VersionedModel;
 
@@ -32,7 +32,7 @@ import de.ppi.fuwesta.jpa.helper.VersionedModel;
  * and use this information at write-time.
  *
  */
-@Service
+@Component
 public class RevisionModelListener implements InitializingBean {
 
     private static final Logger LOG = LoggerFactory.getLogger(
