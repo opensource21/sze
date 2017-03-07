@@ -1,12 +1,12 @@
 [[spring:Default]]
-[role=group,includesConstraints="spring:ServiceImpl", includesConcepts=""]
+[role=group,includesConstraints="spring:ServiceImpl,spring:ReposOnlyInDao, spring:ControllerOnlyInDao, spring:ServiceOnlyInDao", includesConcepts=""]
 == Sprint Rules
 
 All Spring-Beans shouldn't be referenced and repositories should only be part of dao-layer
 
 [[spring:ServiceImpl]]
 .Check that classes of service.impl are not referred by any class.
-[source,cypher,role=constraint,requiresConcepts="structure:RootPackage"]
+[source,cypher,role=constraint,requiresConcepts=""]
 ----
 MATCH (use:Type)-[:DEPENDS_ON]->(used:Type)<-[:CONTAINS*]- (serviceImpl:Package{fqn:"net.sf.sze.service.impl"})
 WHERE use <> used
@@ -17,5 +17,32 @@ AND NOT used.name CONTAINS "OO2PdfConverter"
 RETURN use.fqn AS FORBIDDEN_USER, used.fqn AS FORBIDDEN_USED
 ----
 
+[[spring:ReposOnlyInDao]]
+.Check that subclasses of spring-repository are part of the layer dao.
+[source,cypher,role=constraint,requiresConcepts="layer:Layer"]
+----
+MATCH (l:Layer)-[c:CONTAINS*]->(repo:Type)-[:EXTENDS|:IMPLEMENTS*]->(ri:Type)
+WHERE ri.fqn =~ "org.springframework.data.repository..*Repository"
+AND l.name <> "dao"
+RETURN repo.fqn AS DAO_IN_WRONG_LAYER
+----
+
+[[spring:ControllerOnlyInDao]]
+.Check that the annotation Controller is only used for layer frontend .
+[source,cypher,role=constraint,requiresConcepts="layer:Layer"]
+----
+MATCH (f:Layer)-[c:CONTAINS*]->(controller:Type)-[:ANNOTATED_BY]->()-[:OF_TYPE]->(annotationType:Type{fqn:"org.springframework.stereotype.Controller"})
+WHERE f.name <> "frontend"
+RETURN controller.fqn AS CONTROLLER_IN_WRONG_LAYER
+----
+
+[[spring:ServiceOnlyInDao]]
+.Check that the annotation Service is only used for layer service .
+[source,cypher,role=constraint,requiresConcepts="layer:Layer"]
+----
+MATCH (f:Layer)-[c:CONTAINS*]->(service:Type)-[:ANNOTATED_BY]->()-[:OF_TYPE]->(annotationType:Type{fqn:"org.springframework.stereotype.Service"})
+WHERE f.name <> "service"
+RETURN service.fqn AS SERVICE_IN_WRONG_LAYER
+----
 
 
