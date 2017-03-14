@@ -471,7 +471,7 @@
                 </reportSets>
             </plugin>
             <plugin>
-                <groupId>com.buschmais.jqassistant.scm</groupId>
+                <groupId>com.buschmais.jqassistant</groupId>
                 <artifactId>jqassistant-maven-plugin</artifactId>
                 <version>${jqassistant.version}</version>
                 <reportSets>
