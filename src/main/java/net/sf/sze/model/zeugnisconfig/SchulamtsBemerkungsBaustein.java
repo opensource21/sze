@@ -17,6 +17,7 @@ import net.sf.sze.model.base.RevisionModel;
 
 import org.apache.commons.lang.builder.CompareToBuilder;
 
+import de.ppi.fuwesta.oval.validation.Unique;
 import de.ppi.fuwesta.spring.mvc.formatter.NonEmpty;
 
 /**
@@ -34,6 +35,7 @@ public class SchulamtsBemerkungsBaustein extends RevisionModel
     /** The name. */
     @Column(nullable = false, length = 50)
     @NonEmpty
+    @Unique
     private String name;
 
     /** The beschreibender satz. */
