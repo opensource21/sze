@@ -6,19 +6,19 @@ package net.sf.sze.jobs;
 
 import javax.annotation.Resource;
 
-import net.sf.sze.service.api.converter.ZeugnisCreatorService;
+import net.sf.sze.service.api.document.ZeugnisCreatorService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 
 /**
  * Job zum regelmäßigen Erstellen aller Zeugnisse.
  *
  */
-@Service
+@Component
 public class PDFCreationJob {
 
 

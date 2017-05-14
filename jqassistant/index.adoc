@@ -1,0 +1,30 @@
+:numbered:              // Number all section headers
+:sectnumlevels: 5       // Number up to section level 5
+:toclevels: 2           // Table of content should have only two levels
+
+= Coding Rules
+
+This document describes coding rules for the `SZE` project.
+
+== CI Build ==
+
+The following rule groups are executed during a build:
+
+[[default]]
+[role=group,includesGroups="functional:Default,layer:Default,structure:Default,spring:Default,package:Default,maven:Default,test:Default"]
+- <<structure:Default>>
+- <<layer:Default>>
+- <<functional:Default>>
+- <<spring:Default>>
+- <<package:Default>>
+- <<maven:Default>>
+- <<test:Default>>
+
+include::structure.adoc[]
+include::layer.adoc[]
+include::functional.adoc[]
+include::spring.adoc[]
+include::package.adoc[]
+include::maven.adoc[]
+include::test.adoc[]
+

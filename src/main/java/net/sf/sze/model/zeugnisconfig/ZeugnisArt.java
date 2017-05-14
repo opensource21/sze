@@ -16,6 +16,7 @@ import net.sf.sze.model.base.RevisionModel;
 
 import org.apache.commons.lang.builder.CompareToBuilder;
 
+import de.ppi.fuwesta.oval.validation.Unique;
 import de.ppi.fuwesta.spring.mvc.formatter.NonEmpty;
 
 /**
@@ -32,6 +33,7 @@ public class ZeugnisArt extends RevisionModel implements Serializable,
     /** The name. */
     @Column(nullable = false, length = 30)
     @NonEmpty
+    @Unique
     private String name;
 
     /** The sortierung. */

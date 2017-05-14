@@ -10,7 +10,6 @@ import static org.assertj.core.api.Assertions.fail;
 import java.util.Date;
 import java.util.List;
 
-import net.sf.sze.model.stammdaten.Geschlecht;
 import net.sf.sze.model.stammdaten.Schueler;
 
 import org.junit.Test;

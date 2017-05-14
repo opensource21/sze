@@ -1,0 +1,32 @@
+[[structure:Default]]
+[role=group,includesConstraints="structure:RootPackage",includesConcepts=""]
+== Structural Rules
+
+The package `net.sf.sze` is used as the root package of the application.
+
+[[structure:RootPackage]]
+.Labels the package `net.sf.sze` as `Root`.
+[source,cypher,role=concept]
+----
+MATCH
+  (root:Package)
+WHERE
+  root.fqn = "net.sf.sze"
+SET
+  root:Root
+RETURN
+  root as RootPackage
+----
+
+[[structure:RootPackage]]
+.All Java types must be located within the root package or a sub-package thereof.
+[source,cypher,role=constraint,requiresConcepts="structure:RootPackage,maven:InternalFile"]
+----
+MATCH
+  (type:Type:Internal)
+WHERE NOT
+  (:Package:Root)-[:CONTAINS*]->(type)
+RETURN
+  type as TypeOutsideRootPackage
+----
+

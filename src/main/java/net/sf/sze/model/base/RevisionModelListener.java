@@ -2,8 +2,8 @@ package net.sf.sze.model.base;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import javax.persistence.Embedded;
 import javax.persistence.EntityManager;
@@ -20,10 +20,11 @@ import javax.persistence.Transient;
 import net.sf.sze.model.base.RevisionLog.Action;
 
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import de.ppi.fuwesta.jpa.helper.VersionedModel;
 
@@ -32,7 +33,7 @@ import de.ppi.fuwesta.jpa.helper.VersionedModel;
  * and use this information at write-time.
  *
  */
-@Service
+@Component
 public class RevisionModelListener implements InitializingBean {
 
     private static final Logger LOG = LoggerFactory.getLogger(
@@ -68,7 +69,7 @@ public class RevisionModelListener implements InitializingBean {
      * @param model the model.
      */
     @PostPersist
-    public void prePersist(RevisionModel model) {
+    public void postPersist(RevisionModel model) {
         final Map<String, Object> map = new HashMap<String, Object>();
         putValuesToMap(map, "", model);
         saveChanges(Action.CREATE, model, new HashMap<String, Object>(), map);
@@ -89,15 +90,22 @@ public class RevisionModelListener implements InitializingBean {
             Map<String, Object> oldValues, Map<String, Object> newValues) {
         String user = "unkown";
         try {
-            user = "" + SecurityUtils.getSubject().getPrincipal();
+            final Subject subject = SecurityUtils.getSubject();
+            user = "" + subject.getPrincipal();
+            if (user.length() > 20) {
+                // Shorten and add elipses.
+                user = user.substring(0, 19) +  "\u2026";
+            }
         } catch (Exception e) {
             LOG.warn("Security-User konnte nicht ermittelt werden.", e);
         }
         final String entityName = model.getClass().getSimpleName();
         final Long entityId = model.getId();
-        for (Entry<String, Object> keyValue : oldValues.entrySet()) {
-            final String key = keyValue.getKey();
-            final Object oldValue = keyValue.getValue();
+        final HashSet<String> keyValues = new HashSet<String>();
+        keyValues.addAll(oldValues.keySet());
+        keyValues.addAll(newValues.keySet());
+        for (String key : keyValues) {
+            final Object oldValue = oldValues.get(key);
             final Object newValue = newValues.get(key);
             boolean changes = false;
             if (oldValue == null) {

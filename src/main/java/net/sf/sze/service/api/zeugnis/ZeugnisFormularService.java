@@ -8,12 +8,12 @@ package net.sf.sze.service.api.zeugnis;
 import java.util.Calendar;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import net.sf.sze.model.stammdaten.Klasse;
 import net.sf.sze.model.zeugnis.ZeugnisFormular;
 import net.sf.sze.model.zeugnisconfig.Schulhalbjahr;
-
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 
 /**
  * Service that handles work which must be done for {@link ZeugnisFormular}.
@@ -98,5 +98,19 @@ public interface ZeugnisFormularService {
      * @return das letzte Zeugnisformular, wenn es eins gibt.
      */
     ZeugnisFormular getLastZeugnisFormular(final Schulhalbjahr shj, Klasse klasse);
+
+    /**
+     * Liefert die Dateinamen möglicher Templates, zeitlich sortiert.
+     * @return eine Liste mit Dateinamen von templates.
+     */
+    List<String> getFileNames();
+
+
+    /**
+     * Liefert alle Zeugnisformular zu aktiven Schulhalbjahren, sortiert nach Zeit und Klasse,
+     * wobei die neuesten und niedrigsten Klassen zu erst kommen.
+     * @return die Liste mit den Formularen.
+     */
+    List<ZeugnisFormular> getActiveZeugnisFormulare();
 
 }

@@ -133,7 +133,7 @@ public class InitZeugnis {
         newAvSvBewertung().Id(new GreaterThan(0)).Version(0L).ArbeitsUndSozialVerhaltenId(10L).ZeugnisId(zeugnisId1).addTo(b);
         newAvSvBewertung().Id(new GreaterThan(0)).Version(0L).ArbeitsUndSozialVerhaltenId(1L).ZeugnisId(zeugnisId2).addTo(b);
         newAvSvBewertung().Id(new GreaterThan(0)).Version(0L).ArbeitsUndSozialVerhaltenId(10L).ZeugnisId(zeugnisId2).addTo(b);
-        newBewertung().Class("ZweiNiveauBewertung").Id(new GreaterThan(0)).Version(0L).LeistungNurSchwachAusreichend(Boolean.FALSE).Leistungsniveau("G").Relevant(Boolean.TRUE).SonderNote("").SchulfachId(1L).ZeugnisId(zeugnisId1).PreviousBewertung(1L).addTo(b);
+        newBewertung().Class("ZweiNiveauBewertung").Id(new GreaterThan(0)).Version(0L).LeistungNurSchwachAusreichend(Boolean.FALSE).Leistungsniveau("G").Relevant(Boolean.TRUE).SonderNote("").SchulfachId(1L).ZeugnisId(zeugnisId1).PreviousBewertungId(1L).addTo(b);
         newBewertung().Class("ZweiNiveauBewertung").Id(new GreaterThan(0)).Version(0L).LeistungNurSchwachAusreichend(Boolean.FALSE).Leistungsniveau("G").Relevant(Boolean.TRUE).SonderNote("").SchulfachId(2L).ZeugnisId(zeugnisId1).addTo(b);
         newBewertung().Class("ZweiNiveauBewertung").Id(new GreaterThan(0)).Version(0L).LeistungNurSchwachAusreichend(Boolean.FALSE).Leistungsniveau("G").Relevant(Boolean.TRUE).SonderNote("").SchulfachId(3L).ZeugnisId(zeugnisId1).addTo(b);
         newBewertung().Class("DreiNiveauBewertung").Id(new GreaterThan(0)).Version(0L).LeistungNurSchwachAusreichend(Boolean.FALSE).Leistungsniveau("G").Relevant(Boolean.TRUE).SonderNote("").SchulfachId(4L).ZeugnisId(zeugnisId1).addTo(b);

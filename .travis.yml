@@ -1,5 +1,8 @@
 language: java
 
+before_install:
+    echo "MAVEN_OPTS='-Xmx2g -XX:MaxPermSize=512m'" > ~/.mavenrc
+
 sudo: false
 
 jdk:

@@ -20,6 +20,8 @@ import net.sf.sze.util.StringUtil;
 
 import org.apache.commons.lang.builder.CompareToBuilder;
 
+import de.ppi.fuwesta.oval.validation.Unique;
+
 /**
  * Mögliches Arbeits- bzw Sozialverhalten. Im allgemeinen kurz AvSv genannt.
  *
@@ -33,6 +35,7 @@ public class ArbeitsUndSozialVerhalten extends RevisionModel
 
     /** The name. */
     @Column(nullable = false, length = 50)
+    @Unique(value = "typ")
     private String name;
 
     /** The typ. */

@@ -24,6 +24,7 @@ import net.sf.sze.util.StringUtil;
 
 import org.apache.commons.lang.builder.CompareToBuilder;
 
+import de.ppi.fuwesta.oval.validation.Unique;
 import de.ppi.fuwesta.spring.mvc.formatter.NonEmpty;
 
 /**
@@ -40,6 +41,7 @@ public class Schulfach extends RevisionModel implements Serializable,
     /** The name. */
     @Column(nullable = false, length = 30)
     @NonEmpty
+    @Unique(value = "typ")
     private String name;
 
     /** The sortierung. */

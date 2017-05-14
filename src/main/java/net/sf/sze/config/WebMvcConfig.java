@@ -21,8 +21,8 @@ import net.sf.sze.frontend.converter.ZeugnisFormularConverter;
 
 import org.h2.server.web.WebServlet;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration.WebMvcAutoConfigurationAdapter;
-import org.springframework.boot.context.embedded.ServletRegistrationBean;
+//import org.springframework.boot.context.embedded.ServletRegistrationBean;
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -36,6 +36,7 @@ import org.springframework.format.datetime.DateFormatter;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import de.ppi.fuwesta.spring.mvc.bind.ServletBindingService;
 import de.ppi.fuwesta.spring.mvc.formatter.NonEmptyStringAnnotationFormatterFactory;
@@ -57,7 +58,7 @@ import de.ppi.fuwesta.spring.mvc.util.UrlDefinitionsToMessages;
 @ComponentScan(basePackages = {"net.sf.oval.integration.spring", "de.ppi.fuwesta.jpa.helper"})
 @Import(SecurityConfig.class)
 @EnableScheduling
-public class WebMvcConfig extends WebMvcAutoConfigurationAdapter {
+public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
     /**
      * Page size if no other information is given.
@@ -88,7 +89,7 @@ public class WebMvcConfig extends WebMvcAutoConfigurationAdapter {
      * Die POM-Versions-Nr.
      */
     //TODO beim Test fehlt die Version
-    @Value("${project.version:0.0.7}")
+    @Value("${appproject.version:0.0.7}")
     private String buildNr;
 
     /**
@@ -174,7 +175,7 @@ public class WebMvcConfig extends WebMvcAutoConfigurationAdapter {
     public void addFormatters(FormatterRegistry registry) {
         registry.addFormatterForFieldAnnotation(
                 new NonEmptyStringAnnotationFormatterFactory());
-        registry.addFormatter(new DateFormatter());
+        registry.addFormatter(new DateFormatter("dd.MM.yyyy"));
         registry.addConverter(new KlasseConverter());
         registry.addConverter(new ZeugnisFormularConverter());
         registry.addConverter(new SchulfachConverter());
