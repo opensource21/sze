@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.sf.sze</groupId>
     <artifactId>sze_spring</artifactId>
-    <version>3.5.0</version>
+    <version>3.5.1</version>
     <packaging>jar</packaging>
     <name>SZE</name>
     <description>Schulzeugnisersteller</description>
@@ -39,7 +39,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.4.4.RELEASE</version>
+        <version>1.4.6.RELEASE</version>
     </parent>
     <dependencies>
         <dependency>
