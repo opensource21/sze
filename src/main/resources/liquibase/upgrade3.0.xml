@@ -2,6 +2,12 @@
 <databaseChangeLog  logicalFilePath="/liquibase/upgrade3.0.xml"
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
-    <includeAll relativeToChangelogFile="true" path="3.0"/>
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    <include file="classpath:/liquibase/3.0/01_saveExistingData.xml"/>
+    <include file="classpath:/liquibase/3.0/02_initialH2.xml"/>
+    <include file="classpath:/liquibase/3.0/03_copyOldData.xml"/>
+    <include file="classpath:/liquibase/3.0/04_initialH2Constraints.xml"/>
+    <include file="classpath:/liquibase/3.0/05_upgradeH2.xml"/>
+    <include file="classpath:/liquibase/3.0/06_upgrade3.1.xml"/>
+    <include file="classpath:/liquibase/3.0/07_hibernate5.xml"/>
 </databaseChangeLog>
