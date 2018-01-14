@@ -8,6 +8,29 @@
  */
 package net.sf.sze.service.impl.document;
 
+import java.awt.color.ColorSpace;
+import java.awt.color.ICC_Profile;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOCase;
+import org.apache.commons.io.filefilter.AndFileFilter;
+import org.apache.commons.io.filefilter.HiddenFileFilter;
+import org.apache.commons.io.filefilter.IOFileFilter;
+import org.apache.commons.io.filefilter.PrefixFileFilter;
+import org.apache.commons.io.filefilter.SuffixFileFilter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.PageSize;
@@ -25,22 +48,6 @@ import com.lowagie.text.pdf.PdfWriter;
 
 import net.sf.sze.service.api.document.OO2PdfConverter;
 import net.sf.sze.service.api.document.PdfConverter;
-
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.io.filefilter.PrefixFileFilter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
-
-import java.awt.color.ColorSpace;
-import java.awt.color.ICC_Profile;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.Arrays;
 
 /**
  * A converter to convert oo-files to pdfs and A4-PDFs to A3-PDFs.
@@ -169,10 +176,12 @@ public class PdfConverterImpl implements PdfConverter {
         final String completePdfName = praefix + "_complete.pdf";
         final File completePdf = new File(directory, completePdfName);
         completePdf.delete();
-
-        final String[] pdfs = directory.list(new PrefixFileFilter(praefix));
+        final List<IOFileFilter> fileFilter = new ArrayList<>();
+        fileFilter.add(new PrefixFileFilter(praefix));
+        fileFilter.add(new SuffixFileFilter(".pdf", IOCase.INSENSITIVE));
+        fileFilter.add(HiddenFileFilter.VISIBLE);
+        final String[] pdfs = directory.list(new AndFileFilter(fileFilter));
         if ((pdfs != null) && (pdfs.length > 0)) {
-
             final Document document = new Document();
             try {
                 final PdfCopy copy = new PdfCopy(document, new FileOutputStream(
@@ -183,10 +192,6 @@ public class PdfConverterImpl implements PdfConverter {
                 Arrays.sort(pdfs);
 
                 for (String pdfName : pdfs) {
-                    if (completePdfName.equals(pdfName) || pdfName.startsWith(".")) {
-                        continue;
-                    }
-
                     try {
                         final PdfReader reader = new PdfReader(
                                 new FileInputStream(new File(directory,
