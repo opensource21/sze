@@ -8,3 +8,14 @@ sudo: false
 jdk:
   - openjdk7
   - oraclejdk8
+  
+deploy:
+  if: env(jdk)=openjdk7
+  provider: releases
+  api_key:
+    secure: c26aehJymo3Bn8o61q03CgNqdh2Qr7IhOE9GG/OZpdcnOkra4KvSsM66fhPcgMAlzJ8m7SWl0AM06Hehjex7QeV64Az2E7kihgmaljO6B7kF/3i+9uv2XVy3Yz/DF8XJfmZJ6XgR3iyrMMv2lTP5vYoXSMLG0XU23sB0lakm2Z10RW9vrhy/TrAQ+ebShUop+N14g6FwBMzBh1Gk/uL0RiNbvvJUU6W46uvKVSsTETenO2TxJ7scakHUwsN4kAm4vnf0K+0T4JBCF82v3S4xfspZuRKXSR02YXwldpEn7i44sRnOMg4eaFOaD8kldvbxkRPw0wWuFEQp0uJ5CMZOW2Nj/UrtO3v5e4GdnkmcMKqHOJ9radbSaZH8C8WPUBXLUvXgPOdoulzj7zlL7PGEuL7gKfJ6Ov5s62nJ8/K3A88j2st9cB1mCO/BnYBfq3v4Ph+jVQUxFsTW5AGvtwLCTnc/sc9His3QeGmmQyFIFC+vvWfPAxXzFTWehUFTYGkiMYlrv1Hh+PVGCz2AyddI6xOi208uX+97D/SL6ksWZmwerK+735nMW3xGNVROLZVM9A3T0beMhUa/ZagORseQqeuOj8+x4R/TM2+jjKEdQaY15od05fyn6BX+++YnBHHhGFYne2Uy+sc5l+zr27eJJWsB94/63iu3++52EoDFqQ8=
+  file_glob: true
+  file: target/sze.jar
+  skip_cleanup: true
+  on:
+    tags: true
